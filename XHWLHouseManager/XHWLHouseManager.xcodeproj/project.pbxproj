@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19C0BCF21F56AA8B00871BDD /* ESTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCE51F56AA8B00871BDD /* ESTabBar.swift */; };
+		19C0BCF31F56AA8B00871BDD /* ESTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCE61F56AA8B00871BDD /* ESTabBarController.swift */; };
+		19C0BCF41F56AA8B00871BDD /* ESTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCE71F56AA8B00871BDD /* ESTabBarItem.swift */; };
+		19C0BCF51F56AA8B00871BDD /* ESTabBarItemBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCE81F56AA8B00871BDD /* ESTabBarItemBadgeView.swift */; };
+		19C0BCF61F56AA8B00871BDD /* ESTabBarItemContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCE91F56AA8B00871BDD /* ESTabBarItemContainer.swift */; };
+		19C0BCF71F56AA8B00871BDD /* ESTabBarItemContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCEA1F56AA8B00871BDD /* ESTabBarItemContentView.swift */; };
+		19C0BCF81F56AA8B00871BDD /* ESTabBarItemMoreContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCEB1F56AA8B00871BDD /* ESTabBarItemMoreContentView.swift */; };
+		19C0BCF91F56AA8B00871BDD /* XHWLNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */; };
+		19C0BCFA1F56AA8B00871BDD /* XHWLHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCF01F56AA8B00871BDD /* XHWLHomeVC.swift */; };
+		19C0BCFC1F56AAA300871BDD /* XHWLFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCFB1F56AAA300871BDD /* XHWLFirst.swift */; };
 		84A50A5C1F5668DA00BCDA47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A50A5B1F5668DA00BCDA47 /* AppDelegate.swift */; };
 		84A50A5E1F5668DA00BCDA47 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A50A5D1F5668DA00BCDA47 /* ViewController.swift */; };
 		84A50A611F5668DA00BCDA47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A50A5F1F5668DA00BCDA47 /* Main.storyboard */; };
@@ -34,6 +44,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19C0BCE51F56AA8B00871BDD /* ESTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTabBar.swift; sourceTree = "<group>"; };
+		19C0BCE61F56AA8B00871BDD /* ESTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTabBarController.swift; sourceTree = "<group>"; };
+		19C0BCE71F56AA8B00871BDD /* ESTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTabBarItem.swift; sourceTree = "<group>"; };
+		19C0BCE81F56AA8B00871BDD /* ESTabBarItemBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTabBarItemBadgeView.swift; sourceTree = "<group>"; };
+		19C0BCE91F56AA8B00871BDD /* ESTabBarItemContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTabBarItemContainer.swift; sourceTree = "<group>"; };
+		19C0BCEA1F56AA8B00871BDD /* ESTabBarItemContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTabBarItemContentView.swift; sourceTree = "<group>"; };
+		19C0BCEB1F56AA8B00871BDD /* ESTabBarItemMoreContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTabBarItemMoreContentView.swift; sourceTree = "<group>"; };
+		19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLNavigationController.swift; sourceTree = "<group>"; };
+		19C0BCF01F56AA8B00871BDD /* XHWLHomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLHomeVC.swift; sourceTree = "<group>"; };
+		19C0BCFB1F56AAA300871BDD /* XHWLFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLFirst.swift; sourceTree = "<group>"; };
 		84A50A581F5668DA00BCDA47 /* XHWLHouseManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XHWLHouseManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A50A5B1F5668DA00BCDA47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84A50A5D1F5668DA00BCDA47 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +94,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19C0BCE31F56AA8B00871BDD /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				19C0BCE41F56AA8B00871BDD /* Tabbar */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		19C0BCE41F56AA8B00871BDD /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				19C0BCE51F56AA8B00871BDD /* ESTabBar.swift */,
+				19C0BCE61F56AA8B00871BDD /* ESTabBarController.swift */,
+				19C0BCE71F56AA8B00871BDD /* ESTabBarItem.swift */,
+				19C0BCE81F56AA8B00871BDD /* ESTabBarItemBadgeView.swift */,
+				19C0BCE91F56AA8B00871BDD /* ESTabBarItemContainer.swift */,
+				19C0BCEA1F56AA8B00871BDD /* ESTabBarItemContentView.swift */,
+				19C0BCEB1F56AA8B00871BDD /* ESTabBarItemMoreContentView.swift */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		19C0BCEC1F56AA8B00871BDD /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				19C0BCED1F56AA8B00871BDD /* Common */,
+				19C0BCEF1F56AA8B00871BDD /* Home */,
+				19C0BCF11F56AA8B00871BDD /* Login */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		19C0BCED1F56AA8B00871BDD /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		19C0BCEF1F56AA8B00871BDD /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				19C0BCF01F56AA8B00871BDD /* XHWLHomeVC.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		19C0BCF11F56AA8B00871BDD /* Login */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		84A50A4F1F5668DA00BCDA47 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +172,9 @@
 		84A50A5A1F5668DA00BCDA47 /* XHWLHouseManager */ = {
 			isa = PBXGroup;
 			children = (
+				19C0BCFB1F56AAA300871BDD /* XHWLFirst.swift */,
+				19C0BCE31F56AA8B00871BDD /* Lib */,
+				19C0BCEC1F56AA8B00871BDD /* Sources */,
 				84A50A5B1F5668DA00BCDA47 /* AppDelegate.swift */,
 				84A50A5D1F5668DA00BCDA47 /* ViewController.swift */,
 				84A50A5F1F5668DA00BCDA47 /* Main.storyboard */,
@@ -259,8 +337,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19C0BCF91F56AA8B00871BDD /* XHWLNavigationController.swift in Sources */,
+				19C0BCFC1F56AAA300871BDD /* XHWLFirst.swift in Sources */,
 				84A50A5E1F5668DA00BCDA47 /* ViewController.swift in Sources */,
+				19C0BCF71F56AA8B00871BDD /* ESTabBarItemContentView.swift in Sources */,
+				19C0BCF41F56AA8B00871BDD /* ESTabBarItem.swift in Sources */,
+				19C0BCF61F56AA8B00871BDD /* ESTabBarItemContainer.swift in Sources */,
+				19C0BCF21F56AA8B00871BDD /* ESTabBar.swift in Sources */,
+				19C0BCF51F56AA8B00871BDD /* ESTabBarItemBadgeView.swift in Sources */,
 				84A50A5C1F5668DA00BCDA47 /* AppDelegate.swift in Sources */,
+				19C0BCF31F56AA8B00871BDD /* ESTabBarController.swift in Sources */,
+				19C0BCFA1F56AA8B00871BDD /* XHWLHomeVC.swift in Sources */,
+				19C0BCF81F56AA8B00871BDD /* ESTabBarItemMoreContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +593,7 @@
 				84A50A821F5668DA00BCDA47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		84A50A831F5668DA00BCDA47 /* Build configuration list for PBXNativeTarget "XHWLHouseManagerTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +602,7 @@
 				84A50A851F5668DA00BCDA47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		84A50A861F5668DA00BCDA47 /* Build configuration list for PBXNativeTarget "XHWLHouseManagerUITests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +611,7 @@
 				84A50A881F5668DA00BCDA47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
