@@ -1,0 +1,27 @@
+PODS:
+  - Alamofire (4.5.0)
+  - IQKeyboardManagerSwift (4.0.13)
+  - Kingfisher (3.11.0)
+  - SnapKit (3.2.0)
+  - swiftScan (1.1.1)
+  - SwiftyJSON (3.1.4)
+
+DEPENDENCIES:
+  - Alamofire
+  - IQKeyboardManagerSwift
+  - Kingfisher
+  - SnapKit
+  - swiftScan
+  - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  IQKeyboardManagerSwift: fb399c4cddcd8d9bbcd2d0c7c81ed290b61c088e
+  Kingfisher: c8911a7672c6217dec8c0520fb6e76ec4b7e0780
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  swiftScan: f1f7f3eccb67ed1fb9777d084486d201dfca0306
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+
+PODFILE CHECKSUM: 678777a088f3feec2cb3333f2537ba78c057c0a7
+
+COCOAPODS: 1.3.1

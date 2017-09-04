@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let vc:XHWLFirst = XHWLFirst();
+        let vc:XHWLFirst = XHWLFirst()
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

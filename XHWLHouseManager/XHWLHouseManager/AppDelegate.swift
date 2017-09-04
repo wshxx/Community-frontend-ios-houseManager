@@ -7,6 +7,10 @@
 //
 
 import UIKit
+//import CRecordInfo
+import IQKeyboardManagerSwift
+
+//Build Settings－－swift Compiler－－Objective-C Bridging Header内容为DemoApp/Bridging-Header.h，这个与Bridging-Header.h位置有关，从项目的根目录开始在objective-c Bridging Header选项里面写入Bridging-Header.h相对路径。
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,8 +22,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         self.window?.backgroundColor = UIColor.white
         
+        IQKeyboardManager.sharedManager().enable = true
+        
+        self.configureMCU()
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let vc : XHWLLoginVC = XHWLLoginVC()
+        self.window?.rootViewController = XHWLNavigationController(rootViewController: vc)
+        self.window?.makeKeyAndVisible()
         
         return true
+    }
+    
+    // 对接海康威视
+    func configureMCU() {
+
+        MCUVmsNetSDK.shareInstance().configMsp(withAddress: MSP_ADDRESS, port: MSP_PORT)
+        
+        //初始化SDK
+        VP_InitSDK();
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

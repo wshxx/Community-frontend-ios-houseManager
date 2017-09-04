@@ -16,6 +16,7 @@ class XHWLNavigationController: UINavigationController {
         let appearance = UIBarButtonItem.appearance()
         appearance.setBackButtonTitlePositionAdjustment(UIOffset.init(horizontal: 0.0, vertical: -60), for: .default)
         self.navigationBar.isTranslucent = true
+        self.automaticallyAdjustsScrollViewInsets = false
         self.navigationBar.barTintColor = UIColor.init(red: 0, green: 250/255.0, blue: 0, alpha: 0.8)
         
         
