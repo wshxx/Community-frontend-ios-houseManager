@@ -12,6 +12,9 @@ import IQKeyboardManagerSwift
 
 //Build Settings－－swift Compiler－－Objective-C Bridging Header内容为DemoApp/Bridging-Header.h，这个与Bridging-Header.h位置有关，从项目的根目录开始在objective-c Bridging Header选项里面写入Bridging-Header.h相对路径。
 
+//AnyObject可以代表任何class类型的实例。
+//Any可以表示任何类型，除了方法类型(function types)。
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

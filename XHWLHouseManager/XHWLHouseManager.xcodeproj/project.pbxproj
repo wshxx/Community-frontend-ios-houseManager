@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1912240B1F5D47F500D201F3 /* JSONAndDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912240A1F5D47F500D201F3 /* JSONAndDictionary.swift */; };
+		1912240D1F5D774700D201F3 /* XHWLHttpKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912240C1F5D774700D201F3 /* XHWLHttpKey.swift */; };
 		192DA5321F57A62A005950EC /* UIColor+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DA5311F57A62A005950EC /* UIColor+Category.swift */; };
 		192DA5331F57ABF3005950EC /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BB531F1F56BE5B006C38EA /* OpenGLES.framework */; };
 		192DA5341F57ABFE005950EC /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BB53211F56BE65006C38EA /* libiconv.2.4.0.tbd */; };
@@ -21,6 +23,10 @@
 		192DA5431F57B73E005950EC /* XHWLSetPwdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DA5421F57B73E005950EC /* XHWLSetPwdView.swift */; };
 		192DA5451F57E1CB005950EC /* XHWLTransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DA5441F57E1CB005950EC /* XHWLTransitionView.swift */; };
 		1941DCD91F58341B009DE0F0 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1941DCD81F58341B009DE0F0 /* HealthKit.framework */; };
+		194FAAD01F5CECB2004CA513 /* XHWLBgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194FAACF1F5CECB2004CA513 /* XHWLBgView.swift */; };
+		194FAAD41F5CF993004CA513 /* xhwl_login_logo_down.gif in Resources */ = {isa = PBXBuildFile; fileRef = 194FAAD21F5CF993004CA513 /* xhwl_login_logo_down.gif */; };
+		194FAAD51F5CF993004CA513 /* xhwl_login_logo_up.gif in Resources */ = {isa = PBXBuildFile; fileRef = 194FAAD31F5CF993004CA513 /* xhwl_login_logo_up.gif */; };
+		194FAAD71F5CF9B0004CA513 /* door2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 194FAAD61F5CF9B0004CA513 /* door2.gif */; };
 		1961CCCE1F58E301006856D0 /* HintTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1961CCCD1F58E301006856D0 /* HintTool.swift */; };
 		1961CCD01F58E32F006856D0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1961CCCF1F58E32F006856D0 /* StringExtension.swift */; };
 		1961CCD21F58E336006856D0 /* DateStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1961CCD11F58E336006856D0 /* DateStringExtension.swift */; };
@@ -62,8 +68,6 @@
 		1961CDC01F5983EF006856D0 /* XHWLMcuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1961CDBF1F5983EF006856D0 /* XHWLMcuView.swift */; };
 		198E7E0B1F5A9DC10016C4E8 /* XHWLMcuBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E7E0A1F5A9DC10016C4E8 /* XHWLMcuBottomView.swift */; };
 		19A7A7051F57E4540044DC1A /* Mcu_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BB53241F56BEBB006C38EA /* Mcu_sdk.framework */; };
-		19A7A7071F57E8150044DC1A /* xhwl_login_logo_down.gif in Resources */ = {isa = PBXBuildFile; fileRef = 19A7A7061F57E8150044DC1A /* xhwl_login_logo_down.gif */; };
-		19A7A7091F57E82A0044DC1A /* xhwl_login_logo_up.gif in Resources */ = {isa = PBXBuildFile; fileRef = 19A7A7081F57E82A0044DC1A /* xhwl_login_logo_up.gif */; };
 		19A7A70D1F57EB460044DC1A /* YLGIFImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7A70B1F57EB460044DC1A /* YLGIFImage.swift */; };
 		19A7A70E1F57EB460044DC1A /* YLImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7A70C1F57EB460044DC1A /* YLImageView.swift */; };
 		19A7A7111F57FB350044DC1A /* XHWLHttpTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7A7101F57FB350044DC1A /* XHWLHttpTool.swift */; };
@@ -121,6 +125,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1912240A1F5D47F500D201F3 /* JSONAndDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAndDictionary.swift; sourceTree = "<group>"; };
+		1912240C1F5D774700D201F3 /* XHWLHttpKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLHttpKey.swift; sourceTree = "<group>"; };
 		192DA5311F57A62A005950EC /* UIColor+Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Category.swift"; sourceTree = "<group>"; };
 		192DA53B1F57AC4C005950EC /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
 		192DA53D1F57AC5C005950EC /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
@@ -128,6 +134,10 @@
 		192DA5441F57E1CB005950EC /* XHWLTransitionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLTransitionView.swift; sourceTree = "<group>"; };
 		1941DCD81F58341B009DE0F0 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		1941DCDA1F58341B009DE0F0 /* XHWLHouseManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XHWLHouseManager.entitlements; sourceTree = "<group>"; };
+		194FAACF1F5CECB2004CA513 /* XHWLBgView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLBgView.swift; sourceTree = "<group>"; };
+		194FAAD21F5CF993004CA513 /* xhwl_login_logo_down.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xhwl_login_logo_down.gif; sourceTree = "<group>"; };
+		194FAAD31F5CF993004CA513 /* xhwl_login_logo_up.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xhwl_login_logo_up.gif; sourceTree = "<group>"; };
+		194FAAD61F5CF9B0004CA513 /* door2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = door2.gif; sourceTree = "<group>"; };
 		1961CCCD1F58E301006856D0 /* HintTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintTool.swift; sourceTree = "<group>"; };
 		1961CCCF1F58E32F006856D0 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		1961CCD11F58E336006856D0 /* DateStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateStringExtension.swift; sourceTree = "<group>"; };
@@ -198,8 +208,6 @@
 		1961CDBD1F596441006856D0 /* XHWLMcuShowVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLMcuShowVC.swift; sourceTree = "<group>"; };
 		1961CDBF1F5983EF006856D0 /* XHWLMcuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLMcuView.swift; sourceTree = "<group>"; };
 		198E7E0A1F5A9DC10016C4E8 /* XHWLMcuBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLMcuBottomView.swift; sourceTree = "<group>"; };
-		19A7A7061F57E8150044DC1A /* xhwl_login_logo_down.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xhwl_login_logo_down.gif; sourceTree = "<group>"; };
-		19A7A7081F57E82A0044DC1A /* xhwl_login_logo_up.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xhwl_login_logo_up.gif; sourceTree = "<group>"; };
 		19A7A70B1F57EB460044DC1A /* YLGIFImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLGIFImage.swift; sourceTree = "<group>"; };
 		19A7A70C1F57EB460044DC1A /* YLImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLImageView.swift; sourceTree = "<group>"; };
 		19A7A7101F57FB350044DC1A /* XHWLHttpTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLHttpTool.swift; sourceTree = "<group>"; };
@@ -316,6 +324,16 @@
 				EB0514421C71FA51C0328740 /* Pods-XHWLHouseManager.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		194FAAD11F5CF97A004CA513 /* Reasource */ = {
+			isa = PBXGroup;
+			children = (
+				194FAAD61F5CF9B0004CA513 /* door2.gif */,
+				194FAAD21F5CF993004CA513 /* xhwl_login_logo_down.gif */,
+				194FAAD31F5CF993004CA513 /* xhwl_login_logo_up.gif */,
+			);
+			path = Reasource;
 			sourceTree = "<group>";
 		};
 		1961CCCC1F58E301006856D0 /* HintTool */ = {
@@ -465,6 +483,7 @@
 				1961CCD11F58E336006856D0 /* DateStringExtension.swift */,
 				1961CCCF1F58E32F006856D0 /* StringExtension.swift */,
 				192DA5311F57A62A005950EC /* UIColor+Category.swift */,
+				1912240A1F5D47F500D201F3 /* JSONAndDictionary.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -589,6 +608,7 @@
 			isa = PBXGroup;
 			children = (
 				19C0BCF01F56AA8B00871BDD /* XHWLHomeVC.swift */,
+				194FAACF1F5CECB2004CA513 /* XHWLBgView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -630,9 +650,8 @@
 		84A50A5A1F5668DA00BCDA47 /* XHWLHouseManager */ = {
 			isa = PBXGroup;
 			children = (
+				194FAAD11F5CF97A004CA513 /* Reasource */,
 				1941DCDA1F58341B009DE0F0 /* XHWLHouseManager.entitlements */,
-				19A7A7081F57E82A0044DC1A /* xhwl_login_logo_up.gif */,
-				19A7A7061F57E8150044DC1A /* xhwl_login_logo_down.gif */,
 				19C0BCFB1F56AAA300871BDD /* XHWLFirst.swift */,
 				19C0BCE31F56AA8B00871BDD /* Lib */,
 				19C0BCEC1F56AA8B00871BDD /* Sources */,
@@ -644,6 +663,7 @@
 				84A50A671F5668DA00BCDA47 /* Info.plist */,
 				19BB535A1F56C00F006C38EA /* XHWLConfigure.swift */,
 				19BB53A61F56C9E3006C38EA /* XHWLHouseManager-Bridging-Header.h */,
+				1912240C1F5D774700D201F3 /* XHWLHttpKey.swift */,
 			);
 			path = XHWLHouseManager;
 			sourceTree = "<group>";
@@ -805,10 +825,11 @@
 			files = (
 				84A50A661F5668DA00BCDA47 /* LaunchScreen.storyboard in Resources */,
 				1961CDB21F596394006856D0 /* CodeScan.bundle in Resources */,
+				194FAAD41F5CF993004CA513 /* xhwl_login_logo_down.gif in Resources */,
 				84A50A631F5668DA00BCDA47 /* Assets.xcassets in Resources */,
-				19A7A7071F57E8150044DC1A /* xhwl_login_logo_down.gif in Resources */,
 				84A50A611F5668DA00BCDA47 /* Main.storyboard in Resources */,
-				19A7A7091F57E82A0044DC1A /* xhwl_login_logo_up.gif in Resources */,
+				194FAAD51F5CF993004CA513 /* xhwl_login_logo_up.gif in Resources */,
+				194FAAD71F5CF9B0004CA513 /* door2.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -918,6 +939,7 @@
 				19C0BCF71F56AA8B00871BDD /* ESTabBarItemContentView.swift in Sources */,
 				19C0BCF41F56AA8B00871BDD /* ESTabBarItem.swift in Sources */,
 				19A7A70D1F57EB460044DC1A /* YLGIFImage.swift in Sources */,
+				1912240B1F5D47F500D201F3 /* JSONAndDictionary.swift in Sources */,
 				1961CD6E1F595A54006856D0 /* MASConstraintMaker.m in Sources */,
 				1961CDA21F596328006856D0 /* PtzPopView.m in Sources */,
 				1961CDA91F596328006856D0 /* ToolBarButton.m in Sources */,
@@ -940,6 +962,7 @@
 				1961CD771F596316006856D0 /* XHWLMcuResourceVC.swift in Sources */,
 				19A7A7111F57FB350044DC1A /* XHWLHttpTool.swift in Sources */,
 				19BB53581F56BFA3006C38EA /* NSObject+MJProperty.m in Sources */,
+				1912240D1F5D774700D201F3 /* XHWLHttpKey.swift in Sources */,
 				1961CCD61F58E448006856D0 /* TimerARC.swift in Sources */,
 				1961CD721F595A54006856D0 /* NSArray+MASAdditions.m in Sources */,
 				1961CD6F1F595A54006856D0 /* MASLayoutConstraint.m in Sources */,
@@ -961,6 +984,7 @@
 				1961CDA41F596328006856D0 /* PtzPresetPositionMultiDialView.m in Sources */,
 				1961CDAA1F596328006856D0 /* ToolBarButtonPositionReckoner.m in Sources */,
 				1961CD701F595A54006856D0 /* MASViewAttribute.m in Sources */,
+				194FAAD01F5CECB2004CA513 /* XHWLBgView.swift in Sources */,
 				1961CD9F1F596328006856D0 /* PickerView.m in Sources */,
 				19BB53591F56BFA3006C38EA /* NSString+MJExtension.m in Sources */,
 				1961CDBE1F596441006856D0 /* XHWLMcuShowVC.swift in Sources */,

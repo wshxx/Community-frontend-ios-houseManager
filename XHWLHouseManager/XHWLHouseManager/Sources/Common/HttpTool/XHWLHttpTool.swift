@@ -10,7 +10,10 @@ import UIKit
 import Foundation
 import Alamofire
 
-let XHWLHttpURL :String = "http://112.74.19.135:1111/ssh/v1"
+//let XHWLHttpURL :String = "http://112.74.19.135:1111/ssh/v1"
+//let XHWLHttpURL :String = "http://192.168.2.101:9002"
+let XHWLHttpURL :String = "http://192.168.1.154:8080"
+//let XHWLHttpURL :String = ""
 
 class XHWLHttpTool: NSObject {
     
@@ -23,33 +26,61 @@ class XHWLHttpTool: NSObject {
     }
     
     // GET 请求方式
-    func getHttpTool(url:String, parameters: Parameters, block:@escaping ((DataResponse<Any>)->())) {
+    func getHttpTool(url:String, parameters: Parameters,  success:@escaping (_ responseObject: [String : AnyObject])->(), failture:@escaping (_ error : NSError)->()) {
         
-        let requestUrl:String = "\(XHWLHttpURL)/\(url)"
+        var requestUrl:String = ""
+        if XHWLHttpURL.compare("").rawValue == 0 {
+            
+            requestUrl = url
+        } else {
+            
+            requestUrl = "\(XHWLHttpURL)/\(url)"
+        }
         Alamofire.request(requestUrl, method: .get, parameters: parameters, encoding: URLEncoding.default)
             .responseJSON { response in
                 
-                block(response)
+                switch response.result {
+                case .success(let value):
+                    print("error:\(value)")
+                    success(value as! [String : AnyObject])
+                    
+                case .failure(let error):
+                    failture(error as NSError)
+                    print("error:\(error)")
+                }
         }
     }
     
-    // POST 请求方式
-    func postHttpTool(url:String, parameters: Parameters, block:@escaping ((DataResponse<Any>)->())) {
+    // POST 请求方式  block:@escaping ((DataResponse<Any>)->()))
+    func postHttpTool(url:String, parameters: Parameters, success:@escaping (_ responseObject: [String : AnyObject])->(), failture:@escaping (_ error : NSError)->()) {
         
-        let requestUrl:String = "\(XHWLHttpURL)/\(url)"
+        var requestUrl:String = ""
+        if XHWLHttpURL.compare("").rawValue == 0 {
+            
+            requestUrl = url
+        } else {
+            
+            requestUrl = "\(XHWLHttpURL)/\(url)"
+        }
         Alamofire.request(requestUrl, method: .post, parameters: parameters, encoding: URLEncoding.default)
             .responseJSON { response in
+
+                print(response.request)  // original URL request
+                print(response.response) // HTTP URL response
+                print(response.data)     // server data
+                print(response.result)   // result of response serialization
                 
-                block(response)
-                
-//                switch response.result {
-//                case .success:
-//                    
-//                    print("Validation Successful")
-//                case .failure(let error):
-//                    print(error)
-//                    
-//                }
+                //当请求后response是我们自定义的，这个变量用于接受服务器响应的信息
+                //使用switch判断请求是否成功，也就是response的result
+                switch response.result {
+                case .success(let value):
+                    print("error:\(value)")
+                    success(value as! [String : AnyObject])
+                    
+                case .failure(let error):
+                    failture(error as NSError)
+                    print("error:\(error)")
+                }
         }
     }
 }

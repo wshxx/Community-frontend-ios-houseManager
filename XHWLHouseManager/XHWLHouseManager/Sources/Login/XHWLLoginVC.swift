@@ -44,11 +44,12 @@ class XHWLLoginVC: UIViewController {
 //            let vc:XHWLPedometerVC = XHWLPedometerVC()
 //            weak_self?.navigationController?.pushViewController(vc, animated: true)
             
-//            let vc = XHWLScanTestVC()
+            let vc = XHWLScanTestVC()
 //            let vc = CMPedometerViewController()
 //            let vc = XHWLLocationVC()
 //            let vc = XHWLMcuResourceVC()
-            let vc = XHWLMcuShowVC()
+//            let vc = XHWLMcuShowVC()
+//            let vc = XHWLHomeVC()
             weak_self?.navigationController?.pushViewController(vc, animated: true)
         }
         self.view.addSubview(showV)

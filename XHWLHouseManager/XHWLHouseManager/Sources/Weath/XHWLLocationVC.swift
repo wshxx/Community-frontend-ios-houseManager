@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreLocation
+import SwiftyJSON
+import Kingfisher
 
 //NSLocationWhenInUseDescription ：允许在前台获取GPS的描述
 //NSLocationAlwaysUsageDescription ：允许在后台获取GPS的描述
@@ -17,6 +19,7 @@ class XHWLLocationVC: UIViewController , CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     var currentLocation:CLLocation?
     var textLabel :UILabel?
+    var weathIV:UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +34,10 @@ class XHWLLocationVC: UIViewController , CLLocationManagerDelegate {
         textLabel?.numberOfLines = 0;
         textLabel?.textColor = UIColor.black
         self.view.addSubview(textLabel!)
+        
+        weathIV = UIImageView()
+        weathIV.frame = CGRect(x:20, y:350, width:50, height:50)
+        self.view.addSubview(weathIV)
         
         //开启定位
         loadLocation()
@@ -137,17 +144,83 @@ class XHWLLocationVC: UIViewController , CLLocationManagerDelegate {
 //                
 //                let citynameStr = city.replacingOccurrences(of: "市", with: "")
                 
-                let address:String = "\(State)\(city)\(SubLocality)  \(Name)"
+                let address:String = "\(city)"
+//                let address:String = "\(State)\(city)\(SubLocality)  \(Name)"
                 
                 self.textLabel?.text = address
+                
+                self.loadData(city: city)
             }
             else
             {
                 print(error ?? "")
             }
         })
+    }
+    
+    func getDictionaryFromJSONString(jsonString:String) ->NSDictionary{
+        let jsonData:Data = jsonString.data(using: .utf8)!
         
+        let dict = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+        if dict != nil {
+            return dict as! NSDictionary
+        }
+        return [:]
+    }
+    
+    func loadData(city:String) {
+//    https://free-api.heweather.com/v5/weather?city=深圳&key=3e6338eef8c947dd89f4ffebbf580778 
+        let params:[String: String] = ["city" : city,
+                                       "key" : "3e6338eef8c947dd89f4ffebbf580778",
+                                       ]
         
+        //            http://192.168.1.154:8080/v1/appBusiness/scan/qrcode
+         XHWLHttpTool.sharedInstance.postHttpTool(url: "https://free-api.heweather.com/v5/weather", parameters: params, success: { (response) in
+            print("JSON: \(response)")
+            
+            let jsonDict = response as! NSDictionary
+            
+            let ary:NSArray = jsonDict["HeWeather5"] as! NSArray
+            let HeWeather5:NSDictionary = ary[0] as! NSDictionary
+            let aqi:NSDictionary = HeWeather5["aqi"] as! NSDictionary
+            let city:NSDictionary = aqi["city"] as! NSDictionary
+            let dailyAry:NSArray = HeWeather5["daily_forecast"] as! NSArray // 每天
+            let daily_forecast:NSDictionary = dailyAry[0] as! NSDictionary // 每天
+            let hourlyAry:NSArray = HeWeather5["hourly_forecast"] as! NSArray // 每小时
+            let hourly_forecast:NSDictionary = hourlyAry[0] as! NSDictionary // 每小时
+            let now:NSDictionary = HeWeather5["now"] as! NSDictionary // 当前
+            let tmp:NSDictionary = daily_forecast["tmp"] as! NSDictionary // 当天的温度
+            let cond:NSDictionary = now["cond"] as! NSDictionary
+            
+            // 气温
+            let currentTmp:String = now["tmp"] as! String
+            // 空气湿度 相对湿度
+            let hum:String = "\(now["hum"] as! String) %"
+            // PM2.5
+            let pm25:String = city["pm25"] as! String
+            // 空气质量实时指数
+            let currentAqi:String = city["aqi"] as! String
+            // 温度
+            let tmp_max:String = tmp["max"] as! String
+            let tmp_min:String = tmp["min"] as! String
+            // 多云
+            let txt:String = cond["txt"] as! String // code
+            let code:String = cond["code"] as! String // https://cdn.heweather.com/cond_icon/100.png
+            let iconStr:String = "https://cdn.heweather.com/cond_icon/\(code).png"
+            // 污染程度
+            let qlty:String = city["qlty"] as! String
+            
+            let text = "当前气温：\(currentTmp) \n 当前空气湿度：\(hum) \n PM2.5: \(pm25) \n 空气质量实时指数:\(currentAqi) \n 当日温度：\(tmp_min)-\(tmp_max) \n 多云图案：\(txt) 空气质量：\(qlty) "
+            print("\(text)")
+            
+            self.textLabel?.text = text
+            
+            let url = URL(string: iconStr)
+            self.weathIV.kf.setImage(with: url)
+            
+         }) { (error) in
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {

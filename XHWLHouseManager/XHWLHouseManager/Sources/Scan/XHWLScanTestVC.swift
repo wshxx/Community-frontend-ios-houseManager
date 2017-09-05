@@ -45,7 +45,6 @@ class XHWLScanTestVC: UIViewController , XHWLScanVCDelegate{
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    
     /**
      *  扫描代理的回调函数
      *
@@ -56,16 +55,52 @@ class XHWLScanTestVC: UIViewController , XHWLScanVCDelegate{
     {
         print("\(strResult)")
         
-        let index = strResult.index(strResult.startIndex, offsetBy: 6)
-        let headStr:String = strResult.substring(to: index)
         
-        if (headStr == "userId") {
+//        设备二维码模板：
+//            {
+//                "utid":"XHWL",
+//                "type":"equipment",
+//                "code":"TB0001"
+//        }
+//        园林绿植二维码模板：
+//            {
+//                "utid":"XHWL",
+//                "type":"plant",
+//                "code":"xxxxx"
+//        }
+        
+//        let dict : NSDictionary = strResult as! NSDictionary
+        let dict:NSDictionary = strResult.dictionaryWithJSON()
+        let utid:String = dict["utid"] as! String
+        
+        
+        if utid.compare("XHWL").rawValue == 0 {
             block(true)
-//            [self onAddStaff:userId];
+            
+            let type:String = dict["type"] as! String
+            let code:String = dict["code"] as! String
+            
+            let params:[String: String] = ["type" : type,
+                "code" : code,
+                "token" : "3000c8f5-9cf3-48bf-ad0f-8f292251582a",
+              ]
+            
+//            http://192.168.1.154:8080/v1/appBusiness/scan/qrcode
+            
+            XHWLHttpTool.sharedInstance.postHttpTool(url: "v1/appBusiness/scan/qrcode", parameters: params, success: { (response) in
+
+                print("JSON: \(response)")
+                
+            }, failture: { (error) in
+                
+            })
             
         } else {
             block(false)
         }
+//        let index = strResult.index(strResult.startIndex, offsetBy: 6)
+//        let headStr:String = strResult.substring(to: index)
+
     }
 
 

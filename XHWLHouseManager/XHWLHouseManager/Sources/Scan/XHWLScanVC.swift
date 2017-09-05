@@ -28,14 +28,10 @@ class XHWLScanVC: LBXScanViewController {
      */
     var isOpenedFlash:Bool = false
     
-    
     var bottomItemsView:UIView? //底部显示的功能项
     var btnPhoto:UIButton = UIButton() //相册
     var btnFlash:UIButton = UIButton() //闪光灯
     var btnMyQR:UIButton = UIButton() //我的二维码
-    
-   
-
     
     override func viewDidLoad() {
         super.viewDidLoad()

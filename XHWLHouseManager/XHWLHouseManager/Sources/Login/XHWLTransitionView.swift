@@ -63,34 +63,32 @@ class XHWLTransitionView: UIView {
         
         return
             
-        XHWLHttpTool.sharedInstance.postHttpTool(url:"appBase/login", parameters: params, block: { (response) in
-            
-            
-            if let result = response.result.value as? NSDictionary{
-                if result["state"] as! Bool{
-                    //登录成功
-                    //                        self.funcBackBlock(topStr,bottomStr);
-                    
-                    self.onChangeSetPwd()
-                    
-                }else{
-//                    AlertMessage.showAlertMessage(vc: self.superview, alertMessage: result["message"] , duration: 1)
-
-                    //登录失败
-                    switch(result["errorCode"] as! Int){
-                    case 11:
-                        //用户名不存在
-                        //                            AlertMessage.showAlertMessage(vc: self, alertMessage: "用户名不存在！", duration: 1)
+             XHWLHttpTool.sharedInstance.postHttpTool(url: "appBase/login", parameters: params, success: { (response) in
+               
+                    if response["state"] as! Bool{
+                        //登录成功
+                        //                        self.funcBackBlock(topStr,bottomStr);
                         
-                        break
-                    default:
-                        break
+                        self.onChangeSetPwd()
+                        
+                    }else{
+                        //                    AlertMessage.showAlertMessage(vc: self.superview, alertMessage: result["message"] , duration: 1)
+                        
+                        //登录失败
+                        switch(response["errorCode"] as! Int){
+                        case 11:
+                            //用户名不存在
+                            //                            AlertMessage.showAlertMessage(vc: self, alertMessage: "用户名不存在！", duration: 1)
+                            
+                            break
+                        default:
+                            break
+                        }
+                        
                     }
-                    
-                }
-            }
-            
-        })
+             }, failture: { (error) in
+                
+             })
     }
     
     func onChangeSetPwd() {

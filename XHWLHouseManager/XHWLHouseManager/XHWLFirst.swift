@@ -159,11 +159,11 @@ public class XHWLFirst: UIViewController, UITableViewDataSource, UITableViewDele
     
     func customStyle() -> ESTabBarController {
         let tabBarController = ESTabBarController()
-        let v1 = XHWLHome()
-        let v2 = XHWLHome()
-        let v3 = XHWLHome()
-        let v4 = XHWLHome()
-        let v5 = XHWLHome()
+        let v1 = XHWLHomeVC()
+        let v2 = XHWLHomeVC()
+        let v3 = XHWLHomeVC()
+        let v4 = XHWLHomeVC()
+        let v5 = XHWLHomeVC()
         
         v1.tabBarItem = ESTabBarItem.init(title: "Home", image: UIImage(named: "home"), selectedImage: UIImage(named: "home_1"))
         v2.tabBarItem = ESTabBarItem.init(title: "Find", image: UIImage(named: "find"), selectedImage: UIImage(named: "find_1"))
