@@ -9,6 +9,9 @@ pod 'Kingfisher'
 pod 'IQKeyboardManagerSwift'
 pod 'swiftScan'
 pod 'SnapKit'
-pod 'XHToastSwift'
+#pod 'XHToastSwift'
+pod 'BaiduMapKit'
+pod 'MJExtension'
+#pod 'HLBarIndicatorView'
 
 end

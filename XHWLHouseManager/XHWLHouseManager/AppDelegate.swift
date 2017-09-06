@@ -26,8 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.backgroundColor = UIColor.white
         
         IQKeyboardManager.sharedManager().enable = true
-        
-        self.configureMCU()
+        configureMCU()      // 对接海康威视
+        configureMapKit()   // 初始化百度地图
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let vc : XHWLLoginVC = XHWLLoginVC()
@@ -35,6 +35,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         
         return true
+    }
+    
+    // 初始化百度地图
+    func configureMapKit() {
+        
+        let mapManager:BMKMapManager = BMKMapManager()
+        // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+        let ret:Bool  = mapManager.start(MapKitAK, generalDelegate: nil) // BMKGeneralDelegate
+        if ret == false {
+            print("manager start failed!")
+        }
     }
     
     // 对接海康威视

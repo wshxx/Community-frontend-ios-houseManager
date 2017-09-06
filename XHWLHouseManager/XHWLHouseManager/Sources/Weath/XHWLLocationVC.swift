@@ -171,7 +171,7 @@ class XHWLLocationVC: UIViewController , CLLocationManagerDelegate {
     func loadData(city:String) {
 //    https://free-api.heweather.com/v5/weather?city=深圳&key=3e6338eef8c947dd89f4ffebbf580778 
         let params:[String: String] = ["city" : city,
-                                       "key" : "3e6338eef8c947dd89f4ffebbf580778",
+                                       "key" : WeatherKey,
                                        ]
         
         //            http://192.168.1.154:8080/v1/appBusiness/scan/qrcode

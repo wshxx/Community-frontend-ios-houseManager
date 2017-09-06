@@ -11,15 +11,19 @@ import Alamofire
 
 class XHWLLoginVC: UIViewController {
 
+    var progressHUD:XHMLProgressHUD!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
- 
                 
-       self.setupView()
+       setupView()
         
+        progressHUD = XHMLProgressHUD.init(frame: CGRect(x:(Screen_width-100)/2.0, y:(Screen_height-100)/2.0, width:100, height:100))
+        
+        let window:UIWindow = UIApplication.shared.keyWindow!
+        window.addSubview(progressHUD)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,19 +42,17 @@ class XHWLLoginVC: UIViewController {
         showV.center = CGPoint(x: self.view.bounds.width/2.0, y: self.view.bounds.height/2.0-90/2.0)
         weak var weak_self:XHWLLoginVC?  = self
         showV.funcBackBlock = { topStr,bottomStr in
+        
+            self.progressHUD.show()
             
-//            let vc:XHWLFirst = XHWLFirst()
+            //睡眠1.9s，
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.9)){
+                self.progressHUD.hide()
+                let vc = XHWLLookHomeVC()
+                "登陆成功".ext_debugPrintAndHint()
+                weak_self?.navigationController?.pushViewController(vc, animated: true)
+            }
             
-//            let vc:XHWLPedometerVC = XHWLPedometerVC()
-//            weak_self?.navigationController?.pushViewController(vc, animated: true)
-            
-            let vc = XHWLScanTestVC()
-//            let vc = CMPedometerViewController()
-//            let vc = XHWLLocationVC()
-//            let vc = XHWLMcuResourceVC()
-//            let vc = XHWLMcuShowVC()
-//            let vc = XHWLHomeVC()
-            weak_self?.navigationController?.pushViewController(vc, animated: true)
         }
         self.view.addSubview(showV)
         

@@ -42,6 +42,12 @@ let font_18:UIFont = UIFont.systemFont(ofSize: 18)
 let Screen_height:CGFloat = UIScreen.main.bounds.size.height
 let Screen_width:CGFloat = UIScreen.main.bounds.size.width
 
+
+// MARK: -- 百度地图
+let MapKitAK:String = "FQ6dxZRhOTxkwnd4NyAWpvg2XfGdFzXo"
+//"10092150" // 应用编号
+let WeatherKey:String = "3e6338eef8c947dd89f4ffebbf580778"
+
 // MARK: -- 创建分割线
 
 /**

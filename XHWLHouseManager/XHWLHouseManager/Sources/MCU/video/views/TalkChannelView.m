@@ -60,6 +60,7 @@ const static NSInteger confirmButtonwith = 100;/**< 确定取消按钮的宽度*
         [confirmButton addTarget:self action:@selector(confirmChoose) forControlEvents:UIControlEventTouchUpInside];
         [confirmButton.titleLabel setFont:[UIFont systemFontOfSize:14.0]];
         [g_backGroundView addSubview:confirmButton];
+        
         [confirmButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(g_backGroundView).with.offset(-5);
             make.centerX.mas_equalTo(CGRectGetWidth(g_backGroundView.frame) / 4);

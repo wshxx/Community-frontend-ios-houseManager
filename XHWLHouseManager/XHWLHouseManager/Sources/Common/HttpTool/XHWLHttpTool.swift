@@ -12,8 +12,8 @@ import Alamofire
 
 //let XHWLHttpURL :String = "http://112.74.19.135:1111/ssh/v1"
 //let XHWLHttpURL :String = "http://192.168.2.101:9002"
-let XHWLHttpURL :String = "http://192.168.1.154:8080"
-//let XHWLHttpURL :String = ""
+//let XHWLHttpURL :String = "http://192.168.1.154:8080"
+let XHWLHttpURL :String = "http://112.74.19.135:1111"
 
 class XHWLHttpTool: NSObject {
     
@@ -74,7 +74,7 @@ class XHWLHttpTool: NSObject {
                 //使用switch判断请求是否成功，也就是response的result
                 switch response.result {
                 case .success(let value):
-                    print("error:\(value)")
+                    print("success:\(value)")
                     success(value as! [String : AnyObject])
                     
                 case .failure(let error):

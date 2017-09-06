@@ -17,7 +17,7 @@ class XHWLNavigationController: UINavigationController {
         appearance.setBackButtonTitlePositionAdjustment(UIOffset.init(horizontal: 0.0, vertical: -60), for: .default)
         self.navigationBar.isTranslucent = true
         self.automaticallyAdjustsScrollViewInsets = false
-        self.navigationBar.barTintColor = UIColor.init(red: 0, green: 250/255.0, blue: 0, alpha: 0.8)
+        self.navigationBar.barTintColor = UIColor.white
         
         
         self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.init(red: 38/255.0, green: 38/255.0, blue: 38/255.0, alpha: 1.0), NSFontAttributeName : UIFont.systemFont(ofSize: 16.0)]
