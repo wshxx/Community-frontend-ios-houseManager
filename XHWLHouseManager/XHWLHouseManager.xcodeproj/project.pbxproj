@@ -83,6 +83,15 @@
 		19A14D961F5EA6B200D96A2E /* HLBarIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A14D951F5EA6B200D96A2E /* HLBarIndicatorView.swift */; };
 		19A14D9A1F5EAB0800D96A2E /* XHWLMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A14D991F5EAB0800D96A2E /* XHWLMenuVC.swift */; };
 		19A14D9C1F5ECA4200D96A2E /* XHWLScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A14D9B1F5ECA4200D96A2E /* XHWLScanModel.swift */; };
+		19A14DAF1F5F991600D96A2E /* RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DAC1F5F991600D96A2E /* RTRootNavigationController.m */; };
+		19A14DB01F5F991600D96A2E /* UIViewController+RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DAE1F5F991600D96A2E /* UIViewController+RTRootNavigationController.m */; };
+		19A14DBF1F5FA1BF00D96A2E /* CYBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DB31F5FA1BF00D96A2E /* CYBadgeView.m */; };
+		19A14DC01F5FA1BF00D96A2E /* CYButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DB51F5FA1BF00D96A2E /* CYButton.m */; };
+		19A14DC11F5FA1BF00D96A2E /* CYCenterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DB71F5FA1BF00D96A2E /* CYCenterButton.m */; };
+		19A14DC21F5FA1BF00D96A2E /* CYTabBar.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19A14DB81F5FA1BF00D96A2E /* CYTabBar.bundle */; };
+		19A14DC31F5FA1BF00D96A2E /* CYTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DBA1F5FA1BF00D96A2E /* CYTabBar.m */; };
+		19A14DC41F5FA1BF00D96A2E /* CYTabBarConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DBC1F5FA1BF00D96A2E /* CYTabBarConfig.m */; };
+		19A14DC51F5FA1BF00D96A2E /* CYTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DBE1F5FA1BF00D96A2E /* CYTabBarController.m */; };
 		19A7A7051F57E4540044DC1A /* Mcu_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BB53241F56BEBB006C38EA /* Mcu_sdk.framework */; };
 		19A7A70D1F57EB460044DC1A /* YLGIFImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7A70B1F57EB460044DC1A /* YLGIFImage.swift */; };
 		19A7A70E1F57EB460044DC1A /* YLImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7A70C1F57EB460044DC1A /* YLImageView.swift */; };
@@ -103,13 +112,7 @@
 		19BB53A81F56DA43006C38EA /* XHWLLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53A71F56DA43006C38EA /* XHWLLoginVC.swift */; };
 		19BB53AA1F56DDC7006C38EA /* XHWLLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53A91F56DDC7006C38EA /* XHWLLoginView.swift */; };
 		19BB53AC1F56E009006C38EA /* XHWLLoginTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53AB1F56E009006C38EA /* XHWLLoginTF.swift */; };
-		19C0BCF21F56AA8B00871BDD /* ESTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCE51F56AA8B00871BDD /* ESTabBar.swift */; };
-		19C0BCF31F56AA8B00871BDD /* ESTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCE61F56AA8B00871BDD /* ESTabBarController.swift */; };
-		19C0BCF41F56AA8B00871BDD /* ESTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCE71F56AA8B00871BDD /* ESTabBarItem.swift */; };
-		19C0BCF51F56AA8B00871BDD /* ESTabBarItemBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCE81F56AA8B00871BDD /* ESTabBarItemBadgeView.swift */; };
-		19C0BCF61F56AA8B00871BDD /* ESTabBarItemContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCE91F56AA8B00871BDD /* ESTabBarItemContainer.swift */; };
-		19C0BCF71F56AA8B00871BDD /* ESTabBarItemContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCEA1F56AA8B00871BDD /* ESTabBarItemContentView.swift */; };
-		19C0BCF81F56AA8B00871BDD /* ESTabBarItemMoreContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCEB1F56AA8B00871BDD /* ESTabBarItemMoreContentView.swift */; };
+		19BDD7001F6132FB00916464 /* XHWLMapKitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BDD6FF1F6132FB00916464 /* XHWLMapKitVC.swift */; };
 		19C0BCF91F56AA8B00871BDD /* XHWLNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */; };
 		19C0BCFA1F56AA8B00871BDD /* XHWLHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCF01F56AA8B00871BDD /* XHWLHomeVC.swift */; };
 		84A50A5C1F5668DA00BCDA47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A50A5B1F5668DA00BCDA47 /* AppDelegate.swift */; };
@@ -238,6 +241,23 @@
 		19A14D951F5EA6B200D96A2E /* HLBarIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLBarIndicatorView.swift; sourceTree = "<group>"; };
 		19A14D991F5EAB0800D96A2E /* XHWLMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLMenuVC.swift; sourceTree = "<group>"; };
 		19A14D9B1F5ECA4200D96A2E /* XHWLScanModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLScanModel.swift; sourceTree = "<group>"; };
+		19A14DAB1F5F991600D96A2E /* RTRootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTRootNavigationController.h; sourceTree = "<group>"; };
+		19A14DAC1F5F991600D96A2E /* RTRootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTRootNavigationController.m; sourceTree = "<group>"; };
+		19A14DAD1F5F991600D96A2E /* UIViewController+RTRootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RTRootNavigationController.h"; sourceTree = "<group>"; };
+		19A14DAE1F5F991600D96A2E /* UIViewController+RTRootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RTRootNavigationController.m"; sourceTree = "<group>"; };
+		19A14DB21F5FA1BF00D96A2E /* CYBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYBadgeView.h; sourceTree = "<group>"; };
+		19A14DB31F5FA1BF00D96A2E /* CYBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYBadgeView.m; sourceTree = "<group>"; };
+		19A14DB41F5FA1BF00D96A2E /* CYButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYButton.h; sourceTree = "<group>"; };
+		19A14DB51F5FA1BF00D96A2E /* CYButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYButton.m; sourceTree = "<group>"; };
+		19A14DB61F5FA1BF00D96A2E /* CYCenterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYCenterButton.h; sourceTree = "<group>"; };
+		19A14DB71F5FA1BF00D96A2E /* CYCenterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYCenterButton.m; sourceTree = "<group>"; };
+		19A14DB81F5FA1BF00D96A2E /* CYTabBar.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CYTabBar.bundle; sourceTree = "<group>"; };
+		19A14DB91F5FA1BF00D96A2E /* CYTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYTabBar.h; sourceTree = "<group>"; };
+		19A14DBA1F5FA1BF00D96A2E /* CYTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYTabBar.m; sourceTree = "<group>"; };
+		19A14DBB1F5FA1BF00D96A2E /* CYTabBarConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYTabBarConfig.h; sourceTree = "<group>"; };
+		19A14DBC1F5FA1BF00D96A2E /* CYTabBarConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYTabBarConfig.m; sourceTree = "<group>"; };
+		19A14DBD1F5FA1BF00D96A2E /* CYTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYTabBarController.h; sourceTree = "<group>"; };
+		19A14DBE1F5FA1BF00D96A2E /* CYTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYTabBarController.m; sourceTree = "<group>"; };
 		19A7A70B1F57EB460044DC1A /* YLGIFImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLGIFImage.swift; sourceTree = "<group>"; };
 		19A7A70C1F57EB460044DC1A /* YLImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLImageView.swift; sourceTree = "<group>"; };
 		19A7A7101F57FB350044DC1A /* XHWLHttpTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLHttpTool.swift; sourceTree = "<group>"; };
@@ -281,13 +301,7 @@
 		19BB53A71F56DA43006C38EA /* XHWLLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLoginVC.swift; sourceTree = "<group>"; };
 		19BB53A91F56DDC7006C38EA /* XHWLLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLoginView.swift; sourceTree = "<group>"; };
 		19BB53AB1F56E009006C38EA /* XHWLLoginTF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLoginTF.swift; sourceTree = "<group>"; };
-		19C0BCE51F56AA8B00871BDD /* ESTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTabBar.swift; sourceTree = "<group>"; };
-		19C0BCE61F56AA8B00871BDD /* ESTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTabBarController.swift; sourceTree = "<group>"; };
-		19C0BCE71F56AA8B00871BDD /* ESTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTabBarItem.swift; sourceTree = "<group>"; };
-		19C0BCE81F56AA8B00871BDD /* ESTabBarItemBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTabBarItemBadgeView.swift; sourceTree = "<group>"; };
-		19C0BCE91F56AA8B00871BDD /* ESTabBarItemContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTabBarItemContainer.swift; sourceTree = "<group>"; };
-		19C0BCEA1F56AA8B00871BDD /* ESTabBarItemContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTabBarItemContentView.swift; sourceTree = "<group>"; };
-		19C0BCEB1F56AA8B00871BDD /* ESTabBarItemMoreContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTabBarItemMoreContentView.swift; sourceTree = "<group>"; };
+		19BDD6FF1F6132FB00916464 /* XHWLMapKitVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLMapKitVC.swift; sourceTree = "<group>"; };
 		19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLNavigationController.swift; sourceTree = "<group>"; };
 		19C0BCF01F56AA8B00871BDD /* XHWLHomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLHomeVC.swift; sourceTree = "<group>"; };
 		3C8CA86321214775B04BCDF0 /* Pods_XHWLHouseManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XHWLHouseManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -554,6 +568,37 @@
 			path = TipView;
 			sourceTree = "<group>";
 		};
+		19A14DAA1F5F991600D96A2E /* Nav */ = {
+			isa = PBXGroup;
+			children = (
+				19A14DAB1F5F991600D96A2E /* RTRootNavigationController.h */,
+				19A14DAC1F5F991600D96A2E /* RTRootNavigationController.m */,
+				19A14DAD1F5F991600D96A2E /* UIViewController+RTRootNavigationController.h */,
+				19A14DAE1F5F991600D96A2E /* UIViewController+RTRootNavigationController.m */,
+			);
+			path = Nav;
+			sourceTree = "<group>";
+		};
+		19A14DB11F5FA1BF00D96A2E /* CYTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				19A14DB21F5FA1BF00D96A2E /* CYBadgeView.h */,
+				19A14DB31F5FA1BF00D96A2E /* CYBadgeView.m */,
+				19A14DB41F5FA1BF00D96A2E /* CYButton.h */,
+				19A14DB51F5FA1BF00D96A2E /* CYButton.m */,
+				19A14DB61F5FA1BF00D96A2E /* CYCenterButton.h */,
+				19A14DB71F5FA1BF00D96A2E /* CYCenterButton.m */,
+				19A14DB81F5FA1BF00D96A2E /* CYTabBar.bundle */,
+				19A14DB91F5FA1BF00D96A2E /* CYTabBar.h */,
+				19A14DBA1F5FA1BF00D96A2E /* CYTabBar.m */,
+				19A14DBB1F5FA1BF00D96A2E /* CYTabBarConfig.h */,
+				19A14DBC1F5FA1BF00D96A2E /* CYTabBarConfig.m */,
+				19A14DBD1F5FA1BF00D96A2E /* CYTabBarController.h */,
+				19A14DBE1F5FA1BF00D96A2E /* CYTabBarController.m */,
+			);
+			path = CYTabBar;
+			sourceTree = "<group>";
+		};
 		19A77DB61F579AAC0023B4A7 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -629,36 +674,32 @@
 			path = MJExtension;
 			sourceTree = "<group>";
 		};
+		19BDD6FE1F6132DD00916464 /* MapKit */ = {
+			isa = PBXGroup;
+			children = (
+				19BDD6FF1F6132FB00916464 /* XHWLMapKitVC.swift */,
+			);
+			path = MapKit;
+			sourceTree = "<group>";
+		};
 		19C0BCE31F56AA8B00871BDD /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				19A14DB11F5FA1BF00D96A2E /* CYTabBar */,
+				19A14DAA1F5F991600D96A2E /* Nav */,
 				19A14D941F5EA6B200D96A2E /* TipView */,
 				19A14D811F5EA46F00D96A2E /* SYRefresh */,
 				19A14D511F5E381100D96A2E /* Masonry */,
 				19A7A70A1F57EB460044DC1A /* YLGIFImage-Swift */,
 				19BB53231F56BEBB006C38EA /* Mcu_sdk */,
-				19C0BCE41F56AA8B00871BDD /* Tabbar */,
 			);
 			path = Lib;
-			sourceTree = "<group>";
-		};
-		19C0BCE41F56AA8B00871BDD /* Tabbar */ = {
-			isa = PBXGroup;
-			children = (
-				19C0BCE51F56AA8B00871BDD /* ESTabBar.swift */,
-				19C0BCE61F56AA8B00871BDD /* ESTabBarController.swift */,
-				19C0BCE71F56AA8B00871BDD /* ESTabBarItem.swift */,
-				19C0BCE81F56AA8B00871BDD /* ESTabBarItemBadgeView.swift */,
-				19C0BCE91F56AA8B00871BDD /* ESTabBarItemContainer.swift */,
-				19C0BCEA1F56AA8B00871BDD /* ESTabBarItemContentView.swift */,
-				19C0BCEB1F56AA8B00871BDD /* ESTabBarItemMoreContentView.swift */,
-			);
-			path = Tabbar;
 			sourceTree = "<group>";
 		};
 		19C0BCEC1F56AA8B00871BDD /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				19BDD6FE1F6132DD00916464 /* MapKit */,
 				19A14D7C1F5E701A00D96A2E /* Search */,
 				19C0BCEF1F56AA8B00871BDD /* Home */,
 				19A14D751F5E3A7F00D96A2E /* Work */,
@@ -912,6 +953,7 @@
 				84A50A611F5668DA00BCDA47 /* Main.storyboard in Resources */,
 				194FAAD51F5CF993004CA513 /* xhwl_login_logo_up.gif in Resources */,
 				194FAAD71F5CF9B0004CA513 /* door2.gif in Resources */,
+				19A14DC21F5FA1BF00D96A2E /* CYTabBar.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -976,21 +1018,23 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-XHWLHouseManager/Pods-XHWLHouseManager-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${PODS_ROOT}/WilddogWebRTC/WebRTC.framework",
 				"${BUILT_PRODUCTS_DIR}/swiftScan/swiftScan.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebRTC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/swiftScan.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1019,8 +1063,10 @@
 				19A14D7E1F5E703D00D96A2E /* XHWLSearchBar.swift in Sources */,
 				19BB53501F56BFA3006C38EA /* MJExtensionConst.m in Sources */,
 				19BB53A81F56DA43006C38EA /* XHWLLoginVC.swift in Sources */,
+				19A14DB01F5F991600D96A2E /* UIViewController+RTRootNavigationController.m in Sources */,
 				19BB53521F56BFA3006C38EA /* MJProperty.m in Sources */,
 				19A14D8D1F5EA46F00D96A2E /* GIFAnimatedImageView.swift in Sources */,
+				19A14DC51F5FA1BF00D96A2E /* CYTabBarController.m in Sources */,
 				19BB53561F56BFA3006C38EA /* NSObject+MJCoding.m in Sources */,
 				19A14D901F5EA46F00D96A2E /* GifTextHeaderFooter.swift in Sources */,
 				19BB53511F56BFA3006C38EA /* MJFoundation.m in Sources */,
@@ -1033,15 +1079,15 @@
 				19A14D801F5E853C00D96A2E /* XHWLSearchVC.swift in Sources */,
 				1961CD9D1F596328006856D0 /* RealPlayViewController.m in Sources */,
 				19BB53531F56BFA3006C38EA /* MJPropertyKey.m in Sources */,
-				19C0BCF71F56AA8B00871BDD /* ESTabBarItemContentView.swift in Sources */,
-				19C0BCF41F56AA8B00871BDD /* ESTabBarItem.swift in Sources */,
 				19A7A70D1F57EB460044DC1A /* YLGIFImage.swift in Sources */,
 				19A14D6B1F5E381100D96A2E /* MASConstraintMaker.m in Sources */,
+				19A14DBF1F5FA1BF00D96A2E /* CYBadgeView.m in Sources */,
 				1912240B1F5D47F500D201F3 /* JSONAndDictionary.swift in Sources */,
 				19A14D9C1F5ECA4200D96A2E /* XHWLScanModel.swift in Sources */,
 				1961CDA21F596328006856D0 /* PtzPopView.m in Sources */,
 				19A14D741F5E3A1600D96A2E /* XHWLLookHomeVC.swift in Sources */,
 				1961CDA91F596328006856D0 /* ToolBarButton.m in Sources */,
+				19A14DAF1F5F991600D96A2E /* RTRootNavigationController.m in Sources */,
 				1961CDA71F596328006856D0 /* TalkChannelView.m in Sources */,
 				19A14D9A1F5EAB0800D96A2E /* XHWLMenuVC.swift in Sources */,
 				1961CDB71F5963D2006856D0 /* CMPedometerViewController.swift in Sources */,
@@ -1056,7 +1102,6 @@
 				19A14D961F5EA6B200D96A2E /* HLBarIndicatorView.swift in Sources */,
 				19BB53541F56BFA3006C38EA /* MJPropertyType.m in Sources */,
 				198E7E0B1F5A9DC10016C4E8 /* XHWLMcuBottomView.swift in Sources */,
-				19C0BCF61F56AA8B00871BDD /* ESTabBarItemContainer.swift in Sources */,
 				19A14D8E1F5EA46F00D96A2E /* GifHeaderFooter.swift in Sources */,
 				1961CD771F596316006856D0 /* XHWLMcuResourceVC.swift in Sources */,
 				19A7A7111F57FB350044DC1A /* XHWLHttpTool.swift in Sources */,
@@ -1067,31 +1112,32 @@
 				1961CDA11F596328006856D0 /* PtzPanelView.m in Sources */,
 				192DA5451F57E1CB005950EC /* XHWLTransitionView.swift in Sources */,
 				19A14D771F5E3A9500D96A2E /* XHWLWorkVC.swift in Sources */,
-				19C0BCF21F56AA8B00871BDD /* ESTabBar.swift in Sources */,
 				19A14D691F5E381100D96A2E /* MASCompositeConstraint.m in Sources */,
 				19A14D8B1F5EA46F00D96A2E /* AccessoryView.swift in Sources */,
 				1961CDA31F596328006856D0 /* PtzPresetPositionDialView.m in Sources */,
 				1961CDAB1F596328006856D0 /* ToolBarScrollView.m in Sources */,
-				19C0BCF51F56AA8B00871BDD /* ESTabBarItemBadgeView.swift in Sources */,
 				19BB53391F56BF99006C38EA /* XMLReader.m in Sources */,
 				19BB53551F56BFA3006C38EA /* NSObject+MJClass.m in Sources */,
+				19A14DC41F5FA1BF00D96A2E /* CYTabBarConfig.m in Sources */,
 				1961CDC01F5983EF006856D0 /* XHWLMcuView.swift in Sources */,
 				84A50A5C1F5668DA00BCDA47 /* AppDelegate.swift in Sources */,
 				192DA5321F57A62A005950EC /* UIColor+Category.swift in Sources */,
 				1961CDA81F596328006856D0 /* Singleton.m in Sources */,
+				19A14DC31F5FA1BF00D96A2E /* CYTabBar.m in Sources */,
 				1961CDA61F596328006856D0 /* QualityPanelView.m in Sources */,
 				1961CDA41F596328006856D0 /* PtzPresetPositionMultiDialView.m in Sources */,
 				1961CDAA1F596328006856D0 /* ToolBarButtonPositionReckoner.m in Sources */,
 				1961CD9F1F596328006856D0 /* PickerView.m in Sources */,
+				19BDD7001F6132FB00916464 /* XHWLMapKitVC.swift in Sources */,
 				19BB53591F56BFA3006C38EA /* NSString+MJExtension.m in Sources */,
 				1961CDBE1F596441006856D0 /* XHWLMcuShowVC.swift in Sources */,
-				19C0BCF31F56AA8B00871BDD /* ESTabBarController.swift in Sources */,
 				19A14D701F5E381100D96A2E /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				1961CCCE1F58E301006856D0 /* HintTool.swift in Sources */,
 				192DA5431F57B73E005950EC /* XHWLSetPwdView.swift in Sources */,
+				19A14DC01F5FA1BF00D96A2E /* CYButton.m in Sources */,
 				19C0BCFA1F56AA8B00871BDD /* XHWLHomeVC.swift in Sources */,
+				19A14DC11F5FA1BF00D96A2E /* CYCenterButton.m in Sources */,
 				19A14D8C1F5EA46F00D96A2E /* CoreTextHeaderFooter.swift in Sources */,
-				19C0BCF81F56AA8B00871BDD /* ESTabBarItemMoreContentView.swift in Sources */,
 				19A14D931F5EA46F00D96A2E /* UIScrollView+SYRefresh.swift in Sources */,
 				19A14D6C1F5E381100D96A2E /* MASLayoutConstraint.m in Sources */,
 				1961CD9E1F596328006856D0 /* CTimeBarPanel.m in Sources */,
@@ -1265,8 +1311,6 @@
 					"\"Alamofire\"",
 					"-framework",
 					"\"Kingfisher\"",
-					"-framework",
-					"\"SwiftyJSON\"",
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xinghaiwulian.XHWLHouseManager;
@@ -1301,8 +1345,6 @@
 					"\"Alamofire\"",
 					"-framework",
 					"\"Kingfisher\"",
-					"-framework",
-					"\"SwiftyJSON\"",
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xinghaiwulian.XHWLHouseManager;

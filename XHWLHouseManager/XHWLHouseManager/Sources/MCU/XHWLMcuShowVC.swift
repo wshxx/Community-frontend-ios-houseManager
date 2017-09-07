@@ -76,13 +76,16 @@ class XHWLMcuShowVC: UIViewController , XHWLMcuViewDelegate{
                 
                 self.isLogin = true
             } else {
+                
+                "登陆失败".ext_debugPrintAndHint()
                 print("登陆失败")
                 //                //返回码为200,代表登录成功.返回码为202,203,204时,分别代表的意思是初始密码登录,密码强度不符合要求,密码过期.这三种情况都需要修改密码.请开发者使用当前账号登录BS端平台,按要求进行密码修改后,再进行APP的开发测试工作.其他返回码,请根据平台返回提示信息进行提示或处理
                 ////                [SVProgressHUD showErrorWithStatus:responseDic[@"description"]];
             }
         }) { (error) in
             
-            print("登陆失败")
+            "服务器连接失败".ext_debugPrintAndHint()
+            print("登陆请求失败")
             //            [SVProgressHUD showErrorWithStatus:@"服务器连接失败"];
         }
     }

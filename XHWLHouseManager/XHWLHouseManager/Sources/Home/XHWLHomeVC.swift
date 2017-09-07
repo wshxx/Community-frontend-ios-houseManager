@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import swiftScan
 
-class XHWLHomeVC: UIViewController, XHWLScanVCDelegate {
+class XHWLHomeVC: UIViewController, XHWLScanVCDelegate, XHWLScanTestVCDelegate {
     
     
     override func viewDidLoad() {
@@ -20,10 +20,40 @@ class XHWLHomeVC: UIViewController, XHWLScanVCDelegate {
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.red
         
+        if #available(iOS 10.0, *) {
+            self.tabBarItem.badgeColor = UIColor.orange
+        } else {
+            // Fallback on earlier versions
+        }
+        self.tabBarItem.badgeValue = "1234";
+        self.rt_disableInteractivePop = false
+        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"tabbar_1"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onOpenMenu))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"tabbar_2"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onScan))
+
+        
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // 禁用返回手势
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
+//        if ([ respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+//            self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+//        }
+    }
+    
+//    - (void)a
+//    {
+//    [self.rt_navigationController pushViewController:[[UIViewController alloc] init]
+//    animated:YES
+//    complete:^(BOOL finished) {
+//    [self.rt_navigationController removeViewController:self]; // 移除当前控制器
+//    }];
+//    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // 天气
@@ -45,23 +75,26 @@ class XHWLHomeVC: UIViewController, XHWLScanVCDelegate {
     // 扫一扫
     func onScan() {
 
-        //设置扫码区域参数设置
-        var style : LBXScanViewStyle = LBXScanViewStyle()
-        style.centerUpOffset = 44 // 矩形区域中心上移，默认中心点为屏幕中心点
-        style.photoframeAngleStyle = LBXScanViewPhotoframeAngleStyle.Outer //扫码框周围4个角的类型,设置为外挂式
-        style.photoframeLineW = 3      // 扫码框周围4个角绘制的线条宽度
-        style.photoframeAngleW = 12   // 扫码框周围4个角的宽度
-        style.photoframeAngleH = 12   //扫码框周围4个角的高度
-        style.colorAngle = mainColor
-        style.colorRetangleLine = UIColor.clear
-        style.anmiationStyle = LBXScanViewAnimationStyle.LineMove //扫码框内 动画类型 --线条上下移动
-        style.animationImage = UIImage(named:"qrcode_scan_light")  //线条上下移动图片
         
-        //SubLBXScanViewController继承自LBXScanViewController
-        //添加一些扫码或相册结果处理
-        let vc: XHWLScanVC = XHWLScanVC()
-        vc.scanStyle = style
-        vc.scanDelegate = self
+        //设置扫码区域参数设置
+//        var style : LBXScanViewStyle = LBXScanViewStyle()
+//        style.centerUpOffset = 44 // 矩形区域中心上移，默认中心点为屏幕中心点
+//        style.photoframeAngleStyle = LBXScanViewPhotoframeAngleStyle.Outer //扫码框周围4个角的类型,设置为外挂式
+//        style.photoframeLineW = 3      // 扫码框周围4个角绘制的线条宽度
+//        style.photoframeAngleW = 12   // 扫码框周围4个角的宽度
+//        style.photoframeAngleH = 12   //扫码框周围4个角的高度
+//        style.colorAngle = mainColor
+//        style.colorRetangleLine = UIColor.clear
+//        style.anmiationStyle = LBXScanViewAnimationStyle.LineMove //扫码框内 动画类型 --线条上下移动
+//        style.animationImage = UIImage(named:"qrcode_scan_light")  //线条上下移动图片
+//        
+//        //SubLBXScanViewController继承自LBXScanViewController
+//        //添加一些扫码或相册结果处理
+//        let vc: XHWLScanVC = XHWLScanVC()
+//        vc.scanStyle = style
+//        vc.scanDelegate = self
+        let vc: XHWLScanTestVC = XHWLScanTestVC()
+        vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

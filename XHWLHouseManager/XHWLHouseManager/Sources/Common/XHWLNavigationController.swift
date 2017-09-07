@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class XHWLNavigationController: UINavigationController {
+class XHWLNavigationController: RTContainerNavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

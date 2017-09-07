@@ -9,22 +9,26 @@
 import UIKit
 import swiftScan
 
+@objc protocol XHWLScanTestVCDelegate:NSObjectProtocol {
+    @objc optional func returnResultString(strResult:String, block:((_ isSuccess:Bool)->Void));
+}
+
 class XHWLScanTestVC: UIViewController , XHWLScanVCDelegate{
 
+    weak var delegate:XHWLScanTestVCDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationBar.isHidden = false
-        self.view.backgroundColor = UIColor.white
+//        self.navigationController?.navigationBar.isHidden = false
+//        self.view.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
+    
+        setupView()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        scanAction()
-    }
-//    #pragma mark - scan Action
-    
-    func scanAction() {
+    func setupView() {
+        
         //设置扫码区域参数设置
         var style : LBXScanViewStyle = LBXScanViewStyle()
         style.centerUpOffset = 44 // 矩形区域中心上移，默认中心点为屏幕中心点
@@ -42,9 +46,12 @@ class XHWLScanTestVC: UIViewController , XHWLScanVCDelegate{
         let vc: XHWLScanVC = XHWLScanVC()
         vc.scanStyle = style
         vc.scanDelegate = self
-        self.navigationController?.pushViewController(vc, animated: true)
+        vc.view.frame = CGRect(x:0, y:64, width:Screen_width, height:Screen_height-64)
+        self.view.addSubview(vc.view)
+        self.addChildViewController(vc)
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
-
+    
     /**
      *  扫描代理的回调函数
      *
@@ -54,55 +61,8 @@ class XHWLScanTestVC: UIViewController , XHWLScanVCDelegate{
     func returnResultString(strResult:String, block:((_ isSuccess:Bool)->Void))
     {
         print("\(strResult)")
-        
-        
-//        设备二维码模板：
-//            {
-//                "utid":"XHWL",
-//                "type":"equipment",
-//                "code":"TB0001"
-//        }
-//        园林绿植二维码模板：
-//            {
-//                "utid":"XHWL",
-//                "type":"plant",
-//                "code":"xxxxx"
-//        }
-        
-//        let dict : NSDictionary = strResult as! NSDictionary
-        let dict:NSDictionary = strResult.dictionaryWithJSON()
-        let utid:String = dict["utid"] as! String
-        
-        
-        if utid.compare("XHWL").rawValue == 0 {
-            block(true)
-            
-            let type:String = dict["type"] as! String
-            let code:String = dict["code"] as! String
-            
-            let params:[String: String] = ["type" : type,
-                "code" : code,
-                "token" : "3000c8f5-9cf3-48bf-ad0f-8f292251582a",
-              ]
-            
-//            http://192.168.1.154:8080/v1/appBusiness/scan/qrcode
-            
-            XHWLHttpTool.sharedInstance.postHttpTool(url: "v1/appBusiness/scan/qrcode", parameters: params, success: { (response) in
-
-                print("JSON: \(response)")
-                
-            }, failture: { (error) in
-                
-            })
-            
-        } else {
-            block(false)
-        }
-//        let index = strResult.index(strResult.startIndex, offsetBy: 6)
-//        let headStr:String = strResult.substring(to: index)
-
+        self.delegate?.returnResultString!(strResult: strResult, block: block)
     }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -15,6 +15,16 @@ class XHWLWorkVC: UIViewController {
 
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.orange
+        
+        
+        
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"tabbar_1"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onScan))
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"tabbar_2"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onScan))
+        self.rt_disableInteractivePop = true
+    }
+    
+    func onScan() {
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

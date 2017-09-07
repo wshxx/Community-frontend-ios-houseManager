@@ -48,6 +48,15 @@ let MapKitAK:String = "FQ6dxZRhOTxkwnd4NyAWpvg2XfGdFzXo"
 //"10092150" // 应用编号
 let WeatherKey:String = "3e6338eef8c947dd89f4ffebbf580778"
 
+// 野狗云
+//let kWilddogUrl:String = "https://demochat.wilddogio.com"
+let VideoAppId:String = "wd3420885063wekxii"
+let WDGSyncId:String = "wd3420885063wekxii"
+
+//wd2565313036qrpdim
+let kWilddogUrl:String = "https://\(VideoAppId).wilddogio.com"
+
+
 // MARK: -- 创建分割线
 
 /**

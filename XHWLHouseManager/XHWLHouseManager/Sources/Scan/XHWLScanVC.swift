@@ -50,6 +50,7 @@ class XHWLScanVC: LBXScanViewController {
         
         //框向上移动10个像素
         scanStyle?.centerUpOffset += 10
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -118,16 +119,18 @@ class XHWLScanVC: LBXScanViewController {
         
         let strResult:String  = result.strScanned!
 //        scanImage = result.imgScanned
-        if strResult != nil {
+        if strResult.compare("").rawValue != 0 {
 
+//            LBXScanWrapper.
 //            [LBXScanWrapper systemVibrate];//震动提醒
 //            [LBXScanWrapper systemSound];//声音提醒
 //            if self.scanDelegate?.responds(to: #selector(returnResultString)) {
                 self.scanDelegate?.returnResultString!(strResult: strResult, block: { (isSuccess) in
                     if (!isSuccess) {
                         
-                        "请重新扫描".ext_debugPrintAndHint()
-                        self.startScan() // 点击完，继续扫码
+                        AlertMessage.showOneAlertMessage(vc: self, alertMessage: "请重新扫描", block: {
+                            self.startScan() // 点击完，继续扫码
+                        })
                     }
                 })
 //            }
@@ -140,21 +143,22 @@ class XHWLScanVC: LBXScanViewController {
     
     func popAlertMsgWithScanResult(strResult:String) {
         
-        "识别失败 \n 请扫描用户、群组二维码".ext_debugPrintAndHint()
-        self.startScan() // 点击完，继续扫码
+        AlertMessage.showOneAlertMessage(vc: self, alertMessage: "识别失败 \n 请扫描用户、群组二维码", block: {
+            self.startScan() // 点击完，继续扫码
+        })
     }
     
     func showError(str:String)  {
         
-        "\(str)".ext_debugPrintAndHint()
-        let url:URL = URL.init(string: UIApplicationOpenSettingsURLString)!
-        if UIApplication.shared.canOpenURL(url) {
+        AlertMessage.showOneAlertMessage(vc: self, alertMessage: "\(str)", block: {
             let url:URL = URL.init(string: UIApplicationOpenSettingsURLString)!
-            UIApplication.shared.openURL(url)
-        }
-    
-        self.navigationController?.popViewController(animated: true)
-        
+            if UIApplication.shared.canOpenURL(url) {
+                let url:URL = URL.init(string: UIApplicationOpenSettingsURLString)!
+                UIApplication.shared.openURL(url)
+            }
+            
+            self.navigationController?.popViewController(animated: true)
+        })
     }
     
 

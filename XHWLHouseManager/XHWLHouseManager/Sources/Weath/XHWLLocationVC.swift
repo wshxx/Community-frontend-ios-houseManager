@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreLocation
-import SwiftyJSON
 import Kingfisher
 
 //NSLocationWhenInUseDescription ：允许在前台获取GPS的描述
