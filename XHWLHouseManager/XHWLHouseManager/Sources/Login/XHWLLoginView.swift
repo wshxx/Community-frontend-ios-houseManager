@@ -17,10 +17,12 @@ class XHWLLoginView: UIView {
     
 //    var funcBackBlock:(UIButton) -> ()
     
-    var funcStartEditBlock : (Bool) -> () = {param in }
     var funcBackBlock : (String, String) -> () = {param in }
+    var forgetPwdBackBlock : () -> () = {param in }
     var topStr:String!
     var bottomStr:String!
+    var forgetPwdBtn:UIButton!
+    
     //返回值是String
 //    typealias funcBlockA = (Int,Int) -> String
 //    //返回值是一个函数指针，入参为String
@@ -39,7 +41,7 @@ class XHWLLoginView: UIView {
         self.addSubview(bgIV)
         
         let titleL: UILabel = UILabel(frame: CGRect(x:28, y:23, width:310, height:30))
-        titleL.textColor = color_5284d6
+        titleL.textColor = color_01f0ff
         titleL.text = "登陆"
         titleL.font = font_18
         self.addSubview(titleL)
@@ -51,9 +53,6 @@ class XHWLLoginView: UIView {
             weak_self.topStr = str
             
         }
-        userTF.funcStartEditBlock = {
-            self.funcStartEditBlock(true)
-        }
         self.addSubview(userTF)
         
         let pwdTF:XHWLLoginTF = XHWLLoginTF(frame: CGRect(x:25, y:160, width:self.bounds.width-50, height:32), loginEnum: XHWLLoginTFEnum.password , placeholder:"请输入密码")
@@ -61,10 +60,16 @@ class XHWLLoginView: UIView {
         pwdTF.funcBackBlock = {str in
             weak_self.bottomStr = str
         }
-        pwdTF.funcStartEditBlock = {
-            self.funcStartEditBlock(false)
-        }
         self.addSubview(pwdTF)
+        
+        forgetPwdBtn = UIButton(frame: CGRect(x:15, y:pwdTF.frame.maxY+5, width:self.bounds.size.width-30, height:30))
+        forgetPwdBtn.setTitle("忘记密码？", for: UIControlState.normal)
+        forgetPwdBtn.adjustsImageWhenHighlighted = false
+        forgetPwdBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.right
+        forgetPwdBtn.titleLabel?.font = font_14
+        forgetPwdBtn.setTitleColor(color_c8e5f0, for: UIControlState.normal)
+        forgetPwdBtn.addTarget(self, action: #selector(XHWLLoginView.onForgetPwdClick), for: UIControlEvents.touchUpInside)
+        self.addSubview(forgetPwdBtn)
         
         let img = UIImage(named: "xhwl_login_btn_highlight")
         
@@ -74,11 +79,14 @@ class XHWLLoginView: UIView {
         loginBtn.adjustsImageWhenHighlighted = false
         loginBtn.titleLabel?.font = font_18
         loginBtn.center = CGPoint(x: self.bounds.size.width/2.0, y: self.bounds.size.height-40-(img?.size.height)!/2.0)
-        loginBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
+        loginBtn.setTitleColor(color_01f0ff, for: UIControlState.normal)
         loginBtn.addTarget(self, action: #selector(XHWLLoginView.onLoginClick), for: UIControlEvents.touchUpInside)
         self.addSubview(loginBtn)
     }
     
+    func onForgetPwdClick() {
+        self.forgetPwdBackBlock()
+    }
     
     func onLoginClick(btn:UIButton) {
         

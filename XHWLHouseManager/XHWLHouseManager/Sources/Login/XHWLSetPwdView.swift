@@ -10,7 +10,6 @@ import UIKit
 
 class XHWLSetPwdView: UIView {
     
-    var funcStartEditBlock : (Bool) -> () = {param in }
     var funcBackBlock : (String, String) -> () = {param in }
     var topStr:String!
     var bottomStr:String!
@@ -25,7 +24,7 @@ class XHWLSetPwdView: UIView {
         self.addSubview(bgIV)
         
         let titleL: UILabel = UILabel(frame: CGRect(x:28, y:23, width:310, height:30))
-        titleL.textColor = color_5284d6
+        titleL.textColor = color_01f0ff
         titleL.text = "重新设置密码"
         titleL.font = font_18
         self.addSubview(titleL)
@@ -34,18 +33,12 @@ class XHWLSetPwdView: UIView {
         userTF.funcBackBlock = {str in
             self.topStr = str
         }
-        userTF.funcStartEditBlock = {
-            self.funcStartEditBlock(true)
-        }
         self.addSubview(userTF)
         
         
         let pwdTF:XHWLLoginTF = XHWLLoginTF(frame: CGRect(x:25, y:160, width:self.bounds.width-50, height:40), loginEnum: XHWLLoginTFEnum.password , placeholder:"请确认密码")
         pwdTF.funcBackBlock = {str in
             self.bottomStr = str
-        }
-        pwdTF.funcStartEditBlock = {
-            self.funcStartEditBlock(false)
         }
         self.addSubview(pwdTF)
         
@@ -57,7 +50,7 @@ class XHWLSetPwdView: UIView {
         loginBtn.titleLabel?.font = font_18
         loginBtn.adjustsImageWhenHighlighted = false
         loginBtn.center = CGPoint(x: self.bounds.size.width/2.0, y: self.bounds.size.height-40-(img?.size.height)!/2.0)
-        loginBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
+        loginBtn.setTitleColor(color_01f0ff, for: UIControlState.normal)
         loginBtn.addTarget(self, action: #selector(XHWLLoginView.onLoginClick), for: UIControlEvents.touchUpInside)
         self.addSubview(loginBtn)
     }

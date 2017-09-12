@@ -24,7 +24,9 @@ let MSP_PASSWORD:String   =  "Zhwy1234"
 // MARK: -- 颜色
 
 let mainColor:UIColor = UIColor().colorWithHexString(colorStr: "#0abfab") //主色调
-let color_c6c6c6:UIColor = UIColor().colorWithHexString(colorStr: "#c6c6c6") // 默认placholder颜色
+let color_01f0ff:UIColor = UIColor().colorWithHexString(colorStr: "#01f0ff") //主色调
+let color_09fbfe:UIColor = UIColor().colorWithHexString(colorStr: "#09fbfe") //主色调
+let color_c8e5f0:UIColor = UIColor().colorWithHexString(colorStr: "#c8e5f0") // 默认placholder颜色
 let color_f2f2f2:UIColor = UIColor().colorWithHexString(colorStr: "#f2f2f2") // 线的颜色
 let color_f9f9f9:UIColor = UIColor().colorWithHexString(colorStr: "#f9f9f9") // 文字的颜色
 let color_5284d6:UIColor = UIColor().colorWithHexString(colorStr: "#5284d6") // 蓝色的文字
@@ -32,6 +34,9 @@ let color_5284d6:UIColor = UIColor().colorWithHexString(colorStr: "#5284d6") // 
 
 // MARK: -- 字体
 
+let font_9:UIFont = UIFont.systemFont(ofSize: 9)
+let font_12:UIFont = UIFont.systemFont(ofSize: 12)
+let font_13:UIFont = UIFont.systemFont(ofSize: 13)
 let font_14:UIFont = UIFont.systemFont(ofSize: 14)
 let font_15:UIFont = UIFont.systemFont(ofSize: 15)
 let font_16:UIFont = UIFont.systemFont(ofSize: 16)
@@ -44,7 +49,7 @@ let Screen_width:CGFloat = UIScreen.main.bounds.size.width
 
 
 // MARK: -- 百度地图
-let MapKitAK:String = "FQ6dxZRhOTxkwnd4NyAWpvg2XfGdFzXo"
+let MapKitAK:String = "q0cjWyZp8p6ECfY7H8jX9j42TmrdMedR"
 //"10092150" // 应用编号
 let WeatherKey:String = "3e6338eef8c947dd89f4ffebbf580778"
 

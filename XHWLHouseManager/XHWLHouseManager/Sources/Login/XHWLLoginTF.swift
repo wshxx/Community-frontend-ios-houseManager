@@ -15,7 +15,6 @@ enum XHWLLoginTFEnum : Int{
 
 class XHWLLoginTF: UIView, UITextFieldDelegate {
 
-    var funcStartEditBlock : () -> () = {param in }
     var funcBackBlock : (String) -> () = {param in }
     
     init(frame: CGRect , loginEnum:XHWLLoginTFEnum, placeholder:String) {
@@ -24,9 +23,13 @@ class XHWLLoginTF: UIView, UITextFieldDelegate {
         self.backgroundColor = UIColor.clear
         
         let textField: UITextField = UITextField(frame: CGRect(x:0, y:0, width:self.bounds.width, height:30))
-        textField.textColor = color_c6c6c6
-        textField.placeholder = placeholder
+        textField.textColor = color_c8e5f0
+        let placeholderAttr:NSMutableAttributedString = NSMutableAttributedString.init(string: placeholder)
+       placeholderAttr.addAttribute(NSForegroundColorAttributeName, value: color_c8e5f0, range: NSMakeRange(0, placeholder.characters.count))
+        placeholderAttr.addAttribute(NSFontAttributeName, value: font_15, range: NSMakeRange(0, placeholder.characters.count))
+        textField.attributedPlaceholder = placeholderAttr
         textField.font = font_15
+        textField.tintColor = color_c8e5f0
         textField.delegate = self
         
         let leftV:UIView = UIView(frame: CGRect(x:0, y:0, width:30, height:30))
@@ -42,18 +45,17 @@ class XHWLLoginTF: UIView, UITextFieldDelegate {
         textField.leftViewMode = UITextFieldViewMode.always
         self.addSubview(textField)
         
-        let lineL: UIView = SpaceLineSetup(view: self, color: color_f2f2f2)
-        lineL.frame = CGRect(x: 0, y: self.bounds.size.height-0.5, width: self.bounds.size.width, height: 0.5)
-        self.addSubview(lineL)
-    }
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        self.funcStartEditBlock()
+        let lineIV : UIImageView = UIImageView()
+        lineIV.image = UIImage(named: "warning_cell_line")
+        lineIV.frame = CGRect(x: 0, y: self.bounds.size.height-0.5, width: self.bounds.size.width, height: 0.5)
+        self.addSubview(lineIV)
         
-        return true
+//        let lineL: UIImageView = SpaceLineSetup(view: self, color: color_f2f2f2)
+//        self.addSubview(lineL)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        print("\(textField.text)")
         self.funcBackBlock(textField.text!)
     }
     

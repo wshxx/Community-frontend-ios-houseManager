@@ -21,8 +21,16 @@ class XHWLNavigationController: RTContainerNavigationController {
         
         
         self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.init(red: 38/255.0, green: 38/255.0, blue: 38/255.0, alpha: 1.0), NSFontAttributeName : UIFont.systemFont(ofSize: 16.0)]
-        self.navigationBar.tintColor = UIColor.init(red: 38/255.0, green: 38/255.0, blue: 38/255.0, alpha: 1.0)
+        self.navigationBar.tintColor = UIColor.white
         self.navigationItem.title = ""
+        
+        self.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationBar.shadowImage = UIImage()
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"xhwl_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
     }
     
+    func onBack(){
+        self.navigationController?.popViewController(animated: true)
+    }
 }

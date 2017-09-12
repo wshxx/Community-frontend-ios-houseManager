@@ -39,7 +39,7 @@ class XHWLHomeVC: UIViewController, XHWLScanVCDelegate, XHWLScanTestVCDelegate {
         super.viewWillAppear(animated)
         
         // 禁用返回手势
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+//        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
 //        if ([ respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
 //            self.navigationController.interactivePopGestureRecognizer.enabled = NO;

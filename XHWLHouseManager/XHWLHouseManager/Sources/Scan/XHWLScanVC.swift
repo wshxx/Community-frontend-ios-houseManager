@@ -49,16 +49,15 @@ class XHWLScanVC: LBXScanViewController {
         setNeedCodeImage(needCodeImg: true)
         
         //框向上移动10个像素
-        scanStyle?.centerUpOffset += 10
-
+        scanStyle?.centerUpOffset -= 40
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.drawBottomItems()
-        self.drawTitle()
-        self.view.bringSubview(toFront: topTitle!)
+//        self.drawBottomItems()
+//        self.drawTitle()
+//        self.view.bringSubview(toFront: topTitle!)
     }
 
     func drawBottomItems() {

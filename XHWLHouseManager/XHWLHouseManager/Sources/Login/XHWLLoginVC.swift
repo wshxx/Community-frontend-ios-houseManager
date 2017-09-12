@@ -35,10 +35,10 @@ class XHWLLoginVC: UIViewController {
     // 初始化界面
     func setupView() {
         let bgImageV:UIImageView = UIImageView(frame: self.view.bounds)
-        bgImageV.image = UIImage(named: "xhwl_login_bgView")
+        bgImageV.image = UIImage(named: "xhwl_bg")
         self.view.addSubview(bgImageV)
         
-        let showV:XHWLTransitionView = XHWLTransitionView(frame: CGRect(x:0, y:0, width:349, height:299+90))
+        let showV:XHWLTransitionView = XHWLTransitionView(frame: CGRect(x:0, y:0, width:349, height:299+90+60))
         showV.center = CGPoint(x: self.view.bounds.width/2.0, y: self.view.bounds.height/2.0-90/2.0)
         weak var weak_self:XHWLLoginVC?  = self
         showV.funcBackBlock = { topStr,bottomStr in
@@ -49,6 +49,7 @@ class XHWLLoginVC: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.9)){
                 self.progressHUD.hide()
                 let vc = XHWLLookHomeVC()
+//                let vc = XHWLMapKitVC()
                 "登陆成功".ext_debugPrintAndHint()
                 weak_self?.navigationController?.pushViewController(vc, animated: true)
             }

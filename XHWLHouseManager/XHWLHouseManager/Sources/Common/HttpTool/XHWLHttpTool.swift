@@ -36,6 +36,7 @@ class XHWLHttpTool: NSObject {
             
             requestUrl = "\(XHWLHttpURL)/\(url)"
         }
+        print("\(requestUrl) \n \(parameters)")
         Alamofire.request(requestUrl, method: .get, parameters: parameters, encoding: URLEncoding.default)
             .responseJSON { response in
                 

@@ -148,37 +148,8 @@ class XHWLLookHomeVC: UIViewController {
     func doorBtnClicked(_ sender: UIButton) {
     }
     func upBtnClicked(_ sender: UIButton) {
-        let tabbar: CYTabBarController = CYTabBarController()
-        
-        /**
-         *  配置外观
-         */
-        CYTabBarConfig.shared().selectedTextColor = UIColor.orange
-        //    [CYTabBarConfig shared].textColor = [UIColor blueColor];
-        //    [CYTabBarConfig shared].backgroundColor = [UIColor greenColor];
-        CYTabBarConfig.shared().selectIndex = 1
-        
-        
-        /**
-         *  style 1 (中间按钮突出 ， 设为按钮 , 底部有文字 ， 闲鱼)
-         */
-        let v1:RTContainerNavigationController = XHWLNavigationController(rootViewController:XHWLHomeVC())
-        let v2:RTContainerNavigationController = XHWLNavigationController(rootViewController:XHWLWorkVC())
-        tabbar.addChildController(v1, title: "首页", imageName: "tabbar_1", selectedImageName: "tabbar_1")
-        tabbar.addChildController(v2, title: "工作", imageName: "tabbar_2", selectedImageName: "tabbar_2")
-        
-//        [tabbar addCenterController:nil bulge:YES title:@"发布" imageName:@"post_normal" selectedImageName:@"post_normal"];
-        
-//        tabBarController.viewControllers = [v1, v2]
-//        
-//        UITabBar.appearance().barTintColor = UIColor.white
-//        //        图片和文字同时修改
-//        tabBarController.tabBar.tintColor = UIColor.orange
-//        //        UITabBar.appearance().tintColor = UIColor.orange
-//        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.red], for: UIControlState.normal)
-//        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.purple], for:.selected)
-        
-        self.present(tabbar, animated: true, completion: nil)
+        let v2 = XHWLNavigationController(rootViewController:XHWLWorkVC())
+        self.present(v2, animated: true, completion: nil)
     }
     
     weak var bluePoint: UIImageView!
