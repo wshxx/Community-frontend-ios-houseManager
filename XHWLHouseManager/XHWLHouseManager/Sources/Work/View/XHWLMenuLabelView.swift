@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol XHWLMenuLabelViewDelegate:NSObjectProtocol {
+    @objc optional func menuLabel(_ labelView:XHWLMenuLabelView, _ text:String, _ block:@escaping ((Bool)->()))
+}
+
 class XHWLMenuLabelView: UIView {
 
     var titleL:UILabel!
@@ -16,6 +20,8 @@ class XHWLMenuLabelView: UIView {
     var okBtn:UIButton!
     var isHiddenEdit:Bool = false
     var labelBgIV:UIImageView!
+    var delegate:XHWLMenuLabelViewDelegate?
+    var onOKClickBlock : (String, ((Bool) -> ())) -> () = {param in }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,6 +57,11 @@ class XHWLMenuLabelView: UIView {
         contentTF.backgroundColor = UIColor.clear
         contentTF.textAlignment = NSTextAlignment.left
         contentTF.isEnabled = false
+        contentTF.tintColor = color_c8e5f0
+        
+        let leftV:UIView = UIView(frame: CGRect(x:0, y:0, width:5, height:20))
+        contentTF.leftView = leftV
+        contentTF.leftViewMode = UITextFieldViewMode.always
         self.addSubview(contentTF)
         
         okBtn = UIButton()
@@ -58,7 +69,7 @@ class XHWLMenuLabelView: UIView {
         okBtn.setTitleColor(UIColor().colorWithHexString(colorStr: "3cf8ff"), for: UIControlState.normal)
         okBtn.isHidden = true
         okBtn.titleLabel?.font = font_12
-        okBtn.addTarget(self, action: #selector(onOkClick), for: UIControlEvents.touchUpInside)
+        okBtn.addTarget(self, action: #selector(XHWLMenuLabelView.onOkClick), for: UIControlEvents.touchUpInside)
         self.addSubview(okBtn)
         
         rightBtn = UIButton()
@@ -93,8 +104,17 @@ class XHWLMenuLabelView: UIView {
 //        okBtn.isHidden = isHiddenEdit
     }
     
+    // 确定
     func onOkClick() {
         
+        self.delegate?.menuLabel!(self, contentTF.text!, {[weak self] (isTrue) in
+            if isTrue {
+                self?.onEdit(btn: (self?.rightBtn)!)
+            }
+        })
+//        self.onOKClickBlock(contentTF.text!, {_ in 
+//            
+//        })
     }
     
     func onEdit(btn:UIButton) {

@@ -16,8 +16,9 @@ class XHWLWaterView: UIView , UITableViewDelegate, UITableViewDataSource {
     var tableView:UITableView!
     var dataAry:NSMutableArray!
     var clickCell:(NSInteger)->(Void) = {param in }
-    var topMenu:XHWLTopView!
     var tagMenu:XHWLTagView!
+    var selectIndex:NSInteger! = 0
+    var topMenu:XHWLTopView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,25 +40,16 @@ class XHWLWaterView: UIView , UITableViewDelegate, UITableViewDataSource {
         bgImage.image = UIImage(named:"menu_bg")
         self.addSubview(bgImage)
         
-        //        tipImg = UIImageView()
-        //        tipImg.frame = CGRect(x:0, y:0, width:55, height:55)
-        //        tipImg.center = CGPoint(x: self.bounds.size.width/2.0, y: self.bounds.size.height/2.0-20)
-        //        self.addSubview(tipImg)
-        
-        //        tipLabel = UILabel()
-        //        tipLabel.textAlignment = NSTextAlignment.center
-        //        tipLabel.textColor = UIColor().colorWithHexString(colorStr: "32b7e2")
-        //        tipLabel.font = font_15
-        //        self.addSubview(tipLabel)
-        
-        let array:NSArray = ["水泵房", "排污泵"]
+        let array:NSArray = ["待处理", "已处理"]
         topMenu = XHWLTopView.init(frame: CGRect.zero)
         topMenu.createArray(array: array)
-        topMenu.btnBlock = { index in
-            
+//        topMenu.frame = CGRect(x:0, y:0, width:Screen_width-100, height:44)
+//        topMenu.center = CGPoint(x:Screen_width/2.0, y:22)
+        topMenu.btnBlock = {[weak self] index in
+//            self?.warningView.selectIndex = index
+//            self?.warningView.tableView.reloadData()
         }
         self.addSubview(topMenu)
-        
         
         let waterArray:NSArray = ["生活水泵", "生活水泵"]
         tagMenu = XHWLTagView.shared
@@ -68,7 +60,7 @@ class XHWLWaterView: UIView , UITableViewDelegate, UITableViewDataSource {
         self.addSubview(tagMenu)
         
         
-        tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
+        tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.grouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.clear
@@ -81,10 +73,15 @@ class XHWLWaterView: UIView , UITableViewDelegate, UITableViewDataSource {
         super.layoutSubviews()
         
         bgImage.frame = self.bounds
-        //        tipLabel.frame = CGRect(x:10, y:self.bounds.size.height-80, width:self.bounds.size.width-20, height:40)
-        topMenu.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:44)
-        tagMenu.frame = CGRect(x:0, y:44, width:self.bounds.size.width, height:44)
+        tagMenu.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:44)
         tableView.frame = CGRect(x:0, y:tagMenu.frame.maxY, width:self.bounds.size.width, height:self.frame.size.height-tagMenu.frame.maxY)
+        
+        
+        let img = UIImage(named:"warning_subview_top_bg")!
+        topMenu.frame =  CGRect(x:0, y:0, width:img.size.width, height:img.size.height)
+        bgImage.frame = CGRect(x:14, y:56, width:self.bounds.size.width-28, height:self.frame.size.height-56)
+        tagMenu.frame = CGRect(x:14, y:56, width:self.bounds.size.width-28, height:44)
+        tableView.frame = CGRect(x:14, y:tagMenu.frame.maxY, width:self.bounds.size.width-28, height:self.frame.size.height-tagMenu.frame.maxY)
         
     }
     

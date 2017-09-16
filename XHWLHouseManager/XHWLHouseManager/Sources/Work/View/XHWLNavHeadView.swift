@@ -52,7 +52,9 @@ class XHWLNavHeadView: UIView , UITableViewDelegate, UITableViewDataSource {
         if cell == nil {
             cell =  UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: ID)
         }
-        cell?.textLabel?.text = dataAry[indexPath.row] as? String
+        
+        let model:XHWLProjectModel = (dataAry[indexPath.row] as? XHWLProjectModel)!
+        cell?.textLabel?.text = model.name
         
         return cell!
     }

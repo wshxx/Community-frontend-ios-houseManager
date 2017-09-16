@@ -27,7 +27,7 @@ class XHWLNavigationController: RTContainerNavigationController {
         self.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationBar.shadowImage = UIImage()
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"xhwl_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
     }
     
     func onBack(){

@@ -16,7 +16,7 @@ class XHWLAbnormalPassView: UIView  , UITableViewDelegate, UITableViewDataSource
     var tableView:UITableView!
     var dataAry:NSMutableArray!
     var clickCell:(NSInteger)->(Void) = {param in }
-    var topMenu:XHWLTopView!
+//    var topMenu:XHWLTopView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,13 +49,13 @@ class XHWLAbnormalPassView: UIView  , UITableViewDelegate, UITableViewDataSource
         //        tipLabel.font = font_15
         //        self.addSubview(tipLabel)
         
-        let array:NSArray = ["异常放行记录"]
-        topMenu = XHWLTopView.init(frame: CGRect.zero)
-        topMenu.createArray(array: array)
-        topMenu.btnBlock = { index in
-            
-        }
-        self.addSubview(topMenu)
+//        let array:NSArray = ["异常放行记录"]
+//        topMenu = XHWLTopView.init(frame: CGRect.zero)
+//        topMenu.createArray(array: array)
+//        topMenu.btnBlock = { index in
+//            
+//        }
+//        self.addSubview(topMenu)
         
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
         tableView.delegate = self
@@ -71,8 +71,8 @@ class XHWLAbnormalPassView: UIView  , UITableViewDelegate, UITableViewDataSource
         
         bgImage.frame = self.bounds
         //        tipLabel.frame = CGRect(x:10, y:self.bounds.size.height-80, width:self.bounds.size.width-20, height:40)
-        topMenu.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:44)
-        tableView.frame = CGRect(x:0, y:44, width:self.bounds.size.width, height:self.frame.size.height-44)
+//        topMenu.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:44)
+        tableView.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:self.frame.size.height)
         
     }
     

@@ -27,7 +27,7 @@ class XHWLScanTestVC: UIViewController , XHWLScanVCDelegate{
         // Do any additional setup after loading the view.
         bgImg = UIImageView()
         bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"xhwl_bg")
+        bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
 //        let img:UIImage = UIImage(named:"scan_title")!
@@ -37,7 +37,7 @@ class XHWLScanTestVC: UIViewController , XHWLScanVCDelegate{
         
         self.title = "扫一扫"
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"xhwl_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_photo"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onSelectPicture))
     
         setupView()
@@ -63,7 +63,7 @@ class XHWLScanTestVC: UIViewController , XHWLScanVCDelegate{
         style.colorAngle = UIColor.white
         style.colorRetangleLine = UIColor.clear
         style.anmiationStyle = LBXScanViewAnimationStyle.LineMove //扫码框内 动画类型 --线条上下移动
-        style.animationImage = UIImage(named:"qrcode_scan_light")  //线条上下移动图片
+        style.animationImage = UIImage(named:"scan_light")  //线条上下移动图片
         
         //SubLBXScanViewController继承自LBXScanViewController
         //添加一些扫码或相册结果处理

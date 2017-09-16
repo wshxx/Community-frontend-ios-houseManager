@@ -30,6 +30,7 @@ let color_c8e5f0:UIColor = UIColor().colorWithHexString(colorStr: "#c8e5f0") // 
 let color_f2f2f2:UIColor = UIColor().colorWithHexString(colorStr: "#f2f2f2") // 线的颜色
 let color_f9f9f9:UIColor = UIColor().colorWithHexString(colorStr: "#f9f9f9") // 文字的颜色
 let color_5284d6:UIColor = UIColor().colorWithHexString(colorStr: "#5284d6") // 蓝色的文字
+let color_58e9f3:UIColor = UIColor().colorWithHexString(colorStr: "#58e9f3") // 蓝色的文字
 
 
 // MARK: -- 字体

@@ -19,7 +19,7 @@ class XHWLSafeGuardDetailVC: UIViewController, XHWLScanTestVCDelegate{
         self.view.backgroundColor = UIColor.white
         setupView()
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"xhwl_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"home_scan"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onScan))
     }
     
@@ -38,7 +38,7 @@ class XHWLSafeGuardDetailVC: UIViewController, XHWLScanTestVCDelegate{
         
         bgImg = UIImageView()
         bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"xhwl_bg")
+        bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
         let showImg:UIImage = UIImage(named:"menu_bg")!

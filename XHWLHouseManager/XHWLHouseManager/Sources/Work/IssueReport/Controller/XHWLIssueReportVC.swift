@@ -13,6 +13,9 @@ class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueRe
     var bgImg:UIImageView!
     var isAddPicture:Bool!
     var warningView:XHWLIssueReportView!
+    var scanModel:XHWLScanModel!
+    var imageSel:UIImage!
+    var imageSel2:UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +24,20 @@ class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueRe
         self.view.backgroundColor = UIColor.white
         setupView()
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"xhwl_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"home_scan"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onScan))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        // 安管主任拥有权限
+        if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "记录", style: UIBarButtonItemStyle.plain, target: self, action: #selector(onIssueReportList))
+        }
+    }
+    
+    // 
+    func onIssueReportList() {
+        let vc:XHWLIssueReportListVC = XHWLIssueReportListVC()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -35,18 +50,11 @@ class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueRe
         self.navigationController?.popViewController(animated: true)
     }
     
-    // 扫一扫
-    func onScan() {
-        let vc: XHWLScanTestVC = XHWLScanTestVC()
-        vc.delegate = self
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
     func setupView() {
         
         bgImg = UIImageView()
         bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"xhwl_bg")
+        bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
         let showImg:UIImage = UIImage(named:"menu_bg")!
@@ -54,23 +62,111 @@ class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueRe
         warningView.bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.delegate = self
-        warningView.btnBlock = {[weak warningView] index in
-            if index == 0 {
-                self.navigationController?.popViewController(animated: true)
-            } else {
-                warningView?.isHidden = true
-                XHWLTipView.shared.showSuccess(successText: "报事提交成功")
-                
-//                XHWLTipView.shared.showSuccess(successText: "报事提交失败，请重新填写！")
-                
-            
-            }
-           
-//            let vc:XHWLHistoryDetailVC = XHWLHistoryDetailVC()
-//            self.navigationController?.pushViewController(vc, animated: true)
+        warningView.dismissBlock = { _ in
+            self.navigationController?.popViewController(animated: true)
+        }
+        warningView.btnBlock = {type, inspectionPoint, remarks, urgency in
+             self.onIssueReport(type, inspectionPoint, remarks, urgency)
         }
         self.view.addSubview(warningView)
+    }
+    
+    // 报事
+    func onIssueReport(_ type:String, _ inspectionPoint:String, _ remarks:String, _ urgency:String) {
         
+//        接口备注：报事。涉及到文件图片上传，故提交数据时必须使用form表单提交
+//        type	string	是	异常类型
+//        inspectionPoint	string	是	巡检定点
+//        urgency	string	是	紧急情况
+//        equipmentCode	string	否	报事的设备编号
+//        remarks	string	否	备注
+//        token	string	是	用户登录token
+        
+        if type.isEmpty {
+            "异常类型为空".ext_debugPrintAndHint()
+            return
+        }
+        
+        if  inspectionPoint.isEmpty {
+            "巡检定点为空".ext_debugPrintAndHint()
+            return
+        }
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        let params:[String: String] = ["type":type,
+                                       "inspectionPoint":inspectionPoint,
+                                       "urgency":urgency,
+                                       "equipmentCode":scanModel.code,
+                                       "remarks":remarks,
+                                       "token":userModel.wyAccount.token]
+        let url:String = "wyBusiness/complaint"
+        
+//        if topStr.isEmpty {
+//            "您输入的工号为空".ext_debugPrintAndHint()
+//            return
+//        }
+//        if bottomStr.isEmpty {
+//            "您输入的密码为空".ext_debugPrintAndHint()
+//            return
+//        }
+        
+        //        self.progressHUD.show()
+        let imageData:Data = UIImageJPEGRepresentation(imageSel, 0.5)!
+        let imageData2:Data = UIImageJPEGRepresentation(imageSel2, 0.5)!
+        
+        XHWLHttpTool.sharedInstance.uploadHttpTool(url: url,
+                                                   params: params,
+                                                   data: [imageData2], // [imageData, imageData2], //
+                                                   name: ["image3.png"], // ["image3.png", "image2.png"], //
+                                                   success: { (response) in
+                                                    //            self.progressHUD.hide()
+                                                    if response["state"] as! Bool{
+                                                        
+                                                        
+                                                        self.warningView.isHidden = true
+                                                        XHWLTipView.shared.showSuccess(successText: "报事提交成功")
+                                                        
+                                                      //  "登陆成功".ext_debugPrintAndHint()
+                                                        //登录成功
+                                                  /*      let wyUser:NSDictionary = response["result"]!["wyUser"] as! NSDictionary
+                                                        let projectList:NSArray = response["result"]!["projectList"] as! NSArray
+                                                        
+                                                        print("\(wyUser)")
+                                                        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: wyUser)
+                                                        let data:NSData = userModel.mj_JSONData()! as NSData
+                                                        UserDefaults.standard.set(data, forKey: "user")
+                                                        
+                                                        //                let modelAry:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: projectList)
+                                                        let modelData:NSData = projectList.mj_JSONData()! as NSData
+                                                        UserDefaults.standard.set(modelData, forKey: "projectList")
+                                                        UserDefaults.standard.synchronize()
+                                                        
+                                                        if userModel.wyAccount.isFirstLogin.compare("y").rawValue == 0 { // 重置密码
+                                                            //                    self.onLoginChangeReset()
+                                                        } else { // 跳到首页
+                                                            //                    self.delegate?.onGotoHome!(self)
+                                                        } */
+                                                    } else {
+                                                        XHWLTipView.shared.showSuccess(successText: "报事提交失败，请重新填写！")
+                                                        
+                                                        //登录失败
+                                                        switch(response["errorCode"] as! Int){
+                                                        case 11:
+                                                            "用户名不存在".ext_debugPrintAndHint()
+                                                            break
+                                                        default:
+                                                            
+                                                            let msg:String = response["message"] as! String
+                                                            msg.ext_debugPrintAndHint()
+                                                            break
+                                                        }
+                                                        
+                                                    }
+        }, failture: { (error) in
+                                                 
+            
+        })
     }
     
     func onSafeGuard(_ isAdd:Bool)
@@ -112,9 +208,10 @@ class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueRe
             //打开相机
             self.present(picker, animated: true, completion: nil)
         }else{
-            debugPrint("找不到相机")
+            print("找不到相机")
         }
     }
+    var i:NSInteger = 0
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
     {
@@ -128,6 +225,16 @@ class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueRe
         } else {
             warningView.pickPhoto.onChangePicture(image)
         }
+        
+        if i%2 == 0 {
+            imageSel2 = image
+            i += 1
+        } else {
+            imageSel = image
+            i += 1
+
+        }
+        
         //图片控制器退出
         picker.dismiss(animated: true, completion: nil)
     }

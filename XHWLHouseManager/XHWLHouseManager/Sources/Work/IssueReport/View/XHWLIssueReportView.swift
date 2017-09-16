@@ -25,7 +25,9 @@ class XHWLIssueReportView: UIView {
     var submitBtn:UIButton!
     var lineIV:UIImageView!
     weak var delegate:XHWLIssueReportViewDelegate?
-    var btnBlock:(NSInteger)->(Void) = { param in }
+    var btnBlock:(String, String, String, String)->(Void) = { param in }
+    var dismissBlock:()->() = {_ in }
+    var radioIndex:String?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -70,6 +72,15 @@ class XHWLIssueReportView: UIView {
         
         radioView = XHWLRadioView()
         radioView.showText(leftText: "紧急情况：", rightText: "是", btnTitle: "否")
+        radioView.btnBlock = { [weak self] index in
+            
+            if index == 0 {
+                self?.radioIndex = "是"
+            } else {
+                self?.radioIndex = "否"
+            }
+            
+        }
         self.addSubview(radioView)
         
         pickPhoto = XHWLPickPhotoView()
@@ -99,7 +110,13 @@ class XHWLIssueReportView: UIView {
     }
     
     func submitClick(btn:UIButton) {
-        self.btnBlock(btn.tag-comTag)
+        
+        if btn.tag - comTag == 0 {
+            self.dismissBlock()
+        } else {
+            self.btnBlock(typeView.contentTF.text!, dotView.contentTF.text!, remark.textView.text!, radioIndex!)
+        }
+        
     }
     
     override func layoutSubviews() {

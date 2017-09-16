@@ -27,8 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        self.window?.backgroundColor = UIColor.white
-        
+       
         IQKeyboardManager.sharedManager().enable = true
         configureMCU()      // 对接海康威视
         configureMapKit()   // 初始化百度地图
@@ -36,11 +35,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate {
         setupMapKit()       // 百度地图
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.backgroundColor = UIColor.white
+        setupView()
+        
         let vc : XHWLLoginVC = XHWLLoginVC()
         self.window?.rootViewController = UINavigationController(rootViewController: vc)
         self.window?.makeKeyAndVisible()
         
         return true
+    }
+    
+    func setupView() {
+        let bgImg:UIImageView = UIImageView()
+        bgImg.frame = UIScreen.main.bounds
+        bgImg.image = UIImage(named:"home_bg")
+        self.window?.addSubview(bgImg)
     }
     
     // 百度地图

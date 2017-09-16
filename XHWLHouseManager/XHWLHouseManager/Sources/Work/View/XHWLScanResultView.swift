@@ -15,8 +15,25 @@ class XHWLScanResultView: UIView {
     var titleL:UILabel!
     var okBtn:UIButton!
     var cancelBtn:UIButton!
-    var labelViewArray:NSMutableArray!
+    var labelViewArray:NSMutableArray! = NSMutableArray()
     var btnBlock:(NSInteger)->(Void) = { param in }
+    var dataAry:NSMutableArray!
+    
+//    var scanModel:XHWLScanModel? {
+//        willSet{
+//            if newValue != nil {
+//                dataAry = NSMutableArray()
+//                
+//                let array :NSArray = [["name":"设备地址：", "content":newValue!.address, "isHiddenEdit": true],
+//                                      ["name":"编码信息：", "content":newValue!.name, "isHiddenEdit": true],
+//                                      ["name":"最后修改时间：", "content":newValue!.projectName, "isHiddenEdit":true],
+//                                      ["name":"当前状态：", "content":newValue!.status, "isHiddenEdit": true]]
+//                dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
+//                
+//                createArray(dataAry)
+//            }
+//        }
+//    }
     
     static var shared: XHWLHistoryWarningView {
         struct Static {
@@ -53,7 +70,7 @@ class XHWLScanResultView: UIView {
         okBtn.tag = comTag + 1
         okBtn.setTitle("报事", for: UIControlState.normal)
         okBtn.setTitleColor(UIColor().colorWithHexString(colorStr: "51ebfd"), for: UIControlState.normal)
-        okBtn.addTarget(self, action: #selector(btnClick), for: UIControlEvents.touchUpInside)
+        okBtn.addTarget(self, action: #selector(XHWLScanResultView.btnClick), for: UIControlEvents.touchUpInside)
         okBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
         okBtn.titleLabel?.font = font_9
         self.addSubview(okBtn)
@@ -63,7 +80,7 @@ class XHWLScanResultView: UIView {
         cancelBtn.titleLabel?.font = font_9
         cancelBtn.tag = comTag
         cancelBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
-        cancelBtn.addTarget(self, action: #selector(btnClick), for: UIControlEvents.touchUpInside)
+        cancelBtn.addTarget(self, action: #selector(XHWLScanResultView.btnClick), for: UIControlEvents.touchUpInside)
         cancelBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
         self.addSubview(cancelBtn)
         
@@ -73,9 +90,7 @@ class XHWLScanResultView: UIView {
         self.btnBlock(btn.tag-comTag)
     }
     
-    
-    
-    func createArray(array:NSArray) {
+    func createArray(_ array:NSArray) {
         
         labelViewArray = NSMutableArray()
         
@@ -98,11 +113,14 @@ class XHWLScanResultView: UIView {
         titleL.frame = CGRect(x:10, y:showImg.frame.maxY+10, width:self.bounds.size.width-20, height:30)
         let img:UIImage = UIImage(named:"btn_background")!
         let h:CGFloat = titleL.frame.maxY+10
-        for i in 0...labelViewArray.count-1 {
-            let label:XHWLLabelView = labelViewArray[i] as! XHWLLabelView
-            label.frame = CGRect(x:50, y:CGFloat(i).multiplied(by: 30.0) + h, width:self.bounds.size.width-70, height:30)
-        }
         
+        if labelViewArray.count > 0 {
+            for i in 0...labelViewArray.count-1 {
+                let label:XHWLLabelView = labelViewArray[i] as! XHWLLabelView
+                label.frame = CGRect(x:50, y:CGFloat(i).multiplied(by: 30.0) + h, width:self.bounds.size.width-70, height:30)
+            }
+        }
+
         okBtn.frame = CGRect(x:self.bounds.size.width-img.size.width-50, y:self.bounds.size.height-img.size.height-20, width:img.size.width, height:img.size.height)
         cancelBtn.frame = CGRect(x:50, y:self.bounds.size.height-img.size.height-20, width:img.size.width, height:img.size.height)
     

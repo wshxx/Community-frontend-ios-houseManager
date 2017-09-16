@@ -17,7 +17,6 @@ class XHWLSafeProtectionView: UIView , UITableViewDelegate, UITableViewDataSourc
     var dataAry:NSMutableArray!
     var dataSource:NSMutableArray!
     var clickCell:(NSInteger, NSInteger)->(Void) = {param in }
-    var topMenu:XHWLTopView!
     var selectIndex:NSInteger! = 0
     
     override init(frame: CGRect) {
@@ -35,34 +34,13 @@ class XHWLSafeProtectionView: UIView , UITableViewDelegate, UITableViewDataSourc
         dataSource = XHWLRegisterationModel.mj_objectArray(withKeyValuesArray: array2)
         
         setupView()
-        
     }
     
     func setupView() {
         
         bgImage = UIImageView()
-        bgImage.image = UIImage(named:"menu_bg")
+        bgImage.image = UIImage(named:"subview_bg")
         self.addSubview(bgImage)
-        
-        //        tipImg = UIImageView()
-        //        tipImg.frame = CGRect(x:0, y:0, width:55, height:55)
-        //        tipImg.center = CGPoint(x: self.bounds.size.width/2.0, y: self.bounds.size.height/2.0-20)
-        //        self.addSubview(tipImg)
-        
-        //        tipLabel = UILabel()
-        //        tipLabel.textAlignment = NSTextAlignment.center
-        //        tipLabel.textColor = UIColor().colorWithHexString(colorStr: "32b7e2")
-        //        tipLabel.font = font_15
-        //        self.addSubview(tipLabel)
-        
-        let array:NSArray = ["待处理", "已处理"]
-        topMenu = XHWLTopView.init(frame: CGRect.zero)
-        topMenu.createArray(array: array)
-        topMenu.btnBlock = { index in
-            self.selectIndex = index
-            self.tableView.reloadData()
-        }
-        self.addSubview(topMenu)
         
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
         tableView.delegate = self
@@ -77,10 +55,7 @@ class XHWLSafeProtectionView: UIView , UITableViewDelegate, UITableViewDataSourc
         super.layoutSubviews()
         
         bgImage.frame = self.bounds
-        //        tipLabel.frame = CGRect(x:10, y:self.bounds.size.height-80, width:self.bounds.size.width-20, height:40)
-        topMenu.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:44)
-        tableView.frame = CGRect(x:0, y:44, width:self.bounds.size.width, height:self.frame.size.height-44)
-        
+        tableView.frame = CGRect(x:7, y:58, width:self.bounds.size.width-14, height:self.frame.size.height-36)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

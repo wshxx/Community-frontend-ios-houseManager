@@ -57,7 +57,7 @@ class XHWLSearchBar: UIView, UITextFieldDelegate {
         
         let leftV: UIView = UIView.init(frame: CGRect(x:0, y:0, width:36, height:searchTextField.frame.size.height))
         imgV = UIImageView.init(frame: CGRect(x:8, y:9, width:17, height:17))
-        imgV.image = UIImage(named:"sousuo")
+        imgV.image = UIImage(named:"xhwl_search")
         leftV.addSubview(imgV)
         searchTextField.leftView = leftV
         searchTextField.leftViewMode = UITextFieldViewMode.always

@@ -11,13 +11,16 @@ import UIKit
 class XHWLCodeTF: UIView, UITextFieldDelegate {
     
     var funcBackBlock : (String) -> () = {param in }
+    var onSendCodeClickBlock : () -> () = {param in }
+    var sendCodeBtn:UIButton!
+    var textField: UITextField!
     
     init(frame: CGRect, placeholder:String) {
         super.init(frame: frame)
         
         self.backgroundColor = UIColor.clear
         
-        let textField: UITextField = UITextField(frame: CGRect(x:0, y:0, width:self.bounds.width, height:30))
+        textField = UITextField(frame: CGRect(x:0, y:0, width:self.bounds.width-100, height:30))
         textField.textColor = color_c8e5f0
         let placeholderAttr:NSMutableAttributedString = NSMutableAttributedString.init(string: placeholder)
         placeholderAttr.addAttribute(NSForegroundColorAttributeName, value: color_c8e5f0, range: NSMakeRange(0, placeholder.characters.count))
@@ -26,23 +29,44 @@ class XHWLCodeTF: UIView, UITextFieldDelegate {
         textField.font = font_15
         textField.tintColor = color_c8e5f0
         textField.delegate = self
+        textField.clearsOnBeginEditing = true
         
-        let rightV:UIView = UIView(frame: CGRect(x:0, y:0, width:100, height:30))
-        let sendCodeBtn:UIButton = UIButton(frame: CGRect(x:0, y:0, width:100, height:30))
+        let leftV:UIView = UIView(frame: CGRect(x:0, y:0, width:30, height:30))
+        textField.leftView = leftV
+        textField.leftViewMode = UITextFieldViewMode.always
+        
+        let rightV:UIView = UIView()
+        rightV.frame = CGRect(x:0, y:0, width:12.5, height:12.5)
+        let imgBtn:UIButton = UIButton()
+        imgBtn.frame = rightV.bounds
+        imgBtn.setImage(UIImage(named:"login_textfield_clear"), for: UIControlState.normal)
+        imgBtn.addTarget(self, action: #selector(XHWLCodeTF.onClear), for: UIControlEvents.touchUpInside)
+        rightV.addSubview(imgBtn)
+        textField.rightView = rightV
+        textField.rightViewMode = UITextFieldViewMode.whileEditing
+        self.addSubview(textField)
+        
+        sendCodeBtn = UIButton(frame: CGRect(x:self.bounds.width-90, y:0, width:80, height:30))
         sendCodeBtn.setTitle("发送验证码", for: UIControlState.normal)
         sendCodeBtn.setTitleColor(color_01f0ff, for: UIControlState.normal)
-        sendCodeBtn.center = CGPoint(x: 15, y: 15)
+        sendCodeBtn.addTarget(self, action: #selector(onSendCodeClick), for: UIControlEvents.touchUpInside)
         sendCodeBtn.titleLabel?.font = font_15
         sendCodeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.right
-        rightV.addSubview(sendCodeBtn)
-        textField.rightView = rightV
-        textField.rightViewMode = UITextFieldViewMode.always
-        self.addSubview(textField)
+        self.addSubview(sendCodeBtn)
         
         let lineIV : UIImageView = UIImageView()
         lineIV.image = UIImage(named: "warning_cell_line")
         lineIV.frame = CGRect(x: 0, y: self.bounds.size.height-0.5, width: self.bounds.size.width, height: 0.5)
         self.addSubview(lineIV)
+    }
+    
+    func onClear() {
+        textField.text = ""
+    }
+    
+    // 发送验证码
+    func onSendCodeClick() {
+       self.onSendCodeClickBlock()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {

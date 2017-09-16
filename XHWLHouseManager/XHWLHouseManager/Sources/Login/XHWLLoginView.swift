@@ -37,7 +37,7 @@ class XHWLLoginView: UIView {
         self.backgroundColor = UIColor.clear
         
         let bgIV:UIImageView = UIImageView(frame: self.bounds)
-        bgIV.image = UIImage(named: "xhwl_login_showView")
+        bgIV.image = UIImage(named: "login_showView")
         self.addSubview(bgIV)
         
         let titleL: UILabel = UILabel(frame: CGRect(x:28, y:23, width:310, height:30))
@@ -46,23 +46,21 @@ class XHWLLoginView: UIView {
         titleL.font = font_18
         self.addSubview(titleL)
         
-        
-        var weak_self:XHWLLoginView = self
         let userTF:XHWLLoginTF = XHWLLoginTF(frame: CGRect(x:25, y:100, width:self.bounds.width-50, height:32), loginEnum: XHWLLoginTFEnum.user, placeholder:"请输入工号")
-        userTF.funcBackBlock = {str in
-            weak_self.topStr = str
+        userTF.funcBackBlock = {[weak self] str in
+            self?.topStr = str
             
         }
         self.addSubview(userTF)
         
         let pwdTF:XHWLLoginTF = XHWLLoginTF(frame: CGRect(x:25, y:160, width:self.bounds.width-50, height:32), loginEnum: XHWLLoginTFEnum.password , placeholder:"请输入密码")
         
-        pwdTF.funcBackBlock = {str in
-            weak_self.bottomStr = str
+        pwdTF.funcBackBlock = {[weak self] str in
+            self?.bottomStr = str
         }
         self.addSubview(pwdTF)
         
-        forgetPwdBtn = UIButton(frame: CGRect(x:15, y:pwdTF.frame.maxY+5, width:self.bounds.size.width-30, height:30))
+        forgetPwdBtn = UIButton(frame: CGRect(x:self.bounds.size.width-100, y:pwdTF.frame.maxY+5, width:85, height:30))
         forgetPwdBtn.setTitle("忘记密码？", for: UIControlState.normal)
         forgetPwdBtn.adjustsImageWhenHighlighted = false
         forgetPwdBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.right
@@ -71,7 +69,7 @@ class XHWLLoginView: UIView {
         forgetPwdBtn.addTarget(self, action: #selector(XHWLLoginView.onForgetPwdClick), for: UIControlEvents.touchUpInside)
         self.addSubview(forgetPwdBtn)
         
-        let img = UIImage(named: "xhwl_login_btn_highlight")
+        let img = UIImage(named: "login_btn_highlight")
         
         let loginBtn:UIButton = UIButton(frame: CGRect(x:0, y:0, width:(img?.size.width)!, height:(img?.size.height)!))
         loginBtn.setBackgroundImage(img, for: UIControlState.normal)
@@ -89,6 +87,8 @@ class XHWLLoginView: UIView {
     }
     
     func onLoginClick(btn:UIButton) {
+        
+        self.endEditing(true)
         
         if (topStr != nil) && (bottomStr != nil) {
             self.funcBackBlock(topStr!, bottomStr!)

@@ -8,8 +8,9 @@
 
 import UIKit
 
-class XHWLMenuView: UIView {
+class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate {
 
+    var bgScrollView:UIScrollView!
     var bgImg :UIImageView!
     var headOutImg :UIImageView!
     var headImg :UIImageView!
@@ -22,12 +23,16 @@ class XHWLMenuView: UIView {
         
         self.backgroundColor = UIColor.clear
         
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
         dataAry = NSMutableArray()
-        let array :NSArray = [["name":"姓名：", "content":"张雁称", "isHiddenEdit": false],
-                   ["name":"工号：", "content":"3406745", "isHiddenEdit": true],
-                   ["name":"手机：", "content":"13713432456", "isHiddenEdit":false],
-                   ["name":"岗位：", "content":"工程", "isHiddenEdit": true],
-                   ["name":"项目：", "content":"华庭", "isHiddenEdit": true]]
+        let array :NSArray = [["name":"姓名：", "content":userModel.name, "isHiddenEdit": false],
+                   ["name":"工号：", "content":userModel.wyAccount.workCode, "isHiddenEdit": true],
+                   ["name":"手机：", "content":userModel.telephone, "isHiddenEdit":false],
+                   ["name":"岗位：", "content":userModel.wyAccount.wyRoleName, "isHiddenEdit": true],
+                   ["name":"项目：", "content":userModel.wyAccount.wyRole.name, "isHiddenEdit": true]]
         dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
         setupView()
         
@@ -40,27 +45,136 @@ class XHWLMenuView: UIView {
         bgImg.image = UIImage(named:"menu_bg")
         self.addSubview(bgImg)
         
+        bgScrollView = UIScrollView()
+        bgScrollView.frame = self.bounds
+        bgScrollView.contentSize = CGSize(width:0, height:self.bounds.height+20)
+        bgScrollView.showsVerticalScrollIndicator = false
+        self.addSubview(bgScrollView)
+        
         headOutImg = UIImageView()
         headOutImg.bounds = CGRect(x:0, y:0, width:86, height:86)
-        headOutImg.image = UIImage(named:"head_outer_circle")
+        headOutImg.image = UIImage(named:"menu_head_outer_circle")
         headOutImg.center = CGPoint(x:self.frame.size.width/2.0, y:58)
-        self.addSubview(headOutImg)
+        bgScrollView.addSubview(headOutImg)
         
         headImg = UIImageView()
         headImg.bounds = CGRect(x:0, y:0, width:77, height:77)
-        headImg.image = UIImage(named:"head_inner_circle")
+        headImg.image = UIImage(named:"menu_head_inner_circle")
         headImg.center = CGPoint(x:self.frame.size.width/2.0, y:58)
-        self.addSubview(headImg)
+        bgScrollView.addSubview(headImg)
         
         labelViewArray = NSMutableArray()
-        for obj in dataAry {
-            let menuModel :XHWLMenuModel = obj as! XHWLMenuModel
+        for i in 0...dataAry.count-1 {
+            let menuModel :XHWLMenuModel = dataAry[i] as! XHWLMenuModel
             let labelView: XHWLMenuLabelView = XHWLMenuLabelView()
             labelView.showText(leftText: menuModel.name, rightText:menuModel.content, isHiddenEdit: menuModel.isHiddenEdit)
             labelView.isHiddenEdit = menuModel.isHiddenEdit
-            self.addSubview(labelView)
+            labelView.delegate = self
+            labelView.tag = comTag+i
+//            labelView.onOKClickBlock = { string, block in
+//                if i == 0 {
+//                    self.onModityUserName(string, { isTrue in
+//                        block(isTrue)
+//                    })
+//                } else if i == 2 {
+//                    self.onModityPhone(string, { isTrue in
+//                        block(isTrue)
+//                    })
+//                }
+//            }
+            bgScrollView.addSubview(labelView)
             labelViewArray.add(labelView)
         }
+    }
+    
+    func menuLabel(_ labelView:XHWLMenuLabelView, _ text:String, _ block:@escaping((Bool)->())) {
+        
+        if labelView.tag-comTag == 0 {
+            self.onModityUserName(text, block)
+        }
+        else if labelView.tag-comTag == 2 {
+            
+            self.onModityPhone(text, block)
+        }
+    }
+    
+    // 修改姓名
+    func onModityUserName(_ string:String, _ block:@escaping(Bool) -> ()) {
+        
+        if string.isEmpty {
+            "您输入的姓名不能为空".ext_debugPrintAndHint()
+            return
+        }
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        
+        let params = ["name":string, "token":userModel.wyAccount.token]
+        
+        let url:String = "wyBusiness/wyUser"
+    
+        XHWLHttpTool.sharedInstance.postHttpTool(url:url , parameters:params, success: { (response) in
+            
+            if response["state"] as! Bool{
+                "修改姓名成功".ext_debugPrintAndHint()
+                 block(true)
+            } else {
+                //登录失败
+                switch(response["errorCode"] as! Int){
+                case 11:
+                    "用户名不存在".ext_debugPrintAndHint()
+                    break
+                default:
+                    
+                    let msg:String = response["message"] as! String
+                    msg.ext_debugPrintAndHint()
+                    break
+                }
+                
+            }
+        }, failture: { (error) in
+            
+        })
+    }
+    
+    // 修改手机号
+    func onModityPhone(_ string:String, _ block:@escaping (Bool) -> ()) {
+        
+        if Validation.phoneNum(string).isRight == false {
+            "您输入的手机号不合法".ext_debugPrintAndHint()
+            return
+        }
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        let params = ["telephone":string, "token":userModel.wyAccount.token]
+        let url:String = "wyBusiness/wyUser"
+        
+        XHWLHttpTool.sharedInstance.postHttpTool(url:url , parameters:params, success: { (response) in
+            
+            if response["state"] as! Bool{
+                "修改手机号成功".ext_debugPrintAndHint()
+                block(true)
+                
+            } else {
+                //登录失败
+                switch(response["errorCode"] as! Int){
+                case 11:
+                    "用户名不存在".ext_debugPrintAndHint()
+                    break
+                default:
+                    
+                    let msg:String = response["message"] as! String
+                    msg.ext_debugPrintAndHint()
+                    break
+                }
+                
+            }
+        }, failture: { (error) in
+            
+        })
     }
     
     override func layoutSubviews() {

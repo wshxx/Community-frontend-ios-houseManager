@@ -18,22 +18,13 @@ enum XHWLCheckListViewEnum : Int{
 class XHWLCheckListView: UIView {
 
     var bgImage:UIImageView!
-    var titleL:UILabel!
     var bgScrollView:UIScrollView!
-//    var labelView: XHWLCheckTF!
-//    var typeView: XHWLCheckTF!
     var lineIV:UIImageView!
-//    var vertical: XHWLCheckListTF!
-//    var phoneView:XHWLCheckTF!
-//    var cardView:XHWLCheckTF!
-//    var timeView: XHWLCheckListTF!
-//    var radioView:XHWLRadioView!
     var submitBtn:UIButton!
     var dataAry:NSMutableArray!
     var labelViewArray:NSMutableArray!
     var subView:XHWLMoreListView!
     var isShowSUbView:Bool = true
-    var recordBtn:UIButton!
     var btnBlock:(NSInteger)->(Void) = { param in }
     
     override init(frame: CGRect) {
@@ -69,20 +60,6 @@ class XHWLCheckListView: UIView {
         bgScrollView = UIScrollView()
         bgScrollView.showsVerticalScrollIndicator = false
         self.addSubview(bgScrollView)
-        
-        titleL = UILabel()
-        titleL.textAlignment = NSTextAlignment.center
-        titleL.textColor = color_09fbfe
-        titleL.font = font_13
-        titleL.text = "访客登记"
-        self.addSubview(titleL)
-
-        recordBtn = UIButton()
-        recordBtn.setTitle("记录", for: UIControlState.normal)
-        recordBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
-        recordBtn.titleLabel?.font = font_12
-        recordBtn.addTarget(self, action: #selector(onRecordClick), for: UIControlEvents.touchUpInside)
-        self.addSubview(recordBtn)
         
         lineIV = UIImageView()
         lineIV.image = UIImage(named: "warning_cell_line")
@@ -168,10 +145,6 @@ class XHWLCheckListView: UIView {
         bgScrollView.addSubview(submitBtn)
     }
     
-    func onRecordClick() {
-        self.btnBlock(0)
-    }
-    
     func submitClick() {
         self.btnBlock(1)
     }
@@ -180,17 +153,13 @@ class XHWLCheckListView: UIView {
         super.layoutSubviews() 
         
         bgImage.frame = self.bounds
-        titleL.frame = CGRect(x:10, y:0, width:self.bounds.size.width-20, height:44)
-        lineIV.frame = CGRect(x:10, y:titleL.frame.maxY, width:self.bounds.size.width-20, height:0.5)
-        bgScrollView.frame = CGRect(x:0, y:lineIV.frame.maxY+10, width:self.bounds.size.width, height:self.bounds.size.height-lineIV.frame.maxY-10)
+        bgScrollView.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:self.bounds.size.height)
    
         
         for i in 0...labelViewArray.count-1 {
-            
-//            let menuModel :XHWLMenuModel = dataAry[i] as! XHWLMenuModel
             let labelView :UIView = labelViewArray[i] as! UIView
             labelView.bounds = CGRect(x:0, y:0, width:258, height:20)
-            labelView.center = CGPoint(x:self.frame.size.width/2.0, y:10+CGFloat(i*40))
+            labelView.center = CGPoint(x:self.frame.size.width/2.0, y:20+CGFloat(i*40))
         }
         let lastView:UIView = labelViewArray.lastObject as! UIView
         var topHeight:CGFloat = lastView.frame.maxY

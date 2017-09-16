@@ -56,11 +56,11 @@ class XHWLRegistrationDetailView: UIView {
     
     func successView() {
         
-        showIV.image = UIImage(named: "xhwl_bg")
+        showIV.image = UIImage(named: "home_bg")
     }
     func failView() {
         
-        showIV.image = UIImage(named: "xhwl_bg")
+        showIV.image = UIImage(named: "home_bg")
     }
     
     func createArray(array:NSArray) {

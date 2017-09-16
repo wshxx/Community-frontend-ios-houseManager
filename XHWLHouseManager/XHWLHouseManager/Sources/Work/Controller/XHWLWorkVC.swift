@@ -12,38 +12,41 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate {
 
     var menuView : XHWLMenuView!
     var bgImg:UIImageView!
-    var dataAry:NSMutableArray!
     var btn:UIButton!
-    var warningView:XHWLScanResultView!
-    var homeView:XHWLHomeView!
+    var homeView:XHWLWorkView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = UIColor.orange
+        self.view.backgroundColor = UIColor.clear
         self.rt_disableInteractivePop = true
         
+        
+        setupView()
+        setupNav()
+    }
+    
+    func setupNav() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"home_menu"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onOpenMenu))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"home_scan"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onScan))
         
-        dataAry = NSMutableArray()
-        let array :NSArray = [["name":"设备地址：", "content":"中海华庭正门扶手电梯1号", "isHiddenEdit": true],
-                              ["name":"编码信息：", "content":"AJ0098737", "isHiddenEdit": true],
-                              ["name":"最后修改时间：", "content":"1000kg", "isHiddenEdit":true],
-                              ["name":"当前状态：", "content":"正常", "isHiddenEdit": true]]
-        dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
-
-        setupView()
         
         btn = createNavHeadView()
         self.navigationItem.titleView = btn
     }
     
     func createNavHeadView() -> UIButton {
+        let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
+        let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
+        var name:String!
+        if array.count > 0{
+            let model:XHWLProjectModel = array[0] as! XHWLProjectModel
+            name = model.name
+        }
         let btn:UIButton = UIButton()
         btn.frame = CGRect(x:0, y:0, width:100, height:200)
-        btn.setTitle("中海物联科技有限公司", for: UIControlState.normal)
+        btn.setTitle(name, for: UIControlState.normal)
         btn.setTitleColor(UIColor.white, for: UIControlState.normal)
         btn.setImage(UIImage(named:"home_switch"), for: UIControlState.normal)
         btn.titleLabel?.font = font_14
@@ -55,17 +58,19 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate {
     
     func onCreateNavHeadView() {
         
-        let array:NSArray = ["sdfsd", "sdf"]
+        let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
+        let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
+    
         let headView:XHWLNavHeadView = XHWLNavHeadView(frame:CGRect.zero, array:array)
         let window:UIWindow = UIApplication.shared.keyWindow!
         
-//        [waak btn]
         weak var weakSelf = self
         
         headView.dismissBlock = { [weak headView] index in
             print("\(index)")
             if index != -1 {
-               weakSelf?.updateNavTitle(array[index] as! String)
+                let model:XHWLProjectModel = array[index] as! XHWLProjectModel
+                weakSelf?.updateNavTitle(model.name)
             }
             headView?.removeFromSuperview()
         }
@@ -82,7 +87,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate {
         
         bgImg = UIImageView()
         bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"xhwl_bg")
+        bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
         menuView = XHWLMenuView(frame:CGRect(x:0, y:0, width:313, height:453))
@@ -90,74 +95,129 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate {
         menuView.isHidden = true
         self.view.addSubview(menuView)
         
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
-        let array:NSArray = ["安防事件", "在线定位", "进度查看", "数据", "访客记录", "异常放行", "一键开门", "远程开门"]
-        homeView = XHWLHomeView(frame: CGRect.zero, array: array)
-        homeView.frame = CGRect(x:10, y:64, width:self.view.bounds.size.width-20, height:self.view.bounds.height-200)
+        let array:NSMutableArray! = NSMutableArray()
+        if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
+            array.addObjects(from: ["安防事件", "在线定位", "进度查看", "数据", "访客记录", "异常放行"])
+        } else if userModel.wyAccount.wyRole.name.compare("安管人员").rawValue == 0 {
+            array.addObjects(from: ["访客登记"])
+        } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
+            array.addObjects(from: ["设备报警", "供配电", "给排水", "设备统计", "能耗统计"])
+        }
+       
+        homeView = XHWLWorkView(frame: CGRect.zero, array: array)
+        var height = self.view.bounds.height-160
+        if CGFloat(array.count*80) < height {
+            height = CGFloat(array.count * 80)
+        }
+        homeView.bounds = CGRect(x:0, y:0, width:self.view.bounds.size.width-20, height:height)
+        homeView.center = CGPoint(x:Screen_width/2.0, y:Screen_height/2.0)
         homeView.dismissBlock = { index in
-            switch index {
-            case 0:
-                let vc:XHWLSafeProtectionVC = XHWLSafeProtectionVC()
-                self.navigationController?.pushViewController(vc, animated: true)
-                break
-            case 1:
-                let vc:XHWLMapKitVC = XHWLMapKitVC()
-//                let vc:XHWLRegistrationDetailVC = XHWLRegistrationDetailVC()
-                self.navigationController?.pushViewController(vc, animated: true)
-                break
-            case 2:
-                 let vc:XHWLCountVC = XHWLCountVC()
-                self.navigationController?.pushViewController(vc, animated: true)
-                break
-            case 3:
-                let vc:XHWLWaterVC = XHWLWaterVC() //
-                self.navigationController?.pushViewController(vc, animated: true)
-
-                break
-            case 4:
-                let vc:XHWLRegistrationVC = XHWLRegistrationVC() // 访客记录
-                self.navigationController?.pushViewController(vc, animated: true)
-                break
-            case 5:
-                let vc:XHWLAbnormalPassVC = XHWLAbnormalPassVC()
-                self.navigationController?.pushViewController(vc, animated: true)
-                break
-            case 6:
-                let vc: XHWLWarningVC = XHWLWarningVC() // 设备报警
-                self.navigationController?.pushViewController(vc, animated: true)
-                break
-            case 7:
-                let vc:XHWLCheckVC = XHWLCheckVC() // 访客登记
-                self.navigationController?.pushViewController(vc, animated: true)
-                
-            default: break
-                
+            if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
+                self.onSafeGuardLeader(index)
+            } else if userModel.wyAccount.wyRole.name.compare("安管人员").rawValue == 0 {
+                self.onSafeGuard(index)
+            } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
+                self.onProject(index)
             }
         }
         self.view.addSubview(homeView)
-//        ["访客登记", "一键开门", "远程开门"]
-//        ["设备报警", "供配电", "给排水", "设备统计", "能耗统计", "一键开门", "远程开门"]
-        
-        setupScanResult()
     }
     
-    func setupScanResult() {
-        let image:UIImage = UIImage(named:"warning_bg")!
-        warningView = XHWLScanResultView()
-        warningView.bounds = CGRect(x:0, y:0, width:image.size.width, height:image.size.height)
-        warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
-        warningView.isHidden = true
-        warningView.btnBlock = { [weak warningView] index in
-            if index == 0 {
-                warningView?.isHidden = true
-            } else {
-                let vc:XHWLIssueReportVC = XHWLIssueReportVC()
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+    // 安管主任
+    func onSafeGuardLeader(_ index:NSInteger) {
+        switch index {
+        case 0: // "安防事件",
+            
+            let vc:XHWLSafeProtectionVC = XHWLSafeProtectionVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 1:// "在线定位",
+            let vc:XHWLMapKitVC = XHWLMapKitVC()
+            //                let vc:XHWLRegistrationDetailVC = XHWLRegistrationDetailVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 2: // "进度查看",
+            let vc:XHWLCountVC = XHWLCountVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 3: //  "数据",
+            let vc:XHWLWaterVC = XHWLWaterVC() //
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+            break
+        case 4: //  "访客记录",
+            let vc:XHWLRegistrationVC = XHWLRegistrationVC() // 访客记录
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 5: // "异常放行"
+            let vc:XHWLAbnormalPassVC = XHWLAbnormalPassVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+       
+            
+        default: break
+            
         }
-        warningView.createArray(array: dataAry)
-        self.view.addSubview(warningView)
     }
+    
+    // 工程
+    func onProject(_ index:NSInteger) {
+        switch index {
+        case 0:// 设备报警
+            let vc: XHWLWarningVC = XHWLWarningVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 1: //"供配电",
+            let vc:XHWLWaterVC = XHWLWaterVC() //
+            self.navigationController?.pushViewController(vc, animated: true)
+        case 2:// "给排水",
+            let vc:XHWLWaterVC = XHWLWaterVC() //
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 3:// "设备统计",
+            let vc:XHWLWaterVC = XHWLWaterVC() //
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 4: // "能耗统计"
+//            let vc:XHWLRegistrationVC = XHWLRegistrationVC() // 访客记录
+//            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        default: break
+        }
+    }
+    
+    // 安管人员
+    func onSafeGuard(_ index:NSInteger) {
+        switch index {
+        case 0: // "访客登记"
+            let vc:XHWLCheckVC = XHWLCheckVC() // 访客登记
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        default:
+            break
+        }
+    }
+    
+//    func setupScanResult() {
+//        let image:UIImage = UIImage(named:"warning_bg")!
+//        warningView = XHWLScanResultView()
+//        warningView.bounds = CGRect(x:0, y:0, width:image.size.width, height:image.size.height)
+//        warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
+//        warningView.isHidden = true
+//        warningView.btnBlock = { [weak warningView] index in
+//            if index == 0 {
+//                warningView?.isHidden = true
+//            } else {
+//                let vc:XHWLIssueReportVC = XHWLIssueReportVC()
+//                self.navigationController?.pushViewController(vc, animated: true)
+//            }
+//        }
+////        warningView.createArray(array: dataAry)
+//        self.view.addSubview(warningView)
+//    }
     
     // 打开菜单
     func onOpenMenu() {
@@ -171,24 +231,6 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     // 扫一扫
     func onScan() {
-        
-        //设置扫码区域参数设置
-        //        var style : LBXScanViewStyle = LBXScanViewStyle()
-        //        style.centerUpOffset = 44 // 矩形区域中心上移，默认中心点为屏幕中心点
-        //        style.photoframeAngleStyle = LBXScanViewPhotoframeAngleStyle.Outer //扫码框周围4个角的类型,设置为外挂式
-        //        style.photoframeLineW = 3      // 扫码框周围4个角绘制的线条宽度
-        //        style.photoframeAngleW = 12   // 扫码框周围4个角的宽度
-        //        style.photoframeAngleH = 12   //扫码框周围4个角的高度
-        //        style.colorAngle = mainColor
-        //        style.colorRetangleLine = UIColor.clear
-        //        style.anmiationStyle = LBXScanViewAnimationStyle.LineMove //扫码框内 动画类型 --线条上下移动
-        //        style.animationImage = UIImage(named:"qrcode_scan_light")  //线条上下移动图片
-        //
-        //        //SubLBXScanViewController继承自LBXScanViewController
-        //        //添加一些扫码或相册结果处理
-        //        let vc: XHWLScanVC = XHWLScanVC()
-        //        vc.scanStyle = style
-        //        vc.scanDelegate = self
         let vc: XHWLScanTestVC = XHWLScanTestVC()
         vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
@@ -229,16 +271,12 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate {
             let type:String = dict["type"] as! String
             let code:String = dict["code"] as! String
             
-            let params:[String: String] = ["type" : type,
-                                           "code" : code,
-                                           "token" : "a4f0b1b4-7325-441c-87ef-d88728532dae",
-                                           ]
+            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
             
-            //            http://localhost:8080/ssh/v1/appBusiness/qrcode/scan
+            let params:NSArray = [type, code, userModel.wyAccount.token]
             
-            //            http://192.168.1.154:8080/v1/appBusiness/scan/qrcode
-            
-            XHWLHttpTool.sharedInstance.postHttpTool(url: "ssh/v1/appBusiness/qrcode/scan", parameters: params, success: { (response) in
+            XHWLHttpTool.sharedInstance.getHttpTool(url: "wyBusiness/qrcode", parameters: params, success: { (response) in
                 
                 let errorCode:NSInteger = response["errorCode"] as! NSInteger
                 if errorCode == 200 {
@@ -248,9 +286,13 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate {
                     let scanModel:XHWLScanModel = XHWLScanModel.mj_object(withKeyValues: result)
                     
                     print("\(scanModel.name), \(scanModel.code)")
-                
-                    self.navigationController?.popViewController(animated: true)
-                    self.warningView.isHidden = false
+                    
+                    let vc:XHWLScanResultVC = XHWLScanResultVC()
+                       vc.scanModel = scanModel
+                self.navigationController?.pushViewController(vc, animated: true)
+//                    self.navigationController?.popViewController(animated: true)
+//                    self.warningView.isHidden = false
+//                    self.warningView.scanModel = scanModel
                 }
                 
             }, failture: { (error) in

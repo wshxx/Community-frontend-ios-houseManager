@@ -60,7 +60,7 @@ class XHWLSafeGuardView: UIView {
     func setupView() {
         
         bgImage = UIImageView()
-        bgImage.image = UIImage(named:"menu_bg")
+        bgImage.image = UIImage(named:"subview_bg")
         self.addSubview(bgImage)
         
         bgScrollView = UIScrollView()
