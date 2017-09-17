@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XHWLIssueReportListVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
+class XHWLIssueReportListVC: UIViewController , UITableViewDelegate, UITableViewDataSource, XHWLNetworkDelegate {
     
     var bgImg:UIImageView!
     var subBgImg:UIImageView!
@@ -115,25 +115,28 @@ class XHWLIssueReportListVC: UIViewController , UITableViewDelegate, UITableView
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
 
-        XHWLHttpTool.sharedInstance.getHttpTool(url: "wyBusiness/complaint",
-                                                parameters: [userModel.wyAccount.token],
-                                                success: { (response) in
+        XHWLNetwork.shared.getVerCodeClick([userModel.wyAccount.token], self)
+    }
+
+    // MARK: - XHWLNetworkDelegate
+    
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        let errorCode:NSInteger = response["errorCode"] as! NSInteger
+        if errorCode == 200 {
+            let result0:NSArray = response["result"]!["0"] as! NSArray
+            self.dataAry.addObjects(from:XHWLIssueReportModel.mj_objectArray(withKeyValuesArray: result0) as! [Any])
             
-            let errorCode:NSInteger = response["errorCode"] as! NSInteger
-            if errorCode == 200 {
-                let result0:NSArray = response["result"]!["0"] as! NSArray
-                self.dataAry.addObjects(from:XHWLIssueReportModel.mj_objectArray(withKeyValuesArray: result0) as! [Any])
-                
-                
-                let result1:NSArray = response["result"]!["1"] as! NSArray
-                self.dataSource.addObjects(from:XHWLIssueReportModel.mj_objectArray(withKeyValuesArray:result1) as! [Any])
-                
-                self.tableView.reloadData()
-            }
             
-        }, failture: { (error) in
+            let result1:NSArray = response["result"]!["1"] as! NSArray
+            self.dataSource.addObjects(from:XHWLIssueReportModel.mj_objectArray(withKeyValuesArray:result1) as! [Any])
             
-        })
+            self.tableView.reloadData()
+        }
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
     }
 
     override func didReceiveMemoryWarning() {

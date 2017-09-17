@@ -126,13 +126,6 @@
 		19A14D961F5EA6B200D96A2E /* HLBarIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A14D951F5EA6B200D96A2E /* HLBarIndicatorView.swift */; };
 		19A14DAF1F5F991600D96A2E /* RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DAC1F5F991600D96A2E /* RTRootNavigationController.m */; };
 		19A14DB01F5F991600D96A2E /* UIViewController+RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DAE1F5F991600D96A2E /* UIViewController+RTRootNavigationController.m */; };
-		19A14DBF1F5FA1BF00D96A2E /* CYBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DB31F5FA1BF00D96A2E /* CYBadgeView.m */; };
-		19A14DC01F5FA1BF00D96A2E /* CYButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DB51F5FA1BF00D96A2E /* CYButton.m */; };
-		19A14DC11F5FA1BF00D96A2E /* CYCenterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DB71F5FA1BF00D96A2E /* CYCenterButton.m */; };
-		19A14DC21F5FA1BF00D96A2E /* CYTabBar.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19A14DB81F5FA1BF00D96A2E /* CYTabBar.bundle */; };
-		19A14DC31F5FA1BF00D96A2E /* CYTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DBA1F5FA1BF00D96A2E /* CYTabBar.m */; };
-		19A14DC41F5FA1BF00D96A2E /* CYTabBarConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DBC1F5FA1BF00D96A2E /* CYTabBarConfig.m */; };
-		19A14DC51F5FA1BF00D96A2E /* CYTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DBE1F5FA1BF00D96A2E /* CYTabBarController.m */; };
 		19A5725D1F6CD49C007B0D3F /* XHWLBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5725C1F6CD49C007B0D3F /* XHWLBaseVC.swift */; };
 		19A5725F1F6CDF80007B0D3F /* XHWLWorkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5725E1F6CDF80007B0D3F /* XHWLWorkCell.swift */; };
 		19A572651F6CE5CC007B0D3F /* XHWLHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A572611F6CE5CC007B0D3F /* XHWLHomeVC.swift */; };
@@ -186,6 +179,45 @@
 		19FACBC61F68C43E00680E63 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FACBC51F68C43E00680E63 /* Validation.swift */; };
 		19FACBC91F68C97400680E63 /* XHWLUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FACBC81F68C97400680E63 /* XHWLUserModel.swift */; };
 		19FACBCB1F68CA0C00680E63 /* XHWLRoleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FACBCA1F68CA0C00680E63 /* XHWLRoleModel.swift */; };
+		8408358F1F6E010500DC644A /* XHWLRequestKeyDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8408358E1F6E010500DC644A /* XHWLRequestKeyDefine.swift */; };
+		840835911F6E01DF00DC644A /* XHWLNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840835901F6E01DF00DC644A /* XHWLNetwork.swift */; };
+		843A32331F6D4DA1002C9098 /* XHWLDeviceStatisticsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32321F6D4DA1002C9098 /* XHWLDeviceStatisticsVC.swift */; };
+		843A32351F6D4DCA002C9098 /* XHWLDeviceStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32341F6D4DCA002C9098 /* XHWLDeviceStatisticsView.swift */; };
+		843A325E1F6D4F4D002C9098 /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32391F6D4F4D002C9098 /* PieChart.swift */; };
+		843A325F1F6D4F4D002C9098 /* PieChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A323A1F6D4F4D002C9098 /* PieChartDelegate.swift */; };
+		843A32601F6D4F4D002C9098 /* PieSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A323C1F6D4F4D002C9098 /* PieSlice.swift */; };
+		843A32611F6D4F4D002C9098 /* PieSliceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A323D1F6D4F4D002C9098 /* PieSliceDelegate.swift */; };
+		843A32621F6D4F4D002C9098 /* PieSliceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A323E1F6D4F4D002C9098 /* PieSliceLayer.swift */; };
+		843A32631F6D4F4D002C9098 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32401F6D4F4D002C9098 /* CGPoint.swift */; };
+		843A32641F6D4F4D002C9098 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32411F6D4F4D002C9098 /* CGRect.swift */; };
+		843A32651F6D4F4D002C9098 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32421F6D4F4D002C9098 /* CGSize.swift */; };
+		843A32661F6D4F4D002C9098 /* FloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32431F6D4F4D002C9098 /* FloatingPoint.swift */; };
+		843A32671F6D4F4D002C9098 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32441F6D4F4D002C9098 /* Int.swift */; };
+		843A32681F6D4F4D002C9098 /* PieChartLabelSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32481F6D4F4D002C9098 /* PieChartLabelSettings.swift */; };
+		843A32691F6D4F4D002C9098 /* AlphaPieLineTextLayerAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A324B1F6D4F4D002C9098 /* AlphaPieLineTextLayerAnimator.swift */; };
+		843A326A1F6D4F4D002C9098 /* PieLineTextLayerAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A324C1F6D4F4D002C9098 /* PieLineTextLayerAnimator.swift */; };
+		843A326B1F6D4F4D002C9098 /* PieLineTextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A324D1F6D4F4D002C9098 /* PieLineTextLayer.swift */; };
+		843A326C1F6D4F4D002C9098 /* PiePlainTextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A324F1F6D4F4D002C9098 /* PiePlainTextLayer.swift */; };
+		843A326D1F6D4F4D002C9098 /* AlphaPieViewLayerAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32521F6D4F4D002C9098 /* AlphaPieViewLayerAnimator.swift */; };
+		843A326E1F6D4F4D002C9098 /* PieViewLayerAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32531F6D4F4D002C9098 /* PieViewLayerAnimator.swift */; };
+		843A326F1F6D4F4D002C9098 /* PieCustomViewsLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32541F6D4F4D002C9098 /* PieCustomViewsLayer.swift */; };
+		843A32701F6D4F4D002C9098 /* PieChartLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32551F6D4F4D002C9098 /* PieChartLayer.swift */; };
+		843A32711F6D4F4D002C9098 /* PieSliceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32571F6D4F4D002C9098 /* PieSliceData.swift */; };
+		843A32721F6D4F4D002C9098 /* PieSliceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32581F6D4F4D002C9098 /* PieSliceModel.swift */; };
+		843A32741F6D4F4D002C9098 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A325D1F6D4F4D002C9098 /* Globals.swift */; };
+		843A32761F6D5210002C9098 /* PieCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843A32751F6D5210002C9098 /* PieCharts.framework */; };
+		843A32771F6D53BF002C9098 /* PieCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 843A32751F6D5210002C9098 /* PieCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		843A32791F6D58F4002C9098 /* XHWLDeviceStatisticsDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32781F6D58F4002C9098 /* XHWLDeviceStatisticsDetailVC.swift */; };
+		843A327B1F6D591B002C9098 /* XHWLDeviceStatisticsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A327A1F6D591B002C9098 /* XHWLDeviceStatisticsDetailView.swift */; };
+		843A32811F6D5E08002C9098 /* XHWLEnergyManagementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A32801F6D5E08002C9098 /* XHWLEnergyManagementVC.swift */; };
+		843A32AA1F6D63F2002C9098 /* CYBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 843A329C1F6D63F2002C9098 /* CYBadgeView.m */; };
+		843A32AB1F6D63F2002C9098 /* CYButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 843A329E1F6D63F2002C9098 /* CYButton.m */; };
+		843A32AC1F6D63F2002C9098 /* CYCenterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 843A32A01F6D63F2002C9098 /* CYCenterButton.m */; };
+		843A32AD1F6D63F2002C9098 /* CYTabBar.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 843A32A11F6D63F2002C9098 /* CYTabBar.bundle */; };
+		843A32AE1F6D63F2002C9098 /* CYTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 843A32A31F6D63F2002C9098 /* CYTabBar.m */; };
+		843A32AF1F6D63F2002C9098 /* CYTabBarConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 843A32A51F6D63F2002C9098 /* CYTabBarConfig.m */; };
+		843A32B01F6D63F2002C9098 /* CYTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843A32A71F6D63F2002C9098 /* CYTabBarController.m */; };
+		843A32B11F6D63F2002C9098 /* UITabBarItem+BadgeColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 843A32A91F6D63F2002C9098 /* UITabBarItem+BadgeColor.m */; };
 		84A50A5C1F5668DA00BCDA47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A50A5B1F5668DA00BCDA47 /* AppDelegate.swift */; };
 		84A50A611F5668DA00BCDA47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A50A5F1F5668DA00BCDA47 /* Main.storyboard */; };
 		84A50A631F5668DA00BCDA47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A50A621F5668DA00BCDA47 /* Assets.xcassets */; };
@@ -219,6 +251,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				843A32771F6D53BF002C9098 /* PieCharts.framework in Embed Frameworks */,
 				19D8FDB91F6A23CA00AC7C22 /* CommonCrypto.framework in Embed Frameworks */,
 				19D8FDB81F6A23C700AC7C22 /* CardReaderSDK.framework in Embed Frameworks */,
 			);
@@ -372,7 +405,6 @@
 		19A14DAC1F5F991600D96A2E /* RTRootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTRootNavigationController.m; sourceTree = "<group>"; };
 		19A14DAD1F5F991600D96A2E /* UIViewController+RTRootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RTRootNavigationController.h"; sourceTree = "<group>"; };
 		19A14DAE1F5F991600D96A2E /* UIViewController+RTRootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RTRootNavigationController.m"; sourceTree = "<group>"; };
-		19A14DB21F5FA1BF00D96A2E /* CYBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYBadgeView.h; sourceTree = "<group>"; };
 		19A14DB31F5FA1BF00D96A2E /* CYBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYBadgeView.m; sourceTree = "<group>"; };
 		19A14DB41F5FA1BF00D96A2E /* CYButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYButton.h; sourceTree = "<group>"; };
 		19A14DB51F5FA1BF00D96A2E /* CYButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYButton.m; sourceTree = "<group>"; };
@@ -461,6 +493,52 @@
 		19FACBCA1F68CA0C00680E63 /* XHWLRoleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRoleModel.swift; sourceTree = "<group>"; };
 		3C8CA86321214775B04BCDF0 /* Pods_XHWLHouseManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XHWLHouseManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82D04BCDBEE1628E508C0F62 /* Pods-XHWLHouseManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XHWLHouseManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XHWLHouseManager/Pods-XHWLHouseManager.debug.xcconfig"; sourceTree = "<group>"; };
+		8408358E1F6E010500DC644A /* XHWLRequestKeyDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRequestKeyDefine.swift; sourceTree = "<group>"; };
+		840835901F6E01DF00DC644A /* XHWLNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLNetwork.swift; sourceTree = "<group>"; };
+		843A32321F6D4DA1002C9098 /* XHWLDeviceStatisticsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDeviceStatisticsVC.swift; sourceTree = "<group>"; };
+		843A32341F6D4DCA002C9098 /* XHWLDeviceStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDeviceStatisticsView.swift; sourceTree = "<group>"; };
+		843A32391F6D4F4D002C9098 /* PieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
+		843A323A1F6D4F4D002C9098 /* PieChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartDelegate.swift; sourceTree = "<group>"; };
+		843A323C1F6D4F4D002C9098 /* PieSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieSlice.swift; sourceTree = "<group>"; };
+		843A323D1F6D4F4D002C9098 /* PieSliceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieSliceDelegate.swift; sourceTree = "<group>"; };
+		843A323E1F6D4F4D002C9098 /* PieSliceLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieSliceLayer.swift; sourceTree = "<group>"; };
+		843A32401F6D4F4D002C9098 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		843A32411F6D4F4D002C9098 /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
+		843A32421F6D4F4D002C9098 /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
+		843A32431F6D4F4D002C9098 /* FloatingPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingPoint.swift; sourceTree = "<group>"; };
+		843A32441F6D4F4D002C9098 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		843A32481F6D4F4D002C9098 /* PieChartLabelSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartLabelSettings.swift; sourceTree = "<group>"; };
+		843A324B1F6D4F4D002C9098 /* AlphaPieLineTextLayerAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlphaPieLineTextLayerAnimator.swift; sourceTree = "<group>"; };
+		843A324C1F6D4F4D002C9098 /* PieLineTextLayerAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieLineTextLayerAnimator.swift; sourceTree = "<group>"; };
+		843A324D1F6D4F4D002C9098 /* PieLineTextLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieLineTextLayer.swift; sourceTree = "<group>"; };
+		843A324F1F6D4F4D002C9098 /* PiePlainTextLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PiePlainTextLayer.swift; sourceTree = "<group>"; };
+		843A32521F6D4F4D002C9098 /* AlphaPieViewLayerAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlphaPieViewLayerAnimator.swift; sourceTree = "<group>"; };
+		843A32531F6D4F4D002C9098 /* PieViewLayerAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieViewLayerAnimator.swift; sourceTree = "<group>"; };
+		843A32541F6D4F4D002C9098 /* PieCustomViewsLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieCustomViewsLayer.swift; sourceTree = "<group>"; };
+		843A32551F6D4F4D002C9098 /* PieChartLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartLayer.swift; sourceTree = "<group>"; };
+		843A32571F6D4F4D002C9098 /* PieSliceData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieSliceData.swift; sourceTree = "<group>"; };
+		843A32581F6D4F4D002C9098 /* PieSliceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieSliceModel.swift; sourceTree = "<group>"; };
+		843A325B1F6D4F4D002C9098 /* PieCharts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieCharts.h; sourceTree = "<group>"; };
+		843A325D1F6D4F4D002C9098 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		843A32751F6D5210002C9098 /* PieCharts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PieCharts.framework; sourceTree = "<group>"; };
+		843A32781F6D58F4002C9098 /* XHWLDeviceStatisticsDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDeviceStatisticsDetailVC.swift; sourceTree = "<group>"; };
+		843A327A1F6D591B002C9098 /* XHWLDeviceStatisticsDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDeviceStatisticsDetailView.swift; sourceTree = "<group>"; };
+		843A32801F6D5E08002C9098 /* XHWLEnergyManagementVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLEnergyManagementVC.swift; sourceTree = "<group>"; };
+		843A329B1F6D63F2002C9098 /* CYBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYBadgeView.h; sourceTree = "<group>"; };
+		843A329C1F6D63F2002C9098 /* CYBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYBadgeView.m; sourceTree = "<group>"; };
+		843A329D1F6D63F2002C9098 /* CYButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYButton.h; sourceTree = "<group>"; };
+		843A329E1F6D63F2002C9098 /* CYButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYButton.m; sourceTree = "<group>"; };
+		843A329F1F6D63F2002C9098 /* CYCenterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYCenterButton.h; sourceTree = "<group>"; };
+		843A32A01F6D63F2002C9098 /* CYCenterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYCenterButton.m; sourceTree = "<group>"; };
+		843A32A11F6D63F2002C9098 /* CYTabBar.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CYTabBar.bundle; sourceTree = "<group>"; };
+		843A32A21F6D63F2002C9098 /* CYTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYTabBar.h; sourceTree = "<group>"; };
+		843A32A31F6D63F2002C9098 /* CYTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYTabBar.m; sourceTree = "<group>"; };
+		843A32A41F6D63F2002C9098 /* CYTabBarConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYTabBarConfig.h; sourceTree = "<group>"; };
+		843A32A51F6D63F2002C9098 /* CYTabBarConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYTabBarConfig.m; sourceTree = "<group>"; };
+		843A32A61F6D63F2002C9098 /* CYTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYTabBarController.h; sourceTree = "<group>"; };
+		843A32A71F6D63F2002C9098 /* CYTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYTabBarController.m; sourceTree = "<group>"; };
+		843A32A81F6D63F2002C9098 /* UITabBarItem+BadgeColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarItem+BadgeColor.h"; sourceTree = "<group>"; };
+		843A32A91F6D63F2002C9098 /* UITabBarItem+BadgeColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarItem+BadgeColor.m"; sourceTree = "<group>"; };
 		84A50A581F5668DA00BCDA47 /* XHWLHouseManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XHWLHouseManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A50A5B1F5668DA00BCDA47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84A50A601F5668DA00BCDA47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -481,6 +559,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				843A32761F6D5210002C9098 /* PieCharts.framework in Frameworks */,
 				19A7A7051F57E4540044DC1A /* Mcu_sdk.framework in Frameworks */,
 				192DA53E1F57AC5C005950EC /* libc++.1.tbd in Frameworks */,
 				192DA53C1F57AC4C005950EC /* libz.1.1.3.tbd in Frameworks */,
@@ -966,6 +1045,8 @@
 		19A14D751F5E3A7F00D96A2E /* Work */ = {
 			isa = PBXGroup;
 			children = (
+				843A327C1F6D5DCF002C9098 /* EnergyManagement */,
+				843A322E1F6D4D73002C9098 /* DeviceStatistics */,
 				19654C321F6B6ABE00638F05 /* ProjectProgress */,
 				19163D121F67E50E00C09785 /* VisitorRegister */,
 				19163D061F67E27800C09785 /* AbnormalPass */,
@@ -1029,7 +1110,6 @@
 		19A14DB11F5FA1BF00D96A2E /* CYTabBar */ = {
 			isa = PBXGroup;
 			children = (
-				19A14DB21F5FA1BF00D96A2E /* CYBadgeView.h */,
 				19A14DB31F5FA1BF00D96A2E /* CYBadgeView.m */,
 				19A14DB41F5FA1BF00D96A2E /* CYButton.h */,
 				19A14DB51F5FA1BF00D96A2E /* CYButton.m */,
@@ -1094,6 +1174,8 @@
 			isa = PBXGroup;
 			children = (
 				19A7A7101F57FB350044DC1A /* XHWLHttpTool.swift */,
+				8408358E1F6E010500DC644A /* XHWLRequestKeyDefine.swift */,
+				840835901F6E01DF00DC644A /* XHWLNetwork.swift */,
 			);
 			path = HttpTool;
 			sourceTree = "<group>";
@@ -1268,6 +1350,8 @@
 		19C0BCE31F56AA8B00871BDD /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				843A329A1F6D63F2002C9098 /* CYTabBar */,
+				843A32361F6D4F4D002C9098 /* PieCharts */,
 				19B118A81F6A18AF00B1F5D1 /* BluetoothOpen */,
 				19A14DB11F5FA1BF00D96A2E /* CYTabBar */,
 				19A14DAA1F5F991600D96A2E /* Nav */,
@@ -1350,6 +1434,246 @@
 				19D8FDBC1F6A670900AC7C22 /* XHWLProjectModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		843A322E1F6D4D73002C9098 /* DeviceStatistics */ = {
+			isa = PBXGroup;
+			children = (
+				843A322F1F6D4D73002C9098 /* Controller */,
+				843A32301F6D4D73002C9098 /* Model */,
+				843A32311F6D4D73002C9098 /* View */,
+			);
+			path = DeviceStatistics;
+			sourceTree = "<group>";
+		};
+		843A322F1F6D4D73002C9098 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				843A32321F6D4DA1002C9098 /* XHWLDeviceStatisticsVC.swift */,
+				843A32781F6D58F4002C9098 /* XHWLDeviceStatisticsDetailVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		843A32301F6D4D73002C9098 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		843A32311F6D4D73002C9098 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				843A32341F6D4DCA002C9098 /* XHWLDeviceStatisticsView.swift */,
+				843A327A1F6D591B002C9098 /* XHWLDeviceStatisticsDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		843A32361F6D4F4D002C9098 /* PieCharts */ = {
+			isa = PBXGroup;
+			children = (
+				843A32751F6D5210002C9098 /* PieCharts.framework */,
+				843A32371F6D4F4D002C9098 /* Core */,
+				843A323F1F6D4F4D002C9098 /* Extensions */,
+				843A32451F6D4F4D002C9098 /* Layer */,
+				843A32561F6D4F4D002C9098 /* Model */,
+				843A32591F6D4F4D002C9098 /* Supporting files */,
+				843A325C1F6D4F4D002C9098 /* Util */,
+			);
+			path = PieCharts;
+			sourceTree = "<group>";
+		};
+		843A32371F6D4F4D002C9098 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				843A32381F6D4F4D002C9098 /* Chart */,
+				843A323B1F6D4F4D002C9098 /* Slice */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		843A32381F6D4F4D002C9098 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				843A32391F6D4F4D002C9098 /* PieChart.swift */,
+				843A323A1F6D4F4D002C9098 /* PieChartDelegate.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
+		843A323B1F6D4F4D002C9098 /* Slice */ = {
+			isa = PBXGroup;
+			children = (
+				843A323C1F6D4F4D002C9098 /* PieSlice.swift */,
+				843A323D1F6D4F4D002C9098 /* PieSliceDelegate.swift */,
+				843A323E1F6D4F4D002C9098 /* PieSliceLayer.swift */,
+			);
+			path = Slice;
+			sourceTree = "<group>";
+		};
+		843A323F1F6D4F4D002C9098 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				843A32401F6D4F4D002C9098 /* CGPoint.swift */,
+				843A32411F6D4F4D002C9098 /* CGRect.swift */,
+				843A32421F6D4F4D002C9098 /* CGSize.swift */,
+				843A32431F6D4F4D002C9098 /* FloatingPoint.swift */,
+				843A32441F6D4F4D002C9098 /* Int.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		843A32451F6D4F4D002C9098 /* Layer */ = {
+			isa = PBXGroup;
+			children = (
+				843A32461F6D4F4D002C9098 /* Impl */,
+				843A32551F6D4F4D002C9098 /* PieChartLayer.swift */,
+			);
+			path = Layer;
+			sourceTree = "<group>";
+		};
+		843A32461F6D4F4D002C9098 /* Impl */ = {
+			isa = PBXGroup;
+			children = (
+				843A32471F6D4F4D002C9098 /* Common */,
+				843A32491F6D4F4D002C9098 /* LineText */,
+				843A324E1F6D4F4D002C9098 /* PlainText */,
+				843A32501F6D4F4D002C9098 /* View */,
+			);
+			path = Impl;
+			sourceTree = "<group>";
+		};
+		843A32471F6D4F4D002C9098 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				843A32481F6D4F4D002C9098 /* PieChartLabelSettings.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		843A32491F6D4F4D002C9098 /* LineText */ = {
+			isa = PBXGroup;
+			children = (
+				843A324A1F6D4F4D002C9098 /* Anim */,
+				843A324D1F6D4F4D002C9098 /* PieLineTextLayer.swift */,
+			);
+			path = LineText;
+			sourceTree = "<group>";
+		};
+		843A324A1F6D4F4D002C9098 /* Anim */ = {
+			isa = PBXGroup;
+			children = (
+				843A324B1F6D4F4D002C9098 /* AlphaPieLineTextLayerAnimator.swift */,
+				843A324C1F6D4F4D002C9098 /* PieLineTextLayerAnimator.swift */,
+			);
+			path = Anim;
+			sourceTree = "<group>";
+		};
+		843A324E1F6D4F4D002C9098 /* PlainText */ = {
+			isa = PBXGroup;
+			children = (
+				843A324F1F6D4F4D002C9098 /* PiePlainTextLayer.swift */,
+			);
+			path = PlainText;
+			sourceTree = "<group>";
+		};
+		843A32501F6D4F4D002C9098 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				843A32511F6D4F4D002C9098 /* Anim */,
+				843A32541F6D4F4D002C9098 /* PieCustomViewsLayer.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		843A32511F6D4F4D002C9098 /* Anim */ = {
+			isa = PBXGroup;
+			children = (
+				843A32521F6D4F4D002C9098 /* AlphaPieViewLayerAnimator.swift */,
+				843A32531F6D4F4D002C9098 /* PieViewLayerAnimator.swift */,
+			);
+			path = Anim;
+			sourceTree = "<group>";
+		};
+		843A32561F6D4F4D002C9098 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				843A32571F6D4F4D002C9098 /* PieSliceData.swift */,
+				843A32581F6D4F4D002C9098 /* PieSliceModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		843A32591F6D4F4D002C9098 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				843A325B1F6D4F4D002C9098 /* PieCharts.h */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		843A325C1F6D4F4D002C9098 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				843A325D1F6D4F4D002C9098 /* Globals.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		843A327C1F6D5DCF002C9098 /* EnergyManagement */ = {
+			isa = PBXGroup;
+			children = (
+				843A327D1F6D5DCF002C9098 /* Controller */,
+				843A327E1F6D5DCF002C9098 /* Model */,
+				843A327F1F6D5DCF002C9098 /* View */,
+			);
+			path = EnergyManagement;
+			sourceTree = "<group>";
+		};
+		843A327D1F6D5DCF002C9098 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				843A32801F6D5E08002C9098 /* XHWLEnergyManagementVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		843A327E1F6D5DCF002C9098 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		843A327F1F6D5DCF002C9098 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		843A329A1F6D63F2002C9098 /* CYTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				843A329B1F6D63F2002C9098 /* CYBadgeView.h */,
+				843A329C1F6D63F2002C9098 /* CYBadgeView.m */,
+				843A329D1F6D63F2002C9098 /* CYButton.h */,
+				843A329E1F6D63F2002C9098 /* CYButton.m */,
+				843A329F1F6D63F2002C9098 /* CYCenterButton.h */,
+				843A32A01F6D63F2002C9098 /* CYCenterButton.m */,
+				843A32A11F6D63F2002C9098 /* CYTabBar.bundle */,
+				843A32A21F6D63F2002C9098 /* CYTabBar.h */,
+				843A32A31F6D63F2002C9098 /* CYTabBar.m */,
+				843A32A41F6D63F2002C9098 /* CYTabBarConfig.h */,
+				843A32A51F6D63F2002C9098 /* CYTabBarConfig.m */,
+				843A32A61F6D63F2002C9098 /* CYTabBarController.h */,
+				843A32A71F6D63F2002C9098 /* CYTabBarController.m */,
+				843A32A81F6D63F2002C9098 /* UITabBarItem+BadgeColor.h */,
+				843A32A91F6D63F2002C9098 /* UITabBarItem+BadgeColor.m */,
+			);
+			path = CYTabBar;
 			sourceTree = "<group>";
 		};
 		84A50A4F1F5668DA00BCDA47 = {
@@ -1559,7 +1883,7 @@
 				84A50A611F5668DA00BCDA47 /* Main.storyboard in Resources */,
 				194FAAD51F5CF993004CA513 /* xhwl_login_logo_up.gif in Resources */,
 				194FAAD71F5CF9B0004CA513 /* door2.gif in Resources */,
-				19A14DC21F5FA1BF00D96A2E /* CYTabBar.bundle in Resources */,
+				843A32AD1F6D63F2002C9098 /* CYTabBar.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1656,12 +1980,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				19A14D711F5E381100D96A2E /* View+MASAdditions.m in Sources */,
+				843A32651F6D4F4D002C9098 /* CGSize.swift in Sources */,
 				19163CE31F67C3A300C09785 /* XHWLIssueReportVC.swift in Sources */,
 				19B4B1141F6625240068614D /* XHWLHeadView.swift in Sources */,
 				1961CDBC1F5963EA006856D0 /* XHWLLocationVC.swift in Sources */,
 				19BB53AC1F56E009006C38EA /* XHWLLoginTF.swift in Sources */,
 				19654C3D1F6B6B1200638F05 /* XHWLProgressDetailVC.swift in Sources */,
 				19163CE11F67C39E00C09785 /* XHWLIssueReportView.swift in Sources */,
+				843A32351F6D4DCA002C9098 /* XHWLDeviceStatisticsView.swift in Sources */,
 				1961CD9C1F596328006856D0 /* PlayBackViewController.m in Sources */,
 				190B94191F63F2FC007D707B /* XHWLLabelView.swift in Sources */,
 				19C0BCF91F56AA8B00871BDD /* XHWLNavigationController.swift in Sources */,
@@ -1674,6 +2000,7 @@
 				1961CDA51F596328006856D0 /* PtzPresetPositionPopView.m in Sources */,
 				19654C451F6BCBB000638F05 /* XHWLIssueReportListVC.swift in Sources */,
 				19A14D7B1F5E4D5C00D96A2E /* XHMLProgressHUD.swift in Sources */,
+				8408358F1F6E010500DC644A /* XHWLRequestKeyDefine.swift in Sources */,
 				1961CDB01F59637F006856D0 /* XHWLScanVC.swift in Sources */,
 				19654C3C1F6B6B1200638F05 /* XHWLCountVC.swift in Sources */,
 				19A14D7E1F5E703D00D96A2E /* XHWLSearchBar.swift in Sources */,
@@ -1683,13 +2010,14 @@
 				19FACBCB1F68CA0C00680E63 /* XHWLRoleModel.swift in Sources */,
 				19163D2B1F67E72500C09785 /* XHWLHistoryDetailVC.swift in Sources */,
 				19163D311F67E9DA00C09785 /* XHWLCheckTF.swift in Sources */,
+				843A327B1F6D591B002C9098 /* XHWLDeviceStatisticsDetailView.swift in Sources */,
 				19A14DB01F5F991600D96A2E /* UIViewController+RTRootNavigationController.m in Sources */,
 				19BB53521F56BFA3006C38EA /* MJProperty.m in Sources */,
 				19A14D8D1F5EA46F00D96A2E /* GIFAnimatedImageView.swift in Sources */,
 				19B4B1201F666DD10068614D /* XHWLSafeGuardDetailView.swift in Sources */,
 				19163CEB1F67D28800C09785 /* XHWLSafeProtectionVC.swift in Sources */,
+				843A32791F6D58F4002C9098 /* XHWLDeviceStatisticsDetailVC.swift in Sources */,
 				19ADF3AC1F64FF7300A9E0FB /* XHWLTagView.swift in Sources */,
-				19A14DC51F5FA1BF00D96A2E /* CYTabBarController.m in Sources */,
 				19163D291F67E6F100C09785 /* XHWLRegistrationDetailView.swift in Sources */,
 				19BB53561F56BFA3006C38EA /* NSObject+MJCoding.m in Sources */,
 				19A14D901F5EA46F00D96A2E /* GifTextHeaderFooter.swift in Sources */,
@@ -1702,13 +2030,17 @@
 				19A5726C1F6D0B59007B0D3F /* XHWLBaseBgVC.swift in Sources */,
 				19163CED1F67D32F00C09785 /* XHWLSafeProtectionView.swift in Sources */,
 				19A572661F6CE5CC007B0D3F /* XHWLScanModel.swift in Sources */,
+				843A32AF1F6D63F2002C9098 /* CYTabBarConfig.m in Sources */,
 				19A14D911F5EA46F00D96A2E /* RefreshView.swift in Sources */,
 				19A5725D1F6CD49C007B0D3F /* XHWLBaseVC.swift in Sources */,
 				19163D031F67E0EE00C09785 /* XHWLRegistrationView.swift in Sources */,
+				843A32AE1F6D63F2002C9098 /* CYTabBar.m in Sources */,
 				1961CDAF1F59637F006856D0 /* XHWLScanTestVC.swift in Sources */,
 				197D64B61F62807D00977074 /* XHWLMenuModel.swift in Sources */,
+				843A326C1F6D4F4D002C9098 /* PiePlainTextLayer.swift in Sources */,
 				19654C391F6B6B0C00638F05 /* XHWLProgressDetailView.swift in Sources */,
 				19A14D791F5E3BF300D96A2E /* XHWLTabbarVC.swift in Sources */,
+				843A32641F6D4F4D002C9098 /* CGRect.swift in Sources */,
 				19163D1D1F67E63F00C09785 /* XHWLCheckListTF.swift in Sources */,
 				19A14D801F5E853C00D96A2E /* XHWLSearchVC.swift in Sources */,
 				1961CD9D1F596328006856D0 /* RealPlayViewController.m in Sources */,
@@ -1718,33 +2050,46 @@
 				19163D251F67E6C600C09785 /* XHWLRegistrationCell.swift in Sources */,
 				19A7A70D1F57EB460044DC1A /* YLGIFImage.swift in Sources */,
 				19B118A51F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift in Sources */,
+				843A32701F6D4F4D002C9098 /* PieChartLayer.swift in Sources */,
 				19163D271F67E6E200C09785 /* XHWLRegistrationDetailVC.swift in Sources */,
 				19A14D6B1F5E381100D96A2E /* MASConstraintMaker.m in Sources */,
-				19A14DBF1F5FA1BF00D96A2E /* CYBadgeView.m in Sources */,
 				1912240B1F5D47F500D201F3 /* JSONAndDictionary.swift in Sources */,
 				19FACBC91F68C97400680E63 /* XHWLUserModel.swift in Sources */,
+				843A32631F6D4F4D002C9098 /* CGPoint.swift in Sources */,
 				1961CDA21F596328006856D0 /* PtzPopView.m in Sources */,
 				1961CDA91F596328006856D0 /* ToolBarButton.m in Sources */,
 				19A14DAF1F5F991600D96A2E /* RTRootNavigationController.m in Sources */,
 				1961CDA71F596328006856D0 /* TalkChannelView.m in Sources */,
 				1961CDB71F5963D2006856D0 /* CMPedometerViewController.swift in Sources */,
 				19BB53571F56BFA3006C38EA /* NSObject+MJKeyValue.m in Sources */,
+				843A32671F6D4F4D002C9098 /* Int.swift in Sources */,
 				1961CDB91F5963D2006856D0 /* XHWLPedometerVC.swift in Sources */,
+				843A326D1F6D4F4D002C9098 /* AlphaPieViewLayerAnimator.swift in Sources */,
 				19D8FDBB1F6A664400AC7C22 /* XHWLAccountModel.swift in Sources */,
 				1961CCD21F58E336006856D0 /* DateStringExtension.swift in Sources */,
 				19B4B1101F6624790068614D /* XHWLSafeGuardView.swift in Sources */,
 				19163D171F67E50E00C09785 /* XHWLCheckVC.swift in Sources */,
 				19163D231F67E67800C09785 /* XHWLMoreListView.swift in Sources */,
+				843A32711F6D4F4D002C9098 /* PieSliceData.swift in Sources */,
 				190B940D1F63BB59007D707B /* XHWLWarningModel.swift in Sources */,
 				19A14D6A1F5E381100D96A2E /* MASConstraint.m in Sources */,
 				1961CDA01F596328006856D0 /* PlayView.m in Sources */,
 				1961CCD01F58E32F006856D0 /* StringExtension.swift in Sources */,
+				843A32B11F6D63F2002C9098 /* UITabBarItem+BadgeColor.m in Sources */,
+				843A32721F6D4F4D002C9098 /* PieSliceModel.swift in Sources */,
 				19A7A70E1F57EB460044DC1A /* YLImageView.swift in Sources */,
+				843A326F1F6D4F4D002C9098 /* PieCustomViewsLayer.swift in Sources */,
+				843A325F1F6D4F4D002C9098 /* PieChartDelegate.swift in Sources */,
 				19BB535B1F56C00F006C38EA /* XHWLConfigure.swift in Sources */,
+				843A32691F6D4F4D002C9098 /* AlphaPieLineTextLayerAnimator.swift in Sources */,
 				1955C9B51F652A41008C31C8 /* XHWLCodeTF.swift in Sources */,
 				19A572651F6CE5CC007B0D3F /* XHWLHomeVC.swift in Sources */,
 				19163CFB1F67DB4100C09785 /* XHWLWarningVC.swift in Sources */,
+				843A32AA1F6D63F2002C9098 /* CYBadgeView.m in Sources */,
+				843A32811F6D5E08002C9098 /* XHWLEnergyManagementVC.swift in Sources */,
+				843A32601F6D4F4D002C9098 /* PieSlice.swift in Sources */,
 				19A14D961F5EA6B200D96A2E /* HLBarIndicatorView.swift in Sources */,
+				843A326A1F6D4F4D002C9098 /* PieLineTextLayerAnimator.swift in Sources */,
 				19BB53541F56BFA3006C38EA /* MJPropertyType.m in Sources */,
 				198E7E0B1F5A9DC10016C4E8 /* XHWLMcuBottomView.swift in Sources */,
 				19A14D8E1F5EA46F00D96A2E /* GifHeaderFooter.swift in Sources */,
@@ -1763,32 +2108,38 @@
 				192DA5451F57E1CB005950EC /* XHWLTransitionView.swift in Sources */,
 				19A14D691F5E381100D96A2E /* MASCompositeConstraint.m in Sources */,
 				19A14D8B1F5EA46F00D96A2E /* AccessoryView.swift in Sources */,
+				840835911F6E01DF00DC644A /* XHWLNetwork.swift in Sources */,
 				1961CDA31F596328006856D0 /* PtzPresetPositionDialView.m in Sources */,
 				1961CDAB1F596328006856D0 /* ToolBarScrollView.m in Sources */,
 				19BB53391F56BF99006C38EA /* XMLReader.m in Sources */,
 				19BB53551F56BFA3006C38EA /* NSObject+MJClass.m in Sources */,
-				19A14DC41F5FA1BF00D96A2E /* CYTabBarConfig.m in Sources */,
+				843A32621F6D4F4D002C9098 /* PieSliceLayer.swift in Sources */,
 				1961CDC01F5983EF006856D0 /* XHWLMcuView.swift in Sources */,
 				84A50A5C1F5668DA00BCDA47 /* AppDelegate.swift in Sources */,
 				192DA5321F57A62A005950EC /* UIColor+Category.swift in Sources */,
 				1961CDA81F596328006856D0 /* Singleton.m in Sources */,
-				19A14DC31F5FA1BF00D96A2E /* CYTabBar.m in Sources */,
+				843A32611F6D4F4D002C9098 /* PieSliceDelegate.swift in Sources */,
 				1961CDA61F596328006856D0 /* QualityPanelView.m in Sources */,
 				19163D2F1F67E75700C09785 /* XHWLWarningCell.swift in Sources */,
 				1961CDA41F596328006856D0 /* PtzPresetPositionMultiDialView.m in Sources */,
 				1961CDAA1F596328006856D0 /* ToolBarButtonPositionReckoner.m in Sources */,
 				1961CD9F1F596328006856D0 /* PickerView.m in Sources */,
 				19BDD7001F6132FB00916464 /* XHWLMapKitVC.swift in Sources */,
+				843A32B01F6D63F2002C9098 /* CYTabBarController.m in Sources */,
 				19A5725F1F6CDF80007B0D3F /* XHWLWorkCell.swift in Sources */,
 				197D64B01F62804C00977074 /* XHWLWorkVC.swift in Sources */,
 				19ADF3AE1F6501B600A9E0FB /* XHWLWaterView.swift in Sources */,
+				843A326E1F6D4F4D002C9098 /* PieViewLayerAnimator.swift in Sources */,
+				843A32AB1F6D63F2002C9098 /* CYButton.m in Sources */,
 				19BB53591F56BFA3006C38EA /* NSString+MJExtension.m in Sources */,
 				1961CDBE1F596441006856D0 /* XHWLMcuShowVC.swift in Sources */,
 				19163D191F67E53B00C09785 /* XHWLCheckListView.swift in Sources */,
 				19B142E81F67716F0087AC5E /* XHWLImageBtn.swift in Sources */,
+				843A32741F6D4F4D002C9098 /* Globals.swift in Sources */,
 				19654C381F6B6B0C00638F05 /* XHWLCountView.swift in Sources */,
 				19A14D701F5E381100D96A2E /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				19B4B1161F6628C90068614D /* XHWLPickPhotoView.swift in Sources */,
+				843A325E1F6D4F4D002C9098 /* PieChart.swift in Sources */,
 				1961CCCE1F58E301006856D0 /* HintTool.swift in Sources */,
 				1955C9B31F6528C1008C31C8 /* XHWLForgetPwdView.swift in Sources */,
 				19654C471F6BE11000638F05 /* XHWLIssueReportModel.swift in Sources */,
@@ -1796,16 +2147,19 @@
 				19654C3F1F6B6C6300638F05 /* XHWLProgressDetailCell.swift in Sources */,
 				19163D2D1F67E74100C09785 /* XHWLHistoryWarningView.swift in Sources */,
 				19B4B11E1F666B4D0068614D /* XHWLSafeGuardDetailVC.swift in Sources */,
+				843A32681F6D4F4D002C9098 /* PieChartLabelSettings.swift in Sources */,
+				843A32661F6D4F4D002C9098 /* FloatingPoint.swift in Sources */,
 				197D64B41F62805500977074 /* XHWLMenuView.swift in Sources */,
+				843A32331F6D4DA1002C9098 /* XHWLDeviceStatisticsVC.swift in Sources */,
 				192DA5431F57B73E005950EC /* XHWLSetPwdView.swift in Sources */,
 				197D64BC1F62A10900977074 /* XHWLTopView.swift in Sources */,
 				19ADF3B01F6504AE00A9E0FB /* XHWLWaterVC.swift in Sources */,
-				19A14DC01F5FA1BF00D96A2E /* CYButton.m in Sources */,
 				19163D1B1F67E63B00C09785 /* XHWLRadioView.swift in Sources */,
 				19A5726A1F6CE659007B0D3F /* XHWLHomeView.swift in Sources */,
 				19163D0D1F67E2B700C09785 /* XHWLAbnormalPassView.swift in Sources */,
-				19A14DC11F5FA1BF00D96A2E /* CYCenterButton.m in Sources */,
 				19B4B1121F66248F0068614D /* XHWLSafeGuardVC.swift in Sources */,
+				843A326B1F6D4F4D002C9098 /* PieLineTextLayer.swift in Sources */,
+				843A32AC1F6D63F2002C9098 /* CYCenterButton.m in Sources */,
 				19A14D8C1F5EA46F00D96A2E /* CoreTextHeaderFooter.swift in Sources */,
 				19A14D931F5EA46F00D96A2E /* UIScrollView+SYRefresh.swift in Sources */,
 				190B94171F63ECE2007D707B /* XHWLScanResultView.swift in Sources */,
@@ -1974,6 +2328,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/XHWLHouseManager/Lib/Mcu_sdk",
 					"$(PROJECT_DIR)/XHWLHouseManager/Lib/BluetoothOpen",
+					"$(PROJECT_DIR)/XHWLHouseManager/Lib/PieCharts",
 				);
 				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = XHWLHouseManager/Info.plist;
@@ -2009,6 +2364,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/XHWLHouseManager/Lib/Mcu_sdk",
 					"$(PROJECT_DIR)/XHWLHouseManager/Lib/BluetoothOpen",
+					"$(PROJECT_DIR)/XHWLHouseManager/Lib/PieCharts",
 				);
 				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = XHWLHouseManager/Info.plist;

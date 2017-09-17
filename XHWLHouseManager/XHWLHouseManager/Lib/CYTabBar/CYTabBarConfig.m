@@ -34,6 +34,9 @@
         
         //bar底部分割线的高度
         config.borderHeight = 1.0;
+        
+        //中间按钮所在位置
+        config.centerBtnIndex = -1;
     });
     return config;
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XHWLForgetPwdView: UIView {
+class XHWLForgetPwdView: UIView, XHWLNetworkDelegate {
 
     var funcBackBlock : (String, String, String) -> () = {param in }
     var onBackBlock : () -> () = {param in }
@@ -103,7 +103,7 @@ class XHWLForgetPwdView: UIView {
         let text:String = pwdTF.textField.text!
         let workCode:String = userTF.textField.text!
         
-        let url:String = "wyBase/getVerificatCode"
+//        let url:String = "wyBase/getVerificatCode"
         
         if workCode.isEmpty {
             "您输入的工号为空".ext_debugPrintAndHint()
@@ -113,28 +113,34 @@ class XHWLForgetPwdView: UIView {
         //判断手机号格式是否正确
         if Validation.phoneNum(text).isRight {
             
-            XHWLHttpTool.sharedInstance.getHttpTool(url:url , parameters: [text, workCode], success: { (response) in
-                if response["state"] as! Bool{
-                    //发送验证码成功
-                    self.isCounting = true
-                    
-                    self.codeTF.sendCodeBtn.isEnabled = false
-                    "验证码发送成功".ext_debugPrintAndHint()
-                } else{
-                    let msg:String = response["message"] as! String
-                    msg.ext_debugPrintAndHint()
-                }
-            }, failture: { (error) in
-                
-            })
+            XHWLNetwork.shared.getVerCodeClick([text, workCode], self)
         } else {
             "您输入的手机号格式不正确".ext_debugPrintAndHint()
         }
         
     }
     
-    var countDownTimer: Timer?//用于按钮计时
+    // MARK: - XHWLNetworkDelegate
     
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        if response["state"] as! Bool{
+            //发送验证码成功
+            self.isCounting = true
+            
+            self.codeTF.sendCodeBtn.isEnabled = false
+            "验证码发送成功".ext_debugPrintAndHint()
+        } else{
+            let msg:String = response["message"] as! String
+            msg.ext_debugPrintAndHint()
+        }
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
+    }
+    var countDownTimer: Timer?//用于按钮计时
+
     //显示剩余秒数
     var remainingSeconds: Int = 0{
         willSet{

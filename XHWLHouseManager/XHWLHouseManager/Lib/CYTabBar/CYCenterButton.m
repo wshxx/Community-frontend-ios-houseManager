@@ -37,6 +37,10 @@
         if (self.titleLabel.text.length) {
             self.titleLabel.frame = CGRectMake(0 , self.frame.size.height +(BULGEH-16),
                                                self.frame.size.width , 16);
+        }else{
+            CGRect rect = self.imageView.frame;
+            rect.size.height += 8;
+            self.imageView.frame = rect;
         }
         return;
     }

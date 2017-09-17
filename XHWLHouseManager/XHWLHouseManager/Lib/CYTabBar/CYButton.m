@@ -34,10 +34,12 @@
     [super layoutSubviews];
     CGFloat width = self.frame.size.width;
     CGFloat height = self.superview.frame.size.height;
-    if (width!=0 && height!=0)
-    {
+    if (self.titleLabel.text && ![self.titleLabel.text isEqualToString:@""]) {
         self.titleLabel.frame = CGRectMake(0, height-16, width, 16);
         self.imageView.frame = CGRectMake(0 , 0, width, 35);
+    }
+    else{
+        self.imageView.frame = CGRectMake(0 , 0, width, height);
     }
 }
 

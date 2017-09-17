@@ -23,6 +23,8 @@
 @property(assign , nonatomic) CGFloat borderHeight;
 /** bar的底部分割线颜色 */
 @property(strong , nonatomic) UIColor *bordergColor;
+/** 中间按钮所在位置 */
+@property (nonatomic,assign) NSInteger centerBtnIndex;
 
 /**
  *  外观配置的单例对象

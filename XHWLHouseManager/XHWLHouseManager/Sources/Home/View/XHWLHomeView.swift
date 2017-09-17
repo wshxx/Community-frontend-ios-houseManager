@@ -114,11 +114,11 @@ class XHWLHomeView: UIView  {
             "personId" : "", // 人员编号【可为空】
             "name" : ""] // 人员姓名 【可为空】
         
-        XHWLHttpTool.sharedInstance.postHttpTool(url: "openDoor", parameters: params, success: { (response) in
-            print("JSON: \(response)")
-        }) { (error) in
-            
-        }
+//        XHWLHttpTool.sharedInstance.postHttpTool(url: "openDoor", parameters: params, success: { (response) in
+//            print("JSON: \(response)")
+//        }) { (error) in
+//            
+//        }
         
         
         //睡眠1.9s，
@@ -163,32 +163,32 @@ class XHWLHomeView: UIView  {
             "phone" : "", // 手机号码【可为空】
             "name" : ""] // 人员姓名 【可为空】
         
-        XHWLHttpTool.sharedInstance.postHttpTool(url: "authenticate", parameters: params, success: { (response) in
-            print("JSON: \(response)")
-            
-            let dict:NSDictionary = response as! NSDictionary
-            let jg:String = dict["JG"] as! String
-            
-            if jg.compare("0").rawValue == 0 {
-                let doorId:String = ""
-                self.fingerPrintBtnClicked(doorId: doorId)
-            }
-            
-            //            返回结果示例：
-            //                { JQResult: '{"JG":"0","XX":"成功","QQDM":"ABCDEF","RYBH":null,"LYZS":null,"MLB":[{"MMC":"dev门","MID":"319","MLYID":null}]}' }
-            //            返回注释：
-            //            JG：结果代码,0正确
-            //            XX：错误时候有描述信息
-            //            QQDM：请求代码，与请求的一致
-            //            RYBH：人员编号
-            //            LYZS:蓝牙证书，暂为空
-            //            MLB：门列表数组
-            //            MMC：门名称
-            //            MID：门ID
-            //            MLYID：门的蓝牙ID 开发第一阶段为空
-        }) { (error) in
-            
-        }
+//        XHWLHttpTool.sharedInstance.postHttpTool(url: "authenticate", parameters: params, success: { (response) in
+//            print("JSON: \(response)")
+//            
+//            let dict:NSDictionary = response as! NSDictionary
+//            let jg:String = dict["JG"] as! String
+//            
+//            if jg.compare("0").rawValue == 0 {
+//                let doorId:String = ""
+//                self.fingerPrintBtnClicked(doorId: doorId)
+//            }
+//            
+//            //            返回结果示例：
+//            //                { JQResult: '{"JG":"0","XX":"成功","QQDM":"ABCDEF","RYBH":null,"LYZS":null,"MLB":[{"MMC":"dev门","MID":"319","MLYID":null}]}' }
+//            //            返回注释：
+//            //            JG：结果代码,0正确
+//            //            XX：错误时候有描述信息
+//            //            QQDM：请求代码，与请求的一致
+//            //            RYBH：人员编号
+//            //            LYZS:蓝牙证书，暂为空
+//            //            MLB：门列表数组
+//            //            MMC：门名称
+//            //            MID：门ID
+//            //            MLYID：门的蓝牙ID 开发第一阶段为空
+//        }) { (error) in
+//            
+//        }
     }
 
 

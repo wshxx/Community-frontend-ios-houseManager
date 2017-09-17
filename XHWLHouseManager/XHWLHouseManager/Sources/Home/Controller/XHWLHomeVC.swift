@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import swiftScan
 
-class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate{ // XHWLScanVCDelegate,
+class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHWLNetworkDelegate { // XHWLScanVCDelegate,
     
     var btn:UIButton!
     
@@ -145,29 +145,35 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate{ // 
             
             let params:NSArray = [type, code, userModel.wyAccount.token]
             
-            XHWLHttpTool.sharedInstance.getHttpTool(url: "wyBusiness/qrcode", parameters: params, success: { (response) in
-                
-                let errorCode:NSInteger = response["errorCode"] as! NSInteger
-                if errorCode == 200 {
-                    "扫描成功".ext_debugPrintAndHint()
-                    let result:NSDictionary = response["result"] as! NSDictionary
-                    
-                    let scanModel:XHWLScanModel = XHWLScanModel.mj_object(withKeyValues: result)
-                    
-                    print("\(scanModel.name), \(scanModel.code)")
-                    
-                    let vc:XHWLScanResultVC = XHWLScanResultVC()
-                    vc.scanModel = scanModel
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-                
-            }, failture: { (error) in
-                
-            })
+            XHWLNetwork.shared.getScanCodeClick(params, self)
             
         } else {
             block(false)
         }
+    }
+    
+    
+    // MARK: - XHWLNetworkDelegate
+    
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        let errorCode:NSInteger = response["errorCode"] as! NSInteger
+        if errorCode == 200 {
+            "扫描成功".ext_debugPrintAndHint()
+            let result:NSDictionary = response["result"] as! NSDictionary
+            
+            let scanModel:XHWLScanModel = XHWLScanModel.mj_object(withKeyValues: result)
+            
+            print("\(scanModel.name), \(scanModel.code)")
+            
+            let vc:XHWLScanResultVC = XHWLScanResultVC()
+            vc.scanModel = scanModel
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
     }
     
     // MARK: - XHWLHomeViewDelegate

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueReportViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueReportViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, XHWLNetworkDelegate {
     
     var bgImg:UIImageView!
     var isAddPicture:Bool!
@@ -115,60 +115,63 @@ class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueRe
         let imageData:Data = UIImageJPEGRepresentation(imageSel, 0.5)!
         let imageData2:Data = UIImageJPEGRepresentation(imageSel2, 0.5)!
         
-        XHWLHttpTool.sharedInstance.uploadHttpTool(url: url,
-                                                   params: params,
-                                                   data: [imageData2], // [imageData, imageData2], //
-                                                   name: ["image3.png"], // ["image3.png", "image2.png"], //
-                                                   success: { (response) in
-                                                    //            self.progressHUD.hide()
-                                                    if response["state"] as! Bool{
-                                                        
-                                                        
-                                                        self.warningView.isHidden = true
-                                                        XHWLTipView.shared.showSuccess(successText: "报事提交成功")
-                                                        
-                                                      //  "登陆成功".ext_debugPrintAndHint()
-                                                        //登录成功
-                                                  /*      let wyUser:NSDictionary = response["result"]!["wyUser"] as! NSDictionary
-                                                        let projectList:NSArray = response["result"]!["projectList"] as! NSArray
-                                                        
-                                                        print("\(wyUser)")
-                                                        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: wyUser)
-                                                        let data:NSData = userModel.mj_JSONData()! as NSData
-                                                        UserDefaults.standard.set(data, forKey: "user")
-                                                        
-                                                        //                let modelAry:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: projectList)
-                                                        let modelData:NSData = projectList.mj_JSONData()! as NSData
-                                                        UserDefaults.standard.set(modelData, forKey: "projectList")
-                                                        UserDefaults.standard.synchronize()
-                                                        
-                                                        if userModel.wyAccount.isFirstLogin.compare("y").rawValue == 0 { // 重置密码
-                                                            //                    self.onLoginChangeReset()
-                                                        } else { // 跳到首页
-                                                            //                    self.delegate?.onGotoHome!(self)
-                                                        } */
-                                                    } else {
-                                                        XHWLTipView.shared.showSuccess(successText: "报事提交失败，请重新填写！")
-                                                        
-                                                        //登录失败
-                                                        switch(response["errorCode"] as! Int){
-                                                        case 11:
-                                                            "用户名不存在".ext_debugPrintAndHint()
-                                                            break
-                                                        default:
-                                                            
-                                                            let msg:String = response["message"] as! String
-                                                            msg.ext_debugPrintAndHint()
-                                                            break
-                                                        }
-                                                        
-                                                    }
-        }, failture: { (error) in
-                                                 
-            
-        })
+        XHWLNetwork.shared.uploadImageClick(params as NSDictionary, [imageData2], ["image3.png"], self)
     }
     
+    
+    // MARK: - XHWLNetworkDelegate
+    
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        //            self.progressHUD.hide()
+        if response["state"] as! Bool{
+            
+            
+            self.warningView.isHidden = true
+            XHWLTipView.shared.showSuccess(successText: "报事提交成功")
+            
+            //  "登陆成功".ext_debugPrintAndHint()
+            //登录成功
+            /*      let wyUser:NSDictionary = response["result"]!["wyUser"] as! NSDictionary
+             let projectList:NSArray = response["result"]!["projectList"] as! NSArray
+             
+             print("\(wyUser)")
+             let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: wyUser)
+             let data:NSData = userModel.mj_JSONData()! as NSData
+             UserDefaults.standard.set(data, forKey: "user")
+             
+             //                let modelAry:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: projectList)
+             let modelData:NSData = projectList.mj_JSONData()! as NSData
+             UserDefaults.standard.set(modelData, forKey: "projectList")
+             UserDefaults.standard.synchronize()
+             
+             if userModel.wyAccount.isFirstLogin.compare("y").rawValue == 0 { // 重置密码
+             //                    self.onLoginChangeReset()
+             } else { // 跳到首页
+             //                    self.delegate?.onGotoHome!(self)
+             } */
+        } else {
+            XHWLTipView.shared.showSuccess(successText: "报事提交失败，请重新填写！")
+            
+            //登录失败
+            switch(response["errorCode"] as! Int){
+            case 11:
+                "用户名不存在".ext_debugPrintAndHint()
+                break
+            default:
+                
+                let msg:String = response["message"] as! String
+                msg.ext_debugPrintAndHint()
+                break
+            }
+            
+        }
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
+    }
+
     func onSafeGuard(_ isAdd:Bool)
     {
         isAddPicture = isAdd

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XHWLCheckVC: UIViewController  , XHWLScanTestVCDelegate{
+class XHWLCheckVC: UIViewController  , XHWLScanTestVCDelegate, XHWLNetworkDelegate{
     
     var bgImg:UIImageView!
     var topMenu:XHWLTopView!
@@ -36,6 +36,8 @@ class XHWLCheckVC: UIViewController  , XHWLScanTestVCDelegate{
     
     func onRecordClick() {
         
+        let vc:XHWLRegistrationVC = XHWLRegistrationVC() // 访客记录
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     func onBack(){
@@ -63,6 +65,40 @@ class XHWLCheckVC: UIViewController  , XHWLScanTestVCDelegate{
             }
         }
         self.view.addSubview(warningView)
+        
+    }
+    
+    func loadData() {
+//        wyBusiness/visitor/regist
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let dict:NSDictionary = data.mj_JSONObject() as! NSDictionary
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: dict)
+        
+        let params = [
+            "token":userModel.wyAccount.token, // 	用户登录token
+            "name":"",//	访客姓名
+            "type":"", // 	访客类型
+            "certificateType":"", // 	证件类型
+            "cetificateNo":"", // 	证件号
+            "telephone":"", //  	访客电话号码
+            "timeUnit":"", //  	访问时间单位（天/时/分等）
+            "timeNo":"", //  	访问时间值
+            "carNo":"" //  	车牌号
+        ]
+        
+        XHWLNetwork.shared.postVisitRegisterClick(params as NSDictionary, self)
+    }
+    
+    
+    // MARK: - XHWLNetworkDelegate
+    
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
         
     }
     

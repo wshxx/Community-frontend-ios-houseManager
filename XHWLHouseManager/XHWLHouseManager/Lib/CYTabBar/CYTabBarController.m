@@ -7,6 +7,9 @@
 //
 
 #import "CYTabBarController.h"
+#if  __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_10_0
+#import "UITabBarItem+BadgeColor.h"
+#endif
 
 @interface CYTabBarController ()
 /** center button of place ( -1:none center button >=0:contain center button) */
@@ -24,7 +27,7 @@
     self.centerPlace = -1;
     
     //Observer Device Orientation
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OrientationDidChange) name:UIApplicationDidChangeStatusBarFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OrientationDidChange) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 }
 
 /**
@@ -41,7 +44,10 @@
             self.selectedIndex = (self.centerPlace != -1 && self.items[self.centerPlace].tag != -1)
             ? self.centerPlace
             : 0;
-        }else{
+        }else if (index >= self.viewControllers.count){
+            self.selectedIndex = self.viewControllers.count-1;
+        }
+        else{
             self.selectedIndex = index;
         }
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XHWLWarningVC: XHWLBaseVC {
+class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
 
     var warningView:XHWLWarningView!
     
@@ -24,36 +24,14 @@ class XHWLWarningVC: XHWLBaseVC {
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
-        let url:String = "wyBusiness/iot/machine/alarmHistory"
+//        let url:String = "wyBusiness/iot/machine/alarmHistory"
         let params:[String:Any] = ["ProjectCode":"", // 项目编号
             "DeviceID":"", // 设备id
             "Date":"", // 日期
             "token":userModel.wyAccount.token,
             ]
         
-        XHWLHttpTool.sharedInstance.postHttpTool(url:url , parameters:params, success: { (response) in
-            
-            //            self.progressHUD.hide()
-            if response["state"] as! Bool{
-                "登陆成功".ext_debugPrintAndHint()
-                
-            } else {
-                //登录失败
-                switch(response["errorCode"] as! Int){
-                case 11:
-                    "用户名不存在".ext_debugPrintAndHint()
-                    break
-                default:
-                    
-                    let msg:String = response["message"] as! String
-                    msg.ext_debugPrintAndHint()
-                    break
-                }
-                
-            }
-        }, failture: { (error) in
-            
-        })
+        XHWLNetwork.shared.postHistoryAlerClick(params as NSDictionary, self)
         
         let array:NSArray = [["name": "负载率过高告警当前值2.0%", "time":"2017.01.21 12:23:00", "content":"抵压配电房-4#变压器"],
                              ["name": "负载率过高告警当前值2.0%", "time":"2017.01.21 12:23:00", "content":"抵压配电房-4#变压器"]
@@ -73,6 +51,34 @@ class XHWLWarningVC: XHWLBaseVC {
         self.warningView.dataSource.addObjects(from: dataSource as! [Any])
         
         self.warningView.tableView.reloadData()
+    }
+    
+    // MARK: - XHWLNetworkDelegate
+    
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        //            self.progressHUD.hide()
+        if response["state"] as! Bool{
+            "登陆成功".ext_debugPrintAndHint()
+            
+        } else {
+            //登录失败
+            switch(response["errorCode"] as! Int){
+            case 11:
+                "用户名不存在".ext_debugPrintAndHint()
+                break
+            default:
+                
+                let msg:String = response["message"] as! String
+                msg.ext_debugPrintAndHint()
+                break
+            }
+            
+        }
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
     }
     
     func setupView() {

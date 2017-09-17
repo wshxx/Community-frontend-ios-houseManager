@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate {
+class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
 
     var bgScrollView:UIScrollView!
     var bgImg :UIImageView!
@@ -16,6 +16,8 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate {
     var headImg :UIImageView!
     var dataAry:NSMutableArray!
     var labelViewArray:NSMutableArray!
+    var isUserName:Bool? = false
+    var block:(Bool) -> () = {param in }
     
 //    var 
     override init(frame: CGRect) {
@@ -89,6 +91,7 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate {
     
     func menuLabel(_ labelView:XHWLMenuLabelView, _ text:String, _ block:@escaping((Bool)->())) {
         
+        self.block = block
         if labelView.tag-comTag == 0 {
             self.onModityUserName(text, block)
         }
@@ -101,6 +104,7 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate {
     // 修改姓名
     func onModityUserName(_ string:String, _ block:@escaping(Bool) -> ()) {
         
+        self.isUserName = true
         if string.isEmpty {
             "您输入的姓名不能为空".ext_debugPrintAndHint()
             return
@@ -112,35 +116,22 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate {
         
         let params = ["name":string, "token":userModel.wyAccount.token]
         
-        let url:String = "wyBusiness/wyUser"
+//        let url:String = "wyBusiness/wyUser"
+         XHWLNetwork.shared.postModifyUserClick(params as NSDictionary, self)
     
-        XHWLHttpTool.sharedInstance.postHttpTool(url:url , parameters:params, success: { (response) in
-            
-            if response["state"] as! Bool{
-                "修改姓名成功".ext_debugPrintAndHint()
-                 block(true)
-            } else {
-                //登录失败
-                switch(response["errorCode"] as! Int){
-                case 11:
-                    "用户名不存在".ext_debugPrintAndHint()
-                    break
-                default:
-                    
-                    let msg:String = response["message"] as! String
-                    msg.ext_debugPrintAndHint()
-                    break
-                }
-                
-            }
-        }, failture: { (error) in
-            
-        })
+        
+//        XHWLHttpTool.sharedInstance.postHttpTool(url:url , parameters:params, success: { (response) in
+//            
+//           
+//        }, failture: { (error) in
+//            
+//        })
     }
     
     // 修改手机号
     func onModityPhone(_ string:String, _ block:@escaping (Bool) -> ()) {
         
+        self.isUserName = false
         if Validation.phoneNum(string).isRight == false {
             "您输入的手机号不合法".ext_debugPrintAndHint()
             return
@@ -150,31 +141,77 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate {
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
         let params = ["telephone":string, "token":userModel.wyAccount.token]
-        let url:String = "wyBusiness/wyUser"
+      
         
-        XHWLHttpTool.sharedInstance.postHttpTool(url:url , parameters:params, success: { (response) in
+        XHWLNetwork.shared.postModifyUserClick(params as NSDictionary, self)
+        
+//        let url:String = "wyBusiness/wyUser"
+        
+//        XHWLHttpTool.sharedInstance.postHttpTool(url:url , parameters:params, success: { (response) in
+//            
+//            
+//        }, failture: { (error) in
+//            
+//        })
+    }
+    
+    // MARK: - XHWLNetworkDelegate
+    
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        if self.isUserName! {
             
-            if response["state"] as! Bool{
-                "修改手机号成功".ext_debugPrintAndHint()
-                block(true)
+            onModifyUserName(response)
+        } else {
+            
+            onModifyPhone(response)
+        }
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
+    }
+    
+    func onModifyPhone(_ response:[String : AnyObject]) {
+        if response["state"] as! Bool{
+            "修改手机号成功".ext_debugPrintAndHint()
+            
+            block(true)
+            
+        } else {
+            //登录失败
+            switch(response["errorCode"] as! Int){
+            case 11:
+                "用户名不存在".ext_debugPrintAndHint()
+                break
+            default:
                 
-            } else {
-                //登录失败
-                switch(response["errorCode"] as! Int){
-                case 11:
-                    "用户名不存在".ext_debugPrintAndHint()
-                    break
-                default:
-                    
-                    let msg:String = response["message"] as! String
-                    msg.ext_debugPrintAndHint()
-                    break
-                }
-                
+                let msg:String = response["message"] as! String
+                msg.ext_debugPrintAndHint()
+                break
             }
-        }, failture: { (error) in
             
-        })
+        }
+    }
+    
+    func onModifyUserName(_ response:[String : AnyObject]) {
+        if response["state"] as! Bool{
+            "修改姓名成功".ext_debugPrintAndHint()
+            block(true)
+        } else {
+            //登录失败
+            switch(response["errorCode"] as! Int){
+            case 11:
+                "用户名不存在".ext_debugPrintAndHint()
+                break
+            default:
+                
+                let msg:String = response["message"] as! String
+                msg.ext_debugPrintAndHint()
+                break
+            }
+            
+        }
     }
     
     override func layoutSubviews() {

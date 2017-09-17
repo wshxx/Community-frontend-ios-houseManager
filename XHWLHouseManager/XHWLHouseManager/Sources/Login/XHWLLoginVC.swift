@@ -63,23 +63,11 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
 // MARK: - XHWLTransitionViewDelegate
     // 跳转到首页
     func onGotoHome(_ trianView:XHWLTransitionView) {
-        
-//        let vc = XHWLNavigationController(rootViewController:XHWLWorkVC())
-//        self.present(vc, animated: true, completion: nil)
-//        return
-        
-            
-        
-        
-//        weak var weak_self:XHWLLoginVC?  = self
         //睡眠1.9s，
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.9)){
            
             self.onTabbar()
-      //      let v2 = XHWLNavigationController(rootViewController:XHWLWorkVC())
 //            "登陆成功".ext_debugPrintAndHint()
-      //      self.present(v2, animated: true, completion: nil)
-//            weak_self?.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -90,14 +78,11 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
         /**
          *  配置外观
          */
-        CYTabBarConfig.shared().selectedTextColor = UIColor.orange
-        //    [CYTabBarConfig shared].textColor = [UIColor blueColor];
+        CYTabBarConfig.shared().selectedTextColor = UIColor.white
+        CYTabBarConfig.shared().textColor = UIColor.white
         CYTabBarConfig.shared().backgroundColor = UIColor.clear
         CYTabBarConfig.shared().haveBorder = false
-        CYTabBarConfig.shared().selectIndex = 1
-        
-//        self.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-//        self.navigationBar.shadowImage = UIImage()
+        CYTabBarConfig.shared().selectIndex = 0
         
         
         /**
@@ -108,18 +93,9 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
         tabbar.addChildController(v1, title: "首页", imageName: "tabbar_home", selectedImageName: "tabbar_home_sel")
         tabbar.addChildController(v2, title: "工作", imageName: "tabbar_work", selectedImageName: "tabbar_work_sel")
         
-        //        [tabbar addCenterController:nil bulge:YES title:@"发布" imageName:@"post_normal" selectedImageName:@"post_normal"];
-        
-        //        tabBarController.viewControllers = [v1, v2]
-        //
-        //        UITabBar.appearance().barTintColor = UIColor.white
-        //        //        图片和文字同时修改
-        //        tabBarController.tabBar.tintColor = UIColor.orange
-        //        //        UITabBar.appearance().tintColor = UIColor.orange
-        //        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.red], for: UIControlState.normal)
-        //        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.purple], for:.selected)
-        
-        self.present(tabbar, animated: true, completion: nil)
+        // [tabbar addCenterController:nil bulge:YES title:@"发布" imageName:@"post_normal" selectedImageName:@"post_normal"];
+        let window:UIWindow = UIApplication.shared.keyWindow!
+        window.rootViewController = tabbar
     }
     
     func onHiddenKeyboard() {
