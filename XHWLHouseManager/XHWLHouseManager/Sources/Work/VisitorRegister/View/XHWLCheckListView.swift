@@ -15,7 +15,7 @@ enum XHWLCheckListViewEnum : Int{
     case radio
 }
 
-class XHWLCheckListView: UIView {
+class XHWLCheckListView: UIView, XHWLNetworkDelegate {
 
     var bgImage:UIImageView!
     var bgScrollView:UIScrollView!
@@ -27,12 +27,21 @@ class XHWLCheckListView: UIView {
     var isShowSUbView:Bool = true
     var btnBlock:(NSInteger)->(Void) = { param in }
     
+    var name:String!
+    var type:String!
+    var certificateType:String!
+    var certificateNo:String!
+    var telephone:String!
+    var timeUnit:String!
+    var timeNo:String!
+    var carNo:String!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         dataAry = NSMutableArray()
         let array :NSArray = [["name":"姓名：", "content":"", "isHiddenEdit": false, "type": 0],
-                              ["name":"类型：", "content":"", "isHiddenEdit": true, "type": 0],
+                              ["name":"类型：", "content":"", "isHiddenEdit": true, "type": 4],
                               ["name":"证件：", "content":"身份证", "isHiddenEdit":false, "type": 1],
                               ["name":"手机：", "content":"", "isHiddenEdit": true, "type": 0],
                               ["name":"时效：", "content":"请选择", "isHiddenEdit": false, "type": 2],
@@ -54,7 +63,7 @@ class XHWLCheckListView: UIView {
     func setupView() {
         
         bgImage = UIImageView()
-        bgImage.image = UIImage(named:"menu_bg")
+        bgImage.image = UIImage(named:"subview_bg")
         self.addSubview(bgImage)
         
         bgScrollView = UIScrollView()
@@ -72,6 +81,15 @@ class XHWLCheckListView: UIView {
             if menuModel.type == 0 {
                 let cardView:XHWLCheckTF = XHWLCheckTF()
                 cardView.showText(leftText: menuModel.name, rightText:"")
+                cardView.textEndBlock = {param in
+                    if menuModel.type == 0 {
+                        self.name = param
+                    } else if menuModel.type == 3 {
+                        self.telephone = param
+                    } else if menuModel.type == 5 {
+                        self.carNo = param
+                    }
+                }
                 bgScrollView.addSubview(cardView)
                 labelViewArray.add(cardView)
             }
@@ -79,19 +97,24 @@ class XHWLCheckListView: UIView {
                 let vertical:XHWLCheckListTF = XHWLCheckListTF(frame:CGRect.zero, checkListEnum:XHWLCheckListTFEnum.left)
                 vertical.showText(leftText: menuModel.name, rightText: "", btnTitle: menuModel.content)
                 vertical.btnBlock = {  [weak vertical]  in
-                    let array:NSArray = ["sdhf", "sdfjdo"]
+                    self.endEditing(true)
+                    let array:NSArray = ["身份证", "护照"]
                     let pickerView:XHWLPickerView = XHWLPickerView(frame:CGRect.zero, array:array)
                     
                     let window: UIWindow = (UIApplication.shared.keyWindow)!
                     pickerView.dismissBlock = { [weak pickerView] (index)->() in
                         print("\(index)")
                         if index != -1 {
+                            self.certificateType = array[index] as! String
                             vertical?.showBtnTitle(array[index] as! String)
                         }
                         pickerView?.removeFromSuperview()
                     }
                     pickerView.frame = UIScreen.main.bounds
                     window.addSubview(pickerView)
+                }
+                vertical.textEndBlock = {param in
+                    self.certificateNo = param
                 }
                 bgScrollView.addSubview(vertical)
                 labelViewArray.add(vertical)
@@ -100,19 +123,24 @@ class XHWLCheckListView: UIView {
                 let timeView:XHWLCheckListTF = XHWLCheckListTF(frame:CGRect.zero, checkListEnum:XHWLCheckListTFEnum.right)
                 timeView.showText(leftText: menuModel.name, rightText: "", btnTitle: menuModel.content)
                 timeView.btnBlock = { [weak timeView] in
-                    let array:NSArray = ["sdhf", "sdfjdo"]
+                    self.endEditing(true)
+                    let array:NSArray = ["分钟", "小时", "天", "月"]
                     let pickerView:XHWLPickerView = XHWLPickerView(frame:CGRect.zero, array:array)
                     
                     let window: UIWindow = (UIApplication.shared.keyWindow)!
                     pickerView.dismissBlock = { [weak pickerView] (index)->() in
                         print("\(index)")
                         if index != -1 {
+                            self.timeUnit = array[index] as! String
                             timeView?.showBtnTitle(array[index] as! String)
                         }
                         pickerView?.removeFromSuperview()
                     }
                     pickerView.frame = UIScreen.main.bounds
                     window.addSubview(pickerView)
+                }
+                timeView.textEndBlock = {param in
+                    self.timeNo = param
                 }
                 bgScrollView.addSubview(timeView)
                 labelViewArray.add(timeView)
@@ -121,6 +149,7 @@ class XHWLCheckListView: UIView {
                 let radioView:XHWLRadioView = XHWLRadioView()
                 radioView.showText(leftText: menuModel.name, rightText: "是", btnTitle: "否")
                 radioView.btnBlock = { index in
+                    self.endEditing(true)
                     if index == 0 {
                         self.subView.isHidden = false
                     } else {
@@ -131,6 +160,30 @@ class XHWLCheckListView: UIView {
                 bgScrollView.addSubview(radioView)
                 labelViewArray.add(radioView)
             }
+            else if menuModel.type == 4 {
+                let cardView:XHWLSelTypeView = XHWLSelTypeView()
+                cardView.showText(leftText: menuModel.name, btnTitle:"请选择")
+                cardView.btnBlock = { [weak cardView] in
+                    self.endEditing(true)
+                    let array:NSArray = ["亲属", "友人", "家教", "家政", "快递", "外卖", "维修人员", "其他"]
+                    let pickerView:XHWLPickerView = XHWLPickerView(frame:CGRect.zero, array:array)
+                    
+                    let window: UIWindow = (UIApplication.shared.keyWindow)!
+                    pickerView.dismissBlock = { [weak pickerView] (index)->() in
+                        print("\(index)")
+                        if index != -1 {
+                            self.type = array[index] as! String
+                            cardView?.showBtnTitle(array[index] as! String)
+                        }
+                        pickerView?.removeFromSuperview()
+                    }
+                    pickerView.frame = UIScreen.main.bounds
+                    window.addSubview(pickerView)
+                }
+                bgScrollView.addSubview(cardView)
+                labelViewArray.add(cardView)
+            }
+            
         }
         
         subView = XHWLMoreListView()
@@ -146,14 +199,42 @@ class XHWLCheckListView: UIView {
     }
     
     func submitClick() {
+        
+        self.endEditing(true)
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let dict:NSDictionary = data.mj_JSONObject() as! NSDictionary
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: dict)
+        
+        let params = [
+            "token":userModel.wyAccount.token, // 	用户登录token
+            "name":name,//	访客姓名
+            "type":type, // 	访客类型
+            "certificateType":certificateType, // 	证件类型
+            "cetificateNo":certificateNo, // 	证件号
+            "telephone":telephone, //  	访客电话号码
+            "timeUnit":timeUnit, //  	访问时间单位（天/时/分等）
+            "timeNo":timeNo, //  	访问时间值
+            "carNo":carNo //  	车牌号
+        ]
+        
+        XHWLNetwork.shared.postVisitRegisterClick(params as NSDictionary, self)
+    }
+    
+    func requestSuccess(_ requestKey: NSInteger, _ response: [String : AnyObject]) {
+        
+        
         self.btnBlock(1)
+    }
+    
+    func requestFail(_ requestKey: NSInteger, _ error: NSError) {
+        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews() 
         
         bgImage.frame = self.bounds
-        bgScrollView.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:self.bounds.size.height)
+        bgScrollView.frame = CGRect(x:0, y:58, width:self.bounds.size.width, height:self.bounds.size.height-72)
    
         
         for i in 0...labelViewArray.count-1 {

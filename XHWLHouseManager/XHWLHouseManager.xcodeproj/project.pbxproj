@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		190598BC1F6F6E71004A4A91 /* XHWLSelTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598BB1F6F6E71004A4A91 /* XHWLSelTypeView.swift */; };
+		190598BE1F6F9DB1004A4A91 /* XHWLDeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598BD1F6F9DB1004A4A91 /* XHWLDeviceModel.swift */; };
 		190B940D1F63BB59007D707B /* XHWLWarningModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190B940C1F63BB59007D707B /* XHWLWarningModel.swift */; };
 		190B94171F63ECE2007D707B /* XHWLScanResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190B94161F63ECE2007D707B /* XHWLScanResultView.swift */; };
 		190B94191F63F2FC007D707B /* XHWLLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190B94181F63F2FC007D707B /* XHWLLabelView.swift */; };
@@ -261,6 +263,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		190598BB1F6F6E71004A4A91 /* XHWLSelTypeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSelTypeView.swift; sourceTree = "<group>"; };
+		190598BD1F6F9DB1004A4A91 /* XHWLDeviceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDeviceModel.swift; sourceTree = "<group>"; };
 		190B940C1F63BB59007D707B /* XHWLWarningModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLWarningModel.swift; sourceTree = "<group>"; };
 		190B94161F63ECE2007D707B /* XHWLScanResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLScanResultView.swift; sourceTree = "<group>"; };
 		190B94181F63F2FC007D707B /* XHWLLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLabelView.swift; sourceTree = "<group>"; };
@@ -812,6 +816,7 @@
 				19163D1C1F67E63F00C09785 /* XHWLCheckListTF.swift */,
 				19163D1A1F67E63B00C09785 /* XHWLRadioView.swift */,
 				19163D181F67E53B00C09785 /* XHWLCheckListView.swift */,
+				190598BB1F6F6E71004A4A91 /* XHWLSelTypeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -990,6 +995,7 @@
 				197D64B51F62807D00977074 /* XHWLMenuModel.swift */,
 				190B940C1F63BB59007D707B /* XHWLWarningModel.swift */,
 				19ADF39D1F64DD8400A9E0FB /* XHWLRegisterationModel.swift */,
+				190598BD1F6F9DB1004A4A91 /* XHWLDeviceModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2088,6 +2094,7 @@
 				843A32AA1F6D63F2002C9098 /* CYBadgeView.m in Sources */,
 				843A32811F6D5E08002C9098 /* XHWLEnergyManagementVC.swift in Sources */,
 				843A32601F6D4F4D002C9098 /* PieSlice.swift in Sources */,
+				190598BE1F6F9DB1004A4A91 /* XHWLDeviceModel.swift in Sources */,
 				19A14D961F5EA6B200D96A2E /* HLBarIndicatorView.swift in Sources */,
 				843A326A1F6D4F4D002C9098 /* PieLineTextLayerAnimator.swift in Sources */,
 				19BB53541F56BFA3006C38EA /* MJPropertyType.m in Sources */,
@@ -2111,6 +2118,7 @@
 				840835911F6E01DF00DC644A /* XHWLNetwork.swift in Sources */,
 				1961CDA31F596328006856D0 /* PtzPresetPositionDialView.m in Sources */,
 				1961CDAB1F596328006856D0 /* ToolBarScrollView.m in Sources */,
+				190598BC1F6F6E71004A4A91 /* XHWLSelTypeView.swift in Sources */,
 				19BB53391F56BF99006C38EA /* XMLReader.m in Sources */,
 				19BB53551F56BFA3006C38EA /* NSObject+MJClass.m in Sources */,
 				843A32621F6D4F4D002C9098 /* PieSliceLayer.swift in Sources */,

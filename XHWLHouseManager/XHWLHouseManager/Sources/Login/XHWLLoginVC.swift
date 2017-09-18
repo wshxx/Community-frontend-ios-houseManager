@@ -78,7 +78,7 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
         /**
          *  配置外观
          */
-        CYTabBarConfig.shared().selectedTextColor = UIColor.white
+        CYTabBarConfig.shared().selectedTextColor = color_51ebfd
         CYTabBarConfig.shared().textColor = UIColor.white
         CYTabBarConfig.shared().backgroundColor = UIColor.clear
         CYTabBarConfig.shared().haveBorder = false

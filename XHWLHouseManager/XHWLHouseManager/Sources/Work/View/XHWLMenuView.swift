@@ -18,6 +18,7 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
     var labelViewArray:NSMutableArray!
     var isUserName:Bool? = false
     var block:(Bool) -> () = {param in }
+    var logoutBtn:UIButton!
     
 //    var 
     override init(frame: CGRect) {
@@ -73,20 +74,26 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
             labelView.isHiddenEdit = menuModel.isHiddenEdit
             labelView.delegate = self
             labelView.tag = comTag+i
-//            labelView.onOKClickBlock = { string, block in
-//                if i == 0 {
-//                    self.onModityUserName(string, { isTrue in
-//                        block(isTrue)
-//                    })
-//                } else if i == 2 {
-//                    self.onModityPhone(string, { isTrue in
-//                        block(isTrue)
-//                    })
-//                }
-//            }
             bgScrollView.addSubview(labelView)
             labelViewArray.add(labelView)
         }
+        
+        logoutBtn = UIButton()
+        logoutBtn.setTitle("退出", for: UIControlState.normal)
+        logoutBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
+        logoutBtn.titleLabel?.font = font_12
+        logoutBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
+        logoutBtn.addTarget(self, action: #selector(logoutClick), for: UIControlEvents.touchUpInside)
+        bgScrollView.addSubview(logoutBtn)
+    }
+    
+    // 退出
+    func logoutClick() {
+        self.isUserName = true
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        XHWLNetwork.shared.getLogoutClick([userModel.wyAccount.token] as NSArray, self)
     }
     
     func menuLabel(_ labelView:XHWLMenuLabelView, _ text:String, _ block:@escaping((Bool)->())) {
@@ -115,17 +122,8 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
         
         
         let params = ["name":string, "token":userModel.wyAccount.token]
-        
-//        let url:String = "wyBusiness/wyUser"
+
          XHWLNetwork.shared.postModifyUserClick(params as NSDictionary, self)
-    
-        
-//        XHWLHttpTool.sharedInstance.postHttpTool(url:url , parameters:params, success: { (response) in
-//            
-//           
-//        }, failture: { (error) in
-//            
-//        })
     }
     
     // 修改手机号
@@ -144,27 +142,29 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
       
         
         XHWLNetwork.shared.postModifyUserClick(params as NSDictionary, self)
-        
-//        let url:String = "wyBusiness/wyUser"
-        
-//        XHWLHttpTool.sharedInstance.postHttpTool(url:url , parameters:params, success: { (response) in
-//            
-//            
-//        }, failture: { (error) in
-//            
-//        })
     }
     
     // MARK: - XHWLNetworkDelegate
     
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
         
-        if self.isUserName! {
+        if requestKey == XHWLRequestKeyID.XHWL_LOGOUT.rawValue {
+
+            UserDefaults.standard.set("", forKey: "user")
+            UserDefaults.standard.set("", forKey: "projectList")
+            UserDefaults.standard.synchronize()
             
-            onModifyUserName(response)
+            
+            let window:UIWindow = UIApplication.shared.keyWindow!
+            window.rootViewController = XHWLLoginVC()
         } else {
-            
-            onModifyPhone(response)
+            if self.isUserName! {
+                
+                onModifyUserName(response)
+            } else {
+                
+                onModifyPhone(response)
+            }
         }
     }
     
@@ -223,6 +223,12 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
             labelView.bounds = CGRect(x:0, y:0, width:258, height:30)
             labelView.center = CGPoint(x:self.frame.size.width/2.0, y:CGFloat(145 + i*52))
         }
+        var topHeight = 0
+        if labelViewArray.count>0 {
+            let labelView :XHWLMenuLabelView = labelViewArray.lastObject as! XHWLMenuLabelView
+            topHeight = Int(labelView.frame.maxY)
+        }
+        logoutBtn.frame = CGRect(x:Int((self.bounds.size.width-150)/2.0), y:topHeight+20, width:150, height:30)
     }
     
     required init?(coder aDecoder: NSCoder) {

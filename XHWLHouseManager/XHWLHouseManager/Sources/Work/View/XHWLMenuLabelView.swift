@@ -69,7 +69,7 @@ class XHWLMenuLabelView: UIView {
         okBtn.setTitleColor(UIColor().colorWithHexString(colorStr: "3cf8ff"), for: UIControlState.normal)
         okBtn.isHidden = true
         okBtn.titleLabel?.font = font_12
-        okBtn.addTarget(self, action: #selector(XHWLMenuLabelView.onOkClick), for: UIControlEvents.touchUpInside)
+        okBtn.addTarget(self, action: #selector(onOkClick), for: UIControlEvents.touchUpInside)
         self.addSubview(okBtn)
         
         rightBtn = UIButton()

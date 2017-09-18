@@ -11,7 +11,7 @@ import UIKit
 class XHWLMoreListView: UIView {
 
     var labelView:XHWLCheckTF!
-    var phoneView:XHWLCheckTF!
+    var phoneView:XHWLSelTypeView!
     var cardView:XHWLCheckTF!
     
     override init(frame: CGRect) {
@@ -26,10 +26,25 @@ class XHWLMoreListView: UIView {
         labelView.showText(leftText: "业主：", rightText:"")
         self.addSubview(labelView)
         
-        phoneView = XHWLCheckTF()
-        phoneView.showText(leftText: "房间：", rightText:"")
+        phoneView = XHWLSelTypeView()
+        phoneView.showText(leftText: "房间：", btnTitle:"请选择")
+        phoneView.btnBlock = { [weak phoneView] in
+            let array:NSArray = ["亲属", "友人", "家教", "家政", "快递", "外卖", "维修人员", "其他"]
+            let pickerView:XHWLPickerView = XHWLPickerView(frame:CGRect.zero, array:array)
+            
+            let window: UIWindow = (UIApplication.shared.keyWindow)!
+            pickerView.dismissBlock = { [weak pickerView] (index)->() in
+                print("\(index)")
+                if index != -1 {
+                    phoneView?.showBtnTitle(array[index] as! String)
+                }
+                pickerView?.removeFromSuperview()
+            }
+            pickerView.frame = UIScreen.main.bounds
+            window.addSubview(pickerView)
+        }
         self.addSubview(phoneView)
-        
+
         cardView = XHWLCheckTF()
         cardView.showText(leftText: "事由：", rightText:"")
         self.addSubview(cardView)

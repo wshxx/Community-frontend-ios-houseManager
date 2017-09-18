@@ -90,10 +90,10 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
     func onLoginClick(_ topStr:String, _ bottomStr:String) {
         
         
-        // 跳到首页
-        self.delegate?.onGotoHome!(self)
-        return
-//        self.onLoginChangeReset()// 可删除
+//        // 跳到首页
+//        self.delegate?.onGotoHome!(self)
+//        return
+////        self.onLoginChangeReset()// 可删除
 //        return
         
         let params:NSArray = [topStr, bottomStr]

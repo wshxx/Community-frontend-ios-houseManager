@@ -144,22 +144,31 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
     func postModifyUserClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
         
         self.delegate = delegate;
-        superWithLoadData(parameters, .XHWL_MODIFYUSER, .get)
+        superWithLoadData(parameters, .XHWL_MODIFYUSER, .post)
     }
     
     // 历史告警
     func postHistoryAlerClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
         
         self.delegate = delegate;
-        superWithLoadData(parameters, .XHWL_HISTORYALER, .get)
+        superWithLoadData(parameters, .XHWL_HISTORYALER, .post)
     }
     
     // 访客登记
     func postVisitRegisterClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
         
         self.delegate = delegate;
-        superWithLoadData(parameters, .XHWL_VISITREGISTER, .get)
+        superWithLoadData(parameters, .XHWL_VISITREGISTER, .post)
     }
+    
+    // 退出登录
+    func getLogoutClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_LOGOUT, .get)
+    }
+    
+    
     
     // 某项目所有设备某日能耗
     func postEnergyLoseClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
@@ -194,21 +203,15 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
     
     // 获取项目当前设定周期内最新告警
     func postNewAlerClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
-        
-        //        ProjectCode 	string 	是 	项目编号
-        //        DeviceID 	string 	是 	设备ID
-        //        token 	string 	是 	用户登录token
+
         self.delegate = delegate;
         superWithLoadData(parameters, .XHWL_NEWALER, .post)
     }
     
     
-    // 获取项目当前设定周期内最新告警
+    //   所有设备信息
     func postDeviceInfoClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
         
-        //        ProjectCode 	string 	是 	项目编号
-        //        DeviceID 	string 	是 	设备ID
-        //        token 	string 	是 	用户登录token
         self.delegate = delegate;
         superWithLoadData(parameters, .XHWL_DEVICEINFO, .post)
     }

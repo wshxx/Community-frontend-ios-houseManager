@@ -13,7 +13,7 @@ import Alamofire
 //let XHWLHttpURL :String = "http://112.74.19.135:1111/ssh/v1"
 //let XHWLHttpURL :String = "http://192.168.2.101:9002"
 //let XHWLHttpURL :String = "http://192.168.1.154:8080"
-let XHWLHttpURL :String = "http://112.74.19.135:1111/ssh/v1"
+let XHWLHttpURL :String = "http://120.77.83.190:8080/ssh/v1"
 
 @objc protocol XHWLHttpToolDelegate:NSObjectProtocol {
     

@@ -11,7 +11,6 @@ import UIKit
 class XHWLRegistrationDetailView: UIView {
 
     var bgImage:UIImageView!
-    var titleL:UILabel!
     var showIV:UIImageView!
     var labelViewArray:NSMutableArray!
     var btnBlock:(NSInteger)->(Void) = { param in }
@@ -40,15 +39,8 @@ class XHWLRegistrationDetailView: UIView {
     func setupView() {
         
         bgImage = UIImageView()
-        bgImage.image = UIImage(named:"menu_bg")
+        bgImage.image = UIImage(named:"subview_bg")
         self.addSubview(bgImage)
-        
-        titleL = UILabel()
-        titleL.textAlignment = NSTextAlignment.center
-        titleL.textColor = UIColor().colorWithHexString(colorStr: "09fbfe")
-        titleL.font = font_13
-        titleL.text = "登记详情"
-        self.addSubview(titleL)
         
         showIV = UIImageView()
         self.addSubview(showIV)
@@ -56,11 +48,11 @@ class XHWLRegistrationDetailView: UIView {
     
     func successView() {
         
-        showIV.image = UIImage(named: "home_bg")
+        showIV.image = UIImage(named: "argee")
     }
     func failView() {
         
-        showIV.image = UIImage(named: "home_bg")
+        showIV.image = UIImage(named: "disagree")
     }
     
     func createArray(array:NSArray) {
@@ -85,16 +77,14 @@ class XHWLRegistrationDetailView: UIView {
         super.layoutSubviews()
         
         bgImage.frame = self.bounds
-        //        tipLabel.frame = CGRect(x:10, y:self.bounds.size.height-80, width:self.bounds.size.width-20, height:40)
-        titleL.frame = CGRect(x:10, y:23, width:self.bounds.size.width-20, height:44)
         
         for i in 0...labelViewArray.count-1 {
             
             let label:XHWLLabelView = labelViewArray[i] as! XHWLLabelView
-            label.frame = CGRect(x:75, y:30*i+55, width:Int(self.bounds.size.width-85), height:30)
+            label.frame = CGRect(x:75, y:30*i+60, width:Int(self.bounds.size.width-85), height:30)
         }
         
-        showIV.frame = CGRect(x:self.bounds.size.width-130, y:self.frame.size.height-90, width:100, height:55)
+        showIV.frame = CGRect(x:self.bounds.size.width-130, y:self.frame.size.height-90, width:94, height:51)
         
     }
 

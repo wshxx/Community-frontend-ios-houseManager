@@ -23,12 +23,13 @@ enum XHWLRequestKeyID : NSInteger {
     case XHWL_MODIFYUSER    // 修改姓名 手机号
     case XHWL_HISTORYALER   // 历史告警
     case XHWL_VISITREGISTER // 访客登记
+    case XHWL_LOGOUT // 退出登录
     
     case XHWL_ENERGYLOSE    // 某日能耗
     case XHWL_REALDATA      // 返回某项目某设备当前实时数据
     case XHWL_NAVPARAME     //返回项目所有房间与环境监测设备对应关系
     case XHWL_NEWALER       //获取项目当前设定周期内最新告警
-    case XHWL_DEVICEINFO
+    case XHWL_DEVICEINFO // 所有设备信息
 }
 
 
@@ -63,6 +64,7 @@ class XHWLRequestKeyDefine: NSObject {
             XHWLRequestKeyID.XHWL_MODIFYUSER:"wyBusiness/wyUser",           // 修改姓名 手机号
             XHWLRequestKeyID.XHWL_HISTORYALER :"wyBusiness/iot/machine/alarmHistory", // 历史告警
             XHWLRequestKeyID.XHWL_VISITREGISTER :"wyBusiness/visitor/regist", // 访客登记
+            XHWLRequestKeyID.XHWL_LOGOUT: "wyBase/logout",                   // 退出登录
             
             XHWLRequestKeyID.XHWL_ENERGYLOSE:"wyBusiness/iot/machine/energy", // 某日能耗
             XHWLRequestKeyID.XHWL_REALDATA: "wyBusiness/iot/machine/realdata", // 返回某项目某设备当前实时数据

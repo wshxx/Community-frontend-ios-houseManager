@@ -19,8 +19,8 @@ class XHWLNavigationController: RTContainerNavigationController {
         self.automaticallyAdjustsScrollViewInsets = false
         self.navigationBar.barTintColor = UIColor.white
         
-        
-        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.init(red: 38/255.0, green: 38/255.0, blue: 38/255.0, alpha: 1.0), NSFontAttributeName : UIFont.systemFont(ofSize: 16.0)]
+//        UIColor.init(red: 38/255.0, green: 38/255.0, blue: 38/255.0, alpha: 1.0)
+        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName : UIFont.systemFont(ofSize: 16.0)]
         self.navigationBar.tintColor = UIColor.white
         self.navigationItem.title = ""
         

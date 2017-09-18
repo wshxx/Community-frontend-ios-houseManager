@@ -13,13 +13,15 @@ enum XHWLCheckListTFEnum : Int{
     case right
 }
 
-class XHWLCheckListTF: UIView {
+class XHWLCheckListTF: UIView, UITextFieldDelegate {
 
     var titleL:UILabel!
     var contentTF:UITextField!
     var listBtn:UIButton!
     var checkEnum:XHWLCheckListTFEnum!
+    var img: UIImageView!
     var btnBlock:()->(Void) = { param in }
+    var textEndBlock:(String)->() = {param in }
     
     init(frame: CGRect , checkListEnum:XHWLCheckListTFEnum) {
         super.init(frame: frame)
@@ -36,6 +38,7 @@ class XHWLCheckListTF: UIView {
         self.addSubview(titleL)
         
         contentTF = UITextField()
+        contentTF.delegate = self
         contentTF.background = UIImage(named:"check_textfield_bg")
         contentTF.font = font_12
         contentTF.textColor = UIColor.white
@@ -47,21 +50,28 @@ class XHWLCheckListTF: UIView {
         
         listBtn = UIButton()
         listBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
-        let image:UIImage = UIImage(named:"home_switch")!
-        listBtn.setImage(image, for: UIControlState.normal)
+//        let image:UIImage = UIImage(named:"home_switch")!
+//        listBtn.setImage(image, for: UIControlStateaqxswxd.normal)
         listBtn.titleLabel?.font = font_12
         listBtn.titleLabel?.textColor = color_09fbfe
         listBtn.addTarget(self, action: #selector(onListTouchClick), for: UIControlEvents.touchUpInside)
         self.addSubview(listBtn)
+        
+        img = UIImageView()
+        img.image = UIImage(named:"home_switch")!
+        listBtn.addSubview(img)
     }
     
     func onListTouchClick() {
         self.btnBlock()
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.textEndBlock(textField.text!)
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         
         let size:CGSize = titleL.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:titleL.font], context: nil).size
         
@@ -79,9 +89,11 @@ class XHWLCheckListTF: UIView {
         }
         
         let image:UIImage = UIImage(named:"home_switch")!
-        let titleW:CGFloat = (listBtn.titleLabel?.bounds.size.width)!
-        listBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -titleW-image.size.width-14)
-        listBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -image.size.width-titleW, bottom: 0, right: 0)
+//        let titleW:CGFloat = (listBtn.titleLabel?.bounds.size.width)!
+//        listBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -titleW-image.size.width-14)
+//        listBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -image.size.width-titleW, bottom: 0, right: 0)
+        
+        img.frame = CGRect(x:(listBtn.frame.size.width-image.size.width-10), y:(listBtn.frame.size.height-image.size.height)/2.0, width:image.size.width, height:image.size.height)
     }
     
     func showText(leftText:String, rightText:String, btnTitle:String) {

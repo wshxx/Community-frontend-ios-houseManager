@@ -102,6 +102,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         } else if userModel.wyAccount.wyRole.name.compare("安管人员").rawValue == 0 {
             array.addObjects(from: ["访客登记"])
         } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
+            loadDeviceInfo()
             array.addObjects(from: ["设备报警", "供配电", "给排水", "设备统计", "能耗统计"])
         }
        
@@ -255,22 +256,41 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
     }
     
     
+    //    返回项目下所有设备信息
+    func loadDeviceInfo() {
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        let param = ["ProjectCode": "201", // 项目编号
+            "token":userModel.wyAccount.token]
+        
+        XHWLNetwork.shared.postDeviceInfoClick(param as NSDictionary, self)
+    }
+    
     // MARK: - XHWLNetworkDelegate
     
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
         
-        let errorCode:NSInteger = response["errorCode"] as! NSInteger
-        if errorCode == 200 {
-            "扫描成功".ext_debugPrintAndHint()
-            let result:NSDictionary = response["result"] as! NSDictionary
+        if requestKey == XHWLRequestKeyID.XHWL_DEVICEINFO.rawValue {
+            let list:NSArray = response["result"] as! NSArray
             
-            let scanModel:XHWLScanModel = XHWLScanModel.mj_object(withKeyValues: result)
-            
-            print("\(scanModel.name), \(scanModel.code)")
-            
-            let vc:XHWLScanResultVC = XHWLScanResultVC()
-            vc.scanModel = scanModel
-            self.navigationController?.pushViewController(vc, animated: true)
+            let modelData:NSData = list.mj_JSONData()! as NSData
+            UserDefaults.standard.set(modelData, forKey: "deviceList") // XHWLDeviceModel
+            UserDefaults.standard.synchronize()
+        } else {
+            let errorCode:NSInteger = response["errorCode"] as! NSInteger
+            if errorCode == 200 {
+                "扫描成功".ext_debugPrintAndHint()
+                let result:NSDictionary = response["result"] as! NSDictionary
+                
+                let scanModel:XHWLScanModel = XHWLScanModel.mj_object(withKeyValues: result)
+                
+                print("\(scanModel.name), \(scanModel.code)")
+                
+                let vc:XHWLScanResultVC = XHWLScanResultVC()
+                vc.scanModel = scanModel
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
     

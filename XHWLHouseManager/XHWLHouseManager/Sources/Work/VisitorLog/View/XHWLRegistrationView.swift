@@ -34,7 +34,7 @@ class XHWLRegistrationView: UIView  , UITableViewDelegate, UITableViewDataSource
     func setupView() {
         
         bgImage = UIImageView()
-        bgImage.image = UIImage(named:"menu_bg")
+        bgImage.image = UIImage(named:"subview_bg")
         self.addSubview(bgImage)
         
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
@@ -50,7 +50,7 @@ class XHWLRegistrationView: UIView  , UITableViewDelegate, UITableViewDataSource
         super.layoutSubviews()
         
         bgImage.frame = self.bounds
-        tableView.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:self.frame.size.height)
+        tableView.frame = CGRect(x:12, y:58, width:self.bounds.size.width-24, height:self.frame.size.height-72)
         
     }
     

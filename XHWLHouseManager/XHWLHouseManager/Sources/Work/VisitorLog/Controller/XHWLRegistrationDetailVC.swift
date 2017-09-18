@@ -35,18 +35,12 @@ class XHWLRegistrationDetailVC: UIViewController  , XHWLScanTestVCDelegate{
         setupView()
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"home_scan"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onScan))
+        
+        self.title = "登记详情"
     }
     
     func onBack(){
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    // 扫一扫
-    func onScan() {
-        let vc: XHWLScanTestVC = XHWLScanTestVC()
-        vc.delegate = self
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func setupView() {
@@ -56,7 +50,7 @@ class XHWLRegistrationDetailVC: UIViewController  , XHWLScanTestVCDelegate{
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-        let image:UIImage = UIImage(named:"menu_bg")!
+        let image:UIImage = UIImage(named:"subview_bg")!
         let warningView:XHWLRegistrationDetailView = XHWLRegistrationDetailView()
         warningView.bounds = CGRect(x:0, y:0, width:image.size.width, height:image.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
