@@ -9,8 +9,13 @@
 /* Begin PBXBuildFile section */
 		190598BC1F6F6E71004A4A91 /* XHWLSelTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598BB1F6F6E71004A4A91 /* XHWLSelTypeView.swift */; };
 		190598BE1F6F9DB1004A4A91 /* XHWLDeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598BD1F6F9DB1004A4A91 /* XHWLDeviceModel.swift */; };
-		190B940D1F63BB59007D707B /* XHWLWarningModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190B940C1F63BB59007D707B /* XHWLWarningModel.swift */; };
-		190B94171F63ECE2007D707B /* XHWLScanResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190B94161F63ECE2007D707B /* XHWLScanResultView.swift */; };
+		190598C41F6FAEBF004A4A91 /* XHWLWaterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598C31F6FAEBF004A4A91 /* XHWLWaterVC.swift */; };
+		190598C61F6FAEDC004A4A91 /* XHWLWaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598C51F6FAEDC004A4A91 /* XHWLWaterView.swift */; };
+		190598C81F6FAEEB004A4A91 /* XHWLChargeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598C71F6FAEEB004A4A91 /* XHWLChargeModel.swift */; };
+		190598CE1F6FC122004A4A91 /* XHWLDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598CD1F6FC122004A4A91 /* XHWLDataVC.swift */; };
+		190598D81F6FE562004A4A91 /* XHWLSafeGuardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598D71F6FE562004A4A91 /* XHWLSafeGuardVC.swift */; };
+		190598DA1F6FE5AF004A4A91 /* XHWLSafeGuardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598D91F6FE5AF004A4A91 /* XHWLSafeGuardView.swift */; };
+		190598DC1F6FE874004A4A91 /* XHWLSafeProtectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598DB1F6FE874004A4A91 /* XHWLSafeProtectionModel.swift */; };
 		190B94191F63F2FC007D707B /* XHWLLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190B94181F63F2FC007D707B /* XHWLLabelView.swift */; };
 		1912240B1F5D47F500D201F3 /* JSONAndDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912240A1F5D47F500D201F3 /* JSONAndDictionary.swift */; };
 		1912240D1F5D774700D201F3 /* XHWLHttpKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912240C1F5D774700D201F3 /* XHWLHttpKey.swift */; };
@@ -50,11 +55,13 @@
 		192DA53E1F57AC5C005950EC /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 192DA53D1F57AC5C005950EC /* libc++.1.tbd */; };
 		192DA5431F57B73E005950EC /* XHWLSetPwdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DA5421F57B73E005950EC /* XHWLSetPwdView.swift */; };
 		192DA5451F57E1CB005950EC /* XHWLTransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DA5441F57E1CB005950EC /* XHWLTransitionView.swift */; };
+		1931C09E1F71F26E004D0A41 /* XHWLLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1931C09D1F71F26E004D0A41 /* XHWLLineView.swift */; };
+		1931C0A01F7203C1004D0A41 /* XHWLScanResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1931C09F1F7203C1004D0A41 /* XHWLScanResultVC.swift */; };
+		1931C0A21F7203E0004D0A41 /* XHWLScanResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1931C0A11F7203E0004D0A41 /* XHWLScanResultView.swift */; };
 		1941DCD91F58341B009DE0F0 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1941DCD81F58341B009DE0F0 /* HealthKit.framework */; };
 		194FAAD41F5CF993004CA513 /* xhwl_login_logo_down.gif in Resources */ = {isa = PBXBuildFile; fileRef = 194FAAD21F5CF993004CA513 /* xhwl_login_logo_down.gif */; };
 		194FAAD51F5CF993004CA513 /* xhwl_login_logo_up.gif in Resources */ = {isa = PBXBuildFile; fileRef = 194FAAD31F5CF993004CA513 /* xhwl_login_logo_up.gif */; };
 		194FAAD71F5CF9B0004CA513 /* door2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 194FAAD61F5CF9B0004CA513 /* door2.gif */; };
-		1955516B1F6AA47800624189 /* XHWLScanResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955516A1F6AA47800624189 /* XHWLScanResultVC.swift */; };
 		1955C9B31F6528C1008C31C8 /* XHWLForgetPwdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955C9B21F6528C1008C31C8 /* XHWLForgetPwdView.swift */; };
 		1955C9B51F652A41008C31C8 /* XHWLCodeTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955C9B41F652A41008C31C8 /* XHWLCodeTF.swift */; };
 		1961CCCE1F58E301006856D0 /* HintTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1961CCCD1F58E301006856D0 /* HintTool.swift */; };
@@ -128,6 +135,23 @@
 		19A14D961F5EA6B200D96A2E /* HLBarIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A14D951F5EA6B200D96A2E /* HLBarIndicatorView.swift */; };
 		19A14DAF1F5F991600D96A2E /* RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DAC1F5F991600D96A2E /* RTRootNavigationController.m */; };
 		19A14DB01F5F991600D96A2E /* UIViewController+RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14DAE1F5F991600D96A2E /* UIViewController+RTRootNavigationController.m */; };
+		19A2E5011F70A88200C08729 /* XHWLSafeGuardDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5001F70A88200C08729 /* XHWLSafeGuardDetailVC.swift */; };
+		19A2E5071F70A89800C08729 /* XHWLHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5021F70A89800C08729 /* XHWLHeadView.swift */; };
+		19A2E5081F70A89800C08729 /* XHWLImageBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5031F70A89800C08729 /* XHWLImageBtn.swift */; };
+		19A2E5091F70A89800C08729 /* XHWLPickPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5041F70A89800C08729 /* XHWLPickPhotoView.swift */; };
+		19A2E50A1F70A89800C08729 /* XHWLRemarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5051F70A89800C08729 /* XHWLRemarkView.swift */; };
+		19A2E50B1F70A89800C08729 /* XHWLSafeGuardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5061F70A89800C08729 /* XHWLSafeGuardDetailView.swift */; };
+		19A2E5111F70BA3800C08729 /* XHWLMapKitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E50E1F70BA3800C08729 /* XHWLMapKitVC.swift */; };
+		19A2E5131F70EF0E00C08729 /* AnimatedAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5121F70EF0E00C08729 /* AnimatedAnnotationView.swift */; };
+		19A2E51B1F710C0200C08729 /* JGProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E51A1F710C0200C08729 /* JGProgressView.swift */; };
+		19A2E51D1F7112D400C08729 /* XHWLDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E51C1F7112D400C08729 /* XHWLDataView.swift */; };
+		19A2E51F1F7115B400C08729 /* XHWLSubDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E51E1F7115B400C08729 /* XHWLSubDataView.swift */; };
+		19A2E5211F71184F00C08729 /* XHWLDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5201F71184F00C08729 /* XHWLDataCell.swift */; };
+		19A2E5231F711B4200C08729 /* XHWLDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5221F711B4200C08729 /* XHWLDataModel.swift */; };
+		19A2E5251F7130AF00C08729 /* XHWLMapKitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5241F7130AF00C08729 /* XHWLMapKitModel.swift */; };
+		19A2E5271F7135B600C08729 /* XHWLRealProgressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5261F7135B600C08729 /* XHWLRealProgressModel.swift */; };
+		19A2E5291F71360500C08729 /* XHWLDetailProgressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5281F71360500C08729 /* XHWLDetailProgressModel.swift */; };
+		19A2E52B1F713F7400C08729 /* XHWLWarningModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E52A1F713F7400C08729 /* XHWLWarningModel.swift */; };
 		19A5725D1F6CD49C007B0D3F /* XHWLBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5725C1F6CD49C007B0D3F /* XHWLBaseVC.swift */; };
 		19A5725F1F6CDF80007B0D3F /* XHWLWorkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5725E1F6CDF80007B0D3F /* XHWLWorkCell.swift */; };
 		19A572651F6CE5CC007B0D3F /* XHWLHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A572611F6CE5CC007B0D3F /* XHWLHomeVC.swift */; };
@@ -142,21 +166,11 @@
 		19A7A7131F58067E0044DC1A /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7A7121F58067E0044DC1A /* AlertMessage.swift */; };
 		19ADF39E1F64DD8400A9E0FB /* XHWLRegisterationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF39D1F64DD8400A9E0FB /* XHWLRegisterationModel.swift */; };
 		19ADF3AC1F64FF7300A9E0FB /* XHWLTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF3AB1F64FF7300A9E0FB /* XHWLTagView.swift */; };
-		19ADF3AE1F6501B600A9E0FB /* XHWLWaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF3AD1F6501B600A9E0FB /* XHWLWaterView.swift */; };
-		19ADF3B01F6504AE00A9E0FB /* XHWLWaterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF3AF1F6504AE00A9E0FB /* XHWLWaterVC.swift */; };
 		19B118A51F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B118A41F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift */; };
 		19B118A71F6A17A300B1F5D1 /* XHWLBluetoothAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B118A61F6A17A300B1F5D1 /* XHWLBluetoothAuthView.swift */; };
 		19B118AB1F6A18BB00B1F5D1 /* CardReaderSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19B118A91F6A18BB00B1F5D1 /* CardReaderSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		19B118AC1F6A18BB00B1F5D1 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19B118AA1F6A18BB00B1F5D1 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		19B142E81F67716F0087AC5E /* XHWLImageBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B142E71F67716F0087AC5E /* XHWLImageBtn.swift */; };
 		19B142EA1F677D780087AC5E /* XHWLNavHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B142E91F677D780087AC5E /* XHWLNavHeadView.swift */; };
-		19B4B1101F6624790068614D /* XHWLSafeGuardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B4B10F1F6624790068614D /* XHWLSafeGuardView.swift */; };
-		19B4B1121F66248F0068614D /* XHWLSafeGuardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B4B1111F66248F0068614D /* XHWLSafeGuardVC.swift */; };
-		19B4B1141F6625240068614D /* XHWLHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B4B1131F6625240068614D /* XHWLHeadView.swift */; };
-		19B4B1161F6628C90068614D /* XHWLPickPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B4B1151F6628C90068614D /* XHWLPickPhotoView.swift */; };
-		19B4B1181F6632990068614D /* XHWLRemarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B4B1171F6632990068614D /* XHWLRemarkView.swift */; };
-		19B4B11E1F666B4D0068614D /* XHWLSafeGuardDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B4B11D1F666B4D0068614D /* XHWLSafeGuardDetailVC.swift */; };
-		19B4B1201F666DD10068614D /* XHWLSafeGuardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B4B11F1F666DD10068614D /* XHWLSafeGuardDetailView.swift */; };
 		19BB53391F56BF99006C38EA /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53381F56BF99006C38EA /* XMLReader.m */; };
 		19BB53501F56BFA3006C38EA /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB533D1F56BFA3006C38EA /* MJExtensionConst.m */; };
 		19BB53511F56BFA3006C38EA /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB533F1F56BFA3006C38EA /* MJFoundation.m */; };
@@ -172,7 +186,6 @@
 		19BB53A81F56DA43006C38EA /* XHWLLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53A71F56DA43006C38EA /* XHWLLoginVC.swift */; };
 		19BB53AA1F56DDC7006C38EA /* XHWLLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53A91F56DDC7006C38EA /* XHWLLoginView.swift */; };
 		19BB53AC1F56E009006C38EA /* XHWLLoginTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53AB1F56E009006C38EA /* XHWLLoginTF.swift */; };
-		19BDD7001F6132FB00916464 /* XHWLMapKitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BDD6FF1F6132FB00916464 /* XHWLMapKitVC.swift */; };
 		19C0BCF91F56AA8B00871BDD /* XHWLNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */; };
 		19D8FDB81F6A23C700AC7C22 /* CardReaderSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 19B118A91F6A18BB00B1F5D1 /* CardReaderSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		19D8FDB91F6A23CA00AC7C22 /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 19B118AA1F6A18BB00B1F5D1 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -265,8 +278,13 @@
 /* Begin PBXFileReference section */
 		190598BB1F6F6E71004A4A91 /* XHWLSelTypeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSelTypeView.swift; sourceTree = "<group>"; };
 		190598BD1F6F9DB1004A4A91 /* XHWLDeviceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDeviceModel.swift; sourceTree = "<group>"; };
-		190B940C1F63BB59007D707B /* XHWLWarningModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLWarningModel.swift; sourceTree = "<group>"; };
-		190B94161F63ECE2007D707B /* XHWLScanResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLScanResultView.swift; sourceTree = "<group>"; };
+		190598C31F6FAEBF004A4A91 /* XHWLWaterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLWaterVC.swift; sourceTree = "<group>"; };
+		190598C51F6FAEDC004A4A91 /* XHWLWaterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLWaterView.swift; sourceTree = "<group>"; };
+		190598C71F6FAEEB004A4A91 /* XHWLChargeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLChargeModel.swift; sourceTree = "<group>"; };
+		190598CD1F6FC122004A4A91 /* XHWLDataVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDataVC.swift; sourceTree = "<group>"; };
+		190598D71F6FE562004A4A91 /* XHWLSafeGuardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSafeGuardVC.swift; sourceTree = "<group>"; };
+		190598D91F6FE5AF004A4A91 /* XHWLSafeGuardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSafeGuardView.swift; sourceTree = "<group>"; };
+		190598DB1F6FE874004A4A91 /* XHWLSafeProtectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSafeProtectionModel.swift; sourceTree = "<group>"; };
 		190B94181F63F2FC007D707B /* XHWLLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLabelView.swift; sourceTree = "<group>"; };
 		1912240A1F5D47F500D201F3 /* JSONAndDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAndDictionary.swift; sourceTree = "<group>"; };
 		1912240C1F5D774700D201F3 /* XHWLHttpKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLHttpKey.swift; sourceTree = "<group>"; };
@@ -298,12 +316,14 @@
 		192DA53D1F57AC5C005950EC /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
 		192DA5421F57B73E005950EC /* XHWLSetPwdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSetPwdView.swift; sourceTree = "<group>"; };
 		192DA5441F57E1CB005950EC /* XHWLTransitionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLTransitionView.swift; sourceTree = "<group>"; };
+		1931C09D1F71F26E004D0A41 /* XHWLLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLineView.swift; sourceTree = "<group>"; };
+		1931C09F1F7203C1004D0A41 /* XHWLScanResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLScanResultVC.swift; sourceTree = "<group>"; };
+		1931C0A11F7203E0004D0A41 /* XHWLScanResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLScanResultView.swift; sourceTree = "<group>"; };
 		1941DCD81F58341B009DE0F0 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		1941DCDA1F58341B009DE0F0 /* XHWLHouseManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XHWLHouseManager.entitlements; sourceTree = "<group>"; };
 		194FAAD21F5CF993004CA513 /* xhwl_login_logo_down.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xhwl_login_logo_down.gif; sourceTree = "<group>"; };
 		194FAAD31F5CF993004CA513 /* xhwl_login_logo_up.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xhwl_login_logo_up.gif; sourceTree = "<group>"; };
 		194FAAD61F5CF9B0004CA513 /* door2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = door2.gif; sourceTree = "<group>"; };
-		1955516A1F6AA47800624189 /* XHWLScanResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLScanResultVC.swift; sourceTree = "<group>"; };
 		1955C9B21F6528C1008C31C8 /* XHWLForgetPwdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLForgetPwdView.swift; sourceTree = "<group>"; };
 		1955C9B41F652A41008C31C8 /* XHWLCodeTF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLCodeTF.swift; sourceTree = "<group>"; };
 		1961CCCD1F58E301006856D0 /* HintTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintTool.swift; sourceTree = "<group>"; };
@@ -421,6 +441,23 @@
 		19A14DBC1F5FA1BF00D96A2E /* CYTabBarConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYTabBarConfig.m; sourceTree = "<group>"; };
 		19A14DBD1F5FA1BF00D96A2E /* CYTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYTabBarController.h; sourceTree = "<group>"; };
 		19A14DBE1F5FA1BF00D96A2E /* CYTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYTabBarController.m; sourceTree = "<group>"; };
+		19A2E5001F70A88200C08729 /* XHWLSafeGuardDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSafeGuardDetailVC.swift; sourceTree = "<group>"; };
+		19A2E5021F70A89800C08729 /* XHWLHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLHeadView.swift; sourceTree = "<group>"; };
+		19A2E5031F70A89800C08729 /* XHWLImageBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLImageBtn.swift; sourceTree = "<group>"; };
+		19A2E5041F70A89800C08729 /* XHWLPickPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLPickPhotoView.swift; sourceTree = "<group>"; };
+		19A2E5051F70A89800C08729 /* XHWLRemarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRemarkView.swift; sourceTree = "<group>"; };
+		19A2E5061F70A89800C08729 /* XHWLSafeGuardDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSafeGuardDetailView.swift; sourceTree = "<group>"; };
+		19A2E50E1F70BA3800C08729 /* XHWLMapKitVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLMapKitVC.swift; sourceTree = "<group>"; };
+		19A2E5121F70EF0E00C08729 /* AnimatedAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedAnnotationView.swift; sourceTree = "<group>"; };
+		19A2E51A1F710C0200C08729 /* JGProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JGProgressView.swift; sourceTree = "<group>"; };
+		19A2E51C1F7112D400C08729 /* XHWLDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDataView.swift; sourceTree = "<group>"; };
+		19A2E51E1F7115B400C08729 /* XHWLSubDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSubDataView.swift; sourceTree = "<group>"; };
+		19A2E5201F71184F00C08729 /* XHWLDataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDataCell.swift; sourceTree = "<group>"; };
+		19A2E5221F711B4200C08729 /* XHWLDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDataModel.swift; sourceTree = "<group>"; };
+		19A2E5241F7130AF00C08729 /* XHWLMapKitModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLMapKitModel.swift; sourceTree = "<group>"; };
+		19A2E5261F7135B600C08729 /* XHWLRealProgressModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRealProgressModel.swift; sourceTree = "<group>"; };
+		19A2E5281F71360500C08729 /* XHWLDetailProgressModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDetailProgressModel.swift; sourceTree = "<group>"; };
+		19A2E52A1F713F7400C08729 /* XHWLWarningModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLWarningModel.swift; sourceTree = "<group>"; };
 		19A5725C1F6CD49C007B0D3F /* XHWLBaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLBaseVC.swift; sourceTree = "<group>"; };
 		19A5725E1F6CDF80007B0D3F /* XHWLWorkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLWorkCell.swift; sourceTree = "<group>"; };
 		19A572611F6CE5CC007B0D3F /* XHWLHomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLHomeVC.swift; sourceTree = "<group>"; };
@@ -434,21 +471,11 @@
 		19A7A7121F58067E0044DC1A /* AlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 		19ADF39D1F64DD8400A9E0FB /* XHWLRegisterationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRegisterationModel.swift; sourceTree = "<group>"; };
 		19ADF3AB1F64FF7300A9E0FB /* XHWLTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLTagView.swift; sourceTree = "<group>"; };
-		19ADF3AD1F6501B600A9E0FB /* XHWLWaterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLWaterView.swift; sourceTree = "<group>"; };
-		19ADF3AF1F6504AE00A9E0FB /* XHWLWaterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLWaterVC.swift; sourceTree = "<group>"; };
 		19B118A41F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLBluetoothOpenVC.swift; sourceTree = "<group>"; };
 		19B118A61F6A17A300B1F5D1 /* XHWLBluetoothAuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLBluetoothAuthView.swift; sourceTree = "<group>"; };
 		19B118A91F6A18BB00B1F5D1 /* CardReaderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CardReaderSDK.framework; sourceTree = "<group>"; };
 		19B118AA1F6A18BB00B1F5D1 /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CommonCrypto.framework; sourceTree = "<group>"; };
-		19B142E71F67716F0087AC5E /* XHWLImageBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLImageBtn.swift; sourceTree = "<group>"; };
 		19B142E91F677D780087AC5E /* XHWLNavHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLNavHeadView.swift; sourceTree = "<group>"; };
-		19B4B10F1F6624790068614D /* XHWLSafeGuardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSafeGuardView.swift; sourceTree = "<group>"; };
-		19B4B1111F66248F0068614D /* XHWLSafeGuardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSafeGuardVC.swift; sourceTree = "<group>"; };
-		19B4B1131F6625240068614D /* XHWLHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLHeadView.swift; sourceTree = "<group>"; };
-		19B4B1151F6628C90068614D /* XHWLPickPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLPickPhotoView.swift; sourceTree = "<group>"; };
-		19B4B1171F6632990068614D /* XHWLRemarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRemarkView.swift; sourceTree = "<group>"; };
-		19B4B11D1F666B4D0068614D /* XHWLSafeGuardDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSafeGuardDetailVC.swift; sourceTree = "<group>"; };
-		19B4B11F1F666DD10068614D /* XHWLSafeGuardDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSafeGuardDetailView.swift; sourceTree = "<group>"; };
 		19BB531F1F56BE5B006C38EA /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		19BB53211F56BE65006C38EA /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		19BB53241F56BEBB006C38EA /* Mcu_sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Mcu_sdk.framework; sourceTree = "<group>"; };
@@ -488,7 +515,6 @@
 		19BB53A71F56DA43006C38EA /* XHWLLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLoginVC.swift; sourceTree = "<group>"; };
 		19BB53A91F56DDC7006C38EA /* XHWLLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLoginView.swift; sourceTree = "<group>"; };
 		19BB53AB1F56E009006C38EA /* XHWLLoginTF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLoginTF.swift; sourceTree = "<group>"; };
-		19BDD6FF1F6132FB00916464 /* XHWLMapKitVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLMapKitVC.swift; sourceTree = "<group>"; };
 		19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLNavigationController.swift; sourceTree = "<group>"; };
 		19D8FDBA1F6A664400AC7C22 /* XHWLAccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLAccountModel.swift; sourceTree = "<group>"; };
 		19D8FDBC1F6A670900AC7C22 /* XHWLProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLProjectModel.swift; sourceTree = "<group>"; };
@@ -608,6 +634,76 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		190598BF1F6FAE98004A4A91 /* ChargeProvider */ = {
+			isa = PBXGroup;
+			children = (
+				190598C01F6FAE98004A4A91 /* Controller */,
+				190598C11F6FAE98004A4A91 /* Model */,
+				190598C21F6FAE98004A4A91 /* View */,
+			);
+			path = ChargeProvider;
+			sourceTree = "<group>";
+		};
+		190598C01F6FAE98004A4A91 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				190598C31F6FAEBF004A4A91 /* XHWLWaterVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		190598C11F6FAE98004A4A91 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				190598C71F6FAEEB004A4A91 /* XHWLChargeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		190598C21F6FAE98004A4A91 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				190598C51F6FAEDC004A4A91 /* XHWLWaterView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		190598C91F6FC109004A4A91 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				190598CA1F6FC109004A4A91 /* Controller */,
+				190598CB1F6FC109004A4A91 /* Model */,
+				190598CC1F6FC109004A4A91 /* View */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		190598CA1F6FC109004A4A91 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				190598CD1F6FC122004A4A91 /* XHWLDataVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		190598CB1F6FC109004A4A91 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				19A2E5221F711B4200C08729 /* XHWLDataModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		190598CC1F6FC109004A4A91 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				19A2E51C1F7112D400C08729 /* XHWLDataView.swift */,
+				19A2E51E1F7115B400C08729 /* XHWLSubDataView.swift */,
+				19A2E5201F71184F00C08729 /* XHWLDataCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		19163CDC1F67C36700C09785 /* IssueReport */ = {
 			isa = PBXGroup;
 			children = (
@@ -622,6 +718,7 @@
 			isa = PBXGroup;
 			children = (
 				19163CE21F67C3A300C09785 /* XHWLIssueReportVC.swift */,
+				1931C09F1F7203C1004D0A41 /* XHWLScanResultVC.swift */,
 				19654C441F6BCBB000638F05 /* XHWLIssueReportListVC.swift */,
 			);
 			path = Controller;
@@ -639,6 +736,7 @@
 		19163CDF1F67C36700C09785 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1931C0A11F7203E0004D0A41 /* XHWLScanResultView.swift */,
 				19163CE01F67C39E00C09785 /* XHWLIssueReportView.swift */,
 			);
 			path = View;
@@ -657,6 +755,7 @@
 		19163CE71F67D23700C09785 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				190598D71F6FE562004A4A91 /* XHWLSafeGuardVC.swift */,
 				19163CEA1F67D28800C09785 /* XHWLSafeProtectionVC.swift */,
 			);
 			path = Controller;
@@ -665,6 +764,7 @@
 		19163CE81F67D23700C09785 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				190598DB1F6FE874004A4A91 /* XHWLSafeProtectionModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -672,6 +772,7 @@
 		19163CE91F67D23700C09785 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				190598D91F6FE5AF004A4A91 /* XHWLSafeGuardView.swift */,
 				19163CEC1F67D32F00C09785 /* XHWLSafeProtectionView.swift */,
 			);
 			path = View;
@@ -699,6 +800,7 @@
 		19163CF41F67DA9800C09785 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				19A2E52A1F713F7400C08729 /* XHWLWarningModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -709,6 +811,7 @@
 				19163D2E1F67E75700C09785 /* XHWLWarningCell.swift */,
 				19163D2C1F67E74100C09785 /* XHWLHistoryWarningView.swift */,
 				19163CFC1F67DB6D00C09785 /* XHWLWarningView.swift */,
+				1931C09D1F71F26E004D0A41 /* XHWLLineView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -762,6 +865,7 @@
 		19163D071F67E27800C09785 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				19A2E5001F70A88200C08729 /* XHWLSafeGuardDetailVC.swift */,
 				19163D0A1F67E29E00C09785 /* XHWLAbnormalPassVC.swift */,
 			);
 			path = Controller;
@@ -777,6 +881,11 @@
 		19163D091F67E27800C09785 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				19A2E5021F70A89800C08729 /* XHWLHeadView.swift */,
+				19A2E5031F70A89800C08729 /* XHWLImageBtn.swift */,
+				19A2E5041F70A89800C08729 /* XHWLPickPhotoView.swift */,
+				19A2E5051F70A89800C08729 /* XHWLRemarkView.swift */,
+				19A2E5061F70A89800C08729 /* XHWLSafeGuardDetailView.swift */,
 				19163D0C1F67E2B700C09785 /* XHWLAbnormalPassView.swift */,
 			);
 			path = View;
@@ -963,6 +1072,8 @@
 		19654C341F6B6ABE00638F05 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				19A2E5261F7135B600C08729 /* XHWLRealProgressModel.swift */,
+				19A2E5281F71360500C08729 /* XHWLDetailProgressModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -983,8 +1094,6 @@
 			isa = PBXGroup;
 			children = (
 				197D64AF1F62804C00977074 /* XHWLWorkVC.swift */,
-				19ADF3AF1F6504AE00A9E0FB /* XHWLWaterVC.swift */,
-				1955516A1F6AA47800624189 /* XHWLScanResultVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -993,7 +1102,6 @@
 			isa = PBXGroup;
 			children = (
 				197D64B51F62807D00977074 /* XHWLMenuModel.swift */,
-				190B940C1F63BB59007D707B /* XHWLWarningModel.swift */,
 				19ADF39D1F64DD8400A9E0FB /* XHWLRegisterationModel.swift */,
 				190598BD1F6F9DB1004A4A91 /* XHWLDeviceModel.swift */,
 			);
@@ -1007,10 +1115,8 @@
 				197D64B21F62805500977074 /* XHWLMenuView.swift */,
 				197D64B71F628B9400977074 /* XHWLTipView.swift */,
 				197D64BB1F62A10900977074 /* XHWLTopView.swift */,
-				190B94161F63ECE2007D707B /* XHWLScanResultView.swift */,
 				190B94181F63F2FC007D707B /* XHWLLabelView.swift */,
 				19ADF3AB1F64FF7300A9E0FB /* XHWLTagView.swift */,
-				19ADF3AD1F6501B600A9E0FB /* XHWLWaterView.swift */,
 				19B142E91F677D780087AC5E /* XHWLNavHeadView.swift */,
 				19A5725E1F6CDF80007B0D3F /* XHWLWorkCell.swift */,
 				19A572671F6CE5F0007B0D3F /* XHWLWorkView.swift */,
@@ -1051,6 +1157,9 @@
 		19A14D751F5E3A7F00D96A2E /* Work */ = {
 			isa = PBXGroup;
 			children = (
+				19A2E50C1F70BA3800C08729 /* MapKit */,
+				190598C91F6FC109004A4A91 /* Data */,
+				190598BF1F6FAE98004A4A91 /* ChargeProvider */,
 				843A327C1F6D5DCF002C9098 /* EnergyManagement */,
 				843A322E1F6D4D73002C9098 /* DeviceStatistics */,
 				19654C321F6B6ABE00638F05 /* ProjectProgress */,
@@ -1061,7 +1170,6 @@
 				19163CE61F67D23700C09785 /* SafeProtection */,
 				19163CDC1F67C36700C09785 /* IssueReport */,
 				19B4B10B1F66242E0068614D /* Project */,
-				19B4B1071F6623C90068614D /* SafeGuard */,
 				197D64AC1F62802900977074 /* Controller */,
 				197D64AD1F62802900977074 /* Model */,
 				197D64AE1F62802900977074 /* View */,
@@ -1130,6 +1238,48 @@
 				19A14DBE1F5FA1BF00D96A2E /* CYTabBarController.m */,
 			);
 			path = CYTabBar;
+			sourceTree = "<group>";
+		};
+		19A2E50C1F70BA3800C08729 /* MapKit */ = {
+			isa = PBXGroup;
+			children = (
+				19A2E50D1F70BA3800C08729 /* Controller */,
+				19A2E50F1F70BA3800C08729 /* Model */,
+				19A2E5101F70BA3800C08729 /* View */,
+			);
+			path = MapKit;
+			sourceTree = "<group>";
+		};
+		19A2E50D1F70BA3800C08729 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				19A2E50E1F70BA3800C08729 /* XHWLMapKitVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		19A2E50F1F70BA3800C08729 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				19A2E5241F7130AF00C08729 /* XHWLMapKitModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		19A2E5101F70BA3800C08729 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				19A2E5121F70EF0E00C08729 /* AnimatedAnnotationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		19A2E5161F710AC100C08729 /* ProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				19A2E51A1F710C0200C08729 /* JGProgressView.swift */,
+			);
+			path = ProgressView;
 			sourceTree = "<group>";
 		};
 		19A572601F6CE5CC007B0D3F /* Controller */ = {
@@ -1228,45 +1378,6 @@
 			path = BluetoothOpen;
 			sourceTree = "<group>";
 		};
-		19B4B1071F6623C90068614D /* SafeGuard */ = {
-			isa = PBXGroup;
-			children = (
-				19B4B1081F6623C90068614D /* Controller */,
-				19B4B1091F6623C90068614D /* Model */,
-				19B4B10A1F6623C90068614D /* View */,
-			);
-			path = SafeGuard;
-			sourceTree = "<group>";
-		};
-		19B4B1081F6623C90068614D /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				19B4B1111F66248F0068614D /* XHWLSafeGuardVC.swift */,
-				19B4B11D1F666B4D0068614D /* XHWLSafeGuardDetailVC.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		19B4B1091F6623C90068614D /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		19B4B10A1F6623C90068614D /* View */ = {
-			isa = PBXGroup;
-			children = (
-				19B4B10F1F6624790068614D /* XHWLSafeGuardView.swift */,
-				19B4B1131F6625240068614D /* XHWLHeadView.swift */,
-				19B4B1151F6628C90068614D /* XHWLPickPhotoView.swift */,
-				19B4B1171F6632990068614D /* XHWLRemarkView.swift */,
-				19B4B11F1F666DD10068614D /* XHWLSafeGuardDetailView.swift */,
-				19B142E71F67716F0087AC5E /* XHWLImageBtn.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		19B4B10B1F66242E0068614D /* Project */ = {
 			isa = PBXGroup;
 			children = (
@@ -1345,17 +1456,10 @@
 			path = MJExtension;
 			sourceTree = "<group>";
 		};
-		19BDD6FE1F6132DD00916464 /* MapKit */ = {
-			isa = PBXGroup;
-			children = (
-				19BDD6FF1F6132FB00916464 /* XHWLMapKitVC.swift */,
-			);
-			path = MapKit;
-			sourceTree = "<group>";
-		};
 		19C0BCE31F56AA8B00871BDD /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				19A2E5161F710AC100C08729 /* ProgressView */,
 				843A329A1F6D63F2002C9098 /* CYTabBar */,
 				843A32361F6D4F4D002C9098 /* PieCharts */,
 				19B118A81F6A18AF00B1F5D1 /* BluetoothOpen */,
@@ -1374,7 +1478,6 @@
 			isa = PBXGroup;
 			children = (
 				19B118A01F6A167700B1F5D1 /* OpenOneStep */,
-				19BDD6FE1F6132DD00916464 /* MapKit */,
 				19A14D7C1F5E701A00D96A2E /* Search */,
 				19C0BCEF1F56AA8B00871BDD /* Home */,
 				19A14D751F5E3A7F00D96A2E /* Work */,
@@ -1988,16 +2091,15 @@
 				19A14D711F5E381100D96A2E /* View+MASAdditions.m in Sources */,
 				843A32651F6D4F4D002C9098 /* CGSize.swift in Sources */,
 				19163CE31F67C3A300C09785 /* XHWLIssueReportVC.swift in Sources */,
-				19B4B1141F6625240068614D /* XHWLHeadView.swift in Sources */,
 				1961CDBC1F5963EA006856D0 /* XHWLLocationVC.swift in Sources */,
 				19BB53AC1F56E009006C38EA /* XHWLLoginTF.swift in Sources */,
+				190598CE1F6FC122004A4A91 /* XHWLDataVC.swift in Sources */,
 				19654C3D1F6B6B1200638F05 /* XHWLProgressDetailVC.swift in Sources */,
 				19163CE11F67C39E00C09785 /* XHWLIssueReportView.swift in Sources */,
 				843A32351F6D4DCA002C9098 /* XHWLDeviceStatisticsView.swift in Sources */,
 				1961CD9C1F596328006856D0 /* PlayBackViewController.m in Sources */,
 				190B94191F63F2FC007D707B /* XHWLLabelView.swift in Sources */,
 				19C0BCF91F56AA8B00871BDD /* XHWLNavigationController.swift in Sources */,
-				1955516B1F6AA47800624189 /* XHWLScanResultVC.swift in Sources */,
 				19A14D6F1F5E381100D96A2E /* NSArray+MASAdditions.m in Sources */,
 				19654C411F6B742100638F05 /* XHWLActualTimeCell.swift in Sources */,
 				19A572681F6CE5F0007B0D3F /* XHWLWorkView.swift in Sources */,
@@ -2011,6 +2113,7 @@
 				19654C3C1F6B6B1200638F05 /* XHWLCountVC.swift in Sources */,
 				19A14D7E1F5E703D00D96A2E /* XHWLSearchBar.swift in Sources */,
 				19BB53501F56BFA3006C38EA /* MJExtensionConst.m in Sources */,
+				1931C0A21F7203E0004D0A41 /* XHWLScanResultView.swift in Sources */,
 				197D64B31F62805500977074 /* XHWLMenuLabelView.swift in Sources */,
 				19BB53A81F56DA43006C38EA /* XHWLLoginVC.swift in Sources */,
 				19FACBCB1F68CA0C00680E63 /* XHWLRoleModel.swift in Sources */,
@@ -2020,7 +2123,7 @@
 				19A14DB01F5F991600D96A2E /* UIViewController+RTRootNavigationController.m in Sources */,
 				19BB53521F56BFA3006C38EA /* MJProperty.m in Sources */,
 				19A14D8D1F5EA46F00D96A2E /* GIFAnimatedImageView.swift in Sources */,
-				19B4B1201F666DD10068614D /* XHWLSafeGuardDetailView.swift in Sources */,
+				19A2E5091F70A89800C08729 /* XHWLPickPhotoView.swift in Sources */,
 				19163CEB1F67D28800C09785 /* XHWLSafeProtectionVC.swift in Sources */,
 				843A32791F6D58F4002C9098 /* XHWLDeviceStatisticsDetailVC.swift in Sources */,
 				19ADF3AC1F64FF7300A9E0FB /* XHWLTagView.swift in Sources */,
@@ -2028,12 +2131,16 @@
 				19BB53561F56BFA3006C38EA /* NSObject+MJCoding.m in Sources */,
 				19A14D901F5EA46F00D96A2E /* GifTextHeaderFooter.swift in Sources */,
 				19BB53511F56BFA3006C38EA /* MJFoundation.m in Sources */,
+				19A2E52B1F713F7400C08729 /* XHWLWarningModel.swift in Sources */,
+				19A2E5131F70EF0E00C08729 /* AnimatedAnnotationView.swift in Sources */,
 				19A14D6E1F5E381100D96A2E /* MASViewConstraint.m in Sources */,
 				19654C431F6B765F00638F05 /* XHWLProgressView.swift in Sources */,
 				19BB53AA1F56DDC7006C38EA /* XHWLLoginView.swift in Sources */,
 				19ADF39E1F64DD8400A9E0FB /* XHWLRegisterationModel.swift in Sources */,
 				19A14D921F5EA46F00D96A2E /* TextHeaderFooter.swift in Sources */,
 				19A5726C1F6D0B59007B0D3F /* XHWLBaseBgVC.swift in Sources */,
+				19A2E51B1F710C0200C08729 /* JGProgressView.swift in Sources */,
+				19A2E5011F70A88200C08729 /* XHWLSafeGuardDetailVC.swift in Sources */,
 				19163CED1F67D32F00C09785 /* XHWLSafeProtectionView.swift in Sources */,
 				19A572661F6CE5CC007B0D3F /* XHWLScanModel.swift in Sources */,
 				843A32AF1F6D63F2002C9098 /* CYTabBarConfig.m in Sources */,
@@ -2043,16 +2150,22 @@
 				843A32AE1F6D63F2002C9098 /* CYTabBar.m in Sources */,
 				1961CDAF1F59637F006856D0 /* XHWLScanTestVC.swift in Sources */,
 				197D64B61F62807D00977074 /* XHWLMenuModel.swift in Sources */,
+				19A2E5081F70A89800C08729 /* XHWLImageBtn.swift in Sources */,
 				843A326C1F6D4F4D002C9098 /* PiePlainTextLayer.swift in Sources */,
 				19654C391F6B6B0C00638F05 /* XHWLProgressDetailView.swift in Sources */,
 				19A14D791F5E3BF300D96A2E /* XHWLTabbarVC.swift in Sources */,
 				843A32641F6D4F4D002C9098 /* CGRect.swift in Sources */,
 				19163D1D1F67E63F00C09785 /* XHWLCheckListTF.swift in Sources */,
+				19A2E51D1F7112D400C08729 /* XHWLDataView.swift in Sources */,
 				19A14D801F5E853C00D96A2E /* XHWLSearchVC.swift in Sources */,
 				1961CD9D1F596328006856D0 /* RealPlayViewController.m in Sources */,
+				190598D81F6FE562004A4A91 /* XHWLSafeGuardVC.swift in Sources */,
+				19A2E5211F71184F00C08729 /* XHWLDataCell.swift in Sources */,
 				19163D051F67E0F300C09785 /* XHWLRegistrationVC.swift in Sources */,
 				19BB53531F56BFA3006C38EA /* MJPropertyKey.m in Sources */,
 				19654C491F6BE25400638F05 /* XHWLIssueAccountModel.swift in Sources */,
+				190598C81F6FAEEB004A4A91 /* XHWLChargeModel.swift in Sources */,
+				19A2E5251F7130AF00C08729 /* XHWLMapKitModel.swift in Sources */,
 				19163D251F67E6C600C09785 /* XHWLRegistrationCell.swift in Sources */,
 				19A7A70D1F57EB460044DC1A /* YLGIFImage.swift in Sources */,
 				19B118A51F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift in Sources */,
@@ -2064,6 +2177,8 @@
 				843A32631F6D4F4D002C9098 /* CGPoint.swift in Sources */,
 				1961CDA21F596328006856D0 /* PtzPopView.m in Sources */,
 				1961CDA91F596328006856D0 /* ToolBarButton.m in Sources */,
+				19A2E5111F70BA3800C08729 /* XHWLMapKitVC.swift in Sources */,
+				190598C61F6FAEDC004A4A91 /* XHWLWaterView.swift in Sources */,
 				19A14DAF1F5F991600D96A2E /* RTRootNavigationController.m in Sources */,
 				1961CDA71F596328006856D0 /* TalkChannelView.m in Sources */,
 				1961CDB71F5963D2006856D0 /* CMPedometerViewController.swift in Sources */,
@@ -2073,18 +2188,18 @@
 				843A326D1F6D4F4D002C9098 /* AlphaPieViewLayerAnimator.swift in Sources */,
 				19D8FDBB1F6A664400AC7C22 /* XHWLAccountModel.swift in Sources */,
 				1961CCD21F58E336006856D0 /* DateStringExtension.swift in Sources */,
-				19B4B1101F6624790068614D /* XHWLSafeGuardView.swift in Sources */,
 				19163D171F67E50E00C09785 /* XHWLCheckVC.swift in Sources */,
 				19163D231F67E67800C09785 /* XHWLMoreListView.swift in Sources */,
 				843A32711F6D4F4D002C9098 /* PieSliceData.swift in Sources */,
-				190B940D1F63BB59007D707B /* XHWLWarningModel.swift in Sources */,
 				19A14D6A1F5E381100D96A2E /* MASConstraint.m in Sources */,
+				190598DA1F6FE5AF004A4A91 /* XHWLSafeGuardView.swift in Sources */,
 				1961CDA01F596328006856D0 /* PlayView.m in Sources */,
 				1961CCD01F58E32F006856D0 /* StringExtension.swift in Sources */,
 				843A32B11F6D63F2002C9098 /* UITabBarItem+BadgeColor.m in Sources */,
 				843A32721F6D4F4D002C9098 /* PieSliceModel.swift in Sources */,
 				19A7A70E1F57EB460044DC1A /* YLImageView.swift in Sources */,
 				843A326F1F6D4F4D002C9098 /* PieCustomViewsLayer.swift in Sources */,
+				19A2E50B1F70A89800C08729 /* XHWLSafeGuardDetailView.swift in Sources */,
 				843A325F1F6D4F4D002C9098 /* PieChartDelegate.swift in Sources */,
 				19BB535B1F56C00F006C38EA /* XHWLConfigure.swift in Sources */,
 				843A32691F6D4F4D002C9098 /* AlphaPieLineTextLayerAnimator.swift in Sources */,
@@ -2099,6 +2214,7 @@
 				843A326A1F6D4F4D002C9098 /* PieLineTextLayerAnimator.swift in Sources */,
 				19BB53541F56BFA3006C38EA /* MJPropertyType.m in Sources */,
 				198E7E0B1F5A9DC10016C4E8 /* XHWLMcuBottomView.swift in Sources */,
+				19A2E51F1F7115B400C08729 /* XHWLSubDataView.swift in Sources */,
 				19A14D8E1F5EA46F00D96A2E /* GifHeaderFooter.swift in Sources */,
 				1961CD771F596316006856D0 /* XHWLMcuResourceVC.swift in Sources */,
 				19163CFD1F67DB6D00C09785 /* XHWLWarningView.swift in Sources */,
@@ -2107,9 +2223,11 @@
 				19D8FDBD1F6A670900AC7C22 /* XHWLProjectModel.swift in Sources */,
 				19BB53581F56BFA3006C38EA /* NSObject+MJProperty.m in Sources */,
 				197D64B81F628B9400977074 /* XHWLTipView.swift in Sources */,
+				1931C09E1F71F26E004D0A41 /* XHWLLineView.swift in Sources */,
 				19A14D8F1F5EA46F00D96A2E /* GifImagesHeaderFooter.swift in Sources */,
 				1912240D1F5D774700D201F3 /* XHWLHttpKey.swift in Sources */,
 				1961CCD61F58E448006856D0 /* TimerARC.swift in Sources */,
+				19A2E5291F71360500C08729 /* XHWLDetailProgressModel.swift in Sources */,
 				19B118A71F6A17A300B1F5D1 /* XHWLBluetoothAuthView.swift in Sources */,
 				1961CDA11F596328006856D0 /* PtzPanelView.m in Sources */,
 				192DA5451F57E1CB005950EC /* XHWLTransitionView.swift in Sources */,
@@ -2119,9 +2237,11 @@
 				1961CDA31F596328006856D0 /* PtzPresetPositionDialView.m in Sources */,
 				1961CDAB1F596328006856D0 /* ToolBarScrollView.m in Sources */,
 				190598BC1F6F6E71004A4A91 /* XHWLSelTypeView.swift in Sources */,
+				190598DC1F6FE874004A4A91 /* XHWLSafeProtectionModel.swift in Sources */,
 				19BB53391F56BF99006C38EA /* XMLReader.m in Sources */,
 				19BB53551F56BFA3006C38EA /* NSObject+MJClass.m in Sources */,
 				843A32621F6D4F4D002C9098 /* PieSliceLayer.swift in Sources */,
+				19A2E50A1F70A89800C08729 /* XHWLRemarkView.swift in Sources */,
 				1961CDC01F5983EF006856D0 /* XHWLMcuView.swift in Sources */,
 				84A50A5C1F5668DA00BCDA47 /* AppDelegate.swift in Sources */,
 				192DA5321F57A62A005950EC /* UIColor+Category.swift in Sources */,
@@ -2132,47 +2252,43 @@
 				1961CDA41F596328006856D0 /* PtzPresetPositionMultiDialView.m in Sources */,
 				1961CDAA1F596328006856D0 /* ToolBarButtonPositionReckoner.m in Sources */,
 				1961CD9F1F596328006856D0 /* PickerView.m in Sources */,
-				19BDD7001F6132FB00916464 /* XHWLMapKitVC.swift in Sources */,
 				843A32B01F6D63F2002C9098 /* CYTabBarController.m in Sources */,
 				19A5725F1F6CDF80007B0D3F /* XHWLWorkCell.swift in Sources */,
 				197D64B01F62804C00977074 /* XHWLWorkVC.swift in Sources */,
-				19ADF3AE1F6501B600A9E0FB /* XHWLWaterView.swift in Sources */,
 				843A326E1F6D4F4D002C9098 /* PieViewLayerAnimator.swift in Sources */,
 				843A32AB1F6D63F2002C9098 /* CYButton.m in Sources */,
 				19BB53591F56BFA3006C38EA /* NSString+MJExtension.m in Sources */,
+				1931C0A01F7203C1004D0A41 /* XHWLScanResultVC.swift in Sources */,
 				1961CDBE1F596441006856D0 /* XHWLMcuShowVC.swift in Sources */,
 				19163D191F67E53B00C09785 /* XHWLCheckListView.swift in Sources */,
-				19B142E81F67716F0087AC5E /* XHWLImageBtn.swift in Sources */,
 				843A32741F6D4F4D002C9098 /* Globals.swift in Sources */,
+				19A2E5271F7135B600C08729 /* XHWLRealProgressModel.swift in Sources */,
 				19654C381F6B6B0C00638F05 /* XHWLCountView.swift in Sources */,
+				19A2E5071F70A89800C08729 /* XHWLHeadView.swift in Sources */,
 				19A14D701F5E381100D96A2E /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
-				19B4B1161F6628C90068614D /* XHWLPickPhotoView.swift in Sources */,
 				843A325E1F6D4F4D002C9098 /* PieChart.swift in Sources */,
 				1961CCCE1F58E301006856D0 /* HintTool.swift in Sources */,
+				190598C41F6FAEBF004A4A91 /* XHWLWaterVC.swift in Sources */,
 				1955C9B31F6528C1008C31C8 /* XHWLForgetPwdView.swift in Sources */,
 				19654C471F6BE11000638F05 /* XHWLIssueReportModel.swift in Sources */,
 				19FACBC61F68C43E00680E63 /* Validation.swift in Sources */,
 				19654C3F1F6B6C6300638F05 /* XHWLProgressDetailCell.swift in Sources */,
 				19163D2D1F67E74100C09785 /* XHWLHistoryWarningView.swift in Sources */,
-				19B4B11E1F666B4D0068614D /* XHWLSafeGuardDetailVC.swift in Sources */,
 				843A32681F6D4F4D002C9098 /* PieChartLabelSettings.swift in Sources */,
 				843A32661F6D4F4D002C9098 /* FloatingPoint.swift in Sources */,
 				197D64B41F62805500977074 /* XHWLMenuView.swift in Sources */,
 				843A32331F6D4DA1002C9098 /* XHWLDeviceStatisticsVC.swift in Sources */,
 				192DA5431F57B73E005950EC /* XHWLSetPwdView.swift in Sources */,
 				197D64BC1F62A10900977074 /* XHWLTopView.swift in Sources */,
-				19ADF3B01F6504AE00A9E0FB /* XHWLWaterVC.swift in Sources */,
 				19163D1B1F67E63B00C09785 /* XHWLRadioView.swift in Sources */,
 				19A5726A1F6CE659007B0D3F /* XHWLHomeView.swift in Sources */,
 				19163D0D1F67E2B700C09785 /* XHWLAbnormalPassView.swift in Sources */,
-				19B4B1121F66248F0068614D /* XHWLSafeGuardVC.swift in Sources */,
 				843A326B1F6D4F4D002C9098 /* PieLineTextLayer.swift in Sources */,
 				843A32AC1F6D63F2002C9098 /* CYCenterButton.m in Sources */,
 				19A14D8C1F5EA46F00D96A2E /* CoreTextHeaderFooter.swift in Sources */,
 				19A14D931F5EA46F00D96A2E /* UIScrollView+SYRefresh.swift in Sources */,
-				190B94171F63ECE2007D707B /* XHWLScanResultView.swift in Sources */,
 				19163D0B1F67E29E00C09785 /* XHWLAbnormalPassVC.swift in Sources */,
-				19B4B1181F6632990068614D /* XHWLRemarkView.swift in Sources */,
+				19A2E5231F711B4200C08729 /* XHWLDataModel.swift in Sources */,
 				19A14D6C1F5E381100D96A2E /* MASLayoutConstraint.m in Sources */,
 				1961CD9E1F596328006856D0 /* CTimeBarPanel.m in Sources */,
 				19163D211F67E66500C09785 /* XHWLPickerView.swift in Sources */,
@@ -2350,7 +2466,7 @@
 					"\"Kingfisher\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.xinghaiwulian.XHWLHouseManager3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xinghaiwulian.XHWLHouseManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XHWLHouseManager/XHWLHouseManager-Bridging-Header.h";
@@ -2386,7 +2502,7 @@
 					"\"Kingfisher\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.xinghaiwulian.XHWLHouseManager3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xinghaiwulian.XHWLHouseManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XHWLHouseManager/XHWLHouseManager-Bridging-Header.h";

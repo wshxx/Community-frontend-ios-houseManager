@@ -16,7 +16,6 @@ class XHWLAbnormalPassView: UIView  , UITableViewDelegate, UITableViewDataSource
     var tableView:UITableView!
     var dataAry:NSMutableArray!
     var clickCell:(NSInteger)->(Void) = {param in }
-//    var topMenu:XHWLTopView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,27 +34,8 @@ class XHWLAbnormalPassView: UIView  , UITableViewDelegate, UITableViewDataSource
     func setupView() {
         
         bgImage = UIImageView()
-        bgImage.image = UIImage(named:"menu_bg")
+        bgImage.image = UIImage(named:"subview_bg")
         self.addSubview(bgImage)
-        
-        //        tipImg = UIImageView()
-        //        tipImg.frame = CGRect(x:0, y:0, width:55, height:55)
-        //        tipImg.center = CGPoint(x: self.bounds.size.width/2.0, y: self.bounds.size.height/2.0-20)
-        //        self.addSubview(tipImg)
-        
-        //        tipLabel = UILabel()
-        //        tipLabel.textAlignment = NSTextAlignment.center
-        //        tipLabel.textColor = UIColor().colorWithHexString(colorStr: "32b7e2")
-        //        tipLabel.font = font_15
-        //        self.addSubview(tipLabel)
-        
-//        let array:NSArray = ["异常放行记录"]
-//        topMenu = XHWLTopView.init(frame: CGRect.zero)
-//        topMenu.createArray(array: array)
-//        topMenu.btnBlock = { index in
-//            
-//        }
-//        self.addSubview(topMenu)
         
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
         tableView.delegate = self
@@ -70,9 +50,7 @@ class XHWLAbnormalPassView: UIView  , UITableViewDelegate, UITableViewDataSource
         super.layoutSubviews()
         
         bgImage.frame = self.bounds
-        //        tipLabel.frame = CGRect(x:10, y:self.bounds.size.height-80, width:self.bounds.size.width-20, height:40)
-//        topMenu.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:44)
-        tableView.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:self.frame.size.height)
+        tableView.frame = bgImage.bounds // CGRect(x:0, y:0, width:self.frame.size.width, height:self.frame.size.height)
         
     }
     
@@ -88,7 +66,7 @@ class XHWLAbnormalPassView: UIView  , UITableViewDelegate, UITableViewDataSource
         
         let cell: XHWLRegistrationCell = XHWLRegistrationCell.cellWithTableView(tableView: tableView)
         let model:XHWLRegisterationModel = dataAry[indexPath.row] as! XHWLRegisterationModel
-        cell.setModel(registrationModel: model)
+        cell.setRegisterModel(model)
         
         return cell;
     }

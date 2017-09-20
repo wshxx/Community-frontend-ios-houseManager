@@ -16,7 +16,17 @@ class XHWLWarningCell: UITableViewCell {
     var contentL:UILabel!
     var accessIV:UIImageView!
     var lineIV:UIImageView!
-    var waringModel:XHWLWarningModel!
+    var waringModel:XHWLWarningModel! {
+        willSet {
+            if (newValue != nil) {
+                
+                titleL.text = newValue.AlarmType
+                contentL.text = newValue.AlarmInfo
+                timeL.text = newValue.Alarmtime
+
+            }
+        }
+    }
     
     class func cellWithTableView(tableView:UITableView) -> XHWLWarningCell {
         
@@ -72,11 +82,11 @@ class XHWLWarningCell: UITableViewCell {
         self.contentView.addSubview(lineIV)
     }
     
-    func setModel(waringModel:XHWLWarningModel) {
-        titleL.text = waringModel.name
-        contentL.text = waringModel.content
-        timeL.text = waringModel.time
-    }
+//    func setModel(waringModel:XHWLWarningModel) {
+//        titleL.text = waringModel.name
+//        contentL.text = waringModel.content
+//        timeL.text = waringModel.time
+//    }
     
     override func layoutSubviews() {
         super.layoutSubviews()

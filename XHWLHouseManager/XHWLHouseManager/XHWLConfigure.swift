@@ -25,6 +25,7 @@ let MSP_PASSWORD:String   =  "Zhwy1234"
 
 let mainColor:UIColor = UIColor().colorWithHexString(colorStr: "#0abfab") //主色调
 let color_01f0ff:UIColor = UIColor().colorWithHexString(colorStr: "#01f0ff") //主色调
+let color_7a9198:UIColor = UIColor().colorWithHexString(colorStr: "#7a9198") //主色调
 let color_09fbfe:UIColor = UIColor().colorWithHexString(colorStr: "#09fbfe") //主色调
 let color_c8e5f0:UIColor = UIColor().colorWithHexString(colorStr: "#c8e5f0") // 默认placholder颜色
 let color_f2f2f2:UIColor = UIColor().colorWithHexString(colorStr: "#f2f2f2") // 线的颜色
@@ -51,7 +52,7 @@ let Screen_width:CGFloat = UIScreen.main.bounds.size.width
 
 
 // MARK: -- 百度地图
-let MapKitAK:String = "q0cjWyZp8p6ECfY7H8jX9j42TmrdMedR"
+let MapKitAK:String = "B7Ml8pkMdglObbl5GiXDGyu2m9VRNHVG"
 //"10092150" // 应用编号
 let WeatherKey:String = "3e6338eef8c947dd89f4ffebbf580778"
 

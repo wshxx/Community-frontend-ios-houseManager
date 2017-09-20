@@ -9,25 +9,31 @@
 import UIKit
 
 @objc protocol XHWLIssueReportViewDelegate:NSObjectProtocol {
-    @objc optional func onSafeGuard(_ isAdd:Bool)
+    @objc optional func onSafeGuard(_ isAdd:Bool, _ index:NSInteger)
 }
 
 class XHWLIssueReportView: UIView {
 
     var bgImage:UIImageView!
-    var titleL:UILabel!
     var pickPhoto:XHWLPickPhotoView!
     var remark:XHWLRemarkView!
     var radioView: XHWLRadioView!
-    var typeView: XHWLLabelView!
+    var typeView: XHWLSelTypeView!
     var dotView: XHWLLabelView!
+    var scanModel:XHWLScanModel! {
+        willSet {
+            if (newValue != nil) {
+                dotView.showText(leftText: "巡检点位：", rightText:newValue.address)
+            }
+        }
+    }
     var cancelBtn:UIButton!
     var submitBtn:UIButton!
-    var lineIV:UIImageView!
     weak var delegate:XHWLIssueReportViewDelegate?
     var btnBlock:(String, String, String, String)->(Void) = { param in }
     var dismissBlock:()->() = {_ in }
     var radioIndex:String?
+    var type:String! = "工程"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,21 +52,28 @@ class XHWLIssueReportView: UIView {
         bgImage.image = UIImage(named:"menu_bg")
         self.addSubview(bgImage)
         
-        titleL = UILabel()
-        titleL.textAlignment = NSTextAlignment.center
-        titleL.textColor = color_09fbfe
-        titleL.font = font_13
-        titleL.text = "报事"
-        self.addSubview(titleL)
-        
-        
-        lineIV = UIImageView()
-        lineIV.image = UIImage(named: "warning_cell_line")
-        self.addSubview(lineIV)
-        
-        typeView = XHWLLabelView()
-        typeView.showText(leftText: "异常类型：", rightText:"工程")
+        typeView = XHWLSelTypeView()
+        typeView.showText(leftText: "异常类型：", btnTitle:"工程")
+        typeView.btnBlock = { [weak typeView] in
+            self.endEditing(true)
+            let array:NSArray = ["工程", "环境", "客服", "安防"]
+            let pickerView:XHWLPickerView = XHWLPickerView(frame:CGRect.zero, array:array)
+            
+            let window: UIWindow = (UIApplication.shared.keyWindow)!
+            pickerView.dismissBlock = { [weak pickerView] (index)->() in
+                print("\(index)")
+                if index != -1 {
+                    self.type = array[index] as! String
+                    typeView?.showBtnTitle(array[index] as! String)
+                }
+                pickerView?.removeFromSuperview()
+            }
+            pickerView.frame = UIScreen.main.bounds
+            window.addSubview(pickerView)
+        }
         self.addSubview(typeView)
+        
+        
         
         dotView = XHWLLabelView()
         dotView.showText(leftText: "巡检点位：", rightText:"中海华庭水泵房")
@@ -85,8 +98,9 @@ class XHWLIssueReportView: UIView {
         
         pickPhoto = XHWLPickPhotoView()
         pickPhoto.showText("上传照片：")
-        pickPhoto.addPictureBlock = { isAdd in
-            self.delegate?.onSafeGuard!(isAdd)
+        pickPhoto.isShow = false
+        pickPhoto.addPictureBlock = { isAdd, index in
+            self.delegate?.onSafeGuard!(isAdd, index)
         }
         self.addSubview(pickPhoto)
         
@@ -108,13 +122,13 @@ class XHWLIssueReportView: UIView {
         submitBtn.addTarget(self, action: #selector(submitClick), for: UIControlEvents.touchUpInside)
         self.addSubview(submitBtn)
     }
-    
+
     func submitClick(btn:UIButton) {
         
         if btn.tag - comTag == 0 {
             self.dismissBlock()
         } else {
-            self.btnBlock(typeView.contentTF.text!, dotView.contentTF.text!, remark.textView.text!, radioIndex!)
+            self.btnBlock(self.type!, dotView.contentTF.text!, remark.textView.text!, radioIndex!)
         }
         
     }
@@ -124,9 +138,7 @@ class XHWLIssueReportView: UIView {
         
         bgImage.frame = self.bounds
         
-        titleL.frame = CGRect(x:10, y:10, width:self.bounds.size.width-20, height:44)
-        lineIV.frame = CGRect(x:10, y:titleL.frame.maxY, width:self.bounds.size.width-20, height:0.5)
-        typeView.frame = CGRect(x:10, y:lineIV.frame.maxY+10, width:self.bounds.size.width-20, height:20)
+        typeView.frame = CGRect(x:10, y:10, width:self.bounds.size.width-20, height:20)
         dotView.frame = CGRect(x:10, y:typeView.frame.maxY+10, width:self.bounds.size.width-20, height:20)
         remark.frame = CGRect(x:10, y:dotView.frame.maxY+10, width:self.bounds.size.width-20, height:80)
         

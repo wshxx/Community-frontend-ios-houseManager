@@ -168,7 +168,26 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
         superWithLoadData(parameters, .XHWL_LOGOUT, .get)
     }
     
+    // 处理安防事件（提交）
+    func postSafeGuardSubmitClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_SAFEGUARDSUBMIT, .post)
+    }
     
+    // 获取停车场异常放行记录
+    func getExceptionPassLogClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_EXCEPTIONPASSLOG, .get)
+    }
+    
+    // 处理异常放行记录
+    func postHandleExceptionPassClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_HANDLEEXCEPTIONPASS, .post)
+    }
     
     // 某项目所有设备某日能耗
     func postEnergyLoseClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
@@ -183,20 +202,14 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
     
     // 返回某项目某设备当前实时数据
     func postRealDataClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
-        
-//        ProjectCode 	string 	是 	项目编号
-//        DeviceID 	string 	是 	设备ID
-//        token 	string 	是 	用户登录token
+
         self.delegate = delegate;
         superWithLoadData(parameters, .XHWL_REALDATA, .post)
     }
     
     // 返回项目所有房间与环境监测设备对应关系
     func postNavParameClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
-        
-        //        ProjectCode 	string 	是 	项目编号
-        //        DeviceID 	string 	是 	设备ID
-        //        token 	string 	是 	用户登录token
+    
         self.delegate = delegate;
         superWithLoadData(parameters, .XHWL_NAVPARAME, .post)
     }
@@ -208,13 +221,30 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
         superWithLoadData(parameters, .XHWL_NEWALER, .post)
     }
     
-    
     //   所有设备信息
     func postDeviceInfoClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
         
         self.delegate = delegate;
         superWithLoadData(parameters, .XHWL_DEVICEINFO, .post)
     }
+    
+    // 在线定位
+    func getMapkitClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_MAPKIT, .get)
+    }
+    
+    // 实时进度
+    func getRealProgressClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_REALPROGRESS, .get)
+    }
+    
+    
+    
+    
     
     
     // MARK: - XHWLHttpToolDelegate

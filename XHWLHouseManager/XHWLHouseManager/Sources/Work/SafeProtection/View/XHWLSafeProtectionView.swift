@@ -14,24 +14,25 @@ class XHWLSafeProtectionView: UIView , UITableViewDelegate, UITableViewDataSourc
     var tipImg:UIImageView!
     var tipLabel:UILabel!
     var tableView:UITableView!
-    var dataAry:NSMutableArray!
-    var dataSource:NSMutableArray!
-    var clickCell:(NSInteger, NSInteger)->(Void) = {param in }
+    var dataAry:NSMutableArray! = NSMutableArray()
+    var dataSource:NSMutableArray! = NSMutableArray()
+    var clickCell:(NSInteger, NSInteger, String)->(Void) = {param in }
     var selectIndex:NSInteger! = 0
+    var topMenu:XHWLTopView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let array:NSArray = [["name": "电梯无法工作", "time":"2017.01.21", "registerName":"哈哈", "content":"张浩然"],
-                             ["name": "电梯无法工作", "time":"2017.01.21", "registerName":"哈哈",  "content":"张浩然"]
-        ]
-        let array2:NSArray = [["name": "已处理电梯无法工作", "time":"2017.01.21", "registerName":"哈哈", "content":"张浩然"],
-                             ["name": "已处理电梯无法工作", "time":"2017.01.21", "registerName":"哈哈",  "content":"张浩然"]
-        ]
-        dataAry = NSMutableArray()
-        dataAry = XHWLRegisterationModel.mj_objectArray(withKeyValuesArray: array)
-        dataSource = NSMutableArray()
-        dataSource = XHWLRegisterationModel.mj_objectArray(withKeyValuesArray: array2)
+//        let array:NSArray = [["name": "电梯无法工作", "time":"2017.01.21", "registerName":"哈哈", "content":"张浩然"],
+//                             ["name": "电梯无法工作", "time":"2017.01.21", "registerName":"哈哈",  "content":"张浩然"]
+//        ]
+//        let array2:NSArray = [["name": "已处理电梯无法工作", "time":"2017.01.21", "registerName":"哈哈", "content":"张浩然"],
+//                             ["name": "已处理电梯无法工作", "time":"2017.01.21", "registerName":"哈哈",  "content":"张浩然"]
+//        ]
+//        dataAry = NSMutableArray()
+//        dataAry = XHWLRegisterationModel.mj_objectArray(withKeyValuesArray: array)
+//        dataSource = NSMutableArray()
+//        dataSource = XHWLRegisterationModel.mj_objectArray(withKeyValuesArray: array2)
         
         setupView()
     }
@@ -39,8 +40,17 @@ class XHWLSafeProtectionView: UIView , UITableViewDelegate, UITableViewDataSourc
     func setupView() {
         
         bgImage = UIImageView()
-        bgImage.image = UIImage(named:"subview_bg")
+        bgImage.image = UIImage(named:"menu_bg")
         self.addSubview(bgImage)
+        
+        let array:NSArray = ["待处理", "已处理"]
+        topMenu = XHWLTopView.init(frame: CGRect.zero)
+        topMenu.createArray(array: array)
+        topMenu.btnBlock = {[weak self] index in
+            self?.selectIndex = index
+            self?.tableView.reloadData()
+        }
+        self.addSubview(topMenu)
         
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
         tableView.delegate = self
@@ -54,8 +64,10 @@ class XHWLSafeProtectionView: UIView , UITableViewDelegate, UITableViewDataSourc
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        bgImage.frame = self.bounds
-        tableView.frame = CGRect(x:7, y:58, width:self.bounds.size.width-14, height:self.frame.size.height-36)
+        let img = UIImage(named:"warning_subview_top_bg")!
+        topMenu.frame =  CGRect(x:0, y:0, width:img.size.width, height:img.size.height)
+        bgImage.frame = CGRect(x:14, y:56, width:self.bounds.size.width-28, height:self.frame.size.height-56)
+        tableView.frame = CGRect(x:14, y:topMenu.frame.maxY, width:self.bounds.size.width-28, height:self.frame.size.height-topMenu.frame.maxY-14)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -72,13 +84,13 @@ class XHWLSafeProtectionView: UIView , UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: XHWLRegistrationCell = XHWLRegistrationCell.cellWithTableView(tableView: tableView)
-        var model:XHWLRegisterationModel!
+        var model:XHWLSafeProtectionModel! //XHWLRegisterationModel!
         if selectIndex == 0 {
-            model = dataAry[indexPath.row] as! XHWLRegisterationModel
+            model = dataAry[indexPath.row] as! XHWLSafeProtectionModel //XHWLRegisterationModel
         } else {
-            model = dataSource[indexPath.row] as! XHWLRegisterationModel
+            model = dataSource[indexPath.row] as! XHWLSafeProtectionModel //XHWLRegisterationModel
         }
-        cell.setModel(registrationModel: model)
+        cell.setModel(model)
         
         return cell;
     }
@@ -86,7 +98,13 @@ class XHWLSafeProtectionView: UIView , UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        self.clickCell(selectIndex, indexPath.row)
+        var model:XHWLSafeProtectionModel! //XHWLRegisterationModel!
+        if selectIndex == 0 {
+            model = dataAry[indexPath.row] as! XHWLSafeProtectionModel //XHWLRegisterationModel
+        } else {
+            model = dataSource[indexPath.row] as! XHWLSafeProtectionModel //XHWLRegisterationModel
+        }
+        self.clickCell(selectIndex, indexPath.row, model.code)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

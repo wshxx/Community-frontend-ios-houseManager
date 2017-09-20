@@ -26,7 +26,6 @@ class XHWLRegistrationVC: UIViewController , XHWLScanTestVCDelegate{
     func setupNav() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
-        self.title = "登记记录"
     }
 
     func onBack(){

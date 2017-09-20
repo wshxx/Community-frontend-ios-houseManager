@@ -16,6 +16,7 @@ pod 'MJExtension', '~>3.0.13'
 pod 'WilddogVideo', '~>2.0.2'
 
 
+pod 'HZActionSheet', '~> 1.0.1'
 pod 'WilddogSync'
 pod 'GPUImage',:git=>'https://github.com/BradLarson/GPUImage.git'
 

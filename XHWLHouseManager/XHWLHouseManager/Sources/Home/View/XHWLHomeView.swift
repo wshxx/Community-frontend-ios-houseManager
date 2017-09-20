@@ -14,9 +14,9 @@ import UIKit
 
 @objc protocol XHWLHomeViewDelegate:NSObjectProtocol
 {
-        @objc optional func onHomeViewWithOpenBluetooth(_ homeView:XHWLHomeView)
-        @objc optional func onHomeViewWithOpenNetwork(_ homeView:XHWLHomeView)
-        @objc optional func onHomeViewWithBindCard(_ homeView:XHWLHomeView)
+    @objc optional func onHomeViewWithOpenBluetooth(_ homeView:XHWLHomeView)
+    @objc optional func onHomeViewWithOpenNetwork(_ homeView:XHWLHomeView)
+    @objc optional func onHomeViewWithBindCard(_ homeView:XHWLHomeView)
 }
 
 class XHWLHomeView: UIView  {
@@ -39,56 +39,77 @@ class XHWLHomeView: UIView  {
     }
     
     func setupView() {
-        
-        let bigImg = UIImage(named:"Space_BIgCircle")!
+        let bigImg = UIImage(named:"home_circle_outer")!
         spaceBigCircle = UIImageView()
         spaceBigCircle.bounds = CGRect(x:0, y:0, width:bigImg.size.width, height:bigImg.size.height)
         spaceBigCircle.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0)
         spaceBigCircle.image = bigImg
         self.addSubview(spaceBigCircle)
         
-        let smallImg = UIImage(named:"Space_SmallCircle")!
+        let smallImg = UIImage(named:"home_circle_inner")!
         spaceSmallCircle = UIImageView()
         spaceSmallCircle.bounds = CGRect(x:0, y:0, width:smallImg.size.width, height:smallImg.size.height)
         spaceSmallCircle.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0)
         spaceSmallCircle.image = smallImg
         self.addSubview(spaceSmallCircle)
         
-        
-        spaceBg = YLImageView(frame: CGRect(x:self.bounds.size.width/2.0-71, y:0, width:142, height:129))
-        spaceBg.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0)
-        self.addSubview(spaceBg!)
-        
-        let openImg:UIImage = UIImage(named: "Space_FingerPrint")!
+        let openImg:UIImage = UIImage(named: "home_finger_print")!
         openBtn = UIButton()
         openBtn.frame = CGRect(x:0, y:0, width:openImg.size.width, height:openImg.size.height)
-        openBtn.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0)
+        openBtn.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0+5)
         openBtn.setImage(openImg, for: UIControlState.normal)
         openBtn.addTarget(self, action: #selector(onBluetoothOpenDoorClick), for: UIControlEvents.touchUpInside)
         self.addSubview(openBtn)
         
-        let netOpenImg:UIImage = UIImage(named: "Space_Door")!
+        let netOpenImg:UIImage = UIImage(named: "home_network")!
         netOpenBtn = UIButton()
         netOpenBtn.frame = CGRect(x:0, y:0, width:netOpenImg.size.width, height:netOpenImg.size.height)
-        netOpenBtn.center = CGPoint(x:50, y:self.bounds.size.height/2.0)
+        netOpenBtn.center = CGPoint(x:self.bounds.size.width/2.0+115, y:self.bounds.size.height/2.0+80)
         netOpenBtn.setImage(netOpenImg, for: UIControlState.normal)
         netOpenBtn.addTarget(self, action: #selector(onNetDoorBtnClicked), for: UIControlEvents.touchUpInside)
         self.addSubview(netOpenBtn)
         
-        let cardImg:UIImage = UIImage(named: "Space_Card")!
+        let cardImg:UIImage = UIImage(named: "home_bluetooth_bind")!
         bindCardBtn = UIButton()
         bindCardBtn.frame = CGRect(x:0, y:0, width:cardImg.size.width, height:cardImg.size.height)
-        bindCardBtn.center = CGPoint(x:self.bounds.size.width/2.0, y:100)
+        bindCardBtn.center = CGPoint(x:self.bounds.size.width/2.0-115, y:self.bounds.size.height/2.0-80)
         bindCardBtn.setImage(cardImg, for: UIControlState.normal)
         bindCardBtn.addTarget(self, action: #selector(onBindCardBtnClicked), for: UIControlEvents.touchUpInside)
         self.addSubview(bindCardBtn)
+        
+        let window:UIWindow = UIApplication.shared.keyWindow!
+        spaceBg = YLImageView(frame: UIScreen.main.bounds)
+        spaceBg.isHidden = true
+        window.addSubview(spaceBg!)
+        window.bringSubview(toFront: spaceBg)
+        
     }
     
 
     // 蓝牙开门
     func onBluetoothOpenDoorClick() {
         
+        
+        self.spaceBg.isHidden = false
+        let window:UIWindow = UIApplication.shared.keyWindow!
+        window.bringSubview(toFront: spaceBg)
+        YLGIFImage.setPrefetchNum(5)
+        
+        // Do any additional setup after loading the view, typically from a nib.
+        let path = Bundle.main.url(forResource: "door2", withExtension: "gif")?.absoluteString as String!
+        spaceBg.image = YLGIFImage(contentsOfFile: path!)
+        spaceBg.startAnimating()
+        
         self.delegate?.onHomeViewWithOpenBluetooth!(self)
+        //睡眠1.9s，
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.9)){
+            self.spaceBg.stopAnimating()
+            //            let window:UIWindow = UIApplication.shared.keyWindow!
+            //            window.sendSubview(toBack: self.spaceBg)
+            self.spaceBg.isHidden = true
+            self.spaceBg.image = UIImage(named: "Space_SpaceBg")
+        }
+        
     }
     
     // 蓝牙绑卡
@@ -119,14 +140,6 @@ class XHWLHomeView: UIView  {
 //        }) { (error) in
 //            
 //        }
-        
-        
-        //睡眠1.9s，
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.9)){
-            self.spaceBg.stopAnimating()
-            self.sendSubview(toBack: self.spaceBg)
-            self.spaceBg.image = UIImage(named: "Space_SpaceBg")
-        }
     }
     
     
@@ -137,23 +150,8 @@ class XHWLHomeView: UIView  {
     //    描述： 开测试中的门，测试门编号为319，项目编号为1234
     // 鉴权
     func authenticate() {
-        self.spaceBg.isHidden = false
-        self.bringSubview(toFront: self.spaceBg)
-        YLGIFImage.setPrefetchNum(5)
         
-        // Do any additional setup after loading the view, typically from a nib.
-        let path = Bundle.main.url(forResource: "door2", withExtension: "gif")?.absoluteString as String!
-        self.spaceBg.image = YLGIFImage(contentsOfFile: path!)
-        self.spaceBg.startAnimating()
-        
-        //睡眠1.9s，
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.9)){
-            self.spaceBg.stopAnimating()
-            self.sendSubview(toBack: self.spaceBg)
-            self.spaceBg.isHidden = true
-            self.spaceBg.image = UIImage(named: "Space_SpaceBg")
-        }
-        
+       
         let params:[String: String] = ["reqId" : "ABCDEF", // 请求代码 【不为空，随意填】
             "upid" : "1234", // 项目唯一编号unique project identifier【现在的门禁服务器上设置的一个项目编号为 1234】
             "bldgId" : "319", //unique building identifier 【暂时传1】

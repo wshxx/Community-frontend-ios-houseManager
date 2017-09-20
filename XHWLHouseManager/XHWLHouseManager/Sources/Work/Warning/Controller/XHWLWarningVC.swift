@@ -11,6 +11,8 @@ import UIKit
 class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
 
     var warningView:XHWLWarningView!
+    var dataSource:NSMutableArray = NSMutableArray()
+    var dataAry:NSMutableArray = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +20,7 @@ class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
         setupView()
         onLoadHistoryData()
         onLoadCurrentData()
+        self.title = "设备报警"
     }
     
     func onLoadCurrentData() {
@@ -25,7 +28,7 @@ class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
 
-        let params:[String:Any] = ["ProjectCode":"201", // 项目编号
+        let params:[String:Any] = ["ProjectCode":"10200", // 项目编号
             "Cycle":getCurrentDate(), // 日期
             "token":userModel.wyAccount.token,
             ]
@@ -51,32 +54,13 @@ class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
         let deviceList:NSArray = XHWLDeviceModel.mj_objectArray(withKeyValuesArray: deviceData.mj_JSONObject())
         
         let model:XHWLDeviceModel = deviceList[1] as! XHWLDeviceModel
-        let params:[String:Any] = ["ProjectCode":"201", // 项目编号
+        let params:[String:Any] = ["ProjectCode":"10200", // 项目编号
             "DeviceID":model.DeviceID, // 设备id
             "Date":getCurrentDate(), // 日期
             "token":userModel.wyAccount.token,
             ]
         
         XHWLNetwork.shared.postHistoryAlerClick(params as NSDictionary, self)
-        
-        
-        
-       
-//
-//        //                dataAry = NSMutableArray()
-//        let dataAry = XHWLWarningModel.mj_objectArray(withKeyValuesArray: array)
-//
-//        let array2:NSArray = [["name": "历史负载率过高告警当前值2.0%", "time":"2017.01.21 12:23:00", "content":"抵压配电房-4#变压器"],
-//                              ["name": "历史负载率过高告警当前值2.0%", "time":"2017.01.21 12:23:00", "content":"抵压配电房-4#变压器"]
-//        ]
-//        
-//        //                dataSource = NSMutableArray()
-//        let dataSource = XHWLWarningModel.mj_objectArray(withKeyValuesArray: array2)
-//        
-//        self.warningView.dataAry.addObjects(from: dataAry as! [Any])
-//        self.warningView.dataSource.addObjects(from: dataSource as! [Any])
-//        
-//        self.warningView.tableView.reloadData()
     }
     
     // MARK: - XHWLNetworkDelegate
@@ -84,20 +68,18 @@ class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
 //        历史告警
         if requestKey == XHWLRequestKeyID.XHWL_HISTORYALER.rawValue {
-            
-            let array2:NSArray = [["name": "历史负载率过高告警当前值2.0%", "time":"2017.01.21 12:23:00", "content":"抵压配电房-4#变压器"],
-                                  ["name": "历史负载率过高告警当前值2.0%", "time":"2017.01.21 12:23:00", "content":"抵压配电房-4#变压器"]
-            ]
-            let dataSource = XHWLWarningModel.mj_objectArray(withKeyValuesArray: array2)
+            let array = response["result"] as! NSArray
+            dataSource = XHWLWarningModel.mj_objectArray(withKeyValuesArray: array)
+            self.warningView.dataSource = NSMutableArray()
             self.warningView.dataSource.addObjects(from: dataSource as! [Any])
             self.warningView.tableView.reloadData()
         }
         else if requestKey == XHWLRequestKeyID.XHWL_NEWALER.rawValue {
-            let array:NSArray = [["name": "负载率过高告警当前值2.0%", "time":"2017.01.21 12:23:00", "content":"抵压配电房-4#变压器"],
-                                 ["name": "负载率过高告警当前值2.0%", "time":"2017.01.21 12:23:00", "content":"抵压配电房-4#变压器"]
-            ]
-            let dataSource = XHWLWarningModel.mj_objectArray(withKeyValuesArray: array)
-            self.warningView.dataAry.addObjects(from: dataSource as! [Any])
+  
+            let array = response["result"] as! NSArray
+            dataAry = XHWLWarningModel.mj_objectArray(withKeyValuesArray: array)
+            self.warningView.dataAry = NSMutableArray()
+            self.warningView.dataAry.addObjects(from: dataAry as! [Any])
             self.warningView.tableView.reloadData()
         }
 
@@ -113,11 +95,16 @@ class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
         warningView = XHWLWarningView()
         warningView.bounds = CGRect(x:0, y:0, width:338, height:68+showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
-        warningView.clickCell = {isHistory, index in
+        warningView.clickCell = {[weak self] isHistory, index in
             
             let vc:XHWLHistoryDetailVC = XHWLHistoryDetailVC()
             vc.isHistory = isHistory
-            self.navigationController?.pushViewController(vc, animated: true)
+            if isHistory {
+                 vc.warningModel = self?.dataSource[index] as! XHWLWarningModel
+            } else {
+                 vc.warningModel = self?.dataAry[index] as! XHWLWarningModel
+            }
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
         self.view.addSubview(warningView)
     }

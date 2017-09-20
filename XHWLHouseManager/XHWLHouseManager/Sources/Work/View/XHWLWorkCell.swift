@@ -41,6 +41,7 @@ class XHWLWorkCell: UITableViewCell {
     func setupView() {
         showBtn = UIButton.init(type: UIButtonType.custom)
         showBtn.setBackgroundImage(UIImage(named:"home_btn_bg"), for: UIControlState.normal)
+        showBtn.setBackgroundImage(UIImage(named:"home_btn_bg_high"), for: UIControlState.highlighted)
         showBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
         showBtn.addTarget(self, action: #selector(onSelectClick), for: UIControlEvents.touchUpInside)
         self.contentView.addSubview(showBtn)

@@ -32,6 +32,7 @@ class XHWLCheckVC: UIViewController  , XHWLScanTestVCDelegate {
     func onRecordClick() {
         
         let vc:XHWLRegistrationVC = XHWLRegistrationVC() // 访客记录
+        vc.title = "登记记录"
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

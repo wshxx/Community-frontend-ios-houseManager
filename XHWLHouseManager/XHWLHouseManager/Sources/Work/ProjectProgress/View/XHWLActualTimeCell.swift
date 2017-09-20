@@ -17,6 +17,14 @@ class XHWLActualTimeCell: UITableViewCell {
     var waringModel:XHWLWarningModel!
    // var progressView:UIProgressView!
     var progressView:XHWLProgressView!
+    var progressModel:XHWLRealProgressModel! {
+        willSet {
+            if newValue != nil {
+                
+                progressView.progressModel = newValue
+            }
+        }
+    }
     
     class func cellWithTableView(tableView:UITableView) -> XHWLActualTimeCell {
         
@@ -47,7 +55,7 @@ class XHWLActualTimeCell: UITableViewCell {
         progressView = XHWLProgressView()
         self.contentView.addSubview(progressView)
         
-     accessIV = UIImageView()
+        accessIV = UIImageView()
         accessIV.image = UIImage(named: "warning_accessView")
         self.contentView.addSubview(accessIV)
         
@@ -80,11 +88,10 @@ class XHWLActualTimeCell: UITableViewCell {
         self.contentView.addSubview(lineIV) */
     }
     
-    func setModel(waringModel:XHWLWarningModel) {
-        progressView.setModel(waringModel: waringModel)
-     //   progressView.titleL.text = waringModel.name
-       // progressView.timeL.text = waringModel.time
-    }
+//    func setModel(waringModel:XHWLWarningModel) {
+//        progressView.setModel(waringModel: waringModel)
+//
+//    }
     
     override func layoutSubviews() {
         super.layoutSubviews()

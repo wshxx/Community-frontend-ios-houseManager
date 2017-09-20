@@ -13,6 +13,7 @@ class XHWLHistoryDetailVC: UIViewController , XHWLScanTestVCDelegate{
     var bgImg:UIImageView!
     var dataAry:NSMutableArray!
     var isHistory:Bool! // 是历史记录
+    var warningModel:XHWLWarningModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,14 +21,15 @@ class XHWLHistoryDetailVC: UIViewController , XHWLScanTestVCDelegate{
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.white
         
+        
         dataAry = NSMutableArray()
-        let array :NSMutableArray = [["name":"告警等级：", "content":"严重", "isHiddenEdit": true],
+        let array :NSMutableArray = [["name":"告警等级：", "content":warningModel.AlarmLevel, "isHiddenEdit": true],
                               ["name":"项目名称：", "content":"中海华庭", "isHiddenEdit": true],
                               ["name":"房间名称：", "content":"低压配电房", "isHiddenEdit":true],
                               ["name":"设备名称：", "content":"4#变压器", "isHiddenEdit": true],
-                              ["name":"设备类型：", "content":"变压器", "isHiddenEdit": true],
-                              ["name":"告警信息：", "content":"负载率过高警告当前", "isHiddenEdit": true],
-                              ["name":"告警时间：", "content":"2017-01-21 12:23", "isHiddenEdit": true]]
+                              ["name":"设备类型：", "content":warningModel.AlarmType, "isHiddenEdit": true],
+                              ["name":"告警信息：", "content":warningModel.AlarmInfo, "isHiddenEdit": true],
+                              ["name":"告警时间：", "content":warningModel.Alarmtime, "isHiddenEdit": true]]
         if isHistory {
             array.add(["name":"告警解除时间：", "content":"2017-01-21 12:23", "isHiddenEdit": true])
         }
@@ -36,18 +38,15 @@ class XHWLHistoryDetailVC: UIViewController , XHWLScanTestVCDelegate{
         setupView()
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"home_scan"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onScan))
+        if isHistory {
+            self.title = "历史告警"
+        } else {
+            self.title = "当前告警"
+        }
     }
     
     func onBack(){
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    // 扫一扫
-    func onScan() {
-        let vc: XHWLScanTestVC = XHWLScanTestVC()
-        vc.delegate = self
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func setupView() {
@@ -57,7 +56,7 @@ class XHWLHistoryDetailVC: UIViewController , XHWLScanTestVCDelegate{
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-        let image:UIImage = UIImage(named:"menu_bg")!
+        let image:UIImage = UIImage(named:"subview_bg")!
         let warningView:XHWLHistoryWarningView = XHWLHistoryWarningView()
         warningView.bounds = CGRect(x:0, y:0, width:image.size.width, height:image.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)

@@ -75,7 +75,15 @@ class XHWLRegistrationCell: UITableViewCell {
         self.contentView.addSubview(lineIV)
     }
     
-    func setModel(registrationModel:XHWLRegisterationModel) {
+//    ["name": "电梯无法工作", "time":"2017.01.21", "registerName":"哈哈", "content":"张浩然"],
+    func setModel(_ registrationModel:XHWLSafeProtectionModel) {
+        titleL.text = registrationModel.urgency
+        contentL.text = "业主:\(registrationModel.manageRemarks)"
+        registerNameL.text = "登记人：\(registrationModel.remarks)"
+        timeL.text = registrationModel.createTime
+    }
+    
+    func setRegisterModel(_ registrationModel:XHWLRegisterationModel) {
         titleL.text = registrationModel.name
         contentL.text = "业主:\(registrationModel.content)"
         registerNameL.text = "登记人：\(registrationModel.registerName)"

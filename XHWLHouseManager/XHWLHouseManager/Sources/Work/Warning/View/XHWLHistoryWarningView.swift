@@ -11,9 +11,9 @@ import UIKit
 class XHWLHistoryWarningView: UIView {
 
     var bgImage:UIImageView!
-    var titleL:UILabel!
     var btn:UIButton!
     var labelViewArray:NSMutableArray!
+    var array:NSArray!
     var btnBlock:(NSInteger)->(Void) = { param in }
     
     static var shared: XHWLHistoryWarningView {
@@ -40,15 +40,8 @@ class XHWLHistoryWarningView: UIView {
     func setupView() {
         
         bgImage = UIImageView()
-        bgImage.image = UIImage(named:"menu_bg")
+        bgImage.image = UIImage(named:"subview_bg")
         self.addSubview(bgImage)
-        
-        titleL = UILabel()
-        titleL.textAlignment = NSTextAlignment.center
-        titleL.textColor = UIColor().colorWithHexString(colorStr: "09fbfe")
-        titleL.font = font_13
-        titleL.text = "历史告警"
-        self.addSubview(titleL)
         
         btn = UIButton()
         btn.addTarget(self, action: #selector(onDeviceDetail), for: UIControlEvents.touchUpInside)
@@ -62,11 +55,12 @@ class XHWLHistoryWarningView: UIView {
     func createArray(array:NSArray) {
         
         labelViewArray = NSMutableArray()
+        self.array = array
         
         for i in 0...array.count-1 {
             
             let menuModel :XHWLMenuModel = array[i] as! XHWLMenuModel
-            let labelView: XHWLLabelView = XHWLLabelView()
+            let labelView: XHWLLineView = XHWLLineView()
             labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
             self.addSubview(labelView)
             labelViewArray.add(labelView)
@@ -77,17 +71,25 @@ class XHWLHistoryWarningView: UIView {
         
     }
     
+    func heightWithSize(_ menuModel :XHWLMenuModel ) -> CGFloat {
+        
+        let sizeL:CGSize = menuModel.name.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_12], context: nil).size
+        let sizeR:CGSize = menuModel.content.boundingRect(with: CGSize(width:CGFloat(self.bounds.size.width-sizeL.width-30), height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesFontLeading, attributes: [NSFontAttributeName:font_12], context: nil).size
+        
+        return sizeR.height + 10
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
         bgImage.frame = self.bounds
         //        tipLabel.frame = CGRect(x:10, y:self.bounds.size.height-80, width:self.bounds.size.width-20, height:40)
-        titleL.frame = CGRect(x:10, y:23, width:self.bounds.size.width-20, height:44)
         
         for i in 0...labelViewArray.count-1 {
             
-            let label:XHWLLabelView = labelViewArray[i] as! XHWLLabelView
-            label.frame = CGRect(x:75, y:30*i+55, width:Int(self.bounds.size.width-85), height:30)
+            let menuModel :XHWLMenuModel = array[i] as! XHWLMenuModel
+            let label:XHWLLineView = labelViewArray[i] as! XHWLLineView
+            label.frame = CGRect(x:15, y:30*i+5, width:Int(self.bounds.size.width-30), height:Int(heightWithSize(menuModel)))
         }
         
         btn.frame = CGRect(x:50, y:self.frame.size.height-172, width:self.bounds.size.width-100, height:44)

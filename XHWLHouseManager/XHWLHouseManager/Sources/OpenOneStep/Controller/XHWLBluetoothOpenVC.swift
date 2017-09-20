@@ -38,12 +38,7 @@ class XHWLBluetoothOpenVC: UIViewController {
     func setupNav() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
-        let array:NSArray = ["蓝牙授权"]
-        topMenu = XHWLTopView.init(frame: CGRect.zero)
-        topMenu.createArray(array: array)
-        topMenu.frame = CGRect(x:0, y:0, width:Screen_width-100, height:44)
-        topMenu.center = CGPoint(x:Screen_width/2.0, y:22)
-        self.navigationItem.titleView = topMenu
+        self.title = "蓝牙授权"
     }
     
     func onBack(){

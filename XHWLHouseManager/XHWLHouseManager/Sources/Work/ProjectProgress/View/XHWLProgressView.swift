@@ -15,7 +15,15 @@ class XHWLProgressView: UIView {
     //var accessIV:UIImageView!
     var lineIV:UIImageView!
     var waringModel:XHWLWarningModel!
-    var progressView:UIProgressView!
+    var progressView:JGProgressView!
+    var progressModel:XHWLRealProgressModel! {
+        willSet {
+            if newValue != nil {
+                titleL.text = newValue.nickname
+                timeL.text = newValue.progress
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,17 +45,9 @@ class XHWLProgressView: UIView {
         titleL.text = "许柳飞"
         self.addSubview(titleL)
         
-        progressView = UIProgressView(progressViewStyle:UIProgressViewStyle.default)
-        progressView.progress=0.8 //默认进度50%
-        progressView.progressTintColor=color_01f0ff  //已有进度颜色
-        progressView.trackTintColor=UIColor.red  //剩余进度颜色（即进度槽颜色）
-        //        progressView.setProgress(0.8,animated:true)
-      //  progressView.layer.borderColor = color_58e9f3.cgColor
-        //progressView.layer.borderWidth = 0.5
-        progressView.frame = CGRect(x:0, y:0, width:200, height:25)
-        //设置进度条位置（水平居中）
-        progressView.layer.position = CGPoint(x:self.bounds.size.width/2.0, y: 100)
-        progressView.transform = CGAffineTransform(scaleX: 1.0, y: 5.0)
+        //进度条
+        progressView = JGProgressView.init(frame: CGRect(x:0, y:0, width:180, height:12))
+        progressView.progress = 0.5
         self.addSubview(progressView)
         
         timeL = UILabel()
@@ -61,21 +61,20 @@ class XHWLProgressView: UIView {
         self.addSubview(lineIV)
     }
     
-    func setModel(waringModel:XHWLWarningModel) {
-        titleL.text = waringModel.name
-        timeL.text = waringModel.time
-    }
+//    func setModel(waringModel:XHWLWarningModel) {
+//        titleL.text = waringModel.name
+//        timeL.text = waringModel.time
+//    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
         titleL.frame = CGRect(x:13, y:0, width:80, height:44)
-        progressView.frame = CGRect(x:0, y:0, width:200, height:25)
-        progressView.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0)
-        progressView.transform = CGAffineTransform(scaleX: 1.0, y: 5.0)
-        timeL.frame = CGRect(x:progressView.frame.maxX+5, y:0, width:60, height:44)
-      //  accessIV.bounds = CGRect(x:0, y:0, width:7, height:12)
-       // accessIV.center = CGPoint(x:self.frame.size.width-17, y:self.frame.size.height/2.0)
+        progressView.frame = CGRect(x:0, y:0, width:180, height:12)
+        timeL.frame = CGRect(x:self.frame.size.width-60, y:0, width:40, height:44)
+//      //  accessIV.bounds = CGRect(x:0, y:0, width:7, height:12)
+//       // accessIV.center = CGPoint(x:self.frame.size.width-17, y:self.frame.size.height/2.0)
         lineIV.frame = CGRect(x:13, y:self.frame.size.height-0.5, width:self.frame.size.width-30, height:0.5)
+        progressView.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0)
     }
 }

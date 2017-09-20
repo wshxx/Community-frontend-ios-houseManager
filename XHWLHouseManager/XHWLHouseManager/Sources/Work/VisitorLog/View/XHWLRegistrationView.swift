@@ -50,7 +50,7 @@ class XHWLRegistrationView: UIView  , UITableViewDelegate, UITableViewDataSource
         super.layoutSubviews()
         
         bgImage.frame = self.bounds
-        tableView.frame = CGRect(x:12, y:58, width:self.bounds.size.width-24, height:self.frame.size.height-72)
+        tableView.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:self.frame.size.height)
         
     }
     
@@ -66,7 +66,7 @@ class XHWLRegistrationView: UIView  , UITableViewDelegate, UITableViewDataSource
         
         let cell: XHWLRegistrationCell = XHWLRegistrationCell.cellWithTableView(tableView: tableView)
         let model:XHWLRegisterationModel = dataAry[indexPath.row] as! XHWLRegisterationModel
-        cell.setModel(registrationModel: model)
+        cell.setRegisterModel(model)
         
         return cell;
     }

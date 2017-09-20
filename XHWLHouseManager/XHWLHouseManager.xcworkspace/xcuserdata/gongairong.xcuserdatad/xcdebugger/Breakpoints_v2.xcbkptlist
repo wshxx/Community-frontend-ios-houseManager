@@ -9,124 +9,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XHWLHouseManager/Sources/Work/View/XHWLScanResultView.swift"
-            timestampString = "527074564.349888"
+            filePath = "XHWLHouseManager/Sources/Work/Warning/Controller/XHWLWarningVC.swift"
+            timestampString = "527562780.552396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "XHWLScanResultView"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XHWLHouseManager/Sources/Work/IssueReport/Controller/XHWLIssueReportVC.swift"
-            timestampString = "527170831.909476"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "onIssueReport(_:_:_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XHWLHouseManager/Sources/Work/IssueReport/Controller/XHWLIssueReportVC.swift"
-            timestampString = "527170831.909476"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "onIssueReport(_:_:_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XHWLHouseManager/Sources/Work/IssueReport/Controller/XHWLIssueReportListVC.swift"
-            timestampString = "527170107.20146"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
-            landmarkName = "loadList()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XHWLHouseManager/Sources/Work/IssueReport/Controller/XHWLIssueReportVC.swift"
-            timestampString = "527171075.532651"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "onIssueReport(_:_:_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XHWLHouseManager/Sources/Work/IssueReport/Controller/XHWLIssueReportVC.swift"
-            timestampString = "527171089.84313"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "onIssueReport(_:_:_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XHWLHouseManager/Sources/Work/VisitorRegister/View/XHWLCheckListView.swift"
-            timestampString = "527405815.95094"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
-            landmarkName = "requestSuccess(_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XHWLHouseManager/Sources/Work/Controller/XHWLWorkVC.swift"
-            timestampString = "527408416.61846"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "requestSuccess(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "XHWLHouseManager/Sources/Work/Warning/Controller/XHWLWarningVC.swift"
-            timestampString = "527409994.799026"
+            timestampString = "527563019.204811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "requestSuccess(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "XHWLHouseManager/Sources/Work/Warning/Controller/XHWLWarningVC.swift"
-            timestampString = "527409542.133562"
+            timestampString = "527563019.204811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "onLoadCurrentData()"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "requestSuccess(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -169,13 +57,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XHWLHouseManager/Sources/Work/Warning/Controller/XHWLWarningVC.swift"
-            timestampString = "527409545.15961"
+            filePath = "XHWLHouseManager/Sources/Work/IssueReport/Controller/XHWLIssueReportVC.swift"
+            timestampString = "527568042.663118"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "onIssueReport(_:_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "XHWLHouseManager/Sources/Work/IssueReport/Controller/XHWLScanResultVC.swift"
+            timestampString = "527568095.859578"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "60"
             endingLineNumber = "60"
-            landmarkName = "onLoadHistoryData()"
+            landmarkName = "setupScanResult()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -185,13 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XHWLHouseManager/Sources/Work/Warning/Controller/XHWLWarningVC.swift"
-            timestampString = "527409955.800326"
+            filePath = "XHWLHouseManager/Sources/Work/IssueReport/Controller/XHWLIssueReportVC.swift"
+            timestampString = "527568189.676441"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "requestSuccess(_:_:)"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "onSafeGuard(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

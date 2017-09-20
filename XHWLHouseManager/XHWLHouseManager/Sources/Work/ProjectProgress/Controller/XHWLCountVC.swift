@@ -8,11 +8,12 @@
 
 import UIKit
 
-class XHWLCountVC: UIViewController {
+class XHWLCountVC: UIViewController , XHWLNetworkDelegate{
     
     var bgImg:UIImageView!
     var topMenu:XHWLTopView!
     var warningView:XHWLCountView!
+    var dataAry:NSMutableArray! = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,17 +22,39 @@ class XHWLCountVC: UIViewController {
         self.view.backgroundColor = UIColor.white
         setupView()
         setupNav()
+        onLoadData()
+    }
+    
+    func onLoadData() {
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        XHWLNetwork.shared.getRealProgressClick([userModel.wyAccount.token] as NSArray, self)
+    }
+    
+    // MARK: - XHWLNetworkDelegate
+    
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        if requestKey == XHWLRequestKeyID.XHWL_EXCEPTIONPASSLOG.rawValue {
+            
+            dataAry = XHWLRealProgressModel.mj_objectArray(withKeyValuesArray:response["result"] as! NSArray)
+            
+            warningView.dataAry = dataAry
+            warningView.tableView.reloadData()
+        }
+        
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
     }
     
     func setupNav() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
-        let array:NSArray = ["实时进度"]
-        topMenu = XHWLTopView.init(frame: CGRect.zero)
-        topMenu.createArray(array: array)
-        topMenu.frame = CGRect(x:0, y:0, width:Screen_width-100, height:44)
-        topMenu.center = CGPoint(x:Screen_width/2.0, y:22)
-        self.navigationItem.titleView = topMenu
+        self.title = "实时进度"
     }
     
     func onBack(){
@@ -45,8 +68,8 @@ class XHWLCountVC: UIViewController {
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-        let showImg:UIImage = UIImage(named:"menu_bg")!
-        warningView = XHWLCountView(frame:CGRect.zero, array:["", ""])
+        let showImg:UIImage = UIImage(named:"subview_bg")!
+        warningView = XHWLCountView(frame:CGRect.zero)
         warningView.bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.dismissBlock = { index in

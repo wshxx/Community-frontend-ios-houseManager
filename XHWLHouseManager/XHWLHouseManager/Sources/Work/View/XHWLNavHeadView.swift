@@ -12,6 +12,7 @@ class XHWLNavHeadView: UIView , UITableViewDelegate, UITableViewDataSource {
     
     var tableView:UITableView!
     var dataAry:NSArray!
+    var bgImage:UIImageView!
     var btnBlock:(NSInteger)->(Void) = { param in }
     var dismissBlock:(NSInteger)->(Void) = { param in }
     
@@ -36,9 +37,16 @@ class XHWLNavHeadView: UIView , UITableViewDelegate, UITableViewDataSource {
     
     func setupView() {
         
+        bgImage = UIImageView()
+        bgImage.image = UIImage(named:"warning_bg")
+        self.addSubview(bgImage)
+        
+        
         tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = UIColor.clear
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         self.addSubview(tableView)
         tableView.tableFooterView = UIView()
     }
@@ -52,8 +60,12 @@ class XHWLNavHeadView: UIView , UITableViewDelegate, UITableViewDataSource {
         if cell == nil {
             cell =  UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: ID)
         }
+        cell?.backgroundColor = UIColor.clear
         
         let model:XHWLProjectModel = (dataAry[indexPath.row] as? XHWLProjectModel)!
+        cell?.textLabel?.textAlignment = NSTextAlignment.center
+        cell?.textLabel?.font = font_14
+        cell?.textLabel?.textColor = UIColor.white
         cell?.textLabel?.text = model.name
         
         return cell!
@@ -71,6 +83,7 @@ class XHWLNavHeadView: UIView , UITableViewDelegate, UITableViewDataSource {
             height = self.bounds.size.height-64
         }
         
+        bgImage.frame = CGRect(x:0, y:64, width:Int(self.bounds.size.width), height:Int(height))
         tableView.frame = CGRect(x:0, y:64, width:Int(self.bounds.size.width), height:Int(height))
     }
     

@@ -26,12 +26,7 @@ class XHWLProgressDetailVC: UIViewController {
     func setupNav() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
-        let array:NSArray = ["进度详情"]
-        topMenu = XHWLTopView.init(frame: CGRect.zero)
-        topMenu.createArray(array: array)
-        topMenu.frame = CGRect(x:0, y:0, width:Screen_width-100, height:44)
-        topMenu.center = CGPoint(x:Screen_width/2.0, y:22)
-        self.navigationItem.titleView = topMenu
+        self.title = "进度详情"
     }
     
     func onBack(){
@@ -45,7 +40,7 @@ class XHWLProgressDetailVC: UIViewController {
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-        let showImg:UIImage = UIImage(named:"menu_bg")!
+        let showImg:UIImage = UIImage(named:"subview_bg")!
         warningView = XHWLProgressDetailView(frame:CGRect.zero, array:["", "", ""])
         warningView.bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)

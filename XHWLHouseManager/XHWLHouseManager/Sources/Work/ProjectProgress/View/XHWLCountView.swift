@@ -12,13 +12,13 @@ class XHWLCountView: UIView , UITableViewDelegate, UITableViewDataSource {
     
     var bgImage:UIImageView!
     var tableView:UITableView!
-    var dataAry:NSArray!
+    var dataAry:NSMutableArray! = NSMutableArray()
     var dismissBlock:(NSInteger)->(Void) = { param in }
     
-    init(frame: CGRect, array:NSArray) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.clear
-        dataAry = array
+
         setupView()
     }
     
@@ -29,7 +29,7 @@ class XHWLCountView: UIView , UITableViewDelegate, UITableViewDataSource {
     func setupView() {
         
         bgImage = UIImageView()
-        bgImage.image = UIImage(named:"menu_bg")
+        bgImage.image = UIImage(named:"subview_bg")
         self.addSubview(bgImage)
         
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
@@ -42,13 +42,13 @@ class XHWLCountView: UIView , UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return dataAry.count
-        return 2
+        return dataAry.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = XHWLActualTimeCell.cellWithTableView(tableView: tableView)
-     //   cell.textLabel?.text = dataAry[indexPath.row] as? String
+        let model:XHWLRealProgressModel = dataAry[indexPath.row] as! XHWLRealProgressModel
+        cell.progressModel = model
         
         return cell
     }

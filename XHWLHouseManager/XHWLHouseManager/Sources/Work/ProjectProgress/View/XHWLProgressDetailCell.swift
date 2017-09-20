@@ -70,10 +70,10 @@ class XHWLProgressDetailCell: UITableViewCell {
         
     }
     
-    func setModel(waringModel:XHWLWarningModel) {
-        titleL.text = waringModel.name
-        timeL.text = waringModel.time
-    }
+//    func setModel(waringModel:XHWLWarningModel) {
+//        titleL.text = waringModel.name
+//        timeL.text = waringModel.time
+//    }
     
     override func layoutSubviews() {
         super.layoutSubviews()

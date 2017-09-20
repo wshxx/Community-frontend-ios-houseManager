@@ -234,7 +234,7 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
         super.layoutSubviews() 
         
         bgImage.frame = self.bounds
-        bgScrollView.frame = CGRect(x:0, y:58, width:self.bounds.size.width, height:self.bounds.size.height-72)
+        bgScrollView.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:self.bounds.size.height)
    
         
         for i in 0...labelViewArray.count-1 {

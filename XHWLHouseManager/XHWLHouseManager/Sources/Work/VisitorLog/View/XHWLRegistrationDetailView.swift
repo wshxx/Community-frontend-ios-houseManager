@@ -81,11 +81,10 @@ class XHWLRegistrationDetailView: UIView {
         for i in 0...labelViewArray.count-1 {
             
             let label:XHWLLabelView = labelViewArray[i] as! XHWLLabelView
-            label.frame = CGRect(x:75, y:30*i+60, width:Int(self.bounds.size.width-85), height:30)
+            label.frame = CGRect(x:75, y:30*i+5, width:Int(self.bounds.size.width-85), height:30)
         }
         
         showIV.frame = CGRect(x:self.bounds.size.width-130, y:self.frame.size.height-90, width:94, height:51)
-        
     }
 
 }

@@ -8,10 +8,9 @@
 
 import UIKit
 
-class XHWLSafeProtectionVC: UIViewController {
+class XHWLSafeProtectionVC: UIViewController, XHWLNetworkDelegate {
     
     var bgImg:UIImageView!
-    var topMenu:XHWLTopView!
     var warningView:XHWLSafeProtectionView!
     
     override func viewDidLoad() {
@@ -21,26 +20,47 @@ class XHWLSafeProtectionVC: UIViewController {
         self.view.backgroundColor = UIColor.clear
         setupView()
         setupNav()
+        onLoadData()
     }
 
     
     func setupNav() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
-        let array:NSArray = ["水泵房", "排污泵"]
-        topMenu = XHWLTopView.init(frame: CGRect.zero)
-        topMenu.createArray(array: array)
-        topMenu.frame = CGRect(x:0, y:0, width:Screen_width-100, height:44)
-        topMenu.center = CGPoint(x:Screen_width/2.0, y:22)
-        topMenu.btnBlock = {[weak self] index in
-            self?.warningView.selectIndex = index
-            self?.warningView.tableView.reloadData()
-        }
-        self.navigationItem.titleView = topMenu
+        self.title = "安防事件"
     }
     
     func onBack(){
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func onLoadData() {
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        XHWLNetwork.shared.getReportListClick([userModel.wyAccount.token] as NSArray, self)
+    }
+    
+    // MARK: - XHWLNetworkDelegate
+    
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+       
+        if requestKey == XHWLRequestKeyID.XHWL_REPORTLIST.rawValue {
+
+            let dealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray:response["result"]!["deal"] as! NSArray )
+            let noDealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray: response["result"]!["notDeal"] as! NSArray)
+            
+            self.warningView.dataAry.addObjects(from: dealArray as! [Any])
+            self.warningView.dataSource.addObjects(from: noDealArray as! [Any])
+            self.warningView.tableView.reloadData()
+            
+        }
+        
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
     }
     
     func setupView() {
@@ -50,21 +70,20 @@ class XHWLSafeProtectionVC: UIViewController {
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-        let showImg:UIImage = UIImage(named:"subview_bg")!
+        let showImg:UIImage = UIImage(named:"menu_bg")!
         warningView = XHWLSafeProtectionView()
-        warningView.bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
+        warningView.bounds = CGRect(x:0, y:0, width:338, height:68+showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
-        warningView.clickCell = {index, row in
+        warningView.clickCell = {[weak warningView] index, row, code in
             
-            if index == 0 {
-                
-                let vc:XHWLSafeGuardVC = XHWLSafeGuardVC()
-                self.navigationController?.pushViewController(vc, animated: true)
-            } else {
-                
-                let vc:XHWLSafeGuardVC = XHWLSafeGuardVC()
-                self.navigationController?.pushViewController(vc, animated: true)
+            let vc:XHWLSafeGuardVC = XHWLSafeGuardVC()
+            vc.isFinished = !(index == 0)
+            vc.code = code
+            vc.backReloadBlock =  { _ in
+                warningView?.tableView.reloadData()
+//                self.navigationController?.popViewController(animated: true)
             }
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         self.view.addSubview(warningView)
     }

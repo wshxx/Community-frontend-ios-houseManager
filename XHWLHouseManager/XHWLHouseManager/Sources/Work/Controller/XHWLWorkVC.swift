@@ -103,7 +103,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
             array.addObjects(from: ["访客登记"])
         } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
             loadDeviceInfo()
-            array.addObjects(from: ["设备报警", "供配电", "给排水", "设备统计", "能耗统计"])
+            array.addObjects(from: ["设备报警", "供配电", "设备统计", "能耗统计"])
         }
        
         homeView = XHWLWorkView(frame: CGRect.zero, array: array)
@@ -141,12 +141,13 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
             self.navigationController?.pushViewController(vc, animated: true)
             break
         case 3: //  "数据",
-            let vc:XHWLWaterVC = XHWLWaterVC() //
+            let vc:XHWLDataVC = XHWLDataVC() //
             self.navigationController?.pushViewController(vc, animated: true)
             
             break
         case 4: //  "访客记录",
             let vc:XHWLRegistrationVC = XHWLRegistrationVC() // 访客记录
+            vc.title = "访客记录"
             self.navigationController?.pushViewController(vc, animated: true)
             break
         case 5: // "异常放行"
@@ -170,15 +171,11 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         case 1: //"供配电",
             let vc:XHWLWaterVC = XHWLWaterVC()
             self.navigationController?.pushViewController(vc, animated: true)
-        case 2:// "给排水",
-            let vc:XHWLWaterVC = XHWLWaterVC()
-            self.navigationController?.pushViewController(vc, animated: true)
-            break
-        case 3:// "设备统计",
+        case 2:// "设备统计",
             let vc:XHWLDeviceStatisticsVC = XHWLDeviceStatisticsVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
-        case 4: // "能耗统计"
+        case 3: // "能耗统计"
             let vc:XHWLEnergyManagementVC = XHWLEnergyManagementVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break

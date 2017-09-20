@@ -53,27 +53,39 @@ class XHWLHttpTool: NSObject {
     func requestWithKey() -> String {
         
         print("\(self.requestKey)")
-        let transId = XHWLRequestKeyDefine.shared.trandIdDict.object(forKey: self.requestKey ?? 0) as! String
         
-        if transId.isEmpty {
-            return XHWLHttpURL
-        } else {
-            return "\(XHWLHttpURL)/\(transId)"
+        if self.requestKey == XHWLRequestKeyID.XHWL_NAVPARAME {
+            return XHWLRequestKeyDefine.shared.trandIdDict.object(forKey: self.requestKey ?? 0) as! String
+        }
+        else {
+            let transId = XHWLRequestKeyDefine.shared.trandIdDict.object(forKey: self.requestKey ?? 0) as! String
+            
+            if transId.isEmpty {
+                return XHWLHttpURL
+            } else {
+                return "\(XHWLHttpURL)/\(transId)"
+            }
         }
     }
     
     // GET 请求方式
     func getHttpTool(_ parameters: NSArray) {
 
-        let paramStr:String = parameters.componentsJoined(by: "/") as String
-        var requestUrl:String = requestWithKey()
-        if !paramStr.isEmpty {
-           requestUrl = "\(requestUrl)/\(paramStr)"
+        var requestUrl:String = ""
+        if self.requestKey == XHWLRequestKeyID.XHWL_NONE {
+            requestUrl = requestWithKey()
+        } else {
+            print("requestUrl = \(requestUrl) \n")
+            let paramStr:String = parameters.componentsJoined(by: "/") as String
+            requestUrl = requestWithKey()
+            if !paramStr.isEmpty {
+                requestUrl = "\(requestUrl)/\(paramStr)"
+            }
         }
-        print("requestUrl = \(requestUrl) \n")
         
+        print("requestUrl = \(requestUrl) \n param = \(parameters)")
         
-        Alamofire.request(requestUrl, method: .get, parameters: [:], encoding: URLEncoding.default)
+        Alamofire.request(requestUrl, method: .get, parameters:[:], encoding: URLEncoding.default)
             .responseJSON { response in
                 
                 switch response.result {
@@ -96,7 +108,7 @@ class XHWLHttpTool: NSObject {
         
         let requestUrl:String = requestWithKey()
         print("requestUrl = \(requestUrl) \n param = \(parameters)")
-        
+   
         Alamofire.request(requestUrl, method: .post, parameters: parameters, encoding: URLEncoding.default)
             .responseJSON { response in
                 

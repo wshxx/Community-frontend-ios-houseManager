@@ -8,14 +8,13 @@
 
 import UIKit
 
-class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueReportViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, XHWLNetworkDelegate {
+class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, XHWLNetworkDelegate, UIActionSheetDelegate {
     
     var bgImg:UIImageView!
     var isAddPicture:Bool!
     var warningView:XHWLIssueReportView!
     var scanModel:XHWLScanModel!
-    var imageSel:UIImage!
-    var imageSel2:UIImage!
+    var imageArray:NSMutableArray! = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +23,7 @@ class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueRe
         self.view.backgroundColor = UIColor.white
         setupView()
         
+        self.title = "报事"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
@@ -59,6 +59,7 @@ class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueRe
         
         let showImg:UIImage = UIImage(named:"menu_bg")!
         warningView = XHWLIssueReportView()
+        warningView.scanModel = scanModel
         warningView.bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.delegate = self
@@ -112,10 +113,16 @@ class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueRe
 //        }
         
         //        self.progressHUD.show()
-        let imageData:Data = UIImageJPEGRepresentation(imageSel, 0.5)!
-        let imageData2:Data = UIImageJPEGRepresentation(imageSel2, 0.5)!
         
-        XHWLNetwork.shared.uploadImageClick(params as NSDictionary, [imageData2], ["image3.png"], self)
+        let imageDataAry = NSMutableArray()
+        let imageNameAry = NSMutableArray()
+        for i in 0..<imageArray.count {
+            let imageData:Data = UIImageJPEGRepresentation(imageArray[i] as! UIImage, 0.5)!
+            imageDataAry.add(imageData)
+            imageNameAry.add("image\(i)")
+        }
+        
+        XHWLNetwork.shared.uploadImageClick(params as NSDictionary, imageDataAry as! [Data], imageNameAry as! [String], self)
     }
     
     
@@ -172,11 +179,22 @@ class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueRe
         
     }
 
-    func onSafeGuard(_ isAdd:Bool)
+    func onSafeGuard(_ isAdd:Bool, _ index:NSInteger)
     {
+        let actionSheet: UIActionSheet = UIActionSheet.init(title: "提示", delegate: self,
+                                                            cancelButtonTitle: "取消",
+                                                            destructiveButtonTitle: nil,
+                                                            otherButtonTitles: "相册", "拍照")
+
+        actionSheet.show(in: self.view)
+        
+        
         isAddPicture = isAdd
         openAlbum()
     }
+//    func actionSheet(_ actionSheet:UIActionSheet,didDismissWithButtonIndex buttonIndex:Int){
+//        print("点击: "+actionSheet.buttonTitleAtIndex(buttonIndex)!)
+//    }
     
     //打开相册
     func openAlbum(){
@@ -214,7 +232,6 @@ class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueRe
             print("找不到相机")
         }
     }
-    var i:NSInteger = 0
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
     {
@@ -229,14 +246,7 @@ class XHWLIssueReportVC: UIViewController  , XHWLScanTestVCDelegate, XHWLIssueRe
             warningView.pickPhoto.onChangePicture(image)
         }
         
-        if i%2 == 0 {
-            imageSel2 = image
-            i += 1
-        } else {
-            imageSel = image
-            i += 1
-
-        }
+        imageArray.add(image)
         
         //图片控制器退出
         picker.dismiss(animated: true, completion: nil)

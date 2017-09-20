@@ -60,7 +60,7 @@ class XHWLWarningView: UIView , UITableViewDelegate, UITableViewDataSource {
         let img = UIImage(named:"warning_subview_top_bg")!
         topMenu.frame =  CGRect(x:0, y:0, width:img.size.width, height:img.size.height)
         bgImage.frame = CGRect(x:14, y:56, width:self.bounds.size.width-28, height:self.frame.size.height-56)
-        tableView.frame = CGRect(x:0, y:topMenu.frame.maxY, width:self.bounds.size.width, height:self.frame.size.height-topMenu.frame.maxY)
+        tableView.frame = CGRect(x:14, y:topMenu.frame.maxY, width:self.bounds.size.width-28, height:self.frame.size.height-topMenu.frame.maxY-14)
         
     }
     
@@ -86,7 +86,8 @@ class XHWLWarningView: UIView , UITableViewDelegate, UITableViewDataSource {
             
             model = dataAry[indexPath.row] as! XHWLWarningModel
         }
-        cell.setModel(waringModel: model)
+//        cell.setModel(waringModel: model)
+        cell.waringModel = model
         
         return cell;
     }

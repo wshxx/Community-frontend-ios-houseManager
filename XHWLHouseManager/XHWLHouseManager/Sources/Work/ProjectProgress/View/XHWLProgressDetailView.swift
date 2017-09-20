@@ -30,7 +30,7 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
     func setupView() {
         
         bgImage = UIImageView()
-        bgImage.image = UIImage(named:"menu_bg")
+        bgImage.image = UIImage(named:"subview_bg")
         self.addSubview(bgImage)
         
         progressView = XHWLProgressView()
@@ -75,7 +75,7 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
         
         bgImage.frame = self.bounds
         progressView.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:44)
-        tableView.frame = CGRect(x:0, y:44, width:self.bounds.size.width, height:self.frame.size.height-44)
+        tableView.frame = CGRect(x:0, y:progressView.frame.maxY, width:self.bounds.size.width, height:self.frame.size.height-44)
     }
 
 }
