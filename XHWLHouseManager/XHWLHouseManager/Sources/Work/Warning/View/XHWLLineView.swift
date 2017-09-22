@@ -28,11 +28,11 @@ class XHWLLineView: UIView {
         
         titleL = UILabel()
         titleL.textColor = UIColor.white
-        titleL.font = font_12
+        titleL.font = font_14
         self.addSubview(titleL)
         
         contentL = UILabel()
-        contentL.font = font_12
+        contentL.font = font_14
         contentL.textColor = UIColor.white
         contentL.numberOfLines = 0
         self.addSubview(contentL)

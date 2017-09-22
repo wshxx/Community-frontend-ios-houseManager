@@ -36,7 +36,7 @@ class XHWLSafeGuardDetailVC: UIViewController, XHWLScanTestVCDelegate{
         self.view.addSubview(bgImg)
         
         let showImg:UIImage = UIImage(named:"subview_bg")!
-        let warningView:XHWLSafeGuardDetailView = XHWLSafeGuardDetailView()
+        let warningView:XHWLSafeGuardDetailView = XHWLSafeGuardDetailView(frame: CGRect.zero, false)
         warningView.bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.backReloadBlock = { _ in

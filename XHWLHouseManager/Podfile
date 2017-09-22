@@ -5,7 +5,7 @@ target "XHWLHouseManager" do
 
 pod 'Alamofire', '~>4.5.0'
 pod 'Kingfisher', '~>3.11.0'
-pod ''
+
 pod 'IQKeyboardManagerSwift', '~>4.0.13'
 pod 'swiftScan', '~>1.1.1'
 pod 'SnapKit', '~>3.2.0'
@@ -13,11 +13,11 @@ pod 'SnapKit', '~>3.2.0'
 pod 'BaiduMapKit', '~>3.4.0'
 pod 'MJExtension', '~>3.0.13'
 #pod 'HLBarIndicatorView'
-pod 'WilddogVideo', '~>2.0.2'
+#pod 'WilddogVideo', '~>2.0.2'
 
+#pod 'HZActionSheet'
 
-pod 'HZActionSheet', '~> 1.0.1'
-pod 'WilddogSync'
-pod 'GPUImage',:git=>'https://github.com/BradLarson/GPUImage.git'
+#pod 'WilddogSync'
+#pod 'GPUImage',:git=>'https://github.com/BradLarson/GPUImage.git'
 
 end

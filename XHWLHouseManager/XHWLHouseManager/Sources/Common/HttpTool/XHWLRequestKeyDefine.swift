@@ -29,13 +29,15 @@ enum XHWLRequestKeyID : NSInteger {
     case XHWL_HANDLEEXCEPTIONPASS// 处理异常放行记录
     case XHWL_MAPKIT // 在线定位
     case XHWL_REALPROGRESS // 实时进度
+    case XHWL_UNIT //获取单元信息
     
-    case XHWL_ENERGYLOSE    // 某日能耗
+    case XHWL_ENERGYLOSE    // 能耗
     case XHWL_REALDATA      // 返回某项目某设备当前实时数据
     case XHWL_NAVPARAME     // 返回项目所有房间与环境监测设备对应关系
     case XHWL_NEWALER       // 获取项目当前设定周期内最新告警
     case XHWL_DEVICEINFO    // 所有设备信息
-    
+    case XHWL_OPENDOOR // 开门
+    case XHWL_VISITLIST  // 访客登记记录
 }
 
 
@@ -76,12 +78,17 @@ class XHWLRequestKeyDefine: NSObject {
             XHWLRequestKeyID.XHWL_HANDLEEXCEPTIONPASS: "wyBusiness/parking/out/exeption/handle", // 处理异常放行记录
             XHWLRequestKeyID.XHWL_MAPKIT:"wyBusiness/patrol/collectNodes",    //在线定位
             XHWLRequestKeyID.XHWL_REALPROGRESS: "wyBusiness/patrol/progress", // 实时进度
+            XHWLRequestKeyID.XHWL_ENERGYLOSE: "http://www.jianshu.com/p/da288a91a519",// "analysis/device/realData", //"analysis/energy", // 能耗
+            XHWLRequestKeyID.XHWL_UNIT:"wyBusiness/unit", // 获取单元信息
             
-            XHWLRequestKeyID.XHWL_ENERGYLOSE:"wyBusiness/iot/machine/energy", // 某日能耗
+//            XHWLRequestKeyID.XHWL_ENERGYLOSE:"wyBusiness/iot/machine/energy", // 某日能耗
             XHWLRequestKeyID.XHWL_REALDATA: "wyBusiness/iot/machine/realdata", // 返回某项目某设备当前实时数据
             XHWLRequestKeyID.XHWL_NAVPARAME:"wyBusiness/iot/machine/navparame", //返回项目所有房间与环境监测设备对应关系 " http://202.105.104.105:8804/realdata/get", //
             XHWLRequestKeyID.XHWL_NEWALER:"wyBusiness/iot/machine/alarm", //获取项目当前设定周期内最新告警
             XHWLRequestKeyID.XHWL_DEVICEINFO:"wyBusiness/iot/machine/device", //  返回项目下所有设备信息
+            
+            XHWLRequestKeyID.XHWL_OPENDOOR:"appBusiness/iot/entrance/openDoor", // 开门
+            XHWLRequestKeyID.XHWL_VISITLIST:"wyBusiness/visitor"  // 访客登记记录
         ]
     }
 }

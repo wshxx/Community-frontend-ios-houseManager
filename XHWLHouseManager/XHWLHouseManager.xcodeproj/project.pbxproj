@@ -35,7 +35,6 @@
 		19163D1D1F67E63F00C09785 /* XHWLCheckListTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163D1C1F67E63F00C09785 /* XHWLCheckListTF.swift */; };
 		19163D211F67E66500C09785 /* XHWLPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163D201F67E66500C09785 /* XHWLPickerView.swift */; };
 		19163D231F67E67800C09785 /* XHWLMoreListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163D221F67E67800C09785 /* XHWLMoreListView.swift */; };
-		19163D251F67E6C600C09785 /* XHWLRegistrationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163D241F67E6C600C09785 /* XHWLRegistrationCell.swift */; };
 		19163D271F67E6E200C09785 /* XHWLRegistrationDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163D261F67E6E200C09785 /* XHWLRegistrationDetailVC.swift */; };
 		19163D291F67E6F100C09785 /* XHWLRegistrationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163D281F67E6F100C09785 /* XHWLRegistrationDetailView.swift */; };
 		19163D2B1F67E72500C09785 /* XHWLHistoryDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163D2A1F67E72500C09785 /* XHWLHistoryDetailVC.swift */; };
@@ -58,6 +57,9 @@
 		1931C09E1F71F26E004D0A41 /* XHWLLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1931C09D1F71F26E004D0A41 /* XHWLLineView.swift */; };
 		1931C0A01F7203C1004D0A41 /* XHWLScanResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1931C09F1F7203C1004D0A41 /* XHWLScanResultVC.swift */; };
 		1931C0A21F7203E0004D0A41 /* XHWLScanResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1931C0A11F7203E0004D0A41 /* XHWLScanResultView.swift */; };
+		1931C0AA1F722C87004D0A41 /* HZActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1931C0A91F722C87004D0A41 /* HZActionSheet.m */; };
+		1931C0AE1F725504004D0A41 /* XHWLRegistrationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1931C0AD1F725504004D0A41 /* XHWLRegistrationCell.swift */; };
+		1931C0B01F725EDB004D0A41 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1931C0AF1F725EDB004D0A41 /* Date+Extension.swift */; };
 		1941DCD91F58341B009DE0F0 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1941DCD81F58341B009DE0F0 /* HealthKit.framework */; };
 		194FAAD41F5CF993004CA513 /* xhwl_login_logo_down.gif in Resources */ = {isa = PBXBuildFile; fileRef = 194FAAD21F5CF993004CA513 /* xhwl_login_logo_down.gif */; };
 		194FAAD51F5CF993004CA513 /* xhwl_login_logo_up.gif in Resources */ = {isa = PBXBuildFile; fileRef = 194FAAD31F5CF993004CA513 /* xhwl_login_logo_up.gif */; };
@@ -164,6 +166,7 @@
 		19A7A70E1F57EB460044DC1A /* YLImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7A70C1F57EB460044DC1A /* YLImageView.swift */; };
 		19A7A7111F57FB350044DC1A /* XHWLHttpTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7A7101F57FB350044DC1A /* XHWLHttpTool.swift */; };
 		19A7A7131F58067E0044DC1A /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7A7121F58067E0044DC1A /* AlertMessage.swift */; };
+		19A822911F728E1C00B8E570 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A822901F728E1C00B8E570 /* SwiftNotice.swift */; };
 		19ADF39E1F64DD8400A9E0FB /* XHWLRegisterationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF39D1F64DD8400A9E0FB /* XHWLRegisterationModel.swift */; };
 		19ADF3AC1F64FF7300A9E0FB /* XHWLTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF3AB1F64FF7300A9E0FB /* XHWLTagView.swift */; };
 		19B118A51F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B118A41F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift */; };
@@ -186,11 +189,84 @@
 		19BB53A81F56DA43006C38EA /* XHWLLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53A71F56DA43006C38EA /* XHWLLoginVC.swift */; };
 		19BB53AA1F56DDC7006C38EA /* XHWLLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53A91F56DDC7006C38EA /* XHWLLoginView.swift */; };
 		19BB53AC1F56E009006C38EA /* XHWLLoginTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53AB1F56E009006C38EA /* XHWLLoginTF.swift */; };
+		19BBF3951F7389BD005AC7F2 /* 别人进行云对讲0000.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3581F7389BD005AC7F2 /* 别人进行云对讲0000.png */; };
+		19BBF3961F7389BD005AC7F2 /* 别人进行云对讲0001.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3591F7389BD005AC7F2 /* 别人进行云对讲0001.png */; };
+		19BBF3971F7389BD005AC7F2 /* 别人进行云对讲0002.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF35A1F7389BD005AC7F2 /* 别人进行云对讲0002.png */; };
+		19BBF3981F7389BD005AC7F2 /* 别人进行云对讲0003.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF35B1F7389BD005AC7F2 /* 别人进行云对讲0003.png */; };
+		19BBF3991F7389BD005AC7F2 /* 别人进行云对讲0004.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF35C1F7389BD005AC7F2 /* 别人进行云对讲0004.png */; };
+		19BBF39A1F7389BD005AC7F2 /* 别人进行云对讲0005.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF35D1F7389BD005AC7F2 /* 别人进行云对讲0005.png */; };
+		19BBF39B1F7389BD005AC7F2 /* 别人进行云对讲0006.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF35E1F7389BD005AC7F2 /* 别人进行云对讲0006.png */; };
+		19BBF39C1F7389BD005AC7F2 /* 别人进行云对讲0007.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF35F1F7389BD005AC7F2 /* 别人进行云对讲0007.png */; };
+		19BBF39D1F7389BD005AC7F2 /* 别人进行云对讲0008.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3601F7389BD005AC7F2 /* 别人进行云对讲0008.png */; };
+		19BBF39E1F7389BD005AC7F2 /* 别人进行云对讲0009.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3611F7389BD005AC7F2 /* 别人进行云对讲0009.png */; };
+		19BBF39F1F7389BD005AC7F2 /* 别人进行云对讲0010.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3621F7389BD005AC7F2 /* 别人进行云对讲0010.png */; };
+		19BBF3A01F7389BD005AC7F2 /* 别人进行云对讲0011.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3631F7389BD005AC7F2 /* 别人进行云对讲0011.png */; };
+		19BBF3A11F7389BD005AC7F2 /* 别人进行云对讲0012.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3641F7389BD005AC7F2 /* 别人进行云对讲0012.png */; };
+		19BBF3A21F7389BD005AC7F2 /* 别人进行云对讲0013.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3651F7389BD005AC7F2 /* 别人进行云对讲0013.png */; };
+		19BBF3A31F7389BD005AC7F2 /* 别人进行云对讲0014.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3661F7389BD005AC7F2 /* 别人进行云对讲0014.png */; };
+		19BBF3A41F7389BD005AC7F2 /* 别人进行云对讲0015.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3671F7389BD005AC7F2 /* 别人进行云对讲0015.png */; };
+		19BBF3A51F7389BD005AC7F2 /* 别人进行云对讲0016.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3681F7389BD005AC7F2 /* 别人进行云对讲0016.png */; };
+		19BBF3A61F7389BD005AC7F2 /* 别人进行云对讲0017.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3691F7389BD005AC7F2 /* 别人进行云对讲0017.png */; };
+		19BBF3A71F7389BD005AC7F2 /* 别人进行云对讲0018.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF36A1F7389BD005AC7F2 /* 别人进行云对讲0018.png */; };
+		19BBF3A81F7389BD005AC7F2 /* 别人进行云对讲0019.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF36B1F7389BD005AC7F2 /* 别人进行云对讲0019.png */; };
+		19BBF3A91F7389BD005AC7F2 /* 别人进行云对讲0020.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF36C1F7389BD005AC7F2 /* 别人进行云对讲0020.png */; };
+		19BBF3AA1F7389BD005AC7F2 /* 别人进行云对讲0021.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF36D1F7389BD005AC7F2 /* 别人进行云对讲0021.png */; };
+		19BBF3AB1F7389BD005AC7F2 /* 别人进行云对讲0022.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF36E1F7389BD005AC7F2 /* 别人进行云对讲0022.png */; };
+		19BBF3AC1F7389BD005AC7F2 /* 别人进行云对讲0023.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF36F1F7389BD005AC7F2 /* 别人进行云对讲0023.png */; };
+		19BBF3AD1F7389BD005AC7F2 /* 别人进行云对讲0024.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3701F7389BD005AC7F2 /* 别人进行云对讲0024.png */; };
+		19BBF3AE1F7389BD005AC7F2 /* 别人进行云对讲0025.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3711F7389BD005AC7F2 /* 别人进行云对讲0025.png */; };
+		19BBF3AF1F7389BD005AC7F2 /* 别人进行云对讲0026.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3721F7389BD005AC7F2 /* 别人进行云对讲0026.png */; };
+		19BBF3B01F7389BD005AC7F2 /* 别人进行云对讲0027.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3731F7389BD005AC7F2 /* 别人进行云对讲0027.png */; };
+		19BBF3B11F7389BD005AC7F2 /* 别人进行云对讲0028.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3741F7389BD005AC7F2 /* 别人进行云对讲0028.png */; };
+		19BBF3B21F7389BD005AC7F2 /* 别人进行云对讲0029.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3751F7389BD005AC7F2 /* 别人进行云对讲0029.png */; };
+		19BBF3B31F7389BD005AC7F2 /* 别人进行云对讲0030.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3761F7389BD005AC7F2 /* 别人进行云对讲0030.png */; };
+		19BBF3B41F7389BD005AC7F2 /* 别人进行云对讲0031.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3771F7389BD005AC7F2 /* 别人进行云对讲0031.png */; };
+		19BBF3B51F7389BD005AC7F2 /* 别人进行云对讲0032.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3781F7389BD005AC7F2 /* 别人进行云对讲0032.png */; };
+		19BBF3B61F7389BD005AC7F2 /* 别人进行云对讲0033.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3791F7389BD005AC7F2 /* 别人进行云对讲0033.png */; };
+		19BBF3B71F7389BD005AC7F2 /* 别人进行云对讲0034.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF37A1F7389BD005AC7F2 /* 别人进行云对讲0034.png */; };
+		19BBF3B81F7389BD005AC7F2 /* 别人进行云对讲0035.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF37B1F7389BD005AC7F2 /* 别人进行云对讲0035.png */; };
+		19BBF3B91F7389BD005AC7F2 /* 别人进行云对讲0036.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF37C1F7389BD005AC7F2 /* 别人进行云对讲0036.png */; };
+		19BBF3BA1F7389BD005AC7F2 /* 别人进行云对讲0037.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF37D1F7389BD005AC7F2 /* 别人进行云对讲0037.png */; };
+		19BBF3BB1F7389BD005AC7F2 /* 别人进行云对讲0038.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF37E1F7389BD005AC7F2 /* 别人进行云对讲0038.png */; };
+		19BBF3BC1F7389BD005AC7F2 /* 别人进行云对讲0039.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF37F1F7389BD005AC7F2 /* 别人进行云对讲0039.png */; };
+		19BBF3BD1F7389BD005AC7F2 /* 别人进行云对讲0040.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3801F7389BD005AC7F2 /* 别人进行云对讲0040.png */; };
+		19BBF3BE1F7389BD005AC7F2 /* 别人进行云对讲0041.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3811F7389BD005AC7F2 /* 别人进行云对讲0041.png */; };
+		19BBF3BF1F7389BD005AC7F2 /* 别人进行云对讲0042.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3821F7389BD005AC7F2 /* 别人进行云对讲0042.png */; };
+		19BBF3C01F7389BD005AC7F2 /* 别人进行云对讲0043.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3831F7389BD005AC7F2 /* 别人进行云对讲0043.png */; };
+		19BBF3C11F7389BD005AC7F2 /* 别人进行云对讲0044.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3841F7389BD005AC7F2 /* 别人进行云对讲0044.png */; };
+		19BBF3C21F7389BD005AC7F2 /* 别人进行云对讲0045.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3851F7389BD005AC7F2 /* 别人进行云对讲0045.png */; };
+		19BBF3C31F7389BD005AC7F2 /* 别人进行云对讲0046.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3861F7389BD005AC7F2 /* 别人进行云对讲0046.png */; };
+		19BBF3C41F7389BD005AC7F2 /* 别人进行云对讲0047.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3871F7389BD005AC7F2 /* 别人进行云对讲0047.png */; };
+		19BBF3C51F7389BD005AC7F2 /* 别人进行云对讲0048.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3881F7389BD005AC7F2 /* 别人进行云对讲0048.png */; };
+		19BBF3C61F7389BD005AC7F2 /* 别人进行云对讲0049.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3891F7389BD005AC7F2 /* 别人进行云对讲0049.png */; };
+		19BBF3C71F7389BD005AC7F2 /* 别人进行云对讲0050.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF38A1F7389BD005AC7F2 /* 别人进行云对讲0050.png */; };
+		19BBF3C81F7389BD005AC7F2 /* 别人进行云对讲0051.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF38B1F7389BD005AC7F2 /* 别人进行云对讲0051.png */; };
+		19BBF3C91F7389BD005AC7F2 /* 别人进行云对讲0052.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF38C1F7389BD005AC7F2 /* 别人进行云对讲0052.png */; };
+		19BBF3CA1F7389BD005AC7F2 /* 别人进行云对讲0053.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF38D1F7389BD005AC7F2 /* 别人进行云对讲0053.png */; };
+		19BBF3CB1F7389BD005AC7F2 /* 别人进行云对讲0054.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF38E1F7389BD005AC7F2 /* 别人进行云对讲0054.png */; };
+		19BBF3CC1F7389BD005AC7F2 /* 别人进行云对讲0055.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF38F1F7389BD005AC7F2 /* 别人进行云对讲0055.png */; };
+		19BBF3CD1F7389BD005AC7F2 /* 别人进行云对讲0056.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3901F7389BD005AC7F2 /* 别人进行云对讲0056.png */; };
+		19BBF3CE1F7389BD005AC7F2 /* 别人进行云对讲0057.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3911F7389BD005AC7F2 /* 别人进行云对讲0057.png */; };
+		19BBF3CF1F7389BD005AC7F2 /* 别人进行云对讲0058.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3921F7389BD005AC7F2 /* 别人进行云对讲0058.png */; };
+		19BBF3D01F7389BD005AC7F2 /* 别人进行云对讲0059.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3931F7389BD005AC7F2 /* 别人进行云对讲0059.png */; };
+		19BBF3D11F7389BD005AC7F2 /* 别人进行云对讲0060.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BBF3941F7389BD005AC7F2 /* 别人进行云对讲0060.png */; };
+		19BBF3D31F73AA72005AC7F2 /* XHWLPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BBF3D21F73AA72005AC7F2 /* XHWLPickerCell.swift */; };
+		19BBF3DE1F73E7BD005AC7F2 /* XHWLUnitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BBF3DD1F73E7BD005AC7F2 /* XHWLUnitModel.swift */; };
+		19BBF3E01F749F89005AC7F2 /* XHWLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BBF3DF1F749F89005AC7F2 /* XHWLButton.swift */; };
+		19BBF3E21F74A620005AC7F2 /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BBF3E11F74A620005AC7F2 /* String+Validation.swift */; };
 		19C0BCF91F56AA8B00871BDD /* XHWLNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */; };
 		19D8FDB81F6A23C700AC7C22 /* CardReaderSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 19B118A91F6A18BB00B1F5D1 /* CardReaderSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		19D8FDB91F6A23CA00AC7C22 /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 19B118AA1F6A18BB00B1F5D1 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		19D8FDBB1F6A664400AC7C22 /* XHWLAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D8FDBA1F6A664400AC7C22 /* XHWLAccountModel.swift */; };
 		19D8FDBD1F6A670900AC7C22 /* XHWLProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D8FDBC1F6A670900AC7C22 /* XHWLProjectModel.swift */; };
+		19F04DC81F74B3AB00E0BD75 /* XHWLChargeProviderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DC71F74B3AB00E0BD75 /* XHWLChargeProviderCell.swift */; };
+		19F04DCA1F74B45800E0BD75 /* XHWLChargeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DC91F74B45800E0BD75 /* XHWLChargeButton.swift */; };
+		19F04DCC1F74F9D600E0BD75 /* XHWLVisitLogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DCB1F74F9D600E0BD75 /* XHWLVisitLogModel.swift */; };
+		19F04DCF1F75051C00E0BD75 /* RemoteOpenDoorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DCE1F75051C00E0BD75 /* RemoteOpenDoorVC.swift */; };
+		19F04DD31F7509B400E0BD75 /* BluetoothScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DD01F7509B400E0BD75 /* BluetoothScanVC.swift */; };
+		19F04DD41F7509B400E0BD75 /* BluetoothTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DD11F7509B400E0BD75 /* BluetoothTableViewCell.swift */; };
+		19F04DD51F7509B400E0BD75 /* BluetoothVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DD21F7509B400E0BD75 /* BluetoothVC.swift */; };
+		19F04DD71F7509B800E0BD75 /* LocalBlueToothTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DD61F7509B800E0BD75 /* LocalBlueToothTableViewCell.swift */; };
 		19FACBC61F68C43E00680E63 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FACBC51F68C43E00680E63 /* Validation.swift */; };
 		19FACBC91F68C97400680E63 /* XHWLUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FACBC81F68C97400680E63 /* XHWLUserModel.swift */; };
 		19FACBCB1F68CA0C00680E63 /* XHWLRoleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FACBCA1F68CA0C00680E63 /* XHWLRoleModel.swift */; };
@@ -304,7 +380,6 @@
 		19163D1C1F67E63F00C09785 /* XHWLCheckListTF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLCheckListTF.swift; sourceTree = "<group>"; };
 		19163D201F67E66500C09785 /* XHWLPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLPickerView.swift; sourceTree = "<group>"; };
 		19163D221F67E67800C09785 /* XHWLMoreListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLMoreListView.swift; sourceTree = "<group>"; };
-		19163D241F67E6C600C09785 /* XHWLRegistrationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRegistrationCell.swift; sourceTree = "<group>"; };
 		19163D261F67E6E200C09785 /* XHWLRegistrationDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRegistrationDetailVC.swift; sourceTree = "<group>"; };
 		19163D281F67E6F100C09785 /* XHWLRegistrationDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRegistrationDetailView.swift; sourceTree = "<group>"; };
 		19163D2A1F67E72500C09785 /* XHWLHistoryDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLHistoryDetailVC.swift; sourceTree = "<group>"; };
@@ -319,6 +394,10 @@
 		1931C09D1F71F26E004D0A41 /* XHWLLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLineView.swift; sourceTree = "<group>"; };
 		1931C09F1F7203C1004D0A41 /* XHWLScanResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLScanResultVC.swift; sourceTree = "<group>"; };
 		1931C0A11F7203E0004D0A41 /* XHWLScanResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLScanResultView.swift; sourceTree = "<group>"; };
+		1931C0A81F722C87004D0A41 /* HZActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZActionSheet.h; sourceTree = "<group>"; };
+		1931C0A91F722C87004D0A41 /* HZActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZActionSheet.m; sourceTree = "<group>"; };
+		1931C0AD1F725504004D0A41 /* XHWLRegistrationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRegistrationCell.swift; sourceTree = "<group>"; };
+		1931C0AF1F725EDB004D0A41 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		1941DCD81F58341B009DE0F0 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		1941DCDA1F58341B009DE0F0 /* XHWLHouseManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XHWLHouseManager.entitlements; sourceTree = "<group>"; };
 		194FAAD21F5CF993004CA513 /* xhwl_login_logo_down.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xhwl_login_logo_down.gif; sourceTree = "<group>"; };
@@ -469,6 +548,7 @@
 		19A7A70C1F57EB460044DC1A /* YLImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLImageView.swift; sourceTree = "<group>"; };
 		19A7A7101F57FB350044DC1A /* XHWLHttpTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLHttpTool.swift; sourceTree = "<group>"; };
 		19A7A7121F58067E0044DC1A /* AlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
+		19A822901F728E1C00B8E570 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
 		19ADF39D1F64DD8400A9E0FB /* XHWLRegisterationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRegisterationModel.swift; sourceTree = "<group>"; };
 		19ADF3AB1F64FF7300A9E0FB /* XHWLTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLTagView.swift; sourceTree = "<group>"; };
 		19B118A41F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLBluetoothOpenVC.swift; sourceTree = "<group>"; };
@@ -515,9 +595,84 @@
 		19BB53A71F56DA43006C38EA /* XHWLLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLoginVC.swift; sourceTree = "<group>"; };
 		19BB53A91F56DDC7006C38EA /* XHWLLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLoginView.swift; sourceTree = "<group>"; };
 		19BB53AB1F56E009006C38EA /* XHWLLoginTF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLoginTF.swift; sourceTree = "<group>"; };
+		19BBF3581F7389BD005AC7F2 /* 别人进行云对讲0000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0000.png"; sourceTree = "<group>"; };
+		19BBF3591F7389BD005AC7F2 /* 别人进行云对讲0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0001.png"; sourceTree = "<group>"; };
+		19BBF35A1F7389BD005AC7F2 /* 别人进行云对讲0002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0002.png"; sourceTree = "<group>"; };
+		19BBF35B1F7389BD005AC7F2 /* 别人进行云对讲0003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0003.png"; sourceTree = "<group>"; };
+		19BBF35C1F7389BD005AC7F2 /* 别人进行云对讲0004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0004.png"; sourceTree = "<group>"; };
+		19BBF35D1F7389BD005AC7F2 /* 别人进行云对讲0005.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0005.png"; sourceTree = "<group>"; };
+		19BBF35E1F7389BD005AC7F2 /* 别人进行云对讲0006.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0006.png"; sourceTree = "<group>"; };
+		19BBF35F1F7389BD005AC7F2 /* 别人进行云对讲0007.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0007.png"; sourceTree = "<group>"; };
+		19BBF3601F7389BD005AC7F2 /* 别人进行云对讲0008.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0008.png"; sourceTree = "<group>"; };
+		19BBF3611F7389BD005AC7F2 /* 别人进行云对讲0009.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0009.png"; sourceTree = "<group>"; };
+		19BBF3621F7389BD005AC7F2 /* 别人进行云对讲0010.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0010.png"; sourceTree = "<group>"; };
+		19BBF3631F7389BD005AC7F2 /* 别人进行云对讲0011.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0011.png"; sourceTree = "<group>"; };
+		19BBF3641F7389BD005AC7F2 /* 别人进行云对讲0012.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0012.png"; sourceTree = "<group>"; };
+		19BBF3651F7389BD005AC7F2 /* 别人进行云对讲0013.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0013.png"; sourceTree = "<group>"; };
+		19BBF3661F7389BD005AC7F2 /* 别人进行云对讲0014.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0014.png"; sourceTree = "<group>"; };
+		19BBF3671F7389BD005AC7F2 /* 别人进行云对讲0015.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0015.png"; sourceTree = "<group>"; };
+		19BBF3681F7389BD005AC7F2 /* 别人进行云对讲0016.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0016.png"; sourceTree = "<group>"; };
+		19BBF3691F7389BD005AC7F2 /* 别人进行云对讲0017.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0017.png"; sourceTree = "<group>"; };
+		19BBF36A1F7389BD005AC7F2 /* 别人进行云对讲0018.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0018.png"; sourceTree = "<group>"; };
+		19BBF36B1F7389BD005AC7F2 /* 别人进行云对讲0019.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0019.png"; sourceTree = "<group>"; };
+		19BBF36C1F7389BD005AC7F2 /* 别人进行云对讲0020.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0020.png"; sourceTree = "<group>"; };
+		19BBF36D1F7389BD005AC7F2 /* 别人进行云对讲0021.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0021.png"; sourceTree = "<group>"; };
+		19BBF36E1F7389BD005AC7F2 /* 别人进行云对讲0022.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0022.png"; sourceTree = "<group>"; };
+		19BBF36F1F7389BD005AC7F2 /* 别人进行云对讲0023.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0023.png"; sourceTree = "<group>"; };
+		19BBF3701F7389BD005AC7F2 /* 别人进行云对讲0024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0024.png"; sourceTree = "<group>"; };
+		19BBF3711F7389BD005AC7F2 /* 别人进行云对讲0025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0025.png"; sourceTree = "<group>"; };
+		19BBF3721F7389BD005AC7F2 /* 别人进行云对讲0026.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0026.png"; sourceTree = "<group>"; };
+		19BBF3731F7389BD005AC7F2 /* 别人进行云对讲0027.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0027.png"; sourceTree = "<group>"; };
+		19BBF3741F7389BD005AC7F2 /* 别人进行云对讲0028.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0028.png"; sourceTree = "<group>"; };
+		19BBF3751F7389BD005AC7F2 /* 别人进行云对讲0029.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0029.png"; sourceTree = "<group>"; };
+		19BBF3761F7389BD005AC7F2 /* 别人进行云对讲0030.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0030.png"; sourceTree = "<group>"; };
+		19BBF3771F7389BD005AC7F2 /* 别人进行云对讲0031.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0031.png"; sourceTree = "<group>"; };
+		19BBF3781F7389BD005AC7F2 /* 别人进行云对讲0032.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0032.png"; sourceTree = "<group>"; };
+		19BBF3791F7389BD005AC7F2 /* 别人进行云对讲0033.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0033.png"; sourceTree = "<group>"; };
+		19BBF37A1F7389BD005AC7F2 /* 别人进行云对讲0034.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0034.png"; sourceTree = "<group>"; };
+		19BBF37B1F7389BD005AC7F2 /* 别人进行云对讲0035.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0035.png"; sourceTree = "<group>"; };
+		19BBF37C1F7389BD005AC7F2 /* 别人进行云对讲0036.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0036.png"; sourceTree = "<group>"; };
+		19BBF37D1F7389BD005AC7F2 /* 别人进行云对讲0037.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0037.png"; sourceTree = "<group>"; };
+		19BBF37E1F7389BD005AC7F2 /* 别人进行云对讲0038.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0038.png"; sourceTree = "<group>"; };
+		19BBF37F1F7389BD005AC7F2 /* 别人进行云对讲0039.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0039.png"; sourceTree = "<group>"; };
+		19BBF3801F7389BD005AC7F2 /* 别人进行云对讲0040.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0040.png"; sourceTree = "<group>"; };
+		19BBF3811F7389BD005AC7F2 /* 别人进行云对讲0041.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0041.png"; sourceTree = "<group>"; };
+		19BBF3821F7389BD005AC7F2 /* 别人进行云对讲0042.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0042.png"; sourceTree = "<group>"; };
+		19BBF3831F7389BD005AC7F2 /* 别人进行云对讲0043.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0043.png"; sourceTree = "<group>"; };
+		19BBF3841F7389BD005AC7F2 /* 别人进行云对讲0044.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0044.png"; sourceTree = "<group>"; };
+		19BBF3851F7389BD005AC7F2 /* 别人进行云对讲0045.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0045.png"; sourceTree = "<group>"; };
+		19BBF3861F7389BD005AC7F2 /* 别人进行云对讲0046.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0046.png"; sourceTree = "<group>"; };
+		19BBF3871F7389BD005AC7F2 /* 别人进行云对讲0047.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0047.png"; sourceTree = "<group>"; };
+		19BBF3881F7389BD005AC7F2 /* 别人进行云对讲0048.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0048.png"; sourceTree = "<group>"; };
+		19BBF3891F7389BD005AC7F2 /* 别人进行云对讲0049.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0049.png"; sourceTree = "<group>"; };
+		19BBF38A1F7389BD005AC7F2 /* 别人进行云对讲0050.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0050.png"; sourceTree = "<group>"; };
+		19BBF38B1F7389BD005AC7F2 /* 别人进行云对讲0051.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0051.png"; sourceTree = "<group>"; };
+		19BBF38C1F7389BD005AC7F2 /* 别人进行云对讲0052.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0052.png"; sourceTree = "<group>"; };
+		19BBF38D1F7389BD005AC7F2 /* 别人进行云对讲0053.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0053.png"; sourceTree = "<group>"; };
+		19BBF38E1F7389BD005AC7F2 /* 别人进行云对讲0054.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0054.png"; sourceTree = "<group>"; };
+		19BBF38F1F7389BD005AC7F2 /* 别人进行云对讲0055.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0055.png"; sourceTree = "<group>"; };
+		19BBF3901F7389BD005AC7F2 /* 别人进行云对讲0056.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0056.png"; sourceTree = "<group>"; };
+		19BBF3911F7389BD005AC7F2 /* 别人进行云对讲0057.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0057.png"; sourceTree = "<group>"; };
+		19BBF3921F7389BD005AC7F2 /* 别人进行云对讲0058.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0058.png"; sourceTree = "<group>"; };
+		19BBF3931F7389BD005AC7F2 /* 别人进行云对讲0059.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0059.png"; sourceTree = "<group>"; };
+		19BBF3941F7389BD005AC7F2 /* 别人进行云对讲0060.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0060.png"; sourceTree = "<group>"; };
+		19BBF3D21F73AA72005AC7F2 /* XHWLPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLPickerCell.swift; sourceTree = "<group>"; };
+		19BBF3D91F73D95F005AC7F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		19BBF3DA1F73D966005AC7F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		19BBF3DD1F73E7BD005AC7F2 /* XHWLUnitModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLUnitModel.swift; sourceTree = "<group>"; };
+		19BBF3DF1F749F89005AC7F2 /* XHWLButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLButton.swift; sourceTree = "<group>"; };
+		19BBF3E11F74A620005AC7F2 /* String+Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
 		19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLNavigationController.swift; sourceTree = "<group>"; };
 		19D8FDBA1F6A664400AC7C22 /* XHWLAccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLAccountModel.swift; sourceTree = "<group>"; };
 		19D8FDBC1F6A670900AC7C22 /* XHWLProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLProjectModel.swift; sourceTree = "<group>"; };
+		19F04DC71F74B3AB00E0BD75 /* XHWLChargeProviderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLChargeProviderCell.swift; sourceTree = "<group>"; };
+		19F04DC91F74B45800E0BD75 /* XHWLChargeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLChargeButton.swift; sourceTree = "<group>"; };
+		19F04DCB1F74F9D600E0BD75 /* XHWLVisitLogModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLVisitLogModel.swift; sourceTree = "<group>"; };
+		19F04DCE1F75051C00E0BD75 /* RemoteOpenDoorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteOpenDoorVC.swift; sourceTree = "<group>"; };
+		19F04DD01F7509B400E0BD75 /* BluetoothScanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothScanVC.swift; sourceTree = "<group>"; };
+		19F04DD11F7509B400E0BD75 /* BluetoothTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothTableViewCell.swift; sourceTree = "<group>"; };
+		19F04DD21F7509B400E0BD75 /* BluetoothVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothVC.swift; sourceTree = "<group>"; };
+		19F04DD61F7509B800E0BD75 /* LocalBlueToothTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalBlueToothTableViewCell.swift; sourceTree = "<group>"; };
 		19FACBC51F68C43E00680E63 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		19FACBC81F68C97400680E63 /* XHWLUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLUserModel.swift; sourceTree = "<group>"; };
 		19FACBCA1F68CA0C00680E63 /* XHWLRoleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRoleModel.swift; sourceTree = "<group>"; };
@@ -664,6 +819,8 @@
 			isa = PBXGroup;
 			children = (
 				190598C51F6FAEDC004A4A91 /* XHWLWaterView.swift */,
+				19F04DC71F74B3AB00E0BD75 /* XHWLChargeProviderCell.swift */,
+				19F04DC91F74B45800E0BD75 /* XHWLChargeButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -772,6 +929,7 @@
 		19163CE91F67D23700C09785 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1931C0AD1F725504004D0A41 /* XHWLRegistrationCell.swift */,
 				190598D91F6FE5AF004A4A91 /* XHWLSafeGuardView.swift */,
 				19163CEC1F67D32F00C09785 /* XHWLSafeProtectionView.swift */,
 			);
@@ -838,6 +996,7 @@
 		19163D001F67E0C800C09785 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				19F04DCB1F74F9D600E0BD75 /* XHWLVisitLogModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -846,7 +1005,6 @@
 			isa = PBXGroup;
 			children = (
 				19163D281F67E6F100C09785 /* XHWLRegistrationDetailView.swift */,
-				19163D241F67E6C600C09785 /* XHWLRegistrationCell.swift */,
 				19163D021F67E0EE00C09785 /* XHWLRegistrationView.swift */,
 			);
 			path = View;
@@ -912,6 +1070,7 @@
 		19163D151F67E50E00C09785 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				19BBF3DD1F73E7BD005AC7F2 /* XHWLUnitModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -926,13 +1085,25 @@
 				19163D1A1F67E63B00C09785 /* XHWLRadioView.swift */,
 				19163D181F67E53B00C09785 /* XHWLCheckListView.swift */,
 				190598BB1F6F6E71004A4A91 /* XHWLSelTypeView.swift */,
+				19BBF3D21F73AA72005AC7F2 /* XHWLPickerCell.swift */,
+				19BBF3DF1F749F89005AC7F2 /* XHWLButton.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1931C0A71F722C87004D0A41 /* HZActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				1931C0A81F722C87004D0A41 /* HZActionSheet.h */,
+				1931C0A91F722C87004D0A41 /* HZActionSheet.m */,
+			);
+			path = HZActionSheet;
 			sourceTree = "<group>";
 		};
 		194FAAD11F5CF97A004CA513 /* Reasource */ = {
 			isa = PBXGroup;
 			children = (
+				19BBF3571F7389BD005AC7F2 /* GIF_image */,
 				194FAAD61F5CF9B0004CA513 /* door2.gif */,
 				194FAAD21F5CF993004CA513 /* xhwl_login_logo_down.gif */,
 				194FAAD31F5CF993004CA513 /* xhwl_login_logo_up.gif */,
@@ -1313,6 +1484,7 @@
 				1961CCCF1F58E32F006856D0 /* StringExtension.swift */,
 				192DA5311F57A62A005950EC /* UIColor+Category.swift */,
 				1912240A1F5D47F500D201F3 /* JSONAndDictionary.swift */,
+				19BBF3E11F74A620005AC7F2 /* String+Validation.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1334,6 +1506,17 @@
 				840835901F6E01DF00DC644A /* XHWLNetwork.swift */,
 			);
 			path = HttpTool;
+			sourceTree = "<group>";
+		};
+		19A822871F728C8900B8E570 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				19F04DD61F7509B800E0BD75 /* LocalBlueToothTableViewCell.swift */,
+				19F04DD01F7509B400E0BD75 /* BluetoothScanVC.swift */,
+				19F04DD11F7509B400E0BD75 /* BluetoothTableViewCell.swift */,
+				19F04DD21F7509B400E0BD75 /* BluetoothVC.swift */,
+			);
+			path = Bluetooth;
 			sourceTree = "<group>";
 		};
 		19B118A01F6A167700B1F5D1 /* OpenOneStep */ = {
@@ -1456,9 +1639,79 @@
 			path = MJExtension;
 			sourceTree = "<group>";
 		};
+		19BBF3571F7389BD005AC7F2 /* GIF_image */ = {
+			isa = PBXGroup;
+			children = (
+				19BBF3581F7389BD005AC7F2 /* 别人进行云对讲0000.png */,
+				19BBF3591F7389BD005AC7F2 /* 别人进行云对讲0001.png */,
+				19BBF35A1F7389BD005AC7F2 /* 别人进行云对讲0002.png */,
+				19BBF35B1F7389BD005AC7F2 /* 别人进行云对讲0003.png */,
+				19BBF35C1F7389BD005AC7F2 /* 别人进行云对讲0004.png */,
+				19BBF35D1F7389BD005AC7F2 /* 别人进行云对讲0005.png */,
+				19BBF35E1F7389BD005AC7F2 /* 别人进行云对讲0006.png */,
+				19BBF35F1F7389BD005AC7F2 /* 别人进行云对讲0007.png */,
+				19BBF3601F7389BD005AC7F2 /* 别人进行云对讲0008.png */,
+				19BBF3611F7389BD005AC7F2 /* 别人进行云对讲0009.png */,
+				19BBF3621F7389BD005AC7F2 /* 别人进行云对讲0010.png */,
+				19BBF3631F7389BD005AC7F2 /* 别人进行云对讲0011.png */,
+				19BBF3641F7389BD005AC7F2 /* 别人进行云对讲0012.png */,
+				19BBF3651F7389BD005AC7F2 /* 别人进行云对讲0013.png */,
+				19BBF3661F7389BD005AC7F2 /* 别人进行云对讲0014.png */,
+				19BBF3671F7389BD005AC7F2 /* 别人进行云对讲0015.png */,
+				19BBF3681F7389BD005AC7F2 /* 别人进行云对讲0016.png */,
+				19BBF3691F7389BD005AC7F2 /* 别人进行云对讲0017.png */,
+				19BBF36A1F7389BD005AC7F2 /* 别人进行云对讲0018.png */,
+				19BBF36B1F7389BD005AC7F2 /* 别人进行云对讲0019.png */,
+				19BBF36C1F7389BD005AC7F2 /* 别人进行云对讲0020.png */,
+				19BBF36D1F7389BD005AC7F2 /* 别人进行云对讲0021.png */,
+				19BBF36E1F7389BD005AC7F2 /* 别人进行云对讲0022.png */,
+				19BBF36F1F7389BD005AC7F2 /* 别人进行云对讲0023.png */,
+				19BBF3701F7389BD005AC7F2 /* 别人进行云对讲0024.png */,
+				19BBF3711F7389BD005AC7F2 /* 别人进行云对讲0025.png */,
+				19BBF3721F7389BD005AC7F2 /* 别人进行云对讲0026.png */,
+				19BBF3731F7389BD005AC7F2 /* 别人进行云对讲0027.png */,
+				19BBF3741F7389BD005AC7F2 /* 别人进行云对讲0028.png */,
+				19BBF3751F7389BD005AC7F2 /* 别人进行云对讲0029.png */,
+				19BBF3761F7389BD005AC7F2 /* 别人进行云对讲0030.png */,
+				19BBF3771F7389BD005AC7F2 /* 别人进行云对讲0031.png */,
+				19BBF3781F7389BD005AC7F2 /* 别人进行云对讲0032.png */,
+				19BBF3791F7389BD005AC7F2 /* 别人进行云对讲0033.png */,
+				19BBF37A1F7389BD005AC7F2 /* 别人进行云对讲0034.png */,
+				19BBF37B1F7389BD005AC7F2 /* 别人进行云对讲0035.png */,
+				19BBF37C1F7389BD005AC7F2 /* 别人进行云对讲0036.png */,
+				19BBF37D1F7389BD005AC7F2 /* 别人进行云对讲0037.png */,
+				19BBF37E1F7389BD005AC7F2 /* 别人进行云对讲0038.png */,
+				19BBF37F1F7389BD005AC7F2 /* 别人进行云对讲0039.png */,
+				19BBF3801F7389BD005AC7F2 /* 别人进行云对讲0040.png */,
+				19BBF3811F7389BD005AC7F2 /* 别人进行云对讲0041.png */,
+				19BBF3821F7389BD005AC7F2 /* 别人进行云对讲0042.png */,
+				19BBF3831F7389BD005AC7F2 /* 别人进行云对讲0043.png */,
+				19BBF3841F7389BD005AC7F2 /* 别人进行云对讲0044.png */,
+				19BBF3851F7389BD005AC7F2 /* 别人进行云对讲0045.png */,
+				19BBF3861F7389BD005AC7F2 /* 别人进行云对讲0046.png */,
+				19BBF3871F7389BD005AC7F2 /* 别人进行云对讲0047.png */,
+				19BBF3881F7389BD005AC7F2 /* 别人进行云对讲0048.png */,
+				19BBF3891F7389BD005AC7F2 /* 别人进行云对讲0049.png */,
+				19BBF38A1F7389BD005AC7F2 /* 别人进行云对讲0050.png */,
+				19BBF38B1F7389BD005AC7F2 /* 别人进行云对讲0051.png */,
+				19BBF38C1F7389BD005AC7F2 /* 别人进行云对讲0052.png */,
+				19BBF38D1F7389BD005AC7F2 /* 别人进行云对讲0053.png */,
+				19BBF38E1F7389BD005AC7F2 /* 别人进行云对讲0054.png */,
+				19BBF38F1F7389BD005AC7F2 /* 别人进行云对讲0055.png */,
+				19BBF3901F7389BD005AC7F2 /* 别人进行云对讲0056.png */,
+				19BBF3911F7389BD005AC7F2 /* 别人进行云对讲0057.png */,
+				19BBF3921F7389BD005AC7F2 /* 别人进行云对讲0058.png */,
+				19BBF3931F7389BD005AC7F2 /* 别人进行云对讲0059.png */,
+				19BBF3941F7389BD005AC7F2 /* 别人进行云对讲0060.png */,
+			);
+			path = GIF_image;
+			sourceTree = "<group>";
+		};
 		19C0BCE31F56AA8B00871BDD /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				19A822901F728E1C00B8E570 /* SwiftNotice.swift */,
+				1931C0A71F722C87004D0A41 /* HZActionSheet */,
 				19A2E5161F710AC100C08729 /* ProgressView */,
 				843A329A1F6D63F2002C9098 /* CYTabBar */,
 				843A32361F6D4F4D002C9098 /* PieCharts */,
@@ -1505,6 +1758,7 @@
 				19A14D7A1F5E4D5C00D96A2E /* XHMLProgressHUD.swift */,
 				19A5725C1F6CD49C007B0D3F /* XHWLBaseVC.swift */,
 				19A5726B1F6D0B59007B0D3F /* XHWLBaseBgVC.swift */,
+				1931C0AF1F725EDB004D0A41 /* Date+Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1512,6 +1766,8 @@
 		19C0BCEF1F56AA8B00871BDD /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				19F04DCD1F75051C00E0BD75 /* RemoteOpenDoor */,
+				19A822871F728C8900B8E570 /* Bluetooth */,
 				19A572601F6CE5CC007B0D3F /* Controller */,
 				19A572621F6CE5CC007B0D3F /* Model */,
 				19A572641F6CE5CC007B0D3F /* View */,
@@ -1532,6 +1788,14 @@
 				1955C9B41F652A41008C31C8 /* XHWLCodeTF.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		19F04DCD1F75051C00E0BD75 /* RemoteOpenDoor */ = {
+			isa = PBXGroup;
+			children = (
+				19F04DCE1F75051C00E0BD75 /* RemoteOpenDoorVC.swift */,
+			);
+			path = RemoteOpenDoor;
 			sourceTree = "<group>";
 		};
 		19FACBC71F68C95B00680E63 /* Model */ = {
@@ -1967,6 +2231,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 84A50A4F1F5668DA00BCDA47;
 			productRefGroup = 84A50A591F5668DA00BCDA47 /* Products */;
@@ -1985,14 +2250,75 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19BBF3A41F7389BD005AC7F2 /* 别人进行云对讲0015.png in Resources */,
+				19BBF3CD1F7389BD005AC7F2 /* 别人进行云对讲0056.png in Resources */,
+				19BBF3C01F7389BD005AC7F2 /* 别人进行云对讲0043.png in Resources */,
+				19BBF3C91F7389BD005AC7F2 /* 别人进行云对讲0052.png in Resources */,
+				19BBF3CB1F7389BD005AC7F2 /* 别人进行云对讲0054.png in Resources */,
 				84A50A661F5668DA00BCDA47 /* LaunchScreen.storyboard in Resources */,
+				19BBF39C1F7389BD005AC7F2 /* 别人进行云对讲0007.png in Resources */,
+				19BBF3BE1F7389BD005AC7F2 /* 别人进行云对讲0041.png in Resources */,
+				19BBF3C71F7389BD005AC7F2 /* 别人进行云对讲0050.png in Resources */,
+				19BBF3B01F7389BD005AC7F2 /* 别人进行云对讲0027.png in Resources */,
+				19BBF3991F7389BD005AC7F2 /* 别人进行云对讲0004.png in Resources */,
+				19BBF3B71F7389BD005AC7F2 /* 别人进行云对讲0034.png in Resources */,
+				19BBF3CF1F7389BD005AC7F2 /* 别人进行云对讲0058.png in Resources */,
+				19BBF3BC1F7389BD005AC7F2 /* 别人进行云对讲0039.png in Resources */,
+				19BBF39E1F7389BD005AC7F2 /* 别人进行云对讲0009.png in Resources */,
+				19BBF3AE1F7389BD005AC7F2 /* 别人进行云对讲0025.png in Resources */,
+				19BBF3A21F7389BD005AC7F2 /* 别人进行云对讲0013.png in Resources */,
+				19BBF3AF1F7389BD005AC7F2 /* 别人进行云对讲0026.png in Resources */,
+				19BBF3BF1F7389BD005AC7F2 /* 别人进行云对讲0042.png in Resources */,
+				19BBF3A31F7389BD005AC7F2 /* 别人进行云对讲0014.png in Resources */,
+				19BBF3A01F7389BD005AC7F2 /* 别人进行云对讲0011.png in Resources */,
+				19BBF3961F7389BD005AC7F2 /* 别人进行云对讲0001.png in Resources */,
+				19BBF3CC1F7389BD005AC7F2 /* 别人进行云对讲0055.png in Resources */,
+				19BBF3B51F7389BD005AC7F2 /* 别人进行云对讲0032.png in Resources */,
+				19BBF3D01F7389BD005AC7F2 /* 别人进行云对讲0059.png in Resources */,
+				19BBF3CA1F7389BD005AC7F2 /* 别人进行云对讲0053.png in Resources */,
+				19BBF3BA1F7389BD005AC7F2 /* 别人进行云对讲0037.png in Resources */,
+				19BBF3C11F7389BD005AC7F2 /* 别人进行云对讲0044.png in Resources */,
+				19BBF3A11F7389BD005AC7F2 /* 别人进行云对讲0012.png in Resources */,
+				19BBF3C61F7389BD005AC7F2 /* 别人进行云对讲0049.png in Resources */,
+				19BBF3C21F7389BD005AC7F2 /* 别人进行云对讲0045.png in Resources */,
 				1961CDB21F596394006856D0 /* CodeScan.bundle in Resources */,
 				194FAAD41F5CF993004CA513 /* xhwl_login_logo_down.gif in Resources */,
+				19BBF39A1F7389BD005AC7F2 /* 别人进行云对讲0005.png in Resources */,
+				19BBF39F1F7389BD005AC7F2 /* 别人进行云对讲0010.png in Resources */,
+				19BBF3A61F7389BD005AC7F2 /* 别人进行云对讲0017.png in Resources */,
+				19BBF3C51F7389BD005AC7F2 /* 别人进行云对讲0048.png in Resources */,
+				19BBF3AD1F7389BD005AC7F2 /* 别人进行云对讲0024.png in Resources */,
+				19BBF3AC1F7389BD005AC7F2 /* 别人进行云对讲0023.png in Resources */,
+				19BBF3D11F7389BD005AC7F2 /* 别人进行云对讲0060.png in Resources */,
+				19BBF39B1F7389BD005AC7F2 /* 别人进行云对讲0006.png in Resources */,
+				19BBF3AB1F7389BD005AC7F2 /* 别人进行云对讲0022.png in Resources */,
+				19BBF3A91F7389BD005AC7F2 /* 别人进行云对讲0020.png in Resources */,
+				19BBF3971F7389BD005AC7F2 /* 别人进行云对讲0002.png in Resources */,
+				19BBF3C81F7389BD005AC7F2 /* 别人进行云对讲0051.png in Resources */,
+				19BBF3B81F7389BD005AC7F2 /* 别人进行云对讲0035.png in Resources */,
+				19BBF3BB1F7389BD005AC7F2 /* 别人进行云对讲0038.png in Resources */,
+				19BBF3BD1F7389BD005AC7F2 /* 别人进行云对讲0040.png in Resources */,
+				19BBF3951F7389BD005AC7F2 /* 别人进行云对讲0000.png in Resources */,
+				19BBF3C41F7389BD005AC7F2 /* 别人进行云对讲0047.png in Resources */,
 				84A50A631F5668DA00BCDA47 /* Assets.xcassets in Resources */,
+				19BBF3CE1F7389BD005AC7F2 /* 别人进行云对讲0057.png in Resources */,
 				84A50A611F5668DA00BCDA47 /* Main.storyboard in Resources */,
+				19BBF3B91F7389BD005AC7F2 /* 别人进行云对讲0036.png in Resources */,
+				19BBF3B31F7389BD005AC7F2 /* 别人进行云对讲0030.png in Resources */,
+				19BBF3B21F7389BD005AC7F2 /* 别人进行云对讲0029.png in Resources */,
+				19BBF3A81F7389BD005AC7F2 /* 别人进行云对讲0019.png in Resources */,
+				19BBF3B41F7389BD005AC7F2 /* 别人进行云对讲0031.png in Resources */,
 				194FAAD51F5CF993004CA513 /* xhwl_login_logo_up.gif in Resources */,
+				19BBF3A71F7389BD005AC7F2 /* 别人进行云对讲0018.png in Resources */,
+				19BBF3981F7389BD005AC7F2 /* 别人进行云对讲0003.png in Resources */,
 				194FAAD71F5CF9B0004CA513 /* door2.gif in Resources */,
+				19BBF3C31F7389BD005AC7F2 /* 别人进行云对讲0046.png in Resources */,
+				19BBF3B61F7389BD005AC7F2 /* 别人进行云对讲0033.png in Resources */,
+				19BBF39D1F7389BD005AC7F2 /* 别人进行云对讲0008.png in Resources */,
+				19BBF3AA1F7389BD005AC7F2 /* 别人进行云对讲0021.png in Resources */,
 				843A32AD1F6D63F2002C9098 /* CYTabBar.bundle in Resources */,
+				19BBF3A51F7389BD005AC7F2 /* 别人进行云对讲0016.png in Resources */,
+				19BBF3B11F7389BD005AC7F2 /* 别人进行云对讲0028.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2057,23 +2383,19 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-XHWLHouseManager/Pods-XHWLHouseManager-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${PODS_ROOT}/WilddogWebRTC/WebRTC.framework",
 				"${BUILT_PRODUCTS_DIR}/swiftScan/swiftScan.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebRTC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/swiftScan.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2103,10 +2425,12 @@
 				19A14D6F1F5E381100D96A2E /* NSArray+MASAdditions.m in Sources */,
 				19654C411F6B742100638F05 /* XHWLActualTimeCell.swift in Sources */,
 				19A572681F6CE5F0007B0D3F /* XHWLWorkView.swift in Sources */,
+				19F04DD41F7509B400E0BD75 /* BluetoothTableViewCell.swift in Sources */,
 				19A7A7131F58067E0044DC1A /* AlertMessage.swift in Sources */,
 				19A14D6D1F5E381100D96A2E /* MASViewAttribute.m in Sources */,
 				1961CDA51F596328006856D0 /* PtzPresetPositionPopView.m in Sources */,
 				19654C451F6BCBB000638F05 /* XHWLIssueReportListVC.swift in Sources */,
+				19BBF3DE1F73E7BD005AC7F2 /* XHWLUnitModel.swift in Sources */,
 				19A14D7B1F5E4D5C00D96A2E /* XHMLProgressHUD.swift in Sources */,
 				8408358F1F6E010500DC644A /* XHWLRequestKeyDefine.swift in Sources */,
 				1961CDB01F59637F006856D0 /* XHWLScanVC.swift in Sources */,
@@ -2130,6 +2454,7 @@
 				19163D291F67E6F100C09785 /* XHWLRegistrationDetailView.swift in Sources */,
 				19BB53561F56BFA3006C38EA /* NSObject+MJCoding.m in Sources */,
 				19A14D901F5EA46F00D96A2E /* GifTextHeaderFooter.swift in Sources */,
+				19F04DD71F7509B800E0BD75 /* LocalBlueToothTableViewCell.swift in Sources */,
 				19BB53511F56BFA3006C38EA /* MJFoundation.m in Sources */,
 				19A2E52B1F713F7400C08729 /* XHWLWarningModel.swift in Sources */,
 				19A2E5131F70EF0E00C08729 /* AnimatedAnnotationView.swift in Sources */,
@@ -2147,15 +2472,20 @@
 				19A14D911F5EA46F00D96A2E /* RefreshView.swift in Sources */,
 				19A5725D1F6CD49C007B0D3F /* XHWLBaseVC.swift in Sources */,
 				19163D031F67E0EE00C09785 /* XHWLRegistrationView.swift in Sources */,
+				19F04DD31F7509B400E0BD75 /* BluetoothScanVC.swift in Sources */,
 				843A32AE1F6D63F2002C9098 /* CYTabBar.m in Sources */,
 				1961CDAF1F59637F006856D0 /* XHWLScanTestVC.swift in Sources */,
 				197D64B61F62807D00977074 /* XHWLMenuModel.swift in Sources */,
 				19A2E5081F70A89800C08729 /* XHWLImageBtn.swift in Sources */,
 				843A326C1F6D4F4D002C9098 /* PiePlainTextLayer.swift in Sources */,
+				19F04DD51F7509B400E0BD75 /* BluetoothVC.swift in Sources */,
 				19654C391F6B6B0C00638F05 /* XHWLProgressDetailView.swift in Sources */,
+				19BBF3E21F74A620005AC7F2 /* String+Validation.swift in Sources */,
 				19A14D791F5E3BF300D96A2E /* XHWLTabbarVC.swift in Sources */,
+				1931C0AE1F725504004D0A41 /* XHWLRegistrationCell.swift in Sources */,
 				843A32641F6D4F4D002C9098 /* CGRect.swift in Sources */,
 				19163D1D1F67E63F00C09785 /* XHWLCheckListTF.swift in Sources */,
+				19BBF3E01F749F89005AC7F2 /* XHWLButton.swift in Sources */,
 				19A2E51D1F7112D400C08729 /* XHWLDataView.swift in Sources */,
 				19A14D801F5E853C00D96A2E /* XHWLSearchVC.swift in Sources */,
 				1961CD9D1F596328006856D0 /* RealPlayViewController.m in Sources */,
@@ -2165,8 +2495,8 @@
 				19BB53531F56BFA3006C38EA /* MJPropertyKey.m in Sources */,
 				19654C491F6BE25400638F05 /* XHWLIssueAccountModel.swift in Sources */,
 				190598C81F6FAEEB004A4A91 /* XHWLChargeModel.swift in Sources */,
+				19F04DCA1F74B45800E0BD75 /* XHWLChargeButton.swift in Sources */,
 				19A2E5251F7130AF00C08729 /* XHWLMapKitModel.swift in Sources */,
-				19163D251F67E6C600C09785 /* XHWLRegistrationCell.swift in Sources */,
 				19A7A70D1F57EB460044DC1A /* YLGIFImage.swift in Sources */,
 				19B118A51F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift in Sources */,
 				843A32701F6D4F4D002C9098 /* PieChartLayer.swift in Sources */,
@@ -2185,6 +2515,7 @@
 				19BB53571F56BFA3006C38EA /* NSObject+MJKeyValue.m in Sources */,
 				843A32671F6D4F4D002C9098 /* Int.swift in Sources */,
 				1961CDB91F5963D2006856D0 /* XHWLPedometerVC.swift in Sources */,
+				1931C0B01F725EDB004D0A41 /* Date+Extension.swift in Sources */,
 				843A326D1F6D4F4D002C9098 /* AlphaPieViewLayerAnimator.swift in Sources */,
 				19D8FDBB1F6A664400AC7C22 /* XHWLAccountModel.swift in Sources */,
 				1961CCD21F58E336006856D0 /* DateStringExtension.swift in Sources */,
@@ -2218,6 +2549,7 @@
 				19A14D8E1F5EA46F00D96A2E /* GifHeaderFooter.swift in Sources */,
 				1961CD771F596316006856D0 /* XHWLMcuResourceVC.swift in Sources */,
 				19163CFD1F67DB6D00C09785 /* XHWLWarningView.swift in Sources */,
+				1931C0AA1F722C87004D0A41 /* HZActionSheet.m in Sources */,
 				19B142EA1F677D780087AC5E /* XHWLNavHeadView.swift in Sources */,
 				19A7A7111F57FB350044DC1A /* XHWLHttpTool.swift in Sources */,
 				19D8FDBD1F6A670900AC7C22 /* XHWLProjectModel.swift in Sources */,
@@ -2226,6 +2558,7 @@
 				1931C09E1F71F26E004D0A41 /* XHWLLineView.swift in Sources */,
 				19A14D8F1F5EA46F00D96A2E /* GifImagesHeaderFooter.swift in Sources */,
 				1912240D1F5D774700D201F3 /* XHWLHttpKey.swift in Sources */,
+				19F04DC81F74B3AB00E0BD75 /* XHWLChargeProviderCell.swift in Sources */,
 				1961CCD61F58E448006856D0 /* TimerARC.swift in Sources */,
 				19A2E5291F71360500C08729 /* XHWLDetailProgressModel.swift in Sources */,
 				19B118A71F6A17A300B1F5D1 /* XHWLBluetoothAuthView.swift in Sources */,
@@ -2244,6 +2577,7 @@
 				19A2E50A1F70A89800C08729 /* XHWLRemarkView.swift in Sources */,
 				1961CDC01F5983EF006856D0 /* XHWLMcuView.swift in Sources */,
 				84A50A5C1F5668DA00BCDA47 /* AppDelegate.swift in Sources */,
+				19F04DCF1F75051C00E0BD75 /* RemoteOpenDoorVC.swift in Sources */,
 				192DA5321F57A62A005950EC /* UIColor+Category.swift in Sources */,
 				1961CDA81F596328006856D0 /* Singleton.m in Sources */,
 				843A32611F6D4F4D002C9098 /* PieSliceDelegate.swift in Sources */,
@@ -2255,6 +2589,7 @@
 				843A32B01F6D63F2002C9098 /* CYTabBarController.m in Sources */,
 				19A5725F1F6CDF80007B0D3F /* XHWLWorkCell.swift in Sources */,
 				197D64B01F62804C00977074 /* XHWLWorkVC.swift in Sources */,
+				19A822911F728E1C00B8E570 /* SwiftNotice.swift in Sources */,
 				843A326E1F6D4F4D002C9098 /* PieViewLayerAnimator.swift in Sources */,
 				843A32AB1F6D63F2002C9098 /* CYButton.m in Sources */,
 				19BB53591F56BFA3006C38EA /* NSString+MJExtension.m in Sources */,
@@ -2289,6 +2624,8 @@
 				19A14D931F5EA46F00D96A2E /* UIScrollView+SYRefresh.swift in Sources */,
 				19163D0B1F67E29E00C09785 /* XHWLAbnormalPassVC.swift in Sources */,
 				19A2E5231F711B4200C08729 /* XHWLDataModel.swift in Sources */,
+				19F04DCC1F74F9D600E0BD75 /* XHWLVisitLogModel.swift in Sources */,
+				19BBF3D31F73AA72005AC7F2 /* XHWLPickerCell.swift in Sources */,
 				19A14D6C1F5E381100D96A2E /* MASLayoutConstraint.m in Sources */,
 				1961CD9E1F596328006856D0 /* CTimeBarPanel.m in Sources */,
 				19163D211F67E66500C09785 /* XHWLPickerView.swift in Sources */,
@@ -2331,6 +2668,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				84A50A601F5668DA00BCDA47 /* Base */,
+				19BBF3D91F73D95F005AC7F2 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -2339,6 +2677,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				84A50A651F5668DA00BCDA47 /* Base */,
+				19BBF3DA1F73D966005AC7F2 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -2350,6 +2689,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -2368,7 +2708,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2400,6 +2741,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -2418,7 +2760,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2445,6 +2788,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = XHWLHouseManager/XHWLHouseManager.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = L4285ALH3W;
 				ENABLE_BITCODE = NO;
@@ -2468,6 +2812,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xinghaiwulian.XHWLHouseManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XHWLHouseManager/XHWLHouseManager-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -2481,6 +2826,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = XHWLHouseManager/XHWLHouseManager.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = L4285ALH3W;
 				ENABLE_BITCODE = NO;
@@ -2504,6 +2850,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xinghaiwulian.XHWLHouseManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XHWLHouseManager/XHWLHouseManager-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

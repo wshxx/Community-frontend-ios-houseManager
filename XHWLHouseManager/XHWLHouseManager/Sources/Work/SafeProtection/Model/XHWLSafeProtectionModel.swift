@@ -10,10 +10,34 @@ import UIKit
 
 class XHWLSafeProtectionModel: NSObject {
 
+//    var code:String = ""
+//    var createTime:String = ""
+//    var equipmentCode:String = ""
+//    var id :String = ""
+//    var imgUrl:String = ""
+//    var inspectionPoint:String = ""
+//    var manageImgUrl:String = ""
+//    var manageRemarks:String = ""
+//    var manageTime:String = ""
+//    var manageWYAccount:String = ""
+//    var remarks:String = ""
+//    var status :String = ""
+//    var type :String = ""
+//    var urgency:String = ""
+//    var wyAccount :String = ""
+    
+    
+    var appComplaint:XHWLAppComplaint = XHWLAppComplaint()
+    var complaintUserName:String = ""
+    var manageUserName :String = ""
+}
+
+
+class XHWLAppComplaint:NSObject {
     var code:String = ""
     var createTime:String = ""
     var equipmentCode:String = ""
-    var id :String = ""
+    var id:String = ""
     var imgUrl:String = ""
     var inspectionPoint:String = ""
     var manageImgUrl:String = ""
@@ -21,8 +45,8 @@ class XHWLSafeProtectionModel: NSObject {
     var manageTime:String = ""
     var manageWYAccount:String = ""
     var remarks:String = ""
-    var status :String = ""
-    var type :String = ""
+    var status:String = ""
+    var type:String = ""
     var urgency:String = ""
-    var wyAccount :String = ""
+    var wyAccount:XHWLAccountModel = XHWLAccountModel()
 }

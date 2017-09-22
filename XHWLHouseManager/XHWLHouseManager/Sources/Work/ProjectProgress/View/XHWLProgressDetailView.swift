@@ -12,14 +12,30 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
     
     var bgImage:UIImageView!
     var tableView:UITableView!
-    var dataAry:NSArray!
+    var dataAry:NSMutableArray! = NSMutableArray()
     var progressView:XHWLProgressView!
     var dismissBlock:(NSInteger)->(Void) = { param in }
+    var realModel:XHWLRealProgressModel! {
+        willSet {
+            if (newValue != nil) {
+                
+                let ary1 = newValue.inspectedLineDetail as NSArray
+                let ary2 = newValue.totalLineDetail as NSArray
+                dataAry = NSMutableArray()
+                dataAry.addObjects(from: ary1 as! [Any])
+                dataAry.addObjects(from: ary2 as! [Any])
+                
+                progressView.progressModel = newValue
+                
+                self.tableView.reloadData()
+            }
+        }
+    }
     
-    init(frame: CGRect, array:NSArray) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.clear
-        dataAry = array
+        
         setupView()
     }
     
@@ -52,8 +68,8 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = XHWLProgressDetailCell.cellWithTableView(tableView: tableView)
-        cell.textLabel?.text = dataAry[indexPath.row] as? String
-        
+//        cell.textLabel?.text = dataAry[indexPath.row] as? String
+        cell.realModel = dataAry[indexPath.row] as? XHWLDetailProgressModel
         cell.isTop = indexPath.row == 0
         cell.isBottom = indexPath.row == dataAry.count - 1
         

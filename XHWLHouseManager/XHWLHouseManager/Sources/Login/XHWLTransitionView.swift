@@ -112,8 +112,6 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
         XHWLNetwork.shared.getLoginClick(params, self)
     }
     
-   
-    
     // 下一步
     func onNextResetPwdClick(_ topStr:String, _ bottomStr:String, _ workCode:String) {
         
@@ -287,7 +285,7 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
         self.showV?.isHidden = false
         UIView.transition(from: self.forgetCodeV!,
                           to: self.showV!,
-                          duration: 2.0,
+                          duration: 1.0,
                           options: UIViewAnimationOptions.transitionFlipFromLeft) { (animated) in
                             
                             self.workCode = ""
@@ -302,7 +300,7 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
         self.setPwdV?.isHidden = false
         UIView.transition(from: self.forgetCodeV!,
                           to: self.setPwdV!,
-                          duration: 2.0,
+                          duration: 1.0,
                           options: UIViewAnimationOptions.transitionFlipFromRight) { (animated) in
                             
                             self.isResetPwd = false
@@ -315,7 +313,7 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
         self.setPwdV?.isHidden = false
         UIView.transition(from: self.showV!,
                           to: self.setPwdV!,
-                          duration: 2.0,
+                          duration: 1.0,
                           options: UIViewAnimationOptions.transitionFlipFromRight) { (animated) in
                             
                             self.isResetPwd = true
@@ -330,7 +328,7 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
         self.showV?.isHidden = false
         UIView.transition(from: self.setPwdV!,
                           to: self.showV!,
-                          duration: 2.0,
+                          duration: 1.0,
                           options: UIViewAnimationOptions.transitionFlipFromLeft) { (animated) in
                             
                             self.bringSubview(toFront: self.showV!)

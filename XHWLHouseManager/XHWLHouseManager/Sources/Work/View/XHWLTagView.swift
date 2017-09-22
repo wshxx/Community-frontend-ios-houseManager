@@ -37,7 +37,7 @@ class XHWLTagView: UIView {
             let text:String = array[i] as! String
             btn.setTitle(text, for: UIControlState.normal)
             btn.tag = i+btnTag
-            btn.titleLabel?.font = font_12
+            btn.titleLabel?.font = font_14
             btn.setBackgroundImage(UIImage(named:"xhwl_water"), for: UIControlState.normal)
             btn.setTitleColor(UIColor.white, for: UIControlState.normal)
             btn.addTarget(self, action: #selector(btnClick), for: UIControlEvents.touchUpInside)

@@ -120,9 +120,9 @@ class XHWLHomeView: UIView  {
     
     // 远程开门
     func onNetDoorBtnClicked(_ sender: UIButton) {
-        authenticate()
+//        authenticate()
         
-//        self.delegate?.onHomeViewWithOpenNetwork(self)
+        self.delegate?.onHomeViewWithOpenNetwork!(self)
     }
     
     // 指纹开锁

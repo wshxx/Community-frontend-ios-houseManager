@@ -46,8 +46,8 @@ class XHWLTipView: UIView {
         self.addSubview(tipLabel)
     }
     
-    func showSuccess(successText:String) {
-        tipImg.image = UIImage(named:"failure")
+    func showSuccess(_ successText:String) {
+        tipImg.image = UIImage(named:"finished")
         tipLabel.text = successText
         let window:UIWindow = UIApplication.shared.keyWindow!
         window.addSubview(self)
@@ -57,7 +57,7 @@ class XHWLTipView: UIView {
         self.removeFromSuperview()
     }
     
-    func showError(errorText:String) {
+    func showError(_ errorText:String) {
         tipImg.image = UIImage(named:"failure")
         tipLabel.text = errorText
         let window:UIWindow = UIApplication.shared.keyWindow!

@@ -24,13 +24,13 @@ class XHWLCheckTF: UIView, UITextFieldDelegate {
         
         titleL = UILabel()
         titleL.textColor = UIColor.white
-        titleL.font = font_12
+        titleL.font = font_14
         self.addSubview(titleL)
         
         contentTF = UITextField()
         contentTF.delegate = self
         contentTF.background = UIImage(named:"check_textfield_bg")
-        contentTF.font = font_12
+        contentTF.font = font_14
         contentTF.textColor = UIColor.white
         contentTF.tintColor = color_c8e5f0
         contentTF.leftView = UIView(frame: CGRect(x:0, y:0, width:5, height:10))

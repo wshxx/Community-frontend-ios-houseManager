@@ -20,8 +20,8 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
                 
        setupView()
         
-//        progressHUD = XHMLProgressHUD.init(frame: CGRect(x:(Screen_width-100)/2.0, y:(Screen_height-100)/2.0, width:100, height:100))
-//        
+//        progressHUD = XHMLProgressHUD.init(frame: UIScreen.main.bounds)
+//
 //        let window:UIWindow = UIApplication.shared.keyWindow!
 //        window.addSubview(progressHUD)
     }
@@ -63,12 +63,7 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
 // MARK: - XHWLTransitionViewDelegate
     // 跳转到首页
     func onGotoHome(_ trianView:XHWLTransitionView) {
-        //睡眠1.9s，
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.9)){
-           
-            self.onTabbar()
-//            "登陆成功".ext_debugPrintAndHint()
-        }
+        self.onTabbar()
     }
     
     func onTabbar() {

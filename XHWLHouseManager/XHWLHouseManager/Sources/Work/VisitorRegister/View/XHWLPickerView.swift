@@ -12,12 +12,13 @@ class XHWLPickerView: UIView , UITableViewDelegate, UITableViewDataSource {
 
     var tableView:UITableView!
     var dataAry:NSArray!
+    var bgImage:UIImageView!
     var btnBlock:(NSInteger)->(Void) = { param in }
     var dismissBlock:(NSInteger)->(Void) = { param in }
     
     init(frame: CGRect, array:NSArray) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         dataAry = array
         setupView()
         
@@ -36,9 +37,15 @@ class XHWLPickerView: UIView , UITableViewDelegate, UITableViewDataSource {
     
     func setupView() {
         
+        bgImage = UIImageView()
+        bgImage.image = UIImage(named:"pop_bg")
+        self.addSubview(bgImage)
+        
         tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor.clear
         self.addSubview(tableView)
         tableView.tableFooterView = UIView()
     }
@@ -47,14 +54,11 @@ class XHWLPickerView: UIView , UITableViewDelegate, UITableViewDataSource {
         return dataAry.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let ID: String = "XHWLPickerView"
-        var cell = tableView.dequeueReusableCell(withIdentifier: ID)
-        if cell == nil {
-            cell =  UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: ID)
-        }
-        cell?.textLabel?.text = dataAry[indexPath.row] as? String
         
-        return cell!
+        let cell:XHWLPickerCell = XHWLPickerCell.cellWithTableView(tableView)
+        cell.titleL.text = dataAry[indexPath.row] as? String
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -64,8 +68,10 @@ class XHWLPickerView: UIView , UITableViewDelegate, UITableViewDataSource {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        tableView.bounds = CGRect(x:0, y:0, width:200, height:44*dataAry.count)
+        tableView.bounds = CGRect(x:0, y:0, width:300, height:44*dataAry.count)
         tableView.center = CGPoint(x:self.bounds.size.width/2.0, y: self.bounds.size.height/2.0)
+        
+        bgImage.frame = tableView.frame
     }
     
     

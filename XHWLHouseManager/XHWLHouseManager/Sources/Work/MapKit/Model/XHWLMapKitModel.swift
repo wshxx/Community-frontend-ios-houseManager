@@ -9,7 +9,7 @@
 import UIKit
 
 class XHWLMapKitModel: NSObject {
-
+    
     var createTime:String = ""
     var cardNum:String = ""
     var nodeName:String = ""
@@ -21,3 +21,4 @@ class XHWLMapKitModel: NSObject {
     var type:String = ""
     var status:String = ""
 }
+

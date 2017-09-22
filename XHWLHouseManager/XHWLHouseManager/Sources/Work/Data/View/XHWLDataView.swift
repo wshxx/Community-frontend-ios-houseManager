@@ -54,7 +54,7 @@ class XHWLDataView: UIView , UITableViewDelegate, UITableViewDataSource {
         super.layoutSubviews()
         
         bgImage.frame = self.bounds
-        tableView.frame = bgImage.bounds 
+        tableView.frame = CGRect(x: 0, y: 20, width: bgImage.bounds.width, height: bgImage.bounds.height-40)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -99,8 +99,8 @@ class XHWLDataView: UIView , UITableViewDelegate, UITableViewDataSource {
             let headV:UIView = UIView.init(frame: CGRect(x:0, y:0, width:self.tableView.frame.size.width, height:20))
             let label:UILabel = UILabel.init(frame: CGRect(x:10, y:0, width:self.tableView.frame.size.width-20, height:20))
             label.textColor = color_7a9198
-            label.font = font_12
-            label.text = "更新时间：2017-08-11 12:11:01"
+            label.font = font_14
+            label.text = "更新时间：\(Date.getCurrentDate())" // 2017-08-11 12:11:01"
             headV.addSubview(label)
             return headV
         } else {

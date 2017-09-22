@@ -23,7 +23,7 @@ class XHWLHeadView: UIView {
         
         titleL = UILabel()
         titleL.textColor = UIColor.white
-        titleL.font = font_12
+        titleL.font = font_14
         titleL.text = "业主认证："
         self.addSubview(titleL)
         

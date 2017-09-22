@@ -8,12 +8,16 @@
 
 import UIKit
 
-class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, XHWLNetworkDelegate, UIActionSheetDelegate {
+//@nonobjc(HZActionSheetDelegate)
+class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, XHWLNetworkDelegate, UIActionSheetDelegate, HZActionSheetDelegate {
     
     var bgImg:UIImageView!
     var isAddPicture:Bool!
     var warningView:XHWLIssueReportView!
+    var actionArr:NSArray!
     var scanModel:XHWLScanModel!
+    var selectIndex:NSInteger! = 0
+    var isPictureAdd:Bool! = true
     var imageArray:NSMutableArray! = NSMutableArray()
     
     override func viewDidLoad() {
@@ -47,7 +51,10 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
     }
     
     func onBack(){
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
+        
+        let vc:UIViewController = (self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)!-3])!
+        self.navigationController?.popToViewController(vc, animated: true)
     }
     
     func setupView() {
@@ -60,7 +67,7 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
         let showImg:UIImage = UIImage(named:"menu_bg")!
         warningView = XHWLIssueReportView()
         warningView.scanModel = scanModel
-        warningView.bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
+        warningView .bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.delegate = self
         warningView.dismissBlock = { _ in
@@ -93,6 +100,20 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
             return
         }
         
+        let imageDataAry = NSMutableArray()
+        let imageNameAry = NSMutableArray()
+        if imageArray.count > 0 {
+            for i in 0..<imageArray.count {
+                let imageData:Data = UIImageJPEGRepresentation(imageArray[i] as! UIImage, 0.5)!
+                imageDataAry.add(imageData)
+                imageNameAry.add("image\(i).png")
+            }
+        }
+         else {
+            "请上传图片".ext_debugPrintAndHint()
+            return
+        }
+        
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         let params:[String: String] = ["type":type,
@@ -101,26 +122,6 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
                                        "equipmentCode":scanModel.code,
                                        "remarks":remarks,
                                        "token":userModel.wyAccount.token]
-        let url:String = "wyBusiness/complaint"
-        
-//        if topStr.isEmpty {
-//            "您输入的工号为空".ext_debugPrintAndHint()
-//            return
-//        }
-//        if bottomStr.isEmpty {
-//            "您输入的密码为空".ext_debugPrintAndHint()
-//            return
-//        }
-        
-        //        self.progressHUD.show()
-        
-        let imageDataAry = NSMutableArray()
-        let imageNameAry = NSMutableArray()
-        for i in 0..<imageArray.count {
-            let imageData:Data = UIImageJPEGRepresentation(imageArray[i] as! UIImage, 0.5)!
-            imageDataAry.add(imageData)
-            imageNameAry.add("image\(i)")
-        }
         
         XHWLNetwork.shared.uploadImageClick(params as NSDictionary, imageDataAry as! [Data], imageNameAry as! [String], self)
     }
@@ -133,32 +134,15 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
         //            self.progressHUD.hide()
         if response["state"] as! Bool{
             
-            
             self.warningView.isHidden = true
-            XHWLTipView.shared.showSuccess(successText: "报事提交成功")
+            XHWLTipView.shared.showSuccess("报事提交成功")
             
-            //  "登陆成功".ext_debugPrintAndHint()
-            //登录成功
-            /*      let wyUser:NSDictionary = response["result"]!["wyUser"] as! NSDictionary
-             let projectList:NSArray = response["result"]!["projectList"] as! NSArray
-             
-             print("\(wyUser)")
-             let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: wyUser)
-             let data:NSData = userModel.mj_JSONData()! as NSData
-             UserDefaults.standard.set(data, forKey: "user")
-             
-             //                let modelAry:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: projectList)
-             let modelData:NSData = projectList.mj_JSONData()! as NSData
-             UserDefaults.standard.set(modelData, forKey: "projectList")
-             UserDefaults.standard.synchronize()
-             
-             if userModel.wyAccount.isFirstLogin.compare("y").rawValue == 0 { // 重置密码
-             //                    self.onLoginChangeReset()
-             } else { // 跳到首页
-             //                    self.delegate?.onGotoHome!(self)
-             } */
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.9)){
+                let vc:UIViewController = (self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)!-4])!
+                self.navigationController?.popToViewController(vc, animated: true)
+            }
         } else {
-            XHWLTipView.shared.showSuccess(successText: "报事提交失败，请重新填写！")
+            XHWLTipView.shared.showSuccess("报事提交失败，请重新填写！")
             
             //登录失败
             switch(response["errorCode"] as! Int){
@@ -179,23 +163,66 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
         
     }
 
-    func onSafeGuard(_ isAdd:Bool, _ index:NSInteger)
+    func onSafeGuard(_ isAdd:Bool, _ index:NSInteger, _ isPictureAdd:Bool)
     {
-        let actionSheet: UIActionSheet = UIActionSheet.init(title: "提示", delegate: self,
-                                                            cancelButtonTitle: "取消",
-                                                            destructiveButtonTitle: nil,
-                                                            otherButtonTitles: "相册", "拍照")
-
-        actionSheet.show(in: self.view)
-        
-        
         isAddPicture = isAdd
-        openAlbum()
+        selectIndex = index
+        self.isPictureAdd = isPictureAdd
+        
+        if !isAdd && !isPictureAdd { // 删除某张图
+            imageArray.removeObject(at: index)
+        } else {
+            actionArr = ["相册", "拍照"]
+            let sheet:HZActionSheet = HZActionSheet.init(title: nil,
+                                                         delegate: self,
+                                                         cancelButtonTitle: "取消",
+                                                         destructiveButtonIndexSet: nil,
+                                                         otherButtonTitles: actionArr as! [Any]!)
+            sheet.titleColor = UIColor.black
+            sheet.show(in: self.view)
+        }
     }
-//    func actionSheet(_ actionSheet:UIActionSheet,didDismissWithButtonIndex buttonIndex:Int){
-//        print("点击: "+actionSheet.buttonTitleAtIndex(buttonIndex)!)
-//    }
+
     
+    
+    // pragma mark  ActionSheetDelegate
+    func sheet(_ actionSheet: HZActionSheet!, click buttonIndex: Int) {
+        if ((actionArr != nil) && buttonIndex >= actionArr.count) {
+            
+            return;
+        }
+        
+        let string:String = actionArr[buttonIndex] as! String
+        print("\(string)")
+        
+        if (buttonIndex == 0) {
+            
+            openAlbum()
+        } else if (buttonIndex == 1){
+            
+            openCarme()
+        }
+    }
+    
+    // 打开相机
+    func openCarme() {
+        //判断设置是否支持图片库
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
+            //初始化图片控制器
+            let picker = UIImagePickerController()
+            //设置代理
+            picker.delegate = self
+            //指定图片控制器类型
+            picker.sourceType = UIImagePickerControllerSourceType.camera
+            //设置是否允许编辑
+            //            picker.allowsEditing = editSwitch.on
+            //弹出控制器，显示界面
+            self.present(picker, animated: true, completion: nil)
+        }else{
+            print("读取相册错误")
+        }
+    }
+
     //打开相册
     func openAlbum(){
         //判断设置是否支持图片库
@@ -242,11 +269,13 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
         //            imageView.image = image
         if isAddPicture {
             warningView.pickPhoto.onCreateImgView(image)
+            imageArray.add(image)
         } else {
             warningView.pickPhoto.onChangePicture(image)
+            imageArray[selectIndex] = image
         }
-        
-        imageArray.add(image)
+//        let type:String = (info[UIImagePickerControllerMediaType]as!String)
+//        let imgData = UIImageJPEGRepresentation(self.headImg.image!,0.5)
         
         //图片控制器退出
         picker.dismiss(animated: true, completion: nil)

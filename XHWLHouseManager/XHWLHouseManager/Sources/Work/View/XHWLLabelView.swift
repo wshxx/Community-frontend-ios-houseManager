@@ -28,11 +28,12 @@ class XHWLLabelView: UIView {
         
         titleL = UILabel()
         titleL.textColor = UIColor.white
-        titleL.font = font_12
+        titleL.textAlignment = .right
+        titleL.font = font_14
         self.addSubview(titleL)
         
         contentTF = UITextField()
-        contentTF.font = font_12
+        contentTF.font = font_14
         contentTF.textColor = UIColor.white
         contentTF.backgroundColor = UIColor.clear
         contentTF.isEnabled = false
@@ -43,10 +44,13 @@ class XHWLLabelView: UIView {
         super.layoutSubviews()
         
         
-        let size:CGSize = titleL.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:titleL.font], context: nil).size
-        
-        titleL.frame = CGRect(x:10, y:0, width:size.width, height:30)
+        titleL.frame = CGRect(x:10, y:0, width:80, height:30)
         contentTF.frame = CGRect(x: titleL.frame.maxX+10, y: 0, width: self.bounds.size.width-titleL.frame.size.width-30, height: 30)
+        
+//        let size:CGSize = titleL.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:titleL.font], context: nil).size
+//        
+//        titleL.frame = CGRect(x:10, y:0, width:size.width, height:30)
+//        contentTF.frame = CGRect(x: titleL.frame.maxX+10, y: 0, width: self.bounds.size.width-titleL.frame.size.width-30, height: 30)
     }
     
     func showText(leftText:String, rightText:String) {

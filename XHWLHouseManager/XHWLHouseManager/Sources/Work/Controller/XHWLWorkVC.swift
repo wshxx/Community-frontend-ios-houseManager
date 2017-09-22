@@ -98,12 +98,12 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         
         let array:NSMutableArray! = NSMutableArray()
         if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
-            array.addObjects(from: ["安防事件", "在线定位", "进度查看", "数据", "访客记录", "异常放行"])
+            array.addObjects(from: ["异常放行", "安防事件", "访客记录", "在线定位", "进度查看", "安环数据"])
         } else if userModel.wyAccount.wyRole.name.compare("安管人员").rawValue == 0 {
             array.addObjects(from: ["访客登记"])
         } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
             loadDeviceInfo()
-            array.addObjects(from: ["设备报警", "供配电", "设备统计", "能耗统计"])
+            array.addObjects(from: ["设备报警", "供配电", "能耗统计", "设备统计"])
         }
        
         homeView = XHWLWorkView(frame: CGRect.zero, array: array)
@@ -125,36 +125,34 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         self.view.addSubview(homeView)
     }
     
-    // 安管主任
+    // 安管主任   "异常放行", "安防事件", "访客记录", "在线定位", "进度查看", "安环数据"
     func onSafeGuardLeader(_ index:NSInteger) {
         switch index {
-        case 0: // "安防事件",
+        case 0: // "异常放行"
+            let vc:XHWLAbnormalPassVC = XHWLAbnormalPassVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 1: // "安防事件",
             let vc:XHWLSafeProtectionVC = XHWLSafeProtectionVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
-        case 1:// "在线定位",
-            let vc:XHWLMapKitVC = XHWLMapKitVC()
-            self.navigationController?.pushViewController(vc, animated: true)
-            break
-        case 2: // "进度查看",
-            let vc:XHWLCountVC = XHWLCountVC()
-            self.navigationController?.pushViewController(vc, animated: true)
-            break
-        case 3: //  "数据",
-            let vc:XHWLDataVC = XHWLDataVC() //
-            self.navigationController?.pushViewController(vc, animated: true)
-            
-            break
-        case 4: //  "访客记录",
+        case 2: //  "访客记录",
             let vc:XHWLRegistrationVC = XHWLRegistrationVC() // 访客记录
             vc.title = "访客记录"
             self.navigationController?.pushViewController(vc, animated: true)
             break
-        case 5: // "异常放行"
-            let vc:XHWLAbnormalPassVC = XHWLAbnormalPassVC()
+        case 3:// "在线定位",
+            let vc:XHWLMapKitVC = XHWLMapKitVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
-       
+        case 4: // "进度查看",
+            let vc:XHWLCountVC = XHWLCountVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 5: //  "数据",
+            let vc:XHWLDataVC = XHWLDataVC() //
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
             
         default: break
             
@@ -171,14 +169,15 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         case 1: //"供配电",
             let vc:XHWLWaterVC = XHWLWaterVC()
             self.navigationController?.pushViewController(vc, animated: true)
-        case 2:// "设备统计",
-            let vc:XHWLDeviceStatisticsVC = XHWLDeviceStatisticsVC()
-            self.navigationController?.pushViewController(vc, animated: true)
-            break
-        case 3: // "能耗统计"
+         case 2: // "能耗统计"
             let vc:XHWLEnergyManagementVC = XHWLEnergyManagementVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
+        case 3:// "设备统计",
+            let vc:XHWLDeviceStatisticsVC = XHWLDeviceStatisticsVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+            
         default: break
         }
     }
@@ -223,7 +222,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
      {
      "utid":"XHWL",
      "type":"plant",
-     "code":"xxxxx"
+     "code":"pl01"
      }
      *  @param strResult 返回的字符串
      */
@@ -299,6 +298,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.isHidden = false
+        menuView.updateData()
     }
 
     override func didReceiveMemoryWarning() {

@@ -26,14 +26,14 @@ class XHWLSubDataView: UIView {
     func setupView() {
         
         titleL = UILabel()
-        titleL.font = font_12
+        titleL.font = font_14
         titleL.textColor = UIColor.white
         titleL.textAlignment = NSTextAlignment.center
         self.addSubview(titleL)
         
         contentL = UILabel()
         contentL.textColor = color_01f0ff
-        contentL.font = font_12
+        contentL.font = font_14
         contentL.textAlignment = NSTextAlignment.center
         self.addSubview(contentL)
     }

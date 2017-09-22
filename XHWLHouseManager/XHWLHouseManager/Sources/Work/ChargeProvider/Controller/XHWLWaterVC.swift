@@ -20,7 +20,8 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
         self.view.backgroundColor = UIColor.white
         setupView()
         setupNav()
-        onLoadNavParameData()
+//        onLoadNavParameData()
+        loadDeviceInfo()
         onLoadRealData()
     }
     
@@ -34,19 +35,30 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func onLoadNavParameData() {
+    //    返回项目下所有设备信息
+    func loadDeviceInfo() {
         
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        let param = ["ProjectCode": "201", // 项目编号
+            "token":userModel.wyAccount.token]
         
-        let params:[String:Any] = ["ProjectCode":"201", // 项目编号
-            "token":userModel.wyAccount.token,
-            ]
-       
-//       ?AccessToken=bd4f1ce1b544463094726ebc23a6c9f1
-        
-        XHWLNetwork.shared.postNavParameClick(params as NSDictionary, self)
+        XHWLNetwork.shared.postDeviceInfoClick(param as NSDictionary, self)
     }
+
+//    func onLoadNavParameData() {
+//        
+//        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+//        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+//        
+//        let params:[String:Any] = ["ProjectCode":"201", // 项目编号
+//            "token":userModel.wyAccount.token,
+//            ]
+//       
+////       ?AccessToken=bd4f1ce1b544463094726ebc23a6c9f1
+//        
+//        XHWLNetwork.shared.postNavParameClick(params as NSDictionary, self)
+//    }
     
     func onLoadRealData() {
         
@@ -73,11 +85,18 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
             let list:NSArray = response["result"] as! NSArray
             
             let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: list.mj_JSONObject())
-            
-        } else if requestKey == XHWLRequestKeyID.XHWL_REALDATA.rawValue {
+        }
+        else if requestKey == XHWLRequestKeyID.XHWL_REALDATA.rawValue {
             let list:NSArray = response["result"] as! NSArray
             
             let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: list.mj_JSONObject())
+        }
+        else if requestKey == XHWLRequestKeyID.XHWL_DEVICEINFO.rawValue {
+            let list:NSArray = response["result"] as! NSArray
+            let array = XHWLDeviceModel.mj_objectArray(withKeyValuesArray: list)
+            warningView.dataAry = NSMutableArray()
+            warningView.dataAry.add(array)
+            warningView.tableView.reloadData()
         }
     }
     

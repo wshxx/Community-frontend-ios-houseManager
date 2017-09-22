@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XHWLAbnormalPassVC: UIViewController  , XHWLNetworkDelegate {
+class XHWLAbnormalPassVC: UIViewController , XHWLNetworkDelegate {
 
     var bgImg:UIImageView!
     var topMenu:XHWLTopView!
@@ -48,12 +48,16 @@ class XHWLAbnormalPassVC: UIViewController  , XHWLNetworkDelegate {
         
         if requestKey == XHWLRequestKeyID.XHWL_EXCEPTIONPASSLOG.rawValue {
             
-            let dealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray:response["result"]!["deal"] as! NSArray )
-            let noDealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray: response["result"]!["notDeal"] as! NSArray)
-            
-            self.warningView.dataAry.addObjects(from: dealArray as! [Any])
-            self.warningView.dataSource.addObjects(from: noDealArray as! [Any])
-            self.warningView.tableView.reloadData()
+            let array = response["result"] as! NSArray
+            if array.count <= 0 {
+                return
+            }
+//            let dealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray:response["result"]!["deal"] as! NSArray )
+//            let noDealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray: response["result"]!["notDeal"] as! NSArray)
+//            
+//            self.warningView.dataAry.addObjects(from: dealArray as! [Any])
+//            self.warningView.dataSource.addObjects(from: noDealArray as! [Any])
+//            self.warningView.tableView.reloadData()
             
         }
         

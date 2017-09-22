@@ -14,7 +14,7 @@ class XHWLHistoryWarningView: UIView {
     var btn:UIButton!
     var labelViewArray:NSMutableArray!
     var array:NSArray!
-    var btnBlock:(NSInteger)->(Void) = { param in }
+    var btnBlock:()->(Void) = { param in }
     
     static var shared: XHWLHistoryWarningView {
         struct Static {
@@ -46,7 +46,7 @@ class XHWLHistoryWarningView: UIView {
         btn = UIButton()
         btn.addTarget(self, action: #selector(onDeviceDetail), for: UIControlEvents.touchUpInside)
         btn.setTitle("设备实时运行监控 >>", for: UIControlState.normal)
-        btn.titleLabel?.font = font_12
+        btn.titleLabel?.font = font_14
         btn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.right
         btn.setTitleColor(UIColor().colorWithHexString(colorStr: "09fbfe") , for: UIControlState.normal)
         self.addSubview(btn)
@@ -68,13 +68,13 @@ class XHWLHistoryWarningView: UIView {
     }
 
     func onDeviceDetail() {
-        
+        self.btnBlock()
     }
     
     func heightWithSize(_ menuModel :XHWLMenuModel ) -> CGFloat {
         
-        let sizeL:CGSize = menuModel.name.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_12], context: nil).size
-        let sizeR:CGSize = menuModel.content.boundingRect(with: CGSize(width:CGFloat(self.bounds.size.width-sizeL.width-30), height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesFontLeading, attributes: [NSFontAttributeName:font_12], context: nil).size
+        let sizeL:CGSize = menuModel.name.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+        let sizeR:CGSize = menuModel.content.boundingRect(with: CGSize(width:CGFloat(self.bounds.size.width-sizeL.width-30), height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesFontLeading, attributes: [NSFontAttributeName:font_14], context: nil).size
         
         return sizeR.height + 10
     }

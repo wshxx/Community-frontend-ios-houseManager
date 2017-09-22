@@ -34,3 +34,5 @@ class XHWLAccountModel: NSObject {
         print("EditPubLicityModel 缺少:\(key)")
     }
 }
+
+

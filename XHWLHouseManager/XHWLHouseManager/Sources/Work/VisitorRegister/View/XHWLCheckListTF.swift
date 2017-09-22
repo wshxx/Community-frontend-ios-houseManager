@@ -17,9 +17,8 @@ class XHWLCheckListTF: UIView, UITextFieldDelegate {
 
     var titleL:UILabel!
     var contentTF:UITextField!
-    var listBtn:UIButton!
+    var listBtn:XHWLButton!
     var checkEnum:XHWLCheckListTFEnum!
-    var img: UIImageView!
     var btnBlock:()->(Void) = { param in }
     var textEndBlock:(String)->() = {param in }
     
@@ -34,13 +33,13 @@ class XHWLCheckListTF: UIView, UITextFieldDelegate {
         
         titleL = UILabel()
         titleL.textColor = UIColor.white
-        titleL.font = font_12
+        titleL.font = font_14
         self.addSubview(titleL)
         
         contentTF = UITextField()
         contentTF.delegate = self
         contentTF.background = UIImage(named:"check_textfield_bg")
-        contentTF.font = font_12
+        contentTF.font = font_14
         contentTF.textColor = UIColor.white
         contentTF.tintColor = color_c8e5f0
         contentTF.leftView = UIView(frame: CGRect(x:0, y:0, width:5, height:10))
@@ -48,18 +47,9 @@ class XHWLCheckListTF: UIView, UITextFieldDelegate {
         //        contentTF.backgroundColor = UIColor.red
         self.addSubview(contentTF)
         
-        listBtn = UIButton()
-        listBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
-//        let image:UIImage = UIImage(named:"home_switch")!
-//        listBtn.setImage(image, for: UIControlStateaqxswxd.normal)
-        listBtn.titleLabel?.font = font_12
-        listBtn.titleLabel?.textColor = color_09fbfe
+        listBtn = XHWLButton()
         listBtn.addTarget(self, action: #selector(onListTouchClick), for: UIControlEvents.touchUpInside)
         self.addSubview(listBtn)
-        
-        img = UIImageView()
-        img.image = UIImage(named:"home_switch")!
-        listBtn.addSubview(img)
     }
     
     func onListTouchClick() {
@@ -87,23 +77,16 @@ class XHWLCheckListTF: UIView, UITextFieldDelegate {
             contentTF.frame = CGRect(x: listBtn.frame.maxX+5, y: 0, width: self.bounds.size.width-listBtn.frame.maxX-20, height: 30)
             
         }
-        
-        let image:UIImage = UIImage(named:"home_switch")!
-//        let titleW:CGFloat = (listBtn.titleLabel?.bounds.size.width)!
-//        listBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -titleW-image.size.width-14)
-//        listBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -image.size.width-titleW, bottom: 0, right: 0)
-        
-        img.frame = CGRect(x:(listBtn.frame.size.width-image.size.width-10), y:(listBtn.frame.size.height-image.size.height)/2.0, width:image.size.width, height:image.size.height)
     }
     
     func showText(leftText:String, rightText:String, btnTitle:String) {
         titleL.text = leftText
         contentTF.text = rightText
-        listBtn.setTitle(btnTitle, for: UIControlState.normal)
+        listBtn.showBtnTitle(btnTitle)
     }
     
     func showBtnTitle(_ btnTitle:String) {
-        listBtn.setTitle(btnTitle, for: UIControlState.normal)
+        listBtn.showBtnTitle(btnTitle)
     }
     
     required init?(coder aDecoder: NSCoder) {

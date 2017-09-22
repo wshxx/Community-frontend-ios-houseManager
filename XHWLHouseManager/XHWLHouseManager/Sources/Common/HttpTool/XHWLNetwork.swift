@@ -66,6 +66,7 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
 //            key:[FireflySecurityUtil sharedInstance].aesToken
 //            vector:AES_VECTOR]; // 加密
         
+        XHMLProgressHUD.shared.show()
         
         let request = XHWLHttpTool() 
         request.initWithKey(requestKey, self)
@@ -130,7 +131,7 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
     func uploadImageClick(_ parameters:NSDictionary, _ data:[Data], _ name:[String], _ delegate:XHWLNetworkDelegate) {
         
         self.delegate = delegate;
-        superWithUploadImage(parameters, .XHWL_SCANCODE, data, name)
+        superWithUploadImage(parameters, .XHWL_REPORTLIST, data, name)
     }
     
     // 报事列表
@@ -169,10 +170,10 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
     }
     
     // 处理安防事件（提交）
-    func postSafeGuardSubmitClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+    func updateSafeGuardSubmitClick(_ parameters:NSDictionary, _ data:[Data], _ name:[String], _ delegate:XHWLNetworkDelegate) {
         
         self.delegate = delegate;
-        superWithLoadData(parameters, .XHWL_SAFEGUARDSUBMIT, .post)
+        superWithUploadImage(parameters, .XHWL_SAFEGUARDSUBMIT, data, name)
     }
     
     // 获取停车场异常放行记录
@@ -190,14 +191,14 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
     }
     
     // 某项目所有设备某日能耗
-    func postEnergyLoseClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+    func getEnergyLoseClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
         
 //        ProjectCode 	string 	是 	项目编号
 //        Date 	Date 	是 	日期
 //        token 	string 	是 	用户登录token
 //        
         self.delegate = delegate;
-        superWithLoadData(parameters, .XHWL_ENERGYLOSE, .post)
+        superWithLoadData(parameters, .XHWL_ENERGYLOSE, .get)
     }
     
     // 返回某项目某设备当前实时数据
@@ -242,10 +243,26 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
         superWithLoadData(parameters, .XHWL_REALPROGRESS, .get)
     }
     
+    //获取单元信息
+    func postUnitClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_UNIT, .post)
+    }
     
+    // 开门
+    func postOpenDoorClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_OPENDOOR, .post)
+    }
     
-    
-    
+    // 访客登记记录
+    func getVisitListClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_VISITLIST, .get)
+    }
     
     // MARK: - XHWLHttpToolDelegate
     func requestSuccess(_ requestKey:NSInteger, result request:Any) {

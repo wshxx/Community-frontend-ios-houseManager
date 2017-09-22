@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 import swiftScan
+import CoreBluetooth
 
-class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHWLNetworkDelegate { // XHWLScanVCDelegate,
+class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHWLNetworkDelegate, CBCentralManagerDelegate {
     
     var btn:UIButton!
     
@@ -22,6 +23,12 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
 
         setupNav()
         setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+          menuView.updateData()
     }
     
     func setupNav() {
@@ -50,6 +57,42 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
         btn.addTarget(self, action: #selector(onCreateNavHeadView), for: UIControlEvents.touchUpInside)
         
         return btn
+    }
+    
+    //MARK: -2.检查设备自身（中心设备）支持的蓝牙状态
+    // CBCentralManagerDelegate的代理方法
+    
+    /// 本地设备状态
+    ///
+    /// - Parameter central: 中心者对象
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        switch central.state {
+        case .unknown:
+            print("CBCentralManager state:", "unknown")
+            break
+        case .resetting:
+            print("CBCentralManager state:", "resetting")
+            break
+        case .unsupported:
+            print("CBCentralManager state:", "unsupported")
+            break
+        case .unauthorized:
+            print("CBCentralManager state:", "unauthorized")
+            break
+        case .poweredOff:
+            print("CBCentralManager state:", "power off")
+            //            AlertMessage.showAlertMessage(vc: self, alertMessage: "请打开蓝牙！", duration: 1)
+            break
+        case .poweredOn:
+            //暂时跳到云对讲
+            let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "bluetoothVC")
+            self.navigationController?.pushViewController(vc, animated: true)
+//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "bluetoothVC")
+//            self.present(vc!, animated: true)
+            break
+        }
+        
     }
     
     func onCreateNavHeadView() {
@@ -157,18 +200,27 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
     
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
         
-        let errorCode:NSInteger = response["errorCode"] as! NSInteger
-        if errorCode == 200 {
-            "扫描成功".ext_debugPrintAndHint()
-            let result:NSDictionary = response["result"] as! NSDictionary
+        if requestKey == XHWLRequestKeyID.XHWL_OPENDOOR.rawValue {
+            let dict = response["result"] as! NSDictionary
+            let model:XHWLUnitModel = XHWLUnitModel.mj_object(withKeyValues: dict)
             
-            let scanModel:XHWLScanModel = XHWLScanModel.mj_object(withKeyValues: result)
+            print("\(model.address) = \(model.yzId)")
+        }
+        else if requestKey == XHWLRequestKeyID.XHWL_SCANCODE.rawValue {
             
-            print("\(scanModel.name), \(scanModel.code)")
-            
-            let vc:XHWLScanResultVC = XHWLScanResultVC()
-            vc.scanModel = scanModel
-            self.navigationController?.pushViewController(vc, animated: true)
+            let errorCode:NSInteger = response["errorCode"] as! NSInteger
+            if errorCode == 200 {
+                "扫描成功".ext_debugPrintAndHint()
+                let result:NSDictionary = response["result"] as! NSDictionary
+                
+                let scanModel:XHWLScanModel = XHWLScanModel.mj_object(withKeyValues: result)
+                
+                print("\(scanModel.name), \(scanModel.code)")
+                
+                let vc:XHWLScanResultVC = XHWLScanResultVC()
+                vc.scanModel = scanModel
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
     
@@ -181,22 +233,49 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
     func onHomeViewWithOpenBluetooth(_ homeView:XHWLHomeView)
     {
         // 天气
-        let vc = XHWLLocationVC()
+//        let vc = XHWLLocationVC()
         //            let vc:XHWLPedometerVC = XHWLPedometerVC()
         //            let vc = CMPedometerViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // 远程开门
     func onHomeViewWithOpenNetwork(_ homeView:XHWLHomeView) {
         
+        let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ChooseDistrictVC")
+        self.present(vc, animated: true, completion: nil)
+//        self.navigationController?.pushViewController(vc, animated: true)
+//        loadData()
     }
     
+    var central: CBCentralManager!
     // 蓝牙绑卡
     func onHomeViewWithBindCard(_ homeView:XHWLHomeView) {
-        let vc:XHWLBluetoothOpenVC = XHWLBluetoothOpenVC()
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc:XHWLBluetoothOpenVC = XHWLBluetoothOpenVC()
+        //初始化本地中心设备对象
+        central = CBCentralManager.init(delegate: self, queue: nil)
+
+        
+        
     }
+    
+    
+    func loadData() {
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        let params:[String:Any] = ["reqId":"DaMen2", // 请求代码
+            "upid":"DaMen2", // 项目唯一编号
+            "doorId":"83886523", // 门ID
+            ]
+        
+        XHWLNetwork.shared.postOpenDoorClick(params as NSDictionary, self)
+    }
+        
+       
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

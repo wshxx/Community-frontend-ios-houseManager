@@ -43,6 +43,7 @@ class XHWLWorkCell: UITableViewCell {
         showBtn.setBackgroundImage(UIImage(named:"home_btn_bg"), for: UIControlState.normal)
         showBtn.setBackgroundImage(UIImage(named:"home_btn_bg_high"), for: UIControlState.highlighted)
         showBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
+        showBtn.titleLabel?.font = font_15
         showBtn.addTarget(self, action: #selector(onSelectClick), for: UIControlEvents.touchUpInside)
         self.contentView.addSubview(showBtn)
     }
@@ -62,7 +63,7 @@ class XHWLWorkCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        showBtn.bounds = CGRect(x:0, y:0, width:270, height:68)
+        showBtn.bounds = CGRect(x:0, y:0, width:270, height:50)
         showBtn.center = CGPoint(x:self.frame.size.width/2.0, y:self.frame.size.height/2.0)
     }
     

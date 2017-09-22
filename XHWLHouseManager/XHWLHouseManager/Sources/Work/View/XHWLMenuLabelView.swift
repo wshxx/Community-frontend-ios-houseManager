@@ -48,11 +48,11 @@ class XHWLMenuLabelView: UIView {
         
         titleL = UILabel()
         titleL.textColor = UIColor.white
-        titleL.font = font_12
+        titleL.font = font_14
         self.addSubview(titleL)
         
         contentTF = UITextField()
-        contentTF.font = font_12
+        contentTF.font = font_14
         contentTF.textColor = UIColor.white
         contentTF.backgroundColor = UIColor.clear
         contentTF.textAlignment = NSTextAlignment.left
@@ -68,14 +68,14 @@ class XHWLMenuLabelView: UIView {
         okBtn.setTitle("确定", for: UIControlState.normal)
         okBtn.setTitleColor(UIColor().colorWithHexString(colorStr: "3cf8ff"), for: UIControlState.normal)
         okBtn.isHidden = true
-        okBtn.titleLabel?.font = font_12
+        okBtn.titleLabel?.font = font_14
         okBtn.addTarget(self, action: #selector(onOkClick), for: UIControlEvents.touchUpInside)
         self.addSubview(okBtn)
         
         rightBtn = UIButton()
         rightBtn.setImage(UIImage(named:"menu_edit"), for: UIControlState.normal)
         rightBtn.setTitle("", for: UIControlState.normal)
-        rightBtn.titleLabel?.font = font_12
+        rightBtn.titleLabel?.font = font_14
         rightBtn.setTitleColor(UIColor().colorWithHexString(colorStr: "3cf8ff"), for: UIControlState.normal)
         rightBtn.isHidden = isHiddenEdit
         rightBtn.setTitleColor(UIColor.black, for: UIControlState.normal)

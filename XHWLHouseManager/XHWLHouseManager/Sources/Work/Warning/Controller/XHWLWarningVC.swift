@@ -67,6 +67,10 @@ class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
     
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
 //        历史告警
+        if response["result"] is NSNull {
+            return
+        }
+        
         if requestKey == XHWLRequestKeyID.XHWL_HISTORYALER.rawValue {
             let array = response["result"] as! NSArray
             dataSource = XHWLWarningModel.mj_objectArray(withKeyValuesArray: array)

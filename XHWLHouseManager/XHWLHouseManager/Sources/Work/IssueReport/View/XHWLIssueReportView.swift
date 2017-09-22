@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol XHWLIssueReportViewDelegate:NSObjectProtocol {
-    @objc optional func onSafeGuard(_ isAdd:Bool, _ index:NSInteger)
+    @objc optional func onSafeGuard(_ isAdd:Bool, _ index:NSInteger, _ isPictureAdd:Bool)
 }
 
 class XHWLIssueReportView: UIView {
@@ -32,7 +32,7 @@ class XHWLIssueReportView: UIView {
     weak var delegate:XHWLIssueReportViewDelegate?
     var btnBlock:(String, String, String, String)->(Void) = { param in }
     var dismissBlock:()->() = {_ in }
-    var radioIndex:String?
+    var radioIndex:String? = "是"
     var type:String! = "工程"
     
     override init(frame: CGRect) {
@@ -96,18 +96,18 @@ class XHWLIssueReportView: UIView {
         }
         self.addSubview(radioView)
         
-        pickPhoto = XHWLPickPhotoView()
+        pickPhoto = XHWLPickPhotoView(frame: CGRect.zero, false)
         pickPhoto.showText("上传照片：")
-        pickPhoto.isShow = false
-        pickPhoto.addPictureBlock = { isAdd, index in
-            self.delegate?.onSafeGuard!(isAdd, index)
+//        pickPhoto.isShow = false
+        pickPhoto.addPictureBlock = { isAdd, index, isPictureAdd in
+            self.delegate?.onSafeGuard!(isAdd, index, isPictureAdd)
         }
         self.addSubview(pickPhoto)
         
         cancelBtn = UIButton()
         cancelBtn.setTitle("取消", for: UIControlState.normal)
         cancelBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
-        cancelBtn.titleLabel?.font = font_12
+        cancelBtn.titleLabel?.font = font_14
         cancelBtn.tag = comTag
         cancelBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
         cancelBtn.addTarget(self, action: #selector(submitClick), for: UIControlEvents.touchUpInside)
@@ -116,7 +116,7 @@ class XHWLIssueReportView: UIView {
         submitBtn = UIButton()
         submitBtn.setTitle("提交", for: UIControlState.normal)
         submitBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
-        submitBtn.titleLabel?.font = font_12
+        submitBtn.titleLabel?.font = font_14
         submitBtn.tag = comTag+1
         submitBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
         submitBtn.addTarget(self, action: #selector(submitClick), for: UIControlEvents.touchUpInside)
@@ -128,7 +128,15 @@ class XHWLIssueReportView: UIView {
         if btn.tag - comTag == 0 {
             self.dismissBlock()
         } else {
-            self.btnBlock(self.type!, dotView.contentTF.text!, remark.textView.text!, radioIndex!)
+//            if type.isEmpty {
+//                "异常类型为空".ext_debugPrintAndHint()
+//                return
+//            }
+//            if remark.textView.text.isEmpty {
+//                "异常类型为空".ext_debugPrintAndHint()
+//                return
+//            }
+            self.btnBlock(self.type!, dotView.contentTF.text! ?? "", remark.textView.text! ?? "", radioIndex!)
         }
         
     }

@@ -34,15 +34,15 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>cameraDesciption</string>
+	<string>App需要访问您的相机</string>
 	<key>NSContactsUsageDescription</key>
-	<string>contactsDesciption</string>
+	<string>App需要访问您的通讯录</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>App需要您的同意,才能访问健康分享</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>App需要您的同意,才能访问健康更新 </string>
 	<key>NSLocationUsageDescription</key>
-	<string>iOS8.0及以前的</string>
+	<string>App需要访问您的位置</string>
 	<key>NSLocationWhenInUseDescription</key>
 	<string>允许在前台获取GPS的描述</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

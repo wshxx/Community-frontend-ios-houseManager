@@ -65,16 +65,20 @@ class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDel
     
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
         
-        if requestKey == XHWLRequestKeyID.XHWL_EXCEPTIONPASSLOG.rawValue {
-            
-            let dealArray:NSArray = XHWLMapKitModel.mj_objectArray(withKeyValuesArray:response["result"] as! NSArray)
+        if requestKey == XHWLRequestKeyID.XHWL_MAPKIT.rawValue {
+
+            if response["result"] is NSNull {
+                return
+            }
+            let dict:NSDictionary = response["result"] as! NSDictionary
+            let dealArray:NSArray = XHWLMapKitModel.mj_objectArray(withKeyValuesArray:dict["collectNodes"] as! NSArray)
             
             for i in 0..<dealArray.count {
                 let model:XHWLMapKitModel = dealArray[i] as! XHWLMapKitModel
                 
                 
                 let coor:CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(model.latitude)!, Double(model.longitude)!)
-                stickAnnotation(coor)
+                stickAnnotation(coor, model)
                 
             }
             
@@ -84,6 +88,23 @@ class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDel
     
     func requestFail(_ requestKey:NSInteger, _ error:NSError) {
         
+    }
+    
+    // 添加大头针
+    func stickAnnotation(_ coordinate:CLLocationCoordinate2D, _ model:XHWLMapKitModel) {
+        // 添加一个PointAnnotation
+        let annotation: BMKPointAnnotation = BMKPointAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = model.nodeName
+        //        annotation.subtitle = "声明"
+        _mapView?.addAnnotation(annotation)
+    }
+    
+    // 移除大头针
+    func removeAnnotation() {
+        //        if (annotation != nil) {
+        //            _mapView?.removeAnnotation(annotation)
+        //        }
     }
     
     // MARK: - 初始化地图和定位
@@ -195,24 +216,13 @@ class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDel
         _mapView?.region = BMKCoordinateRegionMake(coordinate, BMKCoordinateSpanMake(0.1, 0.1))
         // 当前地图的中心点，改变该值时，地图的比例尺级别不会发生变化
         _mapView?.centerCoordinate = coordinate
-        stickAnnotation(coordinate)
-    }
-    
-    // 添加大头针
-    func stickAnnotation(_ coordinate:CLLocationCoordinate2D) {
-        // 添加一个PointAnnotation
+//        stickAnnotation(coordinate)
+        
         let annotation: BMKPointAnnotation = BMKPointAnnotation()
         annotation.coordinate = coordinate
-//        annotation.title = "这里是北京"
-//        annotation.subtitle = "声明"
+        //        annotation.title = "这里是北京"
+        //        annotation.subtitle = "声明"
         _mapView?.addAnnotation(annotation)
-    }
-    
-    // 移除大头针
-    func removeAnnotation() {
-        //        if (annotation != nil) {
-        //            _mapView?.removeAnnotation(annotation)
-        //        }
     }
     
     /**

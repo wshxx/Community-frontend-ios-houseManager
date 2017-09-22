@@ -13,8 +13,23 @@ class XHWLRealProgressModel: NSObject {
     var progress:String = ""
     var id:String = ""
     var totalLine:String = ""
-    var totalLineDetail:XHWLDetailProgressModel = XHWLDetailProgressModel()
+    var totalLineDetail:[XHWLDetailProgressModel] = NSMutableArray() as! [XHWLDetailProgressModel]
     var nickname:String = ""
-    var inspectedLineDetail:XHWLDetailProgressModel = XHWLDetailProgressModel()
+    var inspectedLineDetail:[XHWLDetailProgressModel] = NSMutableArray() as! [XHWLDetailProgressModel]
     var inspectedTotal:String = ""
+    var nodeTotal:String = ""
+    
+    func mj_objectClassInArray() -> [AnyHashable : Any]! {
+        return ["totalLineDetail":XHWLRoleModel.self,
+                "inspectedLineDetail":XHWLRoleModel.self] // [JZMJewelryCategoryModel class]
+    }
+    
+    override func setValue(_ value: Any?, forKey key: String) {
+        super.setValue(value, forKey: key)
+    }
+    
+    override func setValue(_ value:Any?, forUndefinedKey key:String) {
+        print("EditPubLicityModel 缺少:\(key)")
+    }
 }
+

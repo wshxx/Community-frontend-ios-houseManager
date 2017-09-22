@@ -56,12 +56,12 @@ class XHWLScanResultView: UIView {
         okBtn.setTitleColor(UIColor().colorWithHexString(colorStr: "51ebfd"), for: UIControlState.normal)
         okBtn.addTarget(self, action: #selector(XHWLScanResultView.btnClick), for: UIControlEvents.touchUpInside)
         okBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
-        okBtn.titleLabel?.font = font_9
+        okBtn.titleLabel?.font = font_13
         self.addSubview(okBtn)
         
         cancelBtn = UIButton()
         cancelBtn.setTitle("取消", for: UIControlState.normal)
-        cancelBtn.titleLabel?.font = font_9
+        cancelBtn.titleLabel?.font = font_13
         cancelBtn.tag = comTag
         cancelBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
         cancelBtn.addTarget(self, action: #selector(XHWLScanResultView.btnClick), for: UIControlEvents.touchUpInside)

@@ -38,7 +38,7 @@ class XHWLNavHeadView: UIView , UITableViewDelegate, UITableViewDataSource {
     func setupView() {
         
         bgImage = UIImageView()
-        bgImage.image = UIImage(named:"warning_bg")
+        bgImage.image = UIImage(named:"pop_bg")
         self.addSubview(bgImage)
         
         

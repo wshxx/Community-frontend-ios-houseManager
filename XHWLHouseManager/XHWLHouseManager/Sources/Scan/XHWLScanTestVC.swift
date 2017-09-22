@@ -70,7 +70,7 @@ class XHWLScanTestVC: UIViewController , XHWLScanVCDelegate{
         vc = XHWLScanVC()
         vc.scanStyle = style
         vc.scanDelegate = self
-        vc.view.frame = CGRect(x:0, y:85, width:Screen_width, height:Screen_height-170)
+        vc.view.frame = CGRect(x:0, y:85, width:Screen_width, height:Screen_height-85)
         self.view.addSubview(vc.view)
         self.addChildViewController(vc)
 //        self.navigationController?.pushViewController(vc, animated: true)

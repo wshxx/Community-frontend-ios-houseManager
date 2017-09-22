@@ -9,10 +9,10 @@
 import UIKit
 
 @objc protocol XHWLSafeGuardViewDelegate:NSObjectProtocol {
-    @objc optional func onSafeGuard(_ isAdd:Bool, _ index:NSInteger)
+    @objc optional func onSafeGuard(_ isAdd:Bool, _ index:NSInteger, _ isPictureAdd:Bool)
 }
 
-class XHWLSafeGuardView: UIView , XHWLNetworkDelegate{
+class XHWLSafeGuardView: UIView {
 
     var bgImage:UIImageView!
     var bgScrollView: UIScrollView!
@@ -30,34 +30,38 @@ class XHWLSafeGuardView: UIView , XHWLNetworkDelegate{
     var labelViewArray2:NSMutableArray!
     var labelViewArray3:NSMutableArray!
     var isFinished:Bool!
-    var code:String! // 单号
-    var backReloadBlock:()->(Void) = {param in }
+    var model:XHWLSafeProtectionModel! // 单号
+    var submitBlock:(String)->(Void) = {param in }
+    var remarkStr:String! = ""
     
     var submitBtn:UIButton!
     
-    init(frame: CGRect, _ isFinished:Bool, _ code:String) {
+    init(frame: CGRect, _ isFinished:Bool, _ model:XHWLSafeProtectionModel) {
         super.init(frame: frame)
         
         self.isFinished = isFinished
-        self.code = code
-        dataAry1 = NSMutableArray()
-        let array1 :NSArray = [["name":"备注：", "content":"业主", "isHiddenEdit": false],
-                               ["name":"处理人：", "content":"徐柳飞", "isHiddenEdit": true],
-                               ["name":"处理时间：", "content":"2017.06.23 10:11:20", "isHiddenEdit":false]]
-        dataAry1 = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array1)
+        self.model = model
+        
+        if Int(model.appComplaint.status) == 1 {
+            dataAry1 = NSMutableArray()
+            let array1 :NSArray = [["name":"备注：", "content":model.appComplaint.manageRemarks, "isHiddenEdit": false],
+                                   ["name":"处理人：", "content":model.manageUserName, "isHiddenEdit": true],
+                                   ["name":"处理时间：", "content":Date.getDateWith(Int(model.appComplaint.manageTime)!), "isHiddenEdit":false]]
+            dataAry1 = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array1)
+        }
         
         dataAry2 = NSMutableArray()
-        let array2 :NSArray = [["name":"来源：", "content":"业主", "isHiddenEdit": false],
-                              ["name":"报事人：", "content":"徐柳飞", "isHiddenEdit": true],
-                              ["name":"报事时间：", "content":"2017.06.23 10:11:20", "isHiddenEdit":false],
-                              ["name":"工单编号：", "content":"AH03475409797", "isHiddenEdit": true]]
+        let array2 :NSArray = [["name":"来源：", "content":model.appComplaint.wyAccount.wyRole.name, "isHiddenEdit": false],
+                              ["name":"报事人：", "content":model.complaintUserName, "isHiddenEdit": true],
+                              ["name":"报事时间：", "content":Date.getDateWith(Int(model.appComplaint.createTime)!), "isHiddenEdit":false],
+                              ["name":"工单编号：", "content":model.appComplaint.code, "isHiddenEdit": true]]
         dataAry2 = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array2)
         
         dataAry3 = NSMutableArray()
-        let array3 :NSArray = [["name":"异常类型：", "content":"张雁称", "isHiddenEdit": false],
-                              ["name":"巡检点位：", "content":"徐柳飞", "isHiddenEdit": true],
-                              ["name":"备注：", "content":"2017.06.23 10:11:20", "isHiddenEdit":false],
-                              ["name":"紧急情况：", "content":"是", "isHiddenEdit": true]]
+        let array3 :NSArray = [["name":"异常类型：", "content":model.appComplaint.type, "isHiddenEdit": false],
+                              ["name":"巡检点位：", "content":model.appComplaint.inspectionPoint, "isHiddenEdit": true],
+                              ["name":"备注：", "content":model.appComplaint.remarks, "isHiddenEdit":false],
+                              ["name":"紧急情况：", "content":model.appComplaint.urgency, "isHiddenEdit": true]]
         dataAry3 = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array3)
 
         setupView()
@@ -83,11 +87,17 @@ class XHWLSafeGuardView: UIView , XHWLNetworkDelegate{
         head1.showText("来源详情：")
         bgScrollView.addSubview(head1)
         
-        pickPhoto = XHWLPickPhotoView()
+        pickPhoto = XHWLPickPhotoView(frame: CGRect.zero, isFinished)
         pickPhoto.showText("现场照片：")
-        pickPhoto.isShow = isFinished // 显示
-        pickPhoto.addPictureBlock = { isAdd, index in
-            self.delegate?.onSafeGuard!(isAdd, index)
+        if isFinished {
+            if !(model.appComplaint.imgUrl is NSNull) {
+                let array:NSArray = model.appComplaint.manageImgUrl.components(separatedBy: ",") as! NSArray
+                pickPhoto.onShowImgArray(array)
+            }
+        }
+//        pickPhoto.isShow = isFinished // 显示
+        pickPhoto.addPictureBlock = { isAdd, index, isPictureAdd in
+            self.delegate?.onSafeGuard!(isAdd, index, isPictureAdd)
         }
         bgScrollView.addSubview(pickPhoto)
         
@@ -99,11 +109,14 @@ class XHWLSafeGuardView: UIView , XHWLNetworkDelegate{
                 labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
                 labelView.contentTextAlign(textAlignment: NSTextAlignment.center)
                 bgScrollView.addSubview(labelView)
-                labelViewArray2.add(labelView)
+                labelViewArray1.add(labelView)
             }
         } else {
             remark = XHWLRemarkView()
             remark.showText("备注：")
+            remark.textViewBlock = {[weak self] text in
+                self?.remarkStr = text
+            }
             bgScrollView.addSubview(remark)
         }
         
@@ -137,8 +150,13 @@ class XHWLSafeGuardView: UIView , XHWLNetworkDelegate{
             labelViewArray3.add(labelView)
         }
         
-        picture = XHWLPickPhotoView()
-        picture.isShow = true
+        picture = XHWLPickPhotoView(frame: CGRect.zero, true)
+//        picture.isShow = true
+        if !(model.appComplaint.imgUrl is NSNull) {
+            
+            let array:NSArray = model.appComplaint.imgUrl.components(separatedBy: ",") as NSArray
+            picture.onShowImgArray(array)
+        }
         bgScrollView.addSubview(picture)
         
         if !isFinished {
@@ -152,34 +170,8 @@ class XHWLSafeGuardView: UIView , XHWLNetworkDelegate{
 
     }
     
-//     展示图片
-//    func () {
-//    
-//    pickPhoto.onShowImgArray()
-//    }
-    
     func submitClick() {
-        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-        let dict:NSDictionary = data.mj_JSONObject() as! NSDictionary
-        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: dict)
-        
-        let param = ["token": userModel.wyAccount.token,
-                    "manageRemarks": "", // 否	处理备注
-                    "code": self.code] // 是	工单号
-        XHWLNetwork.shared.postSafeGuardSubmitClick(param as NSDictionary , self)
-    }
-    
-    // MARK: - XHWLNetworkDelegate
-    
-    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
-        
-        if requestKey == XHWLRequestKeyID.XHWL_SAFEGUARDSUBMIT.rawValue {
-            self.backReloadBlock()
-        }
-    }
-    
-    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
-        
+        self.submitBlock(self.remarkStr!)
     }
 
     override func layoutSubviews() {
@@ -188,19 +180,19 @@ class XHWLSafeGuardView: UIView , XHWLNetworkDelegate{
         bgImage.frame = self.bounds
         bgScrollView.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:self.bounds.size.height)
         
-        head1.frame = CGRect(x:10, y:0, width:self.bounds.size.width-20, height:20)
-        pickPhoto.frame = CGRect(x:10, y:head1.frame.maxY+10, width:self.bounds.size.width-20, height:80)
+        head1.frame = CGRect(x:10, y:20, width:self.bounds.size.width-20, height:20)
+        pickPhoto.frame = CGRect(x:0, y:head1.frame.maxY+10, width:self.bounds.size.width, height:80)
         var height:CGFloat!
         if isFinished {
             for i in 0...labelViewArray1.count-1 {
                 
                 let labelView :XHWLLabelView = labelViewArray1[i] as! XHWLLabelView
-                labelView.bounds = CGRect(x:0, y:0, width:258, height:25)
+                labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width, height:25)
                 labelView.center = CGPoint(x:self.frame.size.width/2.0, y:pickPhoto.frame.maxY+10+CGFloat(i*25))
                 height = labelView.frame.maxY
             }
         } else {
-            remark.frame = CGRect(x:10, y:pickPhoto.frame.maxY+10, width:self.bounds.size.width-20, height:80)
+            remark.frame = CGRect(x:0, y:pickPhoto.frame.maxY+10, width:self.bounds.size.width-20, height:80)
             height = remark.frame.maxY
         }
         
@@ -208,7 +200,7 @@ class XHWLSafeGuardView: UIView , XHWLNetworkDelegate{
         for i in 0...labelViewArray2.count-1 {
             
             let labelView :XHWLLabelView = labelViewArray2[i] as! XHWLLabelView
-            labelView.bounds = CGRect(x:0, y:0, width:258, height:25)
+            labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width, height:25)
             labelView.center = CGPoint(x:self.frame.size.width/2.0, y:head2.frame.maxY+10+CGFloat(i*25))
         }
         
@@ -217,12 +209,12 @@ class XHWLSafeGuardView: UIView , XHWLNetworkDelegate{
         for i in 0...labelViewArray3.count-1 {
             
             let labelView :XHWLLabelView = labelViewArray3[i] as! XHWLLabelView
-            labelView.bounds = CGRect(x:0, y:0, width:258, height:25)
+            labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width, height:25)
             labelView.center = CGPoint(x:self.frame.size.width/2.0, y:head3.frame.maxY + 10 + CGFloat(i*25))
         }
-        picture.frame = CGRect(x:10, y:head3.frame.maxY+20+CGFloat(labelViewArray3.count).multiplied(by:25), width:self.bounds.size.width-20, height:80)
+        picture.frame = CGRect(x:0, y:head3.frame.maxY+5+CGFloat(labelViewArray3.count).multiplied(by:25), width:self.bounds.size.width-20, height:80)
         
-        if isFinished {
+        if !isFinished {
             submitBtn.bounds = CGRect(x:0, y:0, width:150, height:30)
             submitBtn.center = CGPoint(x:self.bounds.size.width/2.0, y:picture.frame.maxY+45)
         }

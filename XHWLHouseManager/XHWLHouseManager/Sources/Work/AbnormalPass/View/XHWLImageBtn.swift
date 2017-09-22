@@ -28,7 +28,7 @@ class XHWLImageBtn: UIView {
         self.addSubview(imageIV)
         
         deleIV = UIButton()
-        deleIV.setImage(UIImage(named:"failure"), for: UIControlState.normal)
+        deleIV.setImage(UIImage(named:"login_textfield_clear"), for: UIControlState.normal)
         deleIV.addTarget(self, action: #selector(onDelete), for: UIControlEvents.touchUpInside)
         self.addSubview(deleIV)
     }

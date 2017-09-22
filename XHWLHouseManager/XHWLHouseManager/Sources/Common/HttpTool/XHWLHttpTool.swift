@@ -13,7 +13,12 @@ import Alamofire
 //let XHWLHttpURL :String = "http://112.74.19.135:1111/ssh/v1"
 //let XHWLHttpURL :String = "http://192.168.2.101:9002"
 //let XHWLHttpURL :String = "http://192.168.1.154:8080"
+
 let XHWLHttpURL :String = "http://120.77.83.190:8080/ssh/v1"
+//let XHWLHttpURL :String = "http://10.51.37.54:8080/ssh/v1"
+//let XHWLHttpURL :String = "http://10.51.37.74:4000/ssh/v1"
+//let XHWLHttpURL: String = "http://192.168.200.116:8006/ssh/v1"
+
 
 @objc protocol XHWLHttpToolDelegate:NSObjectProtocol {
     
@@ -57,6 +62,9 @@ class XHWLHttpTool: NSObject {
         if self.requestKey == XHWLRequestKeyID.XHWL_NAVPARAME {
             return XHWLRequestKeyDefine.shared.trandIdDict.object(forKey: self.requestKey ?? 0) as! String
         }
+        else if self.requestKey == .XHWL_ENERGYLOSE {
+            return XHWLRequestKeyDefine.shared.trandIdDict.object(forKey: self.requestKey ?? 0) as! String
+        }
         else {
             let transId = XHWLRequestKeyDefine.shared.trandIdDict.object(forKey: self.requestKey ?? 0) as! String
             
@@ -85,12 +93,26 @@ class XHWLHttpTool: NSObject {
         
         print("requestUrl = \(requestUrl) \n param = \(parameters)")
         
-        Alamofire.request(requestUrl, method: .get, parameters:[:], encoding: URLEncoding.default)
+        Alamofire.request(requestUrl, method: .get, parameters:nil, encoding: URLEncoding.default)
             .responseJSON { response in
+                
+                XHMLProgressHUD.shared.hide()
+                
+                print(response.request)  // original URL request
+                print(response.response) // HTTP URL response
+                print(response.data)     // server data
+                print(response.result)   // result of response serialization
                 
                 switch response.result {
                 case .success(let value):
+                    
                     print("success:\(value)")
+                    
+                    if self.requestKey != .XHWL_LOGOUT {
+                        if (value as! [String : AnyObject])["result"] is NSNull {
+                            return
+                        }
+                    }
                     
                     self.delegate?.requestSuccess(self.requestKey!.rawValue, result:value as! [String : AnyObject])
                     
@@ -111,6 +133,8 @@ class XHWLHttpTool: NSObject {
    
         Alamofire.request(requestUrl, method: .post, parameters: parameters, encoding: URLEncoding.default)
             .responseJSON { response in
+                
+                XHMLProgressHUD.shared.hide()
                 
                 //                print(response.request)  // original URL request
                 //                print(response.response) // HTTP URL response
@@ -158,6 +182,9 @@ class XHWLHttpTool: NSObject {
             method:.post,
             headers: headers,
             encodingCompletion: { encodingResult in
+                
+                XHMLProgressHUD.shared.hide()
+                
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.responseJSON { response in

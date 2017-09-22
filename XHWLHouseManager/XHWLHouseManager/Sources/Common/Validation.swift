@@ -22,7 +22,8 @@ enum Validation {
     
     case URL(_: String)
     case IP(_: String)
-    
+    case carNo(_: String)
+    case cardNum(_:String)
     
     var isRight: Bool {
         var predicateStr:String!
@@ -52,9 +53,20 @@ enum Validation {
         case let .IP(str):
             predicateStr = "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
             currObject = str
+        case let .carNo(str):
+            predicateStr = "^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$"
+            currObject = str
+        case let .cardNum(str):
+            predicateStr = "^\\d{15}$)|(^\\d{18}$)|(^\\d{17}(\\d|X|x)$"
+            currObject = str
         }
         
         let predicate =  NSPredicate(format: "SELF MATCHES %@" ,predicateStr)
         return predicate.evaluate(with:currObject)
     }
+    
+    
+    
+    
+    
 }

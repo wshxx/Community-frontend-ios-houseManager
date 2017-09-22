@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XHWLCheckVC: UIViewController  , XHWLScanTestVCDelegate {
+class XHWLCheckVC: UIViewController  , XHWLScanTestVCDelegate{
     
     var bgImg:UIImageView!
     var topMenu:XHWLTopView!

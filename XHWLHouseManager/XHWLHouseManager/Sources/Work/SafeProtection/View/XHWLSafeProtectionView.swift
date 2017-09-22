@@ -16,23 +16,12 @@ class XHWLSafeProtectionView: UIView , UITableViewDelegate, UITableViewDataSourc
     var tableView:UITableView!
     var dataAry:NSMutableArray! = NSMutableArray()
     var dataSource:NSMutableArray! = NSMutableArray()
-    var clickCell:(NSInteger, NSInteger, String)->(Void) = {param in }
+    var clickCell:(NSInteger, NSInteger, XHWLSafeProtectionModel)->(Void) = {param in }
     var selectIndex:NSInteger! = 0
     var topMenu:XHWLTopView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-//        let array:NSArray = [["name": "电梯无法工作", "time":"2017.01.21", "registerName":"哈哈", "content":"张浩然"],
-//                             ["name": "电梯无法工作", "time":"2017.01.21", "registerName":"哈哈",  "content":"张浩然"]
-//        ]
-//        let array2:NSArray = [["name": "已处理电梯无法工作", "time":"2017.01.21", "registerName":"哈哈", "content":"张浩然"],
-//                             ["name": "已处理电梯无法工作", "time":"2017.01.21", "registerName":"哈哈",  "content":"张浩然"]
-//        ]
-//        dataAry = NSMutableArray()
-//        dataAry = XHWLRegisterationModel.mj_objectArray(withKeyValuesArray: array)
-//        dataSource = NSMutableArray()
-//        dataSource = XHWLRegisterationModel.mj_objectArray(withKeyValuesArray: array2)
         
         setupView()
     }
@@ -104,7 +93,7 @@ class XHWLSafeProtectionView: UIView , UITableViewDelegate, UITableViewDataSourc
         } else {
             model = dataSource[indexPath.row] as! XHWLSafeProtectionModel //XHWLRegisterationModel
         }
-        self.clickCell(selectIndex, indexPath.row, model.code)
+        self.clickCell(selectIndex, indexPath.row, model)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

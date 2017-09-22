@@ -8,11 +8,12 @@
 
 import UIKit
 
-class XHWLRegistrationVC: UIViewController , XHWLScanTestVCDelegate{
+class XHWLRegistrationVC: UIViewController , XHWLScanTestVCDelegate, XHWLNetworkDelegate{
 
     var bgImg:UIImageView!
     var topMenu:XHWLTopView!
-    var warningView:XHWLSafeProtectionView!
+    var warningView:XHWLRegistrationView!
+    var dataSource:NSMutableArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class XHWLRegistrationVC: UIViewController , XHWLScanTestVCDelegate{
         self.view.backgroundColor = UIColor.white
         setupView()
         setupNav()
+        onLoadVisitList()
     }
     
     func setupNav() {
@@ -32,6 +34,38 @@ class XHWLRegistrationVC: UIViewController , XHWLScanTestVCDelegate{
         self.navigationController?.popViewController(animated: true)
     }
     
+    func onLoadVisitList() {
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        XHWLNetwork.shared.getVisitListClick([userModel.wyAccount.token] as NSArray, self)
+    }
+    
+    // MARK: - XHWLNetworkDelegate
+    
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        //        历史告警
+        if response["result"] is NSNull {
+            return
+        }
+        
+        if requestKey == XHWLRequestKeyID.XHWL_VISITLIST.rawValue {
+            let dict:NSDictionary = response["result"]! as! NSDictionary
+            let array = dict["rows"] as! NSArray
+            dataSource = NSMutableArray()
+            dataSource = XHWLVisitLogModel.mj_objectArray(withKeyValuesArray: array)
+            self.warningView.dataAry = NSMutableArray()
+            self.warningView.dataAry.addObjects(from: dataSource as! [Any])
+            self.warningView.tableView.reloadData()
+        }
+        
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
+    }
+    
     func setupView() {
         
         bgImg = UIImageView()
@@ -40,12 +74,13 @@ class XHWLRegistrationVC: UIViewController , XHWLScanTestVCDelegate{
         self.view.addSubview(bgImg)
         
         let showImg:UIImage = UIImage(named:"subview_bg")!
-        let warningView:XHWLRegistrationView = XHWLRegistrationView()
+        warningView = XHWLRegistrationView()
         warningView.bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.clickCell = {index in
             
             let vc:XHWLRegistrationDetailVC = XHWLRegistrationDetailVC()
+            vc.visitorLogModel = self.dataSource[index] as! XHWLVisitLogModel
             self.navigationController?.pushViewController(vc, animated: true)
         }
         self.view.addSubview(warningView)

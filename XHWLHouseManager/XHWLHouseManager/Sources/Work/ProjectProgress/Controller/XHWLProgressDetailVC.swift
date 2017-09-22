@@ -13,6 +13,7 @@ class XHWLProgressDetailVC: UIViewController {
     var bgImg:UIImageView!
     var topMenu:XHWLTopView!
     var warningView:XHWLProgressDetailView!
+    var realModel:XHWLRealProgressModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +42,8 @@ class XHWLProgressDetailVC: UIViewController {
         self.view.addSubview(bgImg)
         
         let showImg:UIImage = UIImage(named:"subview_bg")!
-        warningView = XHWLProgressDetailView(frame:CGRect.zero, array:["", "", ""])
+        warningView = XHWLProgressDetailView(frame:CGRect.zero)
+        warningView.realModel = realModel
         warningView.bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.dismissBlock = { index in

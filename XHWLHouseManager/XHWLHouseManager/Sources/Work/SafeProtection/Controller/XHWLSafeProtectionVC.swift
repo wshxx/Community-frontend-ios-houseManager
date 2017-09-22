@@ -51,8 +51,8 @@ class XHWLSafeProtectionVC: UIViewController, XHWLNetworkDelegate {
             let dealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray:response["result"]!["deal"] as! NSArray )
             let noDealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray: response["result"]!["notDeal"] as! NSArray)
             
-            self.warningView.dataAry.addObjects(from: dealArray as! [Any])
-            self.warningView.dataSource.addObjects(from: noDealArray as! [Any])
+            self.warningView.dataAry.addObjects(from: noDealArray as! [Any])
+            self.warningView.dataSource.addObjects(from: dealArray as! [Any])
             self.warningView.tableView.reloadData()
             
         }
@@ -74,11 +74,11 @@ class XHWLSafeProtectionVC: UIViewController, XHWLNetworkDelegate {
         warningView = XHWLSafeProtectionView()
         warningView.bounds = CGRect(x:0, y:0, width:338, height:68+showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
-        warningView.clickCell = {[weak warningView] index, row, code in
+        warningView.clickCell = {[weak warningView] index, row, model in
             
             let vc:XHWLSafeGuardVC = XHWLSafeGuardVC()
             vc.isFinished = !(index == 0)
-            vc.code = code
+            vc.model = model
             vc.backReloadBlock =  { _ in
                 warningView?.tableView.reloadData()
 //                self.navigationController?.popViewController(animated: true)

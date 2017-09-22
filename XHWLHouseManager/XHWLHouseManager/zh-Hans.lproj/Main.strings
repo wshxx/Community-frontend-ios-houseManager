@@ -1,0 +1,33 @@
+
+/* Class = "UIButton"; normalTitle = "开门"; ObjectID = "5Bo-tb-Atm"; */
+"5Bo-tb-Atm.normalTitle" = "开门";
+
+/* Class = "UILabel"; text = "10"; ObjectID = "9ca-Bz-PYE"; */
+"9ca-Bz-PYE.text" = "10";
+
+/* Class = "UILabel"; text = "测试"; ObjectID = "AbH-eY-qQu"; */
+"AbH-eY-qQu.text" = "测试";
+
+/* Class = "UILabel"; text = "1/4"; ObjectID = "Ad7-eF-Aa5"; */
+"Ad7-eF-Aa5.text" = "1/4";
+
+/* Class = "UILabel"; text = "绑定门卡"; ObjectID = "PpC-ug-XPQ"; */
+"PpC-ug-XPQ.text" = "绑定门卡";
+
+/* Class = "UIButton"; normalTitle = "取消"; ObjectID = "VCS-sd-u7H"; */
+"VCS-sd-u7H.normalTitle" = "取消";
+
+/* Class = "UIButton"; normalTitle = "点击重试"; ObjectID = "YMa-Nm-ATl"; */
+"YMa-Nm-ATl.normalTitle" = "点击重试";
+
+/* Class = "UILabel"; text = "正在玩命扫描……"; ObjectID = "alC-Ch-hSb"; */
+"alC-Ch-hSb.text" = "正在玩命扫描……";
+
+/* Class = "UILabel"; text = "没有找到我的锁？"; ObjectID = "dO7-ya-lYD"; */
+"dO7-ya-lYD.text" = "没有找到我的锁？";
+
+/* Class = "UILabel"; text = "测试"; ObjectID = "fF2-zJ-TCO"; */
+"fF2-zJ-TCO.text" = "测试";
+
+/* Class = "UILabel"; text = "蓝牙开门"; ObjectID = "hcU-kC-zM6"; */
+"hcU-kC-zM6.text" = "蓝牙开门";

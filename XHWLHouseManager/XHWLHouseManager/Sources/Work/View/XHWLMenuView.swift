@@ -19,6 +19,8 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
     var isUserName:Bool? = false
     var block:(Bool) -> () = {param in }
     var logoutBtn:UIButton!
+    var name:String!
+    var phone:String!
     
 //    var 
     override init(frame: CGRect) {
@@ -26,20 +28,21 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
         
         self.backgroundColor = UIColor.clear
         
-        
+        setupData()
+        setupView()
+    }
+    
+    func setupData() {
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
         dataAry = NSMutableArray()
         let array :NSArray = [["name":"姓名：", "content":userModel.name, "isHiddenEdit": false],
-                   ["name":"工号：", "content":userModel.wyAccount.workCode, "isHiddenEdit": true],
-                   ["name":"手机：", "content":userModel.telephone, "isHiddenEdit":false],
-                   ["name":"岗位：", "content":userModel.wyAccount.wyRoleName, "isHiddenEdit": true],
-                   ["name":"项目：", "content":userModel.wyAccount.wyRole.name, "isHiddenEdit": true]]
+                              ["name":"工号：", "content":userModel.wyAccount.workCode, "isHiddenEdit": true],
+                              ["name":"手机：", "content":userModel.telephone, "isHiddenEdit":false],
+                              ["name":"岗位：", "content":userModel.wyAccount.wyRoleName, "isHiddenEdit": true],
+                              ["name":"项目：", "content":userModel.wyAccount.wyRole.name, "isHiddenEdit": true]]
         dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
-        setupView()
-        
-        
     }
     
     func setupView() {
@@ -81,10 +84,21 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
         logoutBtn = UIButton()
         logoutBtn.setTitle("退出", for: UIControlState.normal)
         logoutBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
-        logoutBtn.titleLabel?.font = font_12
+        logoutBtn.titleLabel?.font = font_14
         logoutBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
         logoutBtn.addTarget(self, action: #selector(logoutClick), for: UIControlEvents.touchUpInside)
         bgScrollView.addSubview(logoutBtn)
+    }
+    
+    func updateData() {
+        setupData()
+        
+        for i in 0...labelViewArray.count-1 {
+            let menuModel :XHWLMenuModel = dataAry[i] as! XHWLMenuModel
+            let labelView: XHWLMenuLabelView = labelViewArray[i] as! XHWLMenuLabelView
+            labelView.showText(leftText: menuModel.name, rightText:menuModel.content, isHiddenEdit: menuModel.isHiddenEdit)
+            labelView.isHiddenEdit = menuModel.isHiddenEdit
+        }
     }
     
     // 退出
@@ -111,6 +125,7 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
     // 修改姓名
     func onModityUserName(_ string:String, _ block:@escaping(Bool) -> ()) {
         
+        
         self.isUserName = true
         if string.isEmpty {
             "您输入的姓名不能为空".ext_debugPrintAndHint()
@@ -120,7 +135,7 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
-        
+        self.name = string
         let params = ["name":string, "token":userModel.wyAccount.token]
 
          XHWLNetwork.shared.postModifyUserClick(params as NSDictionary, self)
@@ -138,6 +153,7 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
+        self.phone = string
         let params = ["telephone":string, "token":userModel.wyAccount.token]
       
         
@@ -174,6 +190,14 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
     
     func onModifyPhone(_ response:[String : AnyObject]) {
         if response["state"] as! Bool{
+            
+            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+            userModel.telephone = self.phone
+            let modifyData:NSData = userModel.mj_JSONData()! as NSData
+            UserDefaults.standard.set(modifyData, forKey: "user")
+            UserDefaults.standard.synchronize()
+                
             "修改手机号成功".ext_debugPrintAndHint()
             
             block(true)
@@ -196,6 +220,14 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
     
     func onModifyUserName(_ response:[String : AnyObject]) {
         if response["state"] as! Bool{
+            
+            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+            userModel.name = self.name
+            let modifyData:NSData = userModel.mj_JSONData()! as NSData
+            UserDefaults.standard.set(modifyData, forKey: "user")
+            UserDefaults.standard.synchronize()
+            
             "修改姓名成功".ext_debugPrintAndHint()
             block(true)
         } else {

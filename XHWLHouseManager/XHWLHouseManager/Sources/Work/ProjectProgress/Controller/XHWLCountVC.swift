@@ -37,11 +37,11 @@ class XHWLCountVC: UIViewController , XHWLNetworkDelegate{
     
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
         
-        if requestKey == XHWLRequestKeyID.XHWL_EXCEPTIONPASSLOG.rawValue {
+        if requestKey == XHWLRequestKeyID.XHWL_REALPROGRESS.rawValue {
             
             dataAry = XHWLRealProgressModel.mj_objectArray(withKeyValuesArray:response["result"] as! NSArray)
-            
-            warningView.dataAry = dataAry
+            warningView.dataAry = NSMutableArray()
+            warningView.dataAry.addObjects(from: dataAry as! [Any])
             warningView.tableView.reloadData()
         }
         
@@ -72,9 +72,10 @@ class XHWLCountVC: UIViewController , XHWLNetworkDelegate{
         warningView = XHWLCountView(frame:CGRect.zero)
         warningView.bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
-        warningView.dismissBlock = { index in
+        warningView.dismissBlock = {[weak self] index in
             let vc:XHWLProgressDetailVC = XHWLProgressDetailVC()
-            self.navigationController?.pushViewController(vc, animated: true)
+            vc.realModel = self?.dataAry[index] as! XHWLRealProgressModel
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
         self.view.addSubview(warningView)
     }

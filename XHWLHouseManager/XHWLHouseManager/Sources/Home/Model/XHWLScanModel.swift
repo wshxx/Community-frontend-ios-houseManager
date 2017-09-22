@@ -17,6 +17,7 @@ class XHWLScanModel: NSObject {
     var id:String = ""
     var name:String = ""
     var price:String = ""
+    var prodDate:String = ""
     var projectName:String = ""
     var status:String = ""
     var sysProject:XHWLSysProject = XHWLSysProject()

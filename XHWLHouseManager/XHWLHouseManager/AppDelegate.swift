@@ -9,9 +9,6 @@
 import UIKit
 //import CRecordInfo
 import IQKeyboardManagerSwift
-import WilddogCore
-import WilddogAuth
-import WilddogVideo
 
 //Build Settings－－swift Compiler－－Objective-C Bridging Header内容为DemoApp/Bridging-Header.h，这个与Bridging-Header.h位置有关，从项目的根目录开始在objective-c Bridging Header选项里面写入Bridging-Header.h相对路径。
 
@@ -33,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate {
         IQKeyboardManager.sharedManager().enable = true
         configureMCU()      // 对接海康威视
         configureMapKit()   // 初始化百度地图
-        setupIMVideo()      // 野狗云IM
         setupMapKit()       // 百度地图
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -75,31 +71,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate {
             NSLog("manager start failed!")
         }
         
-    }
-    
-    // 野狗云IM
-    func setupIMVideo() {
-        //初始化 WDGApp
-        
-//        WilddogSDKManager.shared().registerSDKApp(withSyncId: WDGSyncId, videoId: VideoAppId)
-//        WDGSignalPush.prepare()
-        
-//        [WDGSignalPush prepare];
-        
-//        let option: WDGOptions = WDGOptions.init(syncURL:kWilddogUrl)
-//        WDGApp.configure(with: option)
-//        
-////        throw  WDGAuth.auth()?.signOut()
-//
-//        WDGAuth.auth()?.signInAnonymously(completion: { (user, error) in
-//            
-//            if (error != nil) {
-//                user?.getTokenWithCompletion({ (idToken, error) in
-////                    self.uid = user.uid
-//                    WDGVideo.shared().configure(withVideoAppId: VideoAppId, token: idToken!)
-//                })
-//            }
-//        })
     }
     
     // 初始化百度地图

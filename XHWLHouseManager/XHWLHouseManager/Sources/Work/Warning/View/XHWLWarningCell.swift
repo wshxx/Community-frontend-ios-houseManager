@@ -59,17 +59,17 @@ class XHWLWarningCell: UITableViewCell {
         
         titleL = UILabel()
         titleL.textColor = UIColor.white
-        titleL.font = font_12
+        titleL.font = font_14
         self.contentView.addSubview(titleL)
         
         timeL = UILabel()
         timeL.textColor = UIColor().colorWithHexString(colorStr: "7a9198")
-        timeL.font = font_9
+        timeL.font = font_13
         self.contentView.addSubview(timeL)
         
         contentL = UILabel()
         contentL.textColor = UIColor().colorWithHexString(colorStr: "7a9198")
-        contentL.font = font_9
+        contentL.font = font_13
         contentL.textAlignment = NSTextAlignment.right
         self.contentView.addSubview(contentL)
         

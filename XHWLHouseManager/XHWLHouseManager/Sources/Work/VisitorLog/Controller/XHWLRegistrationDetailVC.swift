@@ -12,6 +12,7 @@ class XHWLRegistrationDetailVC: UIViewController  , XHWLScanTestVCDelegate{
     
     var bgImg:UIImageView!
     var dataAry:NSMutableArray!
+    var visitorLogModel:XHWLVisitLogModel! 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,16 +21,29 @@ class XHWLRegistrationDetailVC: UIViewController  , XHWLScanTestVCDelegate{
         self.view.backgroundColor = UIColor.white
         
         dataAry = NSMutableArray()
-        let array :NSArray = [["name":"姓名：", "content":"徐柳飞", "isHiddenEdit": true],
-                              ["name":"类型：", "content":"访客友人", "isHiddenEdit": true],
-                              ["name":"证件：", "content":"身份证1320380483084", "isHiddenEdit":true],
-                              ["name":"手机：", "content":"103843074", "isHiddenEdit": true],
-                              ["name":"时效：", "content":"1小时", "isHiddenEdit": true],
-                              ["name":"业主：", "content":"张浩然", "isHiddenEdit": true],
-                              ["name":"房间：", "content":"1栋1单元2304", "isHiddenEdit": true],
-                              ["name":"事由：", "content":"看望业主", "isHiddenEdit": true],
-                              ["name":"登记时间：", "content":"2017-01-21 12:23", "isHiddenEdit": true],
-                              ["name":"离开时间：", "content":"2017-01-21 12:23", "isHiddenEdit": true]]
+        let array :NSMutableArray = NSMutableArray()
+        
+        let ary1:NSArray = [["name":"姓名：", "content":visitorLogModel.sysVisitor.name, "isHiddenEdit": true],
+                            ["name":"类型：", "content":visitorLogModel.sysVisitor.type, "isHiddenEdit": true],
+                            ["name":"证件：", "content":visitorLogModel.sysVisitor.certificateType+visitorLogModel.sysVisitor.cetificateNo, "isHiddenEdit":true],
+                            ["name":"手机：", "content":visitorLogModel.sysVisitor.telephone, "isHiddenEdit": true],
+                            ["name":"时效：", "content":visitorLogModel.sysVisitor.timeNo+visitorLogModel.sysVisitor.timeUnit, "isHiddenEdit": true]]
+        let ary2:NSArray = [
+                            ["name":"事由：", "content":visitorLogModel.sysVisitor.accessReason, "isHiddenEdit": true],
+                            ["name":"登记时间：", "content":Date.getStringDate(Int(visitorLogModel.sysVisitor.accessTime)!), "isHiddenEdit": true]]
+      
+        print("\(visitorLogModel.yzName)")
+        if !visitorLogModel.yzName.isEmpty {
+            array.addObjects(from: ary1 as! [Any])
+            array.add(["name":"业主：", "content":visitorLogModel.yzName, "isHiddenEdit": true])
+            array.add(["name":"房间：", "content":visitorLogModel.sysVisitor.roomNo, "isHiddenEdit": true])
+            array.addObjects(from: ary2 as! [Any])
+            array.add(["name":"离开时间：", "content":Date.getStringDate(Int(visitorLogModel.sysVisitor.leaveTime)!), "isHiddenEdit": true])
+        } else {
+            array.addObjects(from: ary1 as! [Any])
+            array.addObjects(from: ary2 as! [Any])
+        }
+
         dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
         
         setupView()
@@ -55,7 +69,13 @@ class XHWLRegistrationDetailVC: UIViewController  , XHWLScanTestVCDelegate{
         warningView.bounds = CGRect(x:0, y:0, width:image.size.width, height:image.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.createArray(array: dataAry)
-        warningView.successView()
+        if !visitorLogModel.yzName.isEmpty {
+            
+            warningView.successView()
+        } else {
+            
+            warningView.failView()
+        }
         self.view.addSubview(warningView)
         
     }

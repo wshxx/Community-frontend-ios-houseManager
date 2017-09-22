@@ -24,9 +24,12 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
     var agreeBtn:UIButton!
     var backReloadBlock:()->() = {param in }
     var exceptionId:String! // 异常放行ID
+    var isAgree:Bool! = false
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, _ isAgree:Bool) {
         super.init(frame: frame)
+        
+        self.isAgree = isAgree
         
         dataAry = NSMutableArray()
         let array :NSArray = [["name":"放行原因：", "content":"特殊车辆", "isHiddenEdit": false, "type": 0],
@@ -37,9 +40,14 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
                                ["name":"出入时间：", "content":"2017-11-11 09:12:30 \n 2017-11-11", "isHiddenEdit": true, "type": 1],
                                ["name":"操作人：", "content":"徐柳飞", "isHiddenEdit":false, "type": 0],
                                ["name":"岗位：", "content":"门岗", "isHiddenEdit": true, "type": 0],
-                               ["name":"照片：", "content":"业主", "isHiddenEdit": false, "type": 2],
-                               ["name":"处置结果：", "content":"同意", "isHiddenEdit": true, "type": 0]]
-        dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
+                               ["name":"照片：", "content":"业主", "isHiddenEdit": false, "type": 2]]
+        
+        let dataArray:NSMutableArray = NSMutableArray()
+        dataArray.addObjects(from: array as! [Any])
+        if isAgree {
+            dataArray.add(["name":"处置结果：", "content":"同意", "isHiddenEdit": true, "type": 0])
+        }
+        dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: dataArray)
         
         setupView()
     }
@@ -77,29 +85,32 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
                 labelViewArray.add(labelView)
             }
             else if menuModel.type == 2 {
-                let picture:XHWLPickPhotoView = XHWLPickPhotoView()
+                let picture:XHWLPickPhotoView = XHWLPickPhotoView(frame: CGRect.zero, true)
+//                picture.onShowImgArray([]) // 显示图片
                 self.addSubview(picture)
                 labelViewArray.add(picture)
             }
         }
     
-        agreeBtn = UIButton()
-        agreeBtn.setTitle("同意", for: UIControlState.normal)
-        agreeBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
-        agreeBtn.tag = comTag
-        agreeBtn.titleLabel?.font = font_12
-        agreeBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
-        agreeBtn.addTarget(self, action: #selector(submitClick), for: UIControlEvents.touchUpInside)
-        self.addSubview(agreeBtn)
-        
-        cancelBtn = UIButton()
-        cancelBtn.setTitle("过失", for: UIControlState.normal)
-        cancelBtn.tag = comTag+1
-        cancelBtn.titleLabel?.font = font_12
-        cancelBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
-        cancelBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
-        cancelBtn.addTarget(self, action: #selector(submitClick), for: UIControlEvents.touchUpInside)
-        self.addSubview(cancelBtn)
+        if isAgree == false {
+            agreeBtn = UIButton()
+            agreeBtn.setTitle("同意", for: UIControlState.normal)
+            agreeBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
+            agreeBtn.tag = comTag
+            agreeBtn.titleLabel?.font = font_14
+            agreeBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
+            agreeBtn.addTarget(self, action: #selector(submitClick), for: UIControlEvents.touchUpInside)
+            self.addSubview(agreeBtn)
+            
+            cancelBtn = UIButton()
+            cancelBtn.setTitle("过失", for: UIControlState.normal)
+            cancelBtn.tag = comTag+1
+            cancelBtn.titleLabel?.font = font_14
+            cancelBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
+            cancelBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
+            cancelBtn.addTarget(self, action: #selector(submitClick), for: UIControlEvents.touchUpInside)
+            self.addSubview(cancelBtn)
+        }
     }
     
     func submitClick(btn:UIButton) {
@@ -150,20 +161,20 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
                 let menuModel :XHWLMenuModel = dataAry[i] as! XHWLMenuModel
                 if menuModel.type == 0 {
                     let labelView :XHWLLabelView = labelViewArray[i] as! XHWLLabelView
-                    labelView.bounds = CGRect(x:0, y:0, width:258, height:25)
-                    labelView.center = CGPoint(x:self.frame.size.width/2.0, y:5+10+CGFloat(first*25+second*25+third*80))
+                    labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width-30, height:25)
+                    labelView.center = CGPoint(x:self.frame.size.width/2.0, y:30+CGFloat(first*25+second*25+third*80))
                     first += 1
                 }
                 else if menuModel.type == 1 {
                     let labelView :XHWLLabelView = labelViewArray[i] as! XHWLLabelView
-                    labelView.bounds = CGRect(x:0, y:0, width:258, height:25)
-                    labelView.center = CGPoint(x:self.frame.size.width/2.0, y:5+10+CGFloat(first*25+second*25+third*80))
+                    labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width-30, height:25)
+                    labelView.center = CGPoint(x:self.frame.size.width/2.0, y:30+CGFloat(first*25+second*25+third*80))
                     second += 1
                 }
                 else if menuModel.type == 2 {
                     
                     let labelView :XHWLPickPhotoView = labelViewArray[i] as! XHWLPickPhotoView
-                    labelView.frame = CGRect(x:(self.bounds.size.width-258)/2.0, y:5+CGFloat(first*25+second*25+third*80), width:80, height:80)
+                    labelView.frame = CGRect(x:30/2.0, y:30+CGFloat(first*25+second*25+third*80), width:self.frame.size.width-30, height:80)
                     third += 1
                 }
                 
@@ -173,11 +184,13 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
             height = lastView.frame.maxY
         }
         
-        agreeBtn.bounds = CGRect(x:0, y:0, width:70, height:30)
-        agreeBtn.center = CGPoint(x:80, y:height+45)
-        
-        cancelBtn.bounds = CGRect(x:0, y:0, width:70, height:30)
-        cancelBtn.center = CGPoint(x:self.bounds.size.width-80, y:height+45)
+        if isAgree == false {
+            agreeBtn.bounds = CGRect(x:0, y:0, width:70, height:30)
+            agreeBtn.center = CGPoint(x:80, y:height+45)
+            
+            cancelBtn.bounds = CGRect(x:0, y:0, width:70, height:30)
+            cancelBtn.center = CGPoint(x:self.bounds.size.width-80, y:height+45)
+        }
         
 //        bgScrollView.contentSize = CGSize(width:0, height:500)
     }

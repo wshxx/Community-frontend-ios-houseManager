@@ -26,14 +26,14 @@ class XHWLRadioView: UIView {
         
         titleL = UILabel()
         titleL.textColor = UIColor.white
-        titleL.font = font_12
+        titleL.font = font_14
         titleL.text = "业主认证："
         self.addSubview(titleL)
         
         leftBtn = UIButton()
         leftBtn.setImage(UIImage(named:"radio_normal"), for: UIControlState.normal)
         leftBtn.setImage(UIImage(named:"radio_selected"), for: UIControlState.selected)
-        leftBtn.titleLabel?.font = font_12
+        leftBtn.titleLabel?.font = font_14
         leftBtn.tag = comTag
         leftBtn.titleLabel?.textColor = UIColor.white
         leftBtn.addTarget(self, action: #selector(onClick), for: UIControlEvents.touchUpInside)
@@ -44,7 +44,7 @@ class XHWLRadioView: UIView {
         rightBtn = UIButton()
         rightBtn.setImage(UIImage(named:"radio_normal"), for: UIControlState.normal)
         rightBtn.setImage(UIImage(named:"radio_selected"), for: UIControlState.selected)
-        rightBtn.titleLabel?.font = font_12
+        rightBtn.titleLabel?.font = font_14
         rightBtn.tag = comTag+1
         rightBtn.titleLabel?.textColor = UIColor.white
         rightBtn.addTarget(self, action: #selector(onClick), for: UIControlEvents.touchUpInside)

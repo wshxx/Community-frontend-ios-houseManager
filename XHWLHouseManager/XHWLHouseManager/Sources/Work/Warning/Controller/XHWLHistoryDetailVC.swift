@@ -61,6 +61,10 @@ class XHWLHistoryDetailVC: UIViewController , XHWLScanTestVCDelegate{
         warningView.bounds = CGRect(x:0, y:0, width:image.size.width, height:image.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.createArray(array: dataAry)
+        warningView.btnBlock = { _ in
+            let vc:XHWLWaterVC = XHWLWaterVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         self.view.addSubview(warningView)
         
     }

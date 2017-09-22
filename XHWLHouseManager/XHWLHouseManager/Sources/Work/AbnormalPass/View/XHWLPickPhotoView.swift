@@ -12,14 +12,15 @@ class XHWLPickPhotoView: UIView {
 
     var titleL:UILabel!
     var addBtn:UIButton!
-    var addPictureBlock:(Bool, NSInteger)->(Void) = {param in }
+    var addPictureBlock:(Bool, NSInteger, Bool)->(Void) = {param in } // 是否添加，对应哪张图切换， 对应哪张是否是添加
     var imgIVArray:NSMutableArray!
     var selectImg:XHWLImageBtn!
     var isShow:Bool!
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, _ isShow:Bool) {
         super.init(frame: frame)
         
+        self.isShow = isShow
         imgIVArray = NSMutableArray()
         
         setupView()
@@ -29,8 +30,8 @@ class XHWLPickPhotoView: UIView {
         
         titleL = UILabel()
         titleL.textColor = UIColor.white
-        titleL.font = font_12
-        titleL.textAlignment = NSTextAlignment.left
+        titleL.font = font_14
+        titleL.textAlignment = .right
         titleL.text = "现场照片："
         self.addSubview(titleL)
         
@@ -48,9 +49,10 @@ class XHWLPickPhotoView: UIView {
         super.layoutSubviews()
         
         
-        let size:CGSize = titleL.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:25), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:titleL.font], context: nil).size
-        
-        titleL.frame = CGRect(x:10, y:0, width:size.width, height:25)
+//        let size:CGSize = titleL.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:25), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:titleL.font], context: nil).size
+//        
+//        titleL.frame = CGRect(x:10, y:0, width:size.width, height:25)
+        titleL.frame = CGRect(x:10, y:0, width:80, height:25)
         
         var orginX = titleL.frame.maxX
         
@@ -86,15 +88,16 @@ class XHWLPickPhotoView: UIView {
         if imgIVArray.count < 3 {
             let imgV:XHWLImageBtn = XHWLImageBtn()
             imgV.setImage(image)
+            imgV.tag = comTag+imgIVArray.count
             imgV.deleteBlock = { [weak imgV] _ in
                 //                self.addPictureBlock()
+                self.addPictureBlock(false, (imgV?.tag)!-comTag, false)
                 self.imgIVArray.remove(imgV)
                 imgV?.removeFromSuperview()
             }
-            imgV.tag = comTag+imgIVArray.count
             imgV.selectImgBlock = { _ in
                 self.selectImg = imgV
-                self.addPictureBlock(false, imgV.tag-comTag)
+                self.addPictureBlock(false, imgV.tag-comTag, true)
             }
             self.addSubview(imgV)
             imgIVArray.add(imgV)
@@ -118,7 +121,7 @@ class XHWLPickPhotoView: UIView {
     
     func onAddClick() {
         
-        self.addPictureBlock(true, -1)
+        self.addPictureBlock(true, -1, true)
     }
     
 //    func createBtn() {

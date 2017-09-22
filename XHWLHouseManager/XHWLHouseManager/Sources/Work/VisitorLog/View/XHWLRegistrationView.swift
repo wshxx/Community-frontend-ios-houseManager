@@ -14,19 +14,12 @@ class XHWLRegistrationView: UIView  , UITableViewDelegate, UITableViewDataSource
     var tipImg:UIImageView!
     var tipLabel:UILabel!
     var tableView:UITableView!
-    var dataAry:NSMutableArray!
+    var dataAry:NSMutableArray! = NSMutableArray()
     var clickCell:(NSInteger)->(Void) = {param in }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        let array:NSArray = [["name": "徐柳飞——外卖", "time":"2017.01.21", "registerName":"哈哈", "content":"张浩然"],
-                             ["name": "徐柳飞——外卖", "time":"2017.01.21", "registerName":"哈哈",  "content":"张浩然"]
-        ]
-        
-        dataAry = NSMutableArray()
-        dataAry = XHWLRegisterationModel.mj_objectArray(withKeyValuesArray: array)
-        
+    
         setupView()
         
     }
@@ -65,8 +58,9 @@ class XHWLRegistrationView: UIView  , UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: XHWLRegistrationCell = XHWLRegistrationCell.cellWithTableView(tableView: tableView)
-        let model:XHWLRegisterationModel = dataAry[indexPath.row] as! XHWLRegisterationModel
-        cell.setRegisterModel(model)
+        let model:XHWLVisitLogModel = dataAry[indexPath.row] as! XHWLVisitLogModel
+        
+        cell.visitorLogModel = model
         
         return cell;
     }

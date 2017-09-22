@@ -17,6 +17,14 @@ class XHWLProgressDetailCell: UITableViewCell {
     var bottomLineIV:UIImageView!
     
     var waringModel:XHWLWarningModel!
+    var realModel:XHWLDetailProgressModel! {
+        willSet {
+            if (newValue != nil) {
+                titleL.text = newValue.name
+                timeL.text = newValue.createTime
+            }
+        }
+    }
     
     class func cellWithTableView(tableView:UITableView) -> XHWLProgressDetailCell {
         
@@ -46,13 +54,13 @@ class XHWLProgressDetailCell: UITableViewCell {
         
         titleL = UILabel()
         titleL.textColor = UIColor.white
-        titleL.font = font_12
+        titleL.font = font_14
         titleL.text = "许柳飞"
         self.contentView.addSubview(titleL)
         
         timeL = UILabel()
         timeL.textColor = UIColor().colorWithHexString(colorStr: "7a9198")
-        timeL.font = font_9
+        timeL.font = font_13
         timeL.text = "12/22"
         self.contentView.addSubview(timeL)
         
