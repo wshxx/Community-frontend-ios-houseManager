@@ -17,12 +17,24 @@ class XHWLProgressDetailCell: UITableViewCell {
     var bottomLineIV:UIImageView!
     
     var waringModel:XHWLWarningModel!
-    var realModel:XHWLDetailProgressModel! {
-        willSet {
-            if (newValue != nil) {
-                titleL.text = newValue.name
-                timeL.text = newValue.createTime
-            }
+//    var realModel:XHWLListModel! {
+//        willSet {
+//            if (newValue != nil) {
+//               
+//            }
+//        }
+//    }
+    
+    func setRealModel(_ realModel:XHWLListModel) {
+        titleL.text = realModel.nodeName
+        timeL.text = "\(realModel.startTime) - \(realModel.endTime)"
+        
+        if realModel.arriveType == "-1" {
+            
+            iconIV.image = UIImage(named: "dot_green")
+        } else if realModel.arriveType == "0" {
+            
+            iconIV.image = UIImage(named: "dot_gray")
         }
     }
     
@@ -42,6 +54,7 @@ class XHWLProgressDetailCell: UITableViewCell {
         
         self.backgroundColor = UIColor.clear
         self.contentView.backgroundColor = UIColor.clear
+        self.selectionStyle = .none
         
         setupView()
     }
@@ -89,8 +102,8 @@ class XHWLProgressDetailCell: UITableViewCell {
         iconIV.frame = CGRect(x:15, y:11, width:12, height:12)
         titleL.frame = CGRect(x:iconIV.frame.maxX+10, y:2, width:self.contentView.bounds.size.width-iconIV.frame.maxX-20, height:25)
         timeL.frame = CGRect(x:iconIV.frame.maxX+10, y:titleL.frame.maxY, width:self.contentView.bounds.size.width-iconIV.frame.maxX-20, height:25)
-        topLineIV.frame = CGRect(x:21, y:0, width:0.5, height:11)
-        bottomLineIV.frame = CGRect(x:21, y:23, width:0.5, height:self.contentView.bounds.size.height-23)
+        topLineIV.frame = CGRect(x:21, y:0, width:1, height:11)
+        bottomLineIV.frame = CGRect(x:21, y:23, width:1, height:self.contentView.bounds.size.height-23)
     }
     
     var isTop:Bool? = false  {

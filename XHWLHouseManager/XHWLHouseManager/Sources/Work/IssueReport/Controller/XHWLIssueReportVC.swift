@@ -33,14 +33,18 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         // 安管主任拥有权限
-        if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
+        if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 ||
+            userModel.wyAccount.wyRole.name.compare("门岗").rawValue == 0 {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "记录", style: UIBarButtonItemStyle.plain, target: self, action: #selector(onIssueReportList))
         }
     }
     
     // 
     func onIssueReportList() {
-        let vc:XHWLIssueReportListVC = XHWLIssueReportListVC()
+//        let vc:XHWLIssueReportListVC = XHWLIssueReportListVC()
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+        let vc:XHWLSafeProtectionVC = XHWLSafeProtectionVC()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -106,7 +110,7 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
             for i in 0..<imageArray.count {
                 let imageData:Data = UIImageJPEGRepresentation(imageArray[i] as! UIImage, 0.5)!
                 imageDataAry.add(imageData)
-                imageNameAry.add("image\(i).png")
+                imageNameAry.add("image_\(String(Date.getCurrentStamp())).png")
             }
         }
          else {

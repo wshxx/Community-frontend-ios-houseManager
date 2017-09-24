@@ -14,9 +14,10 @@ class XHWLTopView: UIView {
 
     var bgImage:UIImageView!
     var tipLabel:UILabel!
-    var btnArray:NSMutableArray!
+    var btnArray:NSMutableArray! = NSMutableArray()
     var btnBlock:(NSInteger)->(Void) = { param in }
     var selectBtn:UIButton!
+    var sc:UIScrollView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,20 +27,30 @@ class XHWLTopView: UIView {
         bgImage = UIImageView()
         bgImage.image = UIImage(named:"warning_subview_top_bg")
         self.addSubview(bgImage)
+        
+        
+
     }
     
-    func createArray(array:NSArray) {
+    func createModelArray(_ array:NSArray) {
+        
+        sc = UIScrollView()
+        sc.showsHorizontalScrollIndicator = false
+        self.addSubview(sc)
         
         btnArray = NSMutableArray()
         
-        for i in 0...array.count-1 {
+        for i in 0..<array.count {
+            
             let btn:UIButton = UIButton()
-            let text:String = array[i] as! String
-            btn.setTitle(text, for: UIControlState.normal)
+            let model:XHWLDeviceTitleModel = array[i] as! XHWLDeviceTitleModel
+            print("\(model.deviceTitle)")
+            btn.setTitle(model.deviceTitle, for: UIControlState.normal)
             btn.tag = i+btnTag
+            btn.contentHorizontalAlignment = .center
             btn.setTitleColor(UIColor.white, for: UIControlState.normal)
             btn.addTarget(self, action: #selector(btnClick), for: UIControlEvents.touchUpInside)
-            self.addSubview(btn)
+            sc.addSubview(btn)
             btnArray.add(btn)
             
             if i == 0 {
@@ -51,7 +62,42 @@ class XHWLTopView: UIView {
         if array.count > 1 {
             tipLabel = UILabel()
             tipLabel.backgroundColor = UIColor().colorWithHexString(colorStr: "09fbfe")
-            self.addSubview(tipLabel)
+            sc.addSubview(tipLabel)
+        }
+        
+    }
+    
+    func createArray(array:NSArray) {
+        
+        sc = UIScrollView()
+        sc.showsHorizontalScrollIndicator = false
+        self.addSubview(sc)
+        
+        btnArray = NSMutableArray()
+        
+        
+        for i in 0..<array.count {
+            
+            let btn:UIButton = UIButton()
+            let text:String = array[i] as! String
+            btn.setTitle(text, for: UIControlState.normal)
+            btn.tag = i+btnTag
+            btn.contentHorizontalAlignment = .center
+            btn.setTitleColor(UIColor.white, for: UIControlState.normal)
+            btn.addTarget(self, action: #selector(btnClick), for: UIControlEvents.touchUpInside)
+            sc.addSubview(btn)
+            btnArray.add(btn)
+            
+            if i == 0 {
+                selectBtn = btn
+                btn.setTitleColor(UIColor().colorWithHexString(colorStr: "09fbfe"), for: UIControlState.normal)
+            }
+        }
+        
+        if array.count > 1 {
+            tipLabel = UILabel()
+            tipLabel.backgroundColor = UIColor().colorWithHexString(colorStr: "09fbfe")
+            sc.addSubview(tipLabel)
         }
         
     }
@@ -65,7 +111,13 @@ class XHWLTopView: UIView {
             UIView.animate(withDuration: 0.3) {
                 
                 self.selectBtn.setTitleColor(UIColor().colorWithHexString(colorStr: "09fbfe"), for: UIControlState.normal)
-                self.tipLabel.frame = CGRect(x:self.selectBtn.frame.minX+40, y:self.bounds.size.height-18, width:(w-80), height:2)
+                
+                if self.btnArray.count <= 2 {
+                    self.tipLabel.frame = CGRect(x:self.selectBtn.frame.minX+40, y:self.bounds.size.height-18, width:(w-80), height:2)
+                } else {
+                    
+                    self.tipLabel.frame = CGRect(x:self.selectBtn.frame.minX, y:self.bounds.size.height-18, width:120, height:2)
+                }
             }
         }
         self.btnBlock(btn.tag-btnTag)
@@ -76,15 +128,33 @@ class XHWLTopView: UIView {
         
         bgImage.frame = self.bounds
         
-        let w:CGFloat = self.frame.size.width/CGFloat(btnArray.count)
-        for i in 0...btnArray.count-1 {
+        if btnArray.count > 0 {
+            sc.frame = CGRect(x:20, y:0, width:self.bounds.size.width-40, height:self.bounds.size.height)
             
-            let btn:UIButton = btnArray[i] as! UIButton
-            btn.frame = CGRect(x:w.multiplied(by: CGFloat(i)), y:16, width:w, height:self.frame.size.height-32)
-        }
-       
-        if btnArray.count > 1 {
-            tipLabel.frame = CGRect(x:selectBtn.frame.minX+40, y:self.bounds.size.height-18, width:(w-80), height:2)
+            if btnArray.count <= 2 {
+                let w:CGFloat = self.frame.size.width/CGFloat(btnArray.count)
+                sc.contentSize = CGSize(width:0, height:0)
+                for i in 0..<btnArray.count {
+                    
+                    let btn:UIButton = btnArray[i] as! UIButton
+                    btn.frame = CGRect(x:w.multiplied(by: CGFloat(i)), y:16, width:w, height:self.frame.size.height-32)
+                }
+                if btnArray.count > 1 {
+                    tipLabel.frame = CGRect(x:selectBtn.frame.minX+40, y:self.bounds.size.height-18, width:(w-80), height:2)
+                }
+            } else {
+                let w:CGFloat = 120
+                sc.contentSize = CGSize(width:btnArray.count*120+20, height:0)
+                for i in 0..<btnArray.count {
+                    
+                    let btn:UIButton = btnArray[i] as! UIButton
+                    btn.frame = CGRect(x:w.multiplied(by: CGFloat(i)), y:16, width:w, height:self.frame.size.height-32)
+                }
+                
+                if btnArray.count > 1 {
+                    tipLabel.frame = CGRect(x:selectBtn.frame.minX, y:self.bounds.size.height-18, width:w, height:2)
+                }
+            }
         }
     }
     

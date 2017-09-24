@@ -15,6 +15,7 @@ class XHWLScanResultView: UIView {
     var titleL:UILabel!
     var okBtn:UIButton!
     var cancelBtn:UIButton!
+    var scrollView:UIScrollView!
     var labelViewArray:NSMutableArray! = NSMutableArray()
     var btnBlock:(NSInteger)->(Void) = { param in }
     var dataAry:NSMutableArray!
@@ -39,8 +40,12 @@ class XHWLScanResultView: UIView {
         bgImage.image = UIImage(named:"menu_bg")
         self.addSubview(bgImage)
         
+        scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        self.addSubview(scrollView)
+        
         showImg = UIImageView()
-        showImg.image = UIImage(named:"home_bg")
+        showImg.image = UIImage(named:"scan_show")
         self.addSubview(showImg)
         
         titleL = UILabel()
@@ -48,7 +53,7 @@ class XHWLScanResultView: UIView {
         titleL.textColor = UIColor.white
         titleL.font = font_13
         titleL.text = "电梯"
-        self.addSubview(titleL)
+        scrollView.addSubview(titleL)
         
         okBtn = UIButton()
         okBtn.tag = comTag + 1
@@ -57,7 +62,7 @@ class XHWLScanResultView: UIView {
         okBtn.addTarget(self, action: #selector(XHWLScanResultView.btnClick), for: UIControlEvents.touchUpInside)
         okBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
         okBtn.titleLabel?.font = font_13
-        self.addSubview(okBtn)
+        scrollView.addSubview(okBtn)
         
         cancelBtn = UIButton()
         cancelBtn.setTitle("取消", for: UIControlState.normal)
@@ -66,7 +71,7 @@ class XHWLScanResultView: UIView {
         cancelBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
         cancelBtn.addTarget(self, action: #selector(XHWLScanResultView.btnClick), for: UIControlEvents.touchUpInside)
         cancelBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
-        self.addSubview(cancelBtn)
+        scrollView.addSubview(cancelBtn)
         
     }
     
@@ -84,7 +89,7 @@ class XHWLScanResultView: UIView {
             let labelView: XHWLLabelView = XHWLLabelView()
             labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
             labelView.contentTextAlign(textAlignment: NSTextAlignment.right)
-            self.addSubview(labelView)
+            scrollView.addSubview(labelView)
             labelViewArray.add(labelView)
         }
     }
@@ -94,19 +99,23 @@ class XHWLScanResultView: UIView {
         
         bgImage.frame = self.bounds
         showImg.frame = CGRect(x:(self.bounds.size.width-227)/2.0, y:20, width:227, height:227)
-        titleL.frame = CGRect(x:10, y:showImg.frame.maxY+10, width:self.bounds.size.width-20, height:30)
+        scrollView.frame = CGRect(x:0, y:270, width:self.bounds.size.width, height:self.bounds.size.height-270)
+        titleL.frame = CGRect(x:10, y:0, width:self.bounds.size.width-20, height:30)
         let img:UIImage = UIImage(named:"btn_background")!
         let h:CGFloat = titleL.frame.maxY+10
         
+        var height:CGFloat = 0
         if labelViewArray.count > 0 {
             for i in 0...labelViewArray.count-1 {
                 let label:XHWLLabelView = labelViewArray[i] as! XHWLLabelView
                 label.frame = CGRect(x:50, y:CGFloat(i).multiplied(by: 30.0) + h, width:self.bounds.size.width-70, height:30)
+                height = label.frame.maxY
             }
         }
 
-        okBtn.frame = CGRect(x:self.bounds.size.width-img.size.width-50, y:self.bounds.size.height-img.size.height-20, width:img.size.width, height:img.size.height)
-        cancelBtn.frame = CGRect(x:50, y:self.bounds.size.height-img.size.height-20, width:img.size.width, height:img.size.height)
+        okBtn.frame = CGRect(x:self.bounds.size.width-img.size.width-50, y:height+50, width:img.size.width, height:img.size.height)
+        cancelBtn.frame = CGRect(x:50, y:height+50, width:img.size.width, height:img.size.height)
+        scrollView.contentSize = CGSize(width:0, height:okBtn.frame.maxY+20)
     
     }
     

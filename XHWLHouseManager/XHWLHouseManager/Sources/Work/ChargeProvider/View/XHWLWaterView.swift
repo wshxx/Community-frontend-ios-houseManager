@@ -14,25 +14,60 @@ class XHWLWaterView: UIView , UITableViewDelegate, UITableViewDataSource {
     var tipImg:UIImageView!
     var tipLabel:UILabel!
     var tableView:UITableView!
-    var dataAry:NSMutableArray!
-    var clickCell:(NSInteger)->(Void) = {param in }
-//    var tagMenu:XHWLTagView!
-    var selectIndex:NSInteger! = 0
+    var clickCell:(IndexPath, NSInteger)->(Void) = {param in }
+    var tagMenu:XHWLTagView!
     var topMenu:XHWLTopView!
+    
+    var topSelectIndex:NSInteger! = 0
+    var tagSelectIndex:NSInteger! = 0
+    var dataAry:NSArray!
+    var tagAry:NSArray! = NSArray()
+    var modelAry:NSArray! {
+        willSet {
+            if (newValue != nil) {
+                
+                topMenu.createModelArray(newValue)
+                updateTop(0, 0, newValue)
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-       dataAry = NSMutableArray()
-//        let array:NSArray = [["name": "生活水管", "time":"2017.01.21 12:23:00", "content":"抵压配电房-4#变压器"],
-//                             ["name": "生活水管", "time":"2017.01.21 12:23:00", "content":"抵压配电房-4#变压器"]
-//        ]
-//        
-//        dataAry = NSMutableArray()
-//        dataAry = XHWLWarningModel.mj_objectArray(withKeyValuesArray: array)
-        
+        modelAry = NSArray()
+        dataAry = NSArray()
+
         setupView()
         
+    }
+    
+    func updateTop(_ index:NSInteger, _ row:NSInteger, _ array:NSArray) {
+        
+        topSelectIndex = index
+        if array.count > index {
+            let model:XHWLDeviceTitleModel = array[index] as! XHWLDeviceTitleModel
+            print("\(model.deviceAry)")
+            tagAry = model.deviceAry
+            tagMenu.createModelArray(model.deviceAry)
+            
+            updateTag(row, model.deviceAry)
+        }
+    }
+    
+    func updateTag(_ index:NSInteger, _ array:NSArray) {
+        tagSelectIndex = index
+        if array.count > index {
+            let subModel:XHWLDeviceSubTitleModel = array[index] as! XHWLDeviceSubTitleModel
+            dataAry = subModel.deviceSubAry
+        }
+        
+        self.setNeedsDisplay()
+        
+        let num = (tagAry.count%3) == 0 ? tagAry.count/3:tagAry.count/3+1
+        
+        tagMenu.frame = CGRect(x:14, y:56, width:self.bounds.size.width-28, height:CGFloat(num*30+10))
+        tableView.frame = CGRect(x:14, y:tagMenu.frame.maxY, width:self.bounds.size.width-28, height:self.frame.size.height-tagMenu.frame.maxY)
     }
     
     func setupView() {
@@ -41,24 +76,24 @@ class XHWLWaterView: UIView , UITableViewDelegate, UITableViewDataSource {
         bgImage.image = UIImage(named:"menu_bg")
         self.addSubview(bgImage)
         
-        let array:NSArray = ["待处理", "已处理"]
         topMenu = XHWLTopView.init(frame: CGRect.zero)
-        topMenu.createArray(array: array)
-//        topMenu.frame = CGRect(x:0, y:0, width:Screen_width-100, height:44)
-//        topMenu.center = CGPoint(x:Screen_width/2.0, y:22)
+//        topMenu.createModelArray(keyAry)
         topMenu.btnBlock = {[weak self] index in
-//            self?.warningView.selectIndex = index
-//            self?.warningView.tableView.reloadData()
+            
+            self?.topSelectIndex = index
+            self?.updateTop(index, 0, (self?.modelAry)!)
+            self?.tableView.reloadData()
         }
         self.addSubview(topMenu)
         
-//        let waterArray:NSArray = ["生活水泵", "生活水泵"]
-//        tagMenu = XHWLTagView.shared
-//        tagMenu.createArray(array: waterArray)
-//        tagMenu.btnBlock = { index in
-//            
-//        }
-//        self.addSubview(tagMenu)
+        tagMenu = XHWLTagView()
+//        tagMenu.createModelArray(waterArray)
+        tagMenu.btnBlock = {[weak self] index in
+            self?.tagSelectIndex = index
+            self?.updateTop((self?.topSelectIndex)!, index, (self?.modelAry)!)
+            self?.tableView.reloadData()
+        }
+        self.addSubview(tagMenu)
         
         
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.grouped)
@@ -74,27 +109,34 @@ class XHWLWaterView: UIView , UITableViewDelegate, UITableViewDataSource {
         super.layoutSubviews()
         
         bgImage.frame = self.bounds
-//        tagMenu.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:44)
-//        tableView.frame = CGRect(x:0, y:t0, width:self.bounds.size.width, height:self.frame.size.height-tagMenu.frame.maxY)
-        
         
         let img = UIImage(named:"warning_subview_top_bg")!
         topMenu.frame =  CGRect(x:0, y:0, width:img.size.width, height:img.size.height)
         bgImage.frame = CGRect(x:14, y:56, width:self.bounds.size.width-28, height:self.frame.size.height-56)
-//        tagMenu.frame = CGRect(x:14, y:56, width:self.bounds.size.width-28, height:44)
-        tableView.frame = CGRect(x:14, y:56, width:self.bounds.size.width-28, height:self.frame.size.height)
+        
+        let num = (tagAry.count%3) == 0 ? tagAry.count/3:tagAry.count/3+1
+  
+        tagMenu.frame = CGRect(x:14, y:56, width:self.bounds.size.width-28, height:CGFloat(num*40+10))
+        tableView.frame = CGRect(x:14, y:tagMenu.frame.maxY, width:self.bounds.size.width-28, height:self.frame.size.height-tagMenu.frame.maxY)
         
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if dataAry.count%4 == 0 {
-            return dataAry.count/4
+        
+        print("\(dataAry)")
+        if dataAry.count > 0 {
+           
+            if dataAry.count%3 == 0 {
+                return dataAry.count/3
+            }
+            return dataAry.count/3+1
         }
-        return dataAry.count/4+1
+        
+         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,25 +144,23 @@ class XHWLWaterView: UIView , UITableViewDelegate, UITableViewDataSource {
         let cell: XHWLChargeProviderCell = XHWLChargeProviderCell.cellWithTableView(tableView)
         
         let array:NSMutableArray = NSMutableArray()
-
-        array.add(dataAry[indexPath.row*4])
-        if indexPath.row*4+1 < dataAry.count {
-            
-            array.add(dataAry[indexPath.row*4+1])
+        
+        let model:XHWLDeviceModel = dataAry[indexPath.row*3] as! XHWLDeviceModel
+        array.add(model)
+        if (indexPath.row*3+1) < dataAry.count {
+            let model:XHWLDeviceModel = dataAry[indexPath.row*3+1] as! XHWLDeviceModel
+            array.add(model)
         }
-        if indexPath.row*4+2 < dataAry.count {
+        if (indexPath.row*3+2) < dataAry.count {
             
-            array.add(dataAry[indexPath.row*4+2])
-        }
-        if indexPath.row*4+3 < dataAry.count {
-            array.add(dataAry[indexPath.row*4+3])
+            let model:XHWLDeviceModel = dataAry[indexPath.row*3+2] as! XHWLDeviceModel
+            array.add(model)
         }
         
-        print("\(array)")
         cell.createView(array)
         
         cell.onClickCell = { index in
-            
+            self.clickCell(indexPath, index)
         }
         
         return cell;
@@ -129,7 +169,6 @@ class XHWLWaterView: UIView , UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-//        self.clickCell(indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -137,20 +176,16 @@ class XHWLWaterView: UIView , UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headV:UIView = UIView()
+        
+        let headV:XHWLHeadView = XHWLHeadView()
         headV.frame = CGRect(x:0, y:0, width:self.tableView.bounds.size.width, height:30)
-        
-        let titleL:UILabel = UILabel()
-        titleL.text = "冷水泵"
-        titleL.frame = CGRect(x:13, y:0, width:45, height:30)
-        titleL.textColor = UIColor.white
-        titleL.font = font_14
-        headV.addSubview(titleL)
-        
-        let lineIV:UIImageView = UIImageView()
-        lineIV.frame = CGRect(x:titleL.frame.maxX+10, y:headV.bounds.size.height/2.0, width:self.tableView.bounds.size.width-26-titleL.frame.maxX, height:0.5)
-        lineIV.image = UIImage(named: "warning_cell_line")
-        headV.addSubview(lineIV)
+        if modelAry.count > 0 {
+            let model:XHWLDeviceTitleModel = modelAry[topSelectIndex] as! XHWLDeviceTitleModel
+            if model.deviceAry.count > 0 {
+                let subModel:XHWLDeviceSubTitleModel = model.deviceAry[tagSelectIndex] as! XHWLDeviceSubTitleModel
+                headV.showText(subModel.deviceSubTitle)// "冷水泵"
+            }
+        }
         
         return headV
     }

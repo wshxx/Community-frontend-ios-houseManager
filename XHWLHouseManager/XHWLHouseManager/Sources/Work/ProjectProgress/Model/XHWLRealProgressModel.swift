@@ -10,18 +10,14 @@ import UIKit
 
 class XHWLRealProgressModel: NSObject {
     
-    var progress:String = ""
-    var id:String = ""
-    var totalLine:String = ""
-    var totalLineDetail:[XHWLDetailProgressModel] = NSMutableArray() as! [XHWLDetailProgressModel]
+    var count:String = ""
     var nickname:String = ""
-    var inspectedLineDetail:[XHWLDetailProgressModel] = NSMutableArray() as! [XHWLDetailProgressModel]
-    var inspectedTotal:String = ""
-    var nodeTotal:String = ""
+    var planChecksList:NSArray = NSArray()
+    var userId:String = ""
+    var progress:String = ""
     
     func mj_objectClassInArray() -> [AnyHashable : Any]! {
-        return ["totalLineDetail":XHWLRoleModel.self,
-                "inspectedLineDetail":XHWLRoleModel.self] // [JZMJewelryCategoryModel class]
+        return ["planChecksList":XHWLListModel.self] // [JZMJewelryCategoryModel class]
     }
     
     override func setValue(_ value: Any?, forKey key: String) {
@@ -32,4 +28,24 @@ class XHWLRealProgressModel: NSObject {
         print("EditPubLicityModel 缺少:\(key)")
     }
 }
+
+class XHWLListModel:NSObject {
+    var arriveTime:String = ""
+    var arriveType:String = "" //-1已巡更 0 为巡更
+    var collectNodeId:String = ""
+    var endTime:String = ""
+    var nodeName:String = ""
+    var startTime:String = ""
+    var userId:String = ""
+
+    override func setValue(_ value: Any?, forKey key: String) {
+        super.setValue(value, forKey: key)
+    }
+    
+    override func setValue(_ value:Any?, forUndefinedKey key:String) {
+        print("EditPubLicityModel 缺少:\(key)")
+    }
+}
+
+
 

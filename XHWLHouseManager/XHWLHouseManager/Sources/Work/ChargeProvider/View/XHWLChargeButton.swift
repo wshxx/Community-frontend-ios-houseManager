@@ -25,12 +25,13 @@ class XHWLChargeButton: UIButton {
         
         titleL = UILabel()
         titleL.textColor = UIColor.white
-        titleL.font = font_14
+        titleL.font = font_13
+        titleL.numberOfLines = 0
         titleL.textAlignment = .center
         self.addSubview(titleL)
         
         detailL = UILabel()
-        detailL.font = font_14
+        detailL.font = font_13
         detailL.textColor = color_09fbfe
         detailL.textAlignment = .center
         self.addSubview(detailL)

@@ -39,7 +39,7 @@ class XHWLCountVC: UIViewController , XHWLNetworkDelegate{
         
         if requestKey == XHWLRequestKeyID.XHWL_REALPROGRESS.rawValue {
             
-            dataAry = XHWLRealProgressModel.mj_objectArray(withKeyValuesArray:response["result"] as! NSArray)
+            dataAry = XHWLRealProgressModel.mj_objectArray(withKeyValuesArray:response["result"]!["progressList"] as! NSArray)
             warningView.dataAry = NSMutableArray()
             warningView.dataAry.addObjects(from: dataAry as! [Any])
             warningView.tableView.reloadData()

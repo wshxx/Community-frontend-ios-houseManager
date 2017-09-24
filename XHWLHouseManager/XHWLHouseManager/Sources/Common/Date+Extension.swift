@@ -10,14 +10,14 @@ import UIKit
 
 extension Date {
 
-    func getCurrentStamp() -> Int {
+    static func getCurrentStamp() -> Int {
         //获取当前时间
         let now = Date()
         
         // 创建一个日期格式器
-        let dformatter = DateFormatter()
-        dformatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
-        print("当前日期时间：\(dformatter.string(from: now))")
+//        let dformatter = DateFormatter()
+//        dformatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+//        print("当前日期时间：\(dformatter.string(from: now))")
         
         //当前时间的时间戳
         let timeInterval:TimeInterval = now.timeIntervalSince1970

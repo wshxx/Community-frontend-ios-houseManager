@@ -19,12 +19,13 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
         willSet {
             if (newValue != nil) {
                 
-                let ary1 = newValue.inspectedLineDetail as NSArray
-                let ary2 = newValue.totalLineDetail as NSArray
-                dataAry = NSMutableArray()
-                dataAry.addObjects(from: ary1 as! [Any])
-                dataAry.addObjects(from: ary2 as! [Any])
+//                let ary1 = newValue.checkedList as NSArray
+                let ary2 = newValue.planChecksList as NSArray
+                let array = NSMutableArray()
+//                array.addObjects(from: ary1 as! [Any])
+                array.addObjects(from: ary2 as! [Any])
                 
+                dataAry = XHWLListModel.mj_objectArray(withKeyValuesArray: array)
                 progressView.progressModel = newValue
                 
                 self.tableView.reloadData()
@@ -69,15 +70,17 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
         
         let cell = XHWLProgressDetailCell.cellWithTableView(tableView: tableView)
 //        cell.textLabel?.text = dataAry[indexPath.row] as? String
-        cell.realModel = dataAry[indexPath.row] as? XHWLDetailProgressModel
+        print("\(dataAry[indexPath.row])")
+        let realModel:XHWLListModel = (dataAry[indexPath.row] as? XHWLListModel)!
         cell.isTop = indexPath.row == 0
         cell.isBottom = indexPath.row == dataAry.count - 1
+        cell.setRealModel(realModel)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 70
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

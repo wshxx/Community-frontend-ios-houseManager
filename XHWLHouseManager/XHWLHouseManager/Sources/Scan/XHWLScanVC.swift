@@ -59,6 +59,11 @@ class XHWLScanVC: LBXScanViewController {
 //        self.drawTitle()
 //        self.view.bringSubview(toFront: topTitle!)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        startScan()
+    }
 
     func drawBottomItems() {
         if (bottomItemsView != nil) {

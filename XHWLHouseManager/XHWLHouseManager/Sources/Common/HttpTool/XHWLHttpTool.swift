@@ -14,10 +14,12 @@ import Alamofire
 //let XHWLHttpURL :String = "http://192.168.2.101:9002"
 //let XHWLHttpURL :String = "http://192.168.1.154:8080"
 
-let XHWLHttpURL :String = "http://120.77.83.190:8080/ssh/v1"
+//let XHWLHttpURL :String = "http://120.77.83.190:8080/ssh/v1"
+//let XHWLImgURL :String = "http://120.77.83.190:8080/ssh"
 //let XHWLHttpURL :String = "http://10.51.37.54:8080/ssh/v1"
 //let XHWLHttpURL :String = "http://10.51.37.74:4000/ssh/v1"
-//let XHWLHttpURL: String = "http://192.168.200.116:8006/ssh/v1"
+let XHWLImgURL: String = "http://192.168.200.116:8006/ssh"
+let XHWLHttpURL: String = "http://192.168.200.116:8006/ssh/v1"
 
 
 @objc protocol XHWLHttpToolDelegate:NSObjectProtocol {
@@ -98,18 +100,21 @@ class XHWLHttpTool: NSObject {
                 
                 XHMLProgressHUD.shared.hide()
                 
-                print(response.request)  // original URL request
-                print(response.response) // HTTP URL response
-                print(response.data)     // server data
-                print(response.result)   // result of response serialization
+//                print(response.request)  // original URL request
+//                print(response.response) // HTTP URL response
+//                print(response.data)     // server data
+//                print(response.result)   // result of response serialization
                 
                 switch response.result {
                 case .success(let value):
                     
                     print("success:\(value)")
                     
-                    if self.requestKey != .XHWL_LOGOUT {
+                    if self.requestKey != .XHWL_LOGOUT && self.requestKey != .XHWL_GETVERCODE {
                         if (value as! [String : AnyObject])["result"] is NSNull {
+                            
+                            let message:String = (value as! [String : AnyObject])["message"] as! String
+                            message.ext_debugPrintAndHint()
                             return
                         }
                     }
@@ -146,6 +151,19 @@ class XHWLHttpTool: NSObject {
                 switch response.result {
                 case .success(let value):
                     print("success:\(value)")
+                    
+                    if self.requestKey != .XHWL_RESETPWD &&
+                        self.requestKey != .XHWL_VERCODENEXT &&
+                        self.requestKey != .XHWL_FORGETPWD &&
+                        self.requestKey != .XHWL_VISITREGISTER {
+                        if (value as! [String : AnyObject])["result"] is NSNull {
+                            
+                            let message:String = (value as! [String : AnyObject])["message"] as! String
+                            message.ext_debugPrintAndHint()
+                            return
+                        }
+                    }
+                    
                     self.delegate?.requestSuccess(self.requestKey!.rawValue, result:value as! [String : AnyObject])
                     
                 case .failure(let error):
@@ -174,8 +192,13 @@ class XHWLHttpTool: NSObject {
                     multipartFormData.append((param.data(using: String.Encoding.utf8)!), withName: dict.allKeys[i] as! String)
                 }
                 
-                for i in 0..<data.count { // "image.png"  "appPhoto"
+//                let file = Bundle.main.path(forResource: "别人进行云对讲0000", ofType: "png")!
+//                let fileUrl = URL(fileURLWithPath: file)
+                
+                for i in 0..<data.count { // "image.png"  "appPhoto" "appPhoto\(i)"
                     multipartFormData.append(data[i], withName:"appPhoto\(i)", fileName: name[i], mimeType: "image/png")
+//                    multipartFormData.append(fileUrl, withName: "image/png")
+//                    multipartFormData.append
                 }
         },
             to: requestUrl,

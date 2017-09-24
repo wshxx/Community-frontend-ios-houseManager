@@ -53,7 +53,7 @@ class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
         let deviceData:NSData = UserDefaults.standard.object(forKey: "deviceList") as! NSData
         let deviceList:NSArray = XHWLDeviceModel.mj_objectArray(withKeyValuesArray: deviceData.mj_JSONObject())
         
-        let model:XHWLDeviceModel = deviceList[1] as! XHWLDeviceModel
+        let model:XHWLDeviceModel = deviceList[0] as! XHWLDeviceModel
         let params:[String:Any] = ["ProjectCode":"10200", // 项目编号
             "DeviceID":model.DeviceID, // 设备id
             "Date":getCurrentDate(), // 日期

@@ -109,7 +109,9 @@ class XHWLPickPhotoView: UIView {
         imgIVArray = NSMutableArray()
         for i in 0..<array.count {
             let imgV:UIImageView = UIImageView()
-            imgV.image = UIImage(named: array[i] as! String)
+            let urlStr = "\(XHWLImgURL)/\(array[i] as! String)"
+            let url = URL(string: urlStr)
+            imgV.kf.setImage(with: url)
             self.addSubview(imgV)
             imgIVArray.add(imgV)
         }

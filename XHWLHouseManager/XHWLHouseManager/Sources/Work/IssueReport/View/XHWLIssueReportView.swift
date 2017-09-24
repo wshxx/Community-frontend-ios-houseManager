@@ -151,7 +151,7 @@ class XHWLIssueReportView: UIView {
         remark.frame = CGRect(x:10, y:dotView.frame.maxY+10, width:self.bounds.size.width-20, height:80)
         
         radioView.frame = CGRect(x:10, y:remark.frame.maxY+10, width:self.bounds.size.width-20, height:44)
-        pickPhoto.frame = CGRect(x:10, y:radioView.frame.maxY+10, width:self.bounds.size.width-20, height:80)
+        pickPhoto.frame = CGRect(x:0, y:radioView.frame.maxY+10, width:self.bounds.size.width-20, height:80)
         
         cancelBtn.frame = CGRect(x:50, y:self.bounds.size.height-60, width:71, height:30)
         submitBtn.frame = CGRect(x:self.bounds.size.width-50-71, y:self.bounds.size.height-60, width:71, height:30)

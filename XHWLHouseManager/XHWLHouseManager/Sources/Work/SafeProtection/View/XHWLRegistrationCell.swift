@@ -22,6 +22,9 @@ class XHWLRegistrationCell: UITableViewCell {
         willSet {
             if (newValue != nil) {
                 titleL.text = newValue.sysVisitor.accessReason
+                
+                stateL.isHidden = false
+                stateL.text = newValue.yzName.isEmpty ? "状态：拒绝":"状态：同意"
                 contentL.text = "业主:\(newValue.yzName)"
                 registerNameL.text = "登记人：\(newValue.sysVisitor.name)"
                 timeL.text = Date.getDateWith(Int(newValue.sysVisitor.accessTime)!)
@@ -59,6 +62,12 @@ class XHWLRegistrationCell: UITableViewCell {
         titleL.textColor = UIColor.white
         titleL.font = font_14
         self.contentView.addSubview(titleL)
+        
+        stateL = UILabel()
+        stateL.textColor = color_01f0ff
+        stateL.font = font_13
+        stateL.isHidden = true
+        self.contentView.addSubview(stateL)
         
         timeL = UILabel()
         timeL.textColor = UIColor().colorWithHexString(colorStr: "7a9198")
@@ -105,10 +114,16 @@ class XHWLRegistrationCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        titleL.frame = CGRect(x:13, y:0, width:self.frame.size.width-30-13, height:30)
-        timeL.frame = CGRect(x:13, y:30, width:80, height:25)
-        contentL.frame = CGRect(x:13+timeL.frame.maxX, y:30, width:80, height:25)
-        registerNameL.frame = CGRect(x:contentL.frame.maxX, y:30, width:self.frame.size.width-contentL.frame.maxX-30, height:25)
+        if stateL.isHidden {
+             titleL.frame = CGRect(x:13, y:0, width:self.frame.size.width-30-13, height:30)
+            stateL.frame = CGRect(x:13, y:0, width:0, height:30)
+        } else {
+             titleL.frame = CGRect(x:13, y:0, width:self.frame.size.width-30-13-100, height:30)
+            stateL.frame = CGRect(x:self.frame.size.width-100, y:0, width:80, height:30)
+        }
+        timeL.frame = CGRect(x:13, y:30, width:70, height:25)
+        contentL.frame = CGRect(x:5+timeL.frame.maxX, y:30, width:85, height:25)
+        registerNameL.frame = CGRect(x:contentL.frame.maxX+5, y:30, width:self.frame.size.width-contentL.frame.maxX-30, height:25)
         accessIV.bounds = CGRect(x:0, y:0, width:7, height:12)
         accessIV.center = CGPoint(x:self.frame.size.width-17, y:self.frame.size.height/2.0)
         lineIV.frame = CGRect(x:13, y:self.frame.size.height-0.5, width:self.frame.size.width-30, height:0.5)

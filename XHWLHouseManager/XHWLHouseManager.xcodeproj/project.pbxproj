@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		190598BC1F6F6E71004A4A91 /* XHWLSelTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598BB1F6F6E71004A4A91 /* XHWLSelTypeView.swift */; };
-		190598BE1F6F9DB1004A4A91 /* XHWLDeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598BD1F6F9DB1004A4A91 /* XHWLDeviceModel.swift */; };
 		190598C41F6FAEBF004A4A91 /* XHWLWaterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598C31F6FAEBF004A4A91 /* XHWLWaterVC.swift */; };
 		190598C61F6FAEDC004A4A91 /* XHWLWaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598C51F6FAEDC004A4A91 /* XHWLWaterView.swift */; };
-		190598C81F6FAEEB004A4A91 /* XHWLChargeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598C71F6FAEEB004A4A91 /* XHWLChargeModel.swift */; };
 		190598CE1F6FC122004A4A91 /* XHWLDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598CD1F6FC122004A4A91 /* XHWLDataVC.swift */; };
 		190598D81F6FE562004A4A91 /* XHWLSafeGuardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598D71F6FE562004A4A91 /* XHWLSafeGuardVC.swift */; };
 		190598DA1F6FE5AF004A4A91 /* XHWLSafeGuardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190598D91F6FE5AF004A4A91 /* XHWLSafeGuardView.swift */; };
@@ -61,6 +59,7 @@
 		1931C0AE1F725504004D0A41 /* XHWLRegistrationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1931C0AD1F725504004D0A41 /* XHWLRegistrationCell.swift */; };
 		1931C0B01F725EDB004D0A41 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1931C0AF1F725EDB004D0A41 /* Date+Extension.swift */; };
 		1941DCD91F58341B009DE0F0 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1941DCD81F58341B009DE0F0 /* HealthKit.framework */; };
+		19435FCD1F779EF600956457 /* XHWLRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19435FCC1F779EF600956457 /* XHWLRoomView.swift */; };
 		194FAAD41F5CF993004CA513 /* xhwl_login_logo_down.gif in Resources */ = {isa = PBXBuildFile; fileRef = 194FAAD21F5CF993004CA513 /* xhwl_login_logo_down.gif */; };
 		194FAAD51F5CF993004CA513 /* xhwl_login_logo_up.gif in Resources */ = {isa = PBXBuildFile; fileRef = 194FAAD31F5CF993004CA513 /* xhwl_login_logo_up.gif */; };
 		194FAAD71F5CF9B0004CA513 /* door2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 194FAAD61F5CF9B0004CA513 /* door2.gif */; };
@@ -152,7 +151,6 @@
 		19A2E5231F711B4200C08729 /* XHWLDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5221F711B4200C08729 /* XHWLDataModel.swift */; };
 		19A2E5251F7130AF00C08729 /* XHWLMapKitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5241F7130AF00C08729 /* XHWLMapKitModel.swift */; };
 		19A2E5271F7135B600C08729 /* XHWLRealProgressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5261F7135B600C08729 /* XHWLRealProgressModel.swift */; };
-		19A2E5291F71360500C08729 /* XHWLDetailProgressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E5281F71360500C08729 /* XHWLDetailProgressModel.swift */; };
 		19A2E52B1F713F7400C08729 /* XHWLWarningModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E52A1F713F7400C08729 /* XHWLWarningModel.swift */; };
 		19A5725D1F6CD49C007B0D3F /* XHWLBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5725C1F6CD49C007B0D3F /* XHWLBaseVC.swift */; };
 		19A5725F1F6CDF80007B0D3F /* XHWLWorkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5725E1F6CDF80007B0D3F /* XHWLWorkCell.swift */; };
@@ -267,6 +265,10 @@
 		19F04DD41F7509B400E0BD75 /* BluetoothTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DD11F7509B400E0BD75 /* BluetoothTableViewCell.swift */; };
 		19F04DD51F7509B400E0BD75 /* BluetoothVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DD21F7509B400E0BD75 /* BluetoothVC.swift */; };
 		19F04DD71F7509B800E0BD75 /* LocalBlueToothTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DD61F7509B800E0BD75 /* LocalBlueToothTableViewCell.swift */; };
+		19F04DD91F75FA2B00E0BD75 /* XHWLDeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DD81F75FA2B00E0BD75 /* XHWLDeviceModel.swift */; };
+		19F04DDB1F75FBCE00E0BD75 /* XHWLDeviceDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DDA1F75FBCE00E0BD75 /* XHWLDeviceDetailVC.swift */; };
+		19F04DDD1F76390500E0BD75 /* XHWLDeviceTitleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DDC1F76390500E0BD75 /* XHWLDeviceTitleModel.swift */; };
+		19F04DDF1F76392100E0BD75 /* XHWLDeviceSubTitleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DDE1F76392100E0BD75 /* XHWLDeviceSubTitleModel.swift */; };
 		19FACBC61F68C43E00680E63 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FACBC51F68C43E00680E63 /* Validation.swift */; };
 		19FACBC91F68C97400680E63 /* XHWLUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FACBC81F68C97400680E63 /* XHWLUserModel.swift */; };
 		19FACBCB1F68CA0C00680E63 /* XHWLRoleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FACBCA1F68CA0C00680E63 /* XHWLRoleModel.swift */; };
@@ -353,10 +355,8 @@
 
 /* Begin PBXFileReference section */
 		190598BB1F6F6E71004A4A91 /* XHWLSelTypeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSelTypeView.swift; sourceTree = "<group>"; };
-		190598BD1F6F9DB1004A4A91 /* XHWLDeviceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDeviceModel.swift; sourceTree = "<group>"; };
 		190598C31F6FAEBF004A4A91 /* XHWLWaterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLWaterVC.swift; sourceTree = "<group>"; };
 		190598C51F6FAEDC004A4A91 /* XHWLWaterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLWaterView.swift; sourceTree = "<group>"; };
-		190598C71F6FAEEB004A4A91 /* XHWLChargeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLChargeModel.swift; sourceTree = "<group>"; };
 		190598CD1F6FC122004A4A91 /* XHWLDataVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDataVC.swift; sourceTree = "<group>"; };
 		190598D71F6FE562004A4A91 /* XHWLSafeGuardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSafeGuardVC.swift; sourceTree = "<group>"; };
 		190598D91F6FE5AF004A4A91 /* XHWLSafeGuardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLSafeGuardView.swift; sourceTree = "<group>"; };
@@ -400,6 +400,7 @@
 		1931C0AF1F725EDB004D0A41 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		1941DCD81F58341B009DE0F0 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		1941DCDA1F58341B009DE0F0 /* XHWLHouseManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XHWLHouseManager.entitlements; sourceTree = "<group>"; };
+		19435FCC1F779EF600956457 /* XHWLRoomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRoomView.swift; sourceTree = "<group>"; };
 		194FAAD21F5CF993004CA513 /* xhwl_login_logo_down.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xhwl_login_logo_down.gif; sourceTree = "<group>"; };
 		194FAAD31F5CF993004CA513 /* xhwl_login_logo_up.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xhwl_login_logo_up.gif; sourceTree = "<group>"; };
 		194FAAD61F5CF9B0004CA513 /* door2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = door2.gif; sourceTree = "<group>"; };
@@ -535,7 +536,6 @@
 		19A2E5221F711B4200C08729 /* XHWLDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDataModel.swift; sourceTree = "<group>"; };
 		19A2E5241F7130AF00C08729 /* XHWLMapKitModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLMapKitModel.swift; sourceTree = "<group>"; };
 		19A2E5261F7135B600C08729 /* XHWLRealProgressModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRealProgressModel.swift; sourceTree = "<group>"; };
-		19A2E5281F71360500C08729 /* XHWLDetailProgressModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDetailProgressModel.swift; sourceTree = "<group>"; };
 		19A2E52A1F713F7400C08729 /* XHWLWarningModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLWarningModel.swift; sourceTree = "<group>"; };
 		19A5725C1F6CD49C007B0D3F /* XHWLBaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLBaseVC.swift; sourceTree = "<group>"; };
 		19A5725E1F6CDF80007B0D3F /* XHWLWorkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLWorkCell.swift; sourceTree = "<group>"; };
@@ -673,6 +673,10 @@
 		19F04DD11F7509B400E0BD75 /* BluetoothTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothTableViewCell.swift; sourceTree = "<group>"; };
 		19F04DD21F7509B400E0BD75 /* BluetoothVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothVC.swift; sourceTree = "<group>"; };
 		19F04DD61F7509B800E0BD75 /* LocalBlueToothTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalBlueToothTableViewCell.swift; sourceTree = "<group>"; };
+		19F04DD81F75FA2B00E0BD75 /* XHWLDeviceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDeviceModel.swift; sourceTree = "<group>"; };
+		19F04DDA1F75FBCE00E0BD75 /* XHWLDeviceDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDeviceDetailVC.swift; sourceTree = "<group>"; };
+		19F04DDC1F76390500E0BD75 /* XHWLDeviceTitleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDeviceTitleModel.swift; sourceTree = "<group>"; };
+		19F04DDE1F76392100E0BD75 /* XHWLDeviceSubTitleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLDeviceSubTitleModel.swift; sourceTree = "<group>"; };
 		19FACBC51F68C43E00680E63 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		19FACBC81F68C97400680E63 /* XHWLUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLUserModel.swift; sourceTree = "<group>"; };
 		19FACBCA1F68CA0C00680E63 /* XHWLRoleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRoleModel.swift; sourceTree = "<group>"; };
@@ -803,6 +807,7 @@
 			isa = PBXGroup;
 			children = (
 				190598C31F6FAEBF004A4A91 /* XHWLWaterVC.swift */,
+				19F04DDA1F75FBCE00E0BD75 /* XHWLDeviceDetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -810,7 +815,9 @@
 		190598C11F6FAE98004A4A91 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				190598C71F6FAEEB004A4A91 /* XHWLChargeModel.swift */,
+				19F04DD81F75FA2B00E0BD75 /* XHWLDeviceModel.swift */,
+				19F04DDC1F76390500E0BD75 /* XHWLDeviceTitleModel.swift */,
+				19F04DDE1F76392100E0BD75 /* XHWLDeviceSubTitleModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1087,6 +1094,7 @@
 				190598BB1F6F6E71004A4A91 /* XHWLSelTypeView.swift */,
 				19BBF3D21F73AA72005AC7F2 /* XHWLPickerCell.swift */,
 				19BBF3DF1F749F89005AC7F2 /* XHWLButton.swift */,
+				19435FCC1F779EF600956457 /* XHWLRoomView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1244,7 +1252,6 @@
 			isa = PBXGroup;
 			children = (
 				19A2E5261F7135B600C08729 /* XHWLRealProgressModel.swift */,
-				19A2E5281F71360500C08729 /* XHWLDetailProgressModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1274,7 +1281,6 @@
 			children = (
 				197D64B51F62807D00977074 /* XHWLMenuModel.swift */,
 				19ADF39D1F64DD8400A9E0FB /* XHWLRegisterationModel.swift */,
-				190598BD1F6F9DB1004A4A91 /* XHWLDeviceModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2494,8 +2500,8 @@
 				19163D051F67E0F300C09785 /* XHWLRegistrationVC.swift in Sources */,
 				19BB53531F56BFA3006C38EA /* MJPropertyKey.m in Sources */,
 				19654C491F6BE25400638F05 /* XHWLIssueAccountModel.swift in Sources */,
-				190598C81F6FAEEB004A4A91 /* XHWLChargeModel.swift in Sources */,
 				19F04DCA1F74B45800E0BD75 /* XHWLChargeButton.swift in Sources */,
+				19F04DD91F75FA2B00E0BD75 /* XHWLDeviceModel.swift in Sources */,
 				19A2E5251F7130AF00C08729 /* XHWLMapKitModel.swift in Sources */,
 				19A7A70D1F57EB460044DC1A /* YLGIFImage.swift in Sources */,
 				19B118A51F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift in Sources */,
@@ -2511,6 +2517,7 @@
 				190598C61F6FAEDC004A4A91 /* XHWLWaterView.swift in Sources */,
 				19A14DAF1F5F991600D96A2E /* RTRootNavigationController.m in Sources */,
 				1961CDA71F596328006856D0 /* TalkChannelView.m in Sources */,
+				19435FCD1F779EF600956457 /* XHWLRoomView.swift in Sources */,
 				1961CDB71F5963D2006856D0 /* CMPedometerViewController.swift in Sources */,
 				19BB53571F56BFA3006C38EA /* NSObject+MJKeyValue.m in Sources */,
 				843A32671F6D4F4D002C9098 /* Int.swift in Sources */,
@@ -2533,6 +2540,7 @@
 				19A2E50B1F70A89800C08729 /* XHWLSafeGuardDetailView.swift in Sources */,
 				843A325F1F6D4F4D002C9098 /* PieChartDelegate.swift in Sources */,
 				19BB535B1F56C00F006C38EA /* XHWLConfigure.swift in Sources */,
+				19F04DDD1F76390500E0BD75 /* XHWLDeviceTitleModel.swift in Sources */,
 				843A32691F6D4F4D002C9098 /* AlphaPieLineTextLayerAnimator.swift in Sources */,
 				1955C9B51F652A41008C31C8 /* XHWLCodeTF.swift in Sources */,
 				19A572651F6CE5CC007B0D3F /* XHWLHomeVC.swift in Sources */,
@@ -2540,7 +2548,6 @@
 				843A32AA1F6D63F2002C9098 /* CYBadgeView.m in Sources */,
 				843A32811F6D5E08002C9098 /* XHWLEnergyManagementVC.swift in Sources */,
 				843A32601F6D4F4D002C9098 /* PieSlice.swift in Sources */,
-				190598BE1F6F9DB1004A4A91 /* XHWLDeviceModel.swift in Sources */,
 				19A14D961F5EA6B200D96A2E /* HLBarIndicatorView.swift in Sources */,
 				843A326A1F6D4F4D002C9098 /* PieLineTextLayerAnimator.swift in Sources */,
 				19BB53541F56BFA3006C38EA /* MJPropertyType.m in Sources */,
@@ -2560,7 +2567,6 @@
 				1912240D1F5D774700D201F3 /* XHWLHttpKey.swift in Sources */,
 				19F04DC81F74B3AB00E0BD75 /* XHWLChargeProviderCell.swift in Sources */,
 				1961CCD61F58E448006856D0 /* TimerARC.swift in Sources */,
-				19A2E5291F71360500C08729 /* XHWLDetailProgressModel.swift in Sources */,
 				19B118A71F6A17A300B1F5D1 /* XHWLBluetoothAuthView.swift in Sources */,
 				1961CDA11F596328006856D0 /* PtzPanelView.m in Sources */,
 				192DA5451F57E1CB005950EC /* XHWLTransitionView.swift in Sources */,
@@ -2591,6 +2597,7 @@
 				197D64B01F62804C00977074 /* XHWLWorkVC.swift in Sources */,
 				19A822911F728E1C00B8E570 /* SwiftNotice.swift in Sources */,
 				843A326E1F6D4F4D002C9098 /* PieViewLayerAnimator.swift in Sources */,
+				19F04DDF1F76392100E0BD75 /* XHWLDeviceSubTitleModel.swift in Sources */,
 				843A32AB1F6D63F2002C9098 /* CYButton.m in Sources */,
 				19BB53591F56BFA3006C38EA /* NSString+MJExtension.m in Sources */,
 				1931C0A01F7203C1004D0A41 /* XHWLScanResultVC.swift in Sources */,
@@ -2627,6 +2634,7 @@
 				19F04DCC1F74F9D600E0BD75 /* XHWLVisitLogModel.swift in Sources */,
 				19BBF3D31F73AA72005AC7F2 /* XHWLPickerCell.swift in Sources */,
 				19A14D6C1F5E381100D96A2E /* MASLayoutConstraint.m in Sources */,
+				19F04DDB1F75FBCE00E0BD75 /* XHWLDeviceDetailVC.swift in Sources */,
 				1961CD9E1F596328006856D0 /* CTimeBarPanel.m in Sources */,
 				19163D211F67E66500C09785 /* XHWLPickerView.swift in Sources */,
 			);

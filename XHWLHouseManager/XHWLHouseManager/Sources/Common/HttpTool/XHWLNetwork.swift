@@ -79,6 +79,9 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
     }
     
     func superWithUploadImage(_ parameters:NSDictionary, _ requestKey:XHWLRequestKeyID, _ data:[Data], _ name:[String]) {
+        
+        XHMLProgressHUD.shared.show()
+        
         let request = XHWLHttpTool()
         request.initWithKey(requestKey, self)
         request.validTime = 1200
@@ -267,6 +270,8 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
     // MARK: - XHWLHttpToolDelegate
     func requestSuccess(_ requestKey:NSInteger, result request:Any) {
 //        [[FireflyShowViewManager sharedInstance]dismissWaitingView];
+        
+
         
        self.delegate?.requestSuccess(requestKey, request as! [String : AnyObject])
     }

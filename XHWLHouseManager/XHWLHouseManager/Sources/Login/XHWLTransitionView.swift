@@ -180,8 +180,9 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
         else  if requestKey == XHWLRequestKeyID.XHWL_VERCODENEXT.rawValue {
             onNext(response)
         }
-        else  if requestKey == XHWLRequestKeyID.XHWL_RESETPWD.rawValue {
-            onResetPwd(response)
+        else  if requestKey == XHWLRequestKeyID.XHWL_RESETPWD.rawValue ||
+            requestKey == XHWLRequestKeyID.XHWL_FORGETPWD.rawValue {
+            onResetPwd(response, requestKey)
         }
         
     }
@@ -209,7 +210,7 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
             UserDefaults.standard.synchronize()
             
             print("\(userModel.wyAccount.wyRole.name)")
-            userModel.wyAccount.wyRole.name.ext_debugPrintAndHint()
+//            userModel.wyAccount.wyRole.name.ext_debugPrintAndHint()
             if userModel.wyAccount.isFirstLogin.compare("y").rawValue == 0 { // 重置密码
                 self.onLoginChangeReset()
             } else { // 跳到首页
@@ -252,14 +253,20 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
         }
     }
     
-    func onResetPwd(_ response:[String : AnyObject]) {
+    func onResetPwd(_ response:[String : AnyObject], _ requestKey:NSInteger) {
         if response["state"] as! Bool{
             let msg =  response["message"] as! String
             msg.ext_debugPrintAndHint()
             
-            // 跳到首页
-            self.delegate?.onGotoHome!(self)
-            
+            if requestKey == XHWLRequestKeyID.XHWL_RESETPWD.rawValue {
+                
+                // 跳到首页
+                self.delegate?.onGotoHome!(self)
+            } else if requestKey == XHWLRequestKeyID.XHWL_FORGETPWD.rawValue {
+                
+                // 跳到登录
+                onResetChangeLogin()
+            }
         } else {
             //登录失败
             switch(response["errorCode"] as! Int){

@@ -1,43 +1,33 @@
 //
-//  XHWLCheckListTF.swift
+//  XHWLRoomView.swift
 //  XHWLHouseManager
 //
-//  Created by gongairong on 2017/9/10.
+//  Created by gongairong on 2017/9/24.
 //  Copyright © 2017年 XHWL. All rights reserved.
 //
 
 import UIKit
 
-enum XHWLCheckListTFEnum : Int{
-    case left = 0
-    case right
-}
-
-class XHWLCheckListTF: UIView, UITextFieldDelegate {
+class XHWLRoomView: UIView, UITextFieldDelegate {
 
     var titleL:UILabel!
     var contentTF:UITextField!
     var listBtn:XHWLButton!
-    var checkEnum:XHWLCheckListTFEnum!
     var btnBlock:()->(Void) = { param in }
     var textEndBlock:(String)->() = {param in }
     
-    init(frame: CGRect , checkListEnum:XHWLCheckListTFEnum) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         
-        checkEnum = checkListEnum
         setupView()
     }
     
     func setupView() {
         
-        
-        if checkEnum == XHWLCheckListTFEnum.right {
-            titleL = UILabel()
-            titleL.textColor = UIColor.white
-            titleL.font = font_14
-            self.addSubview(titleL)
-        }
+        titleL = UILabel()
+        titleL.textColor = UIColor.white
+        titleL.font = font_14
+        self.addSubview(titleL)
         
         contentTF = UITextField()
         contentTF.delegate = self
@@ -66,29 +56,17 @@ class XHWLCheckListTF: UIView, UITextFieldDelegate {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-
+        let size:CGSize = titleL.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:titleL.font], context: nil).size
         
-        if checkEnum == XHWLCheckListTFEnum.right {
-            let size:CGSize = titleL.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:titleL.font], context: nil).size
-            
-            titleL.frame = CGRect(x:10, y:0, width:size.width, height:30)
-            
-            listBtn.frame = CGRect(x:self.bounds.size.width-100-10, y:0, width:100, height:30)
-            contentTF.frame = CGRect(x: titleL.frame.maxX+10, y: 0, width: self.bounds.size.width-titleL.frame.maxX-127, height: 30)
-            
-        } else {
-            
-            listBtn.frame = CGRect(x:10, y:0, width:78, height:30)
-            contentTF.frame = CGRect(x: listBtn.frame.maxX+5, y: 0, width: self.bounds.size.width-listBtn.frame.maxX-15, height: 30)
-            
-        }
+        
+        listBtn.frame = CGRect(x:10, y:0, width:self.bounds.size.width-20, height:30)
+        
+        titleL.frame = CGRect(x:10, y:40, width:size.width, height:30)
+        contentTF.frame = CGRect(x: titleL.frame.maxX+10, y: 40, width: self.bounds.size.width-titleL.frame.maxX-20, height: 30)
     }
     
     func showText(leftText:String, rightText:String, btnTitle:String) {
-        
-        if checkEnum == XHWLCheckListTFEnum.right {
-            titleL.text = leftText
-        }
+        titleL.text = leftText
         contentTF.text = rightText
         listBtn.showBtnTitle(btnTitle)
     }
@@ -100,4 +78,5 @@ class XHWLCheckListTF: UIView, UITextFieldDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }

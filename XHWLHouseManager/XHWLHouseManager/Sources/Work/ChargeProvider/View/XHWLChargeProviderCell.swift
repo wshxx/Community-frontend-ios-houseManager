@@ -17,12 +17,12 @@ class XHWLChargeProviderCell: UITableViewCell {
     class func cellWithTableView(_ tableView:UITableView) -> XHWLChargeProviderCell {
         
         let ID: String = "XHWLChargeProviderCell"
-        var cell = tableView.dequeueReusableCell(withIdentifier: ID)
-        if (cell == nil) {
-            cell =  XHWLChargeProviderCell.init(style: UITableViewCellStyle.default, reuseIdentifier: ID)
-        }
+//        var cell = tableView.dequeueReusableCell(withIdentifier: ID)
+//        if (cell == nil) {
+          let  cell =  XHWLChargeProviderCell.init(style: UITableViewCellStyle.default, reuseIdentifier: ID)
+//        }
         
-        return cell as! XHWLChargeProviderCell
+        return cell 
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -50,11 +50,12 @@ class XHWLChargeProviderCell: UITableViewCell {
         
         for i in 0..<array.count {
             
-            print("\(array)")
             let firstBtn:XHWLChargeButton = XHWLChargeButton()
             firstBtn.tag = comTag+i
             let model:XHWLDeviceModel = array[i] as! XHWLDeviceModel
-            firstBtn.showText(model.DeviceName, model.TypeName)
+            firstBtn.showText(model.DeviceName, model.NavName)
+            
+            print("\(model.DeviceName)")
             firstBtn.addTarget(self, action: #selector(onBtnClick), for: .touchUpInside)
             self.contentView.addSubview(firstBtn)
             btnAry.add(firstBtn)
@@ -64,10 +65,10 @@ class XHWLChargeProviderCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let width:CGFloat = (self.frame.size.width-45)/4.0
+        let width:CGFloat = (self.frame.size.width-50)/3.0
         for i in 0..<btnAry.count {
             let firstBtn:XHWLChargeButton = btnAry[i] as! XHWLChargeButton
-            firstBtn.frame = CGRect(x:15+CGFloat(i)*(width+5), y:2, width:width, height:self.bounds.size.height-5)
+            firstBtn.frame = CGRect(x:15+CGFloat(i)*(width+10), y:2, width:width, height:self.bounds.size.height-5)
         }
     }
     

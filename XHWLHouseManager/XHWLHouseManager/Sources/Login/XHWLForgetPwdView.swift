@@ -156,10 +156,11 @@ class XHWLForgetPwdView: UIView, XHWLNetworkDelegate {
     //是否正在计数
     var isCounting = false{
         willSet{
-            if newValue{
-                countDownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(XHWLForgetPwdView.updateTimer(_:)), userInfo: nil, repeats: true)
+            if newValue {
                 
                 remainingSeconds = 60
+                countDownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(XHWLForgetPwdView.updateTimer(_:)), userInfo: nil, repeats: true)
+                
             }else{
                 countDownTimer?.invalidate()
                 countDownTimer = nil

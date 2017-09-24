@@ -25,6 +25,16 @@ class RemoteOpenDoorVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
         doorPickerView.selectRow(self.selectedRow,inComponent:0,animated:true)
         doorPickerView.showsSelectionIndicator = false
         // Do any additional setup after loading the view.
+        
+        let backBtn:UIButton = UIButton()
+        backBtn.frame = CGRect(x: 15, y: 20, width: 60, height: 44)
+        backBtn.addTarget(self, action: #selector(onBack), for: .touchUpInside)
+        backBtn.setImage(UIImage(named:"scan_back"), for: .normal)
+        self.view.addSubview(backBtn)
+    }
+    
+    func onBack(){
+        self.dismiss(animated: true, completion: nil)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

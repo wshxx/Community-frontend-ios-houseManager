@@ -48,8 +48,14 @@ class XHWLScanTestVC: UIViewController , XHWLScanVCDelegate{
     }
     
     func onSelectPicture() {
-        vc.openPhotoAlbum()
+       
+//        if ([LBXScanWrapper isGetPhotoPermission]) {
+             vc.openPhotoAlbum()
+//        } else {
+//            [self showError:@"请到设置->隐私中开启本程序相册权限"];
+//        }
     }
+
     
     func setupView() {
         

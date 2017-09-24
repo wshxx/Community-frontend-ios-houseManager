@@ -41,17 +41,20 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         if array.count > 0{
             let model:XHWLProjectModel = array[0] as! XHWLProjectModel
             name = model.name
+            
+            let btn:UIButton = UIButton()
+            btn.frame = CGRect(x:0, y:0, width:100, height:200)
+            btn.setTitle(name, for: UIControlState.normal)
+            btn.setTitleColor(UIColor.white, for: UIControlState.normal)
+            btn.setImage(UIImage(named:"home_switch"), for: UIControlState.normal)
+            btn.titleLabel?.font = font_14
+            btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -14, bottom: 0, right: 0)
+            btn.addTarget(self, action: #selector(onCreateNavHeadView), for: UIControlEvents.touchUpInside)
+            
+            return btn
         }
-        let btn:UIButton = UIButton()
-        btn.frame = CGRect(x:0, y:0, width:100, height:200)
-        btn.setTitle(name, for: UIControlState.normal)
-        btn.setTitleColor(UIColor.white, for: UIControlState.normal)
-        btn.setImage(UIImage(named:"home_switch"), for: UIControlState.normal)
-        btn.titleLabel?.font = font_14
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -14, bottom: 0, right: 0)
-        btn.addTarget(self, action: #selector(onCreateNavHeadView), for: UIControlEvents.touchUpInside)
         
-        return btn
+        return UIButton()
     }
     
     func onCreateNavHeadView() {
@@ -99,7 +102,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         let array:NSMutableArray! = NSMutableArray()
         if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
             array.addObjects(from: ["异常放行", "安防事件", "访客记录", "在线定位", "进度查看", "安环数据"])
-        } else if userModel.wyAccount.wyRole.name.compare("安管人员").rawValue == 0 {
+        } else if userModel.wyAccount.wyRole.name.compare("门岗").rawValue == 0 {
             array.addObjects(from: ["访客登记"])
         } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
             loadDeviceInfo()
@@ -116,7 +119,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         homeView.dismissBlock = { index in
             if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
                 self.onSafeGuardLeader(index)
-            } else if userModel.wyAccount.wyRole.name.compare("安管人员").rawValue == 0 {
+            } else if userModel.wyAccount.wyRole.name.compare("门岗").rawValue == 0 {//安管人员
                 self.onSafeGuard(index)
             } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
                 self.onProject(index)
@@ -257,7 +260,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-        let param = ["ProjectCode": "201", // 项目编号
+        let param = ["ProjectCode": "10200", // 项目编号
             "token":userModel.wyAccount.token]
         
         XHWLNetwork.shared.postDeviceInfoClick(param as NSDictionary, self)

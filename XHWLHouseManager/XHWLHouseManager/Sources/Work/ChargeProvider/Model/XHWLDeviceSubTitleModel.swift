@@ -1,20 +1,21 @@
 //
-//  XHWLDeviceModel.swift
+//  XHWLDeviceSubTitleModel.swift
 //  XHWLHouseManager
 //
-//  Created by gongairong on 2017/9/18.
+//  Created by gongairong on 2017/9/23.
 //  Copyright © 2017年 XHWL. All rights reserved.
 //
 
 import UIKit
 
-class XHWLDeviceModel: NSObject {
+class XHWLDeviceSubTitleModel: NSObject {
 
-    var DeviceID:String = ""
-    var DeviceName:String = ""
-    var NavName:String = ""
-    var TypeID:String = ""
-    var TypeName:String = ""
+    var deviceSubTitle:String = ""
+    var deviceSubAry:NSArray = NSArray()
+    
+    func mj_objectClassInArray() -> [AnyHashable : Any]! {
+        return ["deviceSubAry":XHWLDeviceModel.self] // [JZMJewelryCategoryModel class]
+    }
     
     override func setValue(_ value: Any?, forKey key: String) {
         super.setValue(value, forKey: key)
@@ -23,5 +24,4 @@ class XHWLDeviceModel: NSObject {
     override func setValue(_ value:Any?, forUndefinedKey key:String) {
         print("EditPubLicityModel 缺少:\(key)")
     }
-
 }

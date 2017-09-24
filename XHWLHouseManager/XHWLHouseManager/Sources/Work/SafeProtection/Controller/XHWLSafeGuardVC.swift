@@ -62,8 +62,10 @@ class XHWLSafeGuardVC: UIViewController  , XHWLScanTestVCDelegate, XHWLSafeGuard
         if imageArray.count > 0 {
             for i in 0..<imageArray.count {
                 let imageData:Data = UIImageJPEGRepresentation(imageArray[i] as! UIImage, 0.5)!
+//                let imageData:Data = UIImagePNGRepresentation(imageArray[i] as! UIImage)
                 imageDataAry.add(imageData)
-                imageNameAry.add("image\(i).png")
+                
+                imageNameAry.add("image_\(String(Date.getCurrentStamp())).png")
             }
         }
         else {

@@ -46,17 +46,20 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
         if array.count > 0{
             let model:XHWLProjectModel = array[0] as! XHWLProjectModel
             name = model.name
+            
+            let btn:UIButton = UIButton()
+            btn.frame = CGRect(x:0, y:0, width:100, height:200)
+            btn.setTitle(name, for: UIControlState.normal)
+            btn.setTitleColor(UIColor.white, for: UIControlState.normal)
+            btn.setImage(UIImage(named:"home_switch"), for: UIControlState.normal)
+            btn.titleLabel?.font = font_14
+            btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -14, bottom: 0, right: 0)
+            btn.addTarget(self, action: #selector(onCreateNavHeadView), for: UIControlEvents.touchUpInside)
+            
+            return btn
         }
-        let btn:UIButton = UIButton()
-        btn.frame = CGRect(x:0, y:0, width:100, height:200)
-        btn.setTitle(name, for: UIControlState.normal)
-        btn.setTitleColor(UIColor.white, for: UIControlState.normal)
-        btn.setImage(UIImage(named:"home_switch"), for: UIControlState.normal)
-        btn.titleLabel?.font = font_14
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -14, bottom: 0, right: 0)
-        btn.addTarget(self, action: #selector(onCreateNavHeadView), for: UIControlEvents.touchUpInside)
         
-        return btn
+        return UIButton()
     }
     
     //MARK: -2.检查设备自身（中心设备）支持的蓝牙状态

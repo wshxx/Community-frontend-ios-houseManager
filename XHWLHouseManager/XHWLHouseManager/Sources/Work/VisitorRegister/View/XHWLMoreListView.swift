@@ -11,7 +11,7 @@ import UIKit
 class XHWLMoreListView: UIView , XHWLNetworkDelegate{
 
     var labelView:XHWLCheckTF!
-    var phoneView:XHWLCheckListTF!
+    var phoneView:XHWLRoomView!
     var unit:String! = ""
     var roomNo:String! = ""
     var yzId:String! = ""
@@ -32,8 +32,8 @@ class XHWLMoreListView: UIView , XHWLNetworkDelegate{
         }
         self.addSubview(labelView)
         
-        phoneView = XHWLCheckListTF(frame:CGRect.zero, checkListEnum:XHWLCheckListTFEnum.left)
-        phoneView.showText(leftText: "房间：", rightText: "", btnTitle:"请选择")
+        phoneView = XHWLRoomView(frame:CGRect.zero)
+        phoneView.showText(leftText: "房间：", rightText: "", btnTitle:"请选择单元")
         phoneView.btnBlock = { [weak self] in
             if (self?.yzName.isEmpty)! {
                 "您输入的业主信息".ext_debugPrintAndHint()
@@ -102,8 +102,8 @@ class XHWLMoreListView: UIView , XHWLNetworkDelegate{
         labelView.bounds = CGRect(x:0, y:0, width:258, height:20)
         labelView.center = CGPoint(x:self.frame.size.width/2.0, y:30)
         
-        phoneView.bounds = CGRect(x:0, y:0, width:258, height:20)
-        phoneView.center = CGPoint(x:self.frame.size.width/2.0, y:labelView.frame.maxY+30)
+        phoneView.bounds = CGRect(x:0, y:0, width:258, height:80)
+        phoneView.center = CGPoint(x:self.frame.size.width/2.0, y:labelView.frame.maxY+60)
         
     }
     

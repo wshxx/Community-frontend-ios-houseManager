@@ -22,7 +22,7 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
         setupNav()
 //        onLoadNavParameData()
         loadDeviceInfo()
-        onLoadRealData()
+//        onLoadRealData()
     }
     
     func setupNav() {
@@ -40,7 +40,7 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
         
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-        let param = ["ProjectCode": "201", // 项目编号
+        let param = ["ProjectCode": "10200", // 项目编号 201
             "token":userModel.wyAccount.token]
         
         XHWLNetwork.shared.postDeviceInfoClick(param as NSDictionary, self)
@@ -93,11 +93,74 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
         }
         else if requestKey == XHWLRequestKeyID.XHWL_DEVICEINFO.rawValue {
             let list:NSArray = response["result"] as! NSArray
-            let array = XHWLDeviceModel.mj_objectArray(withKeyValuesArray: list)
-            warningView.dataAry = NSMutableArray()
-            warningView.dataAry.add(array)
+            let ary:NSArray = XHWLDeviceModel.mj_objectArray(withKeyValuesArray: list)
+            let array:NSArray =  XHWLDeviceModel.mj_keyValuesArray(withObjectArray: ary as! [Any]) //XHWLDeviceModel. .mj_objectArray(withKeyValuesArray: list)
+            
+            
+            let dataDict = groupDictWith(array, "NavName") as NSDictionary // 转为【“”： NSArray]
+            print("\(dataDict)")
+            
+            let dataSourceAry = NSMutableArray()
+            let keyAry = dataDict.allKeys as NSArray //["", "" ]
+            for i in 0..<keyAry.count {
+                let key = keyAry[i] as! String
+                let value = dataDict[key] as! NSArray
+                print("\(value)")
+                let subDataDict = groupDictWith(value, "TypeName") as NSDictionary // // 转为【“”： ["":NSArray]]
+                print("\(subDataDict)")
+                
+                let subDataAry = NSMutableArray()
+                let subKeyAry = subDataDict.allKeys as NSArray
+                for j in 0..<subKeyAry.count {
+                    let subKey = subKeyAry[j] as! String
+                    let array:NSArray = XHWLDeviceModel.mj_objectArray(withKeyValuesArray: subDataDict[subKey])
+                    subDataAry.add(["deviceSubTitle":subKey, "deviceSubAry": array])
+                }
+                
+                let modelAry:NSArray = XHWLDeviceSubTitleModel.mj_objectArray(withKeyValuesArray: subDataAry)
+                
+                
+                dataSourceAry.add(["deviceTitle":key, "deviceAry":modelAry])
+            }
+
+            let modelAry = XHWLDeviceTitleModel.mj_objectArray(withKeyValuesArray: dataSourceAry)
+            
+            print("\(modelAry)")
+            warningView.modelAry = modelAry
             warningView.tableView.reloadData()
         }
+    }
+    
+    func groupDictWith(_ array:NSArray, _ key:String) -> NSDictionary {
+        let dict = NSMutableDictionary()
+        for i in 0..<array.count {
+            let model = array[i] as! NSDictionary
+            
+            print("\(model)")
+            let currentKey = model.object(forKey: key) as! String
+            
+            let keyAry = dict.allKeys as NSArray
+            var isCommon:Bool = false
+            for j in 0..<keyAry.count {
+                let oneKey = keyAry[j] as! String
+                if oneKey == currentKey {
+                    isCommon = true
+                    break
+                }
+            }
+            
+            if isCommon == true {
+                let valueAry = dict[currentKey] as! NSMutableArray
+                valueAry.add(model)
+                dict[currentKey] = valueAry
+            } else {
+                let ary:NSMutableArray = [model]
+                dict[currentKey] = ary
+            }
+        }
+         print("\(dict)")
+        
+        return dict
     }
     
     func requestFail(_ requestKey:NSInteger, _ error:NSError) {
@@ -115,9 +178,10 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
         warningView = XHWLWaterView()
         warningView.bounds = CGRect(x:0, y:0, width:338, height:68+showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
-        warningView.clickCell = {index in
+        warningView.clickCell = {indexPath,index in
             
-            let vc:XHWLHistoryDetailVC = XHWLHistoryDetailVC()
+//            let vc:XHWLHistoryDetailVC = XHWLHistoryDetailVC()
+            let vc:XHWLDeviceDetailVC = XHWLDeviceDetailVC()
             self.navigationController?.pushViewController(vc, animated: true)
         }
         self.view.addSubview(warningView)

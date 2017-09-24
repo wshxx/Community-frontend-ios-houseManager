@@ -1,5 +1,5 @@
 //
-//  XHWLChargeModel.swift
+//  XHWLDeviceModel.swift
 //  XHWLHouseManager
 //
 //  Created by gongairong on 2017/9/18.
@@ -8,15 +8,18 @@
 
 import UIKit
 
-class XHWLChargeModel: NSObject {
+class XHWLDeviceModel: NSObject {
 
-    var CollectData:String = ""
-    var CollectTime:String = ""
-    var DataCode:String = ""
-    var DataName:String = ""
     var DeviceID:String = ""
     var DeviceName:String = ""
-    var Unit:String = ""
+    var NavName:String = ""
+    var TypeID:String = ""
+    var TypeName:String = ""
+//    var Unit:String = ""
+//    var DataCode:String = ""
+//    var DataName:String = ""
+//    var CollectData:String = ""
+//    var CollectTime:String = ""
     
     override func setValue(_ value: Any?, forKey key: String) {
         super.setValue(value, forKey: key)
@@ -25,4 +28,5 @@ class XHWLChargeModel: NSObject {
     override func setValue(_ value:Any?, forUndefinedKey key:String) {
         print("EditPubLicityModel 缺少:\(key)")
     }
+
 }

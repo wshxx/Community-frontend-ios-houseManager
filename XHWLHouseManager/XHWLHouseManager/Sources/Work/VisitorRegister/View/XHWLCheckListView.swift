@@ -257,7 +257,7 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
             return
         }
         
-        if carNo.isEmpty || !Validation.carNo(carNo).isRight {
+        if carNo.isEmpty  { // || !Validation.carNo(carNo).isRight
             "您输入的车牌不合法".ext_debugPrintAndHint()
             return
         }
@@ -323,7 +323,7 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
         var topHeight:CGFloat = lastView.frame.maxY
         
         if subView.isHidden == false {
-            subView.frame = CGRect(x:0, y:lastView.frame.maxY, width:self.bounds.size.width, height:80)
+            subView.frame = CGRect(x:0, y:lastView.frame.maxY, width:self.bounds.size.width, height:120)
             topHeight = subView.frame.maxY
         } else {
             

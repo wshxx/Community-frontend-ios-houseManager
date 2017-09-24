@@ -22,12 +22,13 @@ class XHWLProgressView: UIView {
                 titleL.text = newValue.nickname
                 timeL.text = newValue.progress
                 
-                if Int(newValue.nodeTotal)! == 0 {
+                let ary:NSArray = newValue.progress.components(separatedBy: "/") as! NSArray
+                if Int(ary[0] as! String) == 0 {
                     progressView.progress = 0.0
                 } else {
-                    if Int(newValue.nodeTotal)! >= Int(newValue.inspectedTotal)! {
+                    if Int(ary[0] as! String)! >= Int(ary[1] as! String)! {
                         
-                        progressView.progress =  CGFloat(Float(newValue.inspectedTotal)! / Float(newValue.nodeTotal)!)
+                        progressView.progress =  CGFloat(Float(Int(ary[0] as! String)!) / Float(Int(ary[0] as! String)!))
                     } else {
                         
                         progressView.progress = 1.0

@@ -24,10 +24,36 @@ class XHWLScanResultVC: UIViewController {
         dataAry = NSMutableArray()
         
         let array :NSArray = [["name":"设备地址：", "content":scanModel!.address, "isHiddenEdit": true],
-                              ["name":"编码信息：", "content":scanModel!.name, "isHiddenEdit": true],
-                              ["name":"最后修改时间：", "content":scanModel!.projectName, "isHiddenEdit":true],
-                              ["name":"当前状态：", "content":scanModel!.status, "isHiddenEdit": true]]
+                              ["name":"编码信息：", "content":scanModel!.code, "isHiddenEdit": true],
+//                              ["name":"最后修改时间：", "content":"", "isHiddenEdit":true],
+                              ["name":"当前状态：", "content":scanModel!.status, "isHiddenEdit": true],
+                              ["name":"基础信息：", "content":scanModel!.name, "isHiddenEdit": true],
+                              ["name":"价格：", "content":scanModel!.price, "isHiddenEdit": true],
+                              ["name":"项目名称：", "content":scanModel!.projectName, "isHiddenEdit": true]]
         dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
+        
+        
+
+        
+        
+//        category = "\U56ed\U6797\U7eff\U690d";
+//        code = pl01;
+//        description = "\U56ed\U6797\U7eff\U690d";
+//        id = "'1e69d4e7-8e1a-11e7-a2f9-4ccc6aeb6282'";
+//        name = "\U9ec4\U6768";
+//        price = 700;
+//        prodDate = "-2211696000000";
+//        projectName = "\U4e2d\U6d77\U5929\U9882\U96c5\U82d1";
+//        status = 06;
+//        sysProject =         {
+//            code = zhht;
+//            divisionName = "\U5e7f\U4e1c\U7701";
+//            id = "01a4fb8b-8e1f-11e7-a2f9-4ccc6aeb6282";
+//            latitude = "102.1233";
+//            longitude = 101;
+//            name = "\U4e2d\U6d77\U5929\U9882\U96c5\U82d1";
+//        };
+//        type = 01;
         
         
         setupNav()
@@ -62,7 +88,7 @@ class XHWLScanResultVC: UIViewController {
             }
         }
         warningView.createArray(dataAry)
-        warningView.titleL.text = scanModel!.name
+        warningView.titleL.text = scanModel.type == "01" ? "园林绿植":"设备" // scanModel!.name
         self.view.addSubview(warningView)
     }
 

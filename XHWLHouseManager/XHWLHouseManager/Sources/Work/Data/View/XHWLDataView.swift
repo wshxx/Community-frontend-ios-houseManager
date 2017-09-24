@@ -20,7 +20,6 @@ class XHWLDataView: UIView , UITableViewDelegate, UITableViewDataSource {
         
         let array:NSArray = [[["name": "停车总位数（个）", "content":"2100"],["name": "车辆入场流量（次）", "content":"1100"],
                              ["name": "剩余车位（个）", "content":"100"],["name": "异常抬杆数（次）", "content":"2"]],
-                            
                              [["name": "业主入流量（次）", "content":"1100"],["name": "访客入流量（次）", "content":"1100"],
                              ["name": "当前滞留人数（个）", "content":"100"],["name": "访客人工放行", "content":"2"]],
                              [["name": "人员报事", "content":"2100"],["name": "人员报事为报销项数", "content":"1100"],
@@ -54,7 +53,7 @@ class XHWLDataView: UIView , UITableViewDelegate, UITableViewDataSource {
         super.layoutSubviews()
         
         bgImage.frame = self.bounds
-        tableView.frame = CGRect(x: 0, y: 20, width: bgImage.bounds.width, height: bgImage.bounds.height-40)
+        tableView.frame = CGRect(x: 0, y: 20, width: bgImage.bounds.width, height: bgImage.bounds.height-20)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
