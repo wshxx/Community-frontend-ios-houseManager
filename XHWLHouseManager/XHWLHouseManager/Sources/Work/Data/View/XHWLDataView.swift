@@ -18,12 +18,12 @@ class XHWLDataView: UIView , UITableViewDelegate, UITableViewDataSource {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let array:NSArray = [[["name": "停车总位数（个）", "content":"2100"],["name": "车辆入场流量（次）", "content":"1100"],
-                             ["name": "剩余车位（个）", "content":"100"],["name": "异常抬杆数（次）", "content":"2"]],
-                             [["name": "业主入流量（次）", "content":"1100"],["name": "访客入流量（次）", "content":"1100"],
-                             ["name": "当前滞留人数（个）", "content":"100"],["name": "访客人工放行", "content":"2"]],
-                             [["name": "人员报事", "content":"2100"],["name": "人员报事为报销项数", "content":"1100"],
-                             ["name": "环境工作完成率", "content":"100%"]]
+        let array:NSArray = [[["name": "停车总位数", "content":"500(个)"],["name": "车辆入场流量", "content":"155(次)"],
+                             ["name": "剩余车位", "content":"50(个)"],["name": "异常抬杆数", "content":"2(次)"]],
+                             [["name": "业主入流量", "content":"800(次)"],["name": "访客入流量", "content":"150(次)"],
+                             ["name": "当前滞留人数", "content":"10(个)"],["name": "访客人工放行数", "content":"3"]],
+                             [["name": "安防事件数", "content":"2100"]],
+                             [["name": "环境工作完成率", "content":"98%"]]
         ]
         
         dataAry = NSMutableArray()
@@ -103,8 +103,8 @@ class XHWLDataView: UIView , UITableViewDelegate, UITableViewDataSource {
             headV.addSubview(label)
             return headV
         } else {
-            let headV:UIView = UIView.init(frame: CGRect(x:0, y:0, width:self.tableView.frame.size.width, height:20))
-            let label:UILabel = UILabel.init(frame: CGRect(x:10, y:10, width:self.tableView.frame.size.width-20, height:0.5))
+            let headV:UIView = UIView.init(frame: CGRect(x:0, y:0, width:self.tableView.frame.size.width, height:1))
+            let label:UILabel = UILabel.init(frame: CGRect(x:10, y:0, width:self.tableView.frame.size.width-20, height:0.5))
             label.backgroundColor = color_01f0ff
             headV.addSubview(label)
             return headV
@@ -112,7 +112,10 @@ class XHWLDataView: UIView , UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
+        if section == 0 {
+            return 20
+        }
+        return 1
     }
     
     required init?(coder aDecoder: NSCoder) {

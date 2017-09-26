@@ -113,10 +113,14 @@ class XHWLTopView: UIView {
                 self.selectBtn.setTitleColor(UIColor().colorWithHexString(colorStr: "09fbfe"), for: UIControlState.normal)
                 
                 if self.btnArray.count <= 2 {
-                    self.tipLabel.frame = CGRect(x:self.selectBtn.frame.minX+40, y:self.bounds.size.height-18, width:(w-80), height:2)
+//                    self.tipLabel.frame = CGRect(x:self.selectBtn.frame.minX+40, y:self.bounds.size.height-18, width:(w-80), height:2)
+                    let size:CGSize = self.selectBtn.titleLabel!.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:self.selectBtn.titleLabel!.font], context: nil).size
+                    self.tipLabel.frame = CGRect(x:self.selectBtn.frame.minX + (self.selectBtn.bounds.size.width-size.width)/2.0, y:self.bounds.size.height-18, width:size.width, height:2)
                 } else {
                     
-                    self.tipLabel.frame = CGRect(x:self.selectBtn.frame.minX, y:self.bounds.size.height-18, width:120, height:2)
+//                    self.tipLabel.frame = CGRect(x:self.selectBtn.frame.minX, y:self.bounds.size.height-18, width:120, height:2)
+                    let size:CGSize = self.selectBtn.titleLabel!.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:self.selectBtn.titleLabel!.font], context: nil).size
+                    self.tipLabel.frame = CGRect(x:self.selectBtn.frame.minX + (self.selectBtn.bounds.size.width-size.width)/2.0, y:self.bounds.size.height-18, width:size.width, height:2)
                 }
             }
         }
@@ -132,7 +136,7 @@ class XHWLTopView: UIView {
             sc.frame = CGRect(x:20, y:0, width:self.bounds.size.width-40, height:self.bounds.size.height)
             
             if btnArray.count <= 2 {
-                let w:CGFloat = self.frame.size.width/CGFloat(btnArray.count)
+                let w:CGFloat = sc.bounds.size.width/CGFloat(btnArray.count) //  self.frame.size.width
                 sc.contentSize = CGSize(width:0, height:0)
                 for i in 0..<btnArray.count {
                     
@@ -140,7 +144,10 @@ class XHWLTopView: UIView {
                     btn.frame = CGRect(x:w.multiplied(by: CGFloat(i)), y:16, width:w, height:self.frame.size.height-32)
                 }
                 if btnArray.count > 1 {
-                    tipLabel.frame = CGRect(x:selectBtn.frame.minX+40, y:self.bounds.size.height-18, width:(w-80), height:2)
+//                    tipLabel.frame = CGRect(x:selectBtn.frame.minX+40, y:self.bounds.size.height-18, width:(w-80), height:2)
+                    
+                    let size:CGSize = selectBtn.titleLabel!.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:selectBtn.titleLabel!.font], context: nil).size
+                    tipLabel.frame = CGRect(x:selectBtn.frame.minX + (selectBtn.bounds.size.width-size.width)/2.0, y:self.bounds.size.height-18, width:size.width, height:2)
                 }
             } else {
                 let w:CGFloat = 120
@@ -152,7 +159,9 @@ class XHWLTopView: UIView {
                 }
                 
                 if btnArray.count > 1 {
-                    tipLabel.frame = CGRect(x:selectBtn.frame.minX, y:self.bounds.size.height-18, width:w, height:2)
+                    
+                    let size:CGSize = selectBtn.titleLabel!.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:selectBtn.titleLabel!.font], context: nil).size
+                    tipLabel.frame = CGRect(x:selectBtn.frame.minX + (selectBtn.bounds.size.width-size.width)/2.0, y:self.bounds.size.height-18, width:size.width, height:2)
                 }
             }
         }

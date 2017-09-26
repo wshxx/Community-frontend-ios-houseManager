@@ -13,7 +13,6 @@ class XHWLRegistrationCell: UITableViewCell {
     var titleL:UILabel!
     var stateL:UILabel!
     var timeL:UILabel!
-    var registerNameL:UILabel!
     var contentL:UILabel!
     var accessIV:UIImageView!
     var lineIV:UIImageView!
@@ -24,10 +23,9 @@ class XHWLRegistrationCell: UITableViewCell {
                 titleL.text = newValue.sysVisitor.accessReason
                 
                 stateL.isHidden = false
-                stateL.text = newValue.yzName.isEmpty ? "状态：拒绝":"状态：同意"
-                contentL.text = "业主:\(newValue.yzName)"
-                registerNameL.text = "登记人：\(newValue.sysVisitor.name)"
-                timeL.text = Date.getDateWith(Int(newValue.sysVisitor.accessTime)!)
+                stateL.text = "状态：同意" //newValue.yzName.isEmpty ? "状态：拒绝":"状态：同意"
+                contentL.text = "登记人:\(newValue.sysVisitor.name)"
+                timeL.text = Date.getDateWith(Int(newValue.sysVisitor.accessTime)!, "yyyy-MM-dd HH:mm")
             }
         }
     }
@@ -74,13 +72,6 @@ class XHWLRegistrationCell: UITableViewCell {
         timeL.font = font_13
         self.contentView.addSubview(timeL)
         
-        registerNameL = UILabel()
-        registerNameL.textColor = UIColor().colorWithHexString(colorStr: "7a9198")
-        registerNameL.font = font_13
-        registerNameL.textAlignment = NSTextAlignment.right
-        self.contentView.addSubview(registerNameL)
-        
-        
         contentL = UILabel()
         contentL.textColor = UIColor().colorWithHexString(colorStr: "7a9198")
         contentL.font = font_13
@@ -95,19 +86,15 @@ class XHWLRegistrationCell: UITableViewCell {
         self.contentView.addSubview(lineIV)
     }
 
-    
-//    ["name": "电梯无法工作", "time":"2017.01.21", "registerName":"哈哈", "content":"张浩然"],
     func setModel(_ registrationModel:XHWLSafeProtectionModel) {
         titleL.text = registrationModel.appComplaint.remarks
         contentL.text = "来源:\(registrationModel.appComplaint.wyAccount.wyRole.name)"
-        registerNameL.text = "报事人：\(registrationModel.complaintUserName)"
-        timeL.text = Date.getDateWith(Int(registrationModel.appComplaint.createTime)!)
+        timeL.text = Date.getDateWith(Int(registrationModel.appComplaint.createTime)!, "yyyy-MM-dd")
     }
     
     func setRegisterModel(_ registrationModel:XHWLRegisterationModel) {
         titleL.text = registrationModel.name
-        contentL.text = "业主:\(registrationModel.content)"
-        registerNameL.text = "登记人：\(registrationModel.registerName)"
+        contentL.text = "登记人:\(registrationModel.registerName)"
         timeL.text = registrationModel.time
     }
     
@@ -115,18 +102,18 @@ class XHWLRegistrationCell: UITableViewCell {
         super.layoutSubviews()
         
         if stateL.isHidden {
-             titleL.frame = CGRect(x:13, y:0, width:self.frame.size.width-30-13, height:30)
-            stateL.frame = CGRect(x:13, y:0, width:0, height:30)
+             titleL.frame = CGRect(x:10, y:0, width:self.frame.size.width-30-13, height:30)
+            stateL.frame = CGRect(x:0, y:0, width:0, height:30)
         } else {
-             titleL.frame = CGRect(x:13, y:0, width:self.frame.size.width-30-13-100, height:30)
+             titleL.frame = CGRect(x:10, y:0, width:self.frame.size.width-30-13-100, height:30)
             stateL.frame = CGRect(x:self.frame.size.width-100, y:0, width:80, height:30)
         }
-        timeL.frame = CGRect(x:13, y:30, width:70, height:25)
-        contentL.frame = CGRect(x:5+timeL.frame.maxX, y:30, width:85, height:25)
-        registerNameL.frame = CGRect(x:contentL.frame.maxX+5, y:30, width:self.frame.size.width-contentL.frame.maxX-30, height:25)
+        
+        timeL.frame = CGRect(x:10, y:30, width:(self.bounds.size.width-40)/2.0+20, height:25)
+        contentL.frame = CGRect(x:timeL.frame.maxX, y:30, width:(self.bounds.size.width-40)/2.0-10, height:25)
         accessIV.bounds = CGRect(x:0, y:0, width:7, height:12)
         accessIV.center = CGPoint(x:self.frame.size.width-17, y:self.frame.size.height/2.0)
-        lineIV.frame = CGRect(x:13, y:self.frame.size.height-0.5, width:self.frame.size.width-30, height:0.5)
+        lineIV.frame = CGRect(x:10, y:self.frame.size.height-0.5, width:self.frame.size.width-30, height:0.5)
         
     }
     

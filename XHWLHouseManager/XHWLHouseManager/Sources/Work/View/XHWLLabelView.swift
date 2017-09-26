@@ -45,7 +45,7 @@ class XHWLLabelView: UIView {
         
         
         titleL.frame = CGRect(x:10, y:0, width:80, height:30)
-        contentTF.frame = CGRect(x: titleL.frame.maxX+10, y: 0, width: self.bounds.size.width-titleL.frame.size.width-30, height: 30)
+        contentTF.frame = CGRect(x: titleL.frame.maxX, y: 0, width: self.bounds.size.width-titleL.frame.size.width-20, height: 30)
         
 //        let size:CGSize = titleL.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:titleL.font], context: nil).size
 //        

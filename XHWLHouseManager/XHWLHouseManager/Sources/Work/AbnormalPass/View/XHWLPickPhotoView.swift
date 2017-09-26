@@ -54,13 +54,14 @@ class XHWLPickPhotoView: UIView {
 //        titleL.frame = CGRect(x:10, y:0, width:size.width, height:25)
         titleL.frame = CGRect(x:10, y:0, width:80, height:25)
         
-        var orginX = titleL.frame.maxX
+        var orginX:CGFloat = self.bounds.size.width-230
         
         if isShow {
             if imgIVArray.count > 0 {
                 for i in 0...imgIVArray.count-1 {
                     let imgV:UIImageView = imgIVArray[i] as! UIImageView
-                    imgV.frame = CGRect(x:orginX+10, y:10, width:self.bounds.size.height-20, height:self.bounds.size.height-20)
+//                    imgV.frame = CGRect(x:orginX+10, y:titleL.frame.maxY+5, width:self.bounds.size.height-20, height:self.bounds.size.height-titleL.frame.maxY)
+                    imgV.frame = CGRect(x:orginX+10, y:titleL.frame.maxY+5, width:60, height:60)
                     orginX = imgV.frame.maxX
                 }
             }
@@ -69,7 +70,8 @@ class XHWLPickPhotoView: UIView {
                 for i in 0...imgIVArray.count-1 {
                     let imgV:XHWLImageBtn = imgIVArray[i] as! XHWLImageBtn
                     //                let imgV:UIImageView = imgIVArray[i] as! UIImageView
-                    imgV.frame = CGRect(x:orginX+10, y:10, width:self.bounds.size.height-20, height:self.bounds.size.height-20)
+                    imgV.frame = CGRect(x:orginX+10, y:titleL.frame.maxY+5, width:60, height:60)
+//                    imgV.frame = CGRect(x:orginX+10, y:titleL.frame.maxY+5, width:self.bounds.size.height-20, height:self.bounds.size.height-titleL.frame.maxY)
                     orginX = imgV.frame.maxX
                 }
             }
@@ -78,7 +80,8 @@ class XHWLPickPhotoView: UIView {
             } else {
                 addBtn.isHidden = false
             }
-            addBtn.frame = CGRect(x:orginX+10, y:10, width:self.bounds.size.height-20, height:self.bounds.size.height-20)
+//             addBtn.frame = CGRect(x:orginX+10, y:titleL.frame.maxY+5, width:self.bounds.size.height-20, height:self.bounds.size.height-titleL.frame.maxY)
+            addBtn.frame = CGRect(x:orginX+10, y:titleL.frame.maxY+5, width:60, height:60)
         }
         
     }

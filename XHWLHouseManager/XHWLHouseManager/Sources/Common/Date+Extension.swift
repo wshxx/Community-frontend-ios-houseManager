@@ -37,38 +37,55 @@ extension Date {
     }
     
     // 时间戳转时间
-    static func getDateWith(_ timeStamp:Int) -> String {
-//        //时间戳
-//        let timeStamp = 1463637809
-        print("时间戳：\(timeStamp)")
-        
+    static func getDateWith(_ timeStamp:Int, _ formatString:String) -> String {
         //转换为时间
         let timeInterval:TimeInterval = TimeInterval(timeStamp/1000)
         let date = Date(timeIntervalSince1970: timeInterval)
         
         //格式话输出
         let dformatter = DateFormatter()
-        dformatter.dateFormat = "yyyy/MM/dd"
+        dformatter.dateFormat = formatString
         print("对应的日期时间：\(dformatter.string(from: date))")
         
         return dformatter.string(from: date)
     }
     
     // 时间戳转时间
+    static func getDateWith(_ timeStamp:Int) -> String {
+//        //时间戳
+//        let timeStamp = 1463637809
+//        print("时间戳：\(timeStamp)")
+//        
+//        //转换为时间
+//        let timeInterval:TimeInterval = TimeInterval(timeStamp/1000)
+//        let date = Date(timeIntervalSince1970: timeInterval)
+//        
+//        //格式话输出
+//        let dformatter = DateFormatter()
+//        dformatter.dateFormat = "yyyy/MM/dd"
+//        print("对应的日期时间：\(dformatter.string(from: date))")
+//        
+//        return dformatter.string(from: date)
+        return self.getDateWith(timeStamp, "yyyy/MM/dd")
+    }
+    
+    // 时间戳转时间
     static func getStringDate(_ timeStamp:Int) -> String {
         //        //时间戳
         //        let timeStamp = 1463637809
-        print("时间戳：\(timeStamp)")
+//        print("时间戳：\(timeStamp)")
+//        
+//        //转换为时间
+//        let timeInterval:TimeInterval = TimeInterval(timeStamp/1000)
+//        let date = Date(timeIntervalSince1970: timeInterval)
+//        
+//        //格式话输出
+//        let dformatter = DateFormatter()
+//        dformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        print("对应的日期时间：\(dformatter.string(from: date))")
+//        
+//        return dformatter.string(from: date)
         
-        //转换为时间
-        let timeInterval:TimeInterval = TimeInterval(timeStamp/1000)
-        let date = Date(timeIntervalSince1970: timeInterval)
-        
-        //格式话输出
-        let dformatter = DateFormatter()
-        dformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        print("对应的日期时间：\(dformatter.string(from: date))")
-        
-        return dformatter.string(from: date)
+        return self.getDateWith(timeStamp, "yyyy-MM-dd HH:mm:ss")
     }
 }

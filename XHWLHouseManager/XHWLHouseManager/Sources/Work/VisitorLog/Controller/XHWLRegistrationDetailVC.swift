@@ -38,7 +38,7 @@ class XHWLRegistrationDetailVC: UIViewController  , XHWLScanTestVCDelegate{
             array.add(["name":"业主：", "content":visitorLogModel.yzName, "isHiddenEdit": true])
             array.add(["name":"房间：", "content":visitorLogModel.sysVisitor.roomNo, "isHiddenEdit": true])
             array.addObjects(from: ary2 as! [Any])
-            array.add(["name":"离开时间：", "content":Date.getStringDate(Int(visitorLogModel.sysVisitor.leaveTime)!), "isHiddenEdit": true])
+//            array.add(["name":"离开时间：", "content":Date.getStringDate(Int(visitorLogModel.sysVisitor.leaveTime)!), "isHiddenEdit": true])
         } else {
             array.addObjects(from: ary1 as! [Any])
             array.addObjects(from: ary2 as! [Any])
@@ -64,18 +64,19 @@ class XHWLRegistrationDetailVC: UIViewController  , XHWLScanTestVCDelegate{
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-        let image:UIImage = UIImage(named:"subview_bg")!
         let warningView:XHWLRegistrationDetailView = XHWLRegistrationDetailView()
-        warningView.bounds = CGRect(x:0, y:0, width:image.size.width, height:image.size.height)
+        warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.createArray(array: dataAry)
-        if !visitorLogModel.yzName.isEmpty {
-            
-            warningView.successView()
-        } else {
-            
-            warningView.failView()
-        }
+        warningView.successView()
+        
+//        if !visitorLogModel.yzName.isEmpty {
+//            
+//            warningView.successView()
+//        } else {
+//            
+//            warningView.failView()
+//        }
         self.view.addSubview(warningView)
         
     }

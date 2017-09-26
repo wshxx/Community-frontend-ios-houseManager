@@ -90,10 +90,10 @@ class XHWLMenuLabelView: UIView {
         
         let size:CGSize = titleL.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:titleL.font], context: nil).size
         
-        titleL.frame = CGRect(x:10, y:0, width:size.width, height:30)
+        titleL.frame = CGRect(x:5, y:0, width:size.width, height:30)
         contentTF.frame = CGRect(x: titleL.frame.maxX+10, y: 2, width: 100, height: 26)
-        okBtn.frame = CGRect(x:self.frame.size.width-100, y:4, width:80, height:22)
-        rightBtn.frame = CGRect(x:self.frame.size.width-60, y:4, width:60, height:22)
+        okBtn.frame = CGRect(x:self.frame.size.width-80, y:4, width:50, height:22)
+        rightBtn.frame = CGRect(x:self.frame.size.width-40, y:4, width:40, height:22)
     }
     
     func showText(leftText:String, rightText:String, isHiddenEdit:Bool) {

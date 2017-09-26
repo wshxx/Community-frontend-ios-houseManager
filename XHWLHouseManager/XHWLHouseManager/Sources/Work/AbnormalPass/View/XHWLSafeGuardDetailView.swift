@@ -74,20 +74,20 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
                 let labelView: XHWLLabelView = XHWLLabelView()
                 labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
                 labelView.contentTextAlign(textAlignment: NSTextAlignment.left)
-                self.addSubview(labelView)
+                bgScrollView.addSubview(labelView)
                 labelViewArray.add(labelView)
             }
             else if menuModel.type == 1 {
-                let labelView: XHWLLabelView = XHWLLabelView()
+                let labelView: XHWLLineView = XHWLLineView()
                 labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
-                labelView.contentTextAlign(textAlignment: NSTextAlignment.left)
-                self.addSubview(labelView)
+                bgScrollView.addSubview(labelView)
                 labelViewArray.add(labelView)
+                
             }
             else if menuModel.type == 2 {
                 let picture:XHWLPickPhotoView = XHWLPickPhotoView(frame: CGRect.zero, true)
 //                picture.onShowImgArray([]) // 显示图片
-                self.addSubview(picture)
+                bgScrollView.addSubview(picture)
                 labelViewArray.add(picture)
             }
         }
@@ -100,7 +100,7 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
             agreeBtn.titleLabel?.font = font_14
             agreeBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
             agreeBtn.addTarget(self, action: #selector(submitClick), for: UIControlEvents.touchUpInside)
-            self.addSubview(agreeBtn)
+            bgScrollView.addSubview(agreeBtn)
             
             cancelBtn = UIButton()
             cancelBtn.setTitle("过失", for: UIControlState.normal)
@@ -109,7 +109,7 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
             cancelBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
             cancelBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
             cancelBtn.addTarget(self, action: #selector(submitClick), for: UIControlEvents.touchUpInside)
-            self.addSubview(cancelBtn)
+            bgScrollView.addSubview(cancelBtn)
         }
     }
     
@@ -149,11 +149,8 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
         super.layoutSubviews()
         
         bgImage.frame = self.bounds
-//        bgScrollView.frame = CGRect(x:0, y:titleL.frame.maxY, width:self.bounds.size.width, height:self.bounds.size.height-titleL.frame.maxY)
-        var first:NSInteger = 0
-        var second:NSInteger = 0
-        var third:NSInteger = 0
-        var height:CGFloat = 0
+        bgScrollView.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:self.bounds.size.height)
+        var maxH:CGFloat = 20
         
         if labelViewArray.count > 0 {
             for i in 0...labelViewArray.count-1 {
@@ -162,36 +159,36 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
                 if menuModel.type == 0 {
                     let labelView :XHWLLabelView = labelViewArray[i] as! XHWLLabelView
                     labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width-30, height:25)
-                    labelView.center = CGPoint(x:self.frame.size.width/2.0, y:30+CGFloat(first*25+second*25+third*80))
-                    first += 1
+                    labelView.center = CGPoint(x:self.frame.size.width/2.0, y:15 + maxH)
+                    maxH = labelView.frame.maxY
                 }
                 else if menuModel.type == 1 {
-                    let labelView :XHWLLabelView = labelViewArray[i] as! XHWLLabelView
-                    labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width-30, height:25)
-                    labelView.center = CGPoint(x:self.frame.size.width/2.0, y:30+CGFloat(first*25+second*25+third*80))
-                    second += 1
+                    
+                    let size:CGSize = menuModel.content.boundingRect(with: CGSize(width:self.frame.size.width-30-100, height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+                    let height:CGFloat = size.height < font_14.lineHeight ? font_14.lineHeight:size.height
+                    let labelView:XHWLLineView = labelViewArray[i] as! XHWLLineView
+                    
+                    labelView.bounds = CGRect(x:0, y:0, width:Int(self.frame.size.width-30), height:Int(height))
+                    labelView.center = CGPoint(x:self.frame.size.width/2.0, y:(height)/2.0 + 5 + maxH)
+                    maxH = labelView.frame.maxY
                 }
                 else if menuModel.type == 2 {
                     
                     let labelView :XHWLPickPhotoView = labelViewArray[i] as! XHWLPickPhotoView
-                    labelView.frame = CGRect(x:30/2.0, y:30+CGFloat(first*25+second*25+third*80), width:self.frame.size.width-30, height:80)
-                    third += 1
+                    labelView.frame = CGRect(x:30/2.0, y:5 + maxH, width:self.frame.size.width-30, height:80)
+                    maxH = labelView.frame.maxY
                 }
-                
             }
-            
-            let lastView:UIView = labelViewArray.lastObject as! UIView
-            height = lastView.frame.maxY
         }
         
         if isAgree == false {
             agreeBtn.bounds = CGRect(x:0, y:0, width:70, height:30)
-            agreeBtn.center = CGPoint(x:80, y:height+45)
+            agreeBtn.center = CGPoint(x:80, y:maxH+45)
             
             cancelBtn.bounds = CGRect(x:0, y:0, width:70, height:30)
-            cancelBtn.center = CGPoint(x:self.bounds.size.width-80, y:height+45)
+            cancelBtn.center = CGPoint(x:self.bounds.size.width-80, y:maxH+45)
         }
         
-//        bgScrollView.contentSize = CGSize(width:0, height:500)
+        bgScrollView.contentSize = CGSize(width:0, height:cancelBtn.frame.maxY+30)
     }
 }

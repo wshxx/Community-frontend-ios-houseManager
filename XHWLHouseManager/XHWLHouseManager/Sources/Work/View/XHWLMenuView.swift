@@ -37,11 +37,11 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
         dataAry = NSMutableArray()
-        let array :NSArray = [["name":"姓名：", "content":userModel.name, "isHiddenEdit": false],
-                              ["name":"工号：", "content":userModel.wyAccount.workCode, "isHiddenEdit": true],
-                              ["name":"手机：", "content":userModel.telephone, "isHiddenEdit":false],
-                              ["name":"岗位：", "content":userModel.wyAccount.wyRoleName, "isHiddenEdit": true],
-                              ["name":"项目：", "content":userModel.wyAccount.wyRole.name, "isHiddenEdit": true]]
+        let array :NSArray = [["name":"姓名:", "content":userModel.name, "isHiddenEdit": false],
+                              ["name":"工号:", "content":userModel.wyAccount.workCode, "isHiddenEdit": true],
+                              ["name":"手机:", "content":userModel.telephone, "isHiddenEdit":false],
+                              ["name":"岗位:", "content":userModel.wyAccount.wyRoleName, "isHiddenEdit": true],
+                              ["name":"项目:", "content":userModel.wyAccount.wyRole.name, "isHiddenEdit": true]]
         dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
     }
     
@@ -252,7 +252,8 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
         for i in 0...labelViewArray.count-1 {
             
             let labelView :XHWLMenuLabelView = labelViewArray[i] as! XHWLMenuLabelView
-            labelView.bounds = CGRect(x:0, y:0, width:258, height:30)
+            labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width-Screen_width/8.0, height:30)
+//            labelView.bounds = CGRect(x:0, y:0, width:258, height:30)
             labelView.center = CGPoint(x:self.frame.size.width/2.0, y:CGFloat(145 + i*52))
         }
         var topHeight = 0
@@ -261,6 +262,7 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
             topHeight = Int(labelView.frame.maxY)
         }
         logoutBtn.frame = CGRect(x:Int((self.bounds.size.width-150)/2.0), y:topHeight+20, width:150, height:30)
+        bgScrollView.contentSize = CGSize(width:0, height:logoutBtn.frame.maxY+30)
     }
     
     required init?(coder aDecoder: NSCoder) {

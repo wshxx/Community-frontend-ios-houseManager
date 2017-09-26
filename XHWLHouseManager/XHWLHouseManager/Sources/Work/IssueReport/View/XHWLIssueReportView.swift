@@ -146,11 +146,11 @@ class XHWLIssueReportView: UIView {
         
         bgImage.frame = self.bounds
         
-        typeView.frame = CGRect(x:10, y:10, width:self.bounds.size.width-20, height:20)
-        dotView.frame = CGRect(x:10, y:typeView.frame.maxY+10, width:self.bounds.size.width-20, height:20)
-        remark.frame = CGRect(x:10, y:dotView.frame.maxY+10, width:self.bounds.size.width-20, height:80)
+        typeView.frame = CGRect(x:0, y:10, width:self.bounds.size.width, height:20)
+        dotView.frame = CGRect(x:0, y:typeView.frame.maxY+10, width:self.bounds.size.width, height:20)
+        remark.frame = CGRect(x:0, y:dotView.frame.maxY+10, width:self.bounds.size.width, height:80)
         
-        radioView.frame = CGRect(x:10, y:remark.frame.maxY+10, width:self.bounds.size.width-20, height:44)
+        radioView.frame = CGRect(x:0, y:remark.frame.maxY+10, width:self.bounds.size.width, height:44)
         pickPhoto.frame = CGRect(x:0, y:radioView.frame.maxY+10, width:self.bounds.size.width-20, height:80)
         
         cancelBtn.frame = CGRect(x:50, y:self.bounds.size.height-60, width:71, height:30)

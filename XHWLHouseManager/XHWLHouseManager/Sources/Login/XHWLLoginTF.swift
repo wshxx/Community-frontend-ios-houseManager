@@ -17,6 +17,7 @@ class XHWLLoginTF: UIView, UITextFieldDelegate {
 
     var funcBackBlock : (String) -> () = {param in }
     var textField: UITextField!
+    var lineIV : UIImageView!
     
     init(frame: CGRect , loginEnum:XHWLLoginTFEnum, placeholder:String) {
         super.init(frame: frame)
@@ -59,13 +60,21 @@ class XHWLLoginTF: UIView, UITextFieldDelegate {
         textField.leftViewMode = UITextFieldViewMode.always
         self.addSubview(textField)
         
-        let lineIV : UIImageView = UIImageView()
+        lineIV = UIImageView()
         lineIV.image = UIImage(named: "warning_cell_line")
         lineIV.frame = CGRect(x: 0, y: self.bounds.size.height-0.5, width: self.bounds.size.width, height: 0.5)
         self.addSubview(lineIV)
         
 //        let lineL: UIImageView = SpaceLineSetup(view: self, color: color_f2f2f2)
 //        self.addSubview(lineL)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        textField.frame = CGRect(x:0, y:0, width:self.bounds.width, height:self.bounds.size.height)
+        lineIV.frame = CGRect(x: 0, y: self.bounds.size.height-0.5, width: self.bounds.size.width, height: 0.5)
+        
     }
     
     func onClear() {

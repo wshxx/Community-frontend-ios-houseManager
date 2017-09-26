@@ -9,7 +9,9 @@
 import UIKit
 
 class XHWLForgetPwdView: UIView, XHWLNetworkDelegate {
-
+    
+    var bgIV:UIImageView!
+    var titleBtn: UIButton!
     var funcBackBlock : (String, String, String) -> () = {param in }
     var onBackBlock : () -> () = {param in }
     var topStr:String!
@@ -18,7 +20,7 @@ class XHWLForgetPwdView: UIView, XHWLNetworkDelegate {
     var userTF:XHWLLoginTF!
     var codeTF:XHWLCodeTF!
     var loginBtn:UIButton!
-    
+
     func clearData() {
         pwdTF.textField.text = ""
         userTF.textField.text = ""
@@ -31,11 +33,11 @@ class XHWLForgetPwdView: UIView, XHWLNetworkDelegate {
         
         self.backgroundColor = UIColor.clear
         
-        let bgIV:UIImageView = UIImageView(frame: self.bounds)
+        bgIV = UIImageView(frame: self.bounds)
         bgIV.image = UIImage(named: "login_showView")
         self.addSubview(bgIV)
         
-        let titleBtn: UIButton = UIButton(frame: CGRect(x:28, y:23, width:310, height:30))
+        titleBtn = UIButton(frame: CGRect(x:28, y:23, width:310, height:30))
         titleBtn.setTitle("< 账号验证", for: UIControlState.normal)
         titleBtn.setTitleColor(color_01f0ff, for: UIControlState.normal)
         titleBtn.titleLabel?.font = font_18
@@ -79,7 +81,22 @@ class XHWLForgetPwdView: UIView, XHWLNetworkDelegate {
         self.addSubview(loginBtn)
     }
     
-    // 返回首页  
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        bgIV.bounds = self.bounds
+        
+        titleBtn.frame = CGRect(x:28, y:23, width:310, height:30)
+        userTF.frame = CGRect(x:25, y:Screen_height/7.0, width:self.bounds.width-50, height:40)
+        pwdTF.frame = CGRect(x:25, y:userTF.frame.maxY+10, width:self.bounds.width-50, height:40)
+        codeTF.frame = CGRect(x:25, y:pwdTF.frame.maxY+10, width:self.bounds.width-50, height:40)
+        
+        let img = UIImage(named: "login_btn_highlight")
+        loginBtn.frame = CGRect(x:0, y:0, width:(img?.size.width)!, height:(img?.size.height)!)
+        loginBtn.center = CGPoint(x: self.bounds.size.width/2.0, y: self.bounds.size.height*7/8.0-(img?.size.height)!/2.0)
+    }
+    
+    // 返回首页
     func onBackLogin() {
         self.onBackBlock()
     }

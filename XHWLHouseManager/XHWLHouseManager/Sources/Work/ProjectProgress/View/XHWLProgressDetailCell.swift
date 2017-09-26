@@ -17,17 +17,10 @@ class XHWLProgressDetailCell: UITableViewCell {
     var bottomLineIV:UIImageView!
     
     var waringModel:XHWLWarningModel!
-//    var realModel:XHWLListModel! {
-//        willSet {
-//            if (newValue != nil) {
-//               
-//            }
-//        }
-//    }
     
     func setRealModel(_ realModel:XHWLListModel) {
         titleL.text = realModel.nodeName
-        timeL.text = "\(realModel.startTime) - \(realModel.endTime)"
+        timeL.text = "\(realModel.arriveTime)"
         
         if realModel.arriveType == "-1" {
             

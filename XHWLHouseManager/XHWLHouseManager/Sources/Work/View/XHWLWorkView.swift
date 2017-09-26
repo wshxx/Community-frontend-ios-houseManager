@@ -40,6 +40,7 @@ class XHWLWorkView: UIView , UITableViewDelegate, UITableViewDataSource {
         tableView.delegate = self
         tableView.backgroundColor = UIColor.clear
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.showsVerticalScrollIndicator = false
         self.addSubview(tableView)
         tableView.tableFooterView = UIView()
     }

@@ -25,7 +25,7 @@ class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDel
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-        self.title = "在线定位"
+        self.title = "巡更定位"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
         setupMapKit()

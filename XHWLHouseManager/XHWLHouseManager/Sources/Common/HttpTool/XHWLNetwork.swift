@@ -193,22 +193,11 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
         superWithLoadData(parameters, .XHWL_HANDLEEXCEPTIONPASS, .post)
     }
     
-    // 某项目所有设备某日能耗
-    func getEnergyLoseClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
-        
-//        ProjectCode 	string 	是 	项目编号
-//        Date 	Date 	是 	日期
-//        token 	string 	是 	用户登录token
-//        
-        self.delegate = delegate;
-        superWithLoadData(parameters, .XHWL_ENERGYLOSE, .get)
-    }
-    
     // 返回某项目某设备当前实时数据
-    func postRealDataClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+    func getRealDataClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
 
         self.delegate = delegate;
-        superWithLoadData(parameters, .XHWL_REALDATA, .post)
+        superWithLoadData(parameters, .XHWL_REALDATA, .get)
     }
     
     // 返回项目所有房间与环境监测设备对应关系
@@ -266,6 +255,8 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
         self.delegate = delegate;
         superWithLoadData(parameters, .XHWL_VISITLIST, .get)
     }
+    
+    
     
     // MARK: - XHWLHttpToolDelegate
     func requestSuccess(_ requestKey:NSInteger, result request:Any) {

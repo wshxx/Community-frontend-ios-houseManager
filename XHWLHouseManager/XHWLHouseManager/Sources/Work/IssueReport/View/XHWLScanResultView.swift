@@ -62,7 +62,7 @@ class XHWLScanResultView: UIView {
         okBtn.addTarget(self, action: #selector(XHWLScanResultView.btnClick), for: UIControlEvents.touchUpInside)
         okBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
         okBtn.titleLabel?.font = font_13
-        scrollView.addSubview(okBtn)
+        self.addSubview(okBtn)
         
         cancelBtn = UIButton()
         cancelBtn.setTitle("取消", for: UIControlState.normal)
@@ -71,7 +71,7 @@ class XHWLScanResultView: UIView {
         cancelBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
         cancelBtn.addTarget(self, action: #selector(XHWLScanResultView.btnClick), for: UIControlEvents.touchUpInside)
         cancelBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
-        scrollView.addSubview(cancelBtn)
+        self.addSubview(cancelBtn)
         
     }
     
@@ -97,11 +97,12 @@ class XHWLScanResultView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        bgImage.frame = self.bounds
-        showImg.frame = CGRect(x:(self.bounds.size.width-227)/2.0, y:20, width:227, height:227)
-        scrollView.frame = CGRect(x:0, y:270, width:self.bounds.size.width, height:self.bounds.size.height-270)
-        titleL.frame = CGRect(x:10, y:0, width:self.bounds.size.width-20, height:30)
         let img:UIImage = UIImage(named:"btn_background")!
+        bgImage.frame = self.bounds
+        showImg.frame = CGRect(x:(self.bounds.size.width-Screen_width*2/3.0)/2.0, y:20, width:Screen_width*2/3.0, height:Screen_height/3.0)
+        scrollView.frame = CGRect(x:0, y:showImg.frame.maxY+10, width:self.bounds.size.width, height:self.bounds.size.height-showImg.frame.maxY-img.size.height-30)
+        titleL.frame = CGRect(x:10, y:0, width:self.bounds.size.width-20, height:30)
+
         let h:CGFloat = titleL.frame.maxY+10
         
         var height:CGFloat = 0
@@ -112,16 +113,14 @@ class XHWLScanResultView: UIView {
                 height = label.frame.maxY
             }
         }
-
-        okBtn.frame = CGRect(x:self.bounds.size.width-img.size.width-50, y:height+50, width:img.size.width, height:img.size.height)
-        cancelBtn.frame = CGRect(x:50, y:height+50, width:img.size.width, height:img.size.height)
-        scrollView.contentSize = CGSize(width:0, height:okBtn.frame.maxY+20)
-    
+        
+        scrollView.contentSize = CGSize(width:0, height:height+5)
+        okBtn.frame = CGRect(x:self.bounds.size.width-img.size.width-50, y:self.bounds.size.height-img.size.height-20, width:img.size.width, height:img.size.height)
+        cancelBtn.frame = CGRect(x:50, y:self.bounds.size.height-img.size.height-20, width:img.size.width, height:img.size.height)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    
 }

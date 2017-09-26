@@ -18,9 +18,12 @@ import Alamofire
 //let XHWLImgURL :String = "http://120.77.83.190:8080/ssh"
 //let XHWLHttpURL :String = "http://10.51.37.54:8080/ssh/v1"
 //let XHWLHttpURL :String = "http://10.51.37.74:4000/ssh/v1"
-let XHWLImgURL: String = "http://192.168.200.116:8006/ssh"
-let XHWLHttpURL: String = "http://192.168.200.116:8006/ssh/v1"
-
+// 内网
+//let XHWLImgURL: String = "http://192.168.200.116:8006/ssh"
+//let XHWLHttpURL: String = "http://192.168.200.116:8006/ssh/v1"
+// 外网 上线
+let XHWLImgURL: String = "http://202.105.104.105:8006/ssh"
+let XHWLHttpURL: String = "http://202.105.104.105:8006/ssh/v1"
 
 @objc protocol XHWLHttpToolDelegate:NSObjectProtocol {
     
@@ -62,9 +65,6 @@ class XHWLHttpTool: NSObject {
         print("\(self.requestKey)")
         
         if self.requestKey == XHWLRequestKeyID.XHWL_NAVPARAME {
-            return XHWLRequestKeyDefine.shared.trandIdDict.object(forKey: self.requestKey ?? 0) as! String
-        }
-        else if self.requestKey == .XHWL_ENERGYLOSE {
             return XHWLRequestKeyDefine.shared.trandIdDict.object(forKey: self.requestKey ?? 0) as! String
         }
         else {
@@ -155,8 +155,11 @@ class XHWLHttpTool: NSObject {
                     if self.requestKey != .XHWL_RESETPWD &&
                         self.requestKey != .XHWL_VERCODENEXT &&
                         self.requestKey != .XHWL_FORGETPWD &&
-                        self.requestKey != .XHWL_VISITREGISTER {
-                        if (value as! [String : AnyObject])["result"] is NSNull {
+                        self.requestKey != .XHWL_VISITREGISTER &&
+                        self.requestKey != .XHWL_MODIFYUSER
+                    {
+                        
+                        if (value as! [String : AnyObject])["result"] is NSNull {//is NSNull
                             
                             let message:String = (value as! [String : AnyObject])["message"] as! String
                             message.ext_debugPrintAndHint()

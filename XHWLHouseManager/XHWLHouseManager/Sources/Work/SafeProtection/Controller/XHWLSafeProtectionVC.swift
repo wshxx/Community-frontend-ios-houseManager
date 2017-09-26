@@ -51,6 +51,8 @@ class XHWLSafeProtectionVC: UIViewController, XHWLNetworkDelegate {
             let dealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray:response["result"]!["deal"] as! NSArray )
             let noDealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray: response["result"]!["notDeal"] as! NSArray)
             
+            self.warningView.dataAry = NSMutableArray()
+            self.warningView.dataSource = NSMutableArray()
             self.warningView.dataAry.addObjects(from: noDealArray as! [Any])
             self.warningView.dataSource.addObjects(from: dealArray as! [Any])
             self.warningView.tableView.reloadData()
@@ -70,9 +72,8 @@ class XHWLSafeProtectionVC: UIViewController, XHWLNetworkDelegate {
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-        let showImg:UIImage = UIImage(named:"menu_bg")!
         warningView = XHWLSafeProtectionView()
-        warningView.bounds = CGRect(x:0, y:0, width:338, height:68+showImg.size.height)
+        warningView.bounds = CGRect(x:0, y:0, width:Screen_width-20, height:Screen_height-160)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.clickCell = {[weak warningView] index, row, model in
             
@@ -80,8 +81,13 @@ class XHWLSafeProtectionVC: UIViewController, XHWLNetworkDelegate {
             vc.isFinished = !(index == 0)
             vc.model = model
             vc.backReloadBlock =  { _ in
-                warningView?.tableView.reloadData()
-//                self.navigationController?.popViewController(animated: true)
+                if (index == 0) {
+                    
+                    self.onLoadData()
+                } else {
+                    
+                    warningView?.tableView.reloadData()
+                }
             }
             self.navigationController?.pushViewController(vc, animated: true)
         }

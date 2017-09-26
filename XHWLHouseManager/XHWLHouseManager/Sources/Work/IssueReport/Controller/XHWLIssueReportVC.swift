@@ -68,10 +68,9 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-        let showImg:UIImage = UIImage(named:"menu_bg")!
         warningView = XHWLIssueReportView()
         warningView.scanModel = scanModel
-        warningView .bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
+        warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.delegate = self
         warningView.dismissBlock = { _ in
@@ -108,9 +107,9 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
         let imageNameAry = NSMutableArray()
         if imageArray.count > 0 {
             for i in 0..<imageArray.count {
-                let imageData:Data = UIImageJPEGRepresentation(imageArray[i] as! UIImage, 0.5)!
+                let imageData:Data = UIImagePNGRepresentation(imageArray[i] as! UIImage)! // UIImageJPEGRepresentation(imageArray[i] as! UIImage, 0.5)!
                 imageDataAry.add(imageData)
-                imageNameAry.add("image_\(String(Date.getCurrentStamp())).png")
+                imageNameAry.add("image_\(i)\(String(Date.getCurrentStamp())).png")
             }
         }
          else {

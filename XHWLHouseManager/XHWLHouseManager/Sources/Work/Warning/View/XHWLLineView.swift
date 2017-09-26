@@ -16,44 +16,36 @@ class XHWLLineView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+//        self.backgroundColor = UIColor.red
         setupView()
     }
-    
-//    func contentTextAlign(textAlignment: NSTextAlignment) {
-//        
-//        contentTF.textAlignment = textAlignment
-//    }
     
     func setupView() {
         
         titleL = UILabel()
         titleL.textColor = UIColor.white
+        titleL.textAlignment = .right
         titleL.font = font_14
         self.addSubview(titleL)
         
-        contentL = UILabel()
+        contentL = UILabel.init(frame: CGRect(x:0,
+                                              y:0,
+                                              width:100,
+                                              height:font_14.lineHeight))
         contentL.font = font_14
         contentL.textColor = UIColor.white
         contentL.numberOfLines = 0
+        contentL.textAlignment = NSTextAlignment(rawValue: 7)!
         self.addSubview(contentL)
-    }
-    
-    func heightWithSize() -> CGFloat {
-
-        let sizeL:CGSize = titleL.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:titleL.font], context: nil).size
-        let sizeR:CGSize = contentL.text!.boundingRect(with: CGSize(width:CGFloat(self.bounds.size.width-sizeL.width-20), height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:contentL.font], context: nil).size
-        
-        return sizeR.height + 10
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        titleL.frame = CGRect(x:10, y:0, width:80, height:font_14.lineHeight)
         
-        let size:CGSize = titleL.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:titleL.font], context: nil).size
-        
-        titleL.frame = CGRect(x:10, y:5, width:size.width, height:size.height)
-        contentL.frame = CGRect(x: titleL.frame.maxX+10, y: 5, width: self.bounds.size.width-titleL.frame.size.width-10, height: self.bounds.size.height-10)
+        let size:CGSize = contentL.text!.boundingRect(with: CGSize(width:self.bounds.size.width-100, height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+        contentL.frame = CGRect(x: 90, y: 0, width: self.bounds.size.width-100, height:size.height)
     }
     
     func showText(leftText:String, rightText:String) {

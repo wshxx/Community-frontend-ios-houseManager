@@ -57,28 +57,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XHWLHouseManager/Sources/Work/AbnormalPass/Controller/XHWLAbnormalPassVC.swift"
-            timestampString = "527830440.914656"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "requestSuccess(_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "XHWLHouseManager/Sources/Work/SafeProtection/Controller/XHWLSafeGuardVC.swift"
-            timestampString = "527915323.404696"
+            timestampString = "528086580.522696"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "submitClick(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "XHWLHouseManager/Sources/Work/SafeProtection/Controller/XHWLSafeGuardVC.swift"
-            timestampString = "527919125.243449"
+            timestampString = "528086580.522696"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "submitClick(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "XHWLHouseManager/Sources/Login/XHWLTransitionView.swift"
-            timestampString = "527930394.751541"
+            timestampString = "528089808.4802"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
             landmarkName = "onResetPwd(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "XHWLHouseManager/Sources/Login/XHWLTransitionView.swift"
-            timestampString = "527930411.706177"
+            timestampString = "528089808.4802"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
             landmarkName = "onResetPwd(_:_:)"
             landmarkType = "7">
          </BreakpointContent>

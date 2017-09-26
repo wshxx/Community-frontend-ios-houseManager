@@ -23,30 +23,20 @@ class XHWLDeviceStatisticsVC: XHWLBaseVC {
         
 //        warningView.viewDidAppear()
     }
-//    func setupView() {
-//        
-//        let showImg:UIImage = UIImage(named:"menu_bg")!
-//        warningView = XHWLDeviceStatisticsView()
-//        warningView.bounds = CGRect(x:0, y:0, width:338, height:68+showImg.size.height)
-//        warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
-//        warningView.onClickBlock = { index in
-//
-//            let vc:XHWLDeviceStatisticsDetailVC = XHWLDeviceStatisticsDetailVC()
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
-//        self.view.addSubview(warningView)
-//        
-//    }
     
     func setupView() {
         let webView = UIWebView()
+        webView.backgroundColor = UIColor.clear
         webView.frame = CGRect(x: 0, y: 64, width: self.view.bounds.size.width, height: self.view.bounds.size.height-64)
         webView.isOpaque = false
         webView.scalesPageToFit = true
         self.view.addSubview(webView)
         
-        
-        webView.loadRequest(URLRequest.init(url: URL.init(string: "\(XHWLHttpURL)/analysis/device/statistics")!))
+        let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+        let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectData.mj_JSONObject())
+        let url = "\(XHWLHttpURL)/analysis/device/statistics/\(projectModel.code)" // ProjectCode=201
+        print("\(url)")
+        webView.loadRequest(URLRequest.init(url: URL.init(string: url)!))
     }
 
     override func didReceiveMemoryWarning() {

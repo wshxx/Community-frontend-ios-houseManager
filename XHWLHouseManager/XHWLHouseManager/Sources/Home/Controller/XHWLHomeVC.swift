@@ -114,6 +114,10 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
             if index != -1 {
                 let model:XHWLProjectModel = array[index] as! XHWLProjectModel
                 weakSelf?.updateNavTitle(model.name)
+                
+                let projectData:NSData = model.mj_JSONData()! as NSData
+                UserDefaults.standard.set(projectData, forKey: "project") // 项目
+                UserDefaults.standard.synchronize()
             }
             headView?.removeFromSuperview()
         }
@@ -128,7 +132,7 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
     
     func setupView() {
         
-        menuView = XHWLMenuView(frame:CGRect(x:0, y:0, width:313, height:453))
+        menuView = XHWLMenuView(frame:CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0))
         menuView.center = CGPoint(x:self.view.bounds.size.width/2.0, y:self.view.bounds.size.height/2.0)
         menuView.isHidden = true
         self.view.addSubview(menuView)

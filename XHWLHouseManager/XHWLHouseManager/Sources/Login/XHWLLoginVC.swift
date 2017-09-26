@@ -38,20 +38,23 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
         bgImageV.image = UIImage(named: "home_bg")
         self.view.addSubview(bgImageV)
         
-        let showV:XHWLTransitionView = XHWLTransitionView(frame: CGRect(x:0, y:0, width:349, height:299+90+60))
+//        let showV:XHWLTransitionView = XHWLTransitionView(frame: CGRect(x:0, y:0, width:349, height:299+90+60))
+//        showV.center = CGPoint(x: self.view.bounds.width/2.0, y: self.view.bounds.height/2.0-90/2.0)
+        
+        var showV:XHWLTransitionView //
+        print("\(Screen_height)")
+        if Screen_height > 667 {
+            showV = XHWLTransitionView(frame: CGRect(x:0, y:0, width:Screen_width*7/8.0, height:299+90+60+40)) // 299+90+60
+        } else if Screen_height > 568.0 {
+            showV = XHWLTransitionView(frame: CGRect(x:0, y:0, width:Screen_width*7/8.0, height:299+90+60)) // 299+90+60
+        } else {
+            showV = XHWLTransitionView(frame: CGRect(x:0, y:0, width:Screen_width*7/8.0, height:Screen_height*5/7.0)) // 299+90+60
+        }
         showV.center = CGPoint(x: self.view.bounds.width/2.0, y: self.view.bounds.height/2.0-90/2.0)
         showV.delegate = self
         showV.funcBackBlock = {[weak showV] topStr,bottomStr in
-        
-//            self?.progressHUD.show()
-            
-            //睡眠1.9s，
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.9)){
-//                self?.progressHUD.hide()
-//                "登陆成功".ext_debugPrintAndHint()
-                self.onGotoHome(showV!)
-            }
-            
+    
+            self.onGotoHome(showV!)
         }
         self.view.addSubview(showV)
         

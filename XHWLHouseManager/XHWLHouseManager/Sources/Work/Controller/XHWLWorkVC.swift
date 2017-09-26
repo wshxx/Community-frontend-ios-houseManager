@@ -72,6 +72,9 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
             if index != -1 {
                 let model:XHWLProjectModel = array[index] as! XHWLProjectModel
                 weakSelf?.updateNavTitle(model.name)
+                let projectData:NSData = model.mj_JSONData()! as NSData
+                UserDefaults.standard.set(projectData, forKey: "project") // 项目
+                UserDefaults.standard.synchronize()
             }
             headView?.removeFromSuperview()
         }
@@ -91,7 +94,9 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-        menuView = XHWLMenuView(frame:CGRect(x:0, y:0, width:313, height:453))
+//        menuView = XHWLMenuView(frame:CGRect(x:0, y:0, width:313, height:453))
+        
+        menuView = XHWLMenuView(frame:CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0))
         menuView.center = CGPoint(x:self.view.bounds.size.width/2.0, y:self.view.bounds.size.height/2.0)
         menuView.isHidden = true
         self.view.addSubview(menuView)
@@ -101,12 +106,14 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         
         let array:NSMutableArray! = NSMutableArray()
         if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
-            array.addObjects(from: ["异常放行", "安防事件", "访客记录", "在线定位", "进度查看", "安环数据"])
+            array.addObjects(from: ["异常放行", "安防事件", "访客记录", "巡更定位", "巡更进度", "安环数据"])
         } else if userModel.wyAccount.wyRole.name.compare("门岗").rawValue == 0 {
             array.addObjects(from: ["访客登记"])
         } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
             loadDeviceInfo()
-            array.addObjects(from: ["设备报警", "供配电", "能耗统计", "设备统计"])
+            array.addObjects(from: ["设备报警", "设备监控", "能耗统计", "设备统计", "报警统计"])
+        } else { // 项目经理
+            array.addObjects(from:["安防事件", "设备报警", "异常抬杆", "巡更进度", "访客记录", "设备监控", "安防品质监控", "工程品质监控"])
         }
        
         homeView = XHWLWorkView(frame: CGRect.zero, array: array)
@@ -123,9 +130,52 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
                 self.onSafeGuard(index)
             } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
                 self.onProject(index)
+            } else {
+                self.onProjectManager(index)
             }
         }
         self.view.addSubview(homeView)
+    }
+    
+    func onProjectManager(_ index:NSInteger) {
+        switch index {
+        case 0: //"安防事件"
+            let vc:XHWLSafeProtectionVC = XHWLSafeProtectionVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 1:// 设备报警
+            let vc: XHWLWarningVC = XHWLWarningVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 2: // "异常抬杆",
+            let vc:XHWLAbnormalPassVC = XHWLAbnormalPassVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 3: // "巡更进度",
+            let vc:XHWLCountVC = XHWLCountVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 4: // "访客记录",
+            let vc:XHWLRegistrationVC = XHWLRegistrationVC() // 访客记录
+            vc.title = "访客记录"
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 5:// "设备监控",
+            let vc:XHWLWaterVC = XHWLWaterVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 6: //  "安防品质监控"
+            let vc:XHWLSecurityQualityVC = XHWLSecurityQualityVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case 7: //   "工程品质监控"
+            let vc:XHWLProjectQualityVC = XHWLProjectQualityVC() //
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+            
+        default: break
+            
+        }
     }
     
     // 安管主任   "异常放行", "安防事件", "访客记录", "在线定位", "进度查看", "安环数据"
@@ -144,11 +194,11 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
             vc.title = "访客记录"
             self.navigationController?.pushViewController(vc, animated: true)
             break
-        case 3:// "在线定位",
+        case 3:// "巡更定位",
             let vc:XHWLMapKitVC = XHWLMapKitVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
-        case 4: // "进度查看",
+        case 4: // "巡更进度",
             let vc:XHWLCountVC = XHWLCountVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
@@ -169,18 +219,41 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
             let vc: XHWLWarningVC = XHWLWarningVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
-        case 1: //"供配电",
-            let vc:XHWLWaterVC = XHWLWaterVC()
-            self.navigationController?.pushViewController(vc, animated: true)
-         case 2: // "能耗统计"
-            let vc:XHWLEnergyManagementVC = XHWLEnergyManagementVC()
-            self.navigationController?.pushViewController(vc, animated: true)
+        case 1: //"设备监控,
+            
+            let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
+            let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
+            if array.count > 0 {
+                let vc:XHWLWaterVC = XHWLWaterVC()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }else {
+                "您当前无项目".ext_debugPrintAndHint()
+            }
+        case 2: // "能耗统计"
+            let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
+            let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
+            if array.count > 0 {
+                let vc:XHWLEnergyManagementVC = XHWLEnergyManagementVC()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }else {
+                "您当前无项目".ext_debugPrintAndHint()
+            }
             break
         case 3:// "设备统计",
-            let vc:XHWLDeviceStatisticsVC = XHWLDeviceStatisticsVC()
+            let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
+            let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
+            if array.count > 0 {
+                let vc:XHWLDeviceStatisticsVC = XHWLDeviceStatisticsVC()
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                "您当前无项目".ext_debugPrintAndHint()
+            }
+            break
+        case 4://   报警统计
+
+            let vc:XHWLAlertCountVC = XHWLAlertCountVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
-            
         default: break
         }
     }
@@ -257,13 +330,22 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
     
     //    返回项目下所有设备信息
     func loadDeviceInfo() {
-        
-        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-        let param = ["ProjectCode": "10200", // 项目编号
-            "token":userModel.wyAccount.token]
-        
-        XHWLNetwork.shared.postDeviceInfoClick(param as NSDictionary, self)
+        let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
+        let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
+        if array.count > 0 {
+            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+            
+            let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+            let projectModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: projectData.mj_JSONObject())
+            
+            let param = ["ProjectCode": projectModel.id, // 项目编号 201
+                "token":userModel.wyAccount.token]
+            
+            XHWLNetwork.shared.postDeviceInfoClick(param as NSDictionary, self)
+        } else {
+            "您当前无项目".ext_debugPrintAndHint()
+        }
     }
     
     // MARK: - XHWLNetworkDelegate
@@ -271,7 +353,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
         
         if requestKey == XHWLRequestKeyID.XHWL_DEVICEINFO.rawValue {
-            let list:NSArray = response["result"] as! NSArray
+            let list:NSArray = response["result"]!["rows"] as! NSArray
             
             let modelData:NSData = list.mj_JSONData()! as NSData
             UserDefaults.standard.set(modelData, forKey: "deviceList") // XHWLDeviceModel

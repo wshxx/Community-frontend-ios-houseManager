@@ -39,6 +39,7 @@
 #import "CYTabBarController.h"
 #import "HZActionSheet.h"
 
+#import "LYMUILabel+TextAlignment.h"
 
 
 #endif /* XHWLHouseManager_Bridging_Header_h */

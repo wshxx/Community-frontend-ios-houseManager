@@ -10,12 +10,18 @@ import UIKit
 
 class XHWLSetPwdView: UIView {
     
+    var bgIV:UIImageView!
+    var titleL: UILabel!
+    var userTF:XHWLLoginTF!
+    var pwdTF:XHWLLoginTF!
+    var loginBtn:UIButton!
+    var cancelBtn:UIButton!
+    
     var funcBackBlock : (String, String) -> () = {param in }
     var onCancelBlock : () -> () = {param in }
     var topStr:String!
     var bottomStr:String!
-    var userTF:XHWLLoginTF!
-    var pwdTF:XHWLLoginTF!
+  
     
     func clearData() {
         userTF.textField.text = ""
@@ -27,11 +33,11 @@ class XHWLSetPwdView: UIView {
         
         self.backgroundColor = UIColor.clear
         
-        let bgIV:UIImageView = UIImageView(frame: self.bounds)
+        bgIV = UIImageView(frame: self.bounds)
         bgIV.image = UIImage(named: "login_showView")
         self.addSubview(bgIV)
         
-        let titleL: UILabel = UILabel(frame: CGRect(x:28, y:23, width:310, height:30))
+        titleL = UILabel(frame: CGRect(x:28, y:23, width:310, height:30))
         titleL.textColor = color_01f0ff
         titleL.text = "重新设置密码"
         titleL.font = font_18
@@ -52,7 +58,7 @@ class XHWLSetPwdView: UIView {
         
         let img = UIImage(named: "login_btn_highlight")
         
-        let loginBtn:UIButton = UIButton(frame: CGRect(x:0, y:0, width:(img?.size.width)!, height:(img?.size.height)!))
+        loginBtn = UIButton(frame: CGRect(x:0, y:0, width:(img?.size.width)!, height:(img?.size.height)!))
         loginBtn.setBackgroundImage(img, for: UIControlState.normal)
         loginBtn.setTitle("确定", for: UIControlState.normal)
         loginBtn.titleLabel?.font = font_18
@@ -62,7 +68,7 @@ class XHWLSetPwdView: UIView {
         loginBtn.addTarget(self, action: #selector(XHWLSetPwdView.onLoginClick), for: UIControlEvents.touchUpInside)
         self.addSubview(loginBtn)
         
-        let cancelBtn:UIButton = UIButton(frame: CGRect(x:0, y:0, width:(img?.size.width)!, height:(img?.size.height)!))
+        cancelBtn = UIButton(frame: CGRect(x:0, y:0, width:(img?.size.width)!, height:(img?.size.height)!))
         cancelBtn.setBackgroundImage(img, for: UIControlState.normal)
         cancelBtn.setTitle("取消", for: UIControlState.normal)
         cancelBtn.titleLabel?.font = font_18
@@ -71,6 +77,22 @@ class XHWLSetPwdView: UIView {
         cancelBtn.setTitleColor(color_01f0ff, for: UIControlState.normal)
         cancelBtn.addTarget(self, action: #selector(XHWLSetPwdView.onCancelClick), for: UIControlEvents.touchUpInside)
         self.addSubview(cancelBtn)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        bgIV.bounds = self.bounds
+        
+        titleL.frame = CGRect(x:28, y:23, width:310, height:30)
+        userTF.frame = CGRect(x:25, y:Screen_height/7.0, width:self.bounds.width-50, height:40)
+        pwdTF.frame = CGRect(x:25, y:userTF.frame.maxY+10, width:self.bounds.width-50, height:40)
+        
+        let img = UIImage(named: "login_btn_highlight")
+        loginBtn.frame = CGRect(x:0, y:0, width:(img?.size.width)!, height:(img?.size.height)!)
+        loginBtn.center = CGPoint(x: self.bounds.size.width/4.0, y: self.bounds.size.height*7/8.0-(img?.size.height)!/2.0)
+        cancelBtn.frame = CGRect(x:0, y:0, width:(img?.size.width)!, height:(img?.size.height)!)
+        cancelBtn.center = CGPoint(x: self.bounds.size.width*3/4.0, y: self.bounds.size.height*7/8.0-(img?.size.height)!/2.0)
     }
     
     func onLoginClick(btn:UIButton) {

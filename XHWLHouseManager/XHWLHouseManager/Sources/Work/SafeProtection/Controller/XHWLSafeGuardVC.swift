@@ -44,10 +44,9 @@ class XHWLSafeGuardVC: UIViewController  , XHWLScanTestVCDelegate, XHWLSafeGuard
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-        let showImg:UIImage = UIImage(named:"subview_bg")!
         warningView = XHWLSafeGuardView(frame:CGRect.zero, isFinished, model)
         warningView.delegate = self
-        warningView.bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
+        warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.submitBlock = { [weak self] text in
             self?.submitClick(text)

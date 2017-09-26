@@ -23,15 +23,34 @@ class XHWLScanResultVC: UIViewController {
         
         dataAry = NSMutableArray()
         
-        let array :NSArray = [["name":"设备地址：", "content":scanModel!.address, "isHiddenEdit": true],
-                              ["name":"编码信息：", "content":scanModel!.code, "isHiddenEdit": true],
-//                              ["name":"最后修改时间：", "content":"", "isHiddenEdit":true],
-                              ["name":"当前状态：", "content":scanModel!.status, "isHiddenEdit": true],
-                              ["name":"基础信息：", "content":scanModel!.name, "isHiddenEdit": true],
-                              ["name":"价格：", "content":scanModel!.price, "isHiddenEdit": true],
-                              ["name":"项目名称：", "content":scanModel!.projectName, "isHiddenEdit": true]]
-        dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
+//        let array :NSArray = [["name":"设备地址：", "content":scanModel!.address, "isHiddenEdit": true],
+//                              ["name":"编码信息：", "content":scanModel!.code, "isHiddenEdit": true],
+////                              ["name":"最后修改时间：", "content":"", "isHiddenEdit":true],
+//                              ["name":"当前状态：", "content":scanModel!.status, "isHiddenEdit": true],
+//                              ["name":"基础信息：", "content":scanModel!.name, "isHiddenEdit": true],
+//                              ["name":"价格：", "content":scanModel!.price, "isHiddenEdit": true],
+//                              ["name":"项目名称：", "content":scanModel!.projectName, "isHiddenEdit": true]]
         
+        
+        //        一、设备类：1.设备名称。2.项目。3.位置。4.设备编码。5.当前状态。
+        //        二、园林类：1.植被名称。2.项目。3.位置。4.编码
+        
+        let array :NSArray = [["name":"设备名称：", "content":scanModel!.address, "isHiddenEdit": true],
+                              ["name":"项目：", "content":scanModel!.address, "isHiddenEdit": true],
+                              ["name":"位置：", "content":scanModel!.code, "isHiddenEdit": true]]
+        let mutableAry :NSMutableArray = NSMutableArray.init(array: array)
+        
+//        if 设备 {
+//            mutableAry.add(["name":"设备编码：", "content":"", "isHiddenEdit":true])
+//            mutableAry.add(["name":"当前状态：", "content":scanModel!.status, "isHiddenEdit": true])
+//        } else {
+//            mutableAry.add(["name":"当前状态：", "content":scanModel!.status, "isHiddenEdit": true])
+//        }
+      
+        
+        
+        dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
+
         
 
         
@@ -74,9 +93,8 @@ class XHWLScanResultVC: UIViewController {
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-        let image:UIImage = UIImage(named:"warning_bg")!
         warningView = XHWLScanResultView()
-        warningView.bounds = CGRect(x:0, y:0, width:image.size.width, height:image.size.height)
+        warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.btnBlock = {[weak self] index in
             if index == 0 {

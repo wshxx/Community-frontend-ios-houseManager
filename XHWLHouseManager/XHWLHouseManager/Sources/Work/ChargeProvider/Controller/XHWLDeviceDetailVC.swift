@@ -12,6 +12,7 @@ class XHWLDeviceDetailVC: XHWLBaseVC {
     
     var topMenu:XHWLTopView!
     var warningView:XHWLCountView!
+    var deviceModel:XHWLDeviceModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,18 +25,28 @@ class XHWLDeviceDetailVC: XHWLBaseVC {
     
     func setupNav() {
 
-        self.title = "能耗统计"
+        self.title = deviceModel.DeviceName
+       
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
     }
     
     func setupView() {
         let webView = UIWebView()
+        webView.backgroundColor = UIColor.clear
         webView.frame = CGRect(x: 0, y: 64, width: self.view.bounds.size.width, height: self.view.bounds.size.height-64)
         webView.isOpaque = false
         webView.scalesPageToFit = true
         self.view.addSubview(webView)
         
-//        analysis/device/statistics
-        webView.loadRequest(URLRequest.init(url: URL.init(string: "\(XHWLHttpURL)/analysis/device/realData")!))
+        let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+        let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectData.mj_JSONObject())
+        
+        let url = "\(XHWLHttpURL)/analysis/device/realData/\(projectModel.code)/\(deviceModel.DeviceID)" // ProjectCode=201
+        print("\(url)")
+        webView.loadRequest(URLRequest.init(url: URL.init(string: url)!))
     }
 
 }

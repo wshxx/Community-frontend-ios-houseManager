@@ -54,7 +54,7 @@ class XHWLCountVC: UIViewController , XHWLNetworkDelegate{
     func setupNav() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
-        self.title = "实时进度"
+        self.title = "巡更进度"
     }
     
     func onBack(){
@@ -68,9 +68,8 @@ class XHWLCountVC: UIViewController , XHWLNetworkDelegate{
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-        let showImg:UIImage = UIImage(named:"subview_bg")!
         warningView = XHWLCountView(frame:CGRect.zero)
-        warningView.bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
+        warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.dismissBlock = {[weak self] index in
             let vc:XHWLProgressDetailVC = XHWLProgressDetailVC()

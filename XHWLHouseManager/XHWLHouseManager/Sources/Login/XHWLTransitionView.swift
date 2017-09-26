@@ -69,6 +69,14 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
 //        let window:UIWindow = UIApplication.shared.keyWindow!
 //        window.addSubview(progressHUD)
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        showV?.frame = CGRect(x:0, y:75+30, width:self.bounds.size.width, height:self.bounds.size.height-75-60)
+        setPwdV?.frame = CGRect(x:0, y:75+30, width:self.bounds.size.width, height:self.bounds.size.height-75-60)
+        forgetCodeV?.frame = CGRect(x:0, y:75, width:self.bounds.size.width, height:self.bounds.size.height-75)
+    }
 
     func onForgetCode() {
         self.forgetCodeV?.isHidden = false
@@ -192,7 +200,7 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
     }
     
     func onLogin(_ response:[String : AnyObject]) {
-        
+
         if response["state"] as! Bool{
             "登陆成功".ext_debugPrintAndHint()
             //登录成功
@@ -204,13 +212,18 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
             let data:NSData = userModel.mj_JSONData()! as NSData
             UserDefaults.standard.set(data, forKey: "user")
             
-            //                let modelAry:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: projectList)
+            if (projectList.count > 0) {
+                
+                let projectData:NSData = (projectList[0] as! NSDictionary).mj_JSONData()! as NSData
+                UserDefaults.standard.set(projectData, forKey: "project")
+            }
+            
             let modelData:NSData = projectList.mj_JSONData()! as NSData
             UserDefaults.standard.set(modelData, forKey: "projectList")
             UserDefaults.standard.synchronize()
             
+            
             print("\(userModel.wyAccount.wyRole.name)")
-//            userModel.wyAccount.wyRole.name.ext_debugPrintAndHint()
             if userModel.wyAccount.isFirstLogin.compare("y").rawValue == 0 { // 重置密码
                 self.onLoginChangeReset()
             } else { // 跳到首页

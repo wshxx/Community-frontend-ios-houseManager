@@ -46,14 +46,14 @@ class XHWLSafeGuardView: UIView {
             dataAry1 = NSMutableArray()
             let array1 :NSArray = [["name":"备注：", "content":model.appComplaint.manageRemarks, "isHiddenEdit": false],
                                    ["name":"处理人：", "content":model.manageUserName, "isHiddenEdit": true],
-                                   ["name":"处理时间：", "content":Date.getDateWith(Int(model.appComplaint.manageTime)!), "isHiddenEdit":false]]
+                                   ["name":"处理时间：", "content":Date.getDateWith(Int(model.appComplaint.manageTime)!, "yyyy-MM-dd"), "isHiddenEdit":false]]
             dataAry1 = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array1)
         }
         
         dataAry2 = NSMutableArray()
         let array2 :NSArray = [["name":"来源：", "content":model.appComplaint.wyAccount.wyRole.name, "isHiddenEdit": false],
                               ["name":"报事人：", "content":model.complaintUserName, "isHiddenEdit": true],
-                              ["name":"报事时间：", "content":Date.getDateWith(Int(model.appComplaint.createTime)!), "isHiddenEdit":false],
+                              ["name":"报事时间：", "content":Date.getDateWith(Int(model.appComplaint.createTime)!, "yyyy-MM-dd HH:mm:ss"), "isHiddenEdit":false],
                               ["name":"工单编号：", "content":model.appComplaint.code, "isHiddenEdit": true]]
         dataAry2 = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array2)
         
@@ -84,14 +84,15 @@ class XHWLSafeGuardView: UIView {
         
         //
         head1 = XHWLHeadView()
-        head1.showText("来源详情：")
+        head1.showText("处理详情：")
+        head1.showTextColor = color_01f0ff
         bgScrollView.addSubview(head1)
         
         pickPhoto = XHWLPickPhotoView(frame: CGRect.zero, isFinished)
         pickPhoto.showText("现场照片：")
         if isFinished {
             if !(model.appComplaint.imgUrl is NSNull) {
-                let array:NSArray = model.appComplaint.manageImgUrl.components(separatedBy: ",") as! NSArray
+                let array:NSArray = model.appComplaint.manageImgUrl.components(separatedBy: ",") as NSArray
                 pickPhoto.onShowImgArray(array)
             }
         }
@@ -123,7 +124,8 @@ class XHWLSafeGuardView: UIView {
         
         //
         head2 = XHWLHeadView()
-        head2.showText("来源详情：")
+        head2.showText("事件详情：")
+        head2.showTextColor = color_01f0ff
         bgScrollView.addSubview(head2)
         
         labelViewArray2 = NSMutableArray()
@@ -138,6 +140,7 @@ class XHWLSafeGuardView: UIView {
         
         head3 = XHWLHeadView()
         head3.showText("来源详情：")
+        head3.showTextColor = color_01f0ff
         bgScrollView.addSubview(head3)
         
         labelViewArray3 = NSMutableArray()

@@ -10,7 +10,6 @@ import UIKit
 
 class XHWLWarningCell: UITableViewCell {
 
-    var iconIV :UIImageView!
     var titleL:UILabel!
     var timeL:UILabel!
     var contentL:UILabel!
@@ -53,9 +52,6 @@ class XHWLWarningCell: UITableViewCell {
     }
     
     func setupView() {
-        iconIV = UIImageView()
-        iconIV.image = UIImage(named: "failure")
-        self.contentView.addSubview(iconIV)
         
         titleL = UILabel()
         titleL.textColor = UIColor.white
@@ -82,19 +78,11 @@ class XHWLWarningCell: UITableViewCell {
         self.contentView.addSubview(lineIV)
     }
     
-//    func setModel(waringModel:XHWLWarningModel) {
-//        titleL.text = waringModel.name
-//        contentL.text = waringModel.content
-//        timeL.text = waringModel.time
-//    }
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        iconIV.bounds = CGRect(x:0, y:0, width:14, height:14)
-        iconIV.center = CGPoint(x:20, y:self.frame.size.height/2.0)
-        titleL.frame = CGRect(x:iconIV.frame.maxX+5, y:0, width:self.frame.size.width-iconIV.frame.maxX-30, height:30)
-        timeL.frame = CGRect(x:iconIV.frame.maxX+5, y:30, width:100, height:25)
+        titleL.frame = CGRect(x:13, y:0, width:self.frame.size.width-36, height:30)
+        timeL.frame = CGRect(x:13, y:30, width:120, height:25)
         contentL.frame = CGRect(x:timeL.frame.maxX, y:30, width:self.frame.size.width-timeL.frame.maxX-30, height:30)
         accessIV.bounds = CGRect(x:0, y:0, width:7, height:12)
         accessIV.center = CGPoint(x:self.frame.size.width-17, y:self.frame.size.height/2.0)

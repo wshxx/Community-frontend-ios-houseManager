@@ -15,20 +15,12 @@ class XHWLRegistrationDetailView: UIView {
     var labelViewArray:NSMutableArray!
     var visitorLogModel:XHWLVisitLogModel!
     var btnBlock:(NSInteger)->(Void) = { param in }
-    
-//    static var shared: XHWLRegistrationDetailView {
-//        struct Static {
-//            static let instance: XHWLRegistrationDetailView = XHWLRegistrationDetailView.init(frame: CGRect.zero)
-//        }
-//        return Static.instance
-//    }
+    var array:NSArray!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         self.backgroundColor = UIColor.clear
-        
-        
         
         setupView()
     }
@@ -58,12 +50,13 @@ class XHWLRegistrationDetailView: UIView {
     
     func createArray(array:NSArray) {
         
+        self.array = array
         labelViewArray = NSMutableArray()
         
         for i in 0...array.count-1 {
             
             let menuModel :XHWLMenuModel = array[i] as! XHWLMenuModel
-            let labelView: XHWLLabelView = XHWLLabelView()
+            let labelView: XHWLLineView = XHWLLineView()
             labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
             self.addSubview(labelView)
             labelViewArray.add(labelView)
@@ -79,10 +72,16 @@ class XHWLRegistrationDetailView: UIView {
         
         bgImage.frame = self.bounds
         
+        var maxH:CGFloat = 20
         for i in 0...labelViewArray.count-1 {
             
-            let label:XHWLLabelView = labelViewArray[i] as! XHWLLabelView
-            label.frame = CGRect(x:0, y:30*i+5, width:Int(self.bounds.size.width), height:30)
+            let menuModel :XHWLMenuModel = array[i] as! XHWLMenuModel
+            
+            let size:CGSize = menuModel.content.boundingRect(with: CGSize(width:self.bounds.size.width-100, height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+            let height:CGFloat = size.height < font_14.lineHeight ? font_14.lineHeight:size.height
+            let label:XHWLLineView = labelViewArray[i] as! XHWLLineView
+            label.frame = CGRect(x:0, y:Int(maxH+10), width:Int(self.bounds.size.width), height:Int(height)) // 40
+            maxH = label.frame.maxY
         }
         
         showIV.frame = CGRect(x:self.bounds.size.width-130, y:self.frame.size.height-90, width:94, height:51)

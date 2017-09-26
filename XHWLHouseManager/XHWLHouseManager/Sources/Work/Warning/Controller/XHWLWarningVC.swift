@@ -25,15 +25,25 @@ class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
     
     func onLoadCurrentData() {
         
-        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-
-        let params:[String:Any] = ["ProjectCode":"10200", // 项目编号
-            "Cycle":getCurrentDate(), // 日期
-            "token":userModel.wyAccount.token,
-            ]
-        
-        XHWLNetwork.shared.postNewAlerClick(params as NSDictionary, self)
+        let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
+        let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
+        if array.count > 0 {
+            
+            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+            
+            let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+            let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectData.mj_JSONObject())
+            
+            let params:[String:Any] = ["ProjectCode":projectModel.code, // 项目编号
+                "Cycle":"30000", // 日期 getCurrentDate()
+                "token":userModel.wyAccount.token,
+                ]
+            
+            XHWLNetwork.shared.postNewAlerClick(params as NSDictionary, self)
+        } else {
+            "您当前无项目".ext_debugPrintAndHint()
+        }
     }
     
     func getCurrentDate()->String {
@@ -46,12 +56,21 @@ class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
     }
     
     func onLoadHistoryData() {
-
-        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
-        let deviceData:NSData = UserDefaults.standard.object(forKey: "deviceList") as! NSData
-        let deviceList:NSArray = XHWLDeviceModel.mj_objectArray(withKeyValuesArray: deviceData.mj_JSONObject())
+        let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
+        let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
+        if array.count > 0 {
+            
+            
+            
+            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+            
+            let deviceData:NSData = UserDefaults.standard.object(forKey: "deviceList") as! NSData
+            let deviceList:NSArray = XHWLDeviceModel.mj_objectArray(withKeyValuesArray: deviceData.mj_JSONObject())
+            
+            let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+            let projectModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: projectData.mj_JSONObject())
         
         let model:XHWLDeviceModel = deviceList[0] as! XHWLDeviceModel
         let params:[String:Any] = ["ProjectCode":"10200", // 项目编号
@@ -61,6 +80,7 @@ class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
             ]
         
         XHWLNetwork.shared.postHistoryAlerClick(params as NSDictionary, self)
+        }
     }
     
     // MARK: - XHWLNetworkDelegate
@@ -97,7 +117,8 @@ class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
         
         let showImg:UIImage = UIImage(named:"menu_bg")!
         warningView = XHWLWarningView()
-        warningView.bounds = CGRect(x:0, y:0, width:338, height:68+showImg.size.height)
+        warningView.bounds = CGRect(x:0, y:0, width:Screen_width-20, height:Screen_height-160)
+//        warningView.bounds = CGRect(x:0, y:0, width:338, height:68+showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.clickCell = {[weak self] isHistory, index in
             

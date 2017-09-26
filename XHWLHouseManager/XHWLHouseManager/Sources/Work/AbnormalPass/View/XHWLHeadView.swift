@@ -43,6 +43,13 @@ class XHWLHeadView: UIView {
         lineV.frame = CGRect(x:titleL.frame.maxX+10, y:self.bounds.size.height/2.0, width:self.bounds.size.width-titleL.frame.maxX-30, height:0.5)
     }
     
+    var showTextColor:UIColor? {
+        willSet {
+            if (newValue != nil) {
+                titleL.textColor = newValue
+            }
+        }
+    }
     func showText(_ leftText:String) {
         titleL.text = leftText
     }

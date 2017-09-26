@@ -15,6 +15,7 @@ class XHWLHistoryWarningView: UIView {
     var labelViewArray:NSMutableArray!
     var array:NSArray!
     var btnBlock:()->(Void) = { param in }
+    var bgSc:UIScrollView!
     
     static var shared: XHWLHistoryWarningView {
         struct Static {
@@ -43,13 +44,17 @@ class XHWLHistoryWarningView: UIView {
         bgImage.image = UIImage(named:"subview_bg")
         self.addSubview(bgImage)
         
+        bgSc = UIScrollView()
+        bgSc.showsVerticalScrollIndicator = false
+        self.addSubview(bgSc)
+        
         btn = UIButton()
         btn.addTarget(self, action: #selector(onDeviceDetail), for: UIControlEvents.touchUpInside)
         btn.setTitle("设备实时运行监控 >>", for: UIControlState.normal)
         btn.titleLabel?.font = font_14
         btn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.right
         btn.setTitleColor(UIColor().colorWithHexString(colorStr: "09fbfe") , for: UIControlState.normal)
-        self.addSubview(btn)
+        bgSc.addSubview(btn)
     }
     
     func createArray(array:NSArray) {
@@ -62,7 +67,7 @@ class XHWLHistoryWarningView: UIView {
             let menuModel :XHWLMenuModel = array[i] as! XHWLMenuModel
             let labelView: XHWLLineView = XHWLLineView()
             labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
-            self.addSubview(labelView)
+            bgSc.addSubview(labelView)
             labelViewArray.add(labelView)
         }
     }
@@ -83,16 +88,19 @@ class XHWLHistoryWarningView: UIView {
         super.layoutSubviews()
         
         bgImage.frame = self.bounds
+        bgSc.frame = self.bounds
         //        tipLabel.frame = CGRect(x:10, y:self.bounds.size.height-80, width:self.bounds.size.width-20, height:40)
-        
+        var maxHeight = 5
         for i in 0...labelViewArray.count-1 {
             
             let menuModel :XHWLMenuModel = array[i] as! XHWLMenuModel
             let label:XHWLLineView = labelViewArray[i] as! XHWLLineView
             label.frame = CGRect(x:15, y:30*i+5, width:Int(self.bounds.size.width-30), height:Int(heightWithSize(menuModel)))
+            maxHeight = Int(label.frame.maxY)
         }
         
-        btn.frame = CGRect(x:50, y:self.frame.size.height-172, width:self.bounds.size.width-100, height:44)
+        btn.frame = CGRect(x:50, y:maxHeight+30, width:Int(self.bounds.size.width-100), height:44)
+        bgSc.contentSize = CGSize(width:0, height:btn.frame.maxY + 30)
         
     }
 }

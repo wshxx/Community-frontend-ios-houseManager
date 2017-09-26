@@ -39,8 +39,17 @@ class XHWLSubDataView: UIView {
     }
     
     func setTitle(_ title:String, content:String) {
+
         titleL.text = title
         contentL.text = content
+
+//        let str: NSMutableAttributedString = NSMutableAttributedString(string: title)
+//
+//        str.addAttributes([NSFontAttributeName: font_9,
+//                           NSForegroundColorAttributeName:color_01f0ff], range: NSMakeRange((title as NSString).length-1 , 1))
+//        print("\(str)")
+//        titleL.attributedText = str
+        
     }
     
     override func layoutSubviews() {

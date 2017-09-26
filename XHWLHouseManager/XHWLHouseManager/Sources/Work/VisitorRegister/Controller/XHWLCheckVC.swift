@@ -49,7 +49,9 @@ class XHWLCheckVC: UIViewController  , XHWLScanTestVCDelegate{
         
         let showImg:UIImage = UIImage(named:"subview_bg")!
         let warningView:XHWLCheckListView = XHWLCheckListView()
-        warningView.bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
+        
+        warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
+//        warningView.bounds = CGRect(x:0, y:0, width:showImg.size.width, height:showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.btnBlock = {index in
             self.navigationController?.popViewController(animated: true)

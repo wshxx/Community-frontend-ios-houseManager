@@ -14,6 +14,7 @@ class XHWLCodeTF: UIView, UITextFieldDelegate {
     var onSendCodeClickBlock : () -> () = {param in }
     var sendCodeBtn:UIButton!
     var textField: UITextField!
+    var lineIV : UIImageView!
     
     init(frame: CGRect, placeholder:String) {
         super.init(frame: frame)
@@ -54,10 +55,19 @@ class XHWLCodeTF: UIView, UITextFieldDelegate {
         sendCodeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.right
         self.addSubview(sendCodeBtn)
         
-        let lineIV : UIImageView = UIImageView()
+        lineIV = UIImageView()
         lineIV.image = UIImage(named: "warning_cell_line")
         lineIV.frame = CGRect(x: 0, y: self.bounds.size.height-0.5, width: self.bounds.size.width, height: 0.5)
         self.addSubview(lineIV)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        textField.frame = CGRect(x:0, y:0, width:self.bounds.width-100, height:self.bounds.size.height)
+        sendCodeBtn.frame = CGRect(x:self.bounds.width-90, y:0, width:80, height:self.bounds.size.height)
+        lineIV.frame = CGRect(x: 0, y: self.bounds.size.height-0.5, width: self.bounds.size.width, height: 0.5)
+        
     }
     
     func onClear() {
