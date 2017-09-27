@@ -21,6 +21,7 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
     var logoutBtn:UIButton!
     var name:String!
     var phone:String!
+    var backBlock:()->() = {params in }
     
 //    var 
     override init(frame: CGRect) {
@@ -104,10 +105,8 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
     // 退出
     func logoutClick() {
         self.isUserName = true
-        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
-        XHWLNetwork.shared.getLogoutClick([userModel.wyAccount.token] as NSArray, self)
+        self.backBlock()
     }
     
     func menuLabel(_ labelView:XHWLMenuLabelView, _ text:String, _ block:@escaping((Bool)->())) {

@@ -10,10 +10,6 @@ import UIKit
 import Foundation
 import Alamofire
 
-//let XHWLHttpURL :String = "http://112.74.19.135:1111/ssh/v1"
-//let XHWLHttpURL :String = "http://192.168.2.101:9002"
-//let XHWLHttpURL :String = "http://192.168.1.154:8080"
-
 //let XHWLHttpURL :String = "http://120.77.83.190:8080/ssh/v1"
 //let XHWLImgURL :String = "http://120.77.83.190:8080/ssh"
 //let XHWLHttpURL :String = "http://10.51.37.54:8080/ssh/v1"
@@ -110,7 +106,7 @@ class XHWLHttpTool: NSObject {
                     
                     print("success:\(value)")
                     
-                    if self.requestKey != .XHWL_LOGOUT && self.requestKey != .XHWL_GETVERCODE {
+                    if self.requestKey != .XHWL_LOGOUT && self.requestKey != .XHWL_GETVERCODE && self.requestKey != .XHWL_SCANCODE {
                         if (value as! [String : AnyObject])["result"] is NSNull {
                             
                             let message:String = (value as! [String : AnyObject])["message"] as! String

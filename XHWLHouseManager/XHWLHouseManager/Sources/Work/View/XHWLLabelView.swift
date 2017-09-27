@@ -19,7 +19,7 @@ class XHWLLabelView: UIView {
         setupView()
     }
     
-    func contentTextAlign(textAlignment: NSTextAlignment) {
+    func contentTextAlign(_ textAlignment: NSTextAlignment) {
         
         contentTF.textAlignment = textAlignment
     }

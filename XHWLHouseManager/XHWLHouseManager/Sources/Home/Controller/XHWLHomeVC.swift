@@ -15,7 +15,7 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
     
     var btn:UIButton!
     
-    var menuView : XHWLMenuView!
+//    var menuView : XHWLMenuView!
     var homeView:XHWLHomeView!
     
     override func viewDidLoad() {
@@ -28,7 +28,7 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-          menuView.updateData()
+//          menuView.updateData()
     }
     
     func setupNav() {
@@ -132,10 +132,10 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
     
     func setupView() {
         
-        menuView = XHWLMenuView(frame:CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0))
-        menuView.center = CGPoint(x:self.view.bounds.size.width/2.0, y:self.view.bounds.size.height/2.0)
-        menuView.isHidden = true
-        self.view.addSubview(menuView)
+//        menuView = XHWLMenuView(frame:CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0))
+//        menuView.center = CGPoint(x:self.view.bounds.size.width/2.0, y:self.view.bounds.size.height/2.0)
+//        menuView.isHidden = true
+//        self.view.addSubview(menuView)
         
         homeView = XHWLHomeView(frame: CGRect(x:10, y:64, width:self.view.bounds.size.width-20, height:self.view.bounds.height-200))
         homeView.delegate = self
@@ -145,8 +145,11 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
     // 打开菜单
     func onOpenMenu() {
         UIView.animate(withDuration: 0.3) {
-            self.menuView.isHidden = !self.menuView.isHidden
-            self.homeView.isHidden = !self.homeView.isHidden
+//            self.menuView.isHidden = !self.menuView.isHidden
+//            self.homeView.isHidden = !self.homeView.isHidden
+            
+            let vc:XHWLMenuVC = XHWLMenuVC()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -222,7 +225,7 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
                 
                 let scanModel:XHWLScanModel = XHWLScanModel.mj_object(withKeyValues: result)
                 
-                print("\(scanModel.name), \(scanModel.code)")
+                print("\(scanModel.type)")
                 
                 let vc:XHWLScanResultVC = XHWLScanResultVC()
                 vc.scanModel = scanModel

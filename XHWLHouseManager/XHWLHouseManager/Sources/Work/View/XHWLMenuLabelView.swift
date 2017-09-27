@@ -22,6 +22,7 @@ class XHWLMenuLabelView: UIView {
     var labelBgIV:UIImageView!
     var delegate:XHWLMenuLabelViewDelegate?
     var onOKClickBlock : (String, ((Bool) -> ())) -> () = {param in }
+    var contentStr:String?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -99,6 +100,7 @@ class XHWLMenuLabelView: UIView {
     func showText(leftText:String, rightText:String, isHiddenEdit:Bool) {
         titleL.text = leftText
         contentTF.text = rightText
+        contentStr = rightText
         
         rightBtn.isHidden = isHiddenEdit
 //        okBtn.isHidden = isHiddenEdit
@@ -127,11 +129,13 @@ class XHWLMenuLabelView: UIView {
             rightBtn.setTitleColor(UIColor().colorWithHexString(colorStr: "3cf8ff"), for: UIControlState.normal)
             rightBtn.setTitle("取消", for: UIControlState.normal)
         } else {
+            
             okBtn.isHidden = true
             contentTF.isEnabled = false
             contentTF.backgroundColor = UIColor.clear
             rightBtn.setTitle("", for: UIControlState.normal)
             rightBtn.setImage(UIImage(named:"menu_edit"), for: UIControlState.normal)
+            contentTF.text = contentStr
         }
     }
     

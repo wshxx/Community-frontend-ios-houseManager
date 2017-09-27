@@ -58,7 +58,7 @@ class XHWLForgetPwdView: UIView, XHWLNetworkDelegate {
         }
         self.addSubview(pwdTF)
         
-        codeTF = XHWLCodeTF(frame: CGRect(x:25, y:220, width:self.bounds.width-50, height:40), placeholder:"")
+        codeTF = XHWLCodeTF(frame: CGRect(x:25, y:220, width:self.bounds.width-50, height:40), placeholder:"请输入验证码")
         codeTF.funcBackBlock = {str in
             self.bottomStr = str
         }

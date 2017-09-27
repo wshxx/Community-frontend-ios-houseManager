@@ -36,7 +36,7 @@ class YLGIFImage : UIImage {
         let imageProperties:NSDictionary = CGImageSourceCopyProperties(_cgImgSource!, nil)!
         let gifProperties: NSDictionary? = imageProperties[kCGImagePropertyGIFDictionary as String] as? NSDictionary
         if let property = gifProperties {
-            self.loopCount = property[kCGImagePropertyGIFLoopCount as String] as! UInt
+//            self.loopCount = property[kCGImagePropertyGIFLoopCount as String] as! UInt
         }
         let numOfFrames = CGImageSourceGetCount(cgImageSource)
         for i in 0..<numOfFrames {

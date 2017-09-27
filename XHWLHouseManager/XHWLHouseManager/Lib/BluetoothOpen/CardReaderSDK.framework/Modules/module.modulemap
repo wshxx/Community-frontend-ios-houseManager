@@ -1,10 +1,4 @@
 framework module CardReaderSDK {
-  umbrella header "CardReaderSDK.h"
-
-  export *
-  module * { export * }
-}
-
-module CardReaderSDK.Swift {
     header "CardReaderSDK-Swift.h"
+    requires objc
 }

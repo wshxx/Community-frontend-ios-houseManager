@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate {
         let vc : XHWLLoginVC = XHWLLoginVC()
         self.window?.rootViewController = UINavigationController(rootViewController: vc)
         self.window?.makeKeyAndVisible()
-        
+       
         return true
     }
     

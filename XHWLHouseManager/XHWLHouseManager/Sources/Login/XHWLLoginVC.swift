@@ -15,15 +15,21 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
                 
        setupView()
         
-//        progressHUD = XHMLProgressHUD.init(frame: UIScreen.main.bounds)
-//
-//        let window:UIWindow = UIApplication.shared.keyWindow!
-//        window.addSubview(progressHUD)
+        if UserDefaults.standard.bool(forKey: "isFirst") == false {
+            var imageNameArr = Array<Any>()
+            for i in 0..<2 {
+                imageNameArr.append("\(i)")
+            }
+            
+
+            
+            self.view!.addSubview(CLNewFeatureView(imageNameArr: imageNameArr))
+            UserDefaults.standard.set(true, forKey:"isFirst")
+            UserDefaults.standard.synchronize()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

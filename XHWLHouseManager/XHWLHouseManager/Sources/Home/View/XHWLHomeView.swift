@@ -96,7 +96,7 @@ class XHWLHomeView: UIView  {
         YLGIFImage.setPrefetchNum(5)
         
         // Do any additional setup after loading the view, typically from a nib.
-        let path = Bundle.main.url(forResource: "door2", withExtension: "gif")?.absoluteString as String!
+        let path = Bundle.main.url(forResource: "space_door", withExtension: "gif")?.absoluteString as String!
         spaceBg.image = YLGIFImage(contentsOfFile: path!)
         spaceBg.startAnimating()
         

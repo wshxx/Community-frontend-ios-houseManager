@@ -53,10 +53,11 @@ class XHMLProgressHUD { // : UIView
         imageIV.center = CGPoint(x:Screen_width/2.0, y:Screen_height/2.0)
         let array:NSMutableArray = NSMutableArray()
         for i in 0..<61 {
-            let str = String.init(format: "别人进行云对讲%04d", arguments:[i])
-            //            let path:String = Bundle.main.path(forResource:str , ofType: "png")!
+            let str:String! = String.init(format: "别人进行云对讲%04d", arguments:[i])
+            print("\(str)")
+//            let path:String? = Bundle.main.path(forResource:str, ofType: "png")
             //            print("\(path)")
-            //            let image:UIImage = UIImage.init(contentsOfFile: path)!
+//            let image:UIImage = UIImage.init(contentsOfFile: path!)!
             let image:UIImage = UIImage(named: str)!
             array.add(image)
         }

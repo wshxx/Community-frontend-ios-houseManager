@@ -10,10 +10,11 @@ import UIKit
 
 class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
 
-    var menuView : XHWLMenuView!
+//    var menuView : XHWLMenuView!
     var bgImg:UIImageView!
     var btn:UIButton!
     var homeView:XHWLWorkView!
+    var block:(Bool)->() = {param in  }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,10 +97,16 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         
 //        menuView = XHWLMenuView(frame:CGRect(x:0, y:0, width:313, height:453))
         
-        menuView = XHWLMenuView(frame:CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0))
-        menuView.center = CGPoint(x:self.view.bounds.size.width/2.0, y:self.view.bounds.size.height/2.0)
-        menuView.isHidden = true
-        self.view.addSubview(menuView)
+//        menuView = XHWLMenuView(frame:CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0))
+//        menuView.center = CGPoint(x:self.view.bounds.size.width/2.0, y:self.view.bounds.size.height/2.0)
+//        menuView.isHidden = true
+//        self.view.addSubview(menuView)
+//        let menuVc:XHWLMenuVC = XHWLMenuVC()
+//        menuVc.view.frame = UIScreen.main.bounds
+//        self.view.addSubview(menuVc.view)
+//        self.addChildViewController(menuVc)
+//        menuView = menuVc.view
+//        menuView.isHidden = true
         
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
@@ -273,8 +280,11 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
     // 打开菜单
     func onOpenMenu() {
         UIView.animate(withDuration: 0.3) {
-            self.menuView.isHidden = !self.menuView.isHidden
-            self.homeView.isHidden = !self.homeView.isHidden
+//            self.menuView.isHidden = false
+//            self.menuView.isHidden = !self.menuView.isHidden
+//            self.homeView.isHidden = !self.homeView.isHidden
+            let vc:XHWLMenuVC = XHWLMenuVC()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
@@ -298,19 +308,19 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
      {
      "utid":"XHWL",
      "type":"plant",
-     "code":"pl01"
+     "code":"lb01"
      }
      *  @param strResult 返回的字符串
      */
-    func returnResultString(strResult:String, block:((_ isSuccess:Bool)->Void))
+    func returnResultString(strResult:String, block:@escaping ((_ isSuccess:Bool)->Void))
     {
         print("\(strResult)")
-        
+        self.block = block
         let dict:NSDictionary = strResult.dictionaryWithJSON()
         let utid:String = dict["utid"] as! String
         
         if utid.compare("XHWL").rawValue == 0 {
-            block(true)
+//            block(true)
             
             let type:String = dict["type"] as! String
             let code:String = dict["code"] as! String
@@ -361,16 +371,22 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         } else {
             let errorCode:NSInteger = response["errorCode"] as! NSInteger
             if errorCode == 200 {
+                block(true)
                 "扫描成功".ext_debugPrintAndHint()
                 let result:NSDictionary = response["result"] as! NSDictionary
                 
                 let scanModel:XHWLScanModel = XHWLScanModel.mj_object(withKeyValues: result)
                 
-                print("\(scanModel.name), \(scanModel.code)")
+                print("\(scanModel.type)")
                 
                 let vc:XHWLScanResultVC = XHWLScanResultVC()
                 vc.scanModel = scanModel
                 self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                
+                let message:String = response["message"] as! String
+                message.ext_debugPrintAndHint()
+                block(false)
             }
         }
     }
@@ -383,7 +399,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.isHidden = false
-        menuView.updateData()
+//        menuView.updateData()
     }
 
     override func didReceiveMemoryWarning() {
