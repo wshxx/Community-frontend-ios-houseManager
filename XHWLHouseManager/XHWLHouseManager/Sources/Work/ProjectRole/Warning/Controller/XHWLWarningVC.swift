@@ -21,11 +21,12 @@ class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
         let deviceData = UserDefaults.standard.object(forKey: "deviceList")
         if data == nil || deviceData == nil {
             self.navigationController?.popViewController(animated: true)
+        } else {
+            setupView()
+            onLoadHistoryData()
+            onLoadCurrentData()
+            self.title = "设备报警"
         }
-        setupView()
-        onLoadHistoryData()
-        onLoadCurrentData()
-        self.title = "设备报警"
     }
     
     func onLoadCurrentData() {
