@@ -105,7 +105,7 @@ class XHWLHttpTool: NSObject {
                 case .success(let value):
                     
                     print("success:\(value)")
-                    
+                     
                     if self.requestKey != .XHWL_LOGOUT && self.requestKey != .XHWL_GETVERCODE && self.requestKey != .XHWL_SCANCODE {
                         if (value as! [String : AnyObject])["result"] is NSNull {
                             
@@ -114,6 +114,11 @@ class XHWLHttpTool: NSObject {
                             return
                         }
                     }
+                    
+//                    var result = value as! [String : AnyObject]
+//                    if (value as! [String : AnyObject])["result"] is NSNull {
+//                        result = [:]
+//                    }
                     
                     self.delegate?.requestSuccess(self.requestKey!.rawValue, result:value as! [String : AnyObject])
                     

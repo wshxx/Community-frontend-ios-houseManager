@@ -19,11 +19,11 @@ class XHWLDataView: UIView , UITableViewDelegate, UITableViewDataSource {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let array:NSArray = [[["name": "停车总位数", "content":"500(个)"],["name": "车辆入场流量", "content":"155(次)"],
+        let array:NSArray = [[["name": "停车总位数", "content":"509(个)"],["name": "车辆入场流量", "content":"155(次)"],
                              ["name": "剩余车位", "content":"50(个)"],["name": "异常抬杆数", "content":"2(次)"]],
                              [["name": "业主入流量", "content":"800(次)"],["name": "访客入流量", "content":"150(次)"],
                              ["name": "当前滞留人数", "content":"10(个)"],["name": "访客人工放行数", "content":"3(次)"]],
-                             [["name": "安防事件数", "content":"2100"]],
+                             [["name": "安防事件数", "content":"3(件)"]],
                              [["name": "环境工作完成率", "content":"98%"]]
         ]
         

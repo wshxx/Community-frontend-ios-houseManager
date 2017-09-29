@@ -26,14 +26,14 @@ class XHWLMoreListView: UIView , XHWLNetworkDelegate{
     func setupView() {
         
         labelView = XHWLCheckTF()
-        labelView.showText(leftText: "业主", rightText:"")
+        labelView.showText("业主", "", true)
         labelView.textEndBlock = {[weak self] param in
             self?.yzName = param
         }
         self.addSubview(labelView)
         
         phoneView = XHWLRoomView(frame:CGRect.zero)
-        phoneView.showText(leftText: "房间", rightText: "", btnTitle:"请选择单元")
+        phoneView.showText(leftText: "房间", rightText: "", btnTitle:"请选择单元", true)
         phoneView.btnBlock = { [weak self] in
             if (self?.yzName.isEmpty)! {
                 "您输入的业主信息".ext_debugPrintAndHint()

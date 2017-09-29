@@ -21,7 +21,7 @@ import UIKit
 
 class XHWLHomeView: UIView  {
     
-    var spaceBg:YLImageView!
+//    var spaceBg:YLImageView!
     var spaceBigCircle:UIImageView!
     var spaceSmallCircle:UIImageView!
     var openBtn:UIButton!
@@ -77,13 +77,23 @@ class XHWLHomeView: UIView  {
         bindCardBtn.addTarget(self, action: #selector(onBindCardBtnClicked), for: UIControlEvents.touchUpInside)
         self.addSubview(bindCardBtn)
         
-        let window:UIWindow = UIApplication.shared.keyWindow!
-        spaceBg = YLImageView(frame: UIScreen.main.bounds)
-        spaceBg.isHidden = true
-        window.addSubview(spaceBg!)
-        window.bringSubview(toFront: spaceBg)
+//        let window:UIWindow = UIApplication.shared.keyWindow!
+//        spaceBg = YLImageView(frame: UIScreen.main.bounds)
+//        spaceBg.isHidden = true
+//        window.addSubview(spaceBg!)
+//        window.bringSubview(toFront: spaceBg)
         
     }
+    
+    lazy fileprivate var spaceBg: YLImageView = {
+        let window:UIWindow = UIApplication.shared.keyWindow!
+        let spaceBg:YLImageView = YLImageView(frame: UIScreen.main.bounds)
+        spaceBg.isHidden = true
+        window.addSubview(spaceBg)
+        window.bringSubview(toFront: spaceBg)
+        
+        return spaceBg
+    }()
     
 
     // 蓝牙开门
@@ -96,13 +106,13 @@ class XHWLHomeView: UIView  {
         YLGIFImage.setPrefetchNum(5)
         
         // Do any additional setup after loading the view, typically from a nib.
-        let path = Bundle.main.url(forResource: "space_door", withExtension: "gif")?.absoluteString as String!
+        let path = Bundle.main.url(forResource: "open_door", withExtension: "gif")?.absoluteString as String!
         spaceBg.image = YLGIFImage(contentsOfFile: path!)
         spaceBg.startAnimating()
         
         self.delegate?.onHomeViewWithOpenBluetooth!(self)
-        //睡眠1.9s，
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.9)){
+        //睡眠1.0s，
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.0)){
             self.spaceBg.stopAnimating()
             //            let window:UIWindow = UIApplication.shared.keyWindow!
             //            window.sendSubview(toBack: self.spaceBg)

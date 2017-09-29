@@ -15,11 +15,16 @@ class XHWLWorkView: UIView , UITableViewDelegate, UITableViewDataSource {
     var dataAry:NSArray!
     var btnBlock:(NSInteger)->(Void) = { param in }
     var dismissBlock:(NSInteger)->(Void) = { param in }
+    var badgeArray:NSMutableArray?
     
     init(frame: CGRect, array:NSArray) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.clear
         dataAry = array
+        badgeArray = NSMutableArray()
+        for i in 0..<dataAry.count {
+            badgeArray?.add(0)
+        }
         setupView()
     }
     
@@ -53,6 +58,7 @@ class XHWLWorkView: UIView , UITableViewDelegate, UITableViewDataSource {
         let cell = XHWLWorkCell.cellWithTableView(tableView: tableView)
         let str = dataAry[indexPath.row] as? String
         cell.showText = str
+        cell.badgeNumber = badgeArray![indexPath.row] as! NSNumber
         cell.onBtnClickBlock = {[weak self] param in
             
             self?.dismissBlock(indexPath.row)

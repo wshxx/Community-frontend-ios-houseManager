@@ -16,6 +16,7 @@ class XHWLPickPhotoView: UIView {
     var imgIVArray:NSMutableArray!
     var selectImg:XHWLImageBtn!
     var isShow:Bool!
+    var isBundle:Bool! = false
     
     init(frame: CGRect, _ isShow:Bool) {
         super.init(frame: frame)
@@ -55,6 +56,9 @@ class XHWLPickPhotoView: UIView {
         titleL.frame = CGRect(x:10, y:0, width:80, height:25)
         
         var orginX:CGFloat = 70
+        if self.bounds.size.width-70<210 {
+            orginX = self.bounds.size.width-210
+        }
         
         if isShow {
             if imgIVArray.count > 0 {
@@ -112,11 +116,17 @@ class XHWLPickPhotoView: UIView {
         imgIVArray = NSMutableArray()
         for i in 0..<array.count {
             let imgV:UIImageView = UIImageView()
-            let urlStr = "\(XHWLImgURL)/\(array[i] as! String)"
-            let url = URL(string: urlStr)
-            imgV.kf.setImage(with: url)
-            self.addSubview(imgV)
-            imgIVArray.add(imgV)
+            if isBundle == false {
+                let urlStr = "\(XHWLImgURL)/\(array[i] as! String)"
+                let url = URL(string: urlStr)
+                imgV.kf.setImage(with: url)
+                self.addSubview(imgV)
+                imgIVArray.add(imgV)
+            } else {
+                imgV.image = UIImage(named:"3.jpg")
+                self.addSubview(imgV)
+                imgIVArray.add(imgV)
+            }
         }
     }
     

@@ -24,10 +24,10 @@ class XHWLProgressDetailCell: UITableViewCell {
         
         if realModel.arriveType == "-1" {
             
-            iconIV.image = UIImage(named: "dot_green")
+            iconIV.image = UIImage(named: "dot_gray")
         } else if realModel.arriveType == "0" {
             
-            iconIV.image = UIImage(named: "dot_gray")
+            iconIV.image = UIImage(named: "dot_green")
         }
     }
     

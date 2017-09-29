@@ -14,18 +14,18 @@ class XHWLAbnormalPassView: UIView  , UITableViewDelegate, UITableViewDataSource
     var tipImg:UIImageView!
     var tipLabel:UILabel!
     var tableView:UITableView!
-    var dataAry:NSMutableArray!
+    var dataAry:NSMutableArray! = NSMutableArray()
     var clickCell:(NSInteger)->(Void) = {param in }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let array:NSArray = [["name": "特权车辆", "time":"2017.01.21", "registerName":"哈哈", "content":"张浩然"],
-                             ["name": "特权车辆", "time":"2017.01.21", "registerName":"哈哈",  "content":"张浩然"]
-        ]
-        
-        dataAry = NSMutableArray()
-        dataAry = XHWLRegisterationModel.mj_objectArray(withKeyValuesArray: array)
+//        let array:NSArray = [["name": "特权车辆", "time":"2017.01.21", "registerName":"哈哈", "content":"张浩然"],
+//                             ["name": "特权车辆", "time":"2017.01.21", "registerName":"哈哈",  "content":"张浩然"]
+//        ]
+//
+//        dataAry = NSMutableArray()
+//        dataAry = XHWLRegisterationModel.mj_objectArray(withKeyValuesArray: array)
         
         setupView()
         
@@ -50,7 +50,7 @@ class XHWLAbnormalPassView: UIView  , UITableViewDelegate, UITableViewDataSource
         super.layoutSubviews()
         
         bgImage.frame = self.bounds
-        tableView.frame = bgImage.bounds // CGRect(x:0, y:0, width:self.frame.size.width, height:self.frame.size.height)
+        tableView.frame = CGRect(x:0, y:10, width:self.frame.size.width, height:self.frame.size.height-10)
         
     }
     
@@ -65,8 +65,10 @@ class XHWLAbnormalPassView: UIView  , UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: XHWLRegistrationCell = XHWLRegistrationCell.cellWithTableView(tableView: tableView)
-        let model:XHWLRegisterationModel = dataAry[indexPath.row] as! XHWLRegisterationModel
-        cell.setRegisterModel(model)
+//        let model:XHWLRegisterationModel = dataAry[indexPath.row] as! XHWLRegisterationModel
+//        cell.setRegisterModel(model)
+        let model:XHWLAbnormalPassModel = dataAry[indexPath.row] as! XHWLAbnormalPassModel
+        cell.abnormalModel = model
         
         return cell;
     }

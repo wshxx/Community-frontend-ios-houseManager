@@ -12,16 +12,20 @@ class XHWLLabelView: UIView {
 
     var titleL:UILabel!
     var contentTF:UITextField!
+    var textAlign:NSTextAlignment! {
+        willSet {
+            if (newValue  != nil) {
+                contentTF.textAlignment = newValue
+                
+//                NSTextAlignment(rawValue: 7)!
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupView()
-    }
-    
-    func contentTextAlign(_ textAlignment: NSTextAlignment) {
-        
-        contentTF.textAlignment = textAlignment
     }
     
     func setupView() {

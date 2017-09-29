@@ -17,18 +17,25 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
     
 //    var menuView : XHWLMenuView!
     var homeView:XHWLHomeView!
+    var block:(Bool)->() = {param in  }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupNav()
         setupView()
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//          menuView.updateData()
+        if UserDefaults.standard.bool(forKey: "isLeadFirst") == false {
+            XHWLLeadingView.showLeadingView()
+            UserDefaults.standard.set(true, forKey:"isLeadFirst")
+            UserDefaults.standard.synchronize()
+        }
     }
     
     func setupNav() {
@@ -180,15 +187,16 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
      *  @param strResult 返回的字符串
      */
     
-    func returnResultString(strResult:String, block:((_ isSuccess:Bool)->Void))  {
+    func returnResultString(strResult:String, block:@escaping ((_ isSuccess:Bool)->Void))
+    {
         print("\(strResult)")
         
+        self.block = block
         let dict:NSDictionary = strResult.dictionaryWithJSON()
         let utid:String = dict["utid"] as! String
         
-        
         if utid.compare("XHWL").rawValue == 0 {
-            block(true)
+//            block(true)
             
             let type:String = dict["type"] as! String
             let code:String = dict["code"] as! String
@@ -217,9 +225,10 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
             print("\(model.address) = \(model.yzId)")
         }
         else if requestKey == XHWLRequestKeyID.XHWL_SCANCODE.rawValue {
-            
+            print("\(response)")
             let errorCode:NSInteger = response["errorCode"] as! NSInteger
             if errorCode == 200 {
+                block(true)
                 "扫描成功".ext_debugPrintAndHint()
                 let result:NSDictionary = response["result"] as! NSDictionary
                 
@@ -230,6 +239,11 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
                 let vc:XHWLScanResultVC = XHWLScanResultVC()
                 vc.scanModel = scanModel
                 self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                
+                let message:String = response["message"] as! String
+                message.ext_debugPrintAndHint()
+                block(false)
             }
         }
     }

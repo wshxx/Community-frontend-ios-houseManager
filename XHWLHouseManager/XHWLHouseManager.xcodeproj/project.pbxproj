@@ -174,7 +174,6 @@
 		193F10F61F7B97A200C2F948 /* 别人进行云对讲0058.png in Resources */ = {isa = PBXBuildFile; fileRef = 193F10B61F7B97A200C2F948 /* 别人进行云对讲0058.png */; };
 		193F10F71F7B97A200C2F948 /* 别人进行云对讲0059.png in Resources */ = {isa = PBXBuildFile; fileRef = 193F10B71F7B97A200C2F948 /* 别人进行云对讲0059.png */; };
 		193F10F81F7B97A200C2F948 /* 别人进行云对讲0060.png in Resources */ = {isa = PBXBuildFile; fileRef = 193F10B81F7B97A200C2F948 /* 别人进行云对讲0060.png */; };
-		193F10F91F7B97A200C2F948 /* space_door.gif in Resources */ = {isa = PBXBuildFile; fileRef = 193F10B91F7B97A200C2F948 /* space_door.gif */; };
 		193F10FA1F7B97A200C2F948 /* xhwl_login_logo_down.gif in Resources */ = {isa = PBXBuildFile; fileRef = 193F10BA1F7B97A200C2F948 /* xhwl_login_logo_down.gif */; };
 		193F10FB1F7B97A200C2F948 /* xhwl_login_logo_up.gif in Resources */ = {isa = PBXBuildFile; fileRef = 193F10BB1F7B97A200C2F948 /* xhwl_login_logo_up.gif */; };
 		1955C9B31F6528C1008C31C8 /* XHWLForgetPwdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955C9B21F6528C1008C31C8 /* XHWLForgetPwdView.swift */; };
@@ -200,8 +199,6 @@
 		1961CDA91F596328006856D0 /* ToolBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1961CD971F596328006856D0 /* ToolBarButton.m */; };
 		1961CDAA1F596328006856D0 /* ToolBarButtonPositionReckoner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1961CD991F596328006856D0 /* ToolBarButtonPositionReckoner.m */; };
 		1961CDAB1F596328006856D0 /* ToolBarScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1961CD9B1F596328006856D0 /* ToolBarScrollView.m */; };
-		1961CDB71F5963D2006856D0 /* CMPedometerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1961CDB41F5963D2006856D0 /* CMPedometerViewController.swift */; };
-		1961CDB91F5963D2006856D0 /* XHWLPedometerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1961CDB61F5963D2006856D0 /* XHWLPedometerVC.swift */; };
 		1961CDBC1F5963EA006856D0 /* XHWLLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1961CDBB1F5963EA006856D0 /* XHWLLocationVC.swift */; };
 		1961CDBE1F596441006856D0 /* XHWLMcuShowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1961CDBD1F596441006856D0 /* XHWLMcuShowVC.swift */; };
 		1961CDC01F5983EF006856D0 /* XHWLMcuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1961CDBF1F5983EF006856D0 /* XHWLMcuView.swift */; };
@@ -254,6 +251,8 @@
 		19A7A7111F57FB350044DC1A /* XHWLHttpTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7A7101F57FB350044DC1A /* XHWLHttpTool.swift */; };
 		19A7A7131F58067E0044DC1A /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A7A7121F58067E0044DC1A /* AlertMessage.swift */; };
 		19A822911F728E1C00B8E570 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A822901F728E1C00B8E570 /* SwiftNotice.swift */; };
+		19A9C1761F7DEEEE00C928AA /* BluetoothScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A9C1751F7DEEEE00C928AA /* BluetoothScanVC.swift */; };
+		19A9C1791F7E433300C928AA /* XHWLLeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A9C1781F7E433300C928AA /* XHWLLeadingView.swift */; };
 		19ADF39E1F64DD8400A9E0FB /* XHWLRegisterationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF39D1F64DD8400A9E0FB /* XHWLRegisterationModel.swift */; };
 		19ADF3AC1F64FF7300A9E0FB /* XHWLTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF3AB1F64FF7300A9E0FB /* XHWLTagView.swift */; };
 		19B118A51F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B118A41F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift */; };
@@ -278,14 +277,17 @@
 		19C0BCF91F56AA8B00871BDD /* XHWLNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */; };
 		19D8FDBB1F6A664400AC7C22 /* XHWLAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D8FDBA1F6A664400AC7C22 /* XHWLAccountModel.swift */; };
 		19D8FDBD1F6A670900AC7C22 /* XHWLProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D8FDBC1F6A670900AC7C22 /* XHWLProjectModel.swift */; };
+		19E16CD01F7CE53E00E7F930 /* open_door.gif in Resources */ = {isa = PBXBuildFile; fileRef = 19E16CCF1F7CE2BB00E7F930 /* open_door.gif */; };
+		19E16CD51F7CECD100E7F930 /* XHWLAbnormalPassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E16CD41F7CECD100E7F930 /* XHWLAbnormalPassModel.swift */; };
 		19F04DCF1F75051C00E0BD75 /* RemoteOpenDoorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DCE1F75051C00E0BD75 /* RemoteOpenDoorVC.swift */; };
-		19F04DD31F7509B400E0BD75 /* BluetoothScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DD01F7509B400E0BD75 /* BluetoothScanVC.swift */; };
 		19F04DD41F7509B400E0BD75 /* BluetoothTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DD11F7509B400E0BD75 /* BluetoothTableViewCell.swift */; };
 		19F04DD51F7509B400E0BD75 /* BluetoothVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DD21F7509B400E0BD75 /* BluetoothVC.swift */; };
 		19F04DD71F7509B800E0BD75 /* LocalBlueToothTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DD61F7509B800E0BD75 /* LocalBlueToothTableViewCell.swift */; };
 		19FACBC61F68C43E00680E63 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FACBC51F68C43E00680E63 /* Validation.swift */; };
 		19FACBC91F68C97400680E63 /* XHWLUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FACBC81F68C97400680E63 /* XHWLUserModel.swift */; };
 		19FACBCB1F68CA0C00680E63 /* XHWLRoleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FACBCA1F68CA0C00680E63 /* XHWLRoleModel.swift */; };
+		19FB803F1F7C9B4A001B43B9 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB803E1F7C9B4A001B43B9 /* NotificationService.swift */; };
+		19FB80431F7C9B4A001B43B9 /* XHWLPushExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19FB803C1F7C9B4A001B43B9 /* XHWLPushExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8408358F1F6E010500DC644A /* XHWLRequestKeyDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8408358E1F6E010500DC644A /* XHWLRequestKeyDefine.swift */; };
 		840835911F6E01DF00DC644A /* XHWLNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840835901F6E01DF00DC644A /* XHWLNetwork.swift */; };
 		84A50A5C1F5668DA00BCDA47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A50A5B1F5668DA00BCDA47 /* AppDelegate.swift */; };
@@ -298,6 +300,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		19FB80411F7C9B4A001B43B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84A50A501F5668DA00BCDA47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 19FB803B1F7C9B4A001B43B9;
+			remoteInfo = XHWLPushExtension;
+		};
 		84A50A6D1F5668DA00BCDA47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84A50A501F5668DA00BCDA47 /* Project object */;
@@ -325,6 +334,17 @@
 				193F0DA31F7B36C600C2F948 /* CommonCrypto.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		19FB80471F7C9B4A001B43B9 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				19FB80431F7C9B4A001B43B9 /* XHWLPushExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -499,7 +519,6 @@
 		193F10B61F7B97A200C2F948 /* 别人进行云对讲0058.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0058.png"; sourceTree = "<group>"; };
 		193F10B71F7B97A200C2F948 /* 别人进行云对讲0059.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0059.png"; sourceTree = "<group>"; };
 		193F10B81F7B97A200C2F948 /* 别人进行云对讲0060.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0060.png"; sourceTree = "<group>"; };
-		193F10B91F7B97A200C2F948 /* space_door.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = space_door.gif; sourceTree = "<group>"; };
 		193F10BA1F7B97A200C2F948 /* xhwl_login_logo_down.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xhwl_login_logo_down.gif; sourceTree = "<group>"; };
 		193F10BB1F7B97A200C2F948 /* xhwl_login_logo_up.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xhwl_login_logo_up.gif; sourceTree = "<group>"; };
 		1941DCDA1F58341B009DE0F0 /* XHWLHouseManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XHWLHouseManager.entitlements; sourceTree = "<group>"; };
@@ -542,8 +561,6 @@
 		1961CD991F596328006856D0 /* ToolBarButtonPositionReckoner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolBarButtonPositionReckoner.m; sourceTree = "<group>"; };
 		1961CD9A1F596328006856D0 /* ToolBarScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolBarScrollView.h; sourceTree = "<group>"; };
 		1961CD9B1F596328006856D0 /* ToolBarScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolBarScrollView.m; sourceTree = "<group>"; };
-		1961CDB41F5963D2006856D0 /* CMPedometerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMPedometerViewController.swift; sourceTree = "<group>"; };
-		1961CDB61F5963D2006856D0 /* XHWLPedometerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLPedometerVC.swift; sourceTree = "<group>"; };
 		1961CDBB1F5963EA006856D0 /* XHWLLocationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLocationVC.swift; sourceTree = "<group>"; };
 		1961CDBD1F596441006856D0 /* XHWLMcuShowVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLMcuShowVC.swift; sourceTree = "<group>"; };
 		1961CDBF1F5983EF006856D0 /* XHWLMcuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLMcuView.swift; sourceTree = "<group>"; };
@@ -612,6 +629,8 @@
 		19A7A7101F57FB350044DC1A /* XHWLHttpTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLHttpTool.swift; sourceTree = "<group>"; };
 		19A7A7121F58067E0044DC1A /* AlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 		19A822901F728E1C00B8E570 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
+		19A9C1751F7DEEEE00C928AA /* BluetoothScanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothScanVC.swift; sourceTree = "<group>"; };
+		19A9C1781F7E433300C928AA /* XHWLLeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLLeadingView.swift; sourceTree = "<group>"; };
 		19ADF39D1F64DD8400A9E0FB /* XHWLRegisterationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRegisterationModel.swift; sourceTree = "<group>"; };
 		19ADF3AB1F64FF7300A9E0FB /* XHWLTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLTagView.swift; sourceTree = "<group>"; };
 		19B118A41F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLBluetoothOpenVC.swift; sourceTree = "<group>"; };
@@ -662,14 +681,18 @@
 		19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLNavigationController.swift; sourceTree = "<group>"; };
 		19D8FDBA1F6A664400AC7C22 /* XHWLAccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLAccountModel.swift; sourceTree = "<group>"; };
 		19D8FDBC1F6A670900AC7C22 /* XHWLProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLProjectModel.swift; sourceTree = "<group>"; };
+		19E16CCF1F7CE2BB00E7F930 /* open_door.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = open_door.gif; sourceTree = "<group>"; };
+		19E16CD41F7CECD100E7F930 /* XHWLAbnormalPassModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLAbnormalPassModel.swift; sourceTree = "<group>"; };
 		19F04DCE1F75051C00E0BD75 /* RemoteOpenDoorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteOpenDoorVC.swift; sourceTree = "<group>"; };
-		19F04DD01F7509B400E0BD75 /* BluetoothScanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothScanVC.swift; sourceTree = "<group>"; };
 		19F04DD11F7509B400E0BD75 /* BluetoothTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothTableViewCell.swift; sourceTree = "<group>"; };
 		19F04DD21F7509B400E0BD75 /* BluetoothVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothVC.swift; sourceTree = "<group>"; };
 		19F04DD61F7509B800E0BD75 /* LocalBlueToothTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalBlueToothTableViewCell.swift; sourceTree = "<group>"; };
 		19FACBC51F68C43E00680E63 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		19FACBC81F68C97400680E63 /* XHWLUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLUserModel.swift; sourceTree = "<group>"; };
 		19FACBCA1F68CA0C00680E63 /* XHWLRoleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRoleModel.swift; sourceTree = "<group>"; };
+		19FB803C1F7C9B4A001B43B9 /* XHWLPushExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = XHWLPushExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		19FB803E1F7C9B4A001B43B9 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		19FB80401F7C9B4A001B43B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C8CA86321214775B04BCDF0 /* Pods_XHWLHouseManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XHWLHouseManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82D04BCDBEE1628E508C0F62 /* Pods-XHWLHouseManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XHWLHouseManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XHWLHouseManager/Pods-XHWLHouseManager.debug.xcconfig"; sourceTree = "<group>"; };
 		8408358E1F6E010500DC644A /* XHWLRequestKeyDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRequestKeyDefine.swift; sourceTree = "<group>"; };
@@ -690,6 +713,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		19FB80391F7C9B4A001B43B9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84A50A551F5668DA00BCDA47 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1137,6 +1167,7 @@
 		193F0EA81F7B512B00C2F948 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				19E16CD41F7CECD100E7F930 /* XHWLAbnormalPassModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1349,8 +1380,8 @@
 		193F107A1F7B97A200C2F948 /* resourceFile */ = {
 			isa = PBXGroup;
 			children = (
+				19E16CCF1F7CE2BB00E7F930 /* open_door.gif */,
 				193F107B1F7B97A200C2F948 /* GIF_image */,
-				193F10B91F7B97A200C2F948 /* space_door.gif */,
 				193F10BA1F7B97A200C2F948 /* xhwl_login_logo_down.gif */,
 				193F10BB1F7B97A200C2F948 /* xhwl_login_logo_up.gif */,
 			);
@@ -1506,15 +1537,6 @@
 				1961CD9B1F596328006856D0 /* ToolBarScrollView.m */,
 			);
 			path = toolBar;
-			sourceTree = "<group>";
-		};
-		1961CDB31F5963D2006856D0 /* HealthKit */ = {
-			isa = PBXGroup;
-			children = (
-				1961CDB41F5963D2006856D0 /* CMPedometerViewController.swift */,
-				1961CDB61F5963D2006856D0 /* XHWLPedometerVC.swift */,
-			);
-			path = HealthKit;
 			sourceTree = "<group>";
 		};
 		1961CDBA1F5963EA006856D0 /* Weath */ = {
@@ -1714,8 +1736,8 @@
 		19A822871F728C8900B8E570 /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
+				19A9C1751F7DEEEE00C928AA /* BluetoothScanVC.swift */,
 				19F04DD61F7509B800E0BD75 /* LocalBlueToothTableViewCell.swift */,
-				19F04DD01F7509B400E0BD75 /* BluetoothScanVC.swift */,
 				19F04DD11F7509B400E0BD75 /* BluetoothTableViewCell.swift */,
 				19F04DD21F7509B400E0BD75 /* BluetoothVC.swift */,
 			);
@@ -1828,7 +1850,6 @@
 				19C0BCEF1F56AA8B00871BDD /* Home */,
 				19A14D751F5E3A7F00D96A2E /* Work */,
 				1961CDBA1F5963EA006856D0 /* Weath */,
-				1961CDB31F5963D2006856D0 /* HealthKit */,
 				1961CD751F5962F9006856D0 /* MCU */,
 				19C0BCED1F56AA8B00871BDD /* Common */,
 				19C0BCF11F56AA8B00871BDD /* Login */,
@@ -1855,6 +1876,7 @@
 				1931C0AF1F725EDB004D0A41 /* Date+Extension.swift */,
 				199999621F78D56D00F6A135 /* UIDevice+Extension.swift */,
 				198B17C61F7A3F8100F1067C /* XHWLLabel.swift */,
+				19A9C1781F7E433300C928AA /* XHWLLeadingView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1905,12 +1927,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		19FB803D1F7C9B4A001B43B9 /* XHWLPushExtension */ = {
+			isa = PBXGroup;
+			children = (
+				19FB803E1F7C9B4A001B43B9 /* NotificationService.swift */,
+				19FB80401F7C9B4A001B43B9 /* Info.plist */,
+			);
+			path = XHWLPushExtension;
+			sourceTree = "<group>";
+		};
 		84A50A4F1F5668DA00BCDA47 = {
 			isa = PBXGroup;
 			children = (
 				84A50A5A1F5668DA00BCDA47 /* XHWLHouseManager */,
 				84A50A6F1F5668DA00BCDA47 /* XHWLHouseManagerTests */,
 				84A50A7A1F5668DA00BCDA47 /* XHWLHouseManagerUITests */,
+				19FB803D1F7C9B4A001B43B9 /* XHWLPushExtension */,
 				84A50A591F5668DA00BCDA47 /* Products */,
 				081FA168AD840A85721D8E2A /* Pods */,
 				8D4A7720846EA956431B05A7 /* Frameworks */,
@@ -1923,6 +1955,7 @@
 				84A50A581F5668DA00BCDA47 /* XHWLHouseManager.app */,
 				84A50A6C1F5668DA00BCDA47 /* XHWLHouseManagerTests.xctest */,
 				84A50A771F5668DA00BCDA47 /* XHWLHouseManagerUITests.xctest */,
+				19FB803C1F7C9B4A001B43B9 /* XHWLPushExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1988,6 +2021,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		19FB803B1F7C9B4A001B43B9 /* XHWLPushExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 19FB80441F7C9B4A001B43B9 /* Build configuration list for PBXNativeTarget "XHWLPushExtension" */;
+			buildPhases = (
+				19FB80381F7C9B4A001B43B9 /* Sources */,
+				19FB80391F7C9B4A001B43B9 /* Frameworks */,
+				19FB803A1F7C9B4A001B43B9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = XHWLPushExtension;
+			productName = XHWLPushExtension;
+			productReference = 19FB803C1F7C9B4A001B43B9 /* XHWLPushExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		84A50A571F5668DA00BCDA47 /* XHWLHouseManager */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84A50A801F5668DA00BCDA47 /* Build configuration list for PBXNativeTarget "XHWLHouseManager" */;
@@ -1999,10 +2049,12 @@
 				FCD20D725CE4EE8121ADA1A9 /* [CP] Embed Pods Frameworks */,
 				4F32B5FF0B99494BC42039F3 /* [CP] Copy Pods Resources */,
 				19D8FDB71F6A23B300AC7C22 /* Embed Frameworks */,
+				19FB80471F7C9B4A001B43B9 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				19FB80421F7C9B4A001B43B9 /* PBXTargetDependency */,
 			);
 			name = XHWLHouseManager;
 			productName = XHWLHouseManager;
@@ -2051,10 +2103,15 @@
 		84A50A501F5668DA00BCDA47 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = XHWL;
 				TargetAttributes = {
+					19FB803B1F7C9B4A001B43B9 = {
+						CreatedOnToolsVersion = 9.0;
+						DevelopmentTeam = L4285ALH3W;
+						ProvisioningStyle = Automatic;
+					};
 					84A50A571F5668DA00BCDA47 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = L4285ALH3W;
@@ -2065,6 +2122,9 @@
 							};
 							com.apple.HealthKit = {
 								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
 							};
 						};
 					};
@@ -2097,11 +2157,19 @@
 				84A50A571F5668DA00BCDA47 /* XHWLHouseManager */,
 				84A50A6B1F5668DA00BCDA47 /* XHWLHouseManagerTests */,
 				84A50A761F5668DA00BCDA47 /* XHWLHouseManagerUITests */,
+				19FB803B1F7C9B4A001B43B9 /* XHWLPushExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		19FB803A1F7C9B4A001B43B9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84A50A561F5668DA00BCDA47 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2114,7 +2182,6 @@
 				193F10DC1F7B97A200C2F948 /* 别人进行云对讲0032.png in Resources */,
 				193F10F21F7B97A200C2F948 /* 别人进行云对讲0054.png in Resources */,
 				84A50A661F5668DA00BCDA47 /* LaunchScreen.storyboard in Resources */,
-				193F10F91F7B97A200C2F948 /* space_door.gif in Resources */,
 				193F10EC1F7B97A200C2F948 /* 别人进行云对讲0048.png in Resources */,
 				193F10BD1F7B97A200C2F948 /* 别人进行云对讲0001.png in Resources */,
 				193F10DF1F7B97A200C2F948 /* 别人进行云对讲0035.png in Resources */,
@@ -2130,6 +2197,7 @@
 				193F10DD1F7B97A200C2F948 /* 别人进行云对讲0033.png in Resources */,
 				193F10F11F7B97A200C2F948 /* 别人进行云对讲0053.png in Resources */,
 				84A50A631F5668DA00BCDA47 /* Assets.xcassets in Resources */,
+				19E16CD01F7CE53E00E7F930 /* open_door.gif in Resources */,
 				193F10F41F7B97A200C2F948 /* 别人进行云对讲0056.png in Resources */,
 				193F10C51F7B97A200C2F948 /* 别人进行云对讲0009.png in Resources */,
 				193F10E81F7B97A200C2F948 /* 别人进行云对讲0044.png in Resources */,
@@ -2260,6 +2328,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		19FB80381F7C9B4A001B43B9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19FB803F1F7C9B4A001B43B9 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84A50A541F5668DA00BCDA47 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2284,12 +2360,14 @@
 				193F0F1F1F7B53B500C2F948 /* XHWLDataView.swift in Sources */,
 				193F0F201F7B53B500C2F948 /* XHWLSubDataView.swift in Sources */,
 				193F0F1D1F7B53AE00C2F948 /* XHWLDataModel.swift in Sources */,
+				19A9C1761F7DEEEE00C928AA /* BluetoothScanVC.swift in Sources */,
 				193F0F1C1F7B53A800C2F948 /* XHWLDataVC.swift in Sources */,
 				193F0F161F7B53A100C2F948 /* XHWLAbnormalPassView.swift in Sources */,
 				193F0F171F7B53A100C2F948 /* XHWLHeadView.swift in Sources */,
 				193F0F181F7B53A100C2F948 /* XHWLImageBtn.swift in Sources */,
 				193F0F191F7B53A100C2F948 /* XHWLPickPhotoView.swift in Sources */,
 				193F0F1A1F7B53A100C2F948 /* XHWLRemarkView.swift in Sources */,
+				19A9C1791F7E433300C928AA /* XHWLLeadingView.swift in Sources */,
 				193F0F1B1F7B53A100C2F948 /* XHWLSafeGuardDetailView.swift in Sources */,
 				193F0F141F7B539900C2F948 /* XHWLAbnormalPassVC.swift in Sources */,
 				193F0F151F7B539900C2F948 /* XHWLSafeGuardDetailVC.swift in Sources */,
@@ -2386,7 +2464,6 @@
 				19A2E51B1F710C0200C08729 /* JGProgressView.swift in Sources */,
 				19A14D911F5EA46F00D96A2E /* RefreshView.swift in Sources */,
 				19A5725D1F6CD49C007B0D3F /* XHWLBaseVC.swift in Sources */,
-				19F04DD31F7509B400E0BD75 /* BluetoothScanVC.swift in Sources */,
 				197D64B61F62807D00977074 /* XHWLMenuModel.swift in Sources */,
 				19F04DD51F7509B400E0BD75 /* BluetoothVC.swift in Sources */,
 				19BBF3E21F74A620005AC7F2 /* String+Validation.swift in Sources */,
@@ -2403,9 +2480,7 @@
 				1961CDA91F596328006856D0 /* ToolBarButton.m in Sources */,
 				19A14DAF1F5F991600D96A2E /* RTRootNavigationController.m in Sources */,
 				1961CDA71F596328006856D0 /* TalkChannelView.m in Sources */,
-				1961CDB71F5963D2006856D0 /* CMPedometerViewController.swift in Sources */,
 				19BB53571F56BFA3006C38EA /* NSObject+MJKeyValue.m in Sources */,
-				1961CDB91F5963D2006856D0 /* XHWLPedometerVC.swift in Sources */,
 				1931C0B01F725EDB004D0A41 /* Date+Extension.swift in Sources */,
 				19D8FDBB1F6A664400AC7C22 /* XHWLAccountModel.swift in Sources */,
 				1961CCD21F58E336006856D0 /* DateStringExtension.swift in Sources */,
@@ -2413,6 +2488,7 @@
 				1961CDA01F596328006856D0 /* PlayView.m in Sources */,
 				1961CCD01F58E32F006856D0 /* StringExtension.swift in Sources */,
 				19A7A70E1F57EB460044DC1A /* YLImageView.swift in Sources */,
+				19E16CD51F7CECD100E7F930 /* XHWLAbnormalPassModel.swift in Sources */,
 				19BB535B1F56C00F006C38EA /* XHWLConfigure.swift in Sources */,
 				1955C9B51F652A41008C31C8 /* XHWLCodeTF.swift in Sources */,
 				19A572651F6CE5CC007B0D3F /* XHWLHomeVC.swift in Sources */,
@@ -2489,6 +2565,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		19FB80421F7C9B4A001B43B9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 19FB803B1F7C9B4A001B43B9 /* XHWLPushExtension */;
+			targetProxy = 19FB80411F7C9B4A001B43B9 /* PBXContainerItemProxy */;
+		};
 		84A50A6E1F5668DA00BCDA47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 84A50A571F5668DA00BCDA47 /* XHWLHouseManager */;
@@ -2523,6 +2604,60 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		19FB80451F7C9B4A001B43B9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L4285ALH3W;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = XHWLPushExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xinghaiwulian.XHWLHouseManager.XHWLPushExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		19FB80461F7C9B4A001B43B9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L4285ALH3W;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = XHWLPushExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xinghaiwulian.XHWLHouseManager.XHWLPushExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		84A50A7E1F5668DA00BCDA47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2624,7 +2759,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 82D04BCDBEE1628E508C0F62 /* Pods-XHWLHouseManager.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = XHWLHouseManager/XHWLHouseManager.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = L4285ALH3W;
@@ -2656,7 +2793,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XHWLHouseManager/XHWLHouseManager-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 			};
 			name = Debug;
@@ -2665,7 +2802,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EB0514421C71FA51C0328740 /* Pods-XHWLHouseManager.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = XHWLHouseManager/XHWLHouseManager.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = L4285ALH3W;
@@ -2697,7 +2836,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XHWLHouseManager/XHWLHouseManager-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 			};
 			name = Release;
@@ -2759,6 +2898,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		19FB80441F7C9B4A001B43B9 /* Build configuration list for PBXNativeTarget "XHWLPushExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				19FB80451F7C9B4A001B43B9 /* Debug */,
+				19FB80461F7C9B4A001B43B9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		84A50A531F5668DA00BCDA47 /* Build configuration list for PBXProject "XHWLHouseManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

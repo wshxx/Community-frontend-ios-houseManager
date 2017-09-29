@@ -12,7 +12,9 @@ class XHWLAbnormalPassVC: UIViewController , XHWLNetworkDelegate {
 
     var bgImg:UIImageView!
     var topMenu:XHWLTopView!
-    var warningView:XHWLSafeProtectionView!
+//    var warningView:XHWLSafeProtectionView!
+    var warningView:XHWLAbnormalPassView!
+    var dealArray:NSArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,16 +50,15 @@ class XHWLAbnormalPassVC: UIViewController , XHWLNetworkDelegate {
         
         if requestKey == XHWLRequestKeyID.XHWL_EXCEPTIONPASSLOG.rawValue {
             
-            let array = response["result"] as! NSArray
+            let dict = response["result"] as! NSDictionary
+            let array = dict["rows"] as! NSArray
             if array.count <= 0 {
                 return
             }
-//            let dealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray:response["result"]!["deal"] as! NSArray )
-//            let noDealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray: response["result"]!["notDeal"] as! NSArray)
-//            
-//            self.warningView.dataAry.addObjects(from: dealArray as! [Any])
-//            self.warningView.dataSource.addObjects(from: noDealArray as! [Any])
-//            self.warningView.tableView.reloadData()
+            let dealArray:NSArray = XHWLAbnormalPassModel.mj_objectArray(withKeyValuesArray:array)
+self.dealArray = dealArray
+            self.warningView.dataAry.addObjects(from: dealArray as! [Any])
+            self.warningView.tableView.reloadData()
             
         }
         
@@ -74,12 +75,13 @@ class XHWLAbnormalPassVC: UIViewController , XHWLNetworkDelegate {
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-        let warningView:XHWLAbnormalPassView = XHWLAbnormalPassView()
+        warningView = XHWLAbnormalPassView()
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.clickCell = {index in
             
             let vc:XHWLSafeGuardDetailVC = XHWLSafeGuardDetailVC()
+            vc.abnormalModel = self.dealArray[index] as! XHWLAbnormalPassModel
             self.navigationController?.pushViewController(vc, animated: true)
         }
         self.view.addSubview(warningView)

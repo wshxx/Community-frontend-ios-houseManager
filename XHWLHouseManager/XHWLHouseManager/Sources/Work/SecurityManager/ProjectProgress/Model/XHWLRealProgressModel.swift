@@ -31,7 +31,7 @@ class XHWLRealProgressModel: NSObject {
 
 class XHWLListModel:NSObject {
     var arriveTime:String = ""
-    var arriveType:String = "" //-1已巡更 0 为巡更
+    var arriveType:String = "" //-1未巡更 0 已巡更
     var collectNodeId:String = ""
     var endTime:String = ""
     var nodeName:String = ""

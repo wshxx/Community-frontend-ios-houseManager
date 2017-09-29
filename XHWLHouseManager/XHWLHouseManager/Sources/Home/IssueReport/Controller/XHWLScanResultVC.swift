@@ -29,8 +29,8 @@ class XHWLScanResultVC: UIViewController {
         var scanDataModel:XHWLScanDataModel?
         if scanModel.type == "plant" {
             scanDataModel = scanModel.plant
-        } else {
-            scanDataModel = scanModel.plant
+        } else if scanModel.type == "equipment" {
+            scanDataModel = scanModel.equipment
         }
         
         let array :NSArray = [["name":"项目：", "content":scanDataModel!.sysProject.name, "isHiddenEdit": true]
@@ -38,9 +38,9 @@ class XHWLScanResultVC: UIViewController {
         let mutableAry :NSMutableArray = NSMutableArray.init(array: array)
         
         if scanModel.type == "plant" {
-            mutableAry.add(["name":"位置：", "content":"(\(scanDataModel!.longitude),\(scanDataModel!.latitude))", "isHiddenEdit": true])
+            mutableAry.add(["name":"位置：", "content":"\(scanDataModel!.descri)", "isHiddenEdit": true])
             mutableAry.add(["name":"编码：", "content":scanDataModel!.sysProject.ccProjectCode, "isHiddenEdit": true])
-         } else {
+         } else if scanModel?.type == "equipment" {
             mutableAry.add(["name":"位置：", "content":scanDataModel!.address, "isHiddenEdit": true])
             mutableAry.add(["name":"设备编码：", "content":scanDataModel!.sysProject.ccProjectCode, "isHiddenEdit":true])
             mutableAry.add(["name":"当前状态：", "content":scanDataModel!.status, "isHiddenEdit": true])
@@ -83,8 +83,8 @@ class XHWLScanResultVC: UIViewController {
         if scanModel.type == "plant" {
             let scanDataModel:XHWLScanDataModel = scanModel.plant
             warningView.titleL.text = scanDataModel.name
-        } else {
-            let scanDataModel:XHWLScanDataModel = scanModel.plant
+        } else if scanModel.type == "equipment" {
+            let scanDataModel:XHWLScanDataModel = scanModel.equipment
             warningView.titleL.text = scanDataModel.name
         }
         // scanModel.type == "01" ? "园林绿植":"设备" // scanModel!.name

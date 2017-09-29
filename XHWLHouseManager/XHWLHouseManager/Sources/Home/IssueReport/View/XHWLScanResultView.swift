@@ -88,7 +88,7 @@ class XHWLScanResultView: UIView {
             let menuModel :XHWLMenuModel = array[i] as! XHWLMenuModel
             let labelView: XHWLLabelView = XHWLLabelView()
             labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
-            labelView.contentTextAlign(NSTextAlignment.right)
+            labelView.textAlign = NSTextAlignment.right
             scrollView.addSubview(labelView)
             labelViewArray.add(labelView)
         }
@@ -109,7 +109,7 @@ class XHWLScanResultView: UIView {
         if labelViewArray.count > 0 {
             for i in 0..<labelViewArray.count {
                 let label:XHWLLabelView = labelViewArray[i] as! XHWLLabelView
-                label.frame = CGRect(x:50, y:CGFloat(i).multiplied(by: 30.0) + h, width:self.bounds.size.width-70, height:30)
+                label.frame = CGRect(x:15, y:CGFloat(i).multiplied(by: 30.0) + h, width:self.bounds.size.width-30, height:30)
                 height = label.frame.maxY
             }
         }

@@ -30,16 +30,16 @@ class XHWLIssueReportListVC: UIViewController , UITableViewDelegate, UITableView
     func onSetupNav() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
-        let array:NSArray = ["水泵房", "排污泵"]
-        let topMenu:XHWLTopView = XHWLTopView.init(frame: CGRect.zero)
-        topMenu.createArray(array: array)
-        topMenu.bounds = CGRect(x:0, y:0, width:Screen_width-100, height:44)
-        topMenu.center = CGPoint(x:Screen_width/2.0, y:22)
-        topMenu.btnBlock = {[weak self] index in
-            //self?.warningView.selectIndex = index
-            //self?.warningView.tableView.reloadData()
-        }
-        self.navigationItem.titleView = topMenu
+//        let array:NSArray = ["水泵房", "排污泵"]
+//        let topMenu:XHWLTopView = XHWLTopView.init(frame: CGRect.zero)
+//        topMenu.createArray(array: array)
+//        topMenu.bounds = CGRect(x:0, y:0, width:Screen_width-100, height:44)
+//        topMenu.center = CGPoint(x:Screen_width/2.0, y:22)
+//        topMenu.btnBlock = {[weak self] index in
+//            //self?.warningView.selectIndex = index
+//            //self?.warningView.tableView.reloadData()
+//        }
+//        self.navigationItem.titleView = topMenu
     }
     
     func onBack(){

@@ -16,7 +16,7 @@ import IQKeyboardManagerSwift
 //Any可以表示任何类型，除了方法类型(function types)。
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUSHRegisterDelegate { // JPUSHRegisterDelegate
 
     var window: UIWindow?
     var _mapManager: BMKMapManager?
@@ -32,16 +32,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate {
         configureMCU()      // 对接海康威视
         configureMapKit()   // 初始化百度地图
         setupMapKit()       // 百度地图
+        setupJPush(launchOptions)
         
-        self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.backgroundColor = UIColor.white
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        [self configTestin];            // 蒲公英
         setupView()
         
-        let vc : XHWLLoginVC = XHWLLoginVC()
-        self.window?.rootViewController = UINavigationController(rootViewController: vc)
+        if UserDefaults.standard.object(forKey: "user") == nil {
+            let vc : XHWLLoginVC = XHWLLoginVC()
+            self.window?.rootViewController = UINavigationController(rootViewController: vc)
+            self.window?.makeKeyAndVisible()
+        } else {
+            if UserDefaults.standard.object(forKey: "user") is String {
+                let vc : XHWLLoginVC = XHWLLoginVC()
+                self.window?.rootViewController = UINavigationController(rootViewController: vc)
+            } else {
+                let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+                let dict:NSDictionary = data.mj_JSONObject() as! NSDictionary
+                let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: dict)
+                if userModel.wyAccount.token == "" {
+                    let vc : XHWLLoginVC = XHWLLoginVC()
+                    self.window?.rootViewController = UINavigationController(rootViewController: vc)
+                    
+                } else {
+                    onTabbar()
+                }
+            }
+        }
+        
         self.window?.makeKeyAndVisible()
-       
         return true
+    }
+    
+    func onTabbar() {
+        
+        let tabbar: CYTabBarController = CYTabBarController()
+        
+        /**
+         *  配置外观
+         */
+        CYTabBarConfig.shared().selectedTextColor = color_51ebfd
+        CYTabBarConfig.shared().textColor = UIColor.white
+        CYTabBarConfig.shared().backgroundColor = UIColor.clear
+        CYTabBarConfig.shared().haveBorder = false
+        CYTabBarConfig.shared().selectIndex = 0
+        
+        
+        /**
+         *  style 1 (中间按钮突出 ， 设为按钮 , 底部有文字 ， 闲鱼)
+         */
+        let v1:RTContainerNavigationController = XHWLNavigationController(rootViewController:XHWLHomeVC())
+        let v2:RTContainerNavigationController = XHWLNavigationController(rootViewController:XHWLWorkVC())
+        tabbar.addChildController(v1, title: "首页", imageName: "tabbar_home", selectedImageName: "tabbar_home_sel")
+        tabbar.addChildController(v2, title: "工作", imageName: "tabbar_work", selectedImageName: "tabbar_work_sel")
+        
+        // [tabbar addCenterController:nil bulge:YES title:@"发布" imageName:@"post_normal" selectedImageName:@"post_normal"];
+        self.window?.rootViewController = tabbar
     }
     
     func setupView() {
@@ -49,6 +96,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate {
         bgImg.frame = UIScreen.main.bounds
         bgImg.image = UIImage(named:"home_bg")
         self.window?.addSubview(bgImg)
+    }
+    
+//    // 配置蒲公英
+//    -(void)configTestin
+//    {
+//    //启动基本SDK
+//    [[PgyManager sharedPgyManager] startManagerWithAppId:@"a186c57137749ff3f0d2e98067a138e5"];
+//    //启动更新检查SDK
+//    [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:@"a186c57137749ff3f0d2e98067a138e5"];
+//    }
+    
+    func setupJPush(_ launchOptions:[UIApplicationLaunchOptionsKey: Any]?) {
+        //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
+        let entity:JPUSHRegisterEntity = JPUSHRegisterEntity()
+        entity.types = Int(UInt8(JPAuthorizationOptions.alert.rawValue) | UInt8(JPAuthorizationOptions.badge.rawValue) | UInt8(JPAuthorizationOptions.sound.rawValue))
+        if UIDevice.current.systemVersion >= "8.0" {
+            // 可以添加自定义categories
+            // NSSet<UNNotificationCategory *> *categories for iOS10 or later
+            // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
+        }
+
+        JPUSHService.register(forRemoteNotificationConfig: entity, delegate: self)
+        
+        
+        // Required
+        // init Push
+        // notice: 2.1.5版本的SDK新增的注册方法，改成可上报IDFA，如果没有使用IDFA直接传nil
+        // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
+        JPUSHService.setup(withOption: launchOptions,
+                           appKey: jPushAppKey,
+                           channel: channel,
+                           apsForProduction: true) // 0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
     }
     
     // 百度地图
@@ -105,6 +184,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -133,5 +213,78 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate {
             NSLog("授权失败，错误代码：Error\(iError)");
         }
     }
+    
+    // MARK: - 推送
+    // 注册APNs成功并上报DeviceToken 启动注册token
+    // 请在AppDelegate.m实现该回调方法并添加回调方法中的代码
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        /// Required - 注册 DeviceToken
+        JPUSHService.registerDeviceToken(deviceToken)
+    }
+    
+    // 实现注册APNs失败接口可选）
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("did Fail To Register For Remote Notifications With Error: \(error)")
+    }
+    
+
+    
+    // MARK: - JPUSHRegisterDelegate
+    
+    // iOS 10 Support
+    
+    // MARK: - JPUSHRegisterDelegate
+    @available(iOS 10.0, *)
+    func jpushNotificationCenter(_ center: UNUserNotificationCenter!, willPresent notification: UNNotification!, withCompletionHandler completionHandler: ((Int) -> Void)!) {
+        // Required
+        let userInfo:NSDictionary  = notification.request.content.userInfo as NSDictionary
+        print("\(userInfo)")
+        if #available(iOS 10.0, *) {
+            if(notification.request.trigger is UNPushNotificationTrigger) {
+                JPUSHService.handleRemoteNotification(userInfo as! [AnyHashable : Any])
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        completionHandler(Int(UNNotificationPresentationOptions.alert.rawValue)) // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
+    }
+    
+    @available(iOS 10.0, *)
+    func jpushNotificationCenter(_ center: UNUserNotificationCenter!, didReceive response: UNNotificationResponse!, withCompletionHandler completionHandler: (() -> Void)!) {
+        // Required
+        let userInfo:NSDictionary = response.notification.request.content.userInfo as NSDictionary
+        print("\(userInfo)")
+        if(response.notification.request.trigger is UNPushNotificationTrigger) {
+            JPUSHService.handleRemoteNotification(userInfo as! [AnyHashable : Any])
+        }
+        
+        completionHandler();  // 系统要求执行这个方法
+    }
+
+    // ios 9 系统提示
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        // Required, iOS 7 Support
+        JPUSHService.handleRemoteNotification(userInfo)
+        completionHandler(UIBackgroundFetchResult.newData)
+        print("\(userInfo)")
+        let aps:NSDictionary = userInfo["aps"] as! NSDictionary
+        "\(aps["alert"]!)".ext_debugPrintAndHint()
+    }
+    
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        // Required,For systems with less than or equal to iOS6
+        JPUSHService.handleRemoteNotification(userInfo)
+        print("\(userInfo)")
+    }
+    
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        print("\(notification.alertTitle) = \(notification.userInfo)")
+    }
+
+    
+
+
 }
 

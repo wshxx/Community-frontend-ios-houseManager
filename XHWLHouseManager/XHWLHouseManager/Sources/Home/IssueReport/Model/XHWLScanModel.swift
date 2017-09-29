@@ -11,6 +11,7 @@ import MJExtension
 
 class XHWLScanModel:NSObject {
     var plant:XHWLScanDataModel = XHWLScanDataModel()
+    var equipment:XHWLScanDataModel = XHWLScanDataModel()
     var type:String = ""
     
     func mj_objectClassInArray() -> [AnyHashable : Any]! {

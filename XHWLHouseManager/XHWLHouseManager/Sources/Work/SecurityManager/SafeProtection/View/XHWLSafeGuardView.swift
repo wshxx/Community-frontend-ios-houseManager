@@ -91,7 +91,7 @@ class XHWLSafeGuardView: UIView {
         pickPhoto = XHWLPickPhotoView(frame: CGRect.zero, isFinished)
         pickPhoto.showText("现场照片：")
         if isFinished {
-            if !(model.appComplaint.imgUrl is NSNull) {
+            if !(model.appComplaint.manageImgUrl is NSNull) {
                 let array:NSArray = model.appComplaint.manageImgUrl.components(separatedBy: ",") as NSArray
                 pickPhoto.onShowImgArray(array)
             }
@@ -108,13 +108,13 @@ class XHWLSafeGuardView: UIView {
                 let menuModel :XHWLMenuModel = dataAry1[i] as! XHWLMenuModel
                 let labelView: XHWLLabelView = XHWLLabelView()
                 labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
-                labelView.contentTextAlign(NSTextAlignment.center)
+                labelView.textAlign = NSTextAlignment.center
                 bgScrollView.addSubview(labelView)
                 labelViewArray1.add(labelView)
             }
         } else {
             remark = XHWLRemarkView()
-            remark.showText("备注：")
+            remark.showText("备注")
             remark.textViewBlock = {[weak self] text in
                 self?.remarkStr = text
             }
@@ -133,7 +133,7 @@ class XHWLSafeGuardView: UIView {
             let menuModel :XHWLMenuModel = dataAry2[i] as! XHWLMenuModel
             let labelView: XHWLLabelView = XHWLLabelView()
             labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
-            labelView.contentTextAlign(NSTextAlignment.center)
+            labelView.textAlign = NSTextAlignment.center
             bgScrollView.addSubview(labelView)
             labelViewArray2.add(labelView)
         }
@@ -148,7 +148,7 @@ class XHWLSafeGuardView: UIView {
             let menuModel :XHWLMenuModel = dataAry3[i] as! XHWLMenuModel
             let labelView: XHWLLabelView = XHWLLabelView()
             labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
-            labelView.contentTextAlign(NSTextAlignment.center)
+            labelView.textAlign = NSTextAlignment.center
             bgScrollView.addSubview(labelView)
             labelViewArray3.add(labelView)
         }
@@ -189,7 +189,16 @@ class XHWLSafeGuardView: UIView {
         bgScrollView.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:scHeight)
         
         head1.frame = CGRect(x:10, y:20, width:self.bounds.size.width-20, height:20)
-        pickPhoto.frame = CGRect(x:0, y:head1.frame.maxY+10, width:self.bounds.size.width, height:80)
+        if isFinished {
+            if !(model.appComplaint.manageImgUrl is NSNull) && !model.appComplaint.manageImgUrl.isEmpty {
+                pickPhoto.frame = CGRect(x:0, y:head1.frame.maxY+10, width:self.bounds.size.width, height:80)
+            } else {
+                pickPhoto.frame = CGRect(x:0, y:head1.frame.maxY+10, width:self.bounds.size.width, height:30)
+            }
+        } else {
+            pickPhoto.frame = CGRect(x:0, y:head1.frame.maxY+10, width:self.bounds.size.width, height:80)
+        }
+        
         var height:CGFloat!
         if isFinished {
             for i in 0...labelViewArray1.count-1 {
@@ -220,8 +229,11 @@ class XHWLSafeGuardView: UIView {
             labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width, height:25)
             labelView.center = CGPoint(x:self.frame.size.width/2.0, y:head3.frame.maxY + 10 + 25/2.0 + CGFloat(i*25))
         }
-        picture.frame = CGRect(x:0, y:head3.frame.maxY+5+CGFloat(labelViewArray3.count).multiplied(by:25), width:self.bounds.size.width-20, height:80)
-        
+         if !(model.appComplaint.imgUrl is NSNull) && !model.appComplaint.imgUrl.isEmpty {
+            picture.frame = CGRect(x:0, y:head3.frame.maxY+10+CGFloat(labelViewArray3.count).multiplied(by:25), width:self.bounds.size.width-20, height:80)
+        } else {
+            picture.frame = CGRect(x:0, y:head3.frame.maxY+10+CGFloat(labelViewArray3.count).multiplied(by:25), width:self.bounds.size.width-20, height:30)
+        }
         if !isFinished {
             submitBtn.bounds = CGRect(x:0, y:0, width:150, height:30)
             submitBtn.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height-30)

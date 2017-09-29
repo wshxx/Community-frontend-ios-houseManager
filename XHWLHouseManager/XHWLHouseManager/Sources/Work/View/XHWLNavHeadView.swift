@@ -18,7 +18,9 @@ class XHWLNavHeadView: UIView , UITableViewDelegate, UITableViewDataSource {
     
     init(frame: CGRect, array:NSArray) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clear
+//        self.backgroundColor = UIColor.clear
+        
+        self.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         dataAry = array
         setupView()
         

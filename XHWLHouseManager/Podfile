@@ -5,19 +5,17 @@ target "XHWLHouseManager" do
 
 pod 'Alamofire', '~>4.5.0'
 pod 'Kingfisher', '~>3.11.0'
-
 pod 'IQKeyboardManagerSwift', '~>4.0.13'
 pod 'swiftScan', '~>1.1.1'
 pod 'SnapKit', '~>3.2.0'
-#pod 'XHToastSwift'
 pod 'BaiduMapKit', '~>3.4.0'
 pod 'MJExtension', '~>3.0.13'
+pod 'JPush', '~>3.0.6'
+
 #pod 'HLBarIndicatorView'
 #pod 'WilddogVideo', '~>2.0.2'
-
-#pod 'HZActionSheet'
-
 #pod 'WilddogSync'
+#pod 'XHToastSwift'
 #pod 'GPUImage',:git=>'https://github.com/BradLarson/GPUImage.git'
 
 end

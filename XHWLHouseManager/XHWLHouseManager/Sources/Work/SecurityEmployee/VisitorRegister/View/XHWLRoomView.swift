@@ -65,8 +65,14 @@ class XHWLRoomView: UIView, UITextFieldDelegate {
         contentTF.frame = CGRect(x: titleL.frame.maxX+10, y: 40, width: self.bounds.size.width-titleL.frame.maxX-20, height: 30)
     }
     
-    func showText(leftText:String, rightText:String, btnTitle:String) {
-        titleL.text =  "\(leftText):"
+    func showText(leftText:String, rightText:String, btnTitle:String, _ isNeed:Bool) {
+        if isNeed {
+            let attr:NSMutableAttributedString = NSMutableAttributedString.init(string: "* \(leftText):", attributes: [NSForegroundColorAttributeName: UIColor.white])
+            attr.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSMakeRange(0, 1))
+            titleL.attributedText = attr
+        } else {
+            titleL.text = "  \(leftText):"
+        }
         contentTF.text = rightText
         listBtn.showBtnTitle(btnTitle)
         

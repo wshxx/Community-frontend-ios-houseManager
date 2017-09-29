@@ -15,11 +15,7 @@ class XHWLDeviceModel: NSObject {
     var NavName:String = ""
     var TypeID:String = ""
     var TypeName:String = ""
-//    var Unit:String = ""
-//    var DataCode:String = ""
-//    var DataName:String = ""
-//    var CollectData:String = ""
-//    var CollectTime:String = ""
+    var NavCode:String = ""
     
     override func setValue(_ value: Any?, forKey key: String) {
         super.setValue(value, forKey: key)

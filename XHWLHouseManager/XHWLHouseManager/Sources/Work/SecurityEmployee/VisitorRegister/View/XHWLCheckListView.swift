@@ -42,14 +42,14 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
         super.init(frame: frame)
         
         dataAry = NSMutableArray()
-        let array :NSArray = [["name":"姓名", "content":"", "isHiddenEdit": false, "type": 0],
+        let array :NSArray = [["name":"姓名", "content":"", "isHiddenEdit": true, "type": 0],
                               ["name":"类型", "content":"", "isHiddenEdit": true, "type": 4],
-                              ["name":"", "content":"身份证", "isHiddenEdit":false, "type": 1],
+                              ["name":"", "content":"身份证", "isHiddenEdit":true, "type": 1],
                               ["name":"手机", "content":"", "isHiddenEdit": true, "type": 0],
-                              ["name":"时效", "content":"分钟", "isHiddenEdit": false, "type": 2],
-                              ["name":"车牌", "content":"2017-11-11 09:12:30 \n 2017-11-11", "isHiddenEdit": true, "type": 0],
+                              ["name":"时效", "content":"分钟", "isHiddenEdit": true, "type": 2],
+                              ["name":"车牌", "content":"2017-11-11 09:12:30 \n 2017-11-11", "isHiddenEdit": false, "type": 0],
                               ["name":"事由", "content":"", "isHiddenEdit": true, "type": 0],
-                              ["name":"业主认证", "content":"是\n否", "isHiddenEdit":false, "type": 3]]
+                              ["name":"业主认证", "content":"是\n否", "isHiddenEdit":true, "type": 3]]
         
 
         
@@ -85,7 +85,7 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
             
             if menuModel.type == 0 {
                 let cardView:XHWLCheckTF = XHWLCheckTF()
-                cardView.showText(leftText: menuModel.name, rightText:"")
+                cardView.showText(menuModel.name, "", menuModel.isHiddenEdit)
                 cardView.textEndBlock = {param in
                     if i == 0 {
                         self.name = param
@@ -102,7 +102,7 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
             }
             else if menuModel.type == 1 {
                 let vertical:XHWLCheckListTF = XHWLCheckListTF(frame:CGRect.zero, checkListEnum:XHWLCheckListTFEnum.left)
-                vertical.showText(leftText: menuModel.name, rightText: "", btnTitle: menuModel.content)
+                vertical.showText(menuModel.name,  "", menuModel.content, menuModel.isHiddenEdit)
                 vertical.btnBlock = {  [weak vertical]  in
                     self.endEditing(true)
                     let array:NSArray = ["身份证", "护照"]
@@ -128,7 +128,7 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
             }
             else if menuModel.type == 2 {
                 let timeView:XHWLCheckListTF = XHWLCheckListTF(frame:CGRect.zero, checkListEnum:XHWLCheckListTFEnum.right)
-                timeView.showText(leftText: menuModel.name, rightText: "", btnTitle: menuModel.content)
+                timeView.showText( menuModel.name, "", menuModel.content, menuModel.isHiddenEdit)
                 timeView.btnBlock = { [weak timeView] in
                     self.endEditing(true)
                     let array:NSArray = ["分钟", "小时", "天", "月"]
@@ -169,7 +169,7 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
             }
             else if menuModel.type == 4 {
                 let cardView:XHWLSelTypeView = XHWLSelTypeView()
-                cardView.showText(leftText: menuModel.name, btnTitle:"请选择")
+                cardView.showText(menuModel.name, "请选择", menuModel.isHiddenEdit)
                 cardView.btnBlock = { [weak cardView] in
                     self.endEditing(true)
                     

@@ -18,7 +18,7 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
 
     var bgImage:UIImageView!
     var bgScrollView:UIScrollView!
-    var dataAry:NSMutableArray!
+    var dataAry:NSArray! = NSArray()
     var labelViewArray:NSMutableArray!
     var cancelBtn:UIButton!
     var agreeBtn:UIButton!
@@ -26,28 +26,11 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
     var exceptionId:String! // 异常放行ID
     var isAgree:Bool! = false
     
-    init(frame: CGRect, _ isAgree:Bool) {
+    init(frame: CGRect, _ isAgree:Bool, _ dataAry:NSArray) {
         super.init(frame: frame)
         
-        self.isAgree = isAgree
-        
-        dataAry = NSMutableArray()
-        let array :NSArray = [["name":"放行原因：", "content":"特殊车辆", "isHiddenEdit": false, "type": 0],
-                               ["name":"项目：", "content":"中海华庭", "isHiddenEdit": true, "type": 0],
-                               ["name":"道口编号：", "content":"12345", "isHiddenEdit":false, "type": 0],
-                               ["name":"道口名称：", "content":"12345", "isHiddenEdit": true, "type": 0],
-                               ["name":"车牌：", "content":"翼3047504", "isHiddenEdit": false, "type": 0],
-                               ["name":"出入时间：", "content":"2017-11-11 09:12:30 \n 2017-11-11 09:12:30", "isHiddenEdit": true, "type": 1],
-                               ["name":"操作人：", "content":"徐柳飞", "isHiddenEdit":false, "type": 0],
-                               ["name":"岗位：", "content":"门岗", "isHiddenEdit": true, "type": 0],
-                               ["name":"照片：", "content":"业主", "isHiddenEdit": false, "type": 2]]
-        
-        let dataArray:NSMutableArray = NSMutableArray()
-        dataArray.addObjects(from: array as! [Any])
-        if isAgree {
-            dataArray.add(["name":"处置结果：", "content":"同意", "isHiddenEdit": true, "type": 0])
-        }
-        dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: dataArray)
+        self.isAgree = true // isAgree
+        self.dataAry = dataAry
         
         setupView()
     }
@@ -73,7 +56,7 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
             if menuModel.type == 0 {
                 let labelView: XHWLLabelView = XHWLLabelView()
                 labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
-                labelView.contentTextAlign(NSTextAlignment.left)
+                labelView.textAlign = NSTextAlignment.left
                 bgScrollView.addSubview(labelView)
                 labelViewArray.add(labelView)
             }
@@ -86,7 +69,8 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
             }
             else if menuModel.type == 2 {
                 let picture:XHWLPickPhotoView = XHWLPickPhotoView(frame: CGRect.zero, true)
-//                picture.onShowImgArray([]) // 显示图片
+                picture.isBundle = true
+                picture.onShowImgArray(["", ""]) // 显示图片
                 bgScrollView.addSubview(picture)
                 labelViewArray.add(picture)
             }
@@ -159,7 +143,7 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
                 if menuModel.type == 0 {
                     let labelView :XHWLLabelView = labelViewArray[i] as! XHWLLabelView
                     labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width-30, height:25)
-                    labelView.center = CGPoint(x:self.frame.size.width/2.0, y:15 + maxH)
+                    labelView.center = CGPoint(x:self.frame.size.width/2.0, y:25/2.0+5 + maxH)
                     maxH = labelView.frame.maxY
                 }
                 else if menuModel.type == 1 {
@@ -175,7 +159,7 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
                 else if menuModel.type == 2 {
                     
                     let labelView :XHWLPickPhotoView = labelViewArray[i] as! XHWLPickPhotoView
-                    labelView.frame = CGRect(x:30/2.0, y:5 + maxH, width:self.frame.size.width-30, height:80)
+                    labelView.frame = CGRect(x:30/2.0, y:10 + maxH, width:self.frame.size.width-30, height:80)
                     maxH = labelView.frame.maxY
                 }
             }
@@ -187,8 +171,11 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
             
             cancelBtn.bounds = CGRect(x:0, y:0, width:70, height:30)
             cancelBtn.center = CGPoint(x:self.bounds.size.width-80, y:maxH+45)
+            bgScrollView.contentSize = CGSize(width:0, height:cancelBtn.frame.maxY+30)
+        } else {
+            bgScrollView.contentSize = CGSize(width:0, height:maxH+30)
         }
         
-        bgScrollView.contentSize = CGSize(width:0, height:cancelBtn.frame.maxY+30)
+        
     }
 }

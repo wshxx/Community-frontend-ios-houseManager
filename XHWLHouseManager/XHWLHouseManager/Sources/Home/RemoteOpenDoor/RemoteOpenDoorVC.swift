@@ -25,12 +25,21 @@ class RemoteOpenDoorVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
         doorPickerView.selectRow(self.selectedRow,inComponent:0,animated:true)
         doorPickerView.showsSelectionIndicator = false
         // Do any additional setup after loading the view.
+//        self.title =
         
         let backBtn:UIButton = UIButton()
         backBtn.frame = CGRect(x: 15, y: 20, width: 60, height: 44)
         backBtn.addTarget(self, action: #selector(onBack), for: .touchUpInside)
         backBtn.setImage(UIImage(named:"scan_back"), for: .normal)
         self.view.addSubview(backBtn)
+        
+        let titleLabel:UILabel = UILabel()
+        titleLabel.frame = CGRect(x:0, y:0, width:self.view.bounds.size.width-150, height:44)
+        titleLabel.center = CGPoint(x:self.view.bounds.size.width/2.0, y:42)
+        titleLabel.text = "远程开门"
+        titleLabel.textColor = UIColor.white
+        titleLabel.font = font_14
+        self.view.addSubview(titleLabel)
     }
     
     func onBack(){

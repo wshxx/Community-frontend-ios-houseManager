@@ -47,8 +47,14 @@ class XHWLSelTypeView: UIView {
             listBtn.frame = CGRect(x: titleL.frame.maxX+10, y: 0, width: self.bounds.size.width-titleL.frame.size.width-30, height: 30)
         }
         
-        func showText(leftText:String, btnTitle:String) {
-            titleL.text = leftText
+    func showText(_ leftText:String, _ btnTitle:String, _ isNeed:Bool) {
+            if isNeed {
+                let attr:NSMutableAttributedString = NSMutableAttributedString.init(string: "* \(leftText):", attributes: [NSForegroundColorAttributeName: UIColor.white])
+                attr.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSMakeRange(0, 1))
+                titleL.attributedText = attr
+            } else {
+                titleL.text = "  \(leftText):"
+            }
             listBtn.showBtnTitle(btnTitle)
         }
         

@@ -12,8 +12,6 @@ import CardReaderSDK
 class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let macNo = "20c38ff4ffe0"
     let cardNo = "41516039624d0cb4c0f1b5e7"
-
-    @IBOutlet weak var bluetoothLightIV: UIImageView!
     
     @IBOutlet weak var remainText: UILabel!
     var countDownTimer: Timer?//用于倒计时
@@ -27,6 +25,8 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var bigCheck: UIImageView!
     @IBOutlet weak var scanStateLabel: UILabel! //显示扫描或者扫描完成
+    @IBOutlet weak var bluetoothLightIV: UIImageView!
+    @IBOutlet weak var bluetoothView: UIView!
     
     var devices:[DeviceRecord] = []
     var curDevice:DeviceRecord? = nil{
@@ -65,11 +65,10 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         self.bluetoothTableView.delegate = self
         self.bluetoothTableView.dataSource = self
         
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         //初始化
         CardReaderAPI.Init()
         
@@ -153,7 +152,7 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     @IBAction func returnBtnClicked(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
     //是否正在计数
@@ -177,7 +176,6 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //开始扫描
     func scan(){
-        
         let array:NSMutableArray = NSMutableArray()
         for i in 0..<61 {
             let str = String.init(format: "别人进行云对讲%04d", arguments:[i])
@@ -261,8 +259,7 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 self.curDevice = record
                 
                 self.clearMessage()
-                "绑定成功".ext_debugPrintAndHint()
-//                self.noticeSuccess("绑定成功")
+                self.noticeSuccess("绑定成功")
                 self.dismiss(animated: true, completion: nil)
             }else{
                 self.noticeError(err!.description!)
@@ -277,8 +274,7 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         // autoDisconnect: false，不自动断开连接，可以手动屌用Stop方法断开连接
         CardReaderAPI.OpenDoor(mac!, cardNO: record.cardNo!, timeOut: 10, autoDisconnect: true, callback: {(err) -> Void in
             if err == nil {
-                "开门成功".ext_debugPrintAndHint()
-//                self.noticeSuccess("开门成功")
+                self.noticeSuccess("开门成功")
                 print("************\(mac!)")
                 print("************\(record.cardNo!)")
             }else{

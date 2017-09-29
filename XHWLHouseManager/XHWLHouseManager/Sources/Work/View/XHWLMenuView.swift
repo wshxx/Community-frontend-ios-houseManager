@@ -169,6 +169,9 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
             UserDefaults.standard.set("", forKey: "projectList")
             UserDefaults.standard.synchronize()
             
+            JPUSHService.cleanTags({ (iResCode, iAlias, seq) in
+                
+            }, seq: 0)
             
             let window:UIWindow = UIApplication.shared.keyWindow!
             window.rootViewController = XHWLLoginVC()

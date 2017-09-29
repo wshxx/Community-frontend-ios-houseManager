@@ -23,9 +23,21 @@ class XHWLRegistrationCell: UITableViewCell {
                 titleL.text = newValue.sysVisitor.accessReason
                 
                 stateL.isHidden = false
-                stateL.text = "状态：同意" //newValue.yzName.isEmpty ? "状态：拒绝":"状态：同意"
+//                stateL.text = "状态：同意" //newValue.yzName.isEmpty ? "状态：拒绝":"状态：同意"
                 contentL.text = "登记人:\(newValue.sysVisitor.name)"
                 timeL.text = Date.getDateWith(Int(newValue.sysVisitor.accessTime)!, "yyyy-MM-dd HH:mm")
+            }
+        }
+    }
+    var abnormalModel:XHWLAbnormalPassModel! {
+        willSet {
+            if (newValue != nil) {
+                titleL.text = newValue.roadName
+                
+//                stateL.isHidden = false
+//                stateL.text = "状态：同意" //newValue.yzName.isEmpty ? "状态：拒绝":"状态：同意"
+                contentL.text = "道口编号:\(newValue.roadCode)"
+                timeL.text = newValue.date// Date.getDateWith(Int(newValue.sysVisitor.accessTime)!, "yyyy-MM-dd HH:mm")
             }
         }
     }

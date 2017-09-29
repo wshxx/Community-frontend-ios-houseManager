@@ -11,8 +11,8 @@ import UIKit
 class CLNewFeatureView: UIView {
     
     //pageControl与底部的距离（需要更改高度改此处就好）
-    fileprivate let margin: CGFloat = 80
-    fileprivate let marginBtn: CGFloat = 40
+    fileprivate let margin: CGFloat = 60
+    fileprivate let marginBtn: CGFloat = 30
     
     fileprivate var imageNameArr: [Any]?
     
@@ -36,7 +36,7 @@ class CLNewFeatureView: UIView {
         let pageControl = UIPageControl()
         
         pageControl.pageIndicatorTintColor = color_01f0ff
-        pageControl.currentPageIndicatorTintColor = UIColor.blue
+        pageControl.currentPageIndicatorTintColor = color_328bfe
         pageControl.currentPage = 0
         pageControl.numberOfPages = self.subscriptIndex
         
@@ -45,7 +45,7 @@ class CLNewFeatureView: UIView {
     
      lazy fileprivate var jumpBtn: UIButton = {
         let jumpBtn = UIButton()
-        jumpBtn.backgroundColor = UIColor.blue
+        jumpBtn.backgroundColor = color_328bfe
         jumpBtn.layer.cornerRadius = 4
         jumpBtn.layer.masksToBounds = true
         jumpBtn.setTitle("直接跳转", for: .normal)
@@ -124,7 +124,7 @@ extension CLNewFeatureView {
                                          toItem:nil,
                                          attribute: .notAnAttribute,
                                          multiplier:0.0,
-                                         constant:44))
+                                         constant:30))
         addConstraint(NSLayoutConstraint(item: jumpBtn,
                                          attribute: .centerX,
                                          relatedBy: .equal,

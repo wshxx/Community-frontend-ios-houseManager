@@ -24,8 +24,6 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
                 imageNameArr.append("\(i)")
             }
             
-
-            
             self.view!.addSubview(CLNewFeatureView(imageNameArr: imageNameArr))
             UserDefaults.standard.set(true, forKey:"isFirst")
             UserDefaults.standard.synchronize()
@@ -53,8 +51,10 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
             showV = XHWLTransitionView(frame: CGRect(x:0, y:0, width:Screen_width*7/8.0, height:299+90+60+40)) // 299+90+60
         } else if Screen_height > 568.0 {
             showV = XHWLTransitionView(frame: CGRect(x:0, y:0, width:Screen_width*7/8.0, height:299+90+60)) // 299+90+60
-        } else {
+        } else if Screen_height > 480 {
             showV = XHWLTransitionView(frame: CGRect(x:0, y:0, width:Screen_width*7/8.0, height:Screen_height*5/7.0)) // 299+90+60
+        } else {
+            showV = XHWLTransitionView(frame: CGRect(x:0, y:0, width:Screen_width*7/8.0, height:Screen_height*6/7.0)) // 299+90+60
         }
         showV.center = CGPoint(x: self.view.bounds.width/2.0, y: self.view.bounds.height/2.0-90/2.0)
         showV.delegate = self

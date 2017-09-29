@@ -21,15 +21,12 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
         self.view.backgroundColor = UIColor.white
         setupView()
         setupNav()
-//        onLoadNavParameData()
         loadDeviceInfo()
-        
-//        onLoadRealData()
     }
     
     func setupNav() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
-        self.title = "供配电"
+        self.title = "设备监控"
         
     }
 
@@ -51,62 +48,18 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
         
         XHWLNetwork.shared.postDeviceInfoClick(param as NSDictionary, self)
     }
-
-//    func onLoadNavParameData() {
-//        
-//        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-//        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-//        
-//        let params:[String:Any] = ["ProjectCode":"201", // 项目编号
-//            "token":userModel.wyAccount.token,
-//            ]
-//       
-////       ?AccessToken=bd4f1ce1b544463094726ebc23a6c9f1
-//        
-//        XHWLNetwork.shared.postNavParameClick(params as NSDictionary, self)
-//    }
-    
-//    func onLoadRealData() {
-//        
-//        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-//        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-//        
-//        let deviceData:NSData = UserDefaults.standard.object(forKey: "deviceList") as! NSData
-//        let deviceList:NSArray = XHWLDeviceModel.mj_objectArray(withKeyValuesArray: deviceData.mj_JSONObject())
-//        let model:XHWLDeviceModel = deviceList[1] as! XHWLDeviceModel
-//        
-//        let params:[String:Any] = ["ProjectCode":"201", // 项目编号
-//            "DeviceID":model.DeviceID,
-//            "token":userModel.wyAccount.token
-//            ]
-//        
-//        XHWLNetwork.shared.postRealDataClick(params as NSDictionary, self)
-//    }
     
     // MARK: - XHWLNetworkDelegate
     
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
-
-//        if requestKey == XHWLRequestKeyID.XHWL_NAVPARAME.rawValue {
-//            let list:NSArray = response["result"] as! NSArray
-//            
-//            let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: list.mj_JSONObject())
-//        }
-//        else if requestKey == XHWLRequestKeyID.XHWL_REALDATA.rawValue {
-//            let list:NSArray = response["result"] as! NSArray
-//            
-//            let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: list.mj_JSONObject())
-//        }
-//        else
         
         if requestKey == XHWLRequestKeyID.XHWL_DEVICEINFO.rawValue {
             let list:NSArray = response["result"]!["rows"] as! NSArray
             let ary:NSArray = XHWLDeviceModel.mj_objectArray(withKeyValuesArray: list)
             let array:NSArray =  XHWLDeviceModel.mj_keyValuesArray(withObjectArray: ary as! [Any]) //XHWLDeviceModel. .mj_objectArray(withKeyValuesArray: list)
             
-            
             let dataDict = superGroupDictWith(array, "NavName") as NSDictionary // 转为【“”： NSArray]
-            print("\(dataDict)")
+            print("\(dataDict)") // NavCode
             
             let dataSourceAry = NSMutableArray()
             let keyAry = dataDict.allKeys as NSArray //["", "" ]
@@ -155,7 +108,7 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
             var isCommon:Bool = false
             for j in 0..<keyAry.count {
                 let oneKey = keyAry[j] as! String
-                if oneKey == currentKey {
+                if oneKey.compare(currentKey).rawValue == 0 {
                     isCommon = true
                     break
                 }

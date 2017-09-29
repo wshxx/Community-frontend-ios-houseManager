@@ -83,7 +83,7 @@ class HintTool {
         self.hintView = hintView
         
         // 消失
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             [weak self] in
             if !hintTask.isDismissed {
                 self?.dismissHint(interrupted: false ,hintTask)
@@ -94,7 +94,7 @@ class HintTool {
     private func dismissHint(interrupted: Bool, _ hintTask: HintTask) {
         hintTask.isDismissed = true
         let alpha: CGFloat = interrupted ? 0.99 : 0.5
-        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
             self?.hintView?.alpha = alpha
         }, completion: { [weak self] (finished) in
             self?.hintView?.removeFromSuperview()

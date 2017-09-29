@@ -26,9 +26,9 @@ class XHWLProgressView: UIView {
                 if Int(ary[0] as! String) == 0 {
                     progressView.progress = 0.0
                 } else {
-                    if Int(ary[0] as! String)! >= Int(ary[1] as! String)! {
+                    if Int(ary[0] as! String)! < Int(ary[1] as! String)! {
                         
-                        progressView.progress =  CGFloat(Float(Int(ary[0] as! String)!) / Float(Int(ary[0] as! String)!))
+                        progressView.progress =  CGFloat(Float(Int(ary[0] as! String)!) / Float(Int(ary[1] as! String)!))
                     } else {
                         
                         progressView.progress = 1.0

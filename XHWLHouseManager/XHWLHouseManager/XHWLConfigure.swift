@@ -33,6 +33,8 @@ let color_f9f9f9:UIColor = UIColor().colorWithHexString(colorStr: "#f9f9f9") // 
 let color_5284d6:UIColor = UIColor().colorWithHexString(colorStr: "#5284d6") // 蓝色的文字
 let color_58e9f3:UIColor = UIColor().colorWithHexString(colorStr: "#58e9f3") // 蓝色的文字
 let color_51ebfd:UIColor = UIColor().colorWithHexString(colorStr: "#51ebfd") // 蓝色的文字
+let color_328bfe:UIColor = UIColor().colorWithHexString(colorStr: "#328bfe") // 蓝色的文字
+let color_d724d9:UIColor = UIColor().colorWithHexString(colorStr: "#d724d9") // 蓝色的文字
 
 
 // MARK: -- 字体
@@ -63,7 +65,9 @@ let WDGSyncId:String = "wd3420885063wekxii"
 
 //wd2565313036qrpdim
 let kWilddogUrl:String = "https://\(VideoAppId).wilddogio.com"
-
+// 极光推送
+let jPushAppKey:String = "f7da6d8af1224999462d44c7"
+let channel:String = "Publish channel"
 
 // MARK: -- 创建分割线
 

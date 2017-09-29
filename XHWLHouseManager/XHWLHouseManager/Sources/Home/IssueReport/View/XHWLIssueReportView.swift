@@ -15,6 +15,7 @@ import UIKit
 class XHWLIssueReportView: UIView {
 
     var bgImage:UIImageView!
+    var bgSc:UIScrollView!
     var pickPhoto:XHWLPickPhotoView!
     var remark:XHWLRemarkView!
     var radioView: XHWLRadioView!
@@ -26,9 +27,10 @@ class XHWLIssueReportView: UIView {
                 
                 if newValue.type == "plant" {
                     let scanDataModel:XHWLScanDataModel = newValue.plant
-                    dotView.showText(leftText: "巡检点位：", rightText:"(\(scanDataModel.longitude),\(scanDataModel.latitude))")
-                } else {
-                    let scanDataModel:XHWLScanDataModel = newValue.plant
+//                 dotView.showText(leftText: "巡检点位：", rightText:"(\(scanDataModel.longitude),\(scanDataModel.latitude))")
+                    dotView.showText(leftText: "巡检点位：", rightText:"\(scanDataModel.descri)")
+                } else if newValue.type == "equipment" {
+                    let scanDataModel:XHWLScanDataModel = newValue.equipment
                     dotView.showText(leftText: "巡检点位：", rightText:scanDataModel.address)
                 }
             }
@@ -59,8 +61,12 @@ class XHWLIssueReportView: UIView {
         bgImage.image = UIImage(named:"menu_bg")
         self.addSubview(bgImage)
         
+        bgSc = UIScrollView()
+        bgSc.showsVerticalScrollIndicator = false
+        self.addSubview(bgSc)
+        
         typeView = XHWLSelTypeView()
-        typeView.showText(leftText: "异常类型：", btnTitle:"工程")
+        typeView.showText("异常类型", "工程", false)
         typeView.btnBlock = { [weak typeView] in
             self.endEditing(true)
             let array:NSArray = ["工程", "环境", "客服", "安防"]
@@ -78,17 +84,17 @@ class XHWLIssueReportView: UIView {
             pickerView.frame = UIScreen.main.bounds
             window.addSubview(pickerView)
         }
-        self.addSubview(typeView)
+        bgSc.addSubview(typeView)
         
         
         
         dotView = XHWLLabelView()
         dotView.showText(leftText: "巡检点位：", rightText:"中海华庭水泵房")
-        self.addSubview(dotView)
+        bgSc.addSubview(dotView)
         
         remark = XHWLRemarkView()
-        remark.showText("备注：")
-        self.addSubview(remark)
+        remark.showText("备注")
+        bgSc.addSubview(remark)
         
         radioView = XHWLRadioView()
         radioView.showText(leftText: "紧急情况：", rightText: "是", btnTitle: "否")
@@ -101,7 +107,7 @@ class XHWLIssueReportView: UIView {
             }
             
         }
-        self.addSubview(radioView)
+        bgSc.addSubview(radioView)
         
         pickPhoto = XHWLPickPhotoView(frame: CGRect.zero, false)
         pickPhoto.showText("上传照片：")
@@ -109,7 +115,7 @@ class XHWLIssueReportView: UIView {
         pickPhoto.addPictureBlock = { isAdd, index, isPictureAdd in
             self.delegate?.onSafeGuard!(isAdd, index, isPictureAdd)
         }
-        self.addSubview(pickPhoto)
+        bgSc.addSubview(pickPhoto)
         
         cancelBtn = UIButton()
         cancelBtn.setTitle("取消", for: UIControlState.normal)
@@ -152,16 +158,20 @@ class XHWLIssueReportView: UIView {
         super.layoutSubviews()
         
         bgImage.frame = self.bounds
+        bgSc.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:self.bounds.size.height-60)
         
-        typeView.frame = CGRect(x:0, y:10, width:self.bounds.size.width, height:20)
-        dotView.frame = CGRect(x:0, y:typeView.frame.maxY+10, width:self.bounds.size.width, height:20)
-        remark.frame = CGRect(x:0, y:dotView.frame.maxY+10, width:self.bounds.size.width, height:80)
+        typeView.frame = CGRect(x:10, y:10, width:self.bounds.size.width-10, height:20)
+        dotView.frame = CGRect(x:10, y:typeView.frame.maxY+10, width:self.bounds.size.width-10, height:20)
+        remark.frame = CGRect(x:10, y:dotView.frame.maxY+10, width:self.bounds.size.width-10, height:80)
         
-        radioView.frame = CGRect(x:0, y:remark.frame.maxY+10, width:self.bounds.size.width, height:44)
+        radioView.frame = CGRect(x:10, y:remark.frame.maxY+10, width:self.bounds.size.width-10, height:20)
         pickPhoto.frame = CGRect(x:0, y:radioView.frame.maxY+10, width:self.bounds.size.width-20, height:80)
+        bgSc.contentSize = CGSize(width:self.bounds.size.width, height:self.bounds.size.height)
         
-        cancelBtn.frame = CGRect(x:50, y:self.bounds.size.height-60, width:71, height:30)
-        submitBtn.frame = CGRect(x:self.bounds.size.width-50-71, y:self.bounds.size.height-60, width:71, height:30)
+        cancelBtn.bounds = CGRect(x:0, y:0, width:71, height:30)
+        cancelBtn.center = CGPoint(x:self.bounds.size.width/2.0-20-71/2.0, y:self.bounds.size.height-30)
+        submitBtn.bounds = CGRect(x:0, y:0, width:71, height:30)
+        submitBtn.center = CGPoint(x:self.bounds.size.width/2.0+20+71/2.0, y:self.bounds.size.height-30)
     }
 
 }

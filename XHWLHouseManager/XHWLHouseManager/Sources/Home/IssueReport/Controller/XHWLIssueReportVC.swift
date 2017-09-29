@@ -121,8 +121,8 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
         if scanModel.type == "plant" {
             let scanDataModel:XHWLScanDataModel = scanModel.plant
             code = scanDataModel.code
-        } else {
-            let scanDataModel:XHWLScanDataModel = scanModel.plant
+        } else if scanModel.type == "equipment" {
+            let scanDataModel:XHWLScanDataModel = scanModel.equipment
             code = scanDataModel.code
         }
         

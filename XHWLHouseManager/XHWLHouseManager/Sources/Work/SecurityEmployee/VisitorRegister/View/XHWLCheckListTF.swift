@@ -84,10 +84,17 @@ class XHWLCheckListTF: UIView, UITextFieldDelegate {
         }
     }
     
-    func showText(leftText:String, rightText:String, btnTitle:String) {
+    func showText(_ leftText:String, _ rightText:String, _ btnTitle:String, _ isNeed:Bool) {
         
         if checkEnum == XHWLCheckListTFEnum.right {
-            titleL.text = leftText
+            if isNeed {
+                let attr:NSMutableAttributedString = NSMutableAttributedString.init(string: "* \(leftText):", attributes: [NSForegroundColorAttributeName: UIColor.white])
+                attr.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSMakeRange(0, 1))
+                titleL.attributedText = attr
+            } else {
+                
+                titleL.text = "  \(leftText):"
+            }
             let color:UIColor = UIColor.white.withAlphaComponent(0.5)
             contentTF.attributedPlaceholder = NSAttributedString.init(string: "请输入\(leftText)", attributes: [NSForegroundColorAttributeName: color])
         } else {
