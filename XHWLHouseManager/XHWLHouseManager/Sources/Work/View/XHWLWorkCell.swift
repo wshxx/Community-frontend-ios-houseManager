@@ -50,7 +50,7 @@ class XHWLWorkCell: UITableViewCell {
         self.contentView.addSubview(badgeBtn)
     }
     
-    lazy fileprivate var badgeBtn: UIButton = {
+    lazy fileprivate var badgeBtn: UIButton! = {
     
         let badgeBtn = UIButton.init(type: UIButtonType.custom)
         badgeBtn.backgroundColor = color_d724d9
@@ -77,12 +77,11 @@ class XHWLWorkCell: UITableViewCell {
         }
     }
     
-    var badgeNumber:NSNumber! {
+    var badgeNumber:Int! {
         willSet {
             if (newValue != nil) {
                 print("\(newValue)")
 
-                
                 showBtn.bounds = CGRect(x:0, y:0, width:270, height:50)
                 showBtn.center = CGPoint(x:self.frame.size.width/2.0, y:self.frame.size.height/2.0)
                 
@@ -100,7 +99,9 @@ class XHWLWorkCell: UITableViewCell {
                         badgeBtn.layer.cornerRadius = 12
                         badgeBtn.layer.masksToBounds = true
                         badgeBtn.bounds = CGRect(x:0, y:0, width:24, height:24)
-                        badgeBtn.setTitle("\(newValue)", for: .normal)
+                        print("\(newValue!)")
+                        let badgeStr:String! = "\(newValue!)"
+                        badgeBtn.setTitle(badgeStr!, for: .normal)
                     }
                     badgeBtn.center = CGPoint(x:(self.frame.size.width + size.width)/2.0, y:(self.frame.size.height-size.height)/2.0)
                 }
@@ -127,9 +128,9 @@ class XHWLWorkCell: UITableViewCell {
                     badgeBtn.layer.masksToBounds = true
                     badgeBtn.bounds = CGRect(x:0, y:0, width:10, height:10)
                 } else {
-                    badgeBtn.layer.cornerRadius = 10
+                    badgeBtn.layer.cornerRadius = 12
                     badgeBtn.layer.masksToBounds = true
-                    badgeBtn.bounds = CGRect(x:0, y:0, width:20, height:20)
+                    badgeBtn.bounds = CGRect(x:0, y:0, width:24, height:24)
                 }
                 badgeBtn.center = CGPoint(x:(self.frame.size.width + size.width)/2.0, y:(self.frame.size.height-size.height)/2.0)
             }

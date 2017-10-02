@@ -114,16 +114,21 @@ class XHWLPickPhotoView: UIView {
     func onShowImgArray(_ array:NSArray) {
         
         imgIVArray = NSMutableArray()
-        for i in 0..<array.count {
+        var num:NSInteger = array.count
+        if array.count > 3 {
+            num = 3
+        }
+        for i in 0..<num {
             let imgV:UIImageView = UIImageView()
             if isBundle == false {
                 let urlStr = "\(XHWLImgURL)/\(array[i] as! String)"
                 let url = URL(string: urlStr)
-                imgV.kf.setImage(with: url)
+//                imgV.kf.setImage(with: url)
+                imgV.kf.setImage(with: url, placeholder: UIImage(named:"default_icon"), options: nil, progressBlock: nil, completionHandler: nil)
                 self.addSubview(imgV)
                 imgIVArray.add(imgV)
             } else {
-                imgV.image = UIImage(named:"3.jpg")
+                imgV.image = UIImage(named:"\(i)")
                 self.addSubview(imgV)
                 imgIVArray.add(imgV)
             }

@@ -56,12 +56,11 @@ class XHWLAbnormalPassVC: UIViewController , XHWLNetworkDelegate {
                 return
             }
             let dealArray:NSArray = XHWLAbnormalPassModel.mj_objectArray(withKeyValuesArray:array)
-self.dealArray = dealArray
+            self.dealArray = dealArray
+            self.warningView.dataAry = NSMutableArray()
             self.warningView.dataAry.addObjects(from: dealArray as! [Any])
             self.warningView.tableView.reloadData()
-            
         }
-        
     }
     
     func requestFail(_ requestKey:NSInteger, _ error:NSError) {
@@ -82,6 +81,9 @@ self.dealArray = dealArray
             
             let vc:XHWLSafeGuardDetailVC = XHWLSafeGuardDetailVC()
             vc.abnormalModel = self.dealArray[index] as! XHWLAbnormalPassModel
+            vc.backReloadBlock = {[weak self] _ in
+                self?.onLoadData()
+            }
             self.navigationController?.pushViewController(vc, animated: true)
         }
         self.view.addSubview(warningView)

@@ -31,7 +31,7 @@ class XHWLAlertCountVC: XHWLBaseVC {
     func setupView() {
         
         let webView = UIWebView()
-//        webView.backgroundColor = UIColor.clear
+        webView.backgroundColor = UIColor.white
         webView.frame = CGRect(x: 0, y: 64, width: self.view.bounds.size.width, height: self.view.bounds.size.height-64)
         webView.isOpaque = false
         webView.scalesPageToFit = true

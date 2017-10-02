@@ -41,12 +41,16 @@ class XHWLDeviceDetailVC: XHWLBaseVC {
         webView.scalesPageToFit = true
         self.view.addSubview(webView)
         
-        let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
-        let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectData.mj_JSONObject())
-        
-        let url = "\(XHWLHttpURL)/analysis/device/realData/\(projectModel.code)/\(deviceModel.DeviceID)" // ProjectCode=201
-        print("\(url)")
-        webView.loadRequest(URLRequest.init(url: URL.init(string: url)!))
+        if UserDefaults.standard.object(forKey: "project") != nil {
+            let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+            let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectData.mj_JSONObject())
+            
+            let url = "\(XHWLHttpURL)/analysis/device/realData/\(projectModel.code)/\(deviceModel.DeviceID)" // ProjectCode=201
+            print("\(url)")
+            webView.loadRequest(URLRequest.init(url: URL.init(string: url)!))
+        } else {
+            
+            "当前无项目".ext_debugPrintAndHint()
+        }
     }
-
 }

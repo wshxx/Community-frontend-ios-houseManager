@@ -37,6 +37,7 @@ enum XHWLRequestKeyID : NSInteger {
     case XHWL_DEVICEINFO    // 所有设备信息
     case XHWL_OPENDOOR // 开门
     case XHWL_VISITLIST  // 访客登记记录
+    case XHWL_DOORLIST // 门列表
 }
 
 
@@ -82,6 +83,7 @@ class XHWLRequestKeyDefine: NSObject {
             XHWLRequestKeyID.XHWL_DEVICEINFO:"wyBusiness/iot/machine/device",   // 返回项目下所有设备信息
             XHWLRequestKeyID.XHWL_OPENDOOR:"appBusiness/iot/entrance/openDoor", // 开门
             XHWLRequestKeyID.XHWL_VISITLIST:"wyBusiness/visitor",               // 访客登记记录
+            XHWLRequestKeyID.XHWL_DOORLIST:"wyBusiness/iot/entrance/getDoorList",  // 门列表
             
             XHWLRequestKeyID.XHWL_NAVPARAME:"wyBusiness/iot/machine/navparame", //返回项目所有房间与环境监测设备对应关系 " http://202.105.104.105:8804/realdata/get", //
             

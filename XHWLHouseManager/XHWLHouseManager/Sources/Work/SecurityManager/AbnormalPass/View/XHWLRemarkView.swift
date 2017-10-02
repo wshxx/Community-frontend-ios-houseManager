@@ -71,7 +71,8 @@ class XHWLRemarkView: UIView , UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         if textView.text == "" {
-             placeholderL.text = "请输入\(titleL.text)"
+            let placeStr:NSString = "请输入\(titleL.text!)" as NSString
+             placeholderL.text = placeStr.substring(to: placeStr.length-1) as String
             placeholderL.isHidden = false
         } else {
             placeholderL.isHidden = true

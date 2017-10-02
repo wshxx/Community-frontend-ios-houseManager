@@ -24,11 +24,13 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         self.rt_disableInteractivePop = true
         
         setupView()
-        setupNav()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBadge), name:NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
 
     }
     
+//    updateBadge
+
     func setupNav() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"home_menu"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onOpenMenu))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"home_scan"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onScan))
@@ -38,23 +40,42 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
     }
     
     func createNavHeadView() -> UIButton {
-        let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
-        let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
-        var name:String!
-        if array.count > 0{
-            let model:XHWLProjectModel = array[0] as! XHWLProjectModel
-            name = model.name
+        
+        if UserDefaults.standard.object(forKey: "projectList") != nil {
             
-            let btn:UIButton = UIButton()
-            btn.frame = CGRect(x:0, y:0, width:100, height:200)
-            btn.setTitle(name, for: UIControlState.normal)
-            btn.setTitleColor(UIColor.white, for: UIControlState.normal)
-            btn.setImage(UIImage(named:"home_switch"), for: UIControlState.normal)
-            btn.titleLabel?.font = font_14
-            btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -14, bottom: 0, right: 0)
-            btn.addTarget(self, action: #selector(onCreateNavHeadView), for: UIControlEvents.touchUpInside)
+            let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
+            let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
+            var name:String!
+            if array.count > 0{
+                
+                if UserDefaults.standard.object(forKey: "project") != nil {
+                    let projectSubData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+                    let model:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectSubData.mj_JSONObject())
+                    
+                    name = model.name
+                } else {
+                    let model:XHWLProjectModel = array[0] as! XHWLProjectModel
+                    name = model.name
+                    
+                    let projectData:NSData = model.mj_JSONData()! as NSData
+                    UserDefaults.standard.set(projectData, forKey: "project") // 项目
+                    UserDefaults.standard.synchronize()
+                }
+ 
+                
+                let btn:UIButton = UIButton()
+                btn.frame = CGRect(x:0, y:0, width:120, height:200)
+                btn.setTitle(name, for: UIControlState.normal)
+                btn.setTitleColor(UIColor.white, for: UIControlState.normal)
+                btn.setImage(UIImage(named:"home_switch"), for: UIControlState.normal)
+                btn.titleLabel?.font = font_14
+                btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -14, bottom: 0, right: 0)
+                btn.addTarget(self, action: #selector(onCreateNavHeadView), for: UIControlEvents.touchUpInside)
+                
+                return btn
+            }
             
-            return btn
+            return UIButton()
         }
         
         return UIButton()
@@ -99,19 +120,6 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-//        menuView = XHWLMenuView(frame:CGRect(x:0, y:0, width:313, height:453))
-        
-//        menuView = XHWLMenuView(frame:CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0))
-//        menuView.center = CGPoint(x:self.view.bounds.size.width/2.0, y:self.view.bounds.size.height/2.0)
-//        menuView.isHidden = true
-//        self.view.addSubview(menuView)
-//        let menuVc:XHWLMenuVC = XHWLMenuVC()
-//        menuVc.view.frame = UIScreen.main.bounds
-//        self.view.addSubview(menuVc.view)
-//        self.addChildViewController(menuVc)
-//        menuView = menuVc.view
-//        menuView.isHidden = true
-        
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
@@ -154,7 +162,8 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
         if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
-            homeView.badgeArray = NSMutableArray.init(array: [2, 10, 0, 0, 0, 0])
+            let index:NSInteger =  UserDefaults.standard.integer(forKey: "safeProtectAlert") as! NSInteger
+            homeView.badgeArray = NSMutableArray.init(array: [0, index, 0, 0, 0, 0])
         } else if userModel.wyAccount.wyRole.name.compare("门岗").rawValue == 0 {
             homeView.badgeArray = NSMutableArray.init(array: [0])
         } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
@@ -220,6 +229,10 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
             self.navigationController?.pushViewController(vc, animated: true)
             break
         case 1: // "安防事件",
+            UserDefaults.standard.set(0, forKey: "safeProtectAlert")
+            UserDefaults.standard.synchronize()
+            JPUSHService.setBadge(0) // JPush服务器
+            
             let vc:XHWLSafeProtectionVC = XHWLSafeProtectionVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
@@ -312,13 +325,8 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
     
     // 打开菜单
     func onOpenMenu() {
-        UIView.animate(withDuration: 0.3) {
-//            self.menuView.isHidden = false
-//            self.menuView.isHidden = !self.menuView.isHidden
-//            self.homeView.isHidden = !self.homeView.isHidden
-            let vc:XHWLMenuVC = XHWLMenuVC()
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+        let vc:XHWLMenuVC = XHWLMenuVC()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     // 扫一扫
@@ -433,7 +441,9 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.isHidden = false
-//        menuView.updateData()
+        
+        setupNav()
+        updateBadge()
     }
 
     override func didReceiveMemoryWarning() {

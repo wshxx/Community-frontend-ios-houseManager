@@ -17,6 +17,7 @@ import UIKit
     @objc optional func onHomeViewWithOpenBluetooth(_ homeView:XHWLHomeView)
     @objc optional func onHomeViewWithOpenNetwork(_ homeView:XHWLHomeView)
     @objc optional func onHomeViewWithBindCard(_ homeView:XHWLHomeView)
+    @objc optional func onHomeViewWithMessage(_ homeView:XHWLHomeView)
 }
 
 class XHWLHomeView: UIView  {
@@ -27,6 +28,7 @@ class XHWLHomeView: UIView  {
     var openBtn:UIButton!
     var netOpenBtn:UIButton!
     var bindCardBtn:UIButton!
+    var messageBtn:UIButton!
     var delegate:XHWLHomeViewDelegate?
     
     weak var bluePoint: UIImageView!
@@ -77,6 +79,19 @@ class XHWLHomeView: UIView  {
         bindCardBtn.addTarget(self, action: #selector(onBindCardBtnClicked), for: UIControlEvents.touchUpInside)
         self.addSubview(bindCardBtn)
         
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
+            let messageImg:UIImage = UIImage(named: "home_message")!
+            messageBtn = UIButton()
+            messageBtn.frame = CGRect(x:0, y:0, width:messageImg.size.width, height:messageImg.size.height)
+            messageBtn.center = CGPoint(x:self.bounds.size.width/2.0-115, y:self.bounds.size.height/2.0+80)
+            messageBtn.setImage(messageImg, for: UIControlState.normal)
+            messageBtn.addTarget(self, action: #selector(onMessageClicked), for: UIControlEvents.touchUpInside)
+            self.addSubview(messageBtn)
+        }
+
 //        let window:UIWindow = UIApplication.shared.keyWindow!
 //        spaceBg = YLImageView(frame: UIScreen.main.bounds)
 //        spaceBg.isHidden = true
@@ -96,9 +111,8 @@ class XHWLHomeView: UIView  {
     }()
     
 
-    // 蓝牙开门
+    // 蓝牙一键开门
     func onBluetoothOpenDoorClick() {
-        
         
         self.spaceBg.isHidden = false
         let window:UIWindow = UIApplication.shared.keyWindow!
@@ -130,76 +144,14 @@ class XHWLHomeView: UIView  {
     
     // 远程开门
     func onNetDoorBtnClicked(_ sender: UIButton) {
-//        authenticate()
-        
+
         self.delegate?.onHomeViewWithOpenNetwork!(self)
     }
     
-    // 指纹开锁
-    func fingerPrintBtnClicked(doorId:String) {
+    func onMessageClicked(_ sender: UIButton) {
         
-        let params:[String: String] = ["reqId" : "ABCDEF", // 请求代码 【不为空，随意填】
-            "upid" : "1234", // 项目唯一编号unique project identifier【现在的门禁服务器上设置的一个项目编号为 1234】
-            "doorId" : "319", // 门ID 【在鉴权中获得的MID】
-            "phone" : "", // 手机号码 【可为空】
-            "personId" : "", // 人员编号【可为空】
-            "name" : ""] // 人员姓名 【可为空】
-        
-//        XHWLHttpTool.sharedInstance.postHttpTool(url: "openDoor", parameters: params, success: { (response) in
-//            print("JSON: \(response)")
-//        }) { (error) in
-//            
-//        }
+        self.delegate?.onHomeViewWithMessage!(self)
     }
-    
-    
-    //    3.测试接口
-    //    【get】 /test/getDoorId
-    //    描述：同1中鉴权
-    //    【get】 /test/openDoor
-    //    描述： 开测试中的门，测试门编号为319，项目编号为1234
-    // 鉴权
-    func authenticate() {
-        
-       
-        let params:[String: String] = ["reqId" : "ABCDEF", // 请求代码 【不为空，随意填】
-            "upid" : "1234", // 项目唯一编号unique project identifier【现在的门禁服务器上设置的一个项目编号为 1234】
-            "bldgId" : "319", //unique building identifier 【暂时传1】
-            "unitId" : "", // 单元编号 【暂时传2】
-            "personId" : "", // 人员编号 【可为空】
-            "personType" : "",// 人员类型 【传 YZ】
-            "phone" : "", // 手机号码【可为空】
-            "name" : ""] // 人员姓名 【可为空】
-        
-//        XHWLHttpTool.sharedInstance.postHttpTool(url: "authenticate", parameters: params, success: { (response) in
-//            print("JSON: \(response)")
-//            
-//            let dict:NSDictionary = response as! NSDictionary
-//            let jg:String = dict["JG"] as! String
-//            
-//            if jg.compare("0").rawValue == 0 {
-//                let doorId:String = ""
-//                self.fingerPrintBtnClicked(doorId: doorId)
-//            }
-//            
-//            //            返回结果示例：
-//            //                { JQResult: '{"JG":"0","XX":"成功","QQDM":"ABCDEF","RYBH":null,"LYZS":null,"MLB":[{"MMC":"dev门","MID":"319","MLYID":null}]}' }
-//            //            返回注释：
-//            //            JG：结果代码,0正确
-//            //            XX：错误时候有描述信息
-//            //            QQDM：请求代码，与请求的一致
-//            //            RYBH：人员编号
-//            //            LYZS:蓝牙证书，暂为空
-//            //            MLB：门列表数组
-//            //            MMC：门名称
-//            //            MID：门ID
-//            //            MLYID：门的蓝牙ID 开发第一阶段为空
-//        }) { (error) in
-//            
-//        }
-    }
-
-
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

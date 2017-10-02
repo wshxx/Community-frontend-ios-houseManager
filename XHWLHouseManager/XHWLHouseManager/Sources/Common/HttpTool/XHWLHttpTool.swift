@@ -107,10 +107,26 @@ class XHWLHttpTool: NSObject {
                     print("success:\(value)")
                      
                     if self.requestKey != .XHWL_LOGOUT && self.requestKey != .XHWL_GETVERCODE && self.requestKey != .XHWL_SCANCODE {
+                        if (value as! [String : AnyObject])["result"] is String {
+                            if ((value as! [String : AnyObject])["message"] != nil) {
+                                let message:String = (value as! [String : AnyObject])["message"] as! String
+                                message.ext_debugPrintAndHint()
+                            } else {
+                                
+                                "数据为空".ext_debugPrintAndHint()
+                            }
+                            return
+                        }
+                        
                         if (value as! [String : AnyObject])["result"] is NSNull {
                             
-                            let message:String = (value as! [String : AnyObject])["message"] as! String
-                            message.ext_debugPrintAndHint()
+                            if ((value as! [String : AnyObject])["message"] != nil) {
+                                let message:String = (value as! [String : AnyObject])["message"] as! String
+                                message.ext_debugPrintAndHint()
+                            } else {
+                                
+                                "数据为空".ext_debugPrintAndHint()
+                            }
                             return
                         }
                     }
@@ -157,13 +173,29 @@ class XHWLHttpTool: NSObject {
                         self.requestKey != .XHWL_VERCODENEXT &&
                         self.requestKey != .XHWL_FORGETPWD &&
                         self.requestKey != .XHWL_VISITREGISTER &&
-                        self.requestKey != .XHWL_MODIFYUSER
+                        self.requestKey != .XHWL_MODIFYUSER &&
+                        self.requestKey != .XHWL_HANDLEEXCEPTIONPASS
                     {
+                        if (value as! [String : AnyObject])["result"] is String {
+                            if ((value as! [String : AnyObject])["message"] != nil) {
+                                let message:String = (value as! [String : AnyObject])["message"] as! String
+                                message.ext_debugPrintAndHint()
+                            } else {
+                                
+                                "数据为空".ext_debugPrintAndHint()
+                            }
+                            return
+                        }
                         
                         if (value as! [String : AnyObject])["result"] is NSNull {//is NSNull
                             
-                            let message:String = (value as! [String : AnyObject])["message"] as! String
-                            message.ext_debugPrintAndHint()
+                            if ((value as! [String : AnyObject])["message"] != nil) {
+                                let message:String = (value as! [String : AnyObject])["message"] as! String
+                                message.ext_debugPrintAndHint()
+                            } else {
+                                
+                                "数据为空".ext_debugPrintAndHint()
+                            }
                             return
                         }
                     }

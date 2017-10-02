@@ -56,6 +56,17 @@ class XHWLRadioView: UIView {
         selectBtn.isSelected = true
     }
     
+    func onDefaultSelect(_ isSelect:Bool) {
+        selectBtn.isSelected = false
+        if isSelect {
+            selectBtn = leftBtn
+            selectBtn.isSelected = true
+        } else {
+            selectBtn = rightBtn
+            selectBtn.isSelected = true
+        }
+    }
+    
     func onClick(btn:UIButton) {
         selectBtn.isSelected = false
         selectBtn = btn

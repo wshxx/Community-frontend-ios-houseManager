@@ -55,7 +55,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tts-7f-oPC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-838" y="-152"/>
+            <point key="canvasLocation" x="-100" y="-884"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -74,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-119" y="-152"/>
+            <point key="canvasLocation" x="1002" y="13"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0OR-bh-jkz">
@@ -92,7 +92,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7e6-JN-jBM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-586" y="564"/>
+            <point key="canvasLocation" x="110" y="12"/>
         </scene>
         <!--Remote Open DoorVC-->
         <scene sceneID="Pte-cZ-GmN">
@@ -113,21 +113,21 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subview_bg" translatesAutoresizingMaskIntoConstraints="NO" id="LaP-Du-qgp">
-                                <rect key="frame" x="19.5" y="133.5" width="337.5" height="400.5"/>
+                                <rect key="frame" x="36" y="167" width="304.5" height="333.5"/>
                             </imageView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wte-IC-Rmy">
-                                <rect key="frame" x="32.5" y="173.5" width="311.5" height="340.5"/>
+                                <rect key="frame" x="49" y="207" width="278.5" height="273.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.35686274509999999" green="0.93725490199999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择你想要开的门禁" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLF-b5-vEy">
-                                <rect key="frame" x="111" y="190.5" width="153" height="18"/>
+                                <rect key="frame" x="111" y="189" width="153" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.35686274509999999" green="0.93725490199999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDb-ft-nsI">
-                                <rect key="frame" x="112.5" y="564" width="150" height="50"/>
+                                <rect key="frame" x="112.5" y="530.5" width="150" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="yPz-01-llS"/>
                                     <constraint firstAttribute="height" constant="50" id="z9E-lZ-um6"/>
@@ -141,8 +141,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="LaP-Du-qgp" firstAttribute="top" secondItem="eLF-b5-vEy" secondAttribute="bottom" constant="-75" id="7yg-WC-6Q1"/>
-                            <constraint firstItem="LaP-Du-qgp" firstAttribute="width" secondItem="28h-2U-2Bh" secondAttribute="width" multiplier="0.9" id="H8R-f9-yty"/>
+                            <constraint firstItem="LaP-Du-qgp" firstAttribute="top" secondItem="eLF-b5-vEy" secondAttribute="bottom" constant="-40" id="7yg-WC-6Q1"/>
+                            <constraint firstItem="LaP-Du-qgp" firstAttribute="width" secondItem="28h-2U-2Bh" secondAttribute="width" multiplier="13/16" id="H8R-f9-yty"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IRw-8p-Xxv" secondAttribute="trailing" constant="-20" id="Ink-ec-ALG"/>
                             <constraint firstItem="ZDb-ft-nsI" firstAttribute="centerX" secondItem="28h-2U-2Bh" secondAttribute="centerX" id="JoN-44-zu2"/>
                             <constraint firstItem="LaP-Du-qgp" firstAttribute="centerX" secondItem="28h-2U-2Bh" secondAttribute="centerX" id="URw-XC-Ueg"/>
@@ -152,7 +152,7 @@
                             <constraint firstItem="wte-IC-Rmy" firstAttribute="leading" secondItem="LaP-Du-qgp" secondAttribute="leading" constant="13" id="fR8-FT-Hdx"/>
                             <constraint firstItem="wte-IC-Rmy" firstAttribute="trailing" secondItem="LaP-Du-qgp" secondAttribute="trailing" constant="-13" id="h33-5C-3ia"/>
                             <constraint firstItem="qgx-ns-QCc" firstAttribute="top" secondItem="IRw-8p-Xxv" secondAttribute="bottom" id="kLX-J0-XXl"/>
-                            <constraint firstItem="LaP-Du-qgp" firstAttribute="height" secondItem="28h-2U-2Bh" secondAttribute="height" multiplier="0.6" id="kpL-Xo-7Xk"/>
+                            <constraint firstItem="LaP-Du-qgp" firstAttribute="height" secondItem="28h-2U-2Bh" secondAttribute="height" multiplier="0.5" id="kpL-Xo-7Xk"/>
                             <constraint firstItem="IRw-8p-Xxv" firstAttribute="top" secondItem="ZeC-iu-tiD" secondAttribute="bottom" constant="-20" id="olK-n0-4ts"/>
                             <constraint firstItem="wte-IC-Rmy" firstAttribute="bottom" secondItem="LaP-Du-qgp" secondAttribute="bottom" constant="-20" id="qhH-NB-LLC"/>
                             <constraint firstItem="ZDb-ft-nsI" firstAttribute="bottom" secondItem="LaP-Du-qgp" secondAttribute="bottom" constant="80" id="shT-bh-oMo"/>
@@ -166,12 +166,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qhw-Gs-wRf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2038" y="-295"/>
+            <point key="canvasLocation" x="3231" y="-296"/>
         </scene>
         <!--BluetoothVC-->
         <scene sceneID="5KP-4T-uvQ">
             <objects>
-                <viewController storyboardIdentifier="bluetoothVC" id="uNe-i7-jfz" customClass="BluetoothVC" customModule="XHWLHouseOwner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="bluetoothVC" id="uNe-i7-jfz" customClass="BluetoothVC" customModule="XHWLHouseManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FA1-jn-zfU"/>
                         <viewControllerLayoutGuide type="bottom" id="2L3-lB-ZFA"/>
@@ -184,43 +184,43 @@
                                 <rect key="frame" x="0.0" y="-44" width="375" height="711"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mlt-Fj-1ZD">
-                                <rect key="frame" x="19" y="100" width="337.5" height="467"/>
+                                <rect key="frame" x="36" y="111" width="304.5" height="445"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warning_cell_line" translatesAutoresizingMaskIntoConstraints="NO" id="SCd-AQ-Tx7">
-                                        <rect key="frame" x="14" y="35" width="310" height="1"/>
+                                        <rect key="frame" x="14" y="35" width="277" height="1"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="zp3-L0-LkU"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subview_bg" translatesAutoresizingMaskIntoConstraints="NO" id="drx-pd-W1r">
-                                        <rect key="frame" x="0.0" y="-0.5" width="338" height="492"/>
+                                        <rect key="frame" x="0.0" y="-0.5" width="305" height="470"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="蓝牙开门" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eM0-FC-qve">
-                                        <rect key="frame" x="142.5" y="10" width="53.5" height="16"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <rect key="frame" x="121.5" y="10" width="61.5" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.35686274509999999" green="0.93725490199999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="490-zi-CbQ">
-                                        <rect key="frame" x="15" y="46" width="307.5" height="421"/>
+                                        <rect key="frame" x="15" y="46" width="274.5" height="399"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <view key="tableFooterView" contentMode="scaleToFill" id="2lX-xn-i5l">
-                                            <rect key="frame" x="0.0" y="61" width="307.5" height="46"/>
+                                            <rect key="frame" x="0.0" y="61" width="274.5" height="46"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bluetooth_rectBg" translatesAutoresizingMaskIntoConstraints="NO" id="FCj-jq-ffz">
-                                                    <rect key="frame" x="8" y="10" width="290.5" height="36"/>
+                                                    <rect key="frame" x="8" y="10" width="257.5" height="36"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="绑定门卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OcH-k6-TXa">
-                                                    <rect key="frame" x="22" y="22" width="41" height="12"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <rect key="frame" x="22" y="20.5" width="53.5" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r7x-Y6-QZz">
-                                                    <rect key="frame" x="268.5" y="19" width="16" height="18"/>
+                                                    <rect key="frame" x="235.5" y="19" width="16" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="16" id="DLU-qm-WP2"/>
                                                         <constraint firstAttribute="height" constant="18" id="V9j-cO-n8Z"/>
@@ -244,15 +244,15 @@
                                             </constraints>
                                         </view>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="localBluetoothCell" rowHeight="60" id="fbC-2H-Ezj" customClass="LocalBlueToothTableViewCell" customModule="XHWLHouseOwner" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1" width="307.5" height="60"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="localBluetoothCell" rowHeight="60" id="fbC-2H-Ezj" customClass="LocalBlueToothTableViewCell" customModule="XHWLHouseManager" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="1" width="274.5" height="60"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fbC-2H-Ezj" id="Sso-0b-Q7c">
-                                                    <rect key="frame" x="0.0" y="0.0" width="307.5" height="60"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="274.5" height="60"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bluetooth_rectBg" translatesAutoresizingMaskIntoConstraints="NO" id="2KJ-nP-Cog">
-                                                            <rect key="frame" x="8" y="8" width="290.5" height="44"/>
+                                                            <rect key="frame" x="8" y="8" width="257.5" height="44"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bluetooth_bluetooth" translatesAutoresizingMaskIntoConstraints="NO" id="2D7-jm-aLD">
                                                             <rect key="frame" x="22" y="23" width="14" height="14"/>
@@ -262,12 +262,12 @@
                                                             </constraints>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLB-RY-wEv">
-                                                            <rect key="frame" x="239.5" y="19" width="49" height="23"/>
+                                                            <rect key="frame" x="206.5" y="19" width="49" height="23"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="49" id="o9k-3c-W0L"/>
                                                                 <constraint firstAttribute="height" constant="23" id="ssM-Uf-TFd"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <state key="normal" title="开门" backgroundImage="Bluetooth_openBtnBg">
                                                                 <color key="titleColor" red="0.35686274509999999" green="0.93725490199999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
@@ -276,8 +276,8 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="测试" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPt-ef-pZe">
-                                                            <rect key="frame" x="43" y="24" width="20.5" height="12"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <rect key="frame" x="43" y="22.5" width="27" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -327,10 +327,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="SUF-cA-vD2" secondAttribute="trailing" id="4hB-go-5z3"/>
-                            <constraint firstItem="mlt-Fj-1ZD" firstAttribute="width" secondItem="dCD-Ls-rzC" secondAttribute="width" multiplier="0.9" id="4pl-0y-EYh"/>
+                            <constraint firstItem="mlt-Fj-1ZD" firstAttribute="width" secondItem="dCD-Ls-rzC" secondAttribute="width" multiplier="13/16" id="4pl-0y-EYh"/>
                             <constraint firstItem="mlt-Fj-1ZD" firstAttribute="centerY" secondItem="dCD-Ls-rzC" secondAttribute="centerY" id="Nfb-OD-5Aa"/>
                             <constraint firstItem="2L3-lB-ZFA" firstAttribute="top" secondItem="SUF-cA-vD2" secondAttribute="bottom" id="fql-t3-7x2"/>
-                            <constraint firstItem="mlt-Fj-1ZD" firstAttribute="height" secondItem="dCD-Ls-rzC" secondAttribute="height" multiplier="0.7" id="mDo-Sb-CSr"/>
+                            <constraint firstItem="mlt-Fj-1ZD" firstAttribute="height" secondItem="dCD-Ls-rzC" secondAttribute="height" multiplier="2/3" id="mDo-Sb-CSr"/>
                             <constraint firstItem="SUF-cA-vD2" firstAttribute="leading" secondItem="dCD-Ls-rzC" secondAttribute="leading" id="sdn-kV-DZz"/>
                             <constraint firstItem="SUF-cA-vD2" firstAttribute="top" secondItem="FA1-jn-zfU" secondAttribute="bottom" constant="-64" id="t2b-I4-OuY"/>
                             <constraint firstItem="mlt-Fj-1ZD" firstAttribute="centerX" secondItem="dCD-Ls-rzC" secondAttribute="centerX" id="u6N-Zv-dwU"/>
@@ -345,82 +345,10 @@
             </objects>
             <point key="canvasLocation" x="3941.5999999999999" y="-294.60269865067471"/>
         </scene>
-        <!--Remote Open DoorVC-->
-        <scene sceneID="ew6-hN-diO">
-            <objects>
-                <viewController storyboardIdentifier="RemoteOpenDoorVC" id="h7e-Jx-Aha" customClass="RemoteOpenDoorVC" customModule="XHWLHouseOwner" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="oph-x7-Y68"/>
-                        <viewControllerLayoutGuide type="bottom" id="kDX-in-oBP"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="34v-yq-jOJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_bg" translatesAutoresizingMaskIntoConstraints="NO" id="MMC-Ls-V95">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subview_bg" translatesAutoresizingMaskIntoConstraints="NO" id="IZJ-fU-Nm5">
-                                <rect key="frame" x="37.5" y="167" width="300" height="333.5"/>
-                            </imageView>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="que-et-31i">
-                                <rect key="frame" x="50.5" y="180" width="274" height="280"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" red="0.35686274509999999" green="0.93725490199999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                            </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择你想要开的门禁" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZX-h0-5KM">
-                                <rect key="frame" x="111" y="197" width="153" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.35686274509999999" green="0.93725490199999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBW-zU-z4S">
-                                <rect key="frame" x="112.5" y="523.5" width="150" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="e8M-R4-tay"/>
-                                    <constraint firstAttribute="height" constant="50" id="qPg-nU-9Ts"/>
-                                </constraints>
-                                <state key="normal" title="确认" backgroundImage="xhwl_water">
-                                    <color key="titleColor" red="0.35686274509999999" green="0.93725490199999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="conformBtnClicked:" destination="h7e-Jx-Aha" eventType="touchUpInside" id="WIO-bC-6HI"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="IZJ-fU-Nm5" firstAttribute="width" secondItem="34v-yq-jOJ" secondAttribute="width" multiplier="0.8" id="0NR-it-igM"/>
-                            <constraint firstItem="MMC-Ls-V95" firstAttribute="top" secondItem="oph-x7-Y68" secondAttribute="bottom" constant="-20" id="45Y-sz-qhP"/>
-                            <constraint firstItem="MMC-Ls-V95" firstAttribute="leading" secondItem="34v-yq-jOJ" secondAttribute="leading" id="4BQ-vc-a9t"/>
-                            <constraint firstItem="IZJ-fU-Nm5" firstAttribute="centerY" secondItem="34v-yq-jOJ" secondAttribute="centerY" id="9G9-rD-x6S"/>
-                            <constraint firstItem="hBW-zU-z4S" firstAttribute="centerX" secondItem="34v-yq-jOJ" secondAttribute="centerX" id="EGx-dl-Soe"/>
-                            <constraint firstItem="qZX-h0-5KM" firstAttribute="centerX" secondItem="IZJ-fU-Nm5" secondAttribute="centerX" id="HMS-qw-LoR"/>
-                            <constraint firstItem="que-et-31i" firstAttribute="bottom" secondItem="IZJ-fU-Nm5" secondAttribute="bottom" constant="-40.5" id="NDf-Kq-fWA"/>
-                            <constraint firstItem="IZJ-fU-Nm5" firstAttribute="centerX" secondItem="34v-yq-jOJ" secondAttribute="centerX" id="RPo-u8-iq3"/>
-                            <constraint firstItem="kDX-in-oBP" firstAttribute="top" secondItem="MMC-Ls-V95" secondAttribute="bottom" id="TL5-gv-erm"/>
-                            <constraint firstItem="IZJ-fU-Nm5" firstAttribute="height" secondItem="34v-yq-jOJ" secondAttribute="height" multiplier="0.5" id="cIx-ne-pbQ"/>
-                            <constraint firstItem="que-et-31i" firstAttribute="top" secondItem="IZJ-fU-Nm5" secondAttribute="top" constant="13" id="eN6-Bd-Fkl"/>
-                            <constraint firstItem="kDX-in-oBP" firstAttribute="top" secondItem="hBW-zU-z4S" secondAttribute="bottom" constant="93.5" id="iF4-LF-WEI"/>
-                            <constraint firstItem="qZX-h0-5KM" firstAttribute="top" secondItem="IZJ-fU-Nm5" secondAttribute="top" constant="30" id="kdq-vt-lPr"/>
-                            <constraint firstItem="que-et-31i" firstAttribute="leading" secondItem="IZJ-fU-Nm5" secondAttribute="leading" constant="13" id="sfP-er-xQs"/>
-                            <constraint firstAttribute="trailing" secondItem="MMC-Ls-V95" secondAttribute="trailing" id="yDK-6d-Trg"/>
-                            <constraint firstItem="que-et-31i" firstAttribute="trailing" secondItem="IZJ-fU-Nm5" secondAttribute="trailing" constant="-13" id="zEl-Eu-le7"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="conformBtn" destination="hBW-zU-z4S" id="MO7-Ea-0C9"/>
-                        <outlet property="doorPickerView" destination="que-et-31i" id="DW3-xR-LVR"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="i3n-7N-L7T" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="725.60000000000002" y="-1890.4047976011996"/>
-        </scene>
         <!--Bluetooth ScanVC-->
         <scene sceneID="xNz-zX-WGR">
             <objects>
-                <viewController storyboardIdentifier="BluetoothScanVC" id="eCU-Fd-FYl" customClass="BluetoothScanVC" customModule="XHWLHouseOwner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BluetoothScanVC" id="eCU-Fd-FYl" customClass="BluetoothScanVC" customModule="XHWLHouseManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Eh7-ER-bI5"/>
                         <viewControllerLayoutGuide type="bottom" id="z9k-9K-8eF"/>
@@ -433,26 +361,26 @@
                                 <rect key="frame" x="0.0" y="-44" width="375" height="711"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sLb-JW-yIa">
-                                <rect key="frame" x="19" y="100" width="338" height="467"/>
+                                <rect key="frame" x="35.5" y="111" width="305" height="445"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="蓝牙绑卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uan-Xk-mhY">
-                                        <rect key="frame" x="142" y="10" width="54" height="16"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <rect key="frame" x="122" y="10" width="61.5" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.35686274509999999" green="0.93725490199999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subview_bg" translatesAutoresizingMaskIntoConstraints="NO" id="A2P-Ad-fW8">
-                                        <rect key="frame" x="0.0" y="0.0" width="338" height="467"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="305" height="445"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warning_cell_line" translatesAutoresizingMaskIntoConstraints="NO" id="1DM-Ja-Za7">
-                                        <rect key="frame" x="15" y="35" width="308" height="1"/>
+                                        <rect key="frame" x="15" y="35" width="275" height="1"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="3hh-GY-etW"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B0M-xJ-U4Y">
-                                        <rect key="frame" x="147" y="55" width="44" height="49"/>
+                                        <rect key="frame" x="130.5" y="55" width="44" height="49"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="49" id="HCc-8A-kL2"/>
                                             <constraint firstAttribute="width" constant="44" id="PkC-Jb-H9m"/>
@@ -462,32 +390,32 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在玩命扫描……" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyL-CH-89Q">
-                                        <rect key="frame" x="123" y="115" width="93" height="15"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <rect key="frame" x="98.5" y="115" width="108" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.35686274509999999" green="0.93725490199999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bluetooth_light" translatesAutoresizingMaskIntoConstraints="NO" id="dPB-JM-ie5">
-                                        <rect key="frame" x="7" y="75" width="325" height="163"/>
+                                        <rect key="frame" x="-9.5" y="75" width="325" height="163"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="163" id="YCc-2D-heo"/>
                                             <constraint firstAttribute="width" constant="325" id="x7C-9h-24r"/>
                                         </constraints>
                                     </imageView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="zdF-PH-oPM">
-                                        <rect key="frame" x="15" y="190" width="308" height="194"/>
+                                        <rect key="frame" x="15" y="190" width="275" height="172"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bluetoothCell" rowHeight="60" id="Emy-A8-NbM" customClass="BluetoothTableViewCell" customModule="XHWLHouseOwner" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1" width="308" height="60"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bluetoothCell" rowHeight="60" id="Emy-A8-NbM" customClass="BluetoothTableViewCell" customModule="XHWLHouseManager" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="1" width="275" height="60"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Emy-A8-NbM" id="Fyd-td-wCL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="308" height="60"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="275" height="60"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bluetooth_rectBg" translatesAutoresizingMaskIntoConstraints="NO" id="b1C-5N-rXT">
-                                                            <rect key="frame" x="8" y="8" width="292" height="44"/>
+                                                            <rect key="frame" x="8" y="8" width="259" height="44"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bluetooth_bluetooth" translatesAutoresizingMaskIntoConstraints="NO" id="UG7-2u-NnI">
                                                             <rect key="frame" x="22" y="23" width="14" height="14"/>
@@ -497,13 +425,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="测试" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aau-Ag-Hyb">
-                                                            <rect key="frame" x="43" y="24" width="21" height="12"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <rect key="frame" x="43" y="22.5" width="27" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bluetooth_smallCheck" translatesAutoresizingMaskIntoConstraints="NO" id="8eY-hT-0Uy">
-                                                            <rect key="frame" x="279" y="23" width="14" height="14"/>
+                                                            <rect key="frame" x="246" y="23" width="14" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="14" id="OdH-bp-YZY"/>
                                                                 <constraint firstAttribute="height" constant="14" id="prM-7w-Yvl"/>
@@ -533,8 +461,8 @@
                                         </prototypes>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gej-0k-k7u">
-                                        <rect key="frame" x="123" y="420" width="92" height="27"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <rect key="frame" x="106.5" y="398" width="92" height="27"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="取消" backgroundImage="Bluetooth_nextBtnBg">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -543,13 +471,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="没有找到我的锁？" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Bn-9y-Rp4">
-                                        <rect key="frame" x="90" y="397.5" width="98.5" height="14.5"/>
+                                        <rect key="frame" x="73.5" y="375.5" width="98.5" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQH-TU-q6h">
-                                        <rect key="frame" x="188.5" y="391" width="50" height="27"/>
+                                        <rect key="frame" x="172" y="369" width="50" height="27"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="点击重试">
                                             <color key="titleColor" red="0.35686274509999999" green="0.93725490199999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -559,7 +487,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bluetooth_bigCheck" translatesAutoresizingMaskIntoConstraints="NO" id="8e4-RZ-Nfn">
-                                        <rect key="frame" x="136" y="55" width="67" height="44"/>
+                                        <rect key="frame" x="119.5" y="55" width="67" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="67" id="4ks-qr-Saw"/>
                                             <constraint firstAttribute="height" constant="44" id="qMJ-jM-q2T"/>
@@ -601,9 +529,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="sLb-JW-yIa" firstAttribute="centerX" secondItem="dpK-Zo-WA1" secondAttribute="centerX" id="59O-bs-hOO"/>
-                            <constraint firstItem="sLb-JW-yIa" firstAttribute="height" secondItem="dpK-Zo-WA1" secondAttribute="height" multiplier="0.7" id="Biv-Ql-RlM"/>
+                            <constraint firstItem="sLb-JW-yIa" firstAttribute="height" secondItem="dpK-Zo-WA1" secondAttribute="height" multiplier="2/3" id="Biv-Ql-RlM"/>
                             <constraint firstItem="T3L-t5-cxP" firstAttribute="top" secondItem="Eh7-ER-bI5" secondAttribute="bottom" constant="-64" id="Bon-DP-cZf"/>
-                            <constraint firstItem="sLb-JW-yIa" firstAttribute="width" secondItem="dpK-Zo-WA1" secondAttribute="width" multiplier="0.9" id="EDN-en-3Z2"/>
+                            <constraint firstItem="sLb-JW-yIa" firstAttribute="width" secondItem="dpK-Zo-WA1" secondAttribute="width" multiplier="13/16" id="EDN-en-3Z2"/>
                             <constraint firstItem="sLb-JW-yIa" firstAttribute="centerY" secondItem="dpK-Zo-WA1" secondAttribute="centerY" id="FuZ-tj-FPz"/>
                             <constraint firstItem="z9k-9K-8eF" firstAttribute="top" secondItem="T3L-t5-cxP" secondAttribute="bottom" id="IEo-KA-lSI"/>
                             <constraint firstAttribute="trailing" secondItem="T3L-t5-cxP" secondAttribute="trailing" id="R4A-5V-lMd"/>
@@ -641,6 +569,5 @@
         <image name="home_btn_bg_high" width="269" height="68"/>
         <image name="subview_bg" width="312" height="453"/>
         <image name="warning_cell_line" width="1" height="1"/>
-        <image name="xhwl_water" width="61" height="20"/>
     </resources>
 </document>

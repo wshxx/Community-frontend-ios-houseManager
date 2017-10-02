@@ -31,18 +31,22 @@ class XHWLEnergyManagementVC: XHWLBaseVC {
     func setupView() {
         
         let webView = UIWebView()
-//        webView.backgroundColor = UIColor.clear
+        webView.backgroundColor = UIColor.white
         webView.frame = CGRect(x: 0, y: 64, width: self.view.bounds.size.width, height: self.view.bounds.size.height-64)
         webView.isOpaque = false
         webView.scalesPageToFit = true
         self.view.addSubview(webView)
 
-        let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
-        let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectData.mj_JSONObject())
-        let url = "\(XHWLHttpURL)/analysis/energyStatistics/\(projectModel.code)" // ProjectCode=201
-        print("\(url)")
-        webView.loadRequest(URLRequest.init(url: URL.init(string: url)!))
-        
+        if UserDefaults.standard.object(forKey: "project") != nil {
+            let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+            let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectData.mj_JSONObject())
+            let url = "\(XHWLHttpURL)/analysis/energyStatistics/\(projectModel.code)" // ProjectCode=201
+            print("\(url)")
+            webView.loadRequest(URLRequest.init(url: URL.init(string: url)!))
+        } else {
+            
+            "当前无项目".ext_debugPrintAndHint()
+        }
     }
     
     override func didReceiveMemoryWarning() {

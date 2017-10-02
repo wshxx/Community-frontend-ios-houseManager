@@ -32,16 +32,16 @@ class CLNewFeatureView: UIView {
     }()
     
     /// 圆圈视图UIPageControl
-    lazy fileprivate var pageControl: UIPageControl = {
-        let pageControl = UIPageControl()
-        
-        pageControl.pageIndicatorTintColor = color_01f0ff
-        pageControl.currentPageIndicatorTintColor = color_328bfe
-        pageControl.currentPage = 0
-        pageControl.numberOfPages = self.subscriptIndex
-        
-        return pageControl
-    }()
+//    lazy fileprivate var pageControl: UIPageControl = {
+//        let pageControl = UIPageControl()
+//
+//        pageControl.pageIndicatorTintColor = color_01f0ff
+//        pageControl.currentPageIndicatorTintColor = color_328bfe
+//        pageControl.currentPage = 0
+//        pageControl.numberOfPages = self.subscriptIndex
+//
+//        return pageControl
+//    }()
     
      lazy fileprivate var jumpBtn: UIButton = {
         let jumpBtn = UIButton()
@@ -88,25 +88,25 @@ extension CLNewFeatureView {
         
         //添加视图
         addSubview(scrollView)
-        addSubview(pageControl)
+//        addSubview(pageControl)
         addSubview(jumpBtn)
         
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        //自动布局
-        addConstraint(NSLayoutConstraint(item: pageControl,
-                                         attribute: .centerX,
-                                         relatedBy: .equal,
-                                         toItem: self,
-                                         attribute: .centerX,
-                                         multiplier: 1.0,
-                                         constant: 0))
-        addConstraint(NSLayoutConstraint(item: pageControl,
-                                         attribute: .bottom,
-                                         relatedBy: .equal,
-                                         toItem: self,
-                                         attribute: .bottom,
-                                         multiplier: 1.0,
-                                         constant: -margin))
+//        pageControl.translatesAutoresizingMaskIntoConstraints = false
+//        //自动布局
+//        addConstraint(NSLayoutConstraint(item: pageControl,
+//                                         attribute: .centerX,
+//                                         relatedBy: .equal,
+//                                         toItem: self,
+//                                         attribute: .centerX,
+//                                         multiplier: 1.0,
+//                                         constant: 0))
+//        addConstraint(NSLayoutConstraint(item: pageControl,
+//                                         attribute: .bottom,
+//                                         relatedBy: .equal,
+//                                         toItem: self,
+//                                         attribute: .bottom,
+//                                         multiplier: 1.0,
+//                                         constant: -margin))
         
         jumpBtn.translatesAutoresizingMaskIntoConstraints = false
         //自动布局
@@ -165,10 +165,10 @@ extension CLNewFeatureView: UIScrollViewDelegate {
         let offSetX = scrollView.contentOffset.x
         //计算当前页数(四舍五入算法)
         let page = Int(offSetX / self.bounds.width + 0.5)
-        pageControl.currentPage = page
+//        pageControl.currentPage = page
         
         //隐藏pageControl
-        pageControl.isHidden = offSetX > (self.bounds.width * CGFloat(Double(subscriptIndex) - 0.7))
+//        pageControl.isHidden = offSetX > (self.bounds.width * CGFloat(Double(subscriptIndex) - 0.7))
         jumpBtn.isHidden = offSetX > (self.bounds.width * CGFloat(Double(subscriptIndex) - 0.7))
         
         //将newFeature从页面移除

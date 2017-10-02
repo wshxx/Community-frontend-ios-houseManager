@@ -193,7 +193,7 @@ class XHWLSafeGuardView: UIView {
             if !(model.appComplaint.manageImgUrl is NSNull) && !model.appComplaint.manageImgUrl.isEmpty {
                 pickPhoto.frame = CGRect(x:0, y:head1.frame.maxY+10, width:self.bounds.size.width, height:80)
             } else {
-                pickPhoto.frame = CGRect(x:0, y:head1.frame.maxY+10, width:self.bounds.size.width, height:30)
+                pickPhoto.frame = CGRect(x:0, y:head1.frame.maxY+10, width:self.bounds.size.width, height:25)
             }
         } else {
             pickPhoto.frame = CGRect(x:0, y:head1.frame.maxY+10, width:self.bounds.size.width, height:80)
@@ -232,7 +232,7 @@ class XHWLSafeGuardView: UIView {
          if !(model.appComplaint.imgUrl is NSNull) && !model.appComplaint.imgUrl.isEmpty {
             picture.frame = CGRect(x:0, y:head3.frame.maxY+10+CGFloat(labelViewArray3.count).multiplied(by:25), width:self.bounds.size.width-20, height:80)
         } else {
-            picture.frame = CGRect(x:0, y:head3.frame.maxY+10+CGFloat(labelViewArray3.count).multiplied(by:25), width:self.bounds.size.width-20, height:30)
+            picture.frame = CGRect(x:0, y:head3.frame.maxY+10+CGFloat(labelViewArray3.count).multiplied(by:25), width:self.bounds.size.width-20, height:25)
         }
         if !isFinished {
             submitBtn.bounds = CGRect(x:0, y:0, width:150, height:30)

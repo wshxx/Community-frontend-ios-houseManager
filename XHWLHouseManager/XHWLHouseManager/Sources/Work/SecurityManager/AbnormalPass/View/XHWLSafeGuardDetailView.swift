@@ -29,7 +29,7 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
     init(frame: CGRect, _ isAgree:Bool, _ dataAry:NSArray) {
         super.init(frame: frame)
         
-        self.isAgree = true // isAgree
+        self.isAgree = isAgree // isAgree
         self.dataAry = dataAry
         
         setupView()

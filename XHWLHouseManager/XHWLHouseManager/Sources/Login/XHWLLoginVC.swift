@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuartzCore
 import Alamofire
 
 class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
@@ -100,7 +101,27 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
         // [tabbar addCenterController:nil bulge:YES title:@"发布" imageName:@"post_normal" selectedImageName:@"post_normal"];
         let window:UIWindow = UIApplication.shared.keyWindow!
         window.rootViewController = tabbar
+        
+//        let btn:CYButton = tabbar.tabbar.btnArr[1] as! CYButton
+//        btn.setBackgroundImage(UIImage(named:"pin"), for: UIControlState.normal)
     }
+    
+    //闪烁效果。
+    //    [myTest1.layer addAnimation:[self opacityForever_Animation:0.5] forKey:nil];
+    
+//    #pragma mark === 永久闪烁的动画 ======
+//    func opacityForever_Animation(_ time:CGFloat) -> CABasicACnimation {
+//        let animation:CABasicAnimation = CABasicAnimation.   [CABasicAnimation animationWithKeyPath:@"opacity"];//必须写opacity才行。
+//        animation.fromValue = NSNumber. [NSNumber numberWithFloat:1.0f];
+//        animation.toValue = [NSNumbernumberWithFloat:0.0f];//这是透明度。
+//        animation.autoreverses = YES;
+//        animation.duration = time;
+//        animation.repeatCount = MAXFLOAT;
+//        animation.removedOnCompletion = NO;
+//        animation.fillMode = kCAFillModeForwards;
+//        animation.timingFunction=[CAMediaTimingFunctionfunctionWithName:kCAMediaTimingFunctionEaseIn];///没有的话是均匀的动画。
+//        return animation
+//    }
     
     func onHiddenKeyboard() {
         self.view.endEditing(true)

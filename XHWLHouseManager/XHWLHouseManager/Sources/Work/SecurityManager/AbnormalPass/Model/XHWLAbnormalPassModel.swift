@@ -19,18 +19,24 @@ class XHWLAbnormalPassModel: NSObject {
     var roadCode:String = ""
     var outDate:String = ""
     var date:String = ""
-    var oper:String = ""
+    var operatorName:String = ""
     var roadName:String = ""
+    var handleTime:String = ""
+    var id :String = ""
+    var outExceptionId:String = ""
+    var status:String = "" // n拒绝 y同意
+    var uploadTime:String = ""
+    var wyAccount:XHWLAccountModel = XHWLAccountModel()
     
     func mj_replacedKeyFromPropertyName() -> [AnyHashable : Any]! {
         return [
-            "oper" : "operator"
+            "operatorName" : "operator"
         ]
     }
     
-//    func mj_objectClassInArray() -> [AnyHashable : Any]! {
-//        return ["sysProject":XHWLSysProject.self] // [JZMJewelryCategoryModel class]
-//    }
+    func mj_objectClassInArray() -> [AnyHashable : Any]! {
+        return ["wyAccount":XHWLAccountModel.self] // [JZMJewelryCategoryModel class]
+    }
     
     override func setValue(_ value: Any?, forKey key: String) {
         super.setValue(value, forKey: key)
@@ -39,5 +45,4 @@ class XHWLAbnormalPassModel: NSObject {
     override func setValue(_ value:Any?, forUndefinedKey key:String) {
         print("EditPubLicityModel 缺少:\(key)")
     }
-    
 }

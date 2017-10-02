@@ -28,7 +28,7 @@ class XHWLIssueReportView: UIView {
                 if newValue.type == "plant" {
                     let scanDataModel:XHWLScanDataModel = newValue.plant
 //                 dotView.showText(leftText: "巡检点位：", rightText:"(\(scanDataModel.longitude),\(scanDataModel.latitude))")
-                    dotView.showText(leftText: "巡检点位：", rightText:"\(scanDataModel.descri)")
+                    dotView.showText(leftText: "巡检点位：", rightText:"\(scanDataModel.descriptions)")
                 } else if newValue.type == "equipment" {
                     let scanDataModel:XHWLScanDataModel = newValue.equipment
                     dotView.showText(leftText: "巡检点位：", rightText:scanDataModel.address)
@@ -41,7 +41,7 @@ class XHWLIssueReportView: UIView {
     weak var delegate:XHWLIssueReportViewDelegate?
     var btnBlock:(String, String, String, String)->(Void) = { param in }
     var dismissBlock:()->() = {_ in }
-    var radioIndex:String? = "是"
+    var radioIndex:String? = "否"
     var type:String! = "工程"
     
     override init(frame: CGRect) {
@@ -98,6 +98,7 @@ class XHWLIssueReportView: UIView {
         
         radioView = XHWLRadioView()
         radioView.showText(leftText: "紧急情况：", rightText: "是", btnTitle: "否")
+        radioView.onDefaultSelect(false)
         radioView.btnBlock = { [weak self] index in
             
             if index == 0 {

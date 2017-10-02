@@ -12,11 +12,8 @@ class RemoteOpenDoorVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
     @IBOutlet weak var doorPickerView: UIPickerView!
     @IBOutlet weak var conformBtn: UIButton!
 
-    var doors = [
-        ["name": "测试大门", "upid":"DaMen2", "doorId":"83886523"],
-        ["name": "未来海岸1单元大门", "upid":"DaMen2", "doorId":"83886523"],
-        ["name": "中海华庭4单元大门", "upid":"DaMen2", "doorId":"83886523"]
-    ]
+    var doors:NSMutableArray! = NSMutableArray()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         doorPickerView.dataSource = self
@@ -25,7 +22,6 @@ class RemoteOpenDoorVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
         doorPickerView.selectRow(self.selectedRow,inComponent:0,animated:true)
         doorPickerView.showsSelectionIndicator = false
         // Do any additional setup after loading the view.
-//        self.title =
         
         let backBtn:UIButton = UIButton()
         backBtn.frame = CGRect(x: 15, y: 20, width: 60, height: 44)
@@ -37,9 +33,12 @@ class RemoteOpenDoorVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
         titleLabel.frame = CGRect(x:0, y:0, width:self.view.bounds.size.width-150, height:44)
         titleLabel.center = CGPoint(x:self.view.bounds.size.width/2.0, y:42)
         titleLabel.text = "远程开门"
+        titleLabel.textAlignment = .center
         titleLabel.textColor = UIColor.white
         titleLabel.font = font_14
         self.view.addSubview(titleLabel)
+        
+        getDoorList()
     }
     
     func onBack(){
@@ -58,11 +57,16 @@ class RemoteOpenDoorVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
 //        <#code#>
 //    }
     
-    var selectedRow = 1
+    var selectedRow = 0
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
 //        let pickedView = UIView()
         let pickedBtn = UIButton()
-        pickedBtn.setTitle(self.doors[row]["name"], for: .normal)
+        
+        let doorModel:XHWLDoorModel = self.doors[row] as! XHWLDoorModel
+        let buildingModel:XHWLBuildingModel = doorModel.sysBuilding as XHWLBuildingModel
+        let projectModel:XHWLProjectModel = buildingModel.sysProject as XHWLProjectModel
+        
+        pickedBtn.setTitle(doorModel.name+buildingModel.name, for: .normal)
         pickedBtn.setTitleColor(UIColor.white, for: .normal)
         if row == selectedRow{
             pickedBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
@@ -91,10 +95,41 @@ class RemoteOpenDoorVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
         self.doorPickerView.reloadAllComponents()
     }
     
+    // 获取门列表
+    func getDoorList() {
+        if UserDefaults.standard.object(forKey: "project") != nil {
+            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+            let dict:NSDictionary = data.mj_JSONObject() as! NSDictionary
+            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: dict)
+            
+            let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+            let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectData.mj_JSONObject())
+            
+            let params = ["wyAccountId": userModel.wyAccount.id,
+                          "projectId":projectModel.id]
+            XHWLNetwork.shared.postDoorListClick(params as NSDictionary, self)
+        } else {
+            
+            "当前无项目".ext_debugPrintAndHint()
+        }
+    }
+    
     //选中开门
     @IBAction func conformBtnClicked(_ sender: UIButton) {
-        self.conformBtn.isEnabled = false
-        let params = ["reqId": "test", "upid": doors[selectedRow]["upid"], "doorId": doors[selectedRow]["doorId"]]
+//        self.conformBtn.isEnabled = false
+        
+        print("\(selectedRow)")
+        let doorModel:XHWLDoorModel = self.doors[selectedRow] as! XHWLDoorModel
+        let buildingModel:XHWLBuildingModel = doorModel.sysBuilding as XHWLBuildingModel
+        let projectModel:XHWLProjectModel = buildingModel.sysProject as XHWLProjectModel
+        
+        let params = ["reqId": "test",
+                      "upid":projectModel.entranceCode, // 项目编号（使用unitList数组中sysProject实体的entranceCode字段）
+            "bldgId": buildingModel.code, // 楼栋编号（使用unitList数组中sysBuilding实体的code字段）
+            "unitId": doorModel.code, // 单元编号（使用unitList数组中的code字段）
+            "personType": "YZ"] // 人员类型（直接写YZ）
+        
+        
         XHWLNetwork.shared.postOpenDoorClick(params as NSDictionary, self)
     }
     
@@ -102,7 +137,18 @@ class RemoteOpenDoorVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
         switch requestKey {
         case XHWLRequestKeyID.XHWL_OPENDOOR.rawValue:
+//            self.conformBtn.isEnabled = true
             onRemoteOpenDoor(response)
+            break
+        case XHWLRequestKeyID.XHWL_DOORLIST.rawValue:
+            
+            self.doors = NSMutableArray()
+            let dict:NSDictionary =  response["result"] as! NSDictionary
+            let ary:NSArray = dict["unitList"] as! NSArray
+            self.doors.addObjects(from: XHWLDoorModel.mj_objectArray(withKeyValuesArray:ary) as! [Any])
+            self.doorPickerView.reloadAllComponents()
+            selectedRow = 0
+            
             break
         default:
             break
@@ -112,7 +158,7 @@ class RemoteOpenDoorVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
     
     //network代理的方法
     func requestFail(_ requestKey:NSInteger, _ error:NSError) {
-        
+//        self.conformBtn.isEnabled = true
     }
     
     func onRemoteOpenDoor(_ response:[String : AnyObject]){
@@ -121,11 +167,8 @@ class RemoteOpenDoorVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
             self.dismiss(animated: true, completion: nil)
         }
         self.noticeSuccess("开门成功！", autoClearTime:1)
-        
     }
-    
-    
-    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

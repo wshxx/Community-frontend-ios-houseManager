@@ -201,7 +201,7 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
         submitBtn.setTitle("提交", for: UIControlState.normal)
         submitBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
         submitBtn.titleLabel?.font = font_14
-        submitBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
+        submitBtn.setBackgroundImage(UIImage(named:"menu_text_bg"), for: UIControlState.normal)
         submitBtn.addTarget(self, action: #selector(submitClick), for: UIControlEvents.touchUpInside)
         bgScrollView.addSubview(submitBtn)
     }

@@ -46,22 +46,32 @@ class XHWLTipView: UIView {
         self.addSubview(tipLabel)
     }
     
-    func showSuccess(_ successText:String) {
+    func showSuccess(_ successText:String, _ block:@escaping (()->(Void))) {
         tipImg.image = UIImage(named:"finished")
         tipLabel.text = successText
         let window:UIWindow = UIApplication.shared.keyWindow!
         window.addSubview(self)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.0)){
+            XHWLTipView.shared.remove()
+            block()
+        }
     }
     
     func remove() {
         self.removeFromSuperview()
     }
     
-    func showError(_ errorText:String) {
+    func showError(_ errorText:String, _ block:@escaping (()->(Void))) {
         tipImg.image = UIImage(named:"failure")
         tipLabel.text = errorText
         let window:UIWindow = UIApplication.shared.keyWindow!
         window.addSubview(self)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.0)){
+            XHWLTipView.shared.remove()
+            block()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -38,7 +38,7 @@ class XHWLScanDataModel: NSObject {
     var type:String = ""
     
     var category:String = ""
-    var descri:String = ""
+    var descriptions:String = ""
     var price:String = ""
     var prodDate:String = ""
     var projectName:String = ""

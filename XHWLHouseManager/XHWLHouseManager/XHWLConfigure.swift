@@ -53,6 +53,32 @@ let Screen_height:CGFloat = UIScreen.main.bounds.size.height
 let Screen_width:CGFloat = UIScreen.main.bounds.size.width
 
 
+// 错误码
+//110---验证码已过期
+//111---验证码无效
+//113---账号名/密码不正确
+//114---用户名不存在
+//115---没有操作权限
+//116---记录不存在/业主不存在
+//117---业主没有相关房址信息
+
+//200---操作成功
+//201---系统异常，操作失败
+//202---没有相关数据返回
+//203---操作成功，修改了电话号码，需要重新登录
+//400---用户没有登录
+//401---用户token过期
+//402---登出成功
+let code_401:NSInteger = 401
+let code_115:String = "115"
+//
+//-1---缺少参数值
+//-2---二维码错误
+//-3---没有匹配的信息
+//-4---短信发送失败
+//-5---账号已注册过
+
+
 // MARK: -- 百度地图
 let MapKitAK:String = "B7Ml8pkMdglObbl5GiXDGyu2m9VRNHVG"
 //"10092150" // 应用编号

@@ -59,6 +59,7 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
         tableView.backgroundColor = UIColor.clear
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.showsVerticalScrollIndicator = false
         self.addSubview(tableView)
     }
     

@@ -37,12 +37,25 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
+        var projectStr:String! = ""
+        if UserDefaults.standard.object(forKey: "projectList") != nil {
+            let projectData:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
+            let projectList:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: projectData.mj_JSONObject())
+            
+            if projectList.count > 0 {
+                let projectSubData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+                let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectSubData.mj_JSONObject())
+                
+                projectStr = projectModel.name
+            }
+        }
+
         dataAry = NSMutableArray()
         let array :NSArray = [["name":"姓名:", "content":userModel.name, "isHiddenEdit": false],
                               ["name":"工号:", "content":userModel.wyAccount.workCode, "isHiddenEdit": true],
                               ["name":"手机:", "content":userModel.telephone, "isHiddenEdit":false],
                               ["name":"岗位:", "content":userModel.wyAccount.wyRoleName, "isHiddenEdit": true],
-                              ["name":"项目:", "content":userModel.wyAccount.wyRole.name, "isHiddenEdit": true]]
+                              ["name":"项目:", "content":projectStr, "isHiddenEdit": true]]
         dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
     }
     
@@ -73,9 +86,9 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
         labelViewArray = NSMutableArray()
         for i in 0...dataAry.count-1 {
             let menuModel :XHWLMenuModel = dataAry[i] as! XHWLMenuModel
-            let labelView: XHWLMenuLabelView = XHWLMenuLabelView()
+            let labelView: XHWLMenuLabelView = XHWLMenuLabelView(frame:CGRect.zero, !menuModel.isHiddenEdit)
             labelView.showText(leftText: menuModel.name, rightText:menuModel.content, isHiddenEdit: menuModel.isHiddenEdit)
-            labelView.isHiddenEdit = menuModel.isHiddenEdit
+//            labelView.isHiddenEdit = menuModel.isHiddenEdit
             labelView.delegate = self
             labelView.tag = comTag+i
             bgScrollView.addSubview(labelView)
@@ -86,7 +99,7 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
         logoutBtn.setTitle("退出", for: UIControlState.normal)
         logoutBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
         logoutBtn.titleLabel?.font = font_14
-        logoutBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
+        logoutBtn.setBackgroundImage(UIImage(named:"menu_text_bg"), for: UIControlState.normal)
         logoutBtn.addTarget(self, action: #selector(logoutClick), for: UIControlEvents.touchUpInside)
         bgScrollView.addSubview(logoutBtn)
     }
@@ -199,7 +212,13 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
             let modifyData:NSData = userModel.mj_JSONData()! as NSData
             UserDefaults.standard.set(modifyData, forKey: "user")
             UserDefaults.standard.synchronize()
-                
+            
+            
+            let labelView: XHWLMenuLabelView = labelViewArray[2] as! XHWLMenuLabelView
+            let menuModel :XHWLMenuModel = dataAry[2] as! XHWLMenuModel
+            menuModel.content = self.phone
+            labelView.showText(leftText: menuModel.name, rightText:menuModel.content, isHiddenEdit: menuModel.isHiddenEdit)
+            
             "修改手机号成功".ext_debugPrintAndHint()
             
             block(true)
@@ -229,6 +248,11 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
             let modifyData:NSData = userModel.mj_JSONData()! as NSData
             UserDefaults.standard.set(modifyData, forKey: "user")
             UserDefaults.standard.synchronize()
+            
+            let labelView: XHWLMenuLabelView = labelViewArray[0] as! XHWLMenuLabelView
+            let menuModel :XHWLMenuModel = dataAry[0] as! XHWLMenuModel
+            menuModel.content = self.name
+            labelView.showText(leftText: menuModel.name, rightText:menuModel.content, isHiddenEdit: menuModel.isHiddenEdit)
             
             "修改姓名成功".ext_debugPrintAndHint()
             block(true)

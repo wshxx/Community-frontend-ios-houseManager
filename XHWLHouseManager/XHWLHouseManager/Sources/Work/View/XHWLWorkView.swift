@@ -58,7 +58,8 @@ class XHWLWorkView: UIView , UITableViewDelegate, UITableViewDataSource {
         let cell = XHWLWorkCell.cellWithTableView(tableView: tableView)
         let str = dataAry[indexPath.row] as? String
         cell.showText = str
-        cell.badgeNumber = badgeArray![indexPath.row] as! NSNumber
+        cell.badgeNumber = Int(badgeArray![indexPath.row] as! NSInteger)
+        print("\(Int(badgeArray![indexPath.row] as! NSInteger))")
         cell.onBtnClickBlock = {[weak self] param in
             
             self?.dismissBlock(indexPath.row)

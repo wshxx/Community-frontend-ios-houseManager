@@ -16,7 +16,7 @@ import IQKeyboardManagerSwift
 //Any可以表示任何类型，除了方法类型(function types)。
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUSHRegisterDelegate { // JPUSHRegisterDelegate
+class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUSHRegisterDelegate, XHWLNetworkDelegate { // JPUSHRegisterDelegate
 
     var window: UIWindow?
     var _mapManager: BMKMapManager?
@@ -60,6 +60,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
                 }
             }
         }
+        
+        JPUSHService.getAllTags({ (iResCode, iAlias, seq) in
+            print("\(iAlias)")
+        }, seq: 0)
         
         self.window?.makeKeyAndVisible()
         return true
@@ -111,7 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
         //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
         let entity:JPUSHRegisterEntity = JPUSHRegisterEntity()
         entity.types = Int(UInt8(JPAuthorizationOptions.alert.rawValue) | UInt8(JPAuthorizationOptions.badge.rawValue) | UInt8(JPAuthorizationOptions.sound.rawValue))
-        if UIDevice.current.systemVersion >= "8.0" {
+        if (UIDevice.current.systemVersion as NSString).floatValue >= 8.0 {
             // 可以添加自定义categories
             // NSSet<UNNotificationCategory *> *categories for iOS10 or later
             // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
@@ -128,6 +132,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
                            appKey: jPushAppKey,
                            channel: channel,
                            apsForProduction: true) // 0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
+        
+        if (UIDevice.current.systemVersion as NSString).floatValue >= 9.0 &&
+            (UIDevice.current.systemVersion as NSString).floatValue <= 10.3 {
+            let defaultCenter:NotificationCenter = NotificationCenter.default
+            defaultCenter.addObserver(self, selector: #selector(networkDidReceiveMessage), name: NSNotification.Name.jpfNetworkDidReceiveMessage, object: nil)
+        }
+    }
+    
+    func networkDidReceiveMessage(_ notification:Notification) {
+        
+        let userInfo:NSDictionary = notification.userInfo as! NSDictionary
+        print("\(userInfo)")
+        
+        if (UserDefaults.standard.object(forKey: "user") != nil) &&
+            !(UserDefaults.standard.object(forKey: "user") is String) {
+            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+            if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
+                
+                print("\(userInfo["key"])")
+                let extras:NSDictionary = userInfo.value(forKey: "extras") as! NSDictionary
+                let keyStr:String = extras["key"] as! String
+                //                let keyDict:NSDictionary = self.getDictionaryFromJSONString(keyStr)
+                if keyStr == "complaint" { // 安防事件 后台时要给提示
+                    
+                    let index:NSInteger =  Int(UserDefaults.standard.integer(forKey: "safeProtectAlert")) + 1
+                    
+                    UserDefaults.standard.set(index, forKey: "safeProtectAlert")
+                    UserDefaults.standard.synchronize()
+                    
+                    UIApplication.shared.applicationIconBadgeNumber = index
+                    
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
+                    
+                }
+            }
+        }
     }
     
     // 百度地图
@@ -180,11 +221,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        let index:NSInteger =  Int(UserDefaults.standard.integer(forKey: "safeProtectAlert"))
+        JPUSHService.setBadge(index) // JPush服务器
+        UIApplication.shared.applicationIconBadgeNumber = index
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         UIApplication.shared.applicationIconBadgeNumber = 0
+        JPUSHService.resetBadge()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -202,6 +247,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
         }
         else{
             NSLog("联网失败，错误代码：Error\(iError)");
+            "网络连接失败".ext_debugPrintAndHint()
         }
     }
     
@@ -211,6 +257,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
         }
         else{
             NSLog("授权失败，错误代码：Error\(iError)");
+            "地图授权失败".ext_debugPrintAndHint()
         }
     }
     
@@ -247,6 +294,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
             // Fallback on earlier versions
         }
         
+        print("\(userInfo)")
+        let aps:NSDictionary = userInfo["aps"] as! NSDictionary
+        "\(aps["alert"]!)".ext_debugPrintAndHint()
+        if (UserDefaults.standard.object(forKey: "user") != nil) &&
+            !(UserDefaults.standard.object(forKey: "user") is String) {
+            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+            if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
+                
+                print("\(userInfo["key"])")
+                let keyStr:String = userInfo["key"] as! String
+                let keyDict:NSDictionary = self.getDictionaryFromJSONString(keyStr)
+                if keyStr == "complaint" { // 安防事件 后台时要给提示
+                    
+                    let index:NSInteger = aps["badge"] as! NSInteger// Int(UserDefaults.standard.integer(forKey: "safeProtectAlert")) + 1
+                    
+                    UserDefaults.standard.set(index, forKey: "safeProtectAlert")
+                    UserDefaults.standard.synchronize()
+                    
+                    JPUSHService.setBadge(index) // JPush服务器
+                    
+                    UIApplication.shared.applicationIconBadgeNumber = index
+                    
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
+                    
+                }
+            }
+        }
+        
         completionHandler(Int(UNNotificationPresentationOptions.alert.rawValue)) // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
     }
     
@@ -259,17 +335,99 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
             JPUSHService.handleRemoteNotification(userInfo as! [AnyHashable : Any])
         }
         
+        print("\(userInfo)")
+        let aps:NSDictionary = userInfo["aps"] as! NSDictionary
+        
+        "\(aps["alert"]!)".ext_debugPrintAndHint()
+        
+        if (UserDefaults.standard.object(forKey: "user") != nil) &&
+            !(UserDefaults.standard.object(forKey: "user") is String) {
+            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+            if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
+                
+                print("\(userInfo["key"])")
+                let keyStr:String = userInfo["key"] as! String
+                let keyDict:NSDictionary = self.getDictionaryFromJSONString(keyStr)
+                if keyStr == "complaint" { // 安防事件 后台时要给提示
+                    
+                    let index:NSInteger = aps["badge"] as! NSInteger// Int(UserDefaults.standard.integer(forKey: "safeProtectAlert")) + 1
+                    
+                    UserDefaults.standard.set(index, forKey: "safeProtectAlert")
+                    UserDefaults.standard.synchronize()
+                    
+                    JPUSHService.setBadge(index) // JPush服务器
+                    
+                    UIApplication.shared.applicationIconBadgeNumber = index
+                    
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
+                    
+                }
+            }
+        }
+        
         completionHandler();  // 系统要求执行这个方法
     }
 
-    // ios 9 系统提示
+    // ios 9 系统提示   在前台时调用
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        JPUSHService.getAllTags({ (iResCode, iAlias, seq) in
+            print("\(iAlias)")
+        }, seq: 0)
+        
         // Required, iOS 7 Support
         JPUSHService.handleRemoteNotification(userInfo)
         completionHandler(UIBackgroundFetchResult.newData)
         print("\(userInfo)")
         let aps:NSDictionary = userInfo["aps"] as! NSDictionary
         "\(aps["alert"]!)".ext_debugPrintAndHint()
+        
+        if application.applicationState == UIApplicationState.active {
+            // 代表从前台接受消息app
+            
+            if (UserDefaults.standard.object(forKey: "user") != nil) &&
+                !(UserDefaults.standard.object(forKey: "user") is String) {
+                let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+                let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+                if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
+                    
+                    print("\(userInfo["key"])")
+                    let keyStr:String = userInfo["key"] as! String
+                    //                let keyDict:NSDictionary = self.getDictionaryFromJSONString(keyStr)
+                    if keyStr == "complaint" { // 安防事件 后台时要给提示
+                        
+                        let index:NSInteger =  aps["badge"] as! NSInteger //Int(UserDefaults.standard.integer(forKey: "safeProtectAlert")) + 1
+                        
+                        UserDefaults.standard.set(index, forKey: "safeProtectAlert")
+                        UserDefaults.standard.synchronize()
+                        JPUSHService.setBadge(index) // JPush服务器
+                        
+                        UIApplication.shared.applicationIconBadgeNumber = index
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
+                        
+                    }
+                }
+            }
+        }else{
+            // 代表从后台接受消息后进入app
+//            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+        }
+        
+    }
+    
+    
+    //json格式字符串转字典：
+    func getDictionaryFromJSONString(_ jsonString:String) ->NSDictionary{
+        
+        let jsonData:Data = jsonString.data(using: .utf8)!
+        
+        let dict = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+        if dict != nil {
+            return dict as! NSDictionary
+        }
+        return NSDictionary()
     }
     
     
@@ -283,8 +441,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
         print("\(notification.alertTitle) = \(notification.userInfo)")
     }
 
+    class func shared() ->AppDelegate {
     
-
-
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    func onLogout() {
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        XHWLNetwork.shared.getLogoutClick([userModel.wyAccount.token] as NSArray, self)
+    }
+    // MARK: - XHWLNetworkDelegate
+    
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        if requestKey == XHWLRequestKeyID.XHWL_LOGOUT.rawValue {
+            
+            UserDefaults.standard.set("", forKey: "user")
+            UserDefaults.standard.set("", forKey: "projectList")
+            UserDefaults.standard.synchronize()
+            
+            //                + (void)deleteAlias:(JPUSHAliasOperationCompletion)completion
+            //            seq:(NSInteger)seq;
+            JPUSHService.cleanTags({ (iResCode, iAlias, seq) in
+                
+            }, seq: 0)
+            
+            let window:UIWindow = UIApplication.shared.keyWindow!
+            window.rootViewController = XHWLLoginVC()
+        }
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
+    }
 }
 

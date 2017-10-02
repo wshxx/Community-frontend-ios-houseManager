@@ -103,8 +103,6 @@ class XHWLCheckListTF: UIView, UITextFieldDelegate {
         }
         contentTF.text = rightText
         listBtn.showBtnTitle(btnTitle)
-        
-        
     }
     
     func showBtnTitle(_ btnTitle:String) {

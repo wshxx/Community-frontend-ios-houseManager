@@ -40,7 +40,6 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
-        
         let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
         let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectData.mj_JSONObject())
         let param = ["ProjectCode":projectModel.code, // 项目编号 201
@@ -58,7 +57,8 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
             let ary:NSArray = XHWLDeviceModel.mj_objectArray(withKeyValuesArray: list)
             let array:NSArray =  XHWLDeviceModel.mj_keyValuesArray(withObjectArray: ary as! [Any]) //XHWLDeviceModel. .mj_objectArray(withKeyValuesArray: list)
             
-            let dataDict = superGroupDictWith(array, "NavName") as NSDictionary // 转为【“”： NSArray]
+//            let dataDict = superGroupDictWith(array, "NavName") as NSDictionary // 转为【“”： NSArray]
+            let dataDict = superGroupDictWith(array, "NavCode") as NSDictionary // 转为【“”： NSArray]
             print("\(dataDict)") // NavCode
             
             let dataSourceAry = NSMutableArray()
@@ -80,8 +80,9 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
                 
                 let modelAry:NSArray = XHWLDeviceSubTitleModel.mj_objectArray(withKeyValuesArray: subDataAry)
                 
-                
-                dataSourceAry.add(["deviceTitle":key, "deviceAry":modelAry])
+                let keyDict:NSDictionary =  value[0] as! NSDictionary
+                let keyStr:String = keyDict["NavName"] as! String
+                dataSourceAry.add(["deviceTitle":keyStr, "deviceAry":modelAry])
             }
 
             let modelAry = XHWLDeviceTitleModel.mj_objectArray(withKeyValuesArray: dataSourceAry)
@@ -95,8 +96,8 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
     
     func superGroupDictWith(_ array:NSArray, _ key:String) -> NSDictionary {
         let dict = NSMutableDictionary() //NSMutableDictionary()
-        dict["发电机房"] = NSMutableArray()
-        dict["低压配电房"] = NSMutableArray()
+//        dict["发电机房"] = NSMutableArray()
+//        dict["低压配电房"] = NSMutableArray()
         
         for i in 0..<array.count {
             let model = array[i] as! NSDictionary
@@ -119,10 +120,10 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
                 valueAry.add(model)
                 dict[currentKey] = valueAry
             }
-//            else {
-//                let ary:NSMutableArray = [model]
-//                dict[currentKey] = ary
-//            }
+            else {
+                let ary:NSMutableArray = [model]
+                dict[currentKey] = ary
+            }
         }
         print("\(dict)")
         
@@ -173,10 +174,8 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
         bgImg.image = UIImage(named:"home_bg")
         self.view.addSubview(bgImg)
         
-        let showImg:UIImage = UIImage(named:"menu_bg")!
         warningView = XHWLWaterView()
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width-20, height:Screen_height-160)
-//        warningView.bounds = CGRect(x:0, y:0, width:338, height:68+showImg.size.height)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.clickCell = {topIndex,indexPath,index in
             

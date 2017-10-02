@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XHWLMenuVC: XHWLBaseVC , XHWLNetworkDelegate {
+class XHWLMenuVC: XHWLBaseVC  {
 
     var menuView : XHWLMenuView!
     
@@ -28,35 +28,13 @@ class XHWLMenuVC: XHWLBaseVC , XHWLNetworkDelegate {
 //        menuView.isHidden = true
         menuView.backBlock = {_ in
             AlertMessage.showAlertMessage(vc: self, alertMessage: "确定要退出吗？") {
-                
-                let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-                let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-                
-                XHWLNetwork.shared.getLogoutClick([userModel.wyAccount.token] as NSArray, self)
+                AppDelegate.shared().onLogout()
             }
         }
         self.view.addSubview(menuView)
     }
     
-    // MARK: - XHWLNetworkDelegate
-    
-    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
-        
-        if requestKey == XHWLRequestKeyID.XHWL_LOGOUT.rawValue {
-            
-            UserDefaults.standard.set("", forKey: "user")
-            UserDefaults.standard.set("", forKey: "projectList")
-            UserDefaults.standard.synchronize()
-            
-            
-            let window:UIWindow = UIApplication.shared.keyWindow!
-            window.rootViewController = XHWLLoginVC()
-        }
-    }
-    
-    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
-        
-    }
+  
 
 //    func action() {
 //        actionArr = ["相册", "拍照"]

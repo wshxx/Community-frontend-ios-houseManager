@@ -17,6 +17,12 @@ class XHWLProjectModel: NSObject {
     var longitude:String = ""
     var divisionName:String = ""
     
+    var ccProjectCode:String = ""
+    var entranceCode:String = ""
+    var patrolCode:String = ""
+    var parkingCode:String = ""
+
+    
     func mj_objectClassInArray() -> [AnyHashable : Any]! {
         return ["sysDivision":XHWLSysDivisionModel.self] // [JZMJewelryCategoryModel class]
     }

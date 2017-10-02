@@ -67,8 +67,6 @@ class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
         let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
         if array.count > 0 {
             
-            
-            
             let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
             let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
             

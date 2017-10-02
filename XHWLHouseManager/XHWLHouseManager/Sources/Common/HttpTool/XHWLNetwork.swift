@@ -256,15 +256,22 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
         superWithLoadData(parameters, .XHWL_VISITLIST, .get)
     }
     
-    
+    // 门列表
+    func postDoorListClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_DOORLIST, .post)
+    }
     
     // MARK: - XHWLHttpToolDelegate
     func requestSuccess(_ requestKey:NSInteger, result request:Any) {
 //        [[FireflyShowViewManager sharedInstance]dismissWaitingView];
-        
-
-        
-       self.delegate?.requestSuccess(requestKey, request as! [String : AnyObject])
+        let dict:NSDictionary = request as! NSDictionary
+        if dict["errorCode"] as! NSInteger == code_401 { // 用户token过期
+            AppDelegate.shared().onLogout()
+        } else {
+            self.delegate?.requestSuccess(requestKey, request as! [String : AnyObject])
+        }
     }
     
     func requestFail(_ requestKey:NSInteger, _ error:NSError) {

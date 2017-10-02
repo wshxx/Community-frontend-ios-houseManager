@@ -52,7 +52,7 @@ class XHWLForgetPwdView: UIView, XHWLNetworkDelegate {
         self.addSubview(userTF)
         
         
-        pwdTF = XHWLLoginTF(frame: CGRect(x:25, y:160, width:self.bounds.width-50, height:40), loginEnum: XHWLLoginTFEnum.user , placeholder:"请输入手机号")
+        pwdTF = XHWLLoginTF(frame: CGRect(x:25, y:160, width:self.bounds.width-50, height:40), loginEnum: XHWLLoginTFEnum.phone , placeholder:"请输入手机号")
         pwdTF.funcBackBlock = {str in
             self.bottomStr = str
         }

@@ -39,6 +39,7 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
         }
     }
     
+    
     // 
     func onIssueReportList() {
 //        let vc:XHWLIssueReportListVC = XHWLIssueReportListVC()
@@ -57,8 +58,11 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
     func onBack(){
 //        self.navigationController?.popViewController(animated: true)
         
-        let vc:UIViewController = (self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)!-3])!
-        self.navigationController?.popToViewController(vc, animated: true)
+        if self.view.isUserInteractionEnabled == true {
+            
+            let vc:UIViewController = (self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)!-3])!
+            self.navigationController?.popToViewController(vc, animated: true)
+        }
     }
     
     func setupView() {
@@ -92,6 +96,8 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
 //        equipmentCode	string	否	报事的设备编号
 //        remarks	string	否	备注
 //        token	string	是	用户登录token
+        self.view.isUserInteractionEnabled = false
+        
         
         if type.isEmpty {
             "异常类型为空".ext_debugPrintAndHint()
@@ -126,6 +132,7 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
             code = scanDataModel.code
         }
         
+        
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         let params:[String: String] = ["type":type,
@@ -145,23 +152,21 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
         
         //            self.progressHUD.hide()
         if response["state"] as! Bool{
-            
             self.warningView.isHidden = true
-            XHWLTipView.shared.showSuccess("报事提交成功")
-            
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.9)){
+            XHWLTipView.shared.showSuccess("报事提交成功", {
                 let vc:UIViewController = (self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)!-4])!
                 self.navigationController?.popToViewController(vc, animated: true)
-            }
+                self.view.isUserInteractionEnabled = true
+            } )
+            
         } else {
             
             self.warningView.isHidden = true
-            XHWLTipView.shared.showError("报事提交失败，请重新填写！")
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.9)){
-                XHWLTipView.shared.remove()
+            XHWLTipView.shared.showError("报事提交失败，请重新填写！", {
+                
                 self.warningView.isHidden = false
-            }
-            
+                self.view.isUserInteractionEnabled = true
+            })
             //登录失败
             switch(response["errorCode"] as! Int){
             case 11:
@@ -178,7 +183,7 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
     }
     
     func requestFail(_ requestKey:NSInteger, _ error:NSError) {
-        
+        self.view.isUserInteractionEnabled = true
     }
 
     func onSafeGuard(_ isAdd:Bool, _ index:NSInteger, _ isPictureAdd:Bool)

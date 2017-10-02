@@ -11,6 +11,7 @@ import UIKit
 enum XHWLLoginTFEnum : Int{
     case user = 0
     case password
+    case phone
 }
 
 class XHWLLoginTF: UIView, UITextFieldDelegate {
@@ -47,12 +48,15 @@ class XHWLLoginTF: UIView, UITextFieldDelegate {
         
         
         let leftV:UIView = UIView(frame: CGRect(x:0, y:0, width:30, height:30))
-        let bgIV:UIImageView = UIImageView(frame: CGRect(x:0, y:(30-13)/2.0, width:11, height:13))
+        let bgIV:UIImageView = UIImageView(frame: CGRect(x:0, y:(30-22)/2.0, width:12, height:22))
+        bgIV.contentMode = .center
         if XHWLLoginTFEnum.user == loginEnum {
             bgIV.image = UIImage(named: "login_person")
         } else if XHWLLoginTFEnum.password == loginEnum {
             bgIV.image = UIImage(named: "login_password")
             textField.isSecureTextEntry = true
+        } else if XHWLLoginTFEnum.phone == loginEnum {
+            bgIV.image = UIImage(named: "login_phone")
         }
         bgIV.center = CGPoint(x: 15, y: 15)
         leftV.addSubview(bgIV)

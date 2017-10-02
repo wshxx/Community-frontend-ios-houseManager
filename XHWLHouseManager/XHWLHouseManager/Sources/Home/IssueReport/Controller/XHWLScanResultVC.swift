@@ -38,7 +38,7 @@ class XHWLScanResultVC: UIViewController {
         let mutableAry :NSMutableArray = NSMutableArray.init(array: array)
         
         if scanModel.type == "plant" {
-            mutableAry.add(["name":"位置：", "content":"\(scanDataModel!.descri)", "isHiddenEdit": true])
+            mutableAry.add(["name":"位置：", "content":"\(scanDataModel!.descriptions)", "isHiddenEdit": true])
             mutableAry.add(["name":"编码：", "content":scanDataModel!.sysProject.ccProjectCode, "isHiddenEdit": true])
          } else if scanModel?.type == "equipment" {
             mutableAry.add(["name":"位置：", "content":scanDataModel!.address, "isHiddenEdit": true])

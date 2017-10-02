@@ -21,7 +21,7 @@ class XHWLButton: UIButton {
     }
     
     func setupView() {
-        self.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
+        self.setBackgroundImage(UIImage(named:"menu_text_bg"), for: UIControlState.normal)
 //        self.addTarget(self, action: #selector(onListTouchClick), for: UIControlEvents.touchUpInside)
         
         titleL = UILabel()

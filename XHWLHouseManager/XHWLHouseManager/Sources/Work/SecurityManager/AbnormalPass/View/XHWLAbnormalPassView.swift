@@ -20,13 +20,6 @@ class XHWLAbnormalPassView: UIView  , UITableViewDelegate, UITableViewDataSource
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-//        let array:NSArray = [["name": "特权车辆", "time":"2017.01.21", "registerName":"哈哈", "content":"张浩然"],
-//                             ["name": "特权车辆", "time":"2017.01.21", "registerName":"哈哈",  "content":"张浩然"]
-//        ]
-//
-//        dataAry = NSMutableArray()
-//        dataAry = XHWLRegisterationModel.mj_objectArray(withKeyValuesArray: array)
-        
         setupView()
         
     }
@@ -43,6 +36,7 @@ class XHWLAbnormalPassView: UIView  , UITableViewDelegate, UITableViewDataSource
         tableView.backgroundColor = UIColor.clear
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.showsVerticalScrollIndicator = false
         self.addSubview(tableView)
     }
     
