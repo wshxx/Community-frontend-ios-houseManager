@@ -28,7 +28,7 @@ class XHWLHomeView: UIView  {
     var openBtn:UIButton!
     var netOpenBtn:UIButton!
     var bindCardBtn:UIButton!
-    var messageBtn:UIButton!
+//    var messageBtn:UIButton!
     var delegate:XHWLHomeViewDelegate?
     
     weak var bluePoint: UIImageView!
@@ -82,15 +82,15 @@ class XHWLHomeView: UIView  {
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
-        if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
-            let messageImg:UIImage = UIImage(named: "home_message")!
-            messageBtn = UIButton()
-            messageBtn.frame = CGRect(x:0, y:0, width:messageImg.size.width, height:messageImg.size.height)
-            messageBtn.center = CGPoint(x:self.bounds.size.width/2.0-115, y:self.bounds.size.height/2.0+80)
-            messageBtn.setImage(messageImg, for: UIControlState.normal)
-            messageBtn.addTarget(self, action: #selector(onMessageClicked), for: UIControlEvents.touchUpInside)
-            self.addSubview(messageBtn)
-        }
+//        if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
+//            let messageImg:UIImage = UIImage(named: "home_message")!
+//            messageBtn = UIButton()
+//            messageBtn.frame = CGRect(x:0, y:0, width:messageImg.size.width, height:messageImg.size.height)
+//            messageBtn.center = CGPoint(x:self.bounds.size.width/2.0-115, y:self.bounds.size.height/2.0+80)
+//            messageBtn.setImage(messageImg, for: UIControlState.normal)
+//            messageBtn.addTarget(self, action: #selector(onMessageClicked), for: UIControlEvents.touchUpInside)
+//            self.addSubview(messageBtn)
+//        }
 
 //        let window:UIWindow = UIApplication.shared.keyWindow!
 //        spaceBg = YLImageView(frame: UIScreen.main.bounds)

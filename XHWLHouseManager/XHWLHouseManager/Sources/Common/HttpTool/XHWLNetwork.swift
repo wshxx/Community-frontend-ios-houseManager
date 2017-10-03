@@ -267,7 +267,8 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
     func requestSuccess(_ requestKey:NSInteger, result request:Any) {
 //        [[FireflyShowViewManager sharedInstance]dismissWaitingView];
         let dict:NSDictionary = request as! NSDictionary
-        if dict["errorCode"] as! NSInteger == code_401 { // 用户token过期
+        if dict["errorCode"] as! NSInteger == code_401 ||
+            dict["errorCode"] as! NSInteger == code_400 { // 用户token过期  用户没有登录
             AppDelegate.shared().onLogout()
         } else {
             self.delegate?.requestSuccess(requestKey, request as! [String : AnyObject])

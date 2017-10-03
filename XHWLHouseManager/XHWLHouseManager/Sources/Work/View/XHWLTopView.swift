@@ -118,6 +118,8 @@ class XHWLTopView: UIView {
                     self.tipLabel.frame = CGRect(x:self.selectBtn.frame.minX + (self.selectBtn.bounds.size.width-size.width)/2.0, y:self.bounds.size.height-18, width:size.width, height:2)
                 } else {
                     
+                    
+                    
 //                    self.tipLabel.frame = CGRect(x:self.selectBtn.frame.minX, y:self.bounds.size.height-18, width:120, height:2)
                     let size:CGSize = self.selectBtn.titleLabel!.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:self.selectBtn.titleLabel!.font], context: nil).size
                     self.tipLabel.frame = CGRect(x:self.selectBtn.frame.minX + (self.selectBtn.bounds.size.width-size.width)/2.0, y:self.bounds.size.height-18, width:size.width, height:2)
@@ -150,13 +152,22 @@ class XHWLTopView: UIView {
                     tipLabel.frame = CGRect(x:selectBtn.frame.minX + (selectBtn.bounds.size.width-size.width)/2.0, y:self.bounds.size.height-18, width:size.width, height:2)
                 }
             } else {
-                let w:CGFloat = 120
-                sc.contentSize = CGSize(width:btnArray.count*120+20, height:0)
+                
+
+                var maxX:CGFloat = 10
+//                let w:CGFloat = 120
+//                sc.contentSize = CGSize(width:btnArray.count*120+20, height:0)
                 for i in 0..<btnArray.count {
-                    
                     let btn:UIButton = btnArray[i] as! UIButton
-                    btn.frame = CGRect(x:w.multiplied(by: CGFloat(i)), y:16, width:w, height:self.frame.size.height-32)
+//                    let model:XHWLDeviceTitleModel = array[i] as! XHWLDeviceTitleModel
+                    let size:CGSize = btn.titleLabel!.text!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:selectBtn.titleLabel!.font], context: nil).size
+                    
+//                    btn.frame = CGRect(x:w.multiplied(by: CGFloat(i)), y:16, width:size.width+10, height:self.frame.size.height-32)
+                    btn.frame = CGRect(x:maxX+15, y:16, width:size.width, height:self.frame.size.height-32)
+                    maxX = btn.frame.maxX
                 }
+                
+                sc.contentSize = CGSize(width:maxX+10, height:0)
                 
                 if btnArray.count > 1 {
                     

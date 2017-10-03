@@ -381,19 +381,24 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
     
     //    返回项目下所有设备信息
     func loadDeviceInfo() {
-        let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
-        let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
-        if array.count > 0 {
-            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-            
-            let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
-            let projectModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: projectData.mj_JSONObject())
-            
-            let param = ["ProjectCode": projectModel.code, // 项目编号 201
-                "token":userModel.wyAccount.token]
-            
-            XHWLNetwork.shared.postDeviceInfoClick(param as NSDictionary, self)
+        
+        if UserDefaults.standard.object(forKey: "projectList") != nil {
+            let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
+            let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
+            if array.count > 0 {
+                let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+                let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+                
+                let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+                let projectModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: projectData.mj_JSONObject())
+                
+                let param = ["ProjectCode": projectModel.code, // 项目编号 201
+                            "token":userModel.wyAccount.token]
+                
+                XHWLNetwork.shared.postDeviceInfoClick(param as NSDictionary, self)
+            } else {
+                "您当前无项目".ext_debugPrintAndHint()
+            }
         } else {
             "您当前无项目".ext_debugPrintAndHint()
         }

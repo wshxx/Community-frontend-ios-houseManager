@@ -11,7 +11,7 @@ import UIKit
 class XHWLChargeButton: UIButton {
 
     var titleL:UILabel!
-    var detailL:UILabel!
+//    var detailL:UILabel!
     var btnBlock:()->(Void) = { param in }
     
     override init(frame: CGRect) {
@@ -30,24 +30,29 @@ class XHWLChargeButton: UIButton {
         titleL.textAlignment = .center
         self.addSubview(titleL)
         
-        detailL = UILabel()
-        detailL.font = font_13
-        detailL.textColor = color_09fbfe
-        detailL.textAlignment = .center
-        self.addSubview(detailL)
+//        detailL = UILabel()
+//        detailL.font = font_13
+//        detailL.textColor = color_09fbfe
+//        detailL.textAlignment = .center
+//        self.addSubview(detailL)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        titleL.frame = CGRect(x:5, y:0, width:self.bounds.size.width-10, height:self.bounds.size.height/2.0)
-        detailL.frame = CGRect(x:5, y:self.bounds.size.height/2.0, width:self.bounds.size.width-10, height:self.bounds.size.height/2.0)
+        titleL.frame = CGRect(x:5, y:0, width:self.bounds.size.width-10, height:self.bounds.size.height)
+//        titleL.frame = CGRect(x:5, y:0, width:self.bounds.size.width-10, height:self.bounds.size.height/2.0)
+//        detailL.frame = CGRect(x:5, y:self.bounds.size.height/2.0, width:self.bounds.size.width-10, height:self.bounds.size.height/2.0)
     }
     
-    func showText(_ title:String, _ detailText:String) {
+    func showText(_ title:String) {
         self.titleL.text = title
-        self.detailL.text = detailText
     }
+    
+//    func showText(_ title:String, _ detailText:String) {
+//        self.titleL.text = title
+//        self.detailL.text = detailText
+//    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

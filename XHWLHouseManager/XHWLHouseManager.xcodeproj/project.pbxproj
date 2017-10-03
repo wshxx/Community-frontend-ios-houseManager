@@ -213,6 +213,7 @@
 		197D64B61F62807D00977074 /* XHWLMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D64B51F62807D00977074 /* XHWLMenuModel.swift */; };
 		197D64B81F628B9400977074 /* XHWLTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D64B71F628B9400977074 /* XHWLTipView.swift */; };
 		197D64BC1F62A10900977074 /* XHWLTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D64BB1F62A10900977074 /* XHWLTopView.swift */; };
+		19857F361F83322400850A8A /* XHWLMenuLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19857F351F83322400850A8A /* XHWLMenuLineView.swift */; };
 		198B17C71F7A3F8100F1067C /* XHWLLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198B17C61F7A3F8100F1067C /* XHWLLabel.swift */; };
 		198B17CB1F7A4A1C00F1067C /* LYMUILabel+TextAlignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 198B17CA1F7A4A1C00F1067C /* LYMUILabel+TextAlignment.m */; };
 		198B17D91F7A849100F1067C /* CLNewFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198B17D81F7A849100F1067C /* CLNewFeatureView.swift */; };
@@ -579,6 +580,7 @@
 		197D64B51F62807D00977074 /* XHWLMenuModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLMenuModel.swift; sourceTree = "<group>"; };
 		197D64B71F628B9400977074 /* XHWLTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLTipView.swift; sourceTree = "<group>"; };
 		197D64BB1F62A10900977074 /* XHWLTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLTopView.swift; sourceTree = "<group>"; };
+		19857F351F83322400850A8A /* XHWLMenuLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMenuLineView.swift; sourceTree = "<group>"; };
 		198B17C61F7A3F8100F1067C /* XHWLLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLabel.swift; sourceTree = "<group>"; };
 		198B17C91F7A4A1C00F1067C /* LYMUILabel+TextAlignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LYMUILabel+TextAlignment.h"; sourceTree = "<group>"; };
 		198B17CA1F7A4A1C00F1067C /* LYMUILabel+TextAlignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LYMUILabel+TextAlignment.m"; sourceTree = "<group>"; };
@@ -1619,6 +1621,7 @@
 		197D64AE1F62802900977074 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				19857F351F83322400850A8A /* XHWLMenuLineView.swift */,
 				197D64B11F62805500977074 /* XHWLMenuLabelView.swift */,
 				197D64B21F62805500977074 /* XHWLMenuView.swift */,
 				197D64B71F628B9400977074 /* XHWLTipView.swift */,
@@ -2436,6 +2439,7 @@
 				193F0F131F7B539100C2F948 /* XHWLSelTypeView.swift in Sources */,
 				193F0F091F7B538900C2F948 /* XHWLUnitModel.swift in Sources */,
 				193F0F081F7B538300C2F948 /* XHWLCheckVC.swift in Sources */,
+				19857F361F83322400850A8A /* XHWLMenuLineView.swift in Sources */,
 				193F0F061F7B537C00C2F948 /* XHWLRegistrationDetailView.swift in Sources */,
 				193F0F071F7B537C00C2F948 /* XHWLRegistrationView.swift in Sources */,
 				196A7E8D1F81E1C800E3352B /* XHWLDoorModel.swift in Sources */,

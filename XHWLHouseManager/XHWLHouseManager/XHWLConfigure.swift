@@ -70,7 +70,7 @@ let Screen_width:CGFloat = UIScreen.main.bounds.size.width
 //401---用户token过期
 //402---登出成功
 let code_401:NSInteger = 401
-let code_115:String = "115"
+let code_400:NSInteger = 400
 //
 //-1---缺少参数值
 //-2---二维码错误

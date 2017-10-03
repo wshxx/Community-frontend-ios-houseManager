@@ -155,7 +155,6 @@ class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDel
     func setupLocation() {
         locationService = BMKLocationService()
         locationService.delegate = self
-        locationService.allowsBackgroundLocationUpdates = true
  
         //使用百度地图自带的定位功能
 //        [BMKLocationService setLocationDesiredAccuracy:kCLLocationAccuracyBest];

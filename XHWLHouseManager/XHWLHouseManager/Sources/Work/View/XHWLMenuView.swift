@@ -42,13 +42,34 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
             let projectData:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
             let projectList:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: projectData.mj_JSONObject())
             
-            if projectList.count > 0 {
-                let projectSubData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
-                let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectSubData.mj_JSONObject())
-                
-                projectStr = projectModel.name
+            for i in 0..<projectList.count {
+                let projectModel:XHWLProjectModel = projectList[i] as! XHWLProjectModel
+                if !projectStr.isEmpty {
+                    
+                    projectStr = projectStr + ","+projectModel.name
+                } else {
+                    
+                    projectStr = projectModel.name
+                }
             }
+//            if projectList.count > 0 {
+//                let projectSubData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+//                let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectSubData.mj_JSONObject())
+//
+//                projectStr = projectModel.name
+//            }
         }
+//        if UserDefaults.standard.object(forKey: "projectList") != nil {
+//            let projectData:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
+//            let projectList:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: projectData.mj_JSONObject())
+//
+//            if projectList.count > 0 {
+//                let projectSubData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+//                let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectSubData.mj_JSONObject())
+//
+//                projectStr = projectModel.name
+//            }
+//        }
 
         dataAry = NSMutableArray()
         let array :NSArray = [["name":"姓名:", "content":userModel.name, "isHiddenEdit": false],
@@ -86,13 +107,26 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
         labelViewArray = NSMutableArray()
         for i in 0...dataAry.count-1 {
             let menuModel :XHWLMenuModel = dataAry[i] as! XHWLMenuModel
-            let labelView: XHWLMenuLabelView = XHWLMenuLabelView(frame:CGRect.zero, !menuModel.isHiddenEdit)
-            labelView.showText(leftText: menuModel.name, rightText:menuModel.content, isHiddenEdit: menuModel.isHiddenEdit)
-//            labelView.isHiddenEdit = menuModel.isHiddenEdit
-            labelView.delegate = self
-            labelView.tag = comTag+i
-            bgScrollView.addSubview(labelView)
-            labelViewArray.add(labelView)
+            
+            if dataAry.count-1 == i {
+                
+                let labelView: XHWLMenuLineView = XHWLMenuLineView(frame:CGRect.zero, !menuModel.isHiddenEdit)
+                labelView.showText(leftText: menuModel.name, rightText:menuModel.content, isHiddenEdit: menuModel.isHiddenEdit)
+                //            labelView.isHiddenEdit = menuModel.isHiddenEdit
+                labelView.delegate = self
+                labelView.tag = comTag+i
+                bgScrollView.addSubview(labelView)
+                labelViewArray.add(labelView)
+            } else {
+                
+                let labelView: XHWLMenuLabelView = XHWLMenuLabelView(frame:CGRect.zero, !menuModel.isHiddenEdit)
+                labelView.showText(leftText: menuModel.name, rightText:menuModel.content, isHiddenEdit: menuModel.isHiddenEdit)
+                //            labelView.isHiddenEdit = menuModel.isHiddenEdit
+                labelView.delegate = self
+                labelView.tag = comTag+i
+                bgScrollView.addSubview(labelView)
+                labelViewArray.add(labelView)
+            }
         }
         
         logoutBtn = UIButton()
@@ -108,10 +142,18 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
         setupData()
         
         for i in 0...labelViewArray.count-1 {
-            let menuModel :XHWLMenuModel = dataAry[i] as! XHWLMenuModel
-            let labelView: XHWLMenuLabelView = labelViewArray[i] as! XHWLMenuLabelView
-            labelView.showText(leftText: menuModel.name, rightText:menuModel.content, isHiddenEdit: menuModel.isHiddenEdit)
-            labelView.isHiddenEdit = menuModel.isHiddenEdit
+             if dataAry.count-1 == i {
+                let menuModel :XHWLMenuModel = dataAry[i] as! XHWLMenuModel
+                let labelView: XHWLMenuLineView = labelViewArray[i] as! XHWLMenuLineView
+                labelView.showText(leftText: menuModel.name, rightText:menuModel.content, isHiddenEdit: menuModel.isHiddenEdit)
+//                labelView.isHiddenEdit = menuModel.isHiddenEdit
+             } else {
+                let menuModel :XHWLMenuModel = dataAry[i] as! XHWLMenuModel
+                let labelView: XHWLMenuLabelView = labelViewArray[i] as! XHWLMenuLabelView
+                labelView.showText(leftText: menuModel.name, rightText:menuModel.content, isHiddenEdit: menuModel.isHiddenEdit)
+                labelView.isHiddenEdit = menuModel.isHiddenEdit
+            }
+   
         }
     }
     
@@ -272,22 +314,43 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
         }
     }
     
+    func heightWithSize(_ menuModel :XHWLMenuModel ) -> CGFloat {
+        
+        let size:CGSize = menuModel.name.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+        
+        let sizeR:CGSize = menuModel.content.boundingRect(with: CGSize(width:CGFloat(Int(self.bounds.size.width-Screen_width/8.0-size.width-15)), height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+        
+        return sizeR.height + 5
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        var maxY:CGFloat = 130 //145
         for i in 0...labelViewArray.count-1 {
-            
-            let labelView :XHWLMenuLabelView = labelViewArray[i] as! XHWLMenuLabelView
-            labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width-Screen_width/8.0, height:30)
-//            labelView.bounds = CGRect(x:0, y:0, width:258, height:30)
-            labelView.center = CGPoint(x:self.frame.size.width/2.0, y:CGFloat(145 + i*52))
+            let menuModel :XHWLMenuModel = dataAry[i] as! XHWLMenuModel
+            if dataAry.count-1 == i {
+                let labelView :XHWLMenuLineView = labelViewArray[i] as! XHWLMenuLineView
+                labelView.bounds = CGRect(x:0, y:0, width:Int(self.bounds.size.width-Screen_width/8.0), height:Int(30-font_14.lineHeight+heightWithSize(menuModel)))
+                //            labelView.bounds = CGRect(x:0, y:0, width:258, height:30)
+                labelView.center = CGPoint(x:self.frame.size.width/2.0, y:13+CGFloat(maxY + heightWithSize(menuModel)/2.0))
+                
+                maxY = labelView.frame.maxY
+//                labelView.frame = CGRect(x:15, y:maxHeight+5, width:Int(self.bounds.size.width-30), height:Int(heightWithSize(menuModel)))
+            } else {
+                let labelView :XHWLMenuLabelView = labelViewArray[i] as! XHWLMenuLabelView
+                labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width-Screen_width/8.0, height:30)
+                //            labelView.bounds = CGRect(x:0, y:0, width:258, height:30)
+                labelView.center = CGPoint(x:self.frame.size.width/2.0, y:maxY + 52/2.0) //  CGFloat(145 + i*52)
+                maxY = labelView.frame.maxY
+            }
         }
-        var topHeight = 0
-        if labelViewArray.count>0 {
-            let labelView :XHWLMenuLabelView = labelViewArray.lastObject as! XHWLMenuLabelView
-            topHeight = Int(labelView.frame.maxY)
-        }
-        logoutBtn.frame = CGRect(x:Int((self.bounds.size.width-150)/2.0), y:topHeight+20, width:150, height:30)
+//        var topHeight = 0
+//        if labelViewArray.count>0 {
+//            let labelView :XHWLMenuLabelView = labelViewArray.lastObject as! XHWLMenuLabelView
+//            topHeight = Int(labelView.frame.maxY)
+//        }
+        logoutBtn.frame = CGRect(x:Int((self.bounds.size.width-150)/2.0), y:Int(maxY+20), width:150, height:30)
         bgScrollView.contentSize = CGSize(width:0, height:logoutBtn.frame.maxY+30)
     }
     

@@ -143,7 +143,7 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
                 if menuModel.type == 0 {
                     let labelView :XHWLLabelView = labelViewArray[i] as! XHWLLabelView
                     labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width-30, height:25)
-                    labelView.center = CGPoint(x:self.frame.size.width/2.0, y:25/2.0+5 + maxH)
+                    labelView.center = CGPoint(x:self.frame.size.width/2.0, y:25/2.0 + 5 + maxH)
                     maxH = labelView.frame.maxY
                 }
                 else if menuModel.type == 1 {
@@ -152,8 +152,9 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
                     let height:CGFloat = size.height < font_14.lineHeight ? font_14.lineHeight:size.height
                     let labelView:XHWLLineView = labelViewArray[i] as! XHWLLineView
                     
-                    labelView.bounds = CGRect(x:0, y:0, width:Int(self.frame.size.width-30), height:Int(height))
-                    labelView.center = CGPoint(x:self.frame.size.width/2.0, y:(height)/2.0 + 5 + maxH)
+//                    labelView.bounds = CGRect(x:0, y:0, width:Int(self.frame.size.width-30), height:Int(height))
+//                    labelView.center = CGPoint(x:self.frame.size.width/2.0, y:(height)/2.0 + 5 + maxH)
+                    labelView.frame = CGRect(x:5, y:Int(10 + maxH), width:Int(self.frame.size.width-30), height:Int(height))
                     maxH = labelView.frame.maxY
                 }
                 else if menuModel.type == 2 {

@@ -53,7 +53,8 @@ class XHWLChargeProviderCell: UITableViewCell {
             let firstBtn:XHWLChargeButton = XHWLChargeButton()
             firstBtn.tag = comTag+i
             let model:XHWLDeviceModel = array[i] as! XHWLDeviceModel
-            firstBtn.showText(model.DeviceName, model.NavName)
+//            firstBtn.showText(model.DeviceName,  model.NavName)
+            firstBtn.showText(model.DeviceName) // model.NavName
             
             print("\(model.DeviceName)")
             firstBtn.addTarget(self, action: #selector(onBtnClick), for: .touchUpInside)

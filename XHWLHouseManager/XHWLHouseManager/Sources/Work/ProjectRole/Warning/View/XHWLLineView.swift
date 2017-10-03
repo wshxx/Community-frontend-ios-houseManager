@@ -28,10 +28,11 @@ class XHWLLineView: UIView {
         titleL.font = font_14
         self.addSubview(titleL)
         
-        contentL = UILabel.init(frame: CGRect(x:0,
-                                              y:0,
-                                              width:100,
-                                              height:font_14.lineHeight))
+//        contentL = UILabel.init(frame: CGRect(x:0,
+//                                              y:0,
+//                                              width:100,
+//                                              height:font_14.lineHeight))
+        contentL = UILabel()
         contentL.font = font_14
         contentL.textColor = UIColor.white
         contentL.numberOfLines = 0
@@ -42,10 +43,10 @@ class XHWLLineView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        titleL.frame = CGRect(x:10, y:0, width:80, height:font_14.lineHeight)
+        titleL.frame = CGRect(x:0, y:0, width:100, height:font_14.lineHeight)
         
         let size:CGSize = contentL.text!.boundingRect(with: CGSize(width:self.bounds.size.width-100, height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
-        contentL.frame = CGRect(x: 90, y: 0, width: self.bounds.size.width-100, height:size.height)
+        contentL.frame = CGRect(x: 100, y: 0, width: self.bounds.size.width-100, height:size.height)
     }
     
     func showText(leftText:String, rightText:String) {

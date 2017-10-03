@@ -203,51 +203,56 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
 
         if response["state"] as! Bool{
             self.isUserInteractionEnabled = false
-            "登陆成功".ext_debugPrintAndHint()
             
             //登录成功
-            let wyUser:NSDictionary = response["result"]!["wyUser"] as! NSDictionary
-            let projectList:NSArray = response["result"]!["projectList"] as! NSArray
-            
-            print("\(wyUser)")
-            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: wyUser)
-            let data:NSData = userModel.mj_JSONData()! as NSData
-            UserDefaults.standard.set(data, forKey: "user")
-            
-            if (projectList.count > 0) {
+            if !(response["result"]!["wyUser"] is NSNull) {
+                "登陆成功".ext_debugPrintAndHint()
+                 let wyUser:NSDictionary = response["result"]!["wyUser"] as! NSDictionary
                 
-                let projectData:NSData = (projectList[0] as! NSDictionary).mj_JSONData()! as NSData
-                UserDefaults.standard.set(projectData, forKey: "project")
-            }
-            
-            let modelData:NSData = projectList.mj_JSONData()! as NSData
-            UserDefaults.standard.set(modelData, forKey: "projectList")
-            UserDefaults.standard.synchronize()
-            
-            // 打标签 安管主任：AGM； 工程：GC
-            if userModel.wyAccount.wyRole.name == "工程" {
-                JPUSHService.addTags(["GC"],
-                                     completion: { (iResCode, iAlias, seq) in
-                                        if seq == 0 {
-                                            //  "打标签成功".ext_debugPrintAndHint()
-                                        }
-                }, seq: 0)
-            } else if userModel.wyAccount.wyRole.name == "安管主任" {
-                JPUSHService.addTags(["AGM"],
-                                     completion: { (iResCode, iAlias, seq) in
-                                        if seq == 0 {
-                                            // "打标签成功".ext_debugPrintAndHint()
-                                        }
-                }, seq: 0)
-            }
- 
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-                print("\(userModel.wyAccount.wyRole.name)")
-                if userModel.wyAccount.isFirstLogin.compare("y").rawValue == 0 { // 重置密码
-                    self.onLoginChangeReset()
-                } else { // 跳到首页
-                    self.delegate?.onGotoHome!(self)
+                let projectList:NSArray = response["result"]!["projectList"] as! NSArray
+                
+                print("\(wyUser)")
+                let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: wyUser)
+                let data:NSData = userModel.mj_JSONData()! as NSData
+                UserDefaults.standard.set(data, forKey: "user")
+                
+                if (projectList.count > 0) {
+                    
+                    let projectData:NSData = (projectList[0] as! NSDictionary).mj_JSONData()! as NSData
+                    UserDefaults.standard.set(projectData, forKey: "project")
                 }
+                
+                let modelData:NSData = projectList.mj_JSONData()! as NSData
+                UserDefaults.standard.set(modelData, forKey: "projectList")
+                UserDefaults.standard.synchronize()
+                
+                // 打标签 安管主任：AGM； 工程：GC
+                if userModel.wyAccount.wyRole.name == "工程" {
+                    JPUSHService.addTags(["GC"],
+                                         completion: { (iResCode, iAlias, seq) in
+                                            if seq == 0 {
+                                                //  "打标签成功".ext_debugPrintAndHint()
+                                            }
+                    }, seq: 0)
+                } else if userModel.wyAccount.wyRole.name == "安管主任" {
+                    JPUSHService.addTags(["AGM"],
+                                         completion: { (iResCode, iAlias, seq) in
+                                            if seq == 0 {
+                                                // "打标签成功".ext_debugPrintAndHint()
+                                            }
+                    }, seq: 0)
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                    print("\(userModel.wyAccount.wyRole.name)")
+                    if userModel.wyAccount.isFirstLogin.compare("y").rawValue == 0 { // 重置密码
+                        self.onLoginChangeReset()
+                    } else { // 跳到首页
+                        self.delegate?.onGotoHome!(self)
+                    }
+                }
+            } else {
+                "登陆失败".ext_debugPrintAndHint()
             }
         } else {
             //登录失败

@@ -78,10 +78,10 @@ class XHWLHistoryWarningView: UIView {
     
     func heightWithSize(_ menuModel :XHWLMenuModel ) -> CGFloat {
         
-        let sizeL:CGSize = menuModel.name.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
-        let sizeR:CGSize = menuModel.content.boundingRect(with: CGSize(width:CGFloat(self.bounds.size.width-sizeL.width-30), height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesFontLeading, attributes: [NSFontAttributeName:font_14], context: nil).size
+//        let sizeL:CGSize = menuModel.name.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size //CGFloat(self.bounds.size.width-sizeL.width-30)
+        let sizeR:CGSize = menuModel.content.boundingRect(with: CGSize(width:CGFloat(Int(self.bounds.size.width-100-30)), height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
         
-        return sizeR.height + 10
+        return sizeR.height + 5
     }
     
     override func layoutSubviews() {
@@ -90,13 +90,14 @@ class XHWLHistoryWarningView: UIView {
         bgImage.frame = self.bounds
         bgSc.frame = self.bounds
         //        tipLabel.frame = CGRect(x:10, y:self.bounds.size.height-80, width:self.bounds.size.width-20, height:40)
-        var maxHeight = 5
+        var maxHeight = 25
         for i in 0...labelViewArray.count-1 {
             
             let menuModel :XHWLMenuModel = array[i] as! XHWLMenuModel
-            let label:XHWLLineView = labelViewArray[i] as! XHWLLineView
-            label.frame = CGRect(x:15, y:30*i+5, width:Int(self.bounds.size.width-30), height:Int(heightWithSize(menuModel)))
-            maxHeight = Int(label.frame.maxY)
+            let labelView:XHWLLineView = labelViewArray[i] as! XHWLLineView
+            labelView.frame = CGRect(x:15, y:maxHeight+5, width:Int(self.bounds.size.width-30), height:Int(heightWithSize(menuModel)))
+            labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
+            maxHeight = Int(labelView.frame.maxY)
         }
         
         btn.frame = CGRect(x:50, y:maxHeight+30, width:Int(self.bounds.size.width-100), height:44)
