@@ -10,31 +10,13 @@ import UIKit
 import CoreBluetooth
 import CardReaderSDK
 
-class BluetoothVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class BluetoothVC: UIViewController,UITableViewDelegate, UITableViewDataSource , XHWLNetworkDelegate {
 
-    let macNo = "20c38ff4ffe0"
-    let cardNo = "41516039624d0cb4c0f1b5e7"
+    var deleteIndexPath:NSIndexPath?
     @IBOutlet weak var addDoorOpenView: UIView!
     
-    var devices:[DeviceRecord] = []
-    var curDevice:DeviceRecord? = nil
-//    {
-//        didSet {
-//            if self.curDevice == nil {
-//                self.btnBind.isEnabled = false
-//                self.btnOpen.isEnabled = false
-//                self.btnStop.isEnabled = false
-//            }else{
-//                self.btnBind.isEnabled = true
-//                self.btnStop.isEnabled = true
-//                if self.curDevice?.cardNo == nil {
-//                    self.btnOpen.isEnabled = false
-//                }else{
-//                    self.btnOpen.isEnabled = true
-//                }
-//            }
-//        }
-//    }
+    var deviceAry:NSMutableArray! = NSMutableArray()
+    var curDevice:XHWLBluetoothModel? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,21 +24,48 @@ class BluetoothVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         self.bluetoothTableView.delegate = self
         self.bluetoothTableView.dataSource = self
-        initDevices()
+        loadBindCardLog()
         
         //初始化
         CardReaderAPI.Init()
-        
     }
     
     func onBack(){
         self.navigationController?.popViewController(animated: true)
     }
     
-    func initDevices(){
-        let device = DeviceRecord("测试",mac: "20c38ff4ffe0")
-        device.cardNo = "b6e997df0864cbd51411dcd5"
-        self.devices.append(device)
+    func loadBindCardLog() {
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        XHWLNetwork.shared.getBindCardLogClick([userModel.wyAccount.id, "ios"], self) // accountId
+    }
+    
+    // MARK: - XHWLNetworkDelegate
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        if requestKey == XHWLRequestKeyID.XHWL_BINDCARDLOG.rawValue {
+            
+            
+            let dict = response["result"] as! NSDictionary
+            let dictAry:NSArray = dict["rows"] as! NSArray
+            
+            self.deviceAry = NSMutableArray()
+            self.deviceAry.addObjects(from: XHWLBluetoothModel.mj_objectArray(withKeyValuesArray: dictAry) as! [Any])
+            self.bluetoothTableView.reloadData()
+        }
+        else if requestKey == XHWLRequestKeyID.XHWL_DELETECARDLOG.rawValue {
+            if response["state"] as! Bool == true{
+                self.deviceAry.removeObject(at: (deleteIndexPath?.row)!)
+                self.bluetoothTableView.deleteRows(at: [deleteIndexPath! as IndexPath], with: .fade)
+//                self.bluetoothTableView.reloadData()
+            }
+        }
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
     }
     
     class DeviceRecord {
@@ -76,72 +85,60 @@ class BluetoothVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     
-    
-    
-//    //开始扫描
-//    func scan(){
-//        self.curDevice = nil
-//        self.devices = []
-//        self.bluetoothTableView.reloadData()
-//        
-//        CardReaderAPI.StartScan({ (adv) in
-//            var isFound = false
-//            for item in self.devices {
-//                if(item.mac == adv.mac){
-//                    isFound = true
-//                }
-//            }
-//            
-//            if !isFound {
-//                print("name: \(adv.name)")
-//                let device = DeviceRecord(adv.name, mac: adv.mac)
-//                self.devices.append(device)
-//                if self.curDevice == nil {
-//                    self.curDevice = device
-//                }
-//                
-//                self.bluetoothTableView.reloadData()
-//            }
-//        }, callback: {(err)->Void in
-//            if err != nil {
-//                self.noticeError(err!.description!)
-//            }else{
-//                print("扫描结束")
-//            }
-//        })
-//    }
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.devices.count
+        return self.deviceAry!.count
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let device = self.devices[indexPath.row]
-        self.curDevice = device
+        let bluetoothModel:XHWLBluetoothModel = self.deviceAry[indexPath.row] as! XHWLBluetoothModel
+        self.curDevice = bluetoothModel
         
-        self.bluetoothTableView.reloadData()
+//        self.bluetoothTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let device = self.devices[indexPath.row]
+        let bluetoothModel:XHWLBluetoothModel = self.deviceAry[indexPath.row] as! XHWLBluetoothModel
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "localBluetoothCell") as! LocalBlueToothTableViewCell
-        cell.localDeviceName.text = device.name
+        cell.localDeviceName.text = bluetoothModel.name
         cell.getWhcihCellBlock = { curCell in
-            //            self.pleaseWaitWithMsg("正在开门中……")
-            XHMLProgressHUD.shared.show()
             
-            self.open(device: device)
+            XHMLProgressHUD.shared.show()
+            self.open(device: bluetoothModel)
         }
-//        cell.localOpenDoorBtn.addTarget(self, action: #selector(self.open(_:)), for: .touchUpInside)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // 要显示自定义的action,cell必须处于编辑状态
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .normal, title: "删除") { action, index in
+            //取出user的信息
+            let data = UserDefaults.standard.object(forKey: "user") as? NSData
+            let userModel = XHWLUserModel.mj_object(withKeyValues: data?.mj_JSONObject())
+            
+            let bluetoothModel:XHWLBluetoothModel = self.deviceAry[indexPath.row] as! XHWLBluetoothModel
+            
+            let device = DeviceRecord(bluetoothModel.name, mac: bluetoothModel.address)
+            device.cardNo = bluetoothModel.currentCardStr
+            
+            self.deleteIndexPath = indexPath as NSIndexPath
+            
+            let params = ["address": device.mac, "accountId": userModel?.wyAccount.id, "systemType":"ios"]
+            
+            XHWLNetwork.shared.postDeleteCardLogClick(params as NSDictionary, self)
+        }
+        delete.backgroundColor = UIColor.clear
+        
+        return [delete]
     }
     
     override func viewDidLayoutSubviews() {
@@ -155,29 +152,32 @@ class BluetoothVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
     @IBAction func addDoorOpenBtnClicked(_ sender: UIButton) {
         //暂时跳到云对讲
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "BluetoothScanVC")
-        self.navigationController?.pushViewController(vc!, animated: true)
+        let vc:BluetoothScanVC = self.storyboard?.instantiateViewController(withIdentifier: "BluetoothScanVC") as! BluetoothScanVC
+        vc.backBlock = { [weak self] _ in
+            self?.loadBindCardLog()
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     //开门
-    func open(device: DeviceRecord){
+    func open(device: XHWLBluetoothModel){
         // autoDisconnect: false，不自动断开连接，可以手动屌用Stop方法断开连接
-        CardReaderAPI.OpenDoor(device.mac, cardNO: device.cardNo!, timeOut: 10, autoDisconnect: true, callback: {(err) -> Void in
+        
+        let array:NSArray = device.address.components(separatedBy: ":") as NSArray
+        let mac:String = array.componentsJoined(by: "").lowercased()
+        let cardNo:String =  device.currentCardStr.lowercased()
+        print("\(mac) =  \(cardNo)")
+        
+        CardReaderAPI.OpenDoor(mac, cardNO:cardNo , timeOut: 10, autoDisconnect: true, callback: {(err) -> Void in
             
             XHMLProgressHUD.shared.hide()
             if err == nil {
                 
-//                self.noticeSuccess("开门成功")
                 "开门成功".ext_debugPrintAndHint()
-                
             }else{
                 self.noticeError(err!.description!)
             }
         })
-    }
-    
-    @IBAction func returnBtnClicked(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

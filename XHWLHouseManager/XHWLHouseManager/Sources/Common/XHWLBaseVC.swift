@@ -11,10 +11,12 @@ import UIKit
 class XHWLBaseVC: UIViewController {
 
     var bgImg:UIImageView!
+//    var internetConnectionIndicator:InternetViewIndicator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        self.startMonitoringInternet()
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.white
         
@@ -65,6 +67,13 @@ class XHWLBaseVC: UIViewController {
     //    }];
     //    }
 
+    
+
+//    deinit {
+//        self.conn.stopNotifier()
+//        NotificationCenter.default.removeObserver(self, name: kReachabilityChangedNotification, object: nil)
+//
+//    }
     /*
     // MARK: - Navigation
 

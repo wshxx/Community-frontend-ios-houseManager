@@ -18,7 +18,7 @@ class XHWLScanResultView: UIView {
     var scrollView:UIScrollView!
     var labelViewArray:NSMutableArray! = NSMutableArray()
     var btnBlock:(NSInteger)->(Void) = { param in }
-    var dataAry:NSMutableArray!
+    var dataAry:NSArray!
     
     static var shared: XHWLHistoryWarningView {
         struct Static {
@@ -81,14 +81,16 @@ class XHWLScanResultView: UIView {
     
     func createArray(_ array:NSArray) {
         
+        dataAry = array
         labelViewArray = NSMutableArray()
         
-        for i in 0...array.count-1 {
+        for i in 0..<array.count {
             
             let menuModel :XHWLMenuModel = array[i] as! XHWLMenuModel
-            let labelView: XHWLLabelView = XHWLLabelView()
+//            let labelView: XHWLLabelView = XHWLLabelView()
+            let labelView: XHWLLineView = XHWLLineView()
             labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
-            labelView.textAlign = NSTextAlignment.right
+            labelView.textAlignment = NSTextAlignment(rawValue: 8)!
             scrollView.addSubview(labelView)
             labelViewArray.add(labelView)
         }
@@ -102,15 +104,21 @@ class XHWLScanResultView: UIView {
         showImg.frame = CGRect(x:(self.bounds.size.width-Screen_width*2/3.0)/2.0, y:20, width:Screen_width*2/3.0, height:Screen_height/3.0)
         scrollView.frame = CGRect(x:0, y:showImg.frame.maxY+10, width:self.bounds.size.width, height:self.bounds.size.height-showImg.frame.maxY-img.size.height-40)
         titleL.frame = CGRect(x:10, y:0, width:self.bounds.size.width-20, height:30)
-
-        let h:CGFloat = titleL.frame.maxY+10
         
-        var height:CGFloat = 0
+        var height:CGFloat = titleL.frame.maxY
         if labelViewArray.count > 0 {
             for i in 0..<labelViewArray.count {
-                let label:XHWLLabelView = labelViewArray[i] as! XHWLLabelView
-                label.frame = CGRect(x:15, y:CGFloat(i).multiplied(by: 30.0) + h, width:self.bounds.size.width-30, height:30)
-                height = label.frame.maxY
+//                let label:XHWLLabelView = labelViewArray[i] as! XHWLLabelView
+//                label.frame = CGRect(x:15, y:CGFloat(i).multiplied(by: 30.0) + h, width:self.bounds.size.width-30, height:30)
+//                height = label.frame.maxY
+                
+                let menuModel :XHWLMenuModel = dataAry[i] as! XHWLMenuModel
+                let size:CGSize = menuModel.content.boundingRect(with: CGSize(width:self.frame.size.width-30-100, height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+                let labelH:CGFloat = size.height < font_14.lineHeight ? font_14.lineHeight:size.height
+                let labelView:XHWLLineView = labelViewArray[i] as! XHWLLineView
+                labelView.frame = CGRect(x:5, y:Int(height + 10), width:Int(self.frame.size.width-20), height:Int(labelH))
+                
+                height = labelView.frame.maxY
             }
         }
         

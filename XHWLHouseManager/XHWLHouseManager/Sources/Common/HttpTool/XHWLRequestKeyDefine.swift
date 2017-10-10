@@ -38,6 +38,10 @@ enum XHWLRequestKeyID : NSInteger {
     case XHWL_OPENDOOR // 开门
     case XHWL_VISITLIST  // 访客登记记录
     case XHWL_DOORLIST // 门列表
+    case XHWL_MESSAGECOUNT // 消息总数
+    case XHWL_BINDCARDLOG // 蓝牙绑卡记录
+    case XHWL_DELETECARDLOG // 删除蓝牙绑卡记录
+    case XHWL_SAVECARDLOG // 保存蓝牙绑卡记录
 }
 
 
@@ -86,7 +90,10 @@ class XHWLRequestKeyDefine: NSObject {
             XHWLRequestKeyID.XHWL_DOORLIST:"wyBusiness/iot/entrance/getDoorList",  // 门列表
             
             XHWLRequestKeyID.XHWL_NAVPARAME:"wyBusiness/iot/machine/navparame", //返回项目所有房间与环境监测设备对应关系 " http://202.105.104.105:8804/realdata/get", //
-            
+            XHWLRequestKeyID.XHWL_BINDCARDLOG:"wyBusiness/bluetoothCard", //绑卡记录
+            XHWLRequestKeyID.XHWL_DELETECARDLOG:"wyBusiness/delBluetoothCard", // 删除蓝牙绑卡记录
+            XHWLRequestKeyID.XHWL_SAVECARDLOG:"wyBusiness/bluetoothCard/bind",  // 保存蓝牙绑卡记录
+            XHWLRequestKeyID.XHWL_MESSAGECOUNT:"wyBase/tips/count" // 消息总数
         ]
     }
 }

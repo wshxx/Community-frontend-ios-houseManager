@@ -252,15 +252,15 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
             return
         }
         
-        if carNo.isEmpty {
-            "您的车牌号为空".ext_debugPrintAndHint()
-            return
-        }
+//        if carNo.isEmpty {
+//            "您的车牌号为空".ext_debugPrintAndHint()
+//            return
+//        }
         
-        if carNo.isEmpty  { // || !Validation.carNo(carNo).isRight
-            "您输入的车牌不合法".ext_debugPrintAndHint()
-            return
-        }
+//        if carNo.isEmpty  { // || !Validation.carNo(carNo).isRight
+//            "您输入的车牌不合法".ext_debugPrintAndHint()
+//            return
+//        }
         
         if accessReason.isEmpty {
             "您的事由为空".ext_debugPrintAndHint()

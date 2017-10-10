@@ -12,6 +12,13 @@ class XHWLLineView: UIView {
 
     var titleL:UILabel!
     var contentL:UILabel!
+    var textAlignment:NSTextAlignment? {
+        willSet {
+            if (newValue != nil) {
+                contentL.textAlignment = newValue as! NSTextAlignment
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

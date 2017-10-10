@@ -129,6 +129,7 @@ class RemoteOpenDoorVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
             "unitId": doorModel.code, // 单元编号（使用unitList数组中的code字段）
             "personType": "YZ"] // 人员类型（直接写YZ）
         
+        XHMLProgressHUD.shared.show()
         
         XHWLNetwork.shared.postOpenDoorClick(params as NSDictionary, self)
     }

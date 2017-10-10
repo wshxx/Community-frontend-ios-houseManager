@@ -108,7 +108,8 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
             break
         case .poweredOff:
             print("CBCentralManager state:", "power off")
-            //            AlertMessage.showAlertMessage(vc: self, alertMessage: "请打开蓝牙！", duration: 1)
+        
+            "请打开蓝牙！".ext_debugPrintAndHint()
             break
         case .poweredOn:
             //暂时跳到云对讲
@@ -201,24 +202,31 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
         
         self.block = block
         let dict:NSDictionary = strResult.dictionaryWithJSON()
-        let utid:String = dict["utid"] as! String
-        
-        if utid.compare("XHWL").rawValue == 0 {
-//            block(true)
+        if dict.count > 0 {
+            print("\(dict)")
+            let utid:String = dict["utid"] as! String
             
-            let type:String = dict["type"] as! String
-            let code:String = dict["code"] as! String
-            
-            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-            
-            let params:NSArray = [type, code, userModel.wyAccount.token]
-            
-            XHWLNetwork.shared.getScanCodeClick(params, self)
-            
+            if utid.compare("XHWL").rawValue == 0 {
+                //            block(true)
+                
+                let type:String = dict["type"] as! String
+                let code:String = dict["code"] as! String
+                
+                let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+                let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+                
+                let params:NSArray = [type, code, userModel.wyAccount.token]
+                
+                XHWLNetwork.shared.getScanCodeClick(params, self)
+                
+            } else {
+                block(false)
+            }
         } else {
+            print("\(dict)")
             block(false)
         }
+        
     }
     
     
@@ -264,7 +272,7 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
     // 蓝牙开门
     func onHomeViewWithOpenBluetooth(_ homeView:XHWLHomeView)
     {
-
+        self.noticeSuccess("开门成功！")
     }
     
     // 远程开门

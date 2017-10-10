@@ -11,6 +11,9 @@ pod 'SnapKit', '~>3.2.0'
 pod 'BaiduMapKit', '~>3.4.0'
 pod 'MJExtension', '~>3.0.13'
 pod 'JPush', '~>3.0.6'
+#pod 'ReachabilitySwift', '~>3'
+
+#pod 'EFInternetIndicator', '~>0.2.0'
 
 #pod 'HLBarIndicatorView'
 #pod 'WilddogVideo', '~>2.0.2'

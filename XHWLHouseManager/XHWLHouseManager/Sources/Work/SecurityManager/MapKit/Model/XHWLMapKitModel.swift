@@ -20,5 +20,10 @@ class XHWLMapKitModel: NSObject {
     var id:String = ""
     var type:String = ""
     var status:String = ""
+    var nickname:String = ""
+    var accuracy:String = ""
+    var ele:String = ""
+    var speed:String = ""
 }
+
 

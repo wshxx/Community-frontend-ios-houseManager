@@ -91,14 +91,13 @@ class XHWLWorkCell: UITableViewCell {
                     
                     self.badgeBtn.isHidden = false
                     let size:CGSize = showText!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:showBtn.titleLabel!.font], context: nil).size
-                    if Int(newValue!) > 9 {
-                        badgeBtn.layer.cornerRadius = 5
-                        badgeBtn.layer.masksToBounds = true
-                        badgeBtn.bounds = CGRect(x:0, y:0, width:10, height:10)
+                    
+                    badgeBtn.layer.cornerRadius = 10
+                    badgeBtn.layer.masksToBounds = true
+                    badgeBtn.bounds = CGRect(x:0, y:0, width:20, height:20)
+                    if Int(newValue!) > 8 {
+                        badgeBtn.setTitle("8", for: .normal)
                     } else {
-                        badgeBtn.layer.cornerRadius = 12
-                        badgeBtn.layer.masksToBounds = true
-                        badgeBtn.bounds = CGRect(x:0, y:0, width:24, height:24)
                         print("\(newValue!)")
                         let badgeStr:String! = "\(newValue!)"
                         badgeBtn.setTitle(badgeStr!, for: .normal)
@@ -123,15 +122,9 @@ class XHWLWorkCell: UITableViewCell {
             } else {
                 self.badgeBtn.isHidden = false
                 let size:CGSize = showText!.boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:showBtn.titleLabel!.font], context: nil).size
-                if Int(badgeNumber!) > 9 {
-                    badgeBtn.layer.cornerRadius = 5
-                    badgeBtn.layer.masksToBounds = true
-                    badgeBtn.bounds = CGRect(x:0, y:0, width:10, height:10)
-                } else {
-                    badgeBtn.layer.cornerRadius = 12
-                    badgeBtn.layer.masksToBounds = true
-                    badgeBtn.bounds = CGRect(x:0, y:0, width:24, height:24)
-                }
+                badgeBtn.layer.cornerRadius = 10
+                badgeBtn.layer.masksToBounds = true
+                badgeBtn.bounds = CGRect(x:0, y:0, width:20, height:20)
                 badgeBtn.center = CGPoint(x:(self.frame.size.width + size.width)/2.0, y:(self.frame.size.height-size.height)/2.0)
             }
         }

@@ -241,6 +241,13 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
                                                 // "打标签成功".ext_debugPrintAndHint()
                                             }
                     }, seq: 0)
+                } else if userModel.wyAccount.wyRole.name == "项目经理" {
+                    JPUSHService.addTags(["PROM"],
+                                         completion: { (iResCode, iAlias, seq) in
+                                            if seq == 0 {
+                                                // "打标签成功".ext_debugPrintAndHint()
+                                            }
+                    }, seq: 0)
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {

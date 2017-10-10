@@ -30,24 +30,24 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
         self.title = "报事"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
-        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-        // 安管主任拥有权限
-        if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 ||
-            userModel.wyAccount.wyRole.name.compare("门岗").rawValue == 0 {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "记录", style: UIBarButtonItemStyle.plain, target: self, action: #selector(onIssueReportList))
-        }
+//        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+//        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+//        // 安管主任拥有权限
+//        if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 ||
+//            userModel.wyAccount.wyRole.name.compare("门岗").rawValue == 0 {
+//            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "记录", style: UIBarButtonItemStyle.plain, target: self, action: #selector(onIssueReportList))
+//        }
     }
     
     
     // 
-    func onIssueReportList() {
-//        let vc:XHWLIssueReportListVC = XHWLIssueReportListVC()
+//    func onIssueReportList() {
+////        let vc:XHWLIssueReportListVC = XHWLIssueReportListVC()
+////        self.navigationController?.pushViewController(vc, animated: true)
+//
+//        let vc:XHWLSafeProtectionVC = XHWLSafeProtectionVC()
 //        self.navigationController?.pushViewController(vc, animated: true)
-        
-        let vc:XHWLSafeProtectionVC = XHWLSafeProtectionVC()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
+//    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -113,7 +113,7 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
         let imageNameAry = NSMutableArray()
         if imageArray.count > 0 {
             for i in 0..<imageArray.count {
-                let imageData:Data = UIImagePNGRepresentation(imageArray[i] as! UIImage)! // UIImageJPEGRepresentation(imageArray[i] as! UIImage, 0.5)!
+                let imageData:Data = UIImageJPEGRepresentation(imageArray[i] as! UIImage, 0.5)! // UIImagePNGRepresentation(imageArray[i] as! UIImage)! //
                 imageDataAry.add(imageData)
                 imageNameAry.add("image_\(i)\(String(Date.getCurrentStamp())).png")
             }

@@ -95,7 +95,7 @@ class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDel
         // 添加一个PointAnnotation
         let annotation: BMKPointAnnotation = BMKPointAnnotation()
         annotation.coordinate = coordinate
-        annotation.title = model.nodeName
+        annotation.title = model.nickname
         //        annotation.subtitle = "声明"
         _mapView?.addAnnotation(annotation)
     }
@@ -118,7 +118,7 @@ class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDel
         _mapView?.showMapScaleBar = true /// 设定是否显式比例尺
         
         /// 限制地图的显示范围（地图状态改变时，该范围不会在地图显示范围外。设置成功后，会调整地图显示该范围）
-        //        _mapView?.limitMapRegion = BMKCoordinateRegionMake(CLLocationCoordinate2DMake(34, 34), BMKCoordinateSpanMake(23, 23))
+//                _mapView?.limitMapRegion = BMKCoordinateRegionMake(CLLocationCoordinate2DMake(34, 34), BMKCoordinateSpanMake(23, 23))
         
         _mapView?.zoomLevel = 3 // 地图比例尺级别，在手机上当前可使用的级别为3-21级
         _mapView?.minZoomLevel = 3 // 地图的自定义最小比例尺级别
@@ -245,11 +245,16 @@ class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDel
         _mapView?.centerCoordinate = coordinate
 //        stickAnnotation(coordinate)
         
-        let annotation: BMKPointAnnotation = BMKPointAnnotation()
+//        BMKPointAnnotation
+        
+        let annotation: XHWLCustomAnnotation = XHWLCustomAnnotation()
         annotation.coordinate = coordinate
-        //        annotation.title = "这里是北京"
+//                annotation.title = ""
         //        annotation.subtitle = "声明"
         _mapView?.addAnnotation(annotation)
+        
+        /// 限制地图的显示范围（地图状态改变时，该范围不会在地图显示范围外。设置成功后，会调整地图显示该范围）
+        _mapView?.region = BMKCoordinateRegionMake(coordinate, BMKCoordinateSpanMake(0.001, 0.001))
     }
     
     /**
@@ -305,6 +310,8 @@ class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDel
             _mapView.addAnnotation(item)
             _mapView.centerCoordinate = result.location
             
+//            CustomPointAnnotation
+            
             let alertView = UIAlertController(title: "反向地理编码", message: result.address, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertView.addAction(okAction)
@@ -340,9 +347,20 @@ class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDel
      */
     func mapView(_ mapView: BMKMapView!, viewFor annotation: BMKAnnotation!) -> BMKAnnotationView! {
         // 动画标注
-        let AnnotationViewID = "AnimatedAnnotation"
-        let annotationView = AnimatedAnnotationView(annotation: annotation, reuseIdentifier: AnnotationViewID)
-        return annotationView
+        if annotation is XHWLCustomAnnotation {
+            let AnnotationViewID = "AnimatedAnnotationView"
+            let annotationView = AnimatedAnnotationView(annotation: annotation, reuseIdentifier: AnnotationViewID)
+            
+            return annotationView
+        } else if annotation is BMKPointAnnotation {
+            print("\(annotation)")
+            let AnnotationViewID = "OtherAnimatedAnnotationView"
+            let annotationView = OtherAnimatedAnnotationView(annotation: annotation, reuseIdentifier: AnnotationViewID)
+            
+            return annotationView
+        }
+        
+        return nil
     }
     
     /**

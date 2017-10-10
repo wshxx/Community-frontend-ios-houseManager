@@ -91,7 +91,7 @@ class XHWLSafeGuardView: UIView {
         pickPhoto = XHWLPickPhotoView(frame: CGRect.zero, isFinished)
         pickPhoto.showText("现场照片：")
         if isFinished {
-            if !(model.appComplaint.manageImgUrl is NSNull) {
+            if !model.appComplaint.manageImgUrl.isEmpty {
                 let array:NSArray = model.appComplaint.manageImgUrl.components(separatedBy: ",") as NSArray
                 pickPhoto.onShowImgArray(array)
             }
@@ -106,9 +106,11 @@ class XHWLSafeGuardView: UIView {
             labelViewArray1 = NSMutableArray()
             for i in 0...dataAry1.count-1  {
                 let menuModel :XHWLMenuModel = dataAry1[i] as! XHWLMenuModel
-                let labelView: XHWLLabelView = XHWLLabelView()
+                
+                let labelView: XHWLLineView = XHWLLineView()
+//                let labelView: XHWLLabelView = XHWLLabelView()
                 labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
-                labelView.textAlign = NSTextAlignment.center
+//                labelView.textAlign = NSTextAlignment.center
                 bgScrollView.addSubview(labelView)
                 labelViewArray1.add(labelView)
             }
@@ -131,9 +133,10 @@ class XHWLSafeGuardView: UIView {
         labelViewArray2 = NSMutableArray()
         for i in 0...dataAry2.count-1  {
             let menuModel :XHWLMenuModel = dataAry2[i] as! XHWLMenuModel
-            let labelView: XHWLLabelView = XHWLLabelView()
+//            let labelView: XHWLLabelView = XHWLLabelView()
+            let labelView: XHWLLineView = XHWLLineView()
             labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
-            labelView.textAlign = NSTextAlignment.center
+//            labelView.textAlign = NSTextAlignment.center
             bgScrollView.addSubview(labelView)
             labelViewArray2.add(labelView)
         }
@@ -146,16 +149,18 @@ class XHWLSafeGuardView: UIView {
         labelViewArray3 = NSMutableArray()
         for i in 0...dataAry3.count-1  {
             let menuModel :XHWLMenuModel = dataAry3[i] as! XHWLMenuModel
-            let labelView: XHWLLabelView = XHWLLabelView()
+//            let labelView: XHWLLabelView = XHWLLabelView()
+            
+            let labelView: XHWLLineView = XHWLLineView()
             labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
-            labelView.textAlign = NSTextAlignment.center
+//            labelView.textAlign = NSTextAlignment.center
             bgScrollView.addSubview(labelView)
             labelViewArray3.add(labelView)
         }
         
         picture = XHWLPickPhotoView(frame: CGRect.zero, true)
 //        picture.isShow = true
-        if !(model.appComplaint.imgUrl is NSNull) {
+        if !model.appComplaint.imgUrl.isEmpty {
             
             let array:NSArray = model.appComplaint.imgUrl.components(separatedBy: ",") as NSArray
             picture.onShowImgArray(array)
@@ -190,22 +195,25 @@ class XHWLSafeGuardView: UIView {
         
         head1.frame = CGRect(x:10, y:20, width:self.bounds.size.width-20, height:20)
         if isFinished {
-            if !(model.appComplaint.manageImgUrl is NSNull) && !model.appComplaint.manageImgUrl.isEmpty {
-                pickPhoto.frame = CGRect(x:0, y:head1.frame.maxY+10, width:self.bounds.size.width, height:80)
+            if !model.appComplaint.manageImgUrl.isEmpty {
+                pickPhoto.frame = CGRect(x:15, y:head1.frame.maxY+10, width:self.bounds.size.width-30, height:80)
             } else {
-                pickPhoto.frame = CGRect(x:0, y:head1.frame.maxY+10, width:self.bounds.size.width, height:25)
+                pickPhoto.frame = CGRect(x:15, y:head1.frame.maxY+10, width:self.bounds.size.width-30, height:25)
             }
         } else {
-            pickPhoto.frame = CGRect(x:0, y:head1.frame.maxY+10, width:self.bounds.size.width, height:80)
+            pickPhoto.frame = CGRect(x:15, y:head1.frame.maxY+10, width:self.bounds.size.width-30, height:80)
         }
         
-        var height:CGFloat!
+        var height:CGFloat! = pickPhoto.frame.maxY+5
         if isFinished {
             for i in 0...labelViewArray1.count-1 {
                 
-                let labelView :XHWLLabelView = labelViewArray1[i] as! XHWLLabelView
-                labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width, height:25)
-                labelView.center = CGPoint(x:self.frame.size.width/2.0, y:pickPhoto.frame.maxY+10+25/2.0+CGFloat(i*25))
+                let menuModel :XHWLMenuModel = dataAry1[i] as! XHWLMenuModel
+                let size:CGSize = menuModel.content.boundingRect(with: CGSize(width:self.frame.size.width-30-100, height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+                let labelH:CGFloat = size.height < font_14.lineHeight ? font_14.lineHeight:size.height
+                let labelView:XHWLLineView = labelViewArray1[i] as! XHWLLineView
+                labelView.frame = CGRect(x:5, y:Int(height + 10), width:Int(self.frame.size.width-10), height:Int(labelH))
+                
                 height = labelView.frame.maxY
             }
         } else {
@@ -214,25 +222,37 @@ class XHWLSafeGuardView: UIView {
         }
         
         head2.frame = CGRect(x:10, y:height+10, width:self.bounds.size.width-20, height:20)
+        height = head2.frame.maxY
+        
         for i in 0...labelViewArray2.count-1 {
             
-            let labelView :XHWLLabelView = labelViewArray2[i] as! XHWLLabelView
-            labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width, height:25)
-            labelView.center = CGPoint(x:self.frame.size.width/2.0, y:head2.frame.maxY+10+25/2.0+CGFloat(i*25))
+            let menuModel :XHWLMenuModel = dataAry2[i] as! XHWLMenuModel
+            let size:CGSize = menuModel.content.boundingRect(with: CGSize(width:self.frame.size.width-30-100, height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+            let labelH:CGFloat = size.height < font_14.lineHeight ? font_14.lineHeight:size.height
+            let labelView:XHWLLineView = labelViewArray2[i] as! XHWLLineView
+            labelView.frame = CGRect(x:5, y:Int(height + 10), width:Int(self.frame.size.width-10), height:Int(labelH))
+            
+            height = labelView.frame.maxY
         }
         
-        head3.frame = CGRect(x:10, y:head2.frame.maxY+20+CGFloat(labelViewArray2.count).multiplied(by:25), width:self.bounds.size.width-20, height:20)
+        head3.frame = CGRect(x:10, y:height+10, width:self.bounds.size.width-20, height:20)
+        
+        height = head3.frame.maxY
         
         for i in 0...labelViewArray3.count-1 {
+
+            let menuModel :XHWLMenuModel = dataAry3[i] as! XHWLMenuModel
+            let size:CGSize = menuModel.content.boundingRect(with: CGSize(width:self.frame.size.width-30-100, height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+            let labelH:CGFloat = size.height < font_14.lineHeight ? font_14.lineHeight:size.height
+            let labelView:XHWLLineView = labelViewArray3[i] as! XHWLLineView
+            labelView.frame = CGRect(x:5, y:Int(height + 10), width:Int(self.frame.size.width-10), height:Int(labelH))
             
-            let labelView :XHWLLabelView = labelViewArray3[i] as! XHWLLabelView
-            labelView.bounds = CGRect(x:0, y:0, width:self.bounds.size.width, height:25)
-            labelView.center = CGPoint(x:self.frame.size.width/2.0, y:head3.frame.maxY + 10 + 25/2.0 + CGFloat(i*25))
+            height = labelView.frame.maxY
         }
-         if !(model.appComplaint.imgUrl is NSNull) && !model.appComplaint.imgUrl.isEmpty {
-            picture.frame = CGRect(x:0, y:head3.frame.maxY+10+CGFloat(labelViewArray3.count).multiplied(by:25), width:self.bounds.size.width-20, height:80)
+         if !model.appComplaint.imgUrl.isEmpty {
+            picture.frame = CGRect(x:15, y:height+5, width:self.bounds.size.width-30, height:80)
         } else {
-            picture.frame = CGRect(x:0, y:head3.frame.maxY+10+CGFloat(labelViewArray3.count).multiplied(by:25), width:self.bounds.size.width-20, height:25)
+            picture.frame = CGRect(x:15, y:height+5, width:self.bounds.size.width-30, height:25)
         }
         if !isFinished {
             submitBtn.bounds = CGRect(x:0, y:0, width:150, height:30)

@@ -9,15 +9,16 @@ import UIKit
 import CoreBluetooth
 import CardReaderSDK
 
-class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let macNo = "20c38ff4ffe0"
-    let cardNo = "41516039624d0cb4c0f1b5e7"
+class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSource, XHWLNetworkDelegate {
+//    let macNo = "20c38ff4ffe0"
+//    let cardNo = "41516039624d0cb4c0f1b5e7"
     
     @IBOutlet weak var remainText: UILabel!
     var countDownTimer: Timer?//用于倒计时
     var messageTimer: Timer?//用于message倒计时
     var messageTime = 60
     var cardTimeAlert: UIAlertController?  //用于弹出刷卡时间倒计时
+    var backBlock:(()->()) = {param in }
     
     @IBOutlet weak var bluetoothTableView: UITableView!
     @IBOutlet weak var noFoundLabel: UILabel!
@@ -28,40 +29,26 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var bluetoothLightIV: UIImageView!
     @IBOutlet weak var bluetoothView: UIView!
     
-    var devices:[DeviceRecord] = []
-    var curDevice:DeviceRecord? = nil{
+    var devices:NSMutableArray = NSMutableArray()
+    var curDevice:XHWLBluetoothModel? = nil{
         didSet {
             if self.curDevice == nil {
-//                self.nextBtn.isEnabled = false
-//                self.btnBind.isEnabled = false
-//                self.btnOpen.isEnabled = false
-//                self.btnStop.isEnabled = false
+                //                self.nextBtn.isEnabled = false
+                //                self.btnBind.isEnabled = false
+                //                self.btnOpen.isEnabled = false
+                //                self.btnStop.isEnabled = false
             }else{
-//                self.nextBtn.isEnabled = true
-//                self.btnBind.isEnabled = true
-//                self.btnStop.isEnabled = true
-                if self.curDevice?.cardNo == nil {
-//                    self.btnOpen.isEnabled = false
+                //                self.nextBtn.isEnabled = true
+                //                self.btnBind.isEnabled = true
+                //                self.btnStop.isEnabled = true
+                if self.curDevice?.currentCardStr == nil {
+                    //                    self.btnOpen.isEnabled = false
                 }else{
-//                    self.btnOpen.isEnabled = true
+                    //                    self.btnOpen.isEnabled = true
                 }
             }
         }
     }
-    
-    //设备数据结构
-    class DeviceRecord {
-        init(_ name: String, mac: String) {
-            self.name = name
-            self.mac = mac
-        }
-        
-        var name: String
-        var mac: String
-        var cardNo: String?
-    }
-
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,8 +77,8 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let device = self.devices[indexPath.row]
+
+        let device:XHWLBluetoothModel = self.devices[indexPath.row] as! XHWLBluetoothModel
         self.curDevice = device
         
         self.bluetoothTableView.reloadData()
@@ -101,12 +88,12 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let device = self.devices[indexPath.row]
+        let device:XHWLBluetoothModel = self.devices[indexPath.row] as! XHWLBluetoothModel
         let cell = tableView.dequeueReusableCell(withIdentifier: "bluetoothCell") as! BluetoothTableViewCell
         
         cell.bluetoothName.text = device.name
-        
-        if device.mac == self.curDevice?.mac {
+
+        if device.address == self.curDevice?.address {
             cell.smallCheck.isHidden = false
         }else{
             cell.smallCheck.isHidden = true
@@ -124,12 +111,11 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //下一步按钮点击事件
     @IBAction func nextBtnClicked(_ sender: UIButton) {
         if sender.currentTitle == "下一步" {
-            if self.devices.isEmpty{
+            if !(self.devices.count>0) {
                 self.noticeError("未扫描出设备，请重试！")
                 stop()
             }else{
                 self.showMessage("正在连接中...")
-//                self.pleaseWaitWithMsg("正在连接中")
                 bind()
             }
         }else{
@@ -137,8 +123,6 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         sender.setTitle("下一步", for: .normal)
     }
-    
-    
     
     //显示剩余秒数
     var remainingSeconds: Int = 0{
@@ -204,16 +188,44 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         CardReaderAPI.StartScan({ (adv) in
             var isFound = false
-            for item in self.devices {
-                if(item.mac == adv.mac){
+            
+            for i in 0..<self.devices.count {
+                let item:XHWLBluetoothModel = self.devices[i] as! XHWLBluetoothModel
+                let array:NSArray = item.address.components(separatedBy: ":") as NSArray
+                let mac:String = array.componentsJoined(by: "")
+                if(mac == adv.mac){
                     isFound = true
                 }
             }
             
             if !isFound {
-                print("name: \(adv.name)")
-                let device = DeviceRecord(adv.name, mac: adv.mac)
-                self.devices.append(device)
+                print("name: \(adv.name), \(adv.mac)")
+                let device:XHWLBluetoothModel = XHWLBluetoothModel()
+                device.name = adv.name
+                device.rssi = "\(adv.rssi)"
+                device.model = "\(adv.model)"
+                device.version = "\(adv.version)"
+                
+                let array:NSMutableArray = NSMutableArray()
+                let macStr:String = "\(adv.mac)"
+                var i:Int = 0
+                let count:Int = NSString.init(string: macStr).length
+                
+                while  i < count {
+                    
+                    let start2 = macStr.index(macStr.startIndex, offsetBy: i)
+                    let end2 = macStr.index(macStr.startIndex, offsetBy: i+2)
+                    let myRange2 = start2..<end2
+                    
+                    let str = macStr.substring(with: myRange2) //输出d的索引到f索引的范围,注意..<符号表示输出不包含f
+                    array.add(str)
+                    i = i+2
+                }
+ 
+                device.address = array.componentsJoined(by: ":") //adv.mac.substring(to: "")
+                device.communitySign = adv.group
+                self.devices.add(device)
+                
                 if self.curDevice == nil {
                     self.curDevice = device
                 }
@@ -232,16 +244,16 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //绑卡
     func bind(){
         let record = self.curDevice!
-        let mac = record.mac
+        let array:NSArray = record.address.components(separatedBy: ":") as NSArray
+        let mac:String = array.componentsJoined(by: "").lowercased()
+        print("\(mac)")
         //超时时间不应大于60s
         CardReaderAPI.Bind(mac, timeOut: 60, process: { (code) -> Void in
             switch code {
             case 1:
-//                self.showMessage("请刷卡")
                 self.showCardTimeMessage(remainTime: 60)
                 break
             case 2:
-//                self.showMessage("已刷卡,请再次刷此卡")
                 self.showCardTimeMessage(remainTime: 10)
                 break
             case 3:
@@ -254,29 +266,62 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }, callback: {(err, cardNO) -> Void in
             self.clearMessage()
             if err == nil {
-                record.cardNo = cardNO//16进制数据
-                print("card str:\(cardNO)")
+                record.currentCardStr = cardNO!  //16进制数据
+                print("card str: \(cardNO!) =  \(record.currentCardStr) ")
                 self.curDevice = record
                 
-                self.clearMessage()
-                self.noticeSuccess("绑定成功")
-                self.dismiss(animated: true, completion: nil)
+                //取出user的信息
+                let data = UserDefaults.standard.object(forKey: "user") as? NSData
+                let userModel = XHWLUserModel.mj_object(withKeyValues: data?.mj_JSONObject())
+                
+                let params = ["accountId":userModel?.wyAccount.id,
+                              "identity": "wy",
+                              "currentCardStr":record.currentCardStr,
+                              "name":record.name,
+                              "address":record.address,
+                              "communitySign":record.communitySign,
+                              "version":record.version,
+                              "model":record.model,
+                              "rssi":record.rssi,
+                              "systemType":"ios"]
+                
+                XHWLNetwork.shared.postSaveCardLogClick(params as NSDictionary, self)
+                
             }else{
                 self.noticeError(err!.description!)
             }
         })
     }
     
+    // MARK: - XHWLNetworkDelegate
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        if requestKey == XHWLRequestKeyID.XHWL_SAVECARDLOG.rawValue {
+            if response["state"] as! Bool == true {
+                
+                self.clearMessage()
+                "绑定成功".ext_debugPrint()
+//                self.noticeSuccess("绑定成功")
+                self.backBlock()
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
+    }
+    
     //开门
     func open(){
         let record = self.curDevice!
-        let mac = self.curDevice?.mac
+        let mac = self.curDevice?.address
         // autoDisconnect: false，不自动断开连接，可以手动屌用Stop方法断开连接
-        CardReaderAPI.OpenDoor(mac!, cardNO: record.cardNo!, timeOut: 10, autoDisconnect: true, callback: {(err) -> Void in
+        CardReaderAPI.OpenDoor(mac!, cardNO: record.currentCardStr, timeOut: 10, autoDisconnect: true, callback: {(err) -> Void in
             if err == nil {
                 self.noticeSuccess("开门成功")
                 print("************\(mac!)")
-                print("************\(record.cardNo!)")
+                print("************\(record.currentCardStr)")
             }else{
                 self.noticeError(err!.description!)
             }
@@ -368,7 +413,7 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func showMessage(_ msg: String) {
         if self.alert != nil {
             self.alert?.dismiss(animated: true, completion: {
-                self.alert = UIAlertController(title: "Bluetooth for doors", message: msg, preferredStyle: .alert)
+                self.alert = UIAlertController(title: "蓝牙开门", message: msg, preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: {
                     action in
                     print("点击了取消")
@@ -380,7 +425,7 @@ class BluetoothScanVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 
             })
         }else{
-            self.alert = UIAlertController(title: "Bluetooth for doors", message: msg, preferredStyle: .alert)
+            self.alert = UIAlertController(title: "蓝牙开门", message: msg, preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: {
                 action in
                 print("点击了取消")

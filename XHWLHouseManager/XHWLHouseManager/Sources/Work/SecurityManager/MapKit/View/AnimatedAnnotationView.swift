@@ -27,6 +27,7 @@ class AnimatedAnnotationView: BMKAnnotationView {
         annotationImageView = UIImageView(frame: bounds)
         annotationImageView.contentMode = UIViewContentMode.center
         annotationImageView.image = UIImage(named: "pin")!
+        
         self.addSubview(annotationImageView)
 
         let paoView = UIView()

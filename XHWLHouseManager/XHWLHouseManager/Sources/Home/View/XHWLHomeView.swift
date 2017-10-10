@@ -20,7 +20,7 @@ import UIKit
     @objc optional func onHomeViewWithMessage(_ homeView:XHWLHomeView)
 }
 
-class XHWLHomeView: UIView  {
+class XHWLHomeView: UIView , XHWLNetworkDelegate {
     
 //    var spaceBg:YLImageView!
     var spaceBigCircle:UIImageView!
@@ -114,6 +114,7 @@ class XHWLHomeView: UIView  {
     // 蓝牙一键开门
     func onBluetoothOpenDoorClick() {
         
+        conformBtnClicked()
         self.spaceBg.isHidden = false
         let window:UIWindow = UIApplication.shared.keyWindow!
         window.bringSubview(toFront: spaceBg)
@@ -124,12 +125,9 @@ class XHWLHomeView: UIView  {
         spaceBg.image = YLGIFImage(contentsOfFile: path!)
         spaceBg.startAnimating()
         
-        self.delegate?.onHomeViewWithOpenBluetooth!(self)
         //睡眠1.0s，
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1.0)){
             self.spaceBg.stopAnimating()
-            //            let window:UIWindow = UIApplication.shared.keyWindow!
-            //            window.sendSubview(toBack: self.spaceBg)
             self.spaceBg.isHidden = true
             self.spaceBg.image = UIImage(named: "Space_SpaceBg")
         }
@@ -152,6 +150,42 @@ class XHWLHomeView: UIView  {
         
         self.delegate?.onHomeViewWithMessage!(self)
     }
+    
+    //选中开门
+    func conformBtnClicked() {
+        //        self.conformBtn.isEnabled = false
+        
+        let param = ["personType": "YZ", "reqId": "test", "upid": "XH0001", "bldgId": "001", "unitId": "02"]
+        
+        XHWLNetwork.shared.postOpenDoorClick(param as NSDictionary, self)
+    }
+    
+    // network代理的方法
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        switch requestKey {
+        case XHWLRequestKeyID.XHWL_OPENDOOR.rawValue:
+            //            self.conformBtn.isEnabled = true
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + TimeInterval(1)){
+//                self.dismiss(animated: true, completion: nil)
+//            }
+            
+            self.spaceBg.stopAnimating()
+            self.spaceBg.isHidden = true
+            self.spaceBg.image = UIImage(named: "Space_SpaceBg")
+//            "开门成功！".ext_debugPrint()
+            self.delegate?.onHomeViewWithOpenBluetooth!(self)
+            
+            break
+        default:
+           break
+        }
+    }
+    
+    //network代理的方法
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        //        self.conformBtn.isEnabled = true
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -16,11 +16,10 @@ import IQKeyboardManagerSwift
 //Any可以表示任何类型，除了方法类型(function types)。
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUSHRegisterDelegate, XHWLNetworkDelegate { // JPUSHRegisterDelegate
+class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUSHRegisterDelegate, XHWLNetworkDelegate, UIAlertViewDelegate { // JPUSHRegisterDelegate
 
     var window: UIWindow?
     var _mapManager: BMKMapManager?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -66,8 +65,118 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
         }, seq: 0)
         
         self.window?.makeKeyAndVisible()
+        
+        launchAnimation()
+        
         return true
     }
+    
+    func getCurrentVC() -> UIViewController {
+        
+        if self.window?.rootViewController is UINavigationController {
+            return self.window?.rootViewController as! XHWLLoginVC
+        }
+        else if self.window?.rootViewController is CYTabBarController {
+            let tabbar:CYTabBarController = self.window?.rootViewController as! CYTabBarController
+
+            let selectNav = tabbar.viewControllers![tabbar.selectedIndex]
+   
+            print("\(selectNav)")
+            
+            if selectNav is XHWLNavigationController {
+                let nav:XHWLNavigationController = selectNav as! XHWLNavigationController
+                let vc:UIViewController = nav.topViewController as! UIViewController
+                
+                print("\(vc)")
+                
+                return vc
+            }
+            return UIViewController()
+        }
+
+        return UIViewController()
+    }
+    
+    //播放启动画面动画
+    private func launchAnimation() {
+        let statusBarOrientation = UIApplication.shared.statusBarOrientation
+        
+        
+        if let img = splashImageForOrientation(orientation: statusBarOrientation,
+                                               size: UIScreen.main.bounds.size) {
+            //获取启动图片
+            let launchImage = UIImage(named: img)
+            let launchview = UIImageView(frame: UIScreen.main.bounds)
+            launchview.image = launchImage
+            //将图片添加到视图上
+            //self.view.addSubview(launchview)
+            let delegate = UIApplication.shared.delegate
+            let mainWindow = delegate?.window
+            mainWindow!!.addSubview(launchview)
+            
+            //播放动画效果，完毕后将其移除
+            UIView.animate(withDuration: 1, delay: 1.5, options: .beginFromCurrentState,
+                                       animations: {
+                                        launchview.alpha = 0.0
+                                        launchview.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.5, 1.5, 1.0)
+            }) { (finished) in
+                launchview.removeFromSuperview()
+            }
+        }
+    }
+    
+    //获取启动图片名（根据设备方向和尺寸）
+    func splashImageForOrientation(orientation: UIInterfaceOrientation, size: CGSize) -> String?{
+        //获取设备尺寸和方向
+        var viewSize = size
+        var viewOrientation = "Portrait"
+        
+        if UIInterfaceOrientationIsLandscape(orientation) {
+            viewSize = CGSize(width:size.height, height:size.width)
+            viewOrientation = "Landscape"
+        }
+        
+        //遍历资源库中的所有启动图片，找出符合条件的
+        if let imagesDict = Bundle.main.infoDictionary  {
+            if let imagesArray = imagesDict["UILaunchImages"] as? [[String: String]] {
+                for dict in imagesArray {
+                    if let sizeString = dict["UILaunchImageSize"],
+                        let imageOrientation = dict["UILaunchImageOrientation"] {
+                        let imageSize = CGSizeFromString(sizeString)
+                        if imageSize.equalTo(viewSize)
+                            && viewOrientation == imageOrientation {
+                            if let imageName = dict["UILaunchImageName"] {
+                                return imageName
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    //播放启动画面动画
+//    private func launchAnimation() {
+//        //获取启动视图
+//        let vc = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateViewController(withIdentifier: "launch")
+//        let launchview = vc.view!
+//        let delegate = UIApplication.shared.delegate
+//        delegate?.window!!.addSubview(launchview)
+//
+//        //self.view.addSubview(launchview) //如果没有导航栏，直接添加到当前的view即可
+//
+//        //播放动画效果，完毕后将其移除
+//        UIView.animate(withDuration: 1, delay: 1.5, options: .beginFromCurrentState,
+//                       animations: {
+//                        launchview.alpha = 0.0
+//                        let transform = CATransform3DScale(CATransform3DIdentity, 1.5, 1.5, 1.0)
+//                        launchview.layer.transform = transform
+//        }) { (finished) in
+//            launchview.removeFromSuperview()
+//        }
+//    }
     
     func onTabbar() {
         
@@ -149,25 +258,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
             !(UserDefaults.standard.object(forKey: "user") is String) {
             let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
             let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-            if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
-                
+//            if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
+            
                 print("\(userInfo["key"])")
                 let extras:NSDictionary = userInfo.value(forKey: "extras") as! NSDictionary
                 let keyStr:String = extras["key"] as! String
                 //                let keyDict:NSDictionary = self.getDictionaryFromJSONString(keyStr)
                 if keyStr == "complaint" { // 安防事件 后台时要给提示
                     
-                    let index:NSInteger =  Int(UserDefaults.standard.integer(forKey: "safeProtectAlert")) + 1
-                    
-                    UserDefaults.standard.set(index, forKey: "safeProtectAlert")
-                    UserDefaults.standard.synchronize()
-                    
-                    UIApplication.shared.applicationIconBadgeNumber = index
+//                    let index:NSInteger =  Int(UserDefaults.standard.integer(forKey: "safeProtectAlert")) + 1
+//
+//                    UserDefaults.standard.set(index, forKey: "safeProtectAlert")
+//                    UserDefaults.standard.synchronize()
+//
+//                    UIApplication.shared.applicationIconBadgeNumber = index
                     
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
                     
                 }
-            }
+//            }
         }
     }
     
@@ -221,15 +330,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        let index:NSInteger =  Int(UserDefaults.standard.integer(forKey: "safeProtectAlert"))
-        JPUSHService.setBadge(index) // JPush服务器
-        UIApplication.shared.applicationIconBadgeNumber = index
+//        let index:NSInteger =  Int(UserDefaults.standard.integer(forKey: "safeProtectAlert"))
+//        JPUSHService.setBadge(index) // JPush服务器
+//        UIApplication.shared.applicationIconBadgeNumber = index
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        UIApplication.shared.applicationIconBadgeNumber = 0
-        JPUSHService.resetBadge()
+//        UIApplication.shared.applicationIconBadgeNumber = 0
+//        JPUSHService.resetBadge()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -299,27 +408,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
         "\(aps["alert"]!)".ext_debugPrintAndHint()
         if (UserDefaults.standard.object(forKey: "user") != nil) &&
             !(UserDefaults.standard.object(forKey: "user") is String) {
-            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-            if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
+            let keyStr:String = userInfo["key"] as! String
+            if keyStr == "complaint" { // 安防事件 后台时要给提示
                 
-                print("\(userInfo["key"])")
-                let keyStr:String = userInfo["key"] as! String
-                let keyDict:NSDictionary = self.getDictionaryFromJSONString(keyStr)
-                if keyStr == "complaint" { // 安防事件 后台时要给提示
-                    
-                    let index:NSInteger = aps["badge"] as! NSInteger// Int(UserDefaults.standard.integer(forKey: "safeProtectAlert")) + 1
-                    
-                    UserDefaults.standard.set(index, forKey: "safeProtectAlert")
-                    UserDefaults.standard.synchronize()
-                    
-                    JPUSHService.setBadge(index) // JPush服务器
-                    
-                    UIApplication.shared.applicationIconBadgeNumber = index
-                    
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
-                    
-                }
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
             }
         }
         
@@ -342,28 +434,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
         
         if (UserDefaults.standard.object(forKey: "user") != nil) &&
             !(UserDefaults.standard.object(forKey: "user") is String) {
-            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-            if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
-                
-                print("\(userInfo["key"])")
                 let keyStr:String = userInfo["key"] as! String
-                let keyDict:NSDictionary = self.getDictionaryFromJSONString(keyStr)
                 if keyStr == "complaint" { // 安防事件 后台时要给提示
-                    
-                    let index:NSInteger = aps["badge"] as! NSInteger// Int(UserDefaults.standard.integer(forKey: "safeProtectAlert")) + 1
-                    
-                    UserDefaults.standard.set(index, forKey: "safeProtectAlert")
-                    UserDefaults.standard.synchronize()
-                    
-                    JPUSHService.setBadge(index) // JPush服务器
-                    
-                    UIApplication.shared.applicationIconBadgeNumber = index
-                    
+                
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
-                    
                 }
-            }
         }
         
         completionHandler();  // 系统要求执行这个方法
@@ -371,10 +446,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
 
     // ios 9 系统提示   在前台时调用
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        
-        JPUSHService.getAllTags({ (iResCode, iAlias, seq) in
-            print("\(iAlias)")
-        }, seq: 0)
         
         // Required, iOS 7 Support
         JPUSHService.handleRemoteNotification(userInfo)
@@ -388,26 +459,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
             
             if (UserDefaults.standard.object(forKey: "user") != nil) &&
                 !(UserDefaults.standard.object(forKey: "user") is String) {
-                let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-                let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-                if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
+                let keyStr:String = userInfo["key"] as! String
+                if keyStr == "complaint" { // 安防事件 后台时要给提示
                     
-                    print("\(userInfo["key"])")
-                    let keyStr:String = userInfo["key"] as! String
-                    //                let keyDict:NSDictionary = self.getDictionaryFromJSONString(keyStr)
-                    if keyStr == "complaint" { // 安防事件 后台时要给提示
-                        
-                        let index:NSInteger =  aps["badge"] as! NSInteger //Int(UserDefaults.standard.integer(forKey: "safeProtectAlert")) + 1
-                        
-                        UserDefaults.standard.set(index, forKey: "safeProtectAlert")
-                        UserDefaults.standard.synchronize()
-                        JPUSHService.setBadge(index) // JPush服务器
-                        
-                        UIApplication.shared.applicationIconBadgeNumber = index
-                        
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
-                        
-                    }
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
                 }
             }
         }else{
@@ -462,8 +517,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
             UserDefaults.standard.set("", forKey: "projectList")
             UserDefaults.standard.synchronize()
             
-            //                + (void)deleteAlias:(JPUSHAliasOperationCompletion)completion
-            //            seq:(NSInteger)seq;
             JPUSHService.cleanTags({ (iResCode, iAlias, seq) in
                 
             }, seq: 0)

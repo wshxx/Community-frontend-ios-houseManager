@@ -66,26 +66,168 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
 //            key:[FireflySecurityUtil sharedInstance].aesToken
 //            vector:AES_VECTOR]; // 加密
         
-        XHMLProgressHUD.shared.show()
+//        Reachability
         
-        let request = XHWLHttpTool() 
-        request.initWithKey(requestKey, self)
-        request.validTime = 1200
-        if method == .get {
-            request.getHttpTool(parameters as! NSArray)
-        } else {
-            request.postHttpTool(parameters as! Parameters)
-        }
+//        Alamofire.
+        
+//        var manager: NetworkReachabilityManager?
+//
+//        manager = NetworkReachabilityManager(host: "www.apple.com")
+//
+//        manager?.listener = { status in
+//
+//            if status == NetworkReachabilityManager.NetworkReachabilityStatus.notReachable {
+//
+//            }
+//
+//            if status == NetworkReachabilityManager.NetworkReachabilityStatus.unknown {
+//
+//            }
+////            if status == reachable(Alamofire.NetworkReachabilityManager.ConnectionType.ethernetOrWiFi) {
+////
+////            }
+//
+//            print("Network Status Changed: \(status)")
+//
+//        }
+//
+//        manager?.startListening()
+        
+//        error:Error Domain=NSURLErrorDomain Code=-1009 "似乎已断开与互联网的连接。" UserInfo={NSUnderlyingError=0x170253e00 {Error Domain=kCFErrorDomainCFNetwork Code=-1009 "(null)" UserInfo={_kCFStreamErrorCodeKey=50, _kCFStreamErrorDomainKey=1}}, NSErrorFailingURLStringKey=http://202.105.104.105:8006/ssh/v1/wyBusiness/complaint/cb522772-4e23-4593-8f95-1cd2551379f4, NSErrorFailingURLKey=http://202.105.104.105:8006/ssh/v1/wyBusiness/complaint/cb522772-4e23-4593-8f95-1cd2551379f4, _kCFStreamErrorDomainKey=1, _kCFStreamErrorCodeKey=50, NSLocalizedDescription=似乎已断开与互联网的连接。}
+        
+//        var reachability: Reachability!
+//
+//        do {
+//            reachability = try Reachability.reachabilityForInternetConnection()
+//        } catch {
+//            print("Unable to create Reachability")
+//            return
+//        }
+//
+//        // 检测网络连接状态
+//        if reachability.isReachable() {
+//            print("网络连接：可用")
+//        } else {
+//            print("网络连接：不可用")
+//        }
+//
+//        // 检测网络类型
+//        if reachability.isReachableViaWiFi() {
+//            print("网络类型：Wifi")
+//        } else if reachability.isReachableViaWWAN() {
+//            print("网络类型：移动网络")
+//        } else {
+//            print("网络类型：无网络连接")
+//        }
+//        
+//        // 网络可用或切换网络类型时执行
+//        reachability.whenReachable = { reachability in
+//
+//            // 判断网络状态及类型
+//        }
+//
+//        // 网络不可用时执行
+//        reachability.whenUnreachable = { reachability in
+//
+//            // 判断网络状态及类型
+//        }
+//
+//        do {
+//            // 开始监听
+//            try reachability.startNotifier()
+//        } catch {
+//            print("Unable to start notifier")
+//        }
+        changeStatus({ (isReach) in
+            if isReach == false {
+                "网络不可用".ext_debugPrintAndHint()
+            } else {
+                if !(requestKey.rawValue == XHWLRequestKeyID.XHWL_OPENDOOR.rawValue) {
+                    XHMLProgressHUD.shared.show()
+                }
+                
+                let request = XHWLHttpTool()
+                request.initWithKey(requestKey, self)
+                request.validTime = 1200
+                if method == .get {
+                    request.getHttpTool(parameters as! NSArray)
+                } else {
+                    request.postHttpTool(parameters as! Parameters)
+                }
+            }
+        })
+    }
+    
+    func superUnProgressHUDWithLoadData(_ parameters:Any, _ requestKey:XHWLRequestKeyID, _ method:HTTPMethod) {
+        
+        changeStatus({ (isReach) in
+            if isReach == false {
+                "网络不可用".ext_debugPrintAndHint()
+            } else {
+                let request = XHWLHttpTool()
+                request.initWithKey(requestKey, self)
+                request.validTime = 1200
+                if method == .get {
+                    request.getHttpTool(parameters as! NSArray)
+                } else {
+                    request.postHttpTool(parameters as! Parameters)
+                }
+            }
+        })
     }
     
     func superWithUploadImage(_ parameters:NSDictionary, _ requestKey:XHWLRequestKeyID, _ data:[Data], _ name:[String]) {
         
-        XHMLProgressHUD.shared.show()
+        changeStatus({ (isReach) in
+            if isReach == false {
+                "网络不可用".ext_debugPrintAndHint()
+            } else {
+                XHMLProgressHUD.shared.show()
+                
+                let request = XHWLHttpTool()
+                request.initWithKey(requestKey, self)
+                request.validTime = 1200
+                request.uploadHttpTool(parameters as! [String : String], data, name)
+            }
+        })
+    }
+    
+    func changeStatus(_ block:@escaping ((Bool)->())) {
+        let networkManager:NetworkReachabilityManager = NetworkReachabilityManager(host: "www.baidu.com")!
+        // 开始监听
+        networkManager.startListening()
+        // 检测网络连接状态
+        if networkManager.isReachable {
+            print("网络连接：可用")
+        } else {
+            "网络不可用".ext_debugPrintAndHint()
+            print("网络连接：不可用")
+        }
         
-        let request = XHWLHttpTool()
-        request.initWithKey(requestKey, self)
-        request.validTime = 1200
-        request.uploadHttpTool(parameters as! [String : String], data, name)
+        // 检测网络类型
+        networkManager.listener = { status in
+            switch status {
+            case .notReachable:
+                print("无网络连接")
+//                AlertMessage.showAlertMessage(vc: self, alertMessage: "网络不可用！请检查网络连接...", block: {
+//
+//                })
+                block(false)
+                break
+            case .unknown:
+                print("未知网络")
+                block(false)
+                break
+            case .reachable(.ethernetOrWiFi):
+                print("WIFI")
+                block(true)
+                break
+            case .reachable(.wwan):
+                print("手机自带网络")
+                block(true)
+                break
+            }
+        }
     }
     
     // 登录
@@ -246,7 +388,7 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
     func postOpenDoorClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
         
         self.delegate = delegate;
-        superWithLoadData(parameters, .XHWL_OPENDOOR, .post)
+        superUnProgressHUDWithLoadData(parameters, .XHWL_OPENDOOR, .post)
     }
     
     // 访客登记记录
@@ -263,15 +405,52 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
         superWithLoadData(parameters, .XHWL_DOORLIST, .post)
     }
     
+    // 消息总数
+    func getMessageCountClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superUnProgressHUDWithLoadData(parameters, .XHWL_MESSAGECOUNT, .get)
+    }
+    
+    // 绑卡记录
+    func getBindCardLogClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_BINDCARDLOG, .get)
+    }
+    
+    // 删除绑卡记录
+    func postDeleteCardLogClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_DELETECARDLOG, .post)
+    }
+    
+    // 保存蓝牙绑卡记录
+    func postSaveCardLogClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_SAVECARDLOG, .post)
+    }
+    
     // MARK: - XHWLHttpToolDelegate
     func requestSuccess(_ requestKey:NSInteger, result request:Any) {
 //        [[FireflyShowViewManager sharedInstance]dismissWaitingView];
         let dict:NSDictionary = request as! NSDictionary
         if dict["errorCode"] as! NSInteger == code_401 ||
             dict["errorCode"] as! NSInteger == code_400 { // 用户token过期  用户没有登录
-            AppDelegate.shared().onLogout()
+//            AppDelegate.shared().
+            onShowAlert()
         } else {
             self.delegate?.requestSuccess(requestKey, request as! [String : AnyObject])
+        }
+    }
+    
+    func onShowAlert() {
+        let vc:UIViewController = AppDelegate.shared().getCurrentVC() as! UIViewController
+        
+        AlertMessage.showOneAlertMessage(vc: vc, alertMessage: "登录失效，请重新登录！") {
+            AppDelegate.shared().onLogout()
         }
     }
     

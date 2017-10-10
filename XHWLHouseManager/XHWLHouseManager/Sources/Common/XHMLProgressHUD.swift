@@ -54,7 +54,6 @@ class XHMLProgressHUD { // : UIView
         let array:NSMutableArray = NSMutableArray()
         for i in 0..<61 {
             let str:String! = String.init(format: "别人进行云对讲%04d", arguments:[i])
-            print("\(str)")
 //            let path:String? = Bundle.main.path(forResource:str, ofType: "png")
             //            print("\(path)")
 //            let image:UIImage = UIImage.init(contentsOfFile: path!)!

@@ -70,7 +70,7 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
             else if menuModel.type == 2 {
                 let picture:XHWLPickPhotoView = XHWLPickPhotoView(frame: CGRect.zero, true)
                 picture.isBundle = true
-                picture.onShowImgArray(["", ""]) // 显示图片
+                picture.onShowImgArray(["", "", ""]) // 显示图片
                 bgScrollView.addSubview(picture)
                 labelViewArray.add(picture)
             }

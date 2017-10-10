@@ -98,7 +98,7 @@ class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
         }
         
         if requestKey == XHWLRequestKeyID.XHWL_HISTORYALER.rawValue {
-            let array = response["result"] as! NSArray
+            let array = response["result"]!["rows"] as! NSArray
             dataSource = XHWLWarningModel.mj_objectArray(withKeyValuesArray: array)
             self.warningView.dataSource = NSMutableArray()
             self.warningView.dataSource.addObjects(from: dataSource as! [Any])
@@ -106,7 +106,7 @@ class XHWLWarningVC: XHWLBaseVC, XHWLNetworkDelegate {
         }
         else if requestKey == XHWLRequestKeyID.XHWL_NEWALER.rawValue {
   
-            let array = response["result"] as! NSArray
+            let array = response["result"]!["rows"] as! NSArray
             dataAry = XHWLWarningModel.mj_objectArray(withKeyValuesArray: array)
             self.warningView.dataAry = NSMutableArray()
             self.warningView.dataAry.addObjects(from: dataAry as! [Any])

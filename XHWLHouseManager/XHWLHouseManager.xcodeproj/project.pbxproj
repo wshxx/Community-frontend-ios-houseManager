@@ -10,6 +10,9 @@
 		190B94191F63F2FC007D707B /* XHWLLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190B94181F63F2FC007D707B /* XHWLLabelView.swift */; };
 		1912240B1F5D47F500D201F3 /* JSONAndDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912240A1F5D47F500D201F3 /* JSONAndDictionary.swift */; };
 		1912240D1F5D774700D201F3 /* XHWLHttpKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912240C1F5D774700D201F3 /* XHWLHttpKey.swift */; };
+		192AEF5B1F8C4F54004A7BF8 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192AEF5A1F8C4F54004A7BF8 /* UIViewController+Extension.swift */; };
+		192AEF611F8C6356004A7BF8 /* OtherAnimatedAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192AEF601F8C6356004A7BF8 /* OtherAnimatedAnnotationView.swift */; };
+		192AEF631F8C6CCA004A7BF8 /* XHWLCustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192AEF621F8C6CCA004A7BF8 /* XHWLCustomAnnotation.swift */; };
 		192DA5321F57A62A005950EC /* UIColor+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DA5311F57A62A005950EC /* UIColor+Category.swift */; };
 		192DA5331F57ABF3005950EC /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BB531F1F56BE5B006C38EA /* OpenGLES.framework */; };
 		192DA5341F57ABFE005950EC /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BB53211F56BE65006C38EA /* libiconv.2.4.0.tbd */; };
@@ -176,6 +179,7 @@
 		193F10F81F7B97A200C2F948 /* 别人进行云对讲0060.png in Resources */ = {isa = PBXBuildFile; fileRef = 193F10B81F7B97A200C2F948 /* 别人进行云对讲0060.png */; };
 		193F10FA1F7B97A200C2F948 /* xhwl_login_logo_down.gif in Resources */ = {isa = PBXBuildFile; fileRef = 193F10BA1F7B97A200C2F948 /* xhwl_login_logo_down.gif */; };
 		193F10FB1F7B97A200C2F948 /* xhwl_login_logo_up.gif in Resources */ = {isa = PBXBuildFile; fileRef = 193F10BB1F7B97A200C2F948 /* xhwl_login_logo_up.gif */; };
+		1949937C1F8CCB4A009EBC09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A50A621F5668DA00BCDA47 /* Assets.xcassets */; };
 		194D7FAC1F80B48400B27BD0 /* XHWLMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194D7FAB1F80B48200B27BD0 /* XHWLMessageVC.swift */; };
 		194D7FAE1F80B55700B27BD0 /* XHWLMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194D7FAD1F80B55700B27BD0 /* XHWLMessageView.swift */; };
 		194D7FB01F80B66A00B27BD0 /* XHWLMessageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194D7FAF1F80B66A00B27BD0 /* XHWLMessageDetailVC.swift */; };
@@ -280,6 +284,8 @@
 		19BB53AC1F56E009006C38EA /* XHWLLoginTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53AB1F56E009006C38EA /* XHWLLoginTF.swift */; };
 		19BBF3E21F74A620005AC7F2 /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BBF3E11F74A620005AC7F2 /* String+Validation.swift */; };
 		19C0BCF91F56AA8B00871BDD /* XHWLNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */; };
+		19CDF0F51F886A3E001F17A1 /* XHWLImageScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CDF0F41F886A3E001F17A1 /* XHWLImageScale.swift */; };
+		19CDF18A1F8AFEDD001F17A1 /* XHWLBluetoothModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CDF1891F8AFEDB001F17A1 /* XHWLBluetoothModel.swift */; };
 		19D8FDBB1F6A664400AC7C22 /* XHWLAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D8FDBA1F6A664400AC7C22 /* XHWLAccountModel.swift */; };
 		19D8FDBD1F6A670900AC7C22 /* XHWLProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D8FDBC1F6A670900AC7C22 /* XHWLProjectModel.swift */; };
 		19E16CD01F7CE53E00E7F930 /* open_door.gif in Resources */ = {isa = PBXBuildFile; fileRef = 19E16CCF1F7CE2BB00E7F930 /* open_door.gif */; };
@@ -358,6 +364,11 @@
 		190B94181F63F2FC007D707B /* XHWLLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLabelView.swift; sourceTree = "<group>"; };
 		1912240A1F5D47F500D201F3 /* JSONAndDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAndDictionary.swift; sourceTree = "<group>"; };
 		1912240C1F5D774700D201F3 /* XHWLHttpKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLHttpKey.swift; sourceTree = "<group>"; };
+		192AEF591F8B4944004A7BF8 /* CardReaderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CardReaderSDK.framework; sourceTree = "<group>"; };
+		192AEF5A1F8C4F54004A7BF8 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		192AEF5F1F8C5988004A7BF8 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		192AEF601F8C6356004A7BF8 /* OtherAnimatedAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherAnimatedAnnotationView.swift; sourceTree = "<group>"; };
+		192AEF621F8C6CCA004A7BF8 /* XHWLCustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLCustomAnnotation.swift; sourceTree = "<group>"; };
 		192DA5311F57A62A005950EC /* UIColor+Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Category.swift"; sourceTree = "<group>"; };
 		192DA53B1F57AC4C005950EC /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
 		192DA53D1F57AC5C005950EC /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
@@ -367,7 +378,6 @@
 		1931C0A91F722C87004D0A41 /* HZActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZActionSheet.m; sourceTree = "<group>"; };
 		1931C0AF1F725EDB004D0A41 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		193F0DA11F7B368700C2F948 /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CommonCrypto.framework; sourceTree = "<group>"; };
-		193F0DA61F7B379000C2F948 /* CardReaderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = file; name = CardReaderSDK.framework; path = ../../../../../../BluetoothOpen/CardReaderSDK.framework; sourceTree = "<group>"; };
 		193F0DA91F7B387A00C2F948 /* CardReaderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CardReaderSDK.framework; path = XHWLHouseManager/Lib/BluetoothOpen/CardReaderSDK.framework; sourceTree = "<group>"; };
 		193F0DEE1F7B43FB00C2F948 /* CYBadgeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYBadgeView.h; sourceTree = "<group>"; };
 		193F0DEF1F7B43FB00C2F948 /* CYBadgeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYBadgeView.m; sourceTree = "<group>"; };
@@ -689,6 +699,8 @@
 		19BBF3DA1F73D966005AC7F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		19BBF3E11F74A620005AC7F2 /* String+Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
 		19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLNavigationController.swift; sourceTree = "<group>"; };
+		19CDF0F41F886A3E001F17A1 /* XHWLImageScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLImageScale.swift; sourceTree = "<group>"; };
+		19CDF1891F8AFEDB001F17A1 /* XHWLBluetoothModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLBluetoothModel.swift; sourceTree = "<group>"; };
 		19D8FDBA1F6A664400AC7C22 /* XHWLAccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLAccountModel.swift; sourceTree = "<group>"; };
 		19D8FDBC1F6A670900AC7C22 /* XHWLProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLProjectModel.swift; sourceTree = "<group>"; };
 		19E16CCF1F7CE2BB00E7F930 /* open_door.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = open_door.gif; sourceTree = "<group>"; };
@@ -777,6 +789,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		192AEF5E1F8C5988004A7BF8 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				192AEF5F1F8C5988004A7BF8 /* Reachability.swift */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		1931C0A71F722C87004D0A41 /* HZActionSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -789,7 +809,7 @@
 		193F0D9F1F7B368700C2F948 /* BluetoothOpen */ = {
 			isa = PBXGroup;
 			children = (
-				193F0DA61F7B379000C2F948 /* CardReaderSDK.framework */,
+				192AEF591F8B4944004A7BF8 /* CardReaderSDK.framework */,
 				193F0DA11F7B368700C2F948 /* CommonCrypto.framework */,
 			);
 			path = BluetoothOpen;
@@ -1261,6 +1281,8 @@
 			isa = PBXGroup;
 			children = (
 				193F0EBF1F7B512B00C2F948 /* AnimatedAnnotationView.swift */,
+				192AEF601F8C6356004A7BF8 /* OtherAnimatedAnnotationView.swift */,
+				192AEF621F8C6CCA004A7BF8 /* XHWLCustomAnnotation.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1764,6 +1786,7 @@
 				192DA5311F57A62A005950EC /* UIColor+Category.swift */,
 				1912240A1F5D47F500D201F3 /* JSONAndDictionary.swift */,
 				19BBF3E11F74A620005AC7F2 /* String+Validation.swift */,
+				192AEF5A1F8C4F54004A7BF8 /* UIViewController+Extension.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1790,6 +1813,7 @@
 		19A822871F728C8900B8E570 /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
+				19CDF1881F8AFEBE001F17A1 /* Model */,
 				19A9C1751F7DEEEE00C928AA /* BluetoothScanVC.swift */,
 				19F04DD61F7509B800E0BD75 /* LocalBlueToothTableViewCell.swift */,
 				19F04DD11F7509B400E0BD75 /* BluetoothTableViewCell.swift */,
@@ -1881,6 +1905,7 @@
 		19C0BCE31F56AA8B00871BDD /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				192AEF5E1F8C5988004A7BF8 /* Reachability */,
 				193F0DED1F7B43FB00C2F948 /* CYTabBar */,
 				193F0D9F1F7B368700C2F948 /* BluetoothOpen */,
 				19A822901F728E1C00B8E570 /* SwiftNotice.swift */,
@@ -1892,6 +1917,7 @@
 				19A14D511F5E381100D96A2E /* Masonry */,
 				19A7A70A1F57EB460044DC1A /* YLGIFImage-Swift */,
 				19BB53231F56BEBB006C38EA /* Mcu_sdk */,
+				19CDF0F41F886A3E001F17A1 /* XHWLImageScale.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -1960,6 +1986,14 @@
 				1955C9B41F652A41008C31C8 /* XHWLCodeTF.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		19CDF1881F8AFEBE001F17A1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				19CDF1891F8AFEDB001F17A1 /* XHWLBluetoothModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		19F04DCD1F75051C00E0BD75 /* RemoteOpenDoor */ = {
@@ -2222,6 +2256,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1949937C1F8CCB4A009EBC09 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2404,6 +2439,7 @@
 				193F0F2A1F7B53DD00C2F948 /* XHWLSafeProtectionModel.swift in Sources */,
 				193F0F281F7B53D600C2F948 /* XHWLSafeGuardVC.swift in Sources */,
 				193F0F291F7B53D600C2F948 /* XHWLSafeProtectionVC.swift in Sources */,
+				192AEF611F8C6356004A7BF8 /* OtherAnimatedAnnotationView.swift in Sources */,
 				193F0F241F7B53CF00C2F948 /* XHWLActualTimeCell.swift in Sources */,
 				193F0F251F7B53CF00C2F948 /* XHWLProgressDetailCell.swift in Sources */,
 				193F0F261F7B53CF00C2F948 /* XHWLProgressDetailView.swift in Sources */,
@@ -2438,6 +2474,7 @@
 				193F0F121F7B539100C2F948 /* XHWLRoomView.swift in Sources */,
 				193F0F131F7B539100C2F948 /* XHWLSelTypeView.swift in Sources */,
 				193F0F091F7B538900C2F948 /* XHWLUnitModel.swift in Sources */,
+				192AEF5B1F8C4F54004A7BF8 /* UIViewController+Extension.swift in Sources */,
 				193F0F081F7B538300C2F948 /* XHWLCheckVC.swift in Sources */,
 				19857F361F83322400850A8A /* XHWLMenuLineView.swift in Sources */,
 				193F0F061F7B537C00C2F948 /* XHWLRegistrationDetailView.swift in Sources */,
@@ -2467,6 +2504,7 @@
 				193F0EF11F7B531400C2F948 /* XHWLScanResultView.swift in Sources */,
 				193F0EED1F7B530D00C2F948 /* XHWLIssueAccountModel.swift in Sources */,
 				193F0EEE1F7B530D00C2F948 /* XHWLIssueReportModel.swift in Sources */,
+				192AEF631F8C6CCA004A7BF8 /* XHWLCustomAnnotation.swift in Sources */,
 				193F0EEF1F7B530D00C2F948 /* XHWLScanModel.swift in Sources */,
 				193F0EEA1F7B530400C2F948 /* XHWLIssueReportListVC.swift in Sources */,
 				193F0EEB1F7B530400C2F948 /* XHWLIssueReportVC.swift in Sources */,
@@ -2562,6 +2600,7 @@
 				19A7A7111F57FB350044DC1A /* XHWLHttpTool.swift in Sources */,
 				19D8FDBD1F6A670900AC7C22 /* XHWLProjectModel.swift in Sources */,
 				19BB53581F56BFA3006C38EA /* NSObject+MJProperty.m in Sources */,
+				19CDF0F51F886A3E001F17A1 /* XHWLImageScale.swift in Sources */,
 				197D64B81F628B9400977074 /* XHWLTipView.swift in Sources */,
 				19A14D8F1F5EA46F00D96A2E /* GifImagesHeaderFooter.swift in Sources */,
 				1912240D1F5D774700D201F3 /* XHWLHttpKey.swift in Sources */,
@@ -2573,6 +2612,7 @@
 				19A14D8B1F5EA46F00D96A2E /* AccessoryView.swift in Sources */,
 				840835911F6E01DF00DC644A /* XHWLNetwork.swift in Sources */,
 				1961CDA31F596328006856D0 /* PtzPresetPositionDialView.m in Sources */,
+				19CDF18A1F8AFEDD001F17A1 /* XHWLBluetoothModel.swift in Sources */,
 				1961CDAB1F596328006856D0 /* ToolBarScrollView.m in Sources */,
 				19BB53391F56BF99006C38EA /* XMLReader.m in Sources */,
 				19BB53551F56BFA3006C38EA /* NSObject+MJClass.m in Sources */,
@@ -2681,7 +2721,7 @@
 				DEVELOPMENT_TEAM = L4285ALH3W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = XHWLPushExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xinghaiwulian.XHWLHouseManager.XHWLPushExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2708,7 +2748,7 @@
 				DEVELOPMENT_TEAM = L4285ALH3W;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = XHWLPushExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xinghaiwulian.XHWLHouseManager.XHWLPushExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2821,6 +2861,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = XHWLHouseManager/XHWLHouseManager.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2864,6 +2905,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = XHWLHouseManager/XHWLHouseManager.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

@@ -25,7 +25,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         
         setupView()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateBadge), name:NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onUpdateMessageCount), name:NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
 
     }
     
@@ -157,22 +157,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         self.view.addSubview(homeView)
     }
     
-    func updateBadge() {
-        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-        
-        if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
-            let index:NSInteger =  UserDefaults.standard.integer(forKey: "safeProtectAlert") as! NSInteger
-            homeView.badgeArray = NSMutableArray.init(array: [0, index, 0, 0, 0, 0])
-        } else if userModel.wyAccount.wyRole.name.compare("门岗").rawValue == 0 {
-            homeView.badgeArray = NSMutableArray.init(array: [0])
-        } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
-            homeView.badgeArray = NSMutableArray.init(array: [0, 0, 0, 0, 0])
-        } else { // 项目经理
-            homeView.badgeArray = NSMutableArray.init(array: [0, 0, 0, 0, 0, 0, 0, 0])
-        }
-        homeView.tableView.reloadData()
-    }
+  
     
     func onProjectManager(_ index:NSInteger) {
         switch index {
@@ -229,9 +214,9 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
             self.navigationController?.pushViewController(vc, animated: true)
             break
         case 1: // "安防事件",
-            UserDefaults.standard.set(0, forKey: "safeProtectAlert")
-            UserDefaults.standard.synchronize()
-            JPUSHService.setBadge(0) // JPush服务器
+//            UserDefaults.standard.set(0, forKey: "safeProtectAlert")
+//            UserDefaults.standard.synchronize()
+//            JPUSHService.setBadge(0) // JPush服务器
             
             let vc:XHWLSafeProtectionVC = XHWLSafeProtectionVC()
             self.navigationController?.pushViewController(vc, animated: true)
@@ -358,27 +343,30 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         print("\(strResult)")
         self.block = block
         let dict:NSDictionary = strResult.dictionaryWithJSON()
-        let utid:String = dict["utid"] as! String
-        
-        if utid.compare("XHWL").rawValue == 0 {
-//            block(true)
+        if dict.count > 0 {
+            let utid:String = dict["utid"] as! String
             
-            let type:String = dict["type"] as! String
-            let code:String = dict["code"] as! String
-            
-            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-            
-            let params:NSArray = [type, code, userModel.wyAccount.token]
-            
-            XHWLNetwork.shared.getScanCodeClick(params, self)
-            
+            if utid.compare("XHWL").rawValue == 0 {
+                //            block(true)
+                
+                let type:String = dict["type"] as! String
+                let code:String = dict["code"] as! String
+                
+                let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+                let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+                
+                let params:NSArray = [type, code, userModel.wyAccount.token]
+                
+                XHWLNetwork.shared.getScanCodeClick(params, self)
+                
+            } else {
+                block(false)
+            }
         } else {
             block(false)
         }
     }
-    
-    
+
     //    返回项目下所有设备信息
     func loadDeviceInfo() {
         
@@ -414,7 +402,52 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
             let modelData:NSData = list.mj_JSONData()! as NSData
             UserDefaults.standard.set(modelData, forKey: "deviceList") // XHWLDeviceModel
             UserDefaults.standard.synchronize()
-        } else if requestKey == XHWLRequestKeyID.XHWL_SCANCODE.rawValue {
+        }
+        else if requestKey == XHWLRequestKeyID.XHWL_MESSAGECOUNT.rawValue {
+            
+            let dict:NSDictionary = response["result"]!["count"] as! NSDictionary
+            
+            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+            
+            if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
+                let securityNotDealNo:NSNumber = dict["securityNotDealNo"] as! NSNumber //未处理安防事件总数
+//                let projectCycleAlarmAccount:NSNumber = dict["projectCycleAlarmAccount"] as! NSNumber //设备告警总数
+                let outExceptionAccount:NSNumber = dict["outExceptionAccount"] as! NSNumber //停车场异常抬杆总数
+                
+                var security:Int = Int(securityNotDealNo)
+                if Int(securityNotDealNo) > 8 {
+                    security = 8
+                }
+                updateBadge(security, 0, Int(outExceptionAccount))
+                
+                let num:Int = Int(outExceptionAccount).advanced(by: security)
+                JPUSHService.setBadge(num) // JPush服务器
+                UIApplication.shared.applicationIconBadgeNumber = num
+            } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
+                
+                let projectCycleAlarmAccount:NSNumber = dict["projectCycleAlarmAccount"] as! NSNumber //设备告警总数
+                
+                updateBadge(0, Int(projectCycleAlarmAccount), 0)
+                JPUSHService.setBadge(Int(projectCycleAlarmAccount)) // JPush服务器
+                UIApplication.shared.applicationIconBadgeNumber = Int(projectCycleAlarmAccount)
+            }
+            else if userModel.wyAccount.wyRole.name.compare("项目经理").rawValue == 0 { // 项目经理
+                let securityNotDealNo:NSNumber = dict["securityNotDealNo"] as! NSNumber //未处理安防事件总数
+                let projectCycleAlarmAccount:NSNumber = dict["projectCycleAlarmAccount"] as! NSNumber //设备告警总数
+                let outExceptionAccount:NSNumber = dict["outExceptionAccount"] as! NSNumber //停车场异常抬杆总数
+                var security:Int = Int(securityNotDealNo)
+                if Int(securityNotDealNo) > 8 {
+                    security = 8
+                }
+                updateBadge(security, Int(projectCycleAlarmAccount), Int(outExceptionAccount))
+                
+                let num:Int = Int(outExceptionAccount).advanced(by:Int(projectCycleAlarmAccount).advanced(by: security))
+                JPUSHService.setBadge(num) // JPush服务器
+                UIApplication.shared.applicationIconBadgeNumber = num
+            }
+        }
+        else if requestKey == XHWLRequestKeyID.XHWL_SCANCODE.rawValue {
             print("\(response)")
             let errorCode:NSInteger = response["errorCode"] as! NSInteger
             if errorCode == 200 {
@@ -442,13 +475,46 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         
     }
     
+    func updateBadge(_ securityNotDealNo:NSInteger, _ projectCycleAlarmAccount:NSInteger, _ outExceptionAccount:NSInteger) {
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
+            //            let index:NSInteger =  UserDefaults.standard.integer(forKey: "safeProtectAlert") as! NSInteger
+            //            homeView.badgeArray = NSMutableArray.init(array: [0, index, 0, 0, 0, 0])
+            homeView.badgeArray = NSMutableArray.init(array: [outExceptionAccount , securityNotDealNo, 0, 0, 0, 0])
+        } else if userModel.wyAccount.wyRole.name.compare("门岗").rawValue == 0 {
+            homeView.badgeArray = NSMutableArray.init(array: [0])
+        } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
+            homeView.badgeArray = NSMutableArray.init(array: [projectCycleAlarmAccount, 0, 0, 0, 0])
+        } else if userModel.wyAccount.wyRole.name.compare("项目经理").rawValue == 0 { // 项目经理
+            homeView.badgeArray = NSMutableArray.init(array: [securityNotDealNo, projectCycleAlarmAccount, outExceptionAccount, 0, 0, 0, 0, 0])
+        }
+        homeView.tableView.reloadData()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.isHidden = false
         
         setupNav()
-        updateBadge()
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 ||
+            userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 ||
+            userModel.wyAccount.wyRole.name.compare("项目经理").rawValue == 0 {
+            onUpdateMessageCount()
+        }
+    }
+    
+    func onUpdateMessageCount() {
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        XHWLNetwork.shared.getMessageCountClick([userModel.wyAccount.token], self)
     }
 
     override func didReceiveMemoryWarning() {

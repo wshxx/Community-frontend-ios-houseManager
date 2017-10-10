@@ -21,7 +21,7 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
         
         if UserDefaults.standard.bool(forKey: "isFirst") == false {
             var imageNameArr = Array<Any>()
-            for i in 0..<2 {
+            for i in 1..<3 {
                 imageNameArr.append("\(i)")
             }
             
@@ -29,7 +29,11 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
             UserDefaults.standard.set(true, forKey:"isFirst")
             UserDefaults.standard.synchronize()
         }
+        
+//        launchAnimation()
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

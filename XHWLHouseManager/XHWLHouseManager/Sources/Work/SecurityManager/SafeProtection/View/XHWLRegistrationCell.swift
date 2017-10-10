@@ -32,10 +32,10 @@ class XHWLRegistrationCell: UITableViewCell {
     var abnormalModel:XHWLAbnormalPassModel! {
         willSet {
             if (newValue != nil) {
-                titleL.text = newValue.roadName
+                titleL.text = newValue.reason
                 
                 contentL.text = "道口编号:\(newValue.roadCode)"
-                timeL.text = newValue.date// Date.getDateWith(Int(newValue.sysVisitor.accessTime)!, "yyyy-MM-dd HH:mm")
+                timeL.text = newValue.outDate //date// Date.getDateWith(Int(newValue.sysVisitor.accessTime)!, "yyyy-MM-dd HH:mm")
                 if !newValue.status.isEmpty {
                     titleL.textColor = UIColor.gray
                 } else {
@@ -104,7 +104,12 @@ class XHWLRegistrationCell: UITableViewCell {
     func setModel(_ registrationModel:XHWLSafeProtectionModel) {
         titleL.text = registrationModel.appComplaint.remarks
         contentL.text = "来源:\(registrationModel.appComplaint.wyAccount.wyRole.name)"
-        timeL.text = Date.getDateWith(Int(registrationModel.appComplaint.createTime)!, "yyyy-MM-dd")
+        
+        if registrationModel.appComplaint.manageTime.isEmpty {
+            timeL.text = Date.getDateWith(Int(registrationModel.appComplaint.createTime)!, "yyyy-MM-dd")
+        } else {
+            timeL.text = Date.getDateWith(Int(registrationModel.appComplaint.manageTime)!, "yyyy-MM-dd")
+        }
     }
     
     func setRegisterModel(_ registrationModel:XHWLRegisterationModel) {

@@ -120,6 +120,10 @@ class XHWLPickPhotoView: UIView {
         }
         for i in 0..<num {
             let imgV:UIImageView = UIImageView()
+            imgV.isUserInteractionEnabled = true
+            let tap:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(onScaleImg(_:)))
+            imgV.addGestureRecognizer(tap)
+            
             if isBundle == false {
                 let urlStr = "\(XHWLImgURL)/\(array[i] as! String)"
                 let url = URL(string: urlStr)
@@ -128,11 +132,20 @@ class XHWLPickPhotoView: UIView {
                 self.addSubview(imgV)
                 imgIVArray.add(imgV)
             } else {
-                imgV.image = UIImage(named:"\(i)")
+                imgV.image = UIImage(named:"IMG_\(i)")
                 self.addSubview(imgV)
                 imgIVArray.add(imgV)
             }
         }
+    }
+    
+    // 放大图片
+    func onScaleImg(_ tap:UITapGestureRecognizer) {
+        
+        print("\(tap.view)")
+        let views:UIImageView = tap.view as! UIImageView
+        
+        XHWLImageScale.scanBigImage(with: views, alpha: 1.0)
     }
     
     func onChangePicture(_ image:UIImage) {
