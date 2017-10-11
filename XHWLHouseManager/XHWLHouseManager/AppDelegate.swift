@@ -100,8 +100,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
     //播放启动画面动画
     private func launchAnimation() {
         let statusBarOrientation = UIApplication.shared.statusBarOrientation
-        
-        
+
+
         if let img = splashImageForOrientation(orientation: statusBarOrientation,
                                                size: UIScreen.main.bounds.size) {
             //获取启动图片
@@ -113,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
             let delegate = UIApplication.shared.delegate
             let mainWindow = delegate?.window
             mainWindow!!.addSubview(launchview)
-            
+
             //播放动画效果，完毕后将其移除
             UIView.animate(withDuration: 1, delay: 1.5, options: .beginFromCurrentState,
                                        animations: {
@@ -130,12 +130,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
         //获取设备尺寸和方向
         var viewSize = size
         var viewOrientation = "Portrait"
-        
+
         if UIInterfaceOrientationIsLandscape(orientation) {
             viewSize = CGSize(width:size.height, height:size.width)
             viewOrientation = "Landscape"
         }
-        
+
         //遍历资源库中的所有启动图片，找出符合条件的
         if let imagesDict = Bundle.main.infoDictionary  {
             if let imagesArray = imagesDict["UILaunchImages"] as? [[String: String]] {
@@ -153,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
                 }
             }
         }
-        
+
         return nil
     }
     
@@ -240,7 +240,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
         JPUSHService.setup(withOption: launchOptions,
                            appKey: jPushAppKey,
                            channel: channel,
-                           apsForProduction: true) // 0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
+                           apsForProduction: apsForProduction) // 0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
         
         if (UIDevice.current.systemVersion as NSString).floatValue >= 9.0 &&
             (UIDevice.current.systemVersion as NSString).floatValue <= 10.3 {
@@ -356,7 +356,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
         }
         else{
             NSLog("联网失败，错误代码：Error\(iError)");
-            "网络连接失败".ext_debugPrintAndHint()
+//            "网络连接失败".ext_debugPrintAndHint()
         }
     }
     
@@ -366,7 +366,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
         }
         else{
             NSLog("授权失败，错误代码：Error\(iError)");
-            "地图授权失败".ext_debugPrintAndHint()
+//            "地图授权失败".ext_debugPrintAndHint()
         }
     }
     
@@ -374,6 +374,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
     // 注册APNs成功并上报DeviceToken 启动注册token
     // 请在AppDelegate.m实现该回调方法并添加回调方法中的代码
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//        let defaultCenter:NotificationCenter = NotificationCenter.default
+//        defaultCenter.addObserver(self, selector: #selector(networkDidReceiveMessage:), name: kJPFNetworkDidLoginNotification, object: nil)
+
         /// Required - 注册 DeviceToken
         JPUSHService.registerDeviceToken(deviceToken)
     }

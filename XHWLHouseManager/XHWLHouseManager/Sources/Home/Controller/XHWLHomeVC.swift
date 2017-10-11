@@ -286,7 +286,6 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
     var central: CBCentralManager!
     // 蓝牙绑卡
     func onHomeViewWithBindCard(_ homeView:XHWLHomeView) {
-//        let vc:XHWLBluetoothOpenVC = XHWLBluetoothOpenVC()
         //初始化本地中心设备对象
         central = CBCentralManager.init(delegate: self, queue: nil)
     }

@@ -66,7 +66,7 @@ const CGFloat kHZFontSize = 14.f;
     _sheetView.backgroundColor = [UIColor clearColor];
     [self addSubview:_sheetView];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
@@ -94,22 +94,20 @@ const CGFloat kHZFontSize = 14.f;
     CGFloat totalHeight = _otherTitles.count * kHZCellHeight + kHZCellHeight + kHZSeparatorHeight +( _title.length ? kHZCellHeight : 0);
     BOOL moreThanScreen = totalHeight > screenHeight;
     CGFloat sheetHeight = moreThanScreen ? screenHeight : totalHeight;
+    CGFloat height = 0;
     if (!moreThanScreen) {
         _tableView.bounces = NO;
+        height = kHZCellHeight * _otherTitles.count;
     }
     else {
         _tableView.bounces = YES;
+        height = screenHeight - kHZCellHeight * 2 + kHZSeparatorHeight;
     }
     [_sheetView addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(_sheetView).with.insets(UIEdgeInsetsZero);
         make.bottom.mas_equalTo(_cancleButton.mas_top).mas_offset(-kHZSeparatorHeight);
-        if (!moreThanScreen) {
-            make.height.mas_equalTo(kHZCellHeight * _otherTitles.count);
-        }
-        else {
-            make.height.mas_equalTo(screenHeight - kHZCellHeight * 2 + kHZSeparatorHeight);
-        }
+        make.height.mas_equalTo(height);
     }];
     
     if (_title.length) {

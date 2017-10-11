@@ -264,8 +264,6 @@
 		19A9C1791F7E433300C928AA /* XHWLLeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A9C1781F7E433300C928AA /* XHWLLeadingView.swift */; };
 		19ADF39E1F64DD8400A9E0FB /* XHWLRegisterationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF39D1F64DD8400A9E0FB /* XHWLRegisterationModel.swift */; };
 		19ADF3AC1F64FF7300A9E0FB /* XHWLTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF3AB1F64FF7300A9E0FB /* XHWLTagView.swift */; };
-		19B118A51F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B118A41F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift */; };
-		19B118A71F6A17A300B1F5D1 /* XHWLBluetoothAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B118A61F6A17A300B1F5D1 /* XHWLBluetoothAuthView.swift */; };
 		19B142EA1F677D780087AC5E /* XHWLNavHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B142E91F677D780087AC5E /* XHWLNavHeadView.swift */; };
 		19BB53391F56BF99006C38EA /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53381F56BF99006C38EA /* XMLReader.m */; };
 		19BB53501F56BFA3006C38EA /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB533D1F56BFA3006C38EA /* MJExtensionConst.m */; };
@@ -653,8 +651,6 @@
 		19A9C1781F7E433300C928AA /* XHWLLeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLLeadingView.swift; sourceTree = "<group>"; };
 		19ADF39D1F64DD8400A9E0FB /* XHWLRegisterationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRegisterationModel.swift; sourceTree = "<group>"; };
 		19ADF3AB1F64FF7300A9E0FB /* XHWLTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLTagView.swift; sourceTree = "<group>"; };
-		19B118A41F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLBluetoothOpenVC.swift; sourceTree = "<group>"; };
-		19B118A61F6A17A300B1F5D1 /* XHWLBluetoothAuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLBluetoothAuthView.swift; sourceTree = "<group>"; };
 		19B142E91F677D780087AC5E /* XHWLNavHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLNavHeadView.swift; sourceTree = "<group>"; };
 		19BB531F1F56BE5B006C38EA /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		19BB53211F56BE65006C38EA /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
@@ -1822,39 +1818,6 @@
 			path = Bluetooth;
 			sourceTree = "<group>";
 		};
-		19B118A01F6A167700B1F5D1 /* OpenOneStep */ = {
-			isa = PBXGroup;
-			children = (
-				19B118A11F6A167700B1F5D1 /* Controller */,
-				19B118A21F6A167700B1F5D1 /* Model */,
-				19B118A31F6A167700B1F5D1 /* View */,
-			);
-			path = OpenOneStep;
-			sourceTree = "<group>";
-		};
-		19B118A11F6A167700B1F5D1 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				19B118A41F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		19B118A21F6A167700B1F5D1 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		19B118A31F6A167700B1F5D1 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				19B118A61F6A17A300B1F5D1 /* XHWLBluetoothAuthView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		19BB53231F56BEBB006C38EA /* Mcu_sdk */ = {
 			isa = PBXGroup;
 			children = (
@@ -1925,7 +1888,6 @@
 		19C0BCEC1F56AA8B00871BDD /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				19B118A01F6A167700B1F5D1 /* OpenOneStep */,
 				19A14D7C1F5E701A00D96A2E /* Search */,
 				19C0BCEF1F56AA8B00871BDD /* Home */,
 				19A14D751F5E3A7F00D96A2E /* Work */,
@@ -2569,7 +2531,6 @@
 				1961CD9D1F596328006856D0 /* RealPlayViewController.m in Sources */,
 				19BB53531F56BFA3006C38EA /* MJPropertyKey.m in Sources */,
 				19A7A70D1F57EB460044DC1A /* YLGIFImage.swift in Sources */,
-				19B118A51F6A16E200B1F5D1 /* XHWLBluetoothOpenVC.swift in Sources */,
 				19A14D6B1F5E381100D96A2E /* MASConstraintMaker.m in Sources */,
 				1912240B1F5D47F500D201F3 /* JSONAndDictionary.swift in Sources */,
 				19FACBC91F68C97400680E63 /* XHWLUserModel.swift in Sources */,
@@ -2605,7 +2566,6 @@
 				19A14D8F1F5EA46F00D96A2E /* GifImagesHeaderFooter.swift in Sources */,
 				1912240D1F5D774700D201F3 /* XHWLHttpKey.swift in Sources */,
 				1961CCD61F58E448006856D0 /* TimerARC.swift in Sources */,
-				19B118A71F6A17A300B1F5D1 /* XHWLBluetoothAuthView.swift in Sources */,
 				1961CDA11F596328006856D0 /* PtzPanelView.m in Sources */,
 				192DA5451F57E1CB005950EC /* XHWLTransitionView.swift in Sources */,
 				19A14D691F5E381100D96A2E /* MASCompositeConstraint.m in Sources */,

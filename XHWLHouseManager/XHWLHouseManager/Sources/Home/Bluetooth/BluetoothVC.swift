@@ -10,6 +10,7 @@ import UIKit
 import CoreBluetooth
 import CardReaderSDK
 
+@available(iOS 11.0, *)
 class BluetoothVC: UIViewController,UITableViewDelegate, UITableViewDataSource , XHWLNetworkDelegate {
 
     var deleteIndexPath:NSIndexPath?
@@ -68,16 +69,16 @@ class BluetoothVC: UIViewController,UITableViewDelegate, UITableViewDataSource ,
         
     }
     
-    class DeviceRecord {
-        init(_ name: String, mac: String) {
-            self.name = name
-            self.mac = mac
-        }
-        
-        var name: String
-        var mac: String
-        var cardNo: String?
-    }
+//    class DeviceRecord {
+//        init(_ name: String, mac: String) {
+//            self.name = name
+//            self.mac = mac
+//        }
+//
+//        var name: String
+//        var mac: String
+//        var cardNo: String?
+//    }
     
     @IBOutlet weak var bluetoothTableView: UITableView!
     
@@ -121,24 +122,44 @@ class BluetoothVC: UIViewController,UITableViewDelegate, UITableViewDataSource ,
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .normal, title: "删除") { action, index in
-            //取出user的信息
-            let data = UserDefaults.standard.object(forKey: "user") as? NSData
-            let userModel = XHWLUserModel.mj_object(withKeyValues: data?.mj_JSONObject())
-            
-            let bluetoothModel:XHWLBluetoothModel = self.deviceAry[indexPath.row] as! XHWLBluetoothModel
-            
-            let device = DeviceRecord(bluetoothModel.name, mac: bluetoothModel.address)
-            device.cardNo = bluetoothModel.currentCardStr
             
             self.deleteIndexPath = indexPath as NSIndexPath
             
-            let params = ["address": device.mac, "accountId": userModel?.wyAccount.id, "systemType":"ios"]
-            
-            XHWLNetwork.shared.postDeleteCardLogClick(params as NSDictionary, self)
+            self.onDelete()
         }
         delete.backgroundColor = UIColor.clear
         
         return [delete]
+    }
+    
+    func onDelete() {
+        //取出user的信息
+        let data = UserDefaults.standard.object(forKey: "user") as? NSData
+        let userModel = XHWLUserModel.mj_object(withKeyValues: data?.mj_JSONObject())
+        
+        let bluetoothModel:XHWLBluetoothModel = self.deviceAry[deleteIndexPath!.row] as! XHWLBluetoothModel
+        
+        let params = ["address": bluetoothModel.address, "accountId": userModel?.wyAccount.id, "systemType":"ios"]
+        
+        XHWLNetwork.shared.postDeleteCardLogClick(params as NSDictionary, self)
+    }
+    
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        //删除
+        let deleteRowAction:UIContextualAction = UIContextualAction.init(style: .destructive, title: "删除") { (action, sourceView, completionHandler) in
+            self.deleteIndexPath = indexPath as NSIndexPath
+            
+            self.onDelete()
+            
+            completionHandler(true)
+        }
+//        deleteRowAction.image = UIImage(named:"icon")
+        deleteRowAction.backgroundColor = UIColor.clear
+        
+        let config:UISwipeActionsConfiguration = UISwipeActionsConfiguration.init(actions: [deleteRowAction])
+        
+        return config
     }
     
     override func viewDidLayoutSubviews() {

@@ -17,23 +17,44 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-       setupView()
+        setupView()
         
-        if UserDefaults.standard.bool(forKey: "isFirst") == false {
-            var imageNameArr = Array<Any>()
-            for i in 1..<3 {
-                imageNameArr.append("\(i)")
+        let currentVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+        
+        if UserDefaults.standard.object(forKey: "versionCode") == nil {
+            setupLaungh()
+        }
+        else {
+            let saveVersion:String = UserDefaults.standard.object(forKey: "versionCode") as! String
+            print("\(saveVersion)")
+            if saveVersion != currentVersion {
+                setupLaungh()
             }
-            
-            self.view!.addSubview(CLNewFeatureView(imageNameArr: imageNameArr))
-            UserDefaults.standard.set(true, forKey:"isFirst")
-            UserDefaults.standard.synchronize()
         }
         
-//        launchAnimation()
+//        if UserDefaults.standard.bool(forKey: "isFirst") == false {
+//            var imageNameArr = Array<Any>()
+//            for i in 1..<3 {
+//                imageNameArr.append("\(i)")
+//            }
+//
+//            self.view!.addSubview(CLNewFeatureView(imageNameArr: imageNameArr))
+//            UserDefaults.standard.set(true, forKey:"isFirst")
+//            UserDefaults.standard.synchronize()
+//        }
     }
     
-    
+    func setupLaungh() {
+        var imageNameArr = Array<Any>()
+        for i in 1..<3 {
+            imageNameArr.append("\(i)")
+        }
+        
+        self.view!.addSubview(CLNewFeatureView(imageNameArr: imageNameArr))
+        let currentVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+        UserDefaults.standard.set(currentVersion, forKey:"versionCode")
+        UserDefaults.standard.synchronize()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

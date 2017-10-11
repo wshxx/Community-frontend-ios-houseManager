@@ -58,11 +58,11 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
     func onBack(){
 //        self.navigationController?.popViewController(animated: true)
         
-        if self.view.isUserInteractionEnabled == true {
-            
+//        if self.view.isUserInteractionEnabled == true {
+        
             let vc:UIViewController = (self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)!-3])!
             self.navigationController?.popToViewController(vc, animated: true)
-        }
+//        }
     }
     
     func setupView() {
@@ -96,7 +96,7 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
 //        equipmentCode	string	否	报事的设备编号
 //        remarks	string	否	备注
 //        token	string	是	用户登录token
-        self.view.isUserInteractionEnabled = false
+        self.warningView.isUserInteractionEnabled = false
         
         
         if type.isEmpty {
@@ -149,6 +149,7 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
     // MARK: - XHWLNetworkDelegate
     
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+
         
         //            self.progressHUD.hide()
         if response["state"] as! Bool{
@@ -156,7 +157,7 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
             XHWLTipView.shared.showSuccess("报事提交成功", {
                 let vc:UIViewController = (self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)!-4])!
                 self.navigationController?.popToViewController(vc, animated: true)
-                self.view.isUserInteractionEnabled = true
+                self.warningView.isUserInteractionEnabled = true
             } )
             
         } else {
@@ -165,7 +166,7 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
             XHWLTipView.shared.showError("报事提交失败，请重新填写！", {
                 
                 self.warningView.isHidden = false
-                self.view.isUserInteractionEnabled = true
+                self.warningView.isUserInteractionEnabled = true
             })
             //登录失败
             switch(response["errorCode"] as! Int){
