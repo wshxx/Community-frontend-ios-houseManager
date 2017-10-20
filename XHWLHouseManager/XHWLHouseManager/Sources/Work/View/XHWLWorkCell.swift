@@ -95,8 +95,8 @@ class XHWLWorkCell: UITableViewCell {
                     badgeBtn.layer.cornerRadius = 10
                     badgeBtn.layer.masksToBounds = true
                     badgeBtn.bounds = CGRect(x:0, y:0, width:20, height:20)
-                    if Int(newValue!) > 8 {
-                        badgeBtn.setTitle("8", for: .normal)
+                    if Int(newValue!) > 99 {
+                        badgeBtn.setTitle("...", for: .normal)
                     } else {
                         print("\(newValue!)")
                         let badgeStr:String! = "\(newValue!)"

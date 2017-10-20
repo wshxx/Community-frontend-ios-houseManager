@@ -19,9 +19,10 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
     var isUserName:Bool? = false
     var block:(Bool) -> () = {param in }
     var logoutBtn:UIButton!
+    var forgetBtn:UIButton!
     var name:String!
     var phone:String!
-    var backBlock:()->() = {params in }
+    var backBlock:(NSInteger)->() = {params in }
     
 //    var 
     override init(frame: CGRect) {
@@ -72,9 +73,9 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
 //        }
 
         dataAry = NSMutableArray()
-        let array :NSArray = [["name":"姓名:", "content":userModel.name, "isHiddenEdit": false],
+        let array :NSArray = [["name":"姓名:", "content":userModel.name, "isHiddenEdit": true],
                               ["name":"工号:", "content":userModel.wyAccount.workCode, "isHiddenEdit": true],
-                              ["name":"手机:", "content":userModel.telephone, "isHiddenEdit":false],
+                              ["name":"手机:", "content":userModel.telephone, "isHiddenEdit":true],
                               ["name":"岗位:", "content":userModel.wyAccount.wyRoleName, "isHiddenEdit": true],
                               ["name":"项目:", "content":projectStr, "isHiddenEdit": true]]
         dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
@@ -136,6 +137,19 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
         logoutBtn.setBackgroundImage(UIImage(named:"menu_text_bg"), for: UIControlState.normal)
         logoutBtn.addTarget(self, action: #selector(logoutClick), for: UIControlEvents.touchUpInside)
         bgScrollView.addSubview(logoutBtn)
+        
+        forgetBtn = UIButton()
+        forgetBtn.setTitle("忘记密码", for: UIControlState.normal)
+        forgetBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
+        forgetBtn.titleLabel?.font = font_14
+        forgetBtn.setBackgroundImage(UIImage(named:"menu_text_bg"), for: UIControlState.normal)
+        forgetBtn.addTarget(self, action: #selector(forgetClick), for: UIControlEvents.touchUpInside)
+        bgScrollView.addSubview(forgetBtn)
+    }
+    
+    func forgetClick() {
+        
+        self.backBlock(1)
     }
     
     func updateData() {
@@ -161,7 +175,7 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
     func logoutClick() {
         self.isUserName = true
         
-        self.backBlock()
+        self.backBlock(0)
     }
     
     func menuLabel(_ labelView:XHWLMenuLabelView, _ text:String, _ block:@escaping((Bool)->())) {
@@ -228,6 +242,7 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
                 
             }, seq: 0)
             
+//            self.regist()
             let window:UIWindow = UIApplication.shared.keyWindow!
             window.rootViewController = XHWLLoginVC()
         } else {
@@ -350,7 +365,9 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
 //            let labelView :XHWLMenuLabelView = labelViewArray.lastObject as! XHWLMenuLabelView
 //            topHeight = Int(labelView.frame.maxY)
 //        }
-        logoutBtn.frame = CGRect(x:Int((self.bounds.size.width-150)/2.0), y:Int(maxY+20), width:150, height:30)
+        forgetBtn.frame = CGRect(x:Int(Screen_width/16.0), y:Int(maxY+10), width:Int(self.bounds.size.width-Screen_width/8.0), height:30)
+        logoutBtn.frame = CGRect(x:Int((self.bounds.size.width-150)/2.0), y:Int(forgetBtn.frame.maxY+20), width:150, height:30)
+        
         bgScrollView.contentSize = CGSize(width:0, height:logoutBtn.frame.maxY+30)
     }
     

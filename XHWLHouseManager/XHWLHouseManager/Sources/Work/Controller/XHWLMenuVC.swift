@@ -26,10 +26,17 @@ class XHWLMenuVC: XHWLBaseVC  {
         menuView = XHWLMenuView(frame:CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0))
         menuView.center = CGPoint(x:self.view.bounds.size.width/2.0, y:self.view.bounds.size.height/2.0)
 //        menuView.isHidden = true
-        menuView.backBlock = {_ in
-            AlertMessage.showAlertMessage(vc: self, alertMessage: "确定要退出吗？") {
-                AppDelegate.shared().onLogout()
+        menuView.backBlock = {index in
+            if index == 0 {
+                AlertMessage.showAlertMessage(vc: self, alertMessage: "确定要退出吗？") {
+                    AppDelegate.shared().onLogout()
+                }
+            } else if index == 1 {
+                let vc : XHWLLoginVC = XHWLLoginVC()
+                vc.isWindowToLogin = false
+                self.navigationController?.pushViewController(vc, animated: true)
             }
+     
         }
         self.view.addSubview(menuView)
     }

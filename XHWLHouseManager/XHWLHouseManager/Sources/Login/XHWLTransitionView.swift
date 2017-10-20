@@ -10,7 +10,6 @@ import UIKit
 
 @objc protocol XHWLTransitionViewDelegate:NSObjectProtocol {
     @objc optional func onGotoHome(_ trianView:XHWLTransitionView)
-//    @objc optional func on(_ trianView:XHWLTransitionView)
 }
 
 class XHWLTransitionView: UIView, XHWLNetworkDelegate {
@@ -22,7 +21,18 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
     var funcBackBlock : (String, String) -> () = {param in }
     var workCode:String!
     var isResetPwd:Bool = false // 是否是重置密码
-//    var progressHUD:XHMLProgressHUD!
+    var isWindowToLogin:Bool? = true { // 从菜单跳转过来为false
+        willSet {
+            if newValue == false {
+                
+                self.setPwdV?.isHidden = true
+                self.setPwdV?.isWindowToLogin = newValue
+                self.forgetCodeV?.isHidden = false
+                self.forgetCodeV.isWindowToLogin = newValue
+                self.showV?.isHidden = true
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -97,13 +107,6 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
     // MARK: 登陆
     func onLoginClick(_ topStr:String, _ bottomStr:String) {
         
-        
-//        // 跳到首页
-//        self.delegate?.onGotoHome!(self)
-//        return
-////        self.onLoginChangeReset()// 可删除
-//        return
-        
         let params:NSArray = [topStr, bottomStr]
         
         if topStr.isEmpty {
@@ -116,15 +119,11 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
             return
         }
         
-//         self.progressHUD.show()
         XHWLNetwork.shared.getLoginClick(params, self)
     }
     
     // 下一步
     func onNextResetPwdClick(_ topStr:String, _ bottomStr:String, _ workCode:String) {
-        
-//        self.onForgetPwdChangeReset()// 可删除
-//        return
         
         self.workCode = workCode
         let params = ["telephone":topStr,
@@ -152,9 +151,6 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
     
     // 重置密码
     func onResetPwdClick(_ topStr:String, _ bottomStr:String) {
-        
-//        self.delegate?.onGotoHome!(self)
-//        return
         
         var params:[String: Any]!
         
@@ -248,6 +244,11 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
                                                 // "打标签成功".ext_debugPrintAndHint()
                                             }
                     }, seq: 0)
+                    
+                    self.loginButtonClicked()
+                } else {
+                    JPUSHService.setBadge(0) // JPush服务器
+                    UIApplication.shared.applicationIconBadgeNumber = 0
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
@@ -274,6 +275,41 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
                 break
             }
             
+        }
+    }
+    
+    //    #pragma mark ---点击登录按钮
+    /**
+     *  点击登录按钮 mcu
+     */
+    func loginButtonClicked() {
+        
+        let password:String = MSP_PASSWORD.md5
+        
+        //调用 登录平台接口,完成登录操作
+        //注意:登录密码必须是经过MD5加密的
+        MCUVmsNetSDK.shareInstance().loginMsp(withUsername: MSP_USERNAME, password: password, success: { (responseDic) in
+            
+            let obj:NSDictionary = responseDic as! NSDictionary
+            let status:String = obj["status"] as! String
+            
+            if (status.compare("200").rawValue == 0) {
+                
+                UserDefaults.standard.set(true, forKey: "isLogin")
+                UserDefaults.standard.synchronize()
+            } else {
+                
+                UserDefaults.standard.set(false, forKey: "isLogin")
+                UserDefaults.standard.synchronize()
+//                "登陆失败".ext_debugPrintAndHint()
+                print("登陆失败")
+                //                //返回码为200,代表登录成功.返回码为202,203,204时,分别代表的意思是初始密码登录,密码强度不符合要求,密码过期.这三种情况都需要修改密码.请开发者使用当前账号登录BS端平台,按要求进行密码修改后,再进行APP的开发测试工作.其他返回码,请根据平台返回提示信息进行提示或处理
+                ////                [SVProgressHUD showErrorWithStatus:responseDic[@"description"]];
+            }
+        }) { (error) in
+            
+            "服务器连接失败".ext_debugPrintAndHint()
+            print("登陆请求失败")
         }
     }
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XHWLCheckVC: UIViewController  , XHWLScanTestVCDelegate{
+class XHWLCheckVC: UIViewController, XHWLScanTestVCDelegate{
     
     var bgImg:UIImageView!
     var topMenu:XHWLTopView!
@@ -20,6 +20,8 @@ class XHWLCheckVC: UIViewController  , XHWLScanTestVCDelegate{
         self.view.backgroundColor = UIColor.white
         setupView()
         setupNav()
+        
+        self.navigationController?.delegate = self
     }
     
     func setupNav() {
@@ -33,10 +35,11 @@ class XHWLCheckVC: UIViewController  , XHWLScanTestVCDelegate{
         
         let vc:XHWLRegistrationVC = XHWLRegistrationVC() // 访客记录
         vc.title = "登记记录"
+        self.navigationController?.delegate = self //as? UINavigationControllerDelegate // push/ pop
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    func onBack(){
+    func onBack() {
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -51,6 +54,7 @@ class XHWLCheckVC: UIViewController  , XHWLScanTestVCDelegate{
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.btnBlock = {index in
+            
             self.navigationController?.popViewController(animated: true)
 //            let vc:XHWLRegistrationVC = XHWLRegistrationVC()
 //            self.navigationController?.pushViewController(vc, animated: true)

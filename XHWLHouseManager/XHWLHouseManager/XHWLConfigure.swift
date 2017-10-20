@@ -9,18 +9,17 @@
 import Foundation
 import UIKit
 
-// DEBUG
+#if DEBUG // 判断是否在测试环境下
 let apsForProduction:Bool = false  // 0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
-
-// REALEASE
-//let apsForProduction:Bool = true  // 0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
-
+#else // REALEASE
+let apsForProduction:Bool = true  // 0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
+#endif
 
 // mark -- 登录及地址界面
-let MSP_ADDRESS : String  =  "202.105.104.105"
+let MSP_ADDRESS : String  =  "202.105.104.109"
 let MSP_PORT  : String    =  "443"
-let MSP_USERNAME : String =  "wang"
-let MSP_PASSWORD:String   =  "Zhwy1234"
+let MSP_USERNAME : String =  "yanfa"
+let MSP_PASSWORD:String   =  "yf1234567"
 
 //let DEFAULT_MSP_PORT:String =  "443"
 //let PUSH_SERVER_ADDRESS:String = "60.191.22.218"
@@ -76,6 +75,9 @@ let code_400:NSInteger = 400
 //-3---没有匹配的信息
 //-4---短信发送失败
 //-5---账号已注册过
+
+// 听云
+let TYAppKey:String = "02cbe5f197bd4b2a9e33898dbcf7dd6d"
 
 // MARK: -- 百度地图
 let MapKitAK:String = "B7Ml8pkMdglObbl5GiXDGyu2m9VRNHVG"

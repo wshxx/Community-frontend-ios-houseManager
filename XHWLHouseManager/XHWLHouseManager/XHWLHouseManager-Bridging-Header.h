@@ -9,9 +9,14 @@
 #ifndef XHWLHouseManager_Bridging_Header_h
 #define XHWLHouseManager_Bridging_Header_h
 
+
+//#define w_kHeight [[UIScreen mainScreen] bounds].size.height
+//#define w_kWidth [[UIScreen mainScreen] bounds].size.width
+
 #import "Mcu_sdk/MCUVmsNetSDK.h"
 #import "Mcu_sdk/VideoPlaySDK.h"
 #import "Mcu_sdk/MCUResourceNode.h"
+#import "Mcu_sdk/VPCaptureInfo.h"
 
 #import <CommonCrypto/CommonDigest.h>
 #import "RealPlayViewController.h"
@@ -49,5 +54,7 @@
 #endif
 
 #import "CYButton.h"
+
+#import <tingyunApp/NBSAppAgent.h>
 
 #endif /* XHWLHouseManager_Bridging_Header_h */

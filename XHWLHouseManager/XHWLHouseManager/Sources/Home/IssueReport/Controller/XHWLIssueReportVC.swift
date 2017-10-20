@@ -9,7 +9,7 @@
 import UIKit
 
 //@nonobjc(HZActionSheetDelegate)
-class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, XHWLNetworkDelegate, UIActionSheetDelegate, HZActionSheetDelegate {
+class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImagePickerControllerDelegate, XHWLNetworkDelegate, UIActionSheetDelegate, HZActionSheetDelegate { // UINavigationControllerDelegate,
     
     var bgImg:UIImageView!
     var isAddPicture:Bool!

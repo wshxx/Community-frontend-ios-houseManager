@@ -24,6 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        #if DEBUG // 判断是否在测试环境下
+            NBSAppAgent.start(withAppID: TYAppKey) // 听云
+        #else
+            NBSAppAgent.start(withAppID: TYAppKey) // 听云
+        #endif
+
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         UIScreen.main.brightness = 0.5
        
@@ -40,21 +46,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
         
         if UserDefaults.standard.object(forKey: "user") == nil {
             let vc : XHWLLoginVC = XHWLLoginVC()
-            self.window?.rootViewController = UINavigationController(rootViewController: vc)
+            self.window?.rootViewController = vc // UINavigationController(rootViewController: vc)
             self.window?.makeKeyAndVisible()
         } else {
             if UserDefaults.standard.object(forKey: "user") is String {
                 let vc : XHWLLoginVC = XHWLLoginVC()
-                self.window?.rootViewController = UINavigationController(rootViewController: vc)
+                self.window?.rootViewController = vc //UINavigationController(rootViewController: vc)
             } else {
                 let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
                 let dict:NSDictionary = data.mj_JSONObject() as! NSDictionary
                 let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: dict)
                 if userModel.wyAccount.token == "" {
                     let vc : XHWLLoginVC = XHWLLoginVC()
-                    self.window?.rootViewController = UINavigationController(rootViewController: vc)
+                    self.window?.rootViewController = vc //UINavigationController(rootViewController: vc)
                     
                 } else {
+                    UserDefaults.standard.set(false, forKey: "isLogin")
+                    UserDefaults.standard.synchronize()
                     onTabbar()
                 }
             }
@@ -516,6 +524,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
         
         if requestKey == XHWLRequestKeyID.XHWL_LOGOUT.rawValue {
             
+            self.regist()
             UserDefaults.standard.set("", forKey: "user")
             UserDefaults.standard.set("", forKey: "projectList")
             UserDefaults.standard.synchronize()
@@ -531,6 +540,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
     
     func requestFail(_ requestKey:NSInteger, _ error:NSError) {
         
+    }
+    
+    // 注销
+    func regist() {
+        
+        UserDefaults.standard.set(false, forKey: "isLogin")
+        UserDefaults.standard.synchronize()
+        MCUVmsNetSDK.shareInstance().logoutMsp({ (object) in
+            //            self.navigationController?.popViewController(animated: true)
+        }) { (error) in
+            
+            print("注销失败")
+        }
     }
 }
 

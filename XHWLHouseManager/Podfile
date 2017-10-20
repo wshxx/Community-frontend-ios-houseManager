@@ -11,6 +11,10 @@ pod 'SnapKit', '~>3.2.0'
 pod 'BaiduMapKit', '~>3.4.0'
 pod 'MJExtension', '~>3.0.13'
 pod 'JPush', '~>3.0.6'
+pod 'tingyunApp' #,'~>2.7.0'
+pod 'TransitionAnimation', '~>4.0.0'
+#pod 'PGActionSheet' #sheet
+
 #pod 'ReachabilitySwift', '~>3'
 
 #pod 'EFInternetIndicator', '~>0.2.0'

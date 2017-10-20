@@ -19,6 +19,7 @@ class XHWLBaseVC: UIViewController {
 //        self.startMonitoringInternet()
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.white
+        navigationController?.delegate = self
         
         initNav()
         

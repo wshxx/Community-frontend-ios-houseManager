@@ -20,6 +20,13 @@ class XHWLForgetPwdView: UIView, XHWLNetworkDelegate {
     var userTF:XHWLLoginTF!
     var codeTF:XHWLCodeTF!
     var loginBtn:UIButton!
+    var isWindowToLogin:Bool? = true {
+        willSet {
+            if newValue == false {
+                titleBtn.isHidden = true
+            }
+        }
+    }
 
     func clearData() {
         pwdTF.textField.text = ""

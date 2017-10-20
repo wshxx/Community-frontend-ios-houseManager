@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XHWLSafeGuardVC: UIViewController  , XHWLScanTestVCDelegate, XHWLSafeGuardViewDelegate , UIImagePickerControllerDelegate,UINavigationControllerDelegate, HZActionSheetDelegate, XHWLNetworkDelegate {
+class XHWLSafeGuardVC: UIViewController  , XHWLScanTestVCDelegate, XHWLSafeGuardViewDelegate , UIImagePickerControllerDelegate, HZActionSheetDelegate, XHWLNetworkDelegate { // UINavigationControllerDelegate
     
     var bgImg:UIImageView!
     var warningView:XHWLSafeGuardView!

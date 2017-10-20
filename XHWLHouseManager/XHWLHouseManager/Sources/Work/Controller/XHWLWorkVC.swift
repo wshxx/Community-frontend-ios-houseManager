@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import TransitionAnimation
+import TransitionTreasury
 
 class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
 
@@ -125,7 +127,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         
         let array:NSMutableArray! = NSMutableArray()
         if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
-            array.addObjects(from: ["异常放行", "安防事件", "访客记录", "巡更定位", "巡更进度", "安环数据"])
+            array.addObjects(from: ["异常放行", "安防事件", "访客记录", "巡更定位", "巡更进度", "安环数据", "云瞳监控"])
         } else if userModel.wyAccount.wyRole.name.compare("门岗").rawValue == 0 {
             array.addObjects(from: ["访客登记"])
         } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
@@ -210,7 +212,11 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
     func onSafeGuardLeader(_ index:NSInteger) {
         switch index {
         case 0: // "异常放行"
-            let vc:XHWLAbnormalPassVC = XHWLAbnormalPassVC()
+//            let vc:XHWLAbnormalPassVC = XHWLAbnormalPassVC()
+//            self.navigationController?.pushViewController(vc, animated: true)
+            
+            // 视频
+            let vc = XHWLMcuShowVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
         case 1: // "安防事件",
@@ -238,6 +244,10 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
             let vc:XHWLDataVC = XHWLDataVC() //
             self.navigationController?.pushViewController(vc, animated: true)
             break
+        case 6: // 云瞳监控
+            // 视频
+            let vc = XHWLMcuListVC()
+            self.navigationController?.pushViewController(vc, animated: true)
             
         default: break
             
@@ -301,7 +311,10 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         switch index {
         case 0: // "访客登记"
             let vc:XHWLCheckVC = XHWLCheckVC() // 访客登记
-            self.navigationController?.pushViewController(vc, animated: true)
+//            navigationController?.delegate = self as? UINavigationControllerDelegate // push/ pop
+//            self.navigationController?.tr_pushViewController(vc, method: .page)
+            navigationController?.pushViewController(vc, animated: true)
+            
             break
         default:
             break
@@ -482,7 +495,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
             //            let index:NSInteger =  UserDefaults.standard.integer(forKey: "safeProtectAlert") as! NSInteger
             //            homeView.badgeArray = NSMutableArray.init(array: [0, index, 0, 0, 0, 0])
-            homeView.badgeArray = NSMutableArray.init(array: [outExceptionAccount , securityNotDealNo, 0, 0, 0, 0])
+            homeView.badgeArray = NSMutableArray.init(array: [outExceptionAccount , securityNotDealNo, 0, 0, 0, 0, 0])
         } else if userModel.wyAccount.wyRole.name.compare("门岗").rawValue == 0 {
             homeView.badgeArray = NSMutableArray.init(array: [0])
         } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {

@@ -10,9 +10,9 @@ import UIKit
 import QuartzCore
 import Alamofire
 
-class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
-//
-//    var progressHUD:XHMLProgressHUD!
+class XHWLLoginVC: XHWLBaseVC , XHWLTransitionViewDelegate {
+
+    var isWindowToLogin:Bool? = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,17 +31,6 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
                 setupLaungh()
             }
         }
-        
-//        if UserDefaults.standard.bool(forKey: "isFirst") == false {
-//            var imageNameArr = Array<Any>()
-//            for i in 1..<3 {
-//                imageNameArr.append("\(i)")
-//            }
-//
-//            self.view!.addSubview(CLNewFeatureView(imageNameArr: imageNameArr))
-//            UserDefaults.standard.set(true, forKey:"isFirst")
-//            UserDefaults.standard.synchronize()
-//        }
     }
     
     func setupLaungh() {
@@ -59,17 +48,14 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.navigationBar.isHidden = true
+//        self.navigationController?.navigationBar.isHidden = true
     }
     
     // 初始化界面
     func setupView() {
-        let bgImageV:UIImageView = UIImageView(frame: self.view.bounds)
-        bgImageV.image = UIImage(named: "home_bg")
-        self.view.addSubview(bgImageV)
-        
-//        let showV:XHWLTransitionView = XHWLTransitionView(frame: CGRect(x:0, y:0, width:349, height:299+90+60))
-//        showV.center = CGPoint(x: self.view.bounds.width/2.0, y: self.view.bounds.height/2.0-90/2.0)
+//        let bgImageV:UIImageView = UIImageView(frame: self.view.bounds)
+//        bgImageV.image = UIImage(named: "home_bg")
+//        self.view.addSubview(bgImageV)
         
         var showV:XHWLTransitionView //
         print("\(Screen_height)")
@@ -84,6 +70,7 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
         }
         showV.center = CGPoint(x: self.view.bounds.width/2.0, y: self.view.bounds.height/2.0-90/2.0)
         showV.delegate = self
+        showV.isWindowToLogin = self.isWindowToLogin
         showV.funcBackBlock = {[weak showV] topStr,bottomStr in
     
             self.onGotoHome(showV!)
@@ -152,8 +139,6 @@ class XHWLLoginVC: UIViewController , XHWLTransitionViewDelegate {
         self.view.endEditing(true)
     }
     
-    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

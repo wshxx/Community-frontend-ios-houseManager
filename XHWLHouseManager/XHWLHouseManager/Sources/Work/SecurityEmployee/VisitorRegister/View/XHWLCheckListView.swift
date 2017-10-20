@@ -229,15 +229,17 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
                 "您的身份证为空".ext_debugPrintAndHint()
                 return
             }
-//            else if !Validation.cardNum(certificateNo).isRight {
-//                "您输入的身份证不合法".ext_debugPrintAndHint()
-//                return
-//            }
+            else if !Validation.cardNum(certificateNo).isRight {
+                "您输入的身份证不合法".ext_debugPrintAndHint()
+                return
+            }
         }
         
-        if certificateNo.isEmpty || certificateType.compare("护照").rawValue == 0 {
-            "您输入的护照不能为空".ext_debugPrintAndHint()
-            return
+        if certificateType.compare("护照").rawValue == 0 {
+            if certificateNo.isEmpty {
+                "您输入的护照不能为空".ext_debugPrintAndHint()
+                return
+            }
         }
         
         print("\(name) \(telephone)")
@@ -251,16 +253,11 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
             "您的时效为空".ext_debugPrintAndHint()
             return
         }
-        
-//        if carNo.isEmpty {
-//            "您的车牌号为空".ext_debugPrintAndHint()
-//            return
-//        }
-        
-//        if carNo.isEmpty  { // || !Validation.carNo(carNo).isRight
-//            "您输入的车牌不合法".ext_debugPrintAndHint()
-//            return
-//        }
+
+        if !carNo.isEmpty && !Validation.carNo(carNo).isRight {
+            "您输入的车牌不合法".ext_debugPrintAndHint()
+            return
+        }
         
         if accessReason.isEmpty {
             "您的事由为空".ext_debugPrintAndHint()

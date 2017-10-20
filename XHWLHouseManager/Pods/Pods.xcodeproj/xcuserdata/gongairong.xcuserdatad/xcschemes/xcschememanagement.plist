@@ -46,6 +46,20 @@
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
+		<key>TransitionAnimation.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
+		<key>TransitionTreasury.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 		<key>swiftScan.xcscheme</key>
 		<dict>
 			<key>isShown</key>

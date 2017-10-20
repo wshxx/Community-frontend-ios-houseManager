@@ -10,4 +10,6 @@ import UIKit
 
 class XHWLCustomAnnotation: BMKPointAnnotation {
 
+    var type:Int?
+    
 }

@@ -21,7 +21,13 @@ class XHWLSetPwdView: UIView {
     var onCancelBlock : () -> () = {param in }
     var topStr:String!
     var bottomStr:String!
-  
+    var isWindowToLogin:Bool? = true {
+        willSet {
+            if newValue == false {
+                cancelBtn.isHidden = true
+            }
+        }
+    }
     
     func clearData() {
         userTF.textField.text = ""
@@ -89,10 +95,17 @@ class XHWLSetPwdView: UIView {
         pwdTF.frame = CGRect(x:25, y:userTF.frame.maxY+10, width:self.bounds.width-50, height:40)
         
         let img = UIImage(named: "login_btn_highlight")
-        loginBtn.frame = CGRect(x:0, y:0, width:(img?.size.width)!, height:(img?.size.height)!)
-        loginBtn.center = CGPoint(x: self.bounds.size.width/4.0, y: self.bounds.size.height*7/8.0-(img?.size.height)!/2.0)
-        cancelBtn.frame = CGRect(x:0, y:0, width:(img?.size.width)!, height:(img?.size.height)!)
-        cancelBtn.center = CGPoint(x: self.bounds.size.width*3/4.0, y: self.bounds.size.height*7/8.0-(img?.size.height)!/2.0)
+        
+        if self.isWindowToLogin! {
+            loginBtn.frame = CGRect(x:0, y:0, width:(img?.size.width)!, height:(img?.size.height)!)
+            loginBtn.center = CGPoint(x: self.bounds.size.width/4.0, y: self.bounds.size.height*7/8.0-(img?.size.height)!/2.0)
+            cancelBtn.frame = CGRect(x:0, y:0, width:(img?.size.width)!, height:(img?.size.height)!)
+            cancelBtn.center = CGPoint(x: self.bounds.size.width*3/4.0, y: self.bounds.size.height*7/8.0-(img?.size.height)!/2.0)
+        } else {
+            
+            loginBtn.frame = CGRect(x:0, y:0, width:(img?.size.width)!, height:(img?.size.height)!)
+            loginBtn.center = CGPoint(x: self.bounds.size.width/2.0, y: self.bounds.size.height*7/8.0-(img?.size.height)!/2.0)
+        }
     }
     
     func onLoginClick(btn:UIButton) {
