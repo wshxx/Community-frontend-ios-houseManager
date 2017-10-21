@@ -76,6 +76,9 @@ let code_400:NSInteger = 400
 //-4---短信发送失败
 //-5---账号已注册过
 
+// 声网
+let agoraAppKey:String = "8ae34391a8184609a868c76743eabc6d"
+
 // 听云
 let TYAppKey:String = "02cbe5f197bd4b2a9e33898dbcf7dd6d"
 

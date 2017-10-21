@@ -207,6 +207,14 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
     }
     
     func submitClick() {
+        if !subView.isHidden {
+            self.btnBlock(2)
+        } else {
+            submit()
+        }
+    }
+    
+    func submit() {
         
         self.endEditing(true)
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
