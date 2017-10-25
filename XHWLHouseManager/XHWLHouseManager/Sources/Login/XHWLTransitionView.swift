@@ -247,6 +247,14 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
                     
                     self.loginButtonClicked()
                 } else {
+                    
+                    JPUSHService.setAlias(userModel.telephone,
+                                          completion: { (iResCode, iAlias, seq) in
+                                            if seq == 0 {
+                                                // "打标签成功".ext_debugPrintAndHint()
+                                            }
+                    }, seq: 0)
+                    
                     JPUSHService.setBadge(0) // JPush服务器
                     UIApplication.shared.applicationIconBadgeNumber = 0
                 }

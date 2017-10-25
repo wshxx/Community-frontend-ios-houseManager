@@ -15,13 +15,13 @@ extension UIViewController: UINavigationControllerDelegate , UIViewControllerTra
         
         print("\(navigationController) \(operation.rawValue)")
         
-        if operation==UINavigationControllerOperation.push {
-            return BYPushAnimation_02()
-        }
-        else if operation==UINavigationControllerOperation.pop{
-            return BYPopAnimation_02()
-          
-        }
+//        if operation==UINavigationControllerOperation.push {
+//            return BYPushAnimation_02()
+//        }
+//        else if operation==UINavigationControllerOperation.pop{
+//            return BYPopAnimation_02()
+//          
+//        }
         return nil
     }
     

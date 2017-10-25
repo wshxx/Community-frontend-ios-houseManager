@@ -9,30 +9,61 @@
 import UIKit
 import MapKit
 
-class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDelegate, XHWLNetworkDelegate {
+class XHWLMapKitVC: XHWLBaseVC , BMKMapViewDelegate, BMKLocationServiceDelegate, XHWLNetworkDelegate {
 
     var _mapView: BMKMapView!
     var enableCustomMap = true
-    var bgImg:UIImageView!
+    var subBgIV:UIImageView!
+    var topView:XHWLMapKitTopView!
     var locationService:BMKLocationService!
     var coordinate:CLLocationCoordinate2D! // 我的当前位置
     var annotationArray:NSMutableArray! = NSMutableArray()
+    var selectAllBtn:UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bgImg = UIImageView()
-        bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"home_bg")
-        self.view.addSubview(bgImg)
+//        bgImg = UIImageView()
+//        bgImg.frame = self.view.bounds
+//        bgImg.image = UIImage(named:"home_bg")
+//        self.view.addSubview(bgImg)
+        
+//        let topHeight = (self.navigationController?.navigationBar.frame.height)! + UIApplication.shared.statusBarFrame.height
+        subBgIV = UIImageView(frame: CGRect(x:10, y:64+20, width:Screen_width-20, height:Screen_height-64-20-20))
+        subBgIV.image = UIImage(named:"subview_bg")
+        self.view.addSubview(subBgIV)
         
         self.title = "巡更定位"
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(selectAllAnnotations))
+//        self.navigationItem.leftBarButtonItem = UI BarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"Patrol_switch"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onSwitchClick))
         
         setupMapKit()
         setupLocation()
         onLoadData()
+        setupUI()
+    }
+    
+    func onSwitchClick() {
+        let vc:XHWLCountVC = XHWLCountVC()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func setupUI() {
+//        let topHeight = (self.navigationController?.navigationBar.frame.height)! + UIApplication.shared.statusBarFrame.height
+        topView = XHWLMapKitTopView(frame:CGRect(x:10, y:64+30, width:Screen_width-20, height:100))
+        self.view.addSubview(topView)
+        
+        selectAllBtn = UIButton()
+        selectAllBtn.setTitleColor(UIColor.black, for: .normal)
+        selectAllBtn.setTitle("显示巡更进度", for: .normal)
+        selectAllBtn.setImage(UIImage(named:"Patrol_unSelected"), for: .normal)
+        selectAllBtn.setImage(UIImage(named:"Patrol_selected"), for: .selected)
+        selectAllBtn.titleLabel?.font = font_14
+        selectAllBtn.setBackgroundImage(UIImage(named:"Patrol_white_bg"), for: .normal)
+        selectAllBtn.setBackgroundImage(UIImage(named:"Patrol_white_bg"), for: .highlighted)
+        selectAllBtn.addTarget(self, action: #selector(selectAllAnnotations), for: .touchUpInside)
+        selectAllBtn?.frame = CGRect(x:Screen_width-120-20, y:Screen_height-80, width:120, height:30)
+        self.view.addSubview(selectAllBtn)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -145,12 +176,12 @@ class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDel
     func requestFail(_ requestKey:NSInteger, _ error:NSError) {
         
     }
-    
+      
     // 添加大头针
-    func stickAnnotation(_ coordinate:CLLocationCoordinate2D, _ model:XHWLMapKitModel) {
+    func stickAnnotation(_ coor:CLLocationCoordinate2D, _ model:XHWLMapKitModel) {
         // 添加一个PointAnnotation
         let annotation: XHWLCustomAnnotation = XHWLCustomAnnotation()
-        annotation.coordinate = coordinate
+        annotation.coordinate = coor
         annotation.title = model.nickname
         annotation.type = 2
         _mapView?.addAnnotation(annotation)
@@ -161,8 +192,10 @@ class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDel
     // MARK: - 初始化地图和定位
     func setupMapKit() {
         
-        let topHeight = (self.navigationController?.navigationBar.frame.height)! + UIApplication.shared.statusBarFrame.height
-        _mapView = BMKMapView(frame: CGRect(x: 0, y: topHeight, width: self.view.frame.width, height: self.view.frame.height - topHeight))
+//        let topHeight = (self.navigationController?.navigationBar.frame.height)! + UIApplication.shared.statusBarFrame.height
+//        _mapView = BMKMapView(frame: CGRect(x: 0, y: topHeight, width: self.view.frame.width, height: self.view.frame.height - topHeight))
+       
+        _mapView = BMKMapView(frame: CGRect(x:10+2, y:64+20+2, width:Screen_width-20-4, height:Screen_height-64-20-20-4))
         _mapView?.logoPosition = BMKLogoPositionLeftBottom  /// logo位置，默认BMKLogoPositionLeftBottom
         _mapView?.mapType = UInt(BMKMapTypeStandard)        /// 当前地图类型，可设定为标准地图、卫星地图
         _mapView?.showMapScaleBar = true /// 设定是否显式比例尺
@@ -187,9 +220,9 @@ class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDel
 
     }
     
-    func onBack(){
-        self.navigationController?.popViewController(animated: true)
-    }
+//    func onBack(){
+//        self.navigationController?.popViewController(animated: true)
+//    }
 
     // MARK: - 定位服务代理
     
@@ -239,8 +272,6 @@ class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDel
         let annotation: XHWLCustomAnnotation = XHWLCustomAnnotation()
         annotation.coordinate = coordinate
         annotation.type = 1
-//                annotation.title = ""
-        //        annotation.subtitle = "声明"
         _mapView?.addAnnotation(annotation)
         
         /// 限制地图的显示范围（地图状态改变时，该范围不会在地图显示范围外。设置成功后，会调整地图显示该范围）
@@ -428,3 +459,5 @@ class XHWLMapKitVC: UIViewController , BMKMapViewDelegate, BMKLocationServiceDel
 //        }
     }
 }
+
+

@@ -14,8 +14,8 @@ class XHWLProgressDetailCell: UITableViewCell {
     var timeL:UILabel!
     var iconIV:UIImageView!
     var topLineIV:UIImageView!
-    var bottomLineIV:UIImageView!
-    
+//    var bottomLineIV:UIImageView!
+    var bgImage:UIImageView!
     var waringModel:XHWLWarningModel!
     
     func setRealModel(_ realModel:XHWLListModel) {
@@ -58,6 +58,10 @@ class XHWLProgressDetailCell: UITableViewCell {
     
     func setupView() {
         
+        bgImage = UIImageView()
+        bgImage.image = UIImage(named:"Patrol_sub_bg")
+        self.contentView.addSubview(bgImage)
+        
         titleL = UILabel()
         titleL.textColor = UIColor.white
         titleL.font = font_14
@@ -75,44 +79,20 @@ class XHWLProgressDetailCell: UITableViewCell {
         self.contentView.addSubview(iconIV)
         
         topLineIV = UIImageView()
-        topLineIV.image = UIImage(named: "progress_line")
+        topLineIV.contentMode = .scaleToFill
+        topLineIV.image = UIImage(named: "Patrol_line")
         self.contentView.addSubview(topLineIV)
         
-        bottomLineIV = UIImageView()
-        bottomLineIV.image = UIImage(named: "progress_line")
-        self.contentView.addSubview(bottomLineIV)
-        
     }
-    
-//    func setModel(waringModel:XHWLWarningModel) {
-//        titleL.text = waringModel.name
-//        timeL.text = waringModel.time
-//    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        bgImage.frame = self.bounds
         iconIV.frame = CGRect(x:15, y:11, width:12, height:12)
         titleL.frame = CGRect(x:iconIV.frame.maxX+10, y:2, width:self.contentView.bounds.size.width-iconIV.frame.maxX-20, height:25)
         timeL.frame = CGRect(x:iconIV.frame.maxX+10, y:titleL.frame.maxY, width:self.contentView.bounds.size.width-iconIV.frame.maxX-20, height:25)
-        topLineIV.frame = CGRect(x:21, y:0, width:1, height:11)
-        bottomLineIV.frame = CGRect(x:21, y:23, width:1, height:self.contentView.bounds.size.height-23)
-    }
-    
-    var isTop:Bool? = false  {
-        willSet {
-            if newValue == true {
-                topLineIV.isHidden = true
-            }
-        }
-    }
-    
-    var isBottom:Bool?  = false  {
-        willSet {
-            if newValue == true {
-                bottomLineIV.isHidden = true
-            }
-        }
+        topLineIV.frame = CGRect(x:10, y:self.bounds.size.height-0.5, width:self.bounds.size.width-20, height:0.5)
     }
     
     override func awakeFromNib() {

@@ -11,10 +11,11 @@ import UIKit
 class XHWLMoreListView: UIView , XHWLNetworkDelegate{
 
     var labelView:XHWLCheckTF!
-    var phoneView:XHWLRoomView!
-    var unit:String! = ""
+    var roomView:XHWLSelTypeView!
+//    var unit:String! = ""
     var roomNo:String! = ""
     var yzId:String! = ""
+    var yzTele:String! = ""
     var yzName:String! = ""
     
     override init(frame: CGRect) {
@@ -32,19 +33,26 @@ class XHWLMoreListView: UIView , XHWLNetworkDelegate{
         }
         self.addSubview(labelView)
         
-        phoneView = XHWLRoomView(frame:CGRect.zero)
-        phoneView.showText(leftText: "房间", rightText: "", btnTitle:"请选择单元", true)
-        phoneView.btnBlock = { [weak self] in
+        roomView = XHWLSelTypeView()
+        roomView.showText("房间", "请选择房间", true)
+        roomView.btnBlock = { [weak self] in
             if (self?.yzName.isEmpty)! {
                 "您输入的业主信息".ext_debugPrintAndHint()
                 return
             }
             self?.loadData()
         }
-        phoneView.textEndBlock = {[weak self] param in
-            self?.roomNo = param
-        }
-        self.addSubview(phoneView)
+        self.addSubview(roomView)
+        
+//        phoneView = XHWLRoomView(frame:CGRect.zero)
+//        phoneView.showText(leftText: "房间", rightText: "", btnTitle:"请选择单元", true)
+//        phoneView.btnBlock = { [weak self] in
+//
+//        }
+//        phoneView.textEndBlock = {[weak self] param in
+//            self?.roomNo = param
+//        }
+//        self.addSubview(phoneView)
     }
     
     //获取单元信息
@@ -72,6 +80,7 @@ class XHWLMoreListView: UIView , XHWLNetworkDelegate{
             let dict = response["result"] as! NSDictionary
             let model:XHWLUnitModel = XHWLUnitModel.mj_object(withKeyValues: dict)
             self.yzId = model.yzId
+            self.yzTele = model.telephone
             
             print("\(model.address) = \(model.yzId)")
             if model.address.count > 0 {
@@ -81,8 +90,10 @@ class XHWLMoreListView: UIView , XHWLNetworkDelegate{
                 pickerView.dismissBlock = { [weak pickerView] (index)->() in
                     print("\(index)")
                     if index != -1 {
-                        self.unit = model.address[index] as! String
-                        self.phoneView?.showBtnTitle(model.address[index] as! String)
+                        self.roomNo = model.address[index] as! String
+                        self.roomView?.showBtnTitle(model.address[index] as! String)
+                        self.updateView()
+//                        self.updateConstraints()
                     }
                     pickerView?.removeFromSuperview()
                 }
@@ -96,15 +107,40 @@ class XHWLMoreListView: UIView , XHWLNetworkDelegate{
         
     }
     
+    func updateView() {
+        let size:CGSize = "* 房间:".boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+        
+        let image:UIImage = UIImage(named:"home_switch")!
+        
+        let listSize:CGSize = self.roomNo.boundingRect(with: CGSize(width:258-size.width-image.size.width-20-40, height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+        
+        //        titleL.frame = CGRect(x:10, y:0, width:size.width, height:30)
+        //        listBtn.frame = CGRect(x: titleL.frame.maxX+10, y: 0, width: self.bounds.size.width-titleL.frame.size.width-30, height: listSize.height)
+        
+        roomView.frame = CGRect(x:(self.frame.size.width-258)/2.0, y:labelView.frame.maxY+10, width:258, height:listSize.height+10)
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        labelView.bounds = CGRect(x:0, y:0, width:258, height:20)
-        labelView.center = CGPoint(x:self.frame.size.width/2.0, y:30)
+        labelView.bounds = CGRect(x:0, y:0, width:258, height:30)
+        labelView.center = CGPoint(x:self.frame.size.width/2.0, y:20)
         
-        phoneView.bounds = CGRect(x:0, y:0, width:258, height:80)
-        phoneView.center = CGPoint(x:self.frame.size.width/2.0, y:labelView.frame.maxY+60)
+//        roomView.bounds = CGRect(x:0, y:0, width:258, height:80)
+//        roomView.center = CGPoint(x:self.frame.size.width/2.0, y:labelView.frame.maxY+60)
         
+        
+        let size:CGSize = "* 房间:".boundingRect(with: CGSize(width:CGFloat(MAXFLOAT), height:30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+        
+        let image:UIImage = UIImage(named:"home_switch")!
+        
+        let listSize:CGSize = self.roomNo.boundingRect(with: CGSize(width:258-size.width-image.size.width-15-40, height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+        
+//        titleL.frame = CGRect(x:10, y:0, width:size.width, height:30)
+//        listBtn.frame = CGRect(x: titleL.frame.maxX+10, y: 0, width: self.bounds.size.width-titleL.frame.size.width-30, height: listSize.height)
+        
+        roomView.bounds = CGRect(x:0, y:0, width:258, height:listSize.height+10)
+        roomView.center = CGPoint(x:self.frame.size.width/2.0, y:labelView.frame.maxY+10+(listSize.height+10)/2.0)
     }
     
     required init?(coder aDecoder: NSCoder) {

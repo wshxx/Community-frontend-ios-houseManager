@@ -19,7 +19,6 @@ class XHWLBaseVC: UIViewController {
 //        self.startMonitoringInternet()
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.white
-        navigationController?.delegate = self
         
         initNav()
         
@@ -51,6 +50,9 @@ class XHWLBaseVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
+        navigationController?.delegate = self
+        self.navigationController?.navigationBar.isHidden = false
         // 禁用返回手势
         //        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         

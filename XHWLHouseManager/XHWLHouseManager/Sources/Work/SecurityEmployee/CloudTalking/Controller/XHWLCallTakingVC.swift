@@ -11,6 +11,9 @@ import AgoraRtcEngineKit
 
 class XHWLCallTakingVC: XHWLBaseVC {
     
+    var backBlock:(String)->() = { param in }
+    var yzName:String! = ""
+    var roomName:String! = "" // 房间
     lazy fileprivate var callView:XHWLCallView! = {
 
        let callView:XHWLCallView = XHWLCallView(frame:UIScreen.main.bounds)
@@ -20,12 +23,10 @@ class XHWLCallTakingVC: XHWLBaseVC {
         return callView
     }()
     
+    
+    var nextParams:NSDictionary! = NSDictionary()
 //    var callView:XHWLCallView!
     
-
-    
-    
-    var roomName: String! = "123" // 房间
     var clientRole = AgoraRtcClientRole.clientRole_Broadcaster
     var videoProfile: AgoraRtcVideoProfile! = AgoraRtcVideoProfile._VideoProfile_360P
 
@@ -65,8 +66,23 @@ class XHWLCallTakingVC: XHWLBaseVC {
 //        callView.delegate = self
 //        self.view.addSubview(callView)
         
-        self.callView.roomName = "张三"
+        self.callView.roomName = yzName
+
+        NotificationCenter.default.addObserver(self, selector: #selector(operatorTalking), name: NSNotification.Name(rawValue: "Talking"), object: nil)
+    }
+    
+    func operatorTalking(_ note:Notification) {
         
+        let yzOperator:String = note.object as! String
+        if yzOperator == "n" { // 拒绝
+            self.backBlock(yzOperator)
+            self.doLeavePressed()
+        } else if yzOperator == "y" { // 同意
+            self.backBlock(yzOperator)
+            self.doLeavePressed()
+        } else if yzOperator == "refuse" { // 拒绝通话
+            self.doLeavePressed()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -256,9 +272,14 @@ extension XHWLCallTakingVC: AgoraRtcEngineDelegate {
 extension XHWLCallTakingVC : XHWLCallViewDelegate {
     func callViewWithCancel(_ callView:XHWLCallView) {
         self.doLeavePressed()
+
+      
+        
     }
     
     func callViewWithFreeHand(_ callView:XHWLCallView) {
         
     }
+
+    
 }

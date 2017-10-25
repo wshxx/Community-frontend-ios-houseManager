@@ -11,5 +11,6 @@ import UIKit
 class XHWLUnitModel: NSObject {
 
     var yzId:String = ""
+    var telephone:String = ""
     var address:NSArray = NSArray()
 }

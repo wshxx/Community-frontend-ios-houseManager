@@ -7,11 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19057C551FA0A2DE0061E26B /* XHWLGroupBoxListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19057C541FA0A2DE0061E26B /* XHWLGroupBoxListView.swift */; };
 		190B94191F63F2FC007D707B /* XHWLLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190B94181F63F2FC007D707B /* XHWLLabelView.swift */; };
 		1912240B1F5D47F500D201F3 /* JSONAndDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912240A1F5D47F500D201F3 /* JSONAndDictionary.swift */; };
 		1912240D1F5D774700D201F3 /* XHWLHttpKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912240C1F5D774700D201F3 /* XHWLHttpKey.swift */; };
 		192AEF611F8C6356004A7BF8 /* XHWLOtherAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192AEF601F8C6356004A7BF8 /* XHWLOtherAnnotationView.swift */; };
 		192AEF631F8C6CCA004A7BF8 /* XHWLCustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192AEF621F8C6CCA004A7BF8 /* XHWLCustomAnnotation.swift */; };
+		192B644D1FA093BA0094421B /* THDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 192B644B1FA093BA0094421B /* THDatePickerView.m */; };
+		192BC21C1F9F184300CDF492 /* XHWLPatrolHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192BC21B1F9F184300CDF492 /* XHWLPatrolHeadView.swift */; };
+		192BC2201F9F329500CDF492 /* XHWLMapKitSubViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192BC21F1F9F329500CDF492 /* XHWLMapKitSubViewCell.swift */; };
+		192BC2221F9F5D8A00CDF492 /* XHWLPatrolStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192BC2211F9F5D8A00CDF492 /* XHWLPatrolStateView.swift */; };
+		192BC2241F9F5DCD00CDF492 /* XHWLPatrolLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192BC2231F9F5DCD00CDF492 /* XHWLPatrolLineView.swift */; };
 		192DA5321F57A62A005950EC /* UIColor+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DA5311F57A62A005950EC /* UIColor+Category.swift */; };
 		192DA5331F57ABF3005950EC /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BB531F1F56BE5B006C38EA /* OpenGLES.framework */; };
 		192DA5341F57ABFE005950EC /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BB53211F56BE65006C38EA /* libiconv.2.4.0.tbd */; };
@@ -214,16 +220,8 @@
 		196761191F99D27E007C840A /* XHWLMcuShowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1967610E1F99D221007C840A /* XHWLMcuShowVC.swift */; };
 		1967611A1F99D283007C840A /* XHWLMcuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1967610D1F99D218007C840A /* XHWLMcuModel.swift */; };
 		1967611C1F99D388007C840A /* XHWLPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1967611B1F99D388007C840A /* XHWLPlayerView.swift */; };
-		196761201F99FE2D007C840A /* XHWLMcuLogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1967611F1F99FE2D007C840A /* XHWLMcuLogVC.swift */; };
-		196761221F99FE87007C840A /* XHWLMcuLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196761211F99FE87007C840A /* XHWLMcuLogView.swift */; };
 		196761281F9AF7EB007C840A /* XHWLCallTakingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196761271F9AF7EB007C840A /* XHWLCallTakingVC.swift */; };
 		1967612A1F9AF94C007C840A /* XHWLCallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196761291F9AF94C007C840A /* XHWLCallView.swift */; };
-		196761301F9B1051007C840A /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1967612D1F9B1048007C840A /* libcrypto.a */; };
-		196761311F9B1052007C840A /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1967612D1F9B1048007C840A /* libcrypto.a */; };
-		196761321F9B1055007C840A /* AgoraRtcCryptoLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1967612E1F9B1048007C840A /* AgoraRtcCryptoLoader.framework */; };
-		196761331F9B1055007C840A /* AgoraRtcEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1967612F1F9B104F007C840A /* AgoraRtcEngineKit.framework */; };
-		196761341F9B1056007C840A /* AgoraRtcCryptoLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1967612E1F9B1048007C840A /* AgoraRtcCryptoLoader.framework */; };
-		196761351F9B1056007C840A /* AgoraRtcEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1967612F1F9B104F007C840A /* AgoraRtcEngineKit.framework */; };
 		196761381F9B2A22007C840A /* VideoViewLayouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196761371F9B2A22007C840A /* VideoViewLayouter.swift */; };
 		1967613C1F9B332A007C840A /* XHWLCallBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1967613B1F9B332A007C840A /* XHWLCallBottomView.swift */; };
 		196761451F9B4017007C840A /* VideoSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196761441F9B400E007C840A /* VideoSession.swift */; };
@@ -239,6 +237,14 @@
 		196AB4C21F945ED5004E6C7A /* BYPushAnimation_04.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196AB4AE1F945785004E6C7A /* BYPushAnimation_04.swift */; };
 		196AB4C31F945ED9004E6C7A /* BYPushAnimation_05.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196AB4B01F945785004E6C7A /* BYPushAnimation_05.swift */; };
 		196AB4C41F945EDE004E6C7A /* BYPushAnimation_06.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196AB4B21F945785004E6C7A /* BYPushAnimation_06.swift */; };
+		19764F4C1F9DD8AB005FD87D /* AgoraRtcEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19764F491F9DD8AA005FD87D /* AgoraRtcEngineKit.framework */; };
+		19764F4E1F9DD8AB005FD87D /* AgoraRtcCryptoLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19764F4B1F9DD8AB005FD87D /* AgoraRtcCryptoLoader.framework */; };
+		19764F501F9DD8C8005FD87D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19764F4F1F9DD8C7005FD87D /* CoreTelephony.framework */; };
+		19764F521F9DD8D8005FD87D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19764F511F9DD8D8005FD87D /* CoreMotion.framework */; };
+		19764F541F9DD8F6005FD87D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19764F531F9DD8F6005FD87D /* AVFoundation.framework */; };
+		19764F561F9DD921005FD87D /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 19764F551F9DD921005FD87D /* libresolv.tbd */; };
+		19764F581F9DDC76005FD87D /* XHWLMcuPictureListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19764F571F9DDC76005FD87D /* XHWLMcuPictureListVC.swift */; };
+		19764F5A1F9DDD0A005FD87D /* XHWLPictureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19764F591F9DDD0A005FD87D /* XHWLPictureListView.swift */; };
 		197D64B01F62804C00977074 /* XHWLWorkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D64AF1F62804C00977074 /* XHWLWorkVC.swift */; };
 		197D64B31F62805500977074 /* XHWLMenuLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D64B11F62805500977074 /* XHWLMenuLabelView.swift */; };
 		197D64B41F62805500977074 /* XHWLMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D64B21F62805500977074 /* XHWLMenuView.swift */; };
@@ -309,10 +315,16 @@
 		19BB53AC1F56E009006C38EA /* XHWLLoginTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53AB1F56E009006C38EA /* XHWLLoginTF.swift */; };
 		19BBF3E21F74A620005AC7F2 /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BBF3E11F74A620005AC7F2 /* String+Validation.swift */; };
 		19C0BCF91F56AA8B00871BDD /* XHWLNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */; };
+		19C1B2601FA016FF0082B983 /* XHWLPatroLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C1B25F1FA016FF0082B983 /* XHWLPatroLabelView.swift */; };
 		19CDF0F51F886A3E001F17A1 /* XHWLImageScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CDF0F41F886A3E001F17A1 /* XHWLImageScale.swift */; };
 		19CDF18A1F8AFEDD001F17A1 /* XHWLBluetoothModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CDF1891F8AFEDB001F17A1 /* XHWLBluetoothModel.swift */; };
 		19D8FDBB1F6A664400AC7C22 /* XHWLAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D8FDBA1F6A664400AC7C22 /* XHWLAccountModel.swift */; };
 		19D8FDBD1F6A670900AC7C22 /* XHWLProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D8FDBC1F6A670900AC7C22 /* XHWLProjectModel.swift */; };
+		19E122011F9DF3220015AC70 /* XHWLMapKitTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E122001F9DF3220015AC70 /* XHWLMapKitTopView.swift */; };
+		19E122031F9DF5220015AC70 /* XHWLTimeLeftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E122021F9DF5220015AC70 /* XHWLTimeLeftView.swift */; };
+		19E122051F9DF52F0015AC70 /* XHWLTimeRightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E122041F9DF52F0015AC70 /* XHWLTimeRightView.swift */; };
+		19E122071F9DF5400015AC70 /* XHWLPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E122061F9DF5400015AC70 /* XHWLPersonView.swift */; };
+		19E122091F9EE4B10015AC70 /* XHWLPatrolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E122081F9EE4B10015AC70 /* XHWLPatrolVC.swift */; };
 		19E16CD01F7CE53E00E7F930 /* open_door.gif in Resources */ = {isa = PBXBuildFile; fileRef = 19E16CCF1F7CE2BB00E7F930 /* open_door.gif */; };
 		19E16CD51F7CECD100E7F930 /* XHWLAbnormalPassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E16CD41F7CECD100E7F930 /* XHWLAbnormalPassModel.swift */; };
 		19F04DCF1F75051C00E0BD75 /* RemoteOpenDoorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F04DCE1F75051C00E0BD75 /* RemoteOpenDoorVC.swift */; };
@@ -386,6 +398,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		19057C541FA0A2DE0061E26B /* XHWLGroupBoxListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLGroupBoxListView.swift; sourceTree = "<group>"; };
 		190B94181F63F2FC007D707B /* XHWLLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLabelView.swift; sourceTree = "<group>"; };
 		1912240A1F5D47F500D201F3 /* JSONAndDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAndDictionary.swift; sourceTree = "<group>"; };
 		1912240C1F5D774700D201F3 /* XHWLHttpKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLHttpKey.swift; sourceTree = "<group>"; };
@@ -393,6 +406,12 @@
 		192AEF5F1F8C5988004A7BF8 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		192AEF601F8C6356004A7BF8 /* XHWLOtherAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLOtherAnnotationView.swift; sourceTree = "<group>"; };
 		192AEF621F8C6CCA004A7BF8 /* XHWLCustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLCustomAnnotation.swift; sourceTree = "<group>"; };
+		192B644B1FA093BA0094421B /* THDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = THDatePickerView.m; sourceTree = "<group>"; };
+		192B644C1FA093BA0094421B /* THDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THDatePickerView.h; sourceTree = "<group>"; };
+		192BC21B1F9F184300CDF492 /* XHWLPatrolHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLPatrolHeadView.swift; sourceTree = "<group>"; };
+		192BC21F1F9F329500CDF492 /* XHWLMapKitSubViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMapKitSubViewCell.swift; sourceTree = "<group>"; };
+		192BC2211F9F5D8A00CDF492 /* XHWLPatrolStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLPatrolStateView.swift; sourceTree = "<group>"; };
+		192BC2231F9F5DCD00CDF492 /* XHWLPatrolLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLPatrolLineView.swift; sourceTree = "<group>"; };
 		192DA5311F57A62A005950EC /* UIColor+Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Category.swift"; sourceTree = "<group>"; };
 		192DA53B1F57AC4C005950EC /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
 		192DA53D1F57AC5C005950EC /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
@@ -612,13 +631,8 @@
 		196761121F99D227007C840A /* XHWLMcuBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMcuBottomView.swift; sourceTree = "<group>"; };
 		196761131F99D227007C840A /* XHWLMcuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMcuView.swift; sourceTree = "<group>"; };
 		1967611B1F99D388007C840A /* XHWLPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLPlayerView.swift; sourceTree = "<group>"; };
-		1967611F1F99FE2D007C840A /* XHWLMcuLogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMcuLogVC.swift; sourceTree = "<group>"; };
-		196761211F99FE87007C840A /* XHWLMcuLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMcuLogView.swift; sourceTree = "<group>"; };
 		196761271F9AF7EB007C840A /* XHWLCallTakingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLCallTakingVC.swift; sourceTree = "<group>"; };
 		196761291F9AF94C007C840A /* XHWLCallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLCallView.swift; sourceTree = "<group>"; };
-		1967612D1F9B1048007C840A /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
-		1967612E1F9B1048007C840A /* AgoraRtcCryptoLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AgoraRtcCryptoLoader.framework; sourceTree = "<group>"; };
-		1967612F1F9B104F007C840A /* AgoraRtcEngineKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AgoraRtcEngineKit.framework; sourceTree = "<group>"; };
 		196761371F9B2A22007C840A /* VideoViewLayouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewLayouter.swift; sourceTree = "<group>"; };
 		1967613B1F9B332A007C840A /* XHWLCallBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLCallBottomView.swift; sourceTree = "<group>"; };
 		196761441F9B400E007C840A /* VideoSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoSession.swift; path = "../../../../../../../../../兴海物业/Agora_Native_SDK_for_iOS_FULL/samples/OpenLive_iOS/OpenLive/VideoSession.swift"; sourceTree = "<group>"; };
@@ -634,6 +648,14 @@
 		196AB4B41F945785004E6C7A /* BYPushAnimation_07.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BYPushAnimation_07.swift; sourceTree = "<group>"; };
 		196AB4B61F945785004E6C7A /* BYPushAnimation_08.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BYPushAnimation_08.swift; sourceTree = "<group>"; };
 		196AB4B71F945785004E6C7A /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		19764F491F9DD8AA005FD87D /* AgoraRtcEngineKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AgoraRtcEngineKit.framework; path = Libs/AgoraRtcEngineKit.framework; sourceTree = "<group>"; };
+		19764F4B1F9DD8AB005FD87D /* AgoraRtcCryptoLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AgoraRtcCryptoLoader.framework; path = Libs/AgoraRtcCryptoLoader.framework; sourceTree = "<group>"; };
+		19764F4F1F9DD8C7005FD87D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		19764F511F9DD8D8005FD87D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		19764F531F9DD8F6005FD87D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		19764F551F9DD921005FD87D /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		19764F571F9DDC76005FD87D /* XHWLMcuPictureListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMcuPictureListVC.swift; sourceTree = "<group>"; };
+		19764F591F9DDD0A005FD87D /* XHWLPictureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLPictureListView.swift; sourceTree = "<group>"; };
 		197D64AF1F62804C00977074 /* XHWLWorkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLWorkVC.swift; sourceTree = "<group>"; };
 		197D64B11F62805500977074 /* XHWLMenuLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLMenuLabelView.swift; sourceTree = "<group>"; };
 		197D64B21F62805500977074 /* XHWLMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLMenuView.swift; sourceTree = "<group>"; };
@@ -746,10 +768,16 @@
 		19BBF3DA1F73D966005AC7F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		19BBF3E11F74A620005AC7F2 /* String+Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
 		19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLNavigationController.swift; sourceTree = "<group>"; };
+		19C1B25F1FA016FF0082B983 /* XHWLPatroLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLPatroLabelView.swift; sourceTree = "<group>"; };
 		19CDF0F41F886A3E001F17A1 /* XHWLImageScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLImageScale.swift; sourceTree = "<group>"; };
 		19CDF1891F8AFEDB001F17A1 /* XHWLBluetoothModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLBluetoothModel.swift; sourceTree = "<group>"; };
 		19D8FDBA1F6A664400AC7C22 /* XHWLAccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLAccountModel.swift; sourceTree = "<group>"; };
 		19D8FDBC1F6A670900AC7C22 /* XHWLProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLProjectModel.swift; sourceTree = "<group>"; };
+		19E122001F9DF3220015AC70 /* XHWLMapKitTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMapKitTopView.swift; sourceTree = "<group>"; };
+		19E122021F9DF5220015AC70 /* XHWLTimeLeftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLTimeLeftView.swift; sourceTree = "<group>"; };
+		19E122041F9DF52F0015AC70 /* XHWLTimeRightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLTimeRightView.swift; sourceTree = "<group>"; };
+		19E122061F9DF5400015AC70 /* XHWLPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLPersonView.swift; sourceTree = "<group>"; };
+		19E122081F9EE4B10015AC70 /* XHWLPatrolVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLPatrolVC.swift; sourceTree = "<group>"; };
 		19E16CCF1F7CE2BB00E7F930 /* open_door.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = open_door.gif; sourceTree = "<group>"; };
 		19E16CD41F7CECD100E7F930 /* XHWLAbnormalPassModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLAbnormalPassModel.swift; sourceTree = "<group>"; };
 		19F04DCE1F75051C00E0BD75 /* RemoteOpenDoorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteOpenDoorVC.swift; sourceTree = "<group>"; };
@@ -786,9 +814,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				196761351F9B1056007C840A /* AgoraRtcEngineKit.framework in Frameworks */,
-				196761311F9B1052007C840A /* libcrypto.a in Frameworks */,
-				196761341F9B1056007C840A /* AgoraRtcCryptoLoader.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -796,20 +821,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19764F561F9DD921005FD87D /* libresolv.tbd in Frameworks */,
+				19764F541F9DD8F6005FD87D /* AVFoundation.framework in Frameworks */,
+				192DA5361F57AC14005950EC /* AudioToolbox.framework in Frameworks */,
+				192DA5381F57AC28005950EC /* VideoToolbox.framework in Frameworks */,
+				19764F521F9DD8D8005FD87D /* CoreMotion.framework in Frameworks */,
+				192DA5391F57AC32005950EC /* CoreMedia.framework in Frameworks */,
+				19764F501F9DD8C8005FD87D /* CoreTelephony.framework in Frameworks */,
+				19764F4C1F9DD8AB005FD87D /* AgoraRtcEngineKit.framework in Frameworks */,
+				19764F4E1F9DD8AB005FD87D /* AgoraRtcCryptoLoader.framework in Frameworks */,
 				193F0DA51F7B370F00C2F948 /* CommonCrypto.framework in Frameworks */,
-				196761331F9B1055007C840A /* AgoraRtcEngineKit.framework in Frameworks */,
 				19A7A7051F57E4540044DC1A /* Mcu_sdk.framework in Frameworks */,
 				193F0E051F7B461B00C2F948 /* CardReaderSDK.framework in Frameworks */,
 				192DA53E1F57AC5C005950EC /* libc++.1.tbd in Frameworks */,
 				192DA53C1F57AC4C005950EC /* libz.1.1.3.tbd in Frameworks */,
-				196761321F9B1055007C840A /* AgoraRtcCryptoLoader.framework in Frameworks */,
 				192DA53A1F57AC41005950EC /* GLKit.framework in Frameworks */,
-				192DA5391F57AC32005950EC /* CoreMedia.framework in Frameworks */,
-				192DA5381F57AC28005950EC /* VideoToolbox.framework in Frameworks */,
 				192DA5371F57AC1E005950EC /* OpenAL.framework in Frameworks */,
-				192DA5361F57AC14005950EC /* AudioToolbox.framework in Frameworks */,
 				192DA5351F57AC0A005950EC /* CoreGraphics.framework in Frameworks */,
-				196761301F9B1051007C840A /* libcrypto.a in Frameworks */,
 				192DA5341F57ABFE005950EC /* libiconv.2.4.0.tbd in Frameworks */,
 				192DA5331F57ABF3005950EC /* OpenGLES.framework in Frameworks */,
 				AB8AAA8A8B40342C790CEE29 /* Pods_XHWLHouseManager.framework in Frameworks */,
@@ -1319,6 +1347,7 @@
 			isa = PBXGroup;
 			children = (
 				193F0EBB1F7B512B00C2F948 /* XHWLMapKitVC.swift */,
+				19E122081F9EE4B10015AC70 /* XHWLPatrolVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1337,6 +1366,14 @@
 				193F0EBF1F7B512B00C2F948 /* XHWLMeAnnotationView.swift */,
 				192AEF601F8C6356004A7BF8 /* XHWLOtherAnnotationView.swift */,
 				192AEF621F8C6CCA004A7BF8 /* XHWLCustomAnnotation.swift */,
+				19E122001F9DF3220015AC70 /* XHWLMapKitTopView.swift */,
+				19E122021F9DF5220015AC70 /* XHWLTimeLeftView.swift */,
+				19E122041F9DF52F0015AC70 /* XHWLTimeRightView.swift */,
+				19E122061F9DF5400015AC70 /* XHWLPersonView.swift */,
+				192BC21F1F9F329500CDF492 /* XHWLMapKitSubViewCell.swift */,
+				192BC2211F9F5D8A00CDF492 /* XHWLPatrolStateView.swift */,
+				192BC2231F9F5DCD00CDF492 /* XHWLPatrolLineView.swift */,
+				19C1B25F1FA016FF0082B983 /* XHWLPatroLabelView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1376,6 +1413,7 @@
 				193F0EC91F7B512B00C2F948 /* XHWLProgressDetailCell.swift */,
 				193F0ECA1F7B512B00C2F948 /* XHWLProgressDetailView.swift */,
 				193F0ECB1F7B512B00C2F948 /* XHWLProgressView.swift */,
+				192BC21B1F9F184300CDF492 /* XHWLPatrolHeadView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1681,7 +1719,7 @@
 				196761101F99D221007C840A /* XHWLMcuListVC.swift */,
 				1967610F1F99D221007C840A /* XHWLMcuResourceVC.swift */,
 				1967610E1F99D221007C840A /* XHWLMcuShowVC.swift */,
-				1967611F1F99FE2D007C840A /* XHWLMcuLogVC.swift */,
+				19764F571F9DDC76005FD87D /* XHWLMcuPictureListVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1693,7 +1731,7 @@
 				196761111F99D227007C840A /* XHWLMcuCell.swift */,
 				196761131F99D227007C840A /* XHWLMcuView.swift */,
 				1967611B1F99D388007C840A /* XHWLPlayerView.swift */,
-				196761211F99FE87007C840A /* XHWLMcuLogView.swift */,
+				19764F591F9DDD0A005FD87D /* XHWLPictureListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2065,6 +2103,8 @@
 		19C0BCE31F56AA8B00871BDD /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				192B644C1FA093BA0094421B /* THDatePickerView.h */,
+				192B644B1FA093BA0094421B /* THDatePickerView.m */,
 				196AB4A11F945785004E6C7A /* BYTransition */,
 				192AEF5E1F8C5988004A7BF8 /* Reachability */,
 				193F0DED1F7B43FB00C2F948 /* CYTabBar */,
@@ -2079,6 +2119,7 @@
 				19A7A70A1F57EB460044DC1A /* YLGIFImage-Swift */,
 				19BB53231F56BEBB006C38EA /* Mcu_sdk */,
 				19CDF0F41F886A3E001F17A1 /* XHWLImageScale.swift */,
+				19057C541FA0A2DE0061E26B /* XHWLGroupBoxListView.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -2249,9 +2290,12 @@
 		8D4A7720846EA956431B05A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1967612E1F9B1048007C840A /* AgoraRtcCryptoLoader.framework */,
-				1967612F1F9B104F007C840A /* AgoraRtcEngineKit.framework */,
-				1967612D1F9B1048007C840A /* libcrypto.a */,
+				19764F551F9DD921005FD87D /* libresolv.tbd */,
+				19764F531F9DD8F6005FD87D /* AVFoundation.framework */,
+				19764F511F9DD8D8005FD87D /* CoreMotion.framework */,
+				19764F4F1F9DD8C7005FD87D /* CoreTelephony.framework */,
+				19764F4B1F9DD8AB005FD87D /* AgoraRtcCryptoLoader.framework */,
+				19764F491F9DD8AA005FD87D /* AgoraRtcEngineKit.framework */,
 				193F0DA91F7B387A00C2F948 /* CardReaderSDK.framework */,
 				192DA53D1F57AC5C005950EC /* libc++.1.tbd */,
 				192DA53B1F57AC4C005950EC /* libz.1.1.3.tbd */,
@@ -2611,12 +2655,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19C1B2601FA016FF0082B983 /* XHWLPatroLabelView.swift in Sources */,
 				193F0F2F1F7B543700C2F948 /* XHWLMeAnnotationView.swift in Sources */,
 				193F0F2E1F7B53EA00C2F948 /* XHWLVisitLogModel.swift in Sources */,
 				193F0F2B1F7B53E400C2F948 /* XHWLRegistrationCell.swift in Sources */,
 				193F0F311F7B83A000C2F948 /* XHWLMenuVC.swift in Sources */,
+				192BC2201F9F329500CDF492 /* XHWLMapKitSubViewCell.swift in Sources */,
 				1967612A1F9AF94C007C840A /* XHWLCallView.swift in Sources */,
 				193F0F2C1F7B53E400C2F948 /* XHWLSafeGuardView.swift in Sources */,
+				192BC2221F9F5D8A00CDF492 /* XHWLPatrolStateView.swift in Sources */,
 				193F0F2D1F7B53E400C2F948 /* XHWLSafeProtectionView.swift in Sources */,
 				193F0F2A1F7B53DD00C2F948 /* XHWLSafeProtectionModel.swift in Sources */,
 				193F0F281F7B53D600C2F948 /* XHWLSafeGuardVC.swift in Sources */,
@@ -2626,12 +2673,14 @@
 				193F0F251F7B53CF00C2F948 /* XHWLProgressDetailCell.swift in Sources */,
 				196761151F99D272007C840A /* XHWLMcuCell.swift in Sources */,
 				193F0F261F7B53CF00C2F948 /* XHWLProgressDetailView.swift in Sources */,
+				19057C551FA0A2DE0061E26B /* XHWLGroupBoxListView.swift in Sources */,
 				193F0F271F7B53CF00C2F948 /* XHWLProgressView.swift in Sources */,
 				193F0F231F7B53C800C2F948 /* XHWLProgressDetailVC.swift in Sources */,
 				193F0F221F7B53C200C2F948 /* XHWLMapKitModel.swift in Sources */,
 				193F0F211F7B53BC00C2F948 /* XHWLMapKitVC.swift in Sources */,
 				193F0F1E1F7B53B500C2F948 /* XHWLDataCell.swift in Sources */,
 				193F0F1F1F7B53B500C2F948 /* XHWLDataView.swift in Sources */,
+				192BC21C1F9F184300CDF492 /* XHWLPatrolHeadView.swift in Sources */,
 				193F0F201F7B53B500C2F948 /* XHWLSubDataView.swift in Sources */,
 				193F0F1D1F7B53AE00C2F948 /* XHWLDataModel.swift in Sources */,
 				19A9C1761F7DEEEE00C928AA /* BluetoothScanVC.swift in Sources */,
@@ -2719,14 +2768,18 @@
 				1961CDBC1F5963EA006856D0 /* XHWLLocationVC.swift in Sources */,
 				19BB53AC1F56E009006C38EA /* XHWLLoginTF.swift in Sources */,
 				1961CD9C1F596328006856D0 /* PlayBackViewController.m in Sources */,
+				19E122071F9DF5400015AC70 /* XHWLPersonView.swift in Sources */,
 				190B94191F63F2FC007D707B /* XHWLLabelView.swift in Sources */,
 				196AB4C31F945ED9004E6C7A /* BYPushAnimation_05.swift in Sources */,
 				19C0BCF91F56AA8B00871BDD /* XHWLNavigationController.swift in Sources */,
+				192B644D1FA093BA0094421B /* THDatePickerView.m in Sources */,
 				19A14D6F1F5E381100D96A2E /* NSArray+MASAdditions.m in Sources */,
 				196AB4BB1F945EA3004E6C7A /* BHPopAnimation.swift in Sources */,
 				19A572681F6CE5F0007B0D3F /* XHWLWorkView.swift in Sources */,
 				19F04DD41F7509B400E0BD75 /* BluetoothTableViewCell.swift in Sources */,
 				19A7A7131F58067E0044DC1A /* AlertMessage.swift in Sources */,
+				19764F5A1F9DDD0A005FD87D /* XHWLPictureListView.swift in Sources */,
+				19E122011F9DF3220015AC70 /* XHWLMapKitTopView.swift in Sources */,
 				19A14D6D1F5E381100D96A2E /* MASViewAttribute.m in Sources */,
 				1961CDA51F596328006856D0 /* PtzPresetPositionPopView.m in Sources */,
 				19A14D7B1F5E4D5C00D96A2E /* XHMLProgressHUD.swift in Sources */,
@@ -2751,9 +2804,11 @@
 				19A14D6E1F5E381100D96A2E /* MASViewConstraint.m in Sources */,
 				19BB53AA1F56DDC7006C38EA /* XHWLLoginView.swift in Sources */,
 				19ADF39E1F64DD8400A9E0FB /* XHWLRegisterationModel.swift in Sources */,
+				19E122031F9DF5220015AC70 /* XHWLTimeLeftView.swift in Sources */,
 				196761181F99D27C007C840A /* XHWLMcuResourceVC.swift in Sources */,
 				198B17CB1F7A4A1C00F1067C /* LYMUILabel+TextAlignment.m in Sources */,
 				19A14D921F5EA46F00D96A2E /* TextHeaderFooter.swift in Sources */,
+				19E122091F9EE4B10015AC70 /* XHWLPatrolVC.swift in Sources */,
 				196761141F99D26F007C840A /* XHWLMcuBottomView.swift in Sources */,
 				19A2E51B1F710C0200C08729 /* JGProgressView.swift in Sources */,
 				19A14D911F5EA46F00D96A2E /* RefreshView.swift in Sources */,
@@ -2764,6 +2819,7 @@
 				19BBF3E21F74A620005AC7F2 /* String+Validation.swift in Sources */,
 				19A14D791F5E3BF300D96A2E /* XHWLTabbarVC.swift in Sources */,
 				194D7FB21F80B6D900B27BD0 /* XHWLMessageDetailView.swift in Sources */,
+				19764F581F9DDC76005FD87D /* XHWLMcuPictureListVC.swift in Sources */,
 				194D7FAE1F80B55700B27BD0 /* XHWLMessageView.swift in Sources */,
 				19A14D801F5E853C00D96A2E /* XHWLSearchVC.swift in Sources */,
 				1961CD9D1F596328006856D0 /* RealPlayViewController.m in Sources */,
@@ -2779,7 +2835,6 @@
 				19BB53571F56BFA3006C38EA /* NSObject+MJKeyValue.m in Sources */,
 				1931C0B01F725EDB004D0A41 /* Date+Extension.swift in Sources */,
 				19D8FDBB1F6A664400AC7C22 /* XHWLAccountModel.swift in Sources */,
-				196761221F99FE87007C840A /* XHWLMcuLogView.swift in Sources */,
 				1961CCD21F58E336006856D0 /* DateStringExtension.swift in Sources */,
 				19A14D6A1F5E381100D96A2E /* MASConstraint.m in Sources */,
 				1961CDA01F596328006856D0 /* PlayView.m in Sources */,
@@ -2813,6 +2868,7 @@
 				840835911F6E01DF00DC644A /* XHWLNetwork.swift in Sources */,
 				1961CDA31F596328006856D0 /* PtzPresetPositionDialView.m in Sources */,
 				19CDF18A1F8AFEDD001F17A1 /* XHWLBluetoothModel.swift in Sources */,
+				192BC2241F9F5DCD00CDF492 /* XHWLPatrolLineView.swift in Sources */,
 				1961CDAB1F596328006856D0 /* ToolBarScrollView.m in Sources */,
 				196AB4BC1F945EA3004E6C7A /* BHPushAnimation.swift in Sources */,
 				19BB53391F56BF99006C38EA /* XMLReader.m in Sources */,
@@ -2831,8 +2887,8 @@
 				19BB53591F56BFA3006C38EA /* NSString+MJExtension.m in Sources */,
 				19A14D701F5E381100D96A2E /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				1961CCCE1F58E301006856D0 /* HintTool.swift in Sources */,
-				196761201F99FE2D007C840A /* XHWLMcuLogVC.swift in Sources */,
 				1955C9B31F6528C1008C31C8 /* XHWLForgetPwdView.swift in Sources */,
+				19E122051F9DF52F0015AC70 /* XHWLTimeRightView.swift in Sources */,
 				19FACBC61F68C43E00680E63 /* Validation.swift in Sources */,
 				197D64B41F62805500977074 /* XHWLMenuView.swift in Sources */,
 				198B17D91F7A849100F1067C /* CLNewFeatureView.swift in Sources */,
@@ -3088,6 +3144,7 @@
 					"$(PROJECT_DIR)/XHWLHouseManager/Lib/Mcu_sdk",
 					"$(PROJECT_DIR)/XHWLHouseManager/Lib/BluetoothOpen",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Libs",
 				);
 				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = XHWLHouseManager/Info.plist;
@@ -3097,6 +3154,7 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/BaiduMapKit/BaiduMapKit/thirdlibs\"",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Libs",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -3134,6 +3192,7 @@
 					"$(PROJECT_DIR)/XHWLHouseManager/Lib/Mcu_sdk",
 					"$(PROJECT_DIR)/XHWLHouseManager/Lib/BluetoothOpen",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Libs",
 				);
 				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = XHWLHouseManager/Info.plist;
@@ -3143,6 +3202,7 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/BaiduMapKit/BaiduMapKit/thirdlibs\"",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Libs",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

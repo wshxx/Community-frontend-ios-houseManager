@@ -31,7 +31,7 @@ class XHWLMcuShowVC: XHWLBaseVC, XHWLPlayerViewDelegate{
 //    }
     
     override func onBack() {
-        self.navigationController?.popToViewController((self.navigationController?.topViewController)!, animated: true)
+        self.navigationController?.popToViewController((self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)!-3])!, animated: true)
     }
     
     lazy fileprivate var okBtn:UIButton = {
@@ -89,7 +89,7 @@ class XHWLMcuShowVC: XHWLBaseVC, XHWLPlayerViewDelegate{
     }
     
     func onCapturePicture() {
-        let vc:XHWLMcuLogVC = XHWLMcuLogVC()
+        let vc:XHWLMcuPictureListVC = XHWLMcuPictureListVC()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

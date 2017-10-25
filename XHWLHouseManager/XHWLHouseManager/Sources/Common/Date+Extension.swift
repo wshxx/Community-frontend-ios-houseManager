@@ -28,9 +28,15 @@ extension Date {
     }
     
     static func getCurrentDate()->String {
+        let dateStr = getCurrentDate("yyyy-MM-dd HH:mm:ss")
+        
+        return dateStr
+    }
+    
+    static func getCurrentDate(_ dateFormat:String)->String {
         let date = Date()
         let dformatter = DateFormatter()
-        dformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dformatter.dateFormat = dateFormat
         let dateStr = dformatter.string(from: date)
         
         return dateStr

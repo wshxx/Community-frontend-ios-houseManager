@@ -35,13 +35,14 @@ enum XHWLRequestKeyID : NSInteger {
     case XHWL_NAVPARAME     // 返回项目所有房间与环境监测设备对应关系
     case XHWL_NEWALER       // 获取项目当前设定周期内最新告警
     case XHWL_DEVICEINFO    // 所有设备信息
-    case XHWL_OPENDOOR // 开门
-    case XHWL_VISITLIST  // 访客登记记录
-    case XHWL_DOORLIST // 门列表
-    case XHWL_MESSAGECOUNT // 消息总数
-    case XHWL_BINDCARDLOG // 蓝牙绑卡记录
+    case XHWL_OPENDOOR      // 开门
+    case XHWL_VISITLIST     // 访客登记记录
+    case XHWL_DOORLIST      // 门列表
+    case XHWL_MESSAGECOUNT  // 消息总数
+    case XHWL_BINDCARDLOG   // 蓝牙绑卡记录
     case XHWL_DELETECARDLOG // 删除蓝牙绑卡记录
-    case XHWL_SAVECARDLOG // 保存蓝牙绑卡记录
+    case XHWL_SAVECARDLOG   // 保存蓝牙绑卡记录
+    case XHWL_REGISTERJPUSH // 访客登记提交推送
 }
 
 
@@ -80,20 +81,20 @@ class XHWLRequestKeyDefine: NSObject {
             XHWLRequestKeyID.XHWL_SAFEGUARDSUBMIT:"wyBusiness/complaint/manage",        // 处理安防事件（提交）
             XHWLRequestKeyID.XHWL_EXCEPTIONPASSLOG:"wyBusiness/parking/out/exeption",   // 获取停车场异常放行记录
             XHWLRequestKeyID.XHWL_HANDLEEXCEPTIONPASS: "wyBusiness/parking/out/exeption/handle", // 处理异常放行记录
-            XHWLRequestKeyID.XHWL_MAPKIT:"wyBusiness/patrol/collectNodes",      // 在线定位
-            XHWLRequestKeyID.XHWL_REALPROGRESS: "wyBusiness/patrol/progress",   // 实时进度
-            XHWLRequestKeyID.XHWL_UNIT:"wyBusiness/unit",                       // 获取单元信息
-            XHWLRequestKeyID.XHWL_NEWALER:"wyBusiness/iot/machine/alarm",       // 获取项目当前设定周期内最新告警
-            XHWLRequestKeyID.XHWL_DEVICEINFO:"wyBusiness/iot/machine/device",   // 返回项目下所有设备信息
-            XHWLRequestKeyID.XHWL_OPENDOOR:"appBusiness/iot/entrance/openDoor", // 开门
-            XHWLRequestKeyID.XHWL_VISITLIST:"wyBusiness/visitor",               // 访客登记记录
-            XHWLRequestKeyID.XHWL_DOORLIST:"wyBusiness/iot/entrance/getDoorList",  // 门列表
-            
-            XHWLRequestKeyID.XHWL_NAVPARAME:"wyBusiness/iot/machine/navparame", //返回项目所有房间与环境监测设备对应关系 " http://202.105.104.105:8804/realdata/get", //
-            XHWLRequestKeyID.XHWL_BINDCARDLOG:"wyBusiness/bluetoothCard", //绑卡记录
-            XHWLRequestKeyID.XHWL_DELETECARDLOG:"wyBusiness/delBluetoothCard", // 删除蓝牙绑卡记录
-            XHWLRequestKeyID.XHWL_SAVECARDLOG:"wyBusiness/bluetoothCard/bind",  // 保存蓝牙绑卡记录
-            XHWLRequestKeyID.XHWL_MESSAGECOUNT:"wyBase/tips/count" // 消息总数
+            XHWLRequestKeyID.XHWL_MAPKIT:"wyBusiness/patrol/collectNodes",          // 在线定位
+            XHWLRequestKeyID.XHWL_REALPROGRESS: "wyBusiness/patrol/progress",       // 实时进度
+            XHWLRequestKeyID.XHWL_UNIT:"wyBusiness/room",                           // 获取单元信息
+            XHWLRequestKeyID.XHWL_NEWALER:"wyBusiness/iot/machine/alarm",           // 获取项目当前设定周期内最新告警
+            XHWLRequestKeyID.XHWL_DEVICEINFO:"wyBusiness/iot/machine/device",       // 返回项目下所有设备信息
+            XHWLRequestKeyID.XHWL_OPENDOOR:"appBusiness/iot/entrance/openDoor",     // 开门
+            XHWLRequestKeyID.XHWL_VISITLIST:"wyBusiness/visitor",                   // 访客登记记录
+            XHWLRequestKeyID.XHWL_DOORLIST:"wyBusiness/iot/entrance/getDoorList",   // 门列表
+            XHWLRequestKeyID.XHWL_NAVPARAME:"wyBusiness/iot/machine/navparame",     //返回项目所有房间与环境监测设备对应关系 " http://202.105.104.105:8804/realdata/get", //
+            XHWLRequestKeyID.XHWL_BINDCARDLOG:"wyBusiness/bluetoothCard",           //绑卡记录
+            XHWLRequestKeyID.XHWL_DELETECARDLOG:"wyBusiness/delBluetoothCard",      // 删除蓝牙绑卡记录
+            XHWLRequestKeyID.XHWL_SAVECARDLOG:"wyBusiness/bluetoothCard/bind",      // 保存蓝牙绑卡记录
+            XHWLRequestKeyID.XHWL_MESSAGECOUNT:"wyBase/tips/count",                 // 消息总数
+            XHWLRequestKeyID.XHWL_REGISTERJPUSH:"wyBusiness/visitor/regist/jgPush"  // 访客登记提交推送
         ]
     }
 }

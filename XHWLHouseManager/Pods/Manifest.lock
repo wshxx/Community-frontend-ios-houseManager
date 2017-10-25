@@ -1,5 +1,4 @@
 PODS:
-  - AgoraRtcEngine_iOS (1.12.0)
   - Alamofire (4.5.0)
   - BaiduMapKit (3.4.0)
   - IQKeyboardManagerSwift (4.0.13)
@@ -16,7 +15,6 @@ PODS:
   - TransitionTreasury (4.0.0)
 
 DEPENDENCIES:
-  - AgoraRtcEngine_iOS
   - Alamofire (~> 4.5.0)
   - BaiduMapKit (~> 3.4.0)
   - IQKeyboardManagerSwift (~> 4.0.13)
@@ -29,7 +27,6 @@ DEPENDENCIES:
   - TransitionAnimation (~> 4.0.0)
 
 SPEC CHECKSUMS:
-  AgoraRtcEngine_iOS: 270ef12a883e1f068c3fa4a8f1b85308ab9819c1
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   BaiduMapKit: 0a5e5e0b1e3fd8dc5aceb40ab9b89e52e1d13df9
   IQKeyboardManagerSwift: fb399c4cddcd8d9bbcd2d0c7c81ed290b61c088e
@@ -43,6 +40,6 @@ SPEC CHECKSUMS:
   TransitionAnimation: c397b9ca41ab593b35b1e8f8673df17bae0db20a
   TransitionTreasury: dcf3fe6e5c740525d9e7d4544af45e6fbfd71c88
 
-PODFILE CHECKSUM: 6c99916c44a0c06456dbafd43dd290dbd48d038b
+PODFILE CHECKSUM: 5f2f7862764e910d21ff309ea7aaefad051e304d
 
 COCOAPODS: 1.3.1

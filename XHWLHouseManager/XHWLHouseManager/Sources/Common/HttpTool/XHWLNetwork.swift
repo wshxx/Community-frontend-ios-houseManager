@@ -433,6 +433,21 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
         superWithLoadData(parameters, .XHWL_SAVECARDLOG, .post)
     }
     
+    // 访客登记提交推送
+    func postRegisterJpushClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_REGISTERJPUSH, .post)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // MARK: - XHWLHttpToolDelegate
     func requestSuccess(_ requestKey:NSInteger, result request:Any) {
 //        [[FireflyShowViewManager sharedInstance]dismissWaitingView];

@@ -31,14 +31,16 @@ class JGProgressView: UIView {
         
         //边框
         let borderView:UIView  = UIView.init(frame: self.bounds)
-        borderView.backgroundColor = UIColor.clear
-        borderView.layer.borderColor = color_01f0ff.cgColor
+        borderView.backgroundColor = UIColor.white
+        borderView.layer.borderColor = UIColor().colorWithHexString(colorStr: "#999999").cgColor
+//        borderView.backgroundColor = UIColor.clear
+//        borderView.layer.borderColor = color_01f0ff.cgColor
         borderView.layer.borderWidth = KProgressBorderWidth
         self.addSubview(borderView)
         
         //进度
         tView = UIView()
-        tView.backgroundColor = color_01f0ff
+        tView.backgroundColor = UIColor().colorWithHexString(colorStr: "#00ff00") //color_01f0ff
         self.addSubview(tView)
     }
     

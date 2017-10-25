@@ -15,17 +15,15 @@ enum XHWLCheckListViewEnum : Int{
     case radio
 }
 
-class XHWLCheckListView: UIView, XHWLNetworkDelegate {
+class XHWLCheckListView: UIView {
 
     var bgImage:UIImageView!
     var bgScrollView:UIScrollView!
     var lineIV:UIImageView!
-    var submitBtn:UIButton!
     var dataAry:NSMutableArray!
     var labelViewArray:NSMutableArray!
     var subView:XHWLMoreListView!
     var isShowSUbView:Bool = true
-    var btnBlock:(NSInteger)->(Void) = { param in }
     
     var name:String! = ""
     var type:String! = ""
@@ -196,120 +194,6 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
         
         subView = XHWLMoreListView()
         bgScrollView.addSubview(subView)
-        
-        submitBtn = UIButton()
-        submitBtn.setTitle("提交", for: UIControlState.normal)
-        submitBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
-        submitBtn.titleLabel?.font = font_14
-        submitBtn.setBackgroundImage(UIImage(named:"menu_text_bg"), for: UIControlState.normal)
-        submitBtn.addTarget(self, action: #selector(submitClick), for: UIControlEvents.touchUpInside)
-        bgScrollView.addSubview(submitBtn)
-    }
-    
-    func submitClick() {
-        if !subView.isHidden {
-            self.btnBlock(2)
-        } else {
-            submit()
-        }
-    }
-    
-    func submit() {
-        
-        self.endEditing(true)
-        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-        let dict:NSDictionary = data.mj_JSONObject() as! NSDictionary
-        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: dict)
-        
-        if name.isEmpty {
-            "您的姓名为空".ext_debugPrintAndHint()
-            return
-        }
-        
-        if type.isEmpty {
-            "请选择访客类型".ext_debugPrintAndHint()
-            return
-        }
-        
-        if certificateType.compare("身份证").rawValue == 0 {
-        
-            if certificateNo.isEmpty {
-                "您的身份证为空".ext_debugPrintAndHint()
-                return
-            }
-            else if !Validation.cardNum(certificateNo).isRight {
-                "您输入的身份证不合法".ext_debugPrintAndHint()
-                return
-            }
-        }
-        
-        if certificateType.compare("护照").rawValue == 0 {
-            if certificateNo.isEmpty {
-                "您输入的护照不能为空".ext_debugPrintAndHint()
-                return
-            }
-        }
-        
-        print("\(name) \(telephone)")
-        
-        if telephone.isEmpty || !Validation.phoneNum(telephone).isRight {
-            "您输入的电话号码不合法".ext_debugPrintAndHint()
-            return
-        }
-        
-        if timeNo.isEmpty {
-            "您的时效为空".ext_debugPrintAndHint()
-            return
-        }
-
-        if !carNo.isEmpty && !Validation.carNo(carNo).isRight {
-            "您输入的车牌不合法".ext_debugPrintAndHint()
-            return
-        }
-        
-        if accessReason.isEmpty {
-            "您的事由为空".ext_debugPrintAndHint()
-            return
-        }
-        
-        if !subView.isHidden {
-            if subView.unit.isEmpty {
-                "请先选择房间单元为空".ext_debugPrintAndHint()
-                return
-            }
-            
-            if subView.roomNo.isEmpty {
-                "您的输入的房号为空".ext_debugPrintAndHint()
-                return
-            }
-        }
-        
-        let params = [
-            "token":userModel.wyAccount.token, // 	用户登录token
-            "name":name,//	访客姓名
-            "type":type, // 	访客类型
-            "certificateType":certificateType, // 	证件类型
-            "cetificateNo":certificateNo, // 	证件号
-            "telephone":telephone, //  	访客电话号码
-            "timeUnit":timeUnit, //  	访问时间单位（天/时/分等）
-            "timeNo":timeNo, //  	访问时间值
-            "carNo":carNo, //  	车牌号
-            "accessReason": accessReason, //	string	是	来访事由
-            "roomNo":self.subView.isHidden ? "":subView.unit+subView.roomNo, //	string	否	房间号（根据获取的业主所拥有的单元选择，房间号手动输入）
-            "yzId":self.subView.isHidden ? "":subView.yzId //	string	否	业主id
-        ]
-        
-        XHWLNetwork.shared.postVisitRegisterClick(params as NSDictionary, self)
-    }
-    
-    func requestSuccess(_ requestKey: NSInteger, _ response: [String : AnyObject]) {
-        
-        "提交成功".ext_debugPrintAndHint()
-        self.btnBlock(1)
-    }
-    
-    func requestFail(_ requestKey: NSInteger, _ error: NSError) {
-        
     }
     
     override func layoutSubviews() {
@@ -321,7 +205,7 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
         
         for i in 0...labelViewArray.count-1 {
             let labelView :UIView = labelViewArray[i] as! UIView
-            labelView.bounds = CGRect(x:0, y:0, width:258, height:20)
+            labelView.bounds = CGRect(x:0, y:0, width:258, height:30)
             labelView.center = CGPoint(x:self.frame.size.width/2.0, y:40+CGFloat(i*40))
         }
         let lastView:UIView = labelViewArray.lastObject as! UIView
@@ -335,7 +219,6 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
             subView.frame = CGRect(x:0, y:lastView.frame.maxY, width:self.bounds.size.width, height:0)
         }
         
-        submitBtn.frame = CGRect(x:(self.bounds.size.width-150)/2.0, y:topHeight+50, width:150, height:30)
-        bgScrollView.contentSize = CGSize(width:0, height: submitBtn.frame.maxY+50)
+        bgScrollView.contentSize = CGSize(width:0, height: subView.frame.maxY+50)
     }
 }

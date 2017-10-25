@@ -50,7 +50,7 @@ class BYPopAnimation_02: NSObject, UIViewControllerAnimatedTransitioning{
         
         if ((toVC.tabBarController != nil) && toVC == toVC.navigationController?.viewControllers.first)
         {
-            toVC.tabBarController?.tabBar.isHidden = true
+//            toVC.tabBarController?.tabBar.isHidden = true
             self.tabbarFlag = true
         }
         

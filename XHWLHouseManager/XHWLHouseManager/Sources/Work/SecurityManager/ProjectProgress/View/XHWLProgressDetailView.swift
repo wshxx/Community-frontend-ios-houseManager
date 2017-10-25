@@ -8,8 +8,8 @@
 
 import UIKit
 
-class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSource {
-    
+class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSource , XHWLPatrolHeadViewDelegate {
+
     var bgImage:UIImageView!
     var tableView:UITableView!
     var dataAry:NSMutableArray! = NSMutableArray()
@@ -53,7 +53,7 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
         progressView = XHWLProgressView()
         self.addSubview(progressView)
         
-        tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
+        tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.grouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.clear
@@ -63,25 +63,105 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
         self.addSubview(tableView)
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+//        return dataAry.count
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
-        return dataAry.count
+//        let realModel:XHWLListModel = (dataAry[section] as? XHWLListModel)!
+        if self.realModel != nil && self.realModel.isFlod == true {
+//            return dataAry.count
+            return 5
+        }
+        
+        return 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = XHWLProgressDetailCell.cellWithTableView(tableView: tableView)
-//        cell.textLabel?.text = dataAry[indexPath.row] as? String
-        print("\(dataAry[indexPath.row])")
-        let realModel:XHWLListModel = (dataAry[indexPath.row] as? XHWLListModel)!
-        cell.isTop = indexPath.row == 0
-        cell.isBottom = indexPath.row == dataAry.count - 1
-        cell.setRealModel(realModel)
+        if indexPath.row == 4 {
+            let cell = XHWLMapKitSubViewCell.cellWithTableView(tableView: tableView)
+            //        cell.textLabel?.text = dataAry[indexPath.row] as? String
+            //        print("\(dataAry[indexPath.row])")
+            //        let realModel:XHWLListModel = (dataAry[indexPath.row] as? XHWLListModel)!
+            //        cell.isTop = indexPath.row == 0
+            //        cell.isBottom = indexPath.row == dataAry.count - 1
+            //        cell.setRealModel(realModel)
+
+            return cell
+        } else {
+            let cell = XHWLProgressDetailCell.cellWithTableView(tableView: tableView)
+            //        cell.textLabel?.text = dataAry[indexPath.row] as? String
+//            print("\(dataAry[indexPath.row])")
+//            let realModel:XHWLListModel = (dataAry[indexPath.row] as? XHWLListModel)!
+//            cell.isTop = indexPath.row == 0
+//            cell.isBottom = indexPath.row == dataAry.count - 1
+//            cell.setRealModel(realModel)
+            
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = UIColor.clear
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let head = XHWLPatrolHeadView.init(reuseIdentifier:"XHWLPatrolHeadView")
+//        let realModel:XHWLListModel = (dataAry[section] as? XHWLListModel)!
+        head.delegate = self
+//        head.cellModel = realModel
+        head.cellModel = realModel
+
+        return head
+    }
+    
+    func headViewClicked(_ cellModel: XHWLRealProgressModel, _ headView: XHWLPatrolHeadView) {
+//        headView.isUserInteractionEnabled = false
         
-        return cell
+//        var indexPaths = [IndexPath]()
+        print("\(cellModel.isFlod)")
+        
+        self.realModel.isFlod = cellModel.isFlod
+//        cellModel.isFlod = !cellModel.isFlod
+        
+        
+        self.tableView.reloadData()
+        
+//        let indexSection = IndexPath.init(row: 0, section: 0)
+//        self.tableView.scrollToRow(at: indexSection as IndexPath, at: UITableViewScrollPosition.middle, animated:true)
+//        for i in 0..<chapterModel.questions.count {
+//            let indexPath = IndexPath.init(row: i , section: chapterModel.chapterId - 1)
+//            indexPaths.append(indexPath as IndexPath)
+//        }
+        
+//        let time = DispatchTime.now() + TableViewConfig.dispatchAfterTime
+//        DispatchQueue.main.asyncAfter(deadline: time) {
+//            if ChapterFoldingSectionState.ChapterSectionStateFlod == chapterModel.foldingState {
+//                self.tableView.deleteRows(at: indexPaths as [IndexPath], with: UITableViewRowAnimation.top)
+//
+//            } else {
+//                self.tableView.insertRows(at: indexPaths as [IndexPath], with: UITableViewRowAnimation.top)
+//                let indexSection = IndexPath.init(row: 0, section: chapterModel.chapterId - 1)
+//
+//                self.tableView.scrollToRow(at: indexSection as IndexPath, at: UITableViewScrollPosition.middle, animated:true)
+//
+//            }
+//            headView.isUserInteractionEnabled = true
+//
+//        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        if indexPath.row == 4 {
+            return 50*5
+        }
+        return 50
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

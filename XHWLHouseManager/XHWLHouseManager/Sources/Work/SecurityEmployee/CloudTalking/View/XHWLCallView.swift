@@ -26,11 +26,18 @@ class XHWLCallView: UIView , XHWLCallBottomViewDelegate {
         willSet {
             self.bottomView.receiveType = newValue
             if newValue == .offline {
+                self.callNameL.isHidden = true
+                self.showTipL.isHidden = true
                 self.callNameL.text = ""
                 self.showTipL.text = ""
             } else if newValue == .receive {
-                self.callNameL.text = self.roomName
-                self.showTipL.text = "00:00"
+                self.callNameL.isHidden = true
+                self.showTipL.isHidden = true
+//                self.callNameL.text = self.roomName
+//                self.showTipL.text = "00:00"
+            } else {
+                self.callNameL.isHidden = false
+                self.showTipL.isHidden = false
             }
         }
     }
@@ -80,7 +87,7 @@ class XHWLCallView: UIView , XHWLCallBottomViewDelegate {
     }()
     
     lazy fileprivate var bottomView:XHWLCallBottomView = {
-        let view:XHWLCallBottomView = XHWLCallBottomView(frame:CGRect.zero)
+        let view:XHWLCallBottomView = XHWLCallBottomView(frame:CGRect(x:10, y:self.bounds.height-100, width:self.bounds.size.width-20, height:93))
         view.delegate = self
         self.bringSubview(toFront: view)
         self.addSubview(view)
@@ -104,6 +111,10 @@ class XHWLCallView: UIView , XHWLCallBottomViewDelegate {
         
         self.backgroundColor = UIColor.clear
         
+        setupView()
+    }
+    
+    func setupView() {
         self.remoteContainerView.frame = self.bounds
         self.localContainerView.frame = CGRect(x:self.bounds.size.width-100, y:64, width:80, height:150)
         self.callNameL.bounds = CGRect(x:0, y:0, width:self.bounds.size.width-20, height:30)

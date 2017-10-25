@@ -27,6 +27,7 @@ class XHWLButton: UIButton {
         titleL = UILabel()
         titleL.textColor = UIColor.white
         titleL.font = font_14
+        titleL.numberOfLines = 0
         titleL.textColor = color_09fbfe
         titleL.textAlignment = .center
         self.addSubview(titleL)

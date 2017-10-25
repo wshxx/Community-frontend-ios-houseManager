@@ -61,6 +61,8 @@ class XHWLRegistrationView: UIView  , UITableViewDelegate, UITableViewDataSource
         let cell: XHWLRegistrationCell = XHWLRegistrationCell.cellWithTableView(tableView: tableView)
         let model:XHWLVisitLogModel = dataAry[indexPath.row] as! XHWLVisitLogModel
         
+        
+       // Visitor_agree
         cell.visitorLogModel = model
         
         return cell;

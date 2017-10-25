@@ -212,18 +212,10 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
     func onSafeGuardLeader(_ index:NSInteger) {
         switch index {
         case 0: // "异常放行"
-//            let vc:XHWLAbnormalPassVC = XHWLAbnormalPassVC()
-//            self.navigationController?.pushViewController(vc, animated: true)
-            
-            // 视频
-            let vc = XHWLMcuShowVC()
+            let vc:XHWLAbnormalPassVC = XHWLAbnormalPassVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
         case 1: // "安防事件",
-//            UserDefaults.standard.set(0, forKey: "safeProtectAlert")
-//            UserDefaults.standard.synchronize()
-//            JPUSHService.setBadge(0) // JPush服务器
-            
             let vc:XHWLSafeProtectionVC = XHWLSafeProtectionVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
@@ -233,7 +225,8 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
             self.navigationController?.pushViewController(vc, animated: true)
             break
         case 3:// "巡更定位",
-            let vc:XHWLMapKitVC = XHWLMapKitVC()
+            let vc:XHWLPatrolVC = XHWLPatrolVC()
+//            let vc:XHWLMapKitVC = XHWLMapKitVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
         case 4: // "巡更进度",

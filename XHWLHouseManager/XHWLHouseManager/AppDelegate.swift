@@ -268,22 +268,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
             let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
 //            if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
             
+            
                 print("\(userInfo["key"])")
                 let extras:NSDictionary = userInfo.value(forKey: "extras") as! NSDictionary
+            
+//            content = "{\"message\":\"\U6765\U81ea\U4e1a\U4e3b\U5e94\U7b54\U64cd\U4f5c\",\"type\":\"yzApply\",\"yzOperator\":\"refuse\"}";
+//            extras =     {
+//                from = JPush;
+//            };
+            let userInfoAry:NSArray = userInfo.allKeys as NSArray
+            if userInfoAry.contains("content") {
+                let content:NSDictionary = getDictionaryFromJSONString(userInfo.value(forKey: "content") as! String)
+                
+                if (content["yzOperator"] as! String) == "refuse" { // 拒绝
+                    
+                }
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Talking"), object: (content["yzOperator"] as! String), userInfo: nil)
+            }
+            let ary:NSArray = extras.allKeys as NSArray
+            
+            if ary.contains("key") {
                 let keyStr:String = extras["key"] as! String
                 //                let keyDict:NSDictionary = self.getDictionaryFromJSONString(keyStr)
                 if keyStr == "complaint" { // 安防事件 后台时要给提示
                     
-//                    let index:NSInteger =  Int(UserDefaults.standard.integer(forKey: "safeProtectAlert")) + 1
-//
-//                    UserDefaults.standard.set(index, forKey: "safeProtectAlert")
-//                    UserDefaults.standard.synchronize()
-//
-//                    UIApplication.shared.applicationIconBadgeNumber = index
+                    //                    let index:NSInteger =  Int(UserDefaults.standard.integer(forKey: "safeProtectAlert")) + 1
+                    //
+                    //                    UserDefaults.standard.set(index, forKey: "safeProtectAlert")
+                    //                    UserDefaults.standard.synchronize()
+                    //
+                    //                    UIApplication.shared.applicationIconBadgeNumber = index
                     
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
                     
                 }
+            }
+            
+            
 //            }
         }
     }
@@ -530,6 +551,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
             UserDefaults.standard.synchronize()
             
             JPUSHService.cleanTags({ (iResCode, iAlias, seq) in
+                
+            }, seq: 0)
+            JPUSHService.deleteAlias({ (iResCode, iAlias, seq) in
                 
             }, seq: 0)
             

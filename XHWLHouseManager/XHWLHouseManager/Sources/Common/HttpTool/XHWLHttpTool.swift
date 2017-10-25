@@ -185,7 +185,8 @@ class XHWLHttpTool: NSObject {
                         self.requestKey != .XHWL_MODIFYUSER &&
                         self.requestKey != .XHWL_HANDLEEXCEPTIONPASS &&
                         self.requestKey != .XHWL_SAVECARDLOG &&
-                        self.requestKey != .XHWL_DELETECARDLOG
+                        self.requestKey != .XHWL_DELETECARDLOG &&
+                        self.requestKey != .XHWL_REGISTERJPUSH
                     {
                         if (value as! [String : AnyObject])["result"] is String {
                             if !((value as! [String : AnyObject])["message"] is NSNull) {

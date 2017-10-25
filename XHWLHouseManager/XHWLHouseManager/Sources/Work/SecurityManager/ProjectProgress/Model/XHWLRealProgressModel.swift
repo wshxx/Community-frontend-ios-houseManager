@@ -15,6 +15,7 @@ class XHWLRealProgressModel: NSObject {
     var planChecksList:NSArray = NSArray()
     var userId:String = ""
     var progress:String = ""
+    var isFlod:Bool = false
     
     func mj_objectClassInArray() -> [AnyHashable : Any]! {
         return ["planChecksList":XHWLListModel.self] // [JZMJewelryCategoryModel class]
@@ -37,6 +38,7 @@ class XHWLListModel:NSObject {
     var nodeName:String = ""
     var startTime:String = ""
     var userId:String = ""
+    var isFlod:Bool = false
 
     override func setValue(_ value: Any?, forKey key: String) {
         super.setValue(value, forKey: key)
