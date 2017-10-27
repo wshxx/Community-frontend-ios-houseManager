@@ -26,6 +26,51 @@ class XHWLMapKitSubViewCell: UITableViewCell {
         
         return cell as! XHWLMapKitSubViewCell
     }
+    var lineModel:XHWLPatrolLineModel! {
+        willSet {
+            if lineModel != nil {
+  
+                var weekStr:String = ""
+                if Bool(newValue.mon) == true {
+                    weekStr = weekStr + "、星期一"
+                }
+                if Bool(newValue.tue) == true {
+                    weekStr = weekStr + "、星期二"
+                }
+                if Bool(newValue.wed) == true {
+                    
+                    weekStr = weekStr + "、星期三"
+                }
+                if Bool(newValue.thu) == true {
+                    weekStr = weekStr + "、星期四"
+                }
+                if Bool(newValue.fri) == true {
+                    weekStr = weekStr + "、星期五"
+                }
+                if Bool(newValue.sat) == true {
+                    weekStr = weekStr + "、星期六"
+                }
+                if Bool(newValue.sun) == true {
+                    weekStr = weekStr + "、星期日"
+                }
+                weekStr = weekStr.substring(from: String.Index(1))
+                
+                let array :NSArray = [["name":"巡检点：", "content":"1.10号楼一单元 2.10号楼一单元天台 3.9号楼一单元大堂"],
+                                      ["name":"巡检日期：", "content":newValue.startDate + "～" + newValue.endDate],
+                                      ["name":"周期：", "content":weekStr],]
+                
+                dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
+                
+                for i in 0..<dataAry.count {
+                    let menuModel :XHWLMenuModel = dataAry[i] as! XHWLMenuModel
+                    let labelView: XHWLPatroLabelView = labelViewArray[i] as! XHWLPatroLabelView
+                    labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
+                }
+                
+                stateView.planAry = newValue.planTime
+            }
+        }
+    }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -46,7 +91,6 @@ class XHWLMapKitSubViewCell: UITableViewCell {
         bgImage = UIImageView()
         bgImage.image = UIImage(named:"Patrol_sub_bg")
         self.contentView.addSubview(bgImage)
-        
 
         dataAry = NSMutableArray()
         let array :NSArray = [["name":"巡检点：", "content":"1.10号楼一单元 2.10号楼一单元天台 3.9号楼一单元大堂"],

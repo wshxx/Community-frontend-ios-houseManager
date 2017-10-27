@@ -49,12 +49,16 @@ class XHWLMcuListVC: XHWLBaseVC, UITableViewDelegate, UITableViewDataSource, UIA
 
         let isLogin:Bool = UserDefaults.standard.bool(forKey: "isLogin")
         if isLogin == true {
+            if selectAry.count <= 0 {
+                "请先选择要展示的视频".ext_debugPrintAndHint()
+                return
+            }
+            
             if self.isBackData == true {
                 self.backBlock(selectAry, self.isSingleSelect)
                 self.navigationController?.popViewController(animated: true)
             } else {
                 let vc = XHWLMcuShowVC() // selectAry
-                //                vc.cameraSyscode = node.sysCode
                 vc.selectAry = selectAry
                 self.navigationController?.pushViewController(vc, animated: true)
             }
@@ -206,6 +210,8 @@ class XHWLMcuListVC: XHWLBaseVC, UITableViewDelegate, UITableViewDataSource, UIA
                     node.isSelected = true
                     self.resourceArray.replaceObject(at: indexPath.row, with: node)
                     selectAry.add(node)
+                } else {
+                    "一次最多只能展示两个视频".ext_debugPrintAndHint()
                 }
             }
             self.tableView.reloadData()

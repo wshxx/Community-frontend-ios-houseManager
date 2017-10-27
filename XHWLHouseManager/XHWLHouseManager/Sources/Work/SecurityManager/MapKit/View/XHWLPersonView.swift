@@ -15,6 +15,22 @@ class XHWLPersonView: UIView {
     var lineL:UILabel!
     var timeBtn:UIButton!
     var arrowIV:UIImageView!
+    var dropBoxView:XHWLGroupBoxListView!
+    var selectBlock:(String)->() = { param in }
+    var personAry:NSArray = NSArray() {
+        willSet {
+            
+//            let array:NSMutableArray = NSMutableArray()
+//            for i in 0..<dealArray.count {
+//                let model:XHWLMapKitModel = dealArray[i] as! XHWLMapKitModel
+//
+//                let coor:CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(model.latitude)!, Double(model.longitude)!)
+//                stickAnnotation(coor, model)
+//                array.add(model.nickname)
+//            }
+            self.dropBoxView.items = newValue
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,10 +74,8 @@ class XHWLPersonView: UIView {
         //        let window:UIWindow = UIApplication.shared.keyWindow!
         vc.view.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
         
-        let defaultTitle = "1号岗"
-        let choices = ["第一个", "第二个", "第三个", "第四个"]
         let rect = CGRect(x:lineL.frame.maxX+5, y:2, width:self.bounds.size.width-lineL.frame.maxX-10, height:self.bounds.size.height-4)
-        let dropBoxView = XHWLGroupBoxListView(parentVC: vc, title: defaultTitle, items: choices, frame: rect)
+        dropBoxView = XHWLGroupBoxListView(parentVC: vc, title: "请选择", items: [], frame: rect)
         dropBoxView.isHightWhenShowList = true
         dropBoxView.willShowOrHideBoxListHandler = { (isShow) in
             if isShow { NSLog("will show choices") }
@@ -71,34 +85,37 @@ class XHWLPersonView: UIView {
             if isShow { NSLog("did show choices") }
             else { NSLog("did hide choices") }
         }
-        dropBoxView.didSelectBoxItemHandler = { (row) in
-            NSLog("selected No.\(row): \(dropBoxView.currentTitle())")
+        dropBoxView.didSelectBoxItemHandler = { [weak self] (row) in
+            
+            let mapkitModel:XHWLMapKitModel = self!.personAry[row] as! XHWLMapKitModel
+            NSLog("selected No.\(row): \(self?.dropBoxView.currentTitle())")
+            self?.selectBlock(mapkitModel.userId)
         }
         self.addSubview(dropBoxView)
     }
     
-    func onListClick() {
-        
-        let vc:UIViewController = AppDelegate.shared().getCurrentVC()
-//        let window:UIWindow = UIApplication.shared.keyWindow!
-        vc.view.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-        
-        let defaultTitle = "这是一个下拉框，请选择"
-        let choices = ["第一个选项", "第二个选项", "第三个选项", "第四个选项"]
-        let rect = CGRect(x: 50, y: 100, width: Screen_width - 100, height: 50)
-        let dropBoxView = XHWLGroupBoxListView(parentVC: vc, title: defaultTitle, items: choices, frame: rect)
-        dropBoxView.isHightWhenShowList = true
-        dropBoxView.willShowOrHideBoxListHandler = { (isShow) in
-            if isShow { NSLog("will show choices") }
-            else { NSLog("will hide choices") }
-        }
-        dropBoxView.didShowOrHideBoxListHandler = { (isShow) in
-            if isShow { NSLog("did show choices") }
-            else { NSLog("did hide choices") }
-        }
-        dropBoxView.didSelectBoxItemHandler = { (row) in
-            NSLog("selected No.\(row): \(dropBoxView.currentTitle())")
-        }
-        vc.view.addSubview(dropBoxView)
-    }
+//    func onListClick() {
+//
+//        let vc:UIViewController = AppDelegate.shared().getCurrentVC()
+////        let window:UIWindow = UIApplication.shared.keyWindow!
+//        vc.view.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+//
+//        let defaultTitle = "这是一个下拉框，请选择"
+//        let choices = ["第一个选项", "第二个选项", "第三个选项", "第四个选项"]
+//        let rect = CGRect(x: 50, y: 100, width: Screen_width - 100, height: 50)
+//        let dropBoxView = XHWLGroupBoxListView(parentVC: vc, title: defaultTitle, items: choices, frame: rect)
+//        dropBoxView.isHightWhenShowList = true
+//        dropBoxView.willShowOrHideBoxListHandler = { (isShow) in
+//            if isShow { NSLog("will show choices") }
+//            else { NSLog("will hide choices") }
+//        }
+//        dropBoxView.didShowOrHideBoxListHandler = { (isShow) in
+//            if isShow { NSLog("did show choices") }
+//            else { NSLog("did hide choices") }
+//        }
+//        dropBoxView.didSelectBoxItemHandler = { (row) in
+//            NSLog("selected No.\(row): \(dropBoxView.currentTitle())")
+//        }
+//        vc.view.addSubview(dropBoxView)
+//    }
 }

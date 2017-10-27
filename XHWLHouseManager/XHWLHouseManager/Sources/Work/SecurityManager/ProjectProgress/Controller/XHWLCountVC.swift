@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XHWLCountVC: UIViewController , XHWLNetworkDelegate{
+class XHWLCountVC: UIViewController , XHWLNetworkDelegate {
     
     var bgImg:UIImageView!
     var topMenu:XHWLTopView!
@@ -22,33 +22,41 @@ class XHWLCountVC: UIViewController , XHWLNetworkDelegate{
         self.view.backgroundColor = UIColor.white
         setupView()
         setupNav()
-        onLoadData()
+//        onLoadData()
     }
+    
+//    var dataAry:NSArray = NSArray() {
+//        willSet {
+//            //    dataAry = XHWLRealProgressModel.mj_objectArray(withKeyValuesArray:response["result"]!["progressList"] as! NSArray)
+//            warningView.dataAry = NSMutableArray()
+//            warningView.dataAry.addObjects(from: newValue as! [Any])
+//            warningView.tableView.reloadData()
+//        }
+//    }
     
     func onLoadData() {
-        
+
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-        
+
         XHWLNetwork.shared.getRealProgressClick([userModel.wyAccount.token] as NSArray, self)
     }
-    
+
     // MARK: - XHWLNetworkDelegate
-    
+
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
-        
+
         if requestKey == XHWLRequestKeyID.XHWL_REALPROGRESS.rawValue {
-            
+
             dataAry = XHWLRealProgressModel.mj_objectArray(withKeyValuesArray:response["result"]!["progressList"] as! NSArray)
             warningView.dataAry = NSMutableArray()
             warningView.dataAry.addObjects(from: dataAry as! [Any])
             warningView.tableView.reloadData()
         }
-        
     }
-    
+
     func requestFail(_ requestKey:NSInteger, _ error:NSError) {
-        
+
     }
     
     func setupNav() {
@@ -73,7 +81,8 @@ class XHWLCountVC: UIViewController , XHWLNetworkDelegate{
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.dismissBlock = {[weak self] index in
             let vc:XHWLProgressDetailVC = XHWLProgressDetailVC()
-            vc.realModel = self?.dataAry[index] as! XHWLRealProgressModel
+            let model:XHWLRealProgressModel = self?.dataAry[index] as! XHWLRealProgressModel
+            vc.userId = model.userId
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         self.view.addSubview(warningView)

@@ -59,7 +59,7 @@
 #import "CYButton.h"
 
 #import <tingyunApp/NBSAppAgent.h>
-
+#import "WSDatePickerView.h"
 #import "THDatePickerView.h"
 
 #endif /* XHWLHouseManager_Bridging_Header_h */

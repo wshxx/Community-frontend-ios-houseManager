@@ -33,6 +33,22 @@ class XHWLPatrolStateView: UIView {
         self.addSubview(lineView)
     }
     
+    var planAry:NSArray! {
+        willSet {
+            if planAry != nil {
+                
+//                for i in 0..< newValue.count {
+//                    let model:XHWLPatrolPlanTimeModel = newValue[i] as! XHWLPatrolPlanTimeModel
+////                     model.startTime+"-"+model.endTime
+////                    var count:String = ""
+////                    var progress:String = ""
+//                }
+            
+//                lineView
+            }
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         

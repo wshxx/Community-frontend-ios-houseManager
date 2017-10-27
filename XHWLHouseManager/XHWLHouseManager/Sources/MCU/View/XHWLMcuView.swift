@@ -74,15 +74,7 @@ class XHWLMcuView: UIView, RealPlayManagerDelegate, PlayViewDelegate {
         self.addSubview(jumpBtn)
         return jumpBtn
     }()
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        deleteBtn.frame = CGRect(x:self.bounds.size.width-70, y:0, width:25, height:24)
-        switchBtn.frame = CGRect(x:self.bounds.size.width-35, y:0, width:25, height:24)
-        voiceBtn.frame = CGRect(x:10, y:self.bounds.size.height-30, width:25, height:24)
-    }
-    
+
     func onSwitchAV() {
         self.delegate?.mcuViewWithSwitchAV!(self)
     }
@@ -168,9 +160,9 @@ class XHWLMcuView: UIView, RealPlayManagerDelegate, PlayViewDelegate {
         g_playView?.addSubview(g_activity!)
         
         g_refreshButton = UIButton()
-        g_refreshButton?.backgroundColor = UIColor.white
+        g_refreshButton?.backgroundColor = UIColor.clear
         g_refreshButton?.setTitle("刷新", for: UIControlState.normal)
-        g_refreshButton?.setTitleColor(UIColor.black, for: UIControlState.normal)
+        g_refreshButton?.setTitleColor(UIColor.white, for: UIControlState.normal)
         g_refreshButton?.addTarget(self, action: #selector(refreshRealPlay), for: UIControlEvents.touchUpInside)
         g_refreshButton?.isHidden = true
         g_playView?.addSubview(g_refreshButton!)
@@ -185,6 +177,27 @@ class XHWLMcuView: UIView, RealPlayManagerDelegate, PlayViewDelegate {
             make.size.equalTo(g_activity!)
             make.center.equalTo(g_playView!)
         }
+    }
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        g_playView?.frame = self.bounds
+        
+        g_activity?.snp.makeConstraints { (make) -> Void in
+            make.size.equalTo(CGSize(width:50, height:50))
+            make.center.equalTo(g_playView!)
+        }
+        
+        g_refreshButton?.snp.makeConstraints { (make) -> Void in
+            make.size.equalTo(g_activity!)
+            make.center.equalTo(g_playView!)
+        }
+        
+        deleteBtn.frame = CGRect(x:self.bounds.size.width-70, y:0, width:25, height:24)
+        switchBtn.frame = CGRect(x:self.bounds.size.width-35, y:0, width:25, height:24)
+        voiceBtn.frame = CGRect(x:10, y:self.bounds.size.height-30, width:25, height:24)
     }
     
     

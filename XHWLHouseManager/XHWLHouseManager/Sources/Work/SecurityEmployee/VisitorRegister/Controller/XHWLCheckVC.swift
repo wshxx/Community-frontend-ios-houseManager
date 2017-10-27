@@ -144,7 +144,9 @@ class XHWLCheckVC: XHWLBaseVC , XHWLNetworkDelegate {
                 "accessReason": warningView.accessReason, //    string    是    来访事由
                 "roomNo":self.warningView.subView.isHidden ? "":warningView.subView.roomNo, //+warningView.subView.roomNo, //    string    否    房间号（根据获取的业主所拥有的单元选择，房间号手动输入）
                 "yzId":self.warningView.subView.isHidden ? "":warningView.subView.yzId, //    string    否    业主id
-                "isYZAgree":isYZAgree
+                "isYZAgree":isYZAgree,
+                "effectiveTimes":"1",    //    是    有效次数
+                "accessWay":"1"
             ])
             registerJpush()
         } else {
@@ -183,7 +185,9 @@ class XHWLCheckVC: XHWLBaseVC , XHWLNetworkDelegate {
             "accessReason": warningView.accessReason, //    string    是    来访事由
             "roomNo":self.warningView.subView.isHidden ? "":warningView.subView.roomNo, //+warningView.subView.roomNo, //    string    否    房间号（根据获取的业主所拥有的单元选择，房间号手动输入）
             "yzId":self.warningView.subView.isHidden ? "":warningView.subView.yzId, //    string    否    业主id
-            "isYZAgree":isYZAgree
+            "isYZAgree":isYZAgree,
+            "effectiveTimes":"1",    //    是    有效次数
+            "accessWay":"1"
         ]
         
 //        nextParams = params

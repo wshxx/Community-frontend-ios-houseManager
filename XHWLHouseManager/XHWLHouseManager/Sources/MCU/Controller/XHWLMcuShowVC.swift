@@ -10,7 +10,7 @@ import UIKit
 
 let comTag:NSInteger = 100
 
-class XHWLMcuShowVC: XHWLBaseVC, XHWLPlayerViewDelegate{
+class XHWLMcuShowVC: XHWLBaseVC, XHWLPlayerViewDelegate, XHWLNetworkDelegate{
 
     var bgImage:UIImageView!
     lazy fileprivate var playerView:XHWLPlayerView! = {
@@ -50,14 +50,17 @@ class XHWLMcuShowVC: XHWLBaseVC, XHWLPlayerViewDelegate{
     var selectAry:NSArray! {
         willSet {
             if newValue != nil {
-                if newValue.count > 0 {
-                    for i in 0..<newValue.count {
-                        print("\(newValue)")
-                        let node:XHWLMcuModel = newValue[i] as! XHWLMcuModel
-                        let mcuView:XHWLMcuView = self.playerView.viewWithTag(comTag+i) as! XHWLMcuView
-                        mcuView.realPlay(cameraSyscode: node.sysCode)
-                    }
-                }
+                
+                self.playerView.selectAry = newValue
+//                if newValue.count > 0 {
+//                    for i in 0..<newValue.count {
+//                        print("\(newValue)")
+//
+////                        let node:XHWLMcuModel = newValue[i] as! XHWLMcuModel
+////                        let mcuView:XHWLMcuView = self.playerView.viewWithTag(comTag+i) as! XHWLMcuView
+////                        mcuView.realPlay(cameraSyscode: node.sysCode)
+//                    }
+//                }
             }
         }
     }
@@ -93,9 +96,51 @@ class XHWLMcuShowVC: XHWLBaseVC, XHWLPlayerViewDelegate{
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    
+    func onUpladPicture(_ image:UIImage) {
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        let imageData:Data = UIImageJPEGRepresentation(image, 0.5)! // UIImagePNGRepresentation(imageArray[i] as! UIImage)! //
+        if UserDefaults.standard.object(forKey: "project") != nil {
+            let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+            let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectData.mj_JSONObject())
+           
+            let param:NSDictionary = ["token":userModel.wyAccount.token,
+                                 "projectId":projectModel.id]
+            XHWLNetwork.shared.uploadVideoImageClick(param, [imageData], ["image_\(String(Date.getCurrentStamp())).png"], self)
+        }
+    }
+    
+    // MARK: - XHWLNetworkDelegate
+    
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        if requestKey == XHWLRequestKeyID.XHWL_VIDEOUPLOAD.rawValue {
+//            if response["result"] is NSNull {
+//                return
+//            }
+//            let dict:NSDictionary = response["result"] as! NSDictionary
+//            //            let userProgressArray:NSArray = XHWLPatrolDetailModel.mj_objectArray(withKeyValuesArray:dict["userProgress"] as! NSArray)
+//            //            self.dataAry = NSMutableArray()
+//            realModel = XHWLPatrolDetailModel.mj_object(withKeyValues: dict["userProgress"] )
+//            //            self.dataAry.addObjects(from: userProgressArray as! [Any])
+//            self.tableView.reloadData()
+        }
+    }
+    
+    func requestFail(_ requestKey: NSInteger, _ error: NSError) {
+        
+    }
+    
     //        #warning 录像和截图操作不能同时进行
     func onCaptureClick() {
 //        playerView.selectMcuView
+        if playerView.selectMcuView == nil {
+            "请先选择要截屏的视频".ext_debugPrintAndHint()
+            return
+        }
         
         //如果此时暂停状态，不允许截图
         if (playerView.selectMcuView.g_playView?.isPausing)! {
@@ -124,8 +169,9 @@ class XHWLMcuShowVC: XHWLBaseVC, XHWLPlayerViewDelegate{
         
         let savedImg = UIImage.init(contentsOfFile: captureInfo.strCapturePath)
 
+        self.onUpladPicture(savedImg!)
         //        g_audioBtn.setBackgroundImage(savedImg, for: .normal)
-        UIImageWriteToSavedPhotosAlbum(savedImg!, nil, nil, nil)
+//        UIImageWriteToSavedPhotosAlbum(savedImg!, nil, nil, nil)
         //        self.backClosure!(savedImg!)
         
         

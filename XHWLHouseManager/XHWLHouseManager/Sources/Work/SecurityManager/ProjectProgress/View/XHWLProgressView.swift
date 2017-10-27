@@ -38,6 +38,24 @@ class XHWLProgressView: UIView {
         }
     }
     
+    func show(name:String, progress:String) {
+        titleL.text = name
+        timeL.text = progress
+        
+        let ary:NSArray = progress.components(separatedBy: "/") as NSArray
+        if Int(ary[0] as! String) == 0 {
+            progressView.progress = 0.0
+        } else {
+            if Int(ary[0] as! String)! < Int(ary[1] as! String)! {
+                
+                progressView.progress =  CGFloat(Float(Int(ary[0] as! String)!) / Float(Int(ary[1] as! String)!))
+            } else {
+                
+                progressView.progress = 1.0
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

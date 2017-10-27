@@ -440,9 +440,40 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
         superWithLoadData(parameters, .XHWL_REGISTERJPUSH, .post)
     }
     
+    // 巡更—在线定位—轨迹回放
+    func getSearchPinClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_SEARCHPIN, .get)
+    }
     
+    // 巡更—在线定位—点击位置查看详情
+    func getPatrolDetailClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_PATROLDETAIL, .get)
+    }
     
+     // 上传云瞳抓拍图片
+    func uploadVideoImageClick(_ parameters:NSDictionary, _ data:[Data], _ name:[String], _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithUploadImage(parameters, .XHWL_VIDEOUPLOAD, data, name)
+    }
     
+    // 获取云瞳抓拍图片
+    func getVideoImgListClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_VIDEOIMGLIST, .get)
+    }
+    
+    //删除抓拍图片
+    func postDeleteVideoImgClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_DELETEVIDEOIMG, .post)
+    }
     
     
     

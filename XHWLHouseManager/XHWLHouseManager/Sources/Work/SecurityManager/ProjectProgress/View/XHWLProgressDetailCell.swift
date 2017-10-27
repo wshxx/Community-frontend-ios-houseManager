@@ -17,19 +17,35 @@ class XHWLProgressDetailCell: UITableViewCell {
 //    var bottomLineIV:UIImageView!
     var bgImage:UIImageView!
     var waringModel:XHWLWarningModel!
-    
-    func setRealModel(_ realModel:XHWLListModel) {
-        titleL.text = realModel.nodeName
-        timeL.text = "\(realModel.arriveTime)"
-        
-        if realModel.arriveType == "-1" {
-            
-            iconIV.image = UIImage(named: "dot_gray")
-        } else if realModel.arriveType == "0" {
-            
-            iconIV.image = UIImage(named: "dot_green")
+    var cellModel:XHWLPatrolTotalCheckModel! {
+        willSet {
+            if newValue != nil {
+                titleL.text = newValue.nodeName
+                timeL.text = "\(newValue.arriveTime)"
+                
+                if newValue.arriveType == "0" {
+                    
+                    iconIV.image = UIImage(named: "dot_green")
+                } else if newValue.arriveType == "-1" {
+                    
+                    iconIV.image = UIImage(named: "dot_gray")
+                }
+            }
         }
     }
+    
+//    func setRealModel(_ realModel:XHWLListModel) {
+//        titleL.text = realModel.nodeName
+//        timeL.text = "\(realModel.arriveTime)"
+//
+//        if realModel.arriveType == "-1" {
+//
+//            iconIV.image = UIImage(named: "dot_gray")
+//        } else if realModel.arriveType == "0" {
+//
+//            iconIV.image = UIImage(named: "dot_green")
+//        }
+//    }
     
     class func cellWithTableView(tableView:UITableView) -> XHWLProgressDetailCell {
         

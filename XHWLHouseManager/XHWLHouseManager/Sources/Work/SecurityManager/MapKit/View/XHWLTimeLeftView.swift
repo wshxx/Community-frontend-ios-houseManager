@@ -9,13 +9,15 @@
 import UIKit
 //import DatePickerDialog
 
-class XHWLTimeLeftView: UIView , THDatePickerViewDelegate { // HooDatePickerDelegate
+class XHWLTimeLeftView: UIView { // HooDatePickerDelegate
 
     var bgIV:UIImageView!
     var nameL:UILabel!
     var lineL:UILabel!
     var timeBtn:UIButton!
-    var dateView:THDatePickerView!
+//    var dateView:THDatePickerView!
+    var selectBlock:(String)->() = {param in }
+    var showPickBlock:(AnyObject) -> () = {param in }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,49 +49,36 @@ class XHWLTimeLeftView: UIView , THDatePickerViewDelegate { // HooDatePickerDele
         timeBtn = UIButton()
         timeBtn.setTitleColor(UIColor.black, for: .normal)
         timeBtn.titleLabel?.font = font_13
-        timeBtn.setTitle(Date.getCurrentDate("yyyy-MM-dd HH:mm") , for: .normal)
+        timeBtn.setTitle("请选择" , for: .normal)
+//        timeBtn.setTitle(Date.getCurrentDate("yyyy-MM-dd HH:mm") , for: .normal)
         timeBtn.addTarget(self, action: #selector(showDatePickerView), for: .touchUpInside)
         timeBtn?.frame = CGRect(x:lineL.frame.maxX+5, y:0, width:self.bounds.size.width-lineL.frame.maxX-10, height:self.bounds.size.height)
         self.addSubview(timeBtn)
-        
-        dateView = THDatePickerView.init(frame: CGRect(x:0, y:Screen_height, width:Screen_width, height:260))
-        dateView.delegate = self
-        dateView.title = "请选择时间"
-        dateView.backgroundColor = UIColor().colorWithHexString(colorStr: "999999")
-        let window:UIWindow = UIApplication.shared.keyWindow!
-        window.addSubview(dateView)
     }
+    var maxTime:String = ""
     
     func showDatePickerView() {
+        //_________________________年-月-日-时-分（滚动到指定的日期）_________________________
+        let minDateFormater:DateFormatter = DateFormatter()
+        minDateFormater.dateFormat = "yyyy-MM-dd HH:mm"
         
-//        let window:UIWindow = UIApplication.shared.keyWindow!
-//        window.isUserInteractionEnabled = false
-        UIView.animate(withDuration: 0.3) {
-            self.dateView.frame = CGRect(x:0, y:Screen_height - 260, width:Screen_width, height:260)
-            self.dateView.show()
-        }
-    }
-
-//    #pragma mark - THDatePickerViewDelegate
- 
-    func datePickerViewSaveBtnClick(_ timer: String!) {
-        timeBtn.setTitle(timer, for: .normal)
-
-        UIView.animate(withDuration: 0.3) {
-            self.dateView.frame = CGRect(x:0, y:Screen_height, width:Screen_width, height:260)
+        let datepicker:WSDatePickerView = WSDatePickerView.init(dateStyle:DateStyleShowYearMonthDayHourMinute, scrollTo: Date()) { (selectDate) in
             
+            let date:String = minDateFormater.string(from: selectDate!)
+            print("选择的日期：\(date)")
+            self.timeBtn.setTitle(date, for: .normal)
+            self.selectBlock(date)
         }
-//        let window:UIWindow = UIApplication.shared.keyWindow!
-//        window.isUserInteractionEnabled = true
-    }
-
-    func datePickerViewCancelBtnClick() {
-
-        UIView.animate(withDuration: 0.3) {
-            
-            self.dateView.frame = CGRect(x:0, y:Screen_height, width:Screen_width, height:260)
+        if maxTime.isEmpty {
+            datepicker.maxLimitDate = Date()
+        } else {
+            let maxDate:Date = minDateFormater.date(from: maxTime)!
+            datepicker.maxLimitDate = maxDate
         }
-//        let window:UIWindow = UIApplication.shared.keyWindow!
-//        window.isUserInteractionEnabled = true
+        datepicker.dateLabelColor = color_09fbfe // RGB(65, 188, 241);//年-月-日-时-分 颜色
+        datepicker.datePickerColor = UIColor.black //滚轮日期颜色
+        datepicker.doneButtonColor = color_51ebfd // RGB(65, 188, 241);//确定按钮的颜色
+        datepicker.yearLabelColor = UIColor.clear //大号年份字体颜色
+        datepicker.show()
     }
 }

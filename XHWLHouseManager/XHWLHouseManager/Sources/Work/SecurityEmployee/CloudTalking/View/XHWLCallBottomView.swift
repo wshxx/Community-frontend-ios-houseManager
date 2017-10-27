@@ -28,10 +28,10 @@ class XHWLCallBottomView: UIView {
                 self.cancelBtn.center = CGPoint(x:self.bounds.size.width/2.0-72, y:self.bounds.size.height/2.0)
                 self.cancelBtn.setImage(UIImage(named:"cloudTalking_off"), for: .normal)
                 
-                self.freehandBtn.isHidden = false
-                self.freehandBtn.bounds = CGRect(x:0, y:0, width:72, height:self.bounds.size.height)
-                self.freehandBtn.center = CGPoint(x:self.bounds.size.width/2.0+72, y:self.bounds.size.height/2.0)
-                self.freehandBtn.setImage(UIImage(named:"cloudTalking_freeHand"), for: .normal)
+                self.freehandBtn.isHidden = true
+//                self.freehandBtn.bounds = CGRect(x:0, y:0, width:72, height:self.bounds.size.height)
+//                self.freehandBtn.center = CGPoint(x:self.bounds.size.width/2.0+72, y:self.bounds.size.height/2.0)
+//                self.freehandBtn.setImage(UIImage(named:"cloudTalking_freeHand"), for: .normal)
             } else {
                 
                 self.freehandBtn.isHidden = true

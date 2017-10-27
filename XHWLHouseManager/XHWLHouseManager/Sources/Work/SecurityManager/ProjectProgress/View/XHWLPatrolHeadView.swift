@@ -8,20 +8,22 @@
 
 import UIKit
 
-protocol XHWLPatrolHeadViewDelegate: NSObjectProtocol {
-    func headViewClicked(_ cellModel: XHWLRealProgressModel, _ headView: XHWLPatrolHeadView)
-}
+//protocol XHWLPatrolHeadViewDelegate: NSObjectProtocol {
+//    func headViewClicked(_ cellModel: XHWLPatrolDetailModel, _ headView: XHWLPatrolHeadView)
+//}
 
 class XHWLPatrolHeadView: UITableViewHeaderFooterView {
     
     var progressView: XHWLProgressView!
     var accessIV:UIImageView!
     var projectL:UILabel!
-    var cellModel: XHWLRealProgressModel! {
+    var headViewBlock:(XHWLPatrolLineModel) -> () = { param in }
+    var cellModel:XHWLPatrolLineModel! {
         willSet {
             if newValue != nil {
-
-//                progressView.progressModel = newValue
+                
+                projectL.text = "巡检计划名称："+newValue.lineName
+                progressView.show(name: "进度：", progress: newValue.progress)
                 
                 //保持箭头方向
                 if newValue.isFlod == false {
@@ -32,7 +34,22 @@ class XHWLPatrolHeadView: UITableViewHeaderFooterView {
             }
         }
     }
-    weak var delegate:XHWLPatrolHeadViewDelegate?
+//    var cellModel: XHWLRealProgressModel! {
+//        willSet {
+//            if newValue != nil {
+//
+////                progressView.progressModel = newValue
+//
+//                //保持箭头方向
+//                if newValue.isFlod == false {
+//                    //            self.indicateIcon.transform = CGAffineTransform.identity;
+//                } else {
+//                    //            self.indicateIcon.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI));
+//                }
+//            }
+//        }
+//    }
+//    weak var delegate:XHWLPatrolHeadViewDelegate?
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -84,7 +101,8 @@ class XHWLPatrolHeadView: UITableViewHeaderFooterView {
             }
         }
         
-        self.delegate?.headViewClicked(self.cellModel, self)
+        self.headViewBlock(self.cellModel)
+//        self.delegate?.headViewClicked(self.cellModel, self)
     }
     
     required init?(coder aDecoder: NSCoder) {

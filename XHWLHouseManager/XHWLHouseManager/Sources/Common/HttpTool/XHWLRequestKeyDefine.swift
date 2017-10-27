@@ -43,6 +43,11 @@ enum XHWLRequestKeyID : NSInteger {
     case XHWL_DELETECARDLOG // 删除蓝牙绑卡记录
     case XHWL_SAVECARDLOG   // 保存蓝牙绑卡记录
     case XHWL_REGISTERJPUSH // 访客登记提交推送
+    case XHWL_SEARCHPIN // 巡更—在线定位—轨迹回放
+    case XHWL_PATROLDETAIL // 巡更—在线定位—点击位置查看详情
+    case XHWL_VIDEOUPLOAD // 上传云瞳抓拍图片
+    case XHWL_VIDEOIMGLIST // 获取云瞳抓拍图片
+    case XHWL_DELETEVIDEOIMG //删除抓拍图片
 }
 
 
@@ -94,7 +99,12 @@ class XHWLRequestKeyDefine: NSObject {
             XHWLRequestKeyID.XHWL_DELETECARDLOG:"wyBusiness/delBluetoothCard",      // 删除蓝牙绑卡记录
             XHWLRequestKeyID.XHWL_SAVECARDLOG:"wyBusiness/bluetoothCard/bind",      // 保存蓝牙绑卡记录
             XHWLRequestKeyID.XHWL_MESSAGECOUNT:"wyBase/tips/count",                 // 消息总数
-            XHWLRequestKeyID.XHWL_REGISTERJPUSH:"wyBusiness/visitor/regist/jgPush"  // 访客登记提交推送
+            XHWLRequestKeyID.XHWL_REGISTERJPUSH:"wyBusiness/visitor/regist/jgPush",  // 访客登记提交推送
+            XHWLRequestKeyID.XHWL_SEARCHPIN:"wyBusiness/patrol/trails/playback", // 巡更—在线定位—轨迹回放
+            XHWLRequestKeyID.XHWL_PATROLDETAIL:"wyBusiness/patrol/position/progress", // 巡更—在线定位—点击位置查看详情
+            XHWLRequestKeyID.XHWL_VIDEOUPLOAD:"wyBusiness/iot/video/upload",        // 上传云瞳抓拍图片
+            XHWLRequestKeyID.XHWL_VIDEOIMGLIST:"wyBusiness/iot/video/getList", // 获取云瞳抓拍图片
+            XHWLRequestKeyID.XHWL_DELETEVIDEOIMG:"wyBusiness/iot/video/delete", //删除抓拍图片
         ]
     }
 }

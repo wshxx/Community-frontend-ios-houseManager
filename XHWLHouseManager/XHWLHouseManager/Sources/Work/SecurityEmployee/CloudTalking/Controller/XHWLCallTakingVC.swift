@@ -22,9 +22,25 @@ class XHWLCallTakingVC: XHWLBaseVC {
 
         return callView
     }()
-    
-    
-    var nextParams:NSDictionary! = NSDictionary()
+
+    var nextParams:NSDictionary! = NSDictionary() {
+        willSet {
+            
+            let array:NSArray = [["name":"姓名：", "content": newValue.object(forKey: "name")],
+                                 ["name":"类型：", "content": newValue.object(forKey: "type")],
+                                 ["name":"证件：", "content": (newValue.object(forKey: "certificateType") as! String) + (newValue.object(forKey: "cetificateNo") as! String)],
+                                 ["name":"手机：", "content": newValue.object(forKey: "telephone")],
+                                 ["name":"时效：", "content": (newValue.object(forKey: "timeNo") as! String) + (newValue.object(forKey: "timeUnit") as! String)],
+                                 ["name":"车牌：", "content": newValue.object(forKey: "carNo")],
+                                 ["name":"事由：", "content": newValue.object(forKey: "accessReason")],
+                                 ["name":"业主：", "content": yzName],
+                                 ["name":"房间：", "content": newValue.object(forKey: "roomNo")]]
+
+            
+            let dataAry:NSArray = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
+            callView.dataAry = dataAry
+        }
+    }
 //    var callView:XHWLCallView!
     
     var clientRole = AgoraRtcClientRole.clientRole_Broadcaster

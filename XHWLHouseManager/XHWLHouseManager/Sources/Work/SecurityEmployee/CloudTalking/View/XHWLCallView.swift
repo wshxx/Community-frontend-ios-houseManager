@@ -35,6 +35,14 @@ class XHWLCallView: UIView , XHWLCallBottomViewDelegate {
                 self.showTipL.isHidden = true
 //                self.callNameL.text = self.roomName
 //                self.showTipL.text = "00:00"
+                
+                self.callSubView.createArray(array: dataAry)
+                
+                UIView.animate(withDuration: 0.3,
+                               animations: {
+                                self.callSubView.frame = CGRect(x:20, y:Screen_height*2/3.0, width:Screen_width-40, height:Screen_height/3.0)
+                                self.bottomView.frame = CGRect(x:10, y:Screen_height*2/3.0-100, width:Screen_width-20, height:93)
+                })
             } else {
                 self.callNameL.isHidden = false
                 self.showTipL.isHidden = false
@@ -49,6 +57,16 @@ class XHWLCallView: UIView , XHWLCallBottomViewDelegate {
             }
         }
     }
+    
+    lazy fileprivate var callSubView:XHWLCallSubView! = {
+        
+        let callView:XHWLCallSubView = XHWLCallSubView(frame:CGRect(x:20, y:Screen_height, width:Screen_width-40, height:0))
+        self.addSubview(callView)
+        
+        return callView
+    }()
+    
+    var dataAry:NSArray! = NSArray()
     
     lazy var remoteContainerView:UIView! = {
         let view:UIView = UIView()
@@ -71,6 +89,7 @@ class XHWLCallView: UIView , XHWLCallBottomViewDelegate {
         label.font = font_16
         label.textAlignment = .center
         self.addSubview(label)
+        self.bringSubview(toFront: label)
         
         return label
     }()
@@ -87,12 +106,12 @@ class XHWLCallView: UIView , XHWLCallBottomViewDelegate {
     }()
     
     lazy fileprivate var bottomView:XHWLCallBottomView = {
-        let view:XHWLCallBottomView = XHWLCallBottomView(frame:CGRect(x:10, y:self.bounds.height-100, width:self.bounds.size.width-20, height:93))
-        view.delegate = self
-        self.bringSubview(toFront: view)
-        self.addSubview(view)
+        let bottomView:XHWLCallBottomView = XHWLCallBottomView(frame:CGRect(x:10, y:self.bounds.height-100, width:self.bounds.size.width-20, height:93))
+        bottomView.delegate = self
+        self.bringSubview(toFront: bottomView)
+        self.addSubview(bottomView)
         
-        return view
+        return bottomView
     }()
     
     
@@ -120,7 +139,11 @@ class XHWLCallView: UIView , XHWLCallBottomViewDelegate {
         self.callNameL.bounds = CGRect(x:0, y:0, width:self.bounds.size.width-20, height:30)
         self.callNameL.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0)
         self.showTipL.frame = CGRect(x:10, y:self.callNameL.frame.maxY+5, width:self.bounds.size.width-20, height:30)
-        self.bottomView.frame = CGRect(x:10, y:self.bounds.height-100, width:self.bounds.size.width-20, height:93)
+        if self.receiveType == .receive {
+            self.bottomView.frame = CGRect(x:10, y:self.bounds.height*2/3.0-100, width:self.bounds.size.width-20, height:93)
+        } else {
+            self.bottomView.frame = CGRect(x:10, y:self.bounds.height-100, width:self.bounds.size.width-20, height:93)
+        }
     }
     
     override func layoutSubviews() {
@@ -131,7 +154,11 @@ class XHWLCallView: UIView , XHWLCallBottomViewDelegate {
         self.callNameL.bounds = CGRect(x:0, y:0, width:self.bounds.size.width-20, height:30)
         self.callNameL.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0)
         self.showTipL.frame = CGRect(x:10, y:self.callNameL.frame.maxY+5, width:self.bounds.size.width-20, height:30)
-        self.bottomView.frame = CGRect(x:10, y:self.bounds.height-100, width:self.bounds.size.width-20, height:93)
+        if self.receiveType == .receive {
+            self.bottomView.frame = CGRect(x:10, y:self.bounds.height*2/3.0-100, width:self.bounds.size.width-20, height:93)
+        } else {
+            self.bottomView.frame = CGRect(x:10, y:self.bounds.height-100, width:self.bounds.size.width-20, height:93)
+        }
 //        self.cancelBtn.bounds = CGRect(x:0, y:0, width:72, height:93)
 //        self.cancelBtn.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height-140)
     }

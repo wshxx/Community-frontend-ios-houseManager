@@ -9,10 +9,14 @@
 import UIKit
 import MapKit
 
-class XHWLMapKitVC: XHWLBaseVC , BMKMapViewDelegate, BMKLocationServiceDelegate, XHWLNetworkDelegate {
+protocol XHWLMapKitVCDelegate:NSObjectProtocol {
+    func mapkitWithShowDetail(_ mapkit:XHWLMapKitVC, _ userId:String)
+}
+class XHWLMapKitVC: XHWLBaseVC , BMKMapViewDelegate, BMKLocationServiceDelegate, XHWLNetworkDelegate , XHWLMapKitTopViewDelegate {
 
     var _mapView: BMKMapView!
     var enableCustomMap = true
+    var delegate:XHWLMapKitVCDelegate?
     var subBgIV:UIImageView!
     var topView:XHWLMapKitTopView!
     var locationService:BMKLocationService!
@@ -48,9 +52,65 @@ class XHWLMapKitVC: XHWLBaseVC , BMKMapViewDelegate, BMKLocationServiceDelegate,
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    
+    func mapKitViewWithSearch(_ topView:XHWLMapKitTopView, _ array:NSArray) {
+//        selectAllBtn.isHidden = false
+        selectAllBtn.setTitle("巡更人员", for: .normal)
+        selectAllBtn.setImage(nil, for: .normal)
+        selectAllBtn.setImage(nil, for: .selected)
+        
+        _mapView.removeAnnotations(_mapView.annotations)
+        _mapView.removeOverlays(_mapView.overlays)
+        //////
+        var dealArray:NSArray = NSArray()
+        let noDelAry:NSMutableArray = NSMutableArray()
+        for j in 0..<4 {
+            switch j {
+            case 0:
+                let model:XHWLMapKitModel = XHWLMapKitModel()
+                model.latitude = "22.539429"
+                model.longitude = "113.958966"
+                noDelAry.add(model)
+            case 1:
+                let model:XHWLMapKitModel = XHWLMapKitModel()
+                model.latitude = "22.539378"
+                model.longitude = "113.959076"
+                noDelAry.add(model)
+            case 2:
+                let model:XHWLMapKitModel = XHWLMapKitModel()
+                model.latitude = "22.539378"
+                model.longitude = "113.959176"
+                noDelAry.add(model)
+            case 3:
+                let model:XHWLMapKitModel = XHWLMapKitModel()
+                model.latitude = "22.539578"
+                model.longitude = "113.959176"
+                noDelAry.add(model)
+            default:
+                break
+            }
+        }
+        
+        dealArray = noDelAry
+        ///////
+        
+        for i in 0..<dealArray.count {
+            let model:XHWLMapKitModel = dealArray[i] as! XHWLMapKitModel
+            
+            let coor:CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(model.latitude)!, Double(model.longitude)!)
+            stickOverlayAnnotation(coor, model)
+        }
+        setupLine(dealArray)
+    }
+    
+    func mapKitViewWithTrail(_ topView:XHWLMapKitTopView) {
+        
+    }
+    
     func setupUI() {
 //        let topHeight = (self.navigationController?.navigationBar.frame.height)! + UIApplication.shared.statusBarFrame.height
         topView = XHWLMapKitTopView(frame:CGRect(x:10, y:64+30, width:Screen_width-20, height:100))
+        topView.delegate = self
         self.view.addSubview(topView)
         
         selectAllBtn = UIButton()
@@ -98,62 +158,54 @@ class XHWLMapKitVC: XHWLBaseVC , BMKMapViewDelegate, BMKLocationServiceDelegate,
     
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
         
-        if requestKey == XHWLRequestKeyID.XHWL_MAPKIT.rawValue {
+       if requestKey == XHWLRequestKeyID.XHWL_MAPKIT.rawValue {
 
             if response["result"] is NSNull {
                 return
             }
             let dict:NSDictionary = response["result"] as! NSDictionary
-            var dealArray:NSArray = XHWLMapKitModel.mj_objectArray(withKeyValuesArray:dict["collectNodes"] as! NSArray)
+            let dealArray:NSArray = XHWLMapKitModel.mj_objectArray(withKeyValuesArray:dict["collectNodes"] as! NSArray)
             
-            annotationArray = NSMutableArray()
             _mapView.removeAnnotations(_mapView.annotations)
             _mapView.removeOverlays(_mapView.overlays)
-           
-            ////////
-            let noDelAry:NSMutableArray = NSMutableArray()
-            for j in 0..<4 {
-                switch j {
-                case 0:
-                    let model:XHWLMapKitModel = XHWLMapKitModel()
-                    model.latitude = "22.549329"
-                    model.longitude = "113.959076"
-                    model.nickname = "0"
-                    noDelAry.add(model)
-                case 1:
-                    let model:XHWLMapKitModel = XHWLMapKitModel()
-                    model.latitude = "22.649329"
-                    model.longitude = "113.959076"
-                    model.nickname = "1"
-                    noDelAry.add(model)
-                case 2:
-                    let model:XHWLMapKitModel = XHWLMapKitModel()
-                    model.latitude = "22.659329"
-                    model.longitude = "113.859076"
-                    model.nickname = "3"
-                    noDelAry.add(model)
-                case 3:
-                    let model:XHWLMapKitModel = XHWLMapKitModel()
-                    model.latitude = "22.549329"
-                    model.longitude = "113.879076"
-                    model.nickname = "2"
-                    noDelAry.add(model)
-                default:
-                    break
-                }
-            }
             
-            dealArray = noDelAry
-            ///////
-
             for i in 0..<dealArray.count {
                 let model:XHWLMapKitModel = dealArray[i] as! XHWLMapKitModel
                 
                 let coor:CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(model.latitude)!, Double(model.longitude)!)
                 stickAnnotation(coor, model)
             }
-            setupLine(dealArray)
+            topView.personAry = dealArray
         }
+    }
+    
+    // 添加大头针
+    func stickOverlayAnnotation(_ coor:CLLocationCoordinate2D, _ model:XHWLMapKitModel) {
+        // 添加一个PointAnnotation
+        let annotation: XHWLCustomAnnotation = XHWLCustomAnnotation()
+        annotation.coordinate = coor
+        annotation.title = model.nickname
+        annotation.type = 3
+        _mapView?.addAnnotation(annotation)
+        
+        
+        //        annotationArray = NSMutableArray()
+        //        annotationArray.add(annotation)
+    }
+    
+    // 添加大头针
+    func stickAnnotation(_ coor:CLLocationCoordinate2D, _ model:XHWLMapKitModel) {
+        // 添加一个PointAnnotation
+        let annotation: XHWLCustomAnnotation = XHWLCustomAnnotation()
+        annotation.coordinate = coor
+        annotation.title = model.nickname
+        annotation.subtitle = model.speed+"%"
+        annotation.type = 2
+        annotation.model = model
+        _mapView?.addAnnotation(annotation)
+        
+        annotationArray = NSMutableArray()
+        annotationArray.add(annotation)
     }
     
     func setupLine(_ dealAry:NSArray) {// BMKMapPoint
@@ -175,18 +227,6 @@ class XHWLMapKitVC: XHWLBaseVC , BMKMapViewDelegate, BMKLocationServiceDelegate,
     
     func requestFail(_ requestKey:NSInteger, _ error:NSError) {
         
-    }
-      
-    // 添加大头针
-    func stickAnnotation(_ coor:CLLocationCoordinate2D, _ model:XHWLMapKitModel) {
-        // 添加一个PointAnnotation
-        let annotation: XHWLCustomAnnotation = XHWLCustomAnnotation()
-        annotation.coordinate = coor
-        annotation.title = model.nickname
-        annotation.type = 2
-        _mapView?.addAnnotation(annotation)
-        
-        annotationArray.add(annotation)
     }
     
     // MARK: - 初始化地图和定位
@@ -385,10 +425,16 @@ class XHWLMapKitVC: XHWLBaseVC , BMKMapViewDelegate, BMKLocationServiceDelegate,
                 let annotationView = XHWLMeAnnotationView(annotation: annotation, reuseIdentifier: AnnotationViewID)
                 
                 return annotationView
-            } else if anno.type == 2 {
-                
+            }
+            else if anno.type == 2 {
                 let AnnotationViewID = "XHWLOtherAnnotationView"
                 let annotationView = XHWLOtherAnnotationView(annotation: annotation, reuseIdentifier: AnnotationViewID)
+
+                return annotationView
+            }
+            else if anno.type == 3 {
+                let AnnotationViewID = "XHWLOverlayAnnotationView"
+                let annotationView = XHWLOverlayAnnotationView(annotation: annotation, reuseIdentifier: AnnotationViewID)
                 
                 return annotationView
             }
@@ -398,9 +444,38 @@ class XHWLMapKitVC: XHWLBaseVC , BMKMapViewDelegate, BMKLocationServiceDelegate,
     }
     
     func selectAllAnnotations() {
-        for i in 0..<annotationArray.count {
-            let anno:XHWLCustomAnnotation = annotationArray[i] as! XHWLCustomAnnotation
-            _mapView.selectAnnotation(anno, animated: true)
+        if selectAllBtn.currentTitle == "显示巡更进度"  {
+            
+            if selectAllBtn.isSelected == false {
+                selectAllBtn.isSelected = true
+                
+                for i in 0..<annotationArray.count {
+                    let anno:XHWLCustomAnnotation = annotationArray[i] as! XHWLCustomAnnotation
+                    _mapView.selectAnnotation(anno, animated: true)
+                }
+            } else {
+                selectAllBtn.isSelected = false
+                
+                for i in 0..<annotationArray.count {
+                    let anno:XHWLCustomAnnotation = annotationArray[i] as! XHWLCustomAnnotation
+                    _mapView.deselectAnnotation(anno, animated: true)
+                }
+            }
+           
+        } else if selectAllBtn.currentTitle == "巡更人员" {
+            selectAllBtn.setTitle("显示巡更进度", for: .normal)
+            selectAllBtn.setImage(UIImage(named:"Patrol_unSelected"), for: .normal)
+            selectAllBtn.setImage(UIImage(named:"Patrol_selected"), for: .selected)
+            
+            _mapView.removeAnnotations(_mapView.annotations)
+            _mapView.removeOverlays(_mapView.overlays)
+            
+            for i in 0..<topView.personAry.count {
+                let model:XHWLMapKitModel = topView.personAry[i] as! XHWLMapKitModel
+                
+                let coor:CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(model.latitude)!, Double(model.longitude)!)
+                stickAnnotation(coor, model)
+            }
         }
     }
     
@@ -419,8 +494,15 @@ class XHWLMapKitVC: XHWLBaseVC , BMKMapViewDelegate, BMKLocationServiceDelegate,
      *@param views 选中的annotation views
      */
     func mapView(_ mapView: BMKMapView!, didSelect view: BMKAnnotationView!) {
+        
         NSLog("选中了标注")
-//        _shopCoor = view.annotation.coordinate;
+//        BMKAnnotation
+        if view.annotation is XHWLCustomAnnotation {
+            let anno:XHWLCustomAnnotation = view.annotation as! XHWLCustomAnnotation
+            if anno.type == 2 {
+                view.isSelected = true
+            }
+        }
     }
     
     /**
@@ -450,7 +532,13 @@ class XHWLMapKitVC: XHWLBaseVC , BMKMapViewDelegate, BMKLocationServiceDelegate,
      */
     func mapView(_ mapView: BMKMapView!, annotationViewForBubble view: BMKAnnotationView!) {
         NSLog("点击了泡泡")
-        
+        if view.annotation is XHWLCustomAnnotation {
+            let anno:XHWLCustomAnnotation = view.annotation as! XHWLCustomAnnotation
+            if anno.type == 2 {
+                let userId:String = anno.model.userId
+                self.delegate?.mapkitWithShowDetail(self, userId)
+            }
+        }
 //        MyBMKPointAnnotation *tt = (MyBMKPointAnnotation *)view.annotation;
 //        if (tt.shopID) {
 //            BusinessIfonUVC *BusinessIfonVC = [[BusinessIfonUVC alloc]init];

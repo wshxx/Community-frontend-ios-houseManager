@@ -39,7 +39,11 @@ class XHWLGroupBoxListView: UIView {
     }
     
     fileprivate var currentIndex = -1
-    fileprivate var items: [String]!
+    var items:NSArray! {
+        didSet {
+            self.listTableView.reloadData()
+        }
+    }
     
     fileprivate var boxButton: UIButton!
     fileprivate var boxTitle: UILabel!
@@ -49,7 +53,7 @@ class XHWLGroupBoxListView: UIView {
     fileprivate var backgroundView: UIView! // under the box background
     fileprivate var listTableView: UITableView!
     
-    init(parentVC: UIViewController, title: String, items: [String], frame: CGRect) {
+    init(parentVC: UIViewController, title: String, items: NSArray, frame: CGRect) {
         super.init(frame: frame)
         
         backgroundColor = UIColor.white
@@ -121,7 +125,7 @@ class XHWLGroupBoxListView: UIView {
         self.boxArrow.center = CGPoint(x: self.frame.size.width - img.size.width/2.0, y: self.frame.size.height * 0.5)
         
         let listPoint:CGRect = convert(CGRect(x: 0, y: self.frame.size.height, width: self.frame.size.width, height: CGFloat(self.items.count) * TGDropBoxListCellHeight), to: self.boxWrapperView)
-        self.listTableView.frame = listPoint
+        self.listTableView.frame = CGRect(x: -50+listPoint.origin.x, y: listPoint.origin.y, width: listPoint.width+50, height: listPoint.height)
 //        self.listTableView.frame.origin = CGPoint(x: listPoint.x, y: listPoint.y + self.frame.size.height) // CGPoint(x: self.frame.origin.x, y: self.frame.origin.y + self.frame.size.height, width: self.frame.size.width, height: CGFloat(self.items.count) * TGDropBoxListCellHeight)
 //        self.listTableView.frame.size = CGSize(width: self.frame.size.width, height: CGFloat(self.items.count) * TGDropBoxListCellHeight)
     }
@@ -217,7 +221,9 @@ class XHWLGroupBoxListView: UIView {
         }
         
         currentIndex = row
-        self.boxTitle.text = self.items[currentIndex]
+        
+        let mapkitModel:XHWLMapKitModel = self.items[currentIndex] as! XHWLMapKitModel
+        self.boxTitle.text = mapkitModel.nickname
         self.hideBoxList()
         
         self.didSelectBoxItemHandler?(row)
@@ -248,7 +254,9 @@ extension XHWLGroupBoxListView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = TGDropBoxTableViewCell(reuseIdentifier: "Cell")
-        cell.textLabel?.text = self.items[indexPath.row]
+        
+        let mapkitModel:XHWLMapKitModel = self.items[indexPath.row] as! XHWLMapKitModel
+        cell.textLabel?.text = mapkitModel.nickname
         return cell
     }
 }

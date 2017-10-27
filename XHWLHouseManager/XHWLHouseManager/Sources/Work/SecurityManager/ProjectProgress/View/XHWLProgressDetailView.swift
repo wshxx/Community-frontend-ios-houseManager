@@ -8,28 +8,36 @@
 
 import UIKit
 
-class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSource , XHWLPatrolHeadViewDelegate {
+class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSource , XHWLNetworkDelegate {
+
+    
 
     var bgImage:UIImageView!
     var tableView:UITableView!
     var dataAry:NSMutableArray! = NSMutableArray()
     var progressView:XHWLProgressView!
     var dismissBlock:(NSInteger)->(Void) = { param in }
-    var realModel:XHWLRealProgressModel! {
+    var realModel:XHWLPatrolDetailModel!
+//    var realModel:XHWLRealProgressModel! {
+//        willSet {
+//            if (newValue != nil) {
+//
+//////                let ary1 = newValue.checkedList as NSArray
+////                let ary2 = newValue.planChecksList as NSArray
+////                let array = NSMutableArray()
+//////                array.addObjects(from: ary1 as! [Any])
+////                array.addObjects(from: ary2 as! [Any])
+////
+////                dataAry = XHWLListModel.mj_objectArray(withKeyValuesArray: array)
+////                progressView.progressModel = newValue
+////
+////                self.tableView.reloadData()
+//            }
+//        }
+//    }
+    var userId:String! = "" {
         willSet {
-            if (newValue != nil) {
-                
-//                let ary1 = newValue.checkedList as NSArray
-                let ary2 = newValue.planChecksList as NSArray
-                let array = NSMutableArray()
-//                array.addObjects(from: ary1 as! [Any])
-                array.addObjects(from: ary2 as! [Any])
-                
-                dataAry = XHWLListModel.mj_objectArray(withKeyValuesArray: array)
-                progressView.progressModel = newValue
-                
-                self.tableView.reloadData()
-            }
+            onLoad(newValue)
         }
     }
     
@@ -38,6 +46,41 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
         self.backgroundColor = UIColor.clear
         
         setupView()
+    }
+    
+    func onLoad(_ userId:String) {
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        let param:NSArray = [userModel.wyAccount.token,
+                             userId]
+        XHWLNetwork.shared.getPatrolDetailClick(param, self)
+    }
+    
+    // MARK: - XHWLNetworkDelegate
+    
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        if requestKey == XHWLRequestKeyID.XHWL_PATROLDETAIL.rawValue {
+            if response["result"] is NSNull {
+                return
+            }
+            let dict:NSDictionary = response["result"] as! NSDictionary
+//            let userProgressArray:NSArray = XHWLPatrolDetailModel.mj_objectArray(withKeyValuesArray:dict["userProgress"] as! NSArray)
+//            self.dataAry = NSMutableArray()
+            realModel = XHWLPatrolDetailModel.mj_object(withKeyValues: dict["userProgress"] )
+//            self.dataAry.addObjects(from: userProgressArray as! [Any])
+            self.tableView.reloadData()
+        }
+    }
+
+
+    
+    
+    
+    func requestFail(_ requestKey: NSInteger, _ error: NSError) {
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -64,23 +107,34 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        if realModel == nil {
+            return 0
+        }
+        
+        let lineList:NSArray = realModel.lineList
 //        return dataAry.count
-        return 2
+        return lineList.count // self.realModel.totalChecksDetail.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
-//        let realModel:XHWLListModel = (dataAry[section] as? XHWLListModel)!
-        if self.realModel != nil && self.realModel.isFlod == true {
-//            return dataAry.count
-            return 5
+        let lineList:NSArray = realModel.lineList
+        let lineModel:XHWLPatrolLineModel = XHWLPatrolLineModel.mj_object(withKeyValues: lineList[section])
+        if lineModel.isFlod == true {
+            return lineModel.currentTimeChecksDetail.count+1
         }
         
         return 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == 4 {
+        
+        let lineList:NSArray = realModel.lineList
+        let lineModel:XHWLPatrolLineModel = XHWLPatrolLineModel.mj_object(withKeyValues: lineList[indexPath.section])
+        let detailAry:NSArray = lineModel.currentTimeChecksDetail
+        let cellModel:XHWLPatrolTotalCheckModel = XHWLPatrolTotalCheckModel.mj_object(withKeyValues: detailAry[indexPath.row])
+//        let realModel:XHWLPatrolDetailModel = (dataAry[section] as? XHWLPatrolDetailModel)!
+        if indexPath.row == detailAry.count {
             let cell = XHWLMapKitSubViewCell.cellWithTableView(tableView: tableView)
             //        cell.textLabel?.text = dataAry[indexPath.row] as? String
             //        print("\(dataAry[indexPath.row])")
@@ -88,6 +142,7 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
             //        cell.isTop = indexPath.row == 0
             //        cell.isBottom = indexPath.row == dataAry.count - 1
             //        cell.setRealModel(realModel)
+            cell.lineModel = lineModel
 
             return cell
         } else {
@@ -98,6 +153,8 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
 //            cell.isTop = indexPath.row == 0
 //            cell.isBottom = indexPath.row == dataAry.count - 1
 //            cell.setRealModel(realModel)
+//            let cellModel = lineModel.currentTimeChecksDetail[indexPath.row] as! XHWLPatrolTotalCheckModel
+            cell.cellModel = cellModel
             
             return cell
         }
@@ -108,16 +165,26 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let head = XHWLPatrolHeadView.init(reuseIdentifier:"XHWLPatrolHeadView")
-//        let realModel:XHWLListModel = (dataAry[section] as? XHWLListModel)!
-        head.delegate = self
+        let head:XHWLPatrolHeadView = XHWLPatrolHeadView.init(reuseIdentifier:"XHWLPatrolHeadView")
+        
+        let lineList:NSMutableArray = realModel.lineList
+        let lineModel:XHWLPatrolLineModel = XHWLPatrolLineModel.mj_object(withKeyValues: lineList[section])
+        head.headViewBlock = {[weak lineModel] cellModel in
+            print("\(cellModel.isFlod)")
+            
+            lineModel?.isFlod = cellModel.isFlod
+            let dict:NSDictionary = (lineModel?.mj_keyValues())!
+            self.realModel.lineList.replaceObject(at: section, with: dict)
+        }
+//        head.delegate = self
 //        head.cellModel = realModel
-        head.cellModel = realModel
+        head.cellModel = lineModel //realModel
+//        self.realModel.totalChecksDetail
 
         return head
     }
     
-    func headViewClicked(_ cellModel: XHWLRealProgressModel, _ headView: XHWLPatrolHeadView) {
+    func headViewClicked(_ cellModel: XHWLPatrolDetailModel, _ headView: XHWLPatrolHeadView) {
 //        headView.isUserInteractionEnabled = false
         
 //        var indexPaths = [IndexPath]()

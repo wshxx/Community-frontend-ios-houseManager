@@ -1,14 +1,14 @@
 //
-//  OtherAnimatedAnnotationView.swift
+//  XHWLOverlayAnnotationView.swift
 //  XHWLHouseManager
 //
-//  Created by gongairong on 2017/10/10.
+//  Created by gongairong on 2017/10/26.
 //  Copyright © 2017年 XHWL. All rights reserved.
 //
 
 import UIKit
 
-class XHWLOtherAnnotationView:BMKAnnotationView  { // BMKAnnotationView MKPinAnnotationView
+class XHWLOverlayAnnotationView: BMKAnnotationView {
 
     var annotationImageView: UIImageView!
     
@@ -22,7 +22,7 @@ class XHWLOtherAnnotationView:BMKAnnotationView  { // BMKAnnotationView MKPinAnn
         
         annotationImageView = UIImageView(frame: bounds)
         annotationImageView.contentMode = UIViewContentMode.center
-        annotationImageView.image = UIImage(named: "pin_other")!
+        annotationImageView.image = UIImage(named: "Patrol_blue_pin")!
         
         self.addSubview(annotationImageView)
         
@@ -61,4 +61,5 @@ class XHWLOtherAnnotationView:BMKAnnotationView  { // BMKAnnotationView MKPinAnn
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }

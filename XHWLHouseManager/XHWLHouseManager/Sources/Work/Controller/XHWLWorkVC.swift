@@ -127,7 +127,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         
         let array:NSMutableArray! = NSMutableArray()
         if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
-            array.addObjects(from: ["异常放行", "安防事件", "访客记录", "巡更定位", "巡更进度", "安环数据", "云瞳监控"])
+            array.addObjects(from: ["异常放行", "安防事件", "访客记录", "巡更安全", "安环数据", "云瞳监控"])
         } else if userModel.wyAccount.wyRole.name.compare("门岗").rawValue == 0 {
             array.addObjects(from: ["访客登记"])
         } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
@@ -158,8 +158,6 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         }
         self.view.addSubview(homeView)
     }
-    
-  
     
     func onProjectManager(_ index:NSInteger) {
         switch index {
@@ -224,20 +222,16 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
             vc.title = "访客记录"
             self.navigationController?.pushViewController(vc, animated: true)
             break
-        case 3:// "巡更定位",
+        case 3:// "巡更定位", 巡更安全
             let vc:XHWLPatrolVC = XHWLPatrolVC()
 //            let vc:XHWLMapKitVC = XHWLMapKitVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
-        case 4: // "巡更进度",
-            let vc:XHWLCountVC = XHWLCountVC()
-            self.navigationController?.pushViewController(vc, animated: true)
-            break
-        case 5: //  "数据",
+        case 4: //  "数据",
             let vc:XHWLDataVC = XHWLDataVC() //
             self.navigationController?.pushViewController(vc, animated: true)
             break
-        case 6: // 云瞳监控
+        case 5: // 云瞳监控
             // 视频
             let vc = XHWLMcuListVC()
             self.navigationController?.pushViewController(vc, animated: true)

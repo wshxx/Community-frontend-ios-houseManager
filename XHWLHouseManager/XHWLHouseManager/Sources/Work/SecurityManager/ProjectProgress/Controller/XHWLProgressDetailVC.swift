@@ -8,12 +8,11 @@
 
 import UIKit
 
-class XHWLProgressDetailVC: UIViewController {
+class XHWLProgressDetailVC: XHWLBaseVC {
 
-    var bgImg:UIImageView!
-    var topMenu:XHWLTopView!
     var warningView:XHWLProgressDetailView!
     var realModel:XHWLRealProgressModel!
+    var userId:String! = "" 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,24 +24,15 @@ class XHWLProgressDetailVC: UIViewController {
     }
     
     func setupNav() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
-        
         self.title = "进度详情"
     }
     
-    func onBack(){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     func setupView() {
-        
-        bgImg = UIImageView()
-        bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"home_bg")
-        self.view.addSubview(bgImg)
-        
+
+        print("\(userId)")
         warningView = XHWLProgressDetailView(frame:CGRect.zero)
-        warningView.realModel = realModel
+//        warningView.realModel = realModel
+        warningView.userId = userId
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.dismissBlock = { index in
