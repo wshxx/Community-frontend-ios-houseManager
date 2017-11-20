@@ -118,6 +118,8 @@ class XHWLMcuShowVC: XHWLBaseVC, XHWLPlayerViewDelegate, XHWLNetworkDelegate{
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
         
         if requestKey == XHWLRequestKeyID.XHWL_VIDEOUPLOAD.rawValue {
+            
+            "抓拍成功".ext_debugPrintAndHint()
 //            if response["result"] is NSNull {
 //                return
 //            }

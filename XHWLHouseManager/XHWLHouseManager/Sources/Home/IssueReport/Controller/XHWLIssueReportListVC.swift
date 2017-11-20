@@ -8,9 +8,9 @@
 
 import UIKit
 
-class XHWLIssueReportListVC: UIViewController , UITableViewDelegate, UITableViewDataSource, XHWLNetworkDelegate {
+class XHWLIssueReportListVC: XHWLBaseVC , UITableViewDelegate, UITableViewDataSource, XHWLNetworkDelegate {
     
-    var bgImg:UIImageView!
+//    var bgImg:UIImageView!
     var subBgImg:UIImageView!
     var tableView:UITableView!
     var dataAry:NSMutableArray! = NSMutableArray()
@@ -28,7 +28,7 @@ class XHWLIssueReportListVC: UIViewController , UITableViewDelegate, UITableView
     }
     
     func onSetupNav() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
 //        let array:NSArray = ["水泵房", "排污泵"]
 //        let topMenu:XHWLTopView = XHWLTopView.init(frame: CGRect.zero)
@@ -42,16 +42,16 @@ class XHWLIssueReportListVC: UIViewController , UITableViewDelegate, UITableView
 //        self.navigationItem.titleView = topMenu
     }
     
-    func onBack(){
-        self.navigationController?.popViewController(animated: true)
-    }
+//    func onBack(){
+//        self.navigationController?.popViewController(animated: true)
+//    }
     
     func setupView() {
         
-        bgImg = UIImageView()
-        bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"home_bg")
-        self.view.addSubview(bgImg)
+//        bgImg = UIImageView()
+//        bgImg.frame = self.view.bounds
+//        bgImg.image = UIImage(named:"home_bg")
+//        self.view.addSubview(bgImg)
         
         let img = UIImage(named:"menu_bg")!
         subBgImg = UIImageView()

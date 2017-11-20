@@ -10,19 +10,19 @@ import UIKit
 
 protocol XHWLMapKitTopViewDelegate:NSObjectProtocol {
     func mapKitViewWithSearch(_ topView:XHWLMapKitTopView, _ array:NSArray)
-    func mapKitViewWithTrail(_ topView:XHWLMapKitTopView)
+    func mapKitViewWithTrail(_ topView:XHWLMapKitTopView, _ array:NSArray)
 }
 class XHWLMapKitTopView: UIView , XHWLNetworkDelegate {
 
     var timeLeftView:XHWLTimeLeftView!
-    var timeRightView:XHWLTimeRightView!
+//    var timeRightView:XHWLTimeRightView!
     var personView:XHWLPersonView!
     var searchBtn:UIButton!
     var trailBtn:UIButton!
     var userId:String! = ""
     var startTime:String! = ""
-    var endTime:String! = ""
     var selectTimeV:AnyObject!
+    var isSearch:Bool = true
     weak var delegate:XHWLMapKitTopViewDelegate?
     
     override init(frame: CGRect) {
@@ -43,19 +43,19 @@ class XHWLMapKitTopView: UIView , XHWLNetworkDelegate {
     }
     
     func setupView() {
-        timeLeftView = XHWLTimeLeftView(frame: CGRect(x:20, y:20, width:self.bounds.size.width/2.0, height:30))
+        timeLeftView = XHWLTimeLeftView(frame: CGRect(x:20, y:20, width:self.bounds.size.width-140, height:30))
         timeLeftView.selectBlock = { startTime in
             self.startTime = startTime
-            self.timeRightView.minTime = startTime
+//            self.timeRightView.minTime = startTime
         }
         self.addSubview(timeLeftView)
         
-        timeRightView = XHWLTimeRightView(frame: CGRect(x:self.bounds.size.width/2.0+30, y:20, width:self.bounds.size.width/2.0-20-30, height:30))
-        timeRightView.selectBlock = { endTime in
-            self.endTime = endTime
-            self.timeLeftView.maxTime = endTime                                                                                                                                                                                                                                                           
-        }
-        self.addSubview(timeRightView)
+//        timeRightView = XHWLTimeRightView(frame: CGRect(x:self.bounds.size.width/2.0+30, y:20, width:self.bounds.size.width/2.0-20-30, height:30))
+//        timeRightView.selectBlock = { endTime in
+//            self.endTime = endTime
+//            self.timeLeftView.maxTime = endTime
+//        }
+//        self.addSubview(timeRightView)
 
         trailBtn = UIButton()
         trailBtn.setTitleColor(UIColor.white, for: .normal)
@@ -71,11 +71,11 @@ class XHWLMapKitTopView: UIView , XHWLNetworkDelegate {
         searchBtn.setTitle("查询", for: .normal)
         searchBtn.titleLabel?.font = font_14
         searchBtn.setBackgroundImage(UIImage(named:"Patrol_blue_bg"), for: .normal)
-        searchBtn?.frame = CGRect(x:self.bounds.size.width-190, y:60, width:80, height:30)
+        searchBtn?.frame = CGRect(x:self.bounds.size.width-100, y:20, width:80, height:30)
         searchBtn.addTarget(self, action: #selector(onSearchClick), for: .touchUpInside)
         self.addSubview(searchBtn)
         
-        personView = XHWLPersonView(frame: CGRect(x:20, y:60, width:self.bounds.size.width-200-20, height:30))
+        personView = XHWLPersonView(frame: CGRect(x:20, y:60, width:self.bounds.size.width-140, height:30))
         personView.selectBlock = { userId in
             self.userId = userId
         }
@@ -83,13 +83,13 @@ class XHWLMapKitTopView: UIView , XHWLNetworkDelegate {
     }
     
     func onSearchClick() {
-        
+        isSearch = true
+        onSearch()
+    }
+    
+    func onSearch() {
         if startTime.isEmpty {
-            "请选择开始时间".ext_debugPrintAndHint()
-            return
-        }
-        if endTime.isEmpty {
-            "请选择结束时间".ext_debugPrintAndHint()
+            "请选择时间".ext_debugPrintAndHint()
             return
         }
         if userId.isEmpty {
@@ -99,8 +99,9 @@ class XHWLMapKitTopView: UIView , XHWLNetworkDelegate {
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
-        let start = (startTime.substring(to: String.Index(10)) ) + "+" + (startTime.substring(from: String.Index(11)) ) + ":00"
-        let end = (endTime.substring(to: String.Index(10)) ) + "+" + (endTime.substring(from: String.Index(11)) ) + ":00"
+        //        let start = (startTime.substring(to: String.Index(10)) ) + "+" + (startTime.substring(from: String.Index(11)) ) + ":00"
+        let start = (startTime.substring(to: String.Index(10)) ) + "+" + "00:00:00"
+        let end = (startTime.substring(to: String.Index(10)) ) + "+" + "23:59:59"
         
         let param:NSArray = [userModel.wyAccount.token,
                              userId,
@@ -110,7 +111,8 @@ class XHWLMapKitTopView: UIView , XHWLNetworkDelegate {
     }
     
     func onTrailClick() {
-        self.delegate?.mapKitViewWithTrail(self)
+        isSearch = false
+        onSearch()
     }
     
     // MARK: - XHWLNetworkDelegate
@@ -127,7 +129,11 @@ class XHWLMapKitTopView: UIView , XHWLNetworkDelegate {
                 dealArray = XHWLMapKitModel.mj_objectArray(withKeyValuesArray:dict["trails"] as! NSArray)
             }
 
-            self.delegate?.mapKitViewWithSearch(self, dealArray)
+            if isSearch {
+                self.delegate?.mapKitViewWithSearch(self, dealArray)
+            } else {
+                self.delegate?.mapKitViewWithTrail(self, dealArray)
+            }
         }
     }
     

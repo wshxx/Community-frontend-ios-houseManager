@@ -8,9 +8,9 @@
 
 import UIKit
 
-class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
+class XHWLWaterVC: XHWLBaseVC, XHWLNetworkDelegate {
     
-    var bgImg:UIImageView!
+//    var bgImg:UIImageView!
     var warningView:XHWLWaterView!
     var modelAry:NSArray!
     
@@ -25,14 +25,14 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
     }
     
     func setupNav() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         self.title = "设备监控"
         
     }
 
-    func onBack(){
-        self.navigationController?.popViewController(animated: true)
-    }
+//    func onBack(){
+//        self.navigationController?.popViewController(animated: true)
+//    }
     
     //    返回项目下所有设备信息
     func loadDeviceInfo() {
@@ -169,10 +169,10 @@ class XHWLWaterVC: UIViewController, XHWLNetworkDelegate {
     
     func setupView() {
         
-        bgImg = UIImageView()
-        bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"home_bg")
-        self.view.addSubview(bgImg)
+//        bgImg = UIImageView()
+//        bgImg.frame = self.view.bounds
+//        bgImg.image = UIImage(named:"home_bg")
+//        self.view.addSubview(bgImg)
         
         warningView = XHWLWaterView()
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width-20, height:Screen_height-160)

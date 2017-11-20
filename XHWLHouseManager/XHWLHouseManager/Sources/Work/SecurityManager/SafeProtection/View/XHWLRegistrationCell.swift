@@ -16,24 +16,38 @@ class XHWLRegistrationCell: UITableViewCell {
     var contentL:UILabel!
     var accessIV:UIImageView!
     var lineIV:UIImageView!
+    var stateIV:UIImageView!
     var waringModel:XHWLWarningModel!
     var visitorLogModel:XHWLVisitLogModel! {
         willSet {
             if (newValue != nil) {
                 titleL.text = newValue.sysVisitor.accessReason
                 
+                stateIV.isHidden = false
+                if newValue.sysVisitor.isYZAgree == "y" {
+                    stateIV.image = UIImage(named:"Visitor_agree")
+                } else if newValue.sysVisitor.isYZAgree == "n" {
+                    stateIV.image = UIImage(named:"Visitor_refuse")
+                } else {
+                    stateIV.image = UIImage(named:"")
+                }
+//                stateIV.frame = CGRect(x:0, y:0, width:25, height:25)
                 stateL.isHidden = false
-//                stateL.text = "状态：同意" //newValue.yzName.isEmpty ? "状态：拒绝":"状态：同意"
                 contentL.text = "登记人:\(newValue.sysVisitor.name)"
-                timeL.text = Date.getDateWith(Int(newValue.sysVisitor.accessTime)!, "yyyy-MM-dd HH:mm")
+                if !newValue.sysVisitor.registTime.isEmpty { // accessTime
+                    
+                    timeL.text = Date.getDateWith(Int(newValue.sysVisitor.registTime)!, "yyyy-MM-dd HH:mm")
+                }
             }
         }
     }
+    
     var abnormalModel:XHWLAbnormalPassModel! {
         willSet {
             if (newValue != nil) {
                 titleL.text = newValue.reason
                 
+                stateIV.isHidden = true
                 contentL.text = "道口编号:\(newValue.roadCode)"
                 timeL.text = newValue.outDate //date// Date.getDateWith(Int(newValue.sysVisitor.accessTime)!, "yyyy-MM-dd HH:mm")
                 if !newValue.status.isEmpty {
@@ -70,6 +84,10 @@ class XHWLRegistrationCell: UITableViewCell {
     }
     
     func setupView() {
+        
+        stateIV = UIImageView()
+        stateIV.isHidden = true
+        self.contentView.addSubview(stateIV)
         
         titleL = UILabel()
         titleL.textColor = UIColor.white
@@ -121,11 +139,16 @@ class XHWLRegistrationCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        stateIV.frame = CGRect(x:0, y:0, width:25, height:25)
+        var stateW:CGFloat = 10
+        if stateIV.isHidden == false {
+            stateW = 25
+        }
         if stateL.isHidden {
-             titleL.frame = CGRect(x:10, y:0, width:self.frame.size.width-30-13, height:30)
+             titleL.frame = CGRect(x:stateW, y:0, width:self.frame.size.width-20-13-stateW, height:30)
             stateL.frame = CGRect(x:0, y:0, width:0, height:30)
         } else {
-             titleL.frame = CGRect(x:10, y:0, width:self.frame.size.width-30-13-100, height:30)
+             titleL.frame = CGRect(x:stateW, y:0, width:self.frame.size.width-20-13-100-stateW, height:30)
             stateL.frame = CGRect(x:self.frame.size.width-100, y:0, width:80, height:30)
         }
         

@@ -21,6 +21,8 @@ class XHWLProjectModel: NSObject {
     var entranceCode:String = ""
     var patrolCode:String = ""
     var parkingCode:String = ""
+    var nodeID:String = ""
+    var nodeType:String = ""
 
     
     func mj_objectClassInArray() -> [AnyHashable : Any]! {

@@ -266,28 +266,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
             !(UserDefaults.standard.object(forKey: "user") is String) {
             let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
             let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-//            if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
+
+            print("\(userInfo["key"])")
+            let extras:NSDictionary = userInfo.value(forKey: "extras") as! NSDictionary
             
-            
-                print("\(userInfo["key"])")
-                let extras:NSDictionary = userInfo.value(forKey: "extras") as! NSDictionary
-            
-//            content = "{\"message\":\"\U6765\U81ea\U4e1a\U4e3b\U5e94\U7b54\U64cd\U4f5c\",\"type\":\"yzApply\",\"yzOperator\":\"refuse\"}";
-//            extras =     {
-//                from = JPush;
-//            };
+            let extrasAry:NSArray = extras.allKeys as NSArray
             let userInfoAry:NSArray = userInfo.allKeys as NSArray
-            if userInfoAry.contains("content") {
-                let content:NSDictionary = getDictionaryFromJSONString(userInfo.value(forKey: "content") as! String)
-                
-                if (content["yzOperator"] as! String) == "refuse" { // 拒绝
+            if extrasAry.contains("from") {
+                if userInfoAry.contains("content") {
+                    let content:NSDictionary = getDictionaryFromJSONString(userInfo.value(forKey: "content") as! String)
                     
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Talking"), object: (content["yzOperator"] as! String), userInfo: nil)
                 }
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Talking"), object: (content["yzOperator"] as! String), userInfo: nil)
             }
-            let ary:NSArray = extras.allKeys as NSArray
-            
-            if ary.contains("key") {
+            else if extrasAry.contains("key") {
                 let keyStr:String = extras["key"] as! String
                 //                let keyDict:NSDictionary = self.getDictionaryFromJSONString(keyStr)
                 if keyStr == "complaint" { // 安防事件 后台时要给提示
@@ -300,12 +292,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
                     //                    UIApplication.shared.applicationIconBadgeNumber = index
                     
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
-                    
+                } else {
+                    // 退出
+                    AlertMessage.showOneAlertMessage(vc: self.getCurrentVC(), alertMessage: (userInfo.value(forKey: "content") as! String), block: {
+                        self.onSuccessLogout()
+                    })
                 }
             }
-            
-            
-//            }
         }
     }
     
@@ -355,10 +348,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
     func applicationWillResignActive(_ application: UIApplication) {
         UIScreen.main.brightness = 0.5
     }
-
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+//        let controller:ViewController = self.window?.rootViewController as! ViewController
+//        controller.textView.text! += "进入后台 "
+//
+//        //如果已存在后台任务，先将其设为完成
+//        if self.backgroundTask != nil {
+//            application.endBackgroundTask(self.backgroundTask)
+//            self.backgroundTask = UIBackgroundTaskInvalid
+//        }
+//
+//        //如果要后台运行
+//        if controller.mySwitch.on {
+//            //注册后台任务
+//            self.backgroundTask = application.beginBackgroundTaskWithExpirationHandler({
+//                () -> Void in
+//                //如果没有调用endBackgroundTask，时间耗尽时应用程序将被终止
+//                application.endBackgroundTask(self.backgroundTask)
+//                self.backgroundTask = UIBackgroundTaskInvalid
+//            })
+//        }
+
+        
 //        let index:NSInteger =  Int(UserDefaults.standard.integer(forKey: "safeProtectAlert"))
 //        JPUSHService.setBadge(index) // JPush服务器
 //        UIApplication.shared.applicationIconBadgeNumber = index
@@ -539,26 +552,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate , JPUS
         
         XHWLNetwork.shared.getLogoutClick([userModel.wyAccount.token] as NSArray, self)
     }
+    
+    func onSuccessLogout() {
+        self.regist()
+        UserDefaults.standard.set("", forKey: "user")
+        UserDefaults.standard.set("", forKey: "projectList")
+        UserDefaults.standard.synchronize()
+        
+        JPUSHService.cleanTags({ (iResCode, iAlias, seq) in
+            
+        }, seq: 0)
+        JPUSHService.deleteAlias({ (iResCode, iAlias, seq) in
+            
+        }, seq: 0)
+        
+        let window:UIWindow = UIApplication.shared.keyWindow!
+        window.rootViewController = XHWLLoginVC()
+    }
     // MARK: - XHWLNetworkDelegate
     
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
         
         if requestKey == XHWLRequestKeyID.XHWL_LOGOUT.rawValue {
             
-            self.regist()
-            UserDefaults.standard.set("", forKey: "user")
-            UserDefaults.standard.set("", forKey: "projectList")
-            UserDefaults.standard.synchronize()
-            
-            JPUSHService.cleanTags({ (iResCode, iAlias, seq) in
-                
-            }, seq: 0)
-            JPUSHService.deleteAlias({ (iResCode, iAlias, seq) in
-                
-            }, seq: 0)
-            
-            let window:UIWindow = UIApplication.shared.keyWindow!
-            window.rootViewController = XHWLLoginVC()
+            onSuccessLogout()
         }
     }
     

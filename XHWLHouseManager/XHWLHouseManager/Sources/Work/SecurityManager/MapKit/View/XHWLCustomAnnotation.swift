@@ -12,5 +12,9 @@ class XHWLCustomAnnotation: BMKPointAnnotation {
 
     var type:Int?
     var model:XHWLMapKitModel!
+    var tagg:NSInteger!
+    var isDisplay:Bool = false
+    var calloutView:SMCalloutView!
+//    var calloutView:UIView!
     
 }

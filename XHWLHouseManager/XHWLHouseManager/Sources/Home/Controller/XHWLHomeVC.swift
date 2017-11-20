@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import swiftScan
+//import swiftScan
 import CoreBluetooth
 
 class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHWLNetworkDelegate, CBCentralManagerDelegate {
@@ -50,35 +50,37 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
         
         if UserDefaults.standard.object(forKey: "projectList") != nil {
             
-            let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
-            let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
-            var name:String!
-            if array.count > 0{
-                
-                if UserDefaults.standard.object(forKey: "project") != nil {
-                    let projectSubData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
-                    let model:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectSubData.mj_JSONObject())
+            if UserDefaults.standard.object(forKey: "projectList") is NSData {
+                let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
+                let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
+                var name:String!
+                if array.count > 0{
                     
-                    name = model.name
-                } else {
-                    let model:XHWLProjectModel = array[0] as! XHWLProjectModel
-                    name = model.name
+                    if UserDefaults.standard.object(forKey: "project") != nil {
+                        let projectSubData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+                        let model:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectSubData.mj_JSONObject())
+                        
+                        name = model.name
+                    } else {
+                        let model:XHWLProjectModel = array[0] as! XHWLProjectModel
+                        name = model.name
+                        
+                        let projectData:NSData = model.mj_JSONData()! as NSData
+                        UserDefaults.standard.set(projectData, forKey: "project") // 项目
+                        UserDefaults.standard.synchronize()
+                    }
                     
-                    let projectData:NSData = model.mj_JSONData()! as NSData
-                    UserDefaults.standard.set(projectData, forKey: "project") // 项目
-                    UserDefaults.standard.synchronize()
+                    let btn:UIButton = UIButton()
+                    btn.frame = CGRect(x:0, y:0, width:120, height:200)
+                    btn.setTitle(name, for: UIControlState.normal)
+                    btn.setTitleColor(UIColor.white, for: UIControlState.normal)
+                    btn.setImage(UIImage(named:"home_switch"), for: UIControlState.normal)
+                    btn.titleLabel?.font = font_14
+                    btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -14, bottom: 0, right: 0)
+                    btn.addTarget(self, action: #selector(onCreateNavHeadView), for: UIControlEvents.touchUpInside)
+                    
+                    return btn
                 }
-                
-                let btn:UIButton = UIButton()
-                btn.frame = CGRect(x:0, y:0, width:120, height:200)
-                btn.setTitle(name, for: UIControlState.normal)
-                btn.setTitleColor(UIColor.white, for: UIControlState.normal)
-                btn.setImage(UIImage(named:"home_switch"), for: UIControlState.normal)
-                btn.titleLabel?.font = font_14
-                btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -14, bottom: 0, right: 0)
-                btn.addTarget(self, action: #selector(onCreateNavHeadView), for: UIControlEvents.touchUpInside)
-                
-                return btn
             }
             
             return UIButton()

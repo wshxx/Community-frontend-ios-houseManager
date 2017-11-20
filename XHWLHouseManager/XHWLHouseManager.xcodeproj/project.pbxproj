@@ -182,8 +182,6 @@
 		193F10F61F7B97A200C2F948 /* 别人进行云对讲0058.png in Resources */ = {isa = PBXBuildFile; fileRef = 193F10B61F7B97A200C2F948 /* 别人进行云对讲0058.png */; };
 		193F10F71F7B97A200C2F948 /* 别人进行云对讲0059.png in Resources */ = {isa = PBXBuildFile; fileRef = 193F10B71F7B97A200C2F948 /* 别人进行云对讲0059.png */; };
 		193F10F81F7B97A200C2F948 /* 别人进行云对讲0060.png in Resources */ = {isa = PBXBuildFile; fileRef = 193F10B81F7B97A200C2F948 /* 别人进行云对讲0060.png */; };
-		193F10FA1F7B97A200C2F948 /* xhwl_login_logo_down.gif in Resources */ = {isa = PBXBuildFile; fileRef = 193F10BA1F7B97A200C2F948 /* xhwl_login_logo_down.gif */; };
-		193F10FB1F7B97A200C2F948 /* xhwl_login_logo_up.gif in Resources */ = {isa = PBXBuildFile; fileRef = 193F10BB1F7B97A200C2F948 /* xhwl_login_logo_up.gif */; };
 		1949937C1F8CCB4A009EBC09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A50A621F5668DA00BCDA47 /* Assets.xcassets */; };
 		194D7FAC1F80B48400B27BD0 /* XHWLMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194D7FAB1F80B48200B27BD0 /* XHWLMessageVC.swift */; };
 		194D7FAE1F80B55700B27BD0 /* XHWLMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194D7FAD1F80B55700B27BD0 /* XHWLMessageView.swift */; };
@@ -305,25 +303,41 @@
 		19ADF39E1F64DD8400A9E0FB /* XHWLRegisterationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF39D1F64DD8400A9E0FB /* XHWLRegisterationModel.swift */; };
 		19ADF3AC1F64FF7300A9E0FB /* XHWLTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF3AB1F64FF7300A9E0FB /* XHWLTagView.swift */; };
 		19B142EA1F677D780087AC5E /* XHWLNavHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B142E91F677D780087AC5E /* XHWLNavHeadView.swift */; };
+		19B8F5A51FB42E8C002D7B9E /* XHWLRosterManageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B8F5A41FB42E8C002D7B9E /* XHWLRosterManageVC.swift */; };
+		19B8F5A81FB52DA7002D7B9E /* XHWLRosterManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B8F5A71FB52DA7002D7B9E /* XHWLRosterManageView.swift */; };
+		19B8F5AA1FB531F1002D7B9E /* XHWLRosterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B8F5A91FB531F1002D7B9E /* XHWLRosterModel.swift */; };
+		19B8F5B51FB54C08002D7B9E /* LBXPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B8F5AE1FB54B8C002D7B9E /* LBXPermissions.swift */; };
+		19B8F5B61FB54C0B002D7B9E /* LBXScanLineAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B8F5AF1FB54B8C002D7B9E /* LBXScanLineAnimation.swift */; };
 		19B9C1901FA1D25600B0A0FB /* XHWLOverlayAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B9C18F1FA1D25600B0A0FB /* XHWLOverlayAnnotationView.swift */; };
 		19BB53391F56BF99006C38EA /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53381F56BF99006C38EA /* XMLReader.m */; };
-		19BB53501F56BFA3006C38EA /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB533D1F56BFA3006C38EA /* MJExtensionConst.m */; };
-		19BB53511F56BFA3006C38EA /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB533F1F56BFA3006C38EA /* MJFoundation.m */; };
-		19BB53521F56BFA3006C38EA /* MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53411F56BFA3006C38EA /* MJProperty.m */; };
-		19BB53531F56BFA3006C38EA /* MJPropertyKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53431F56BFA3006C38EA /* MJPropertyKey.m */; };
-		19BB53541F56BFA3006C38EA /* MJPropertyType.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53451F56BFA3006C38EA /* MJPropertyType.m */; };
-		19BB53551F56BFA3006C38EA /* NSObject+MJClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53471F56BFA3006C38EA /* NSObject+MJClass.m */; };
-		19BB53561F56BFA3006C38EA /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53491F56BFA3006C38EA /* NSObject+MJCoding.m */; };
-		19BB53571F56BFA3006C38EA /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB534B1F56BFA3006C38EA /* NSObject+MJKeyValue.m */; };
-		19BB53581F56BFA3006C38EA /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB534D1F56BFA3006C38EA /* NSObject+MJProperty.m */; };
-		19BB53591F56BFA3006C38EA /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB534F1F56BFA3006C38EA /* NSString+MJExtension.m */; };
 		19BB535B1F56C00F006C38EA /* XHWLConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB535A1F56C00F006C38EA /* XHWLConfigure.swift */; };
 		19BB53A81F56DA43006C38EA /* XHWLLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53A71F56DA43006C38EA /* XHWLLoginVC.swift */; };
 		19BB53AA1F56DDC7006C38EA /* XHWLLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53A91F56DDC7006C38EA /* XHWLLoginView.swift */; };
 		19BB53AC1F56E009006C38EA /* XHWLLoginTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB53AB1F56E009006C38EA /* XHWLLoginTF.swift */; };
 		19BBF3E21F74A620005AC7F2 /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BBF3E11F74A620005AC7F2 /* String+Validation.swift */; };
+		19BEB1881FA55EEB0098CE9F /* XHWLMcuPictureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BEB1871FA55EEB0098CE9F /* XHWLMcuPictureModel.swift */; };
 		19C0BCF91F56AA8B00871BDD /* XHWLNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */; };
+		19C0E8421FB54CE100FB3774 /* LBXScanNetAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B8F5B01FB54B8C002D7B9E /* LBXScanNetAnimation.swift */; };
+		19C0E8431FB54CE600FB3774 /* LBXScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B8F5B11FB54B8C002D7B9E /* LBXScanView.swift */; };
+		19C0E8441FB54CE800FB3774 /* LBXScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B8F5B21FB54B8C002D7B9E /* LBXScanViewController.swift */; };
+		19C0E8451FB54CEB00FB3774 /* LBXScanViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B8F5B31FB54B8C002D7B9E /* LBXScanViewStyle.swift */; };
+		19C0E8461FB54CEE00FB3774 /* LBXScanWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B8F5B41FB54B8C002D7B9E /* LBXScanWrapper.swift */; };
+		19C0E8481FB5825000FB3774 /* XHWLRosterAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0E8471FB5825000FB3774 /* XHWLRosterAddView.swift */; };
+		19C0E84B1FBC2C8000FB3774 /* XHWLRosterManageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0E84A1FBC2C8000FB3774 /* XHWLRosterManageCell.swift */; };
+		19C0E8511FBD231F00FB3774 /* XHWLChannelManageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0E8501FBD231F00FB3774 /* XHWLChannelManageVC.swift */; };
+		19C0E8531FBD656500FB3774 /* XHWLChannelListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0E8521FBD656500FB3774 /* XHWLChannelListView.swift */; };
+		19C0E8551FBD6AED00FB3774 /* XHWLChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0E8541FBD6AED00FB3774 /* XHWLChannelModel.swift */; };
+		19C0E8571FBD72F500FB3774 /* XHWLSelectGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0E8561FBD72F500FB3774 /* XHWLSelectGroupVC.swift */; };
+		19C0E8591FBD731400FB3774 /* XHWLSelectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0E8581FBD731400FB3774 /* XHWLSelectGroupView.swift */; };
+		19C0E8951FBE78ED00FB3774 /* XHWLChannelInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0E8941FBE78ED00FB3774 /* XHWLChannelInfoVC.swift */; };
+		19C0E89B1FBE883800FB3774 /* XHWLGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0E89A1FBE883800FB3774 /* XHWLGridView.swift */; };
+		19C0E89C1FBE889900FB3774 /* LxGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0E8971FBE880800FB3774 /* LxGridView.swift */; };
+		19C0E89D1FBE889C00FB3774 /* LxGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0E8981FBE880800FB3774 /* LxGridViewCell.swift */; };
+		19C0E89E1FBE889E00FB3774 /* LxGridViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0E8991FBE880800FB3774 /* LxGridViewFlowLayout.swift */; };
+		19C0E8A01FBEF3C800FB3774 /* XHWLWorkerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0E89F1FBEF3C800FB3774 /* XHWLWorkerModel.swift */; };
 		19C1B2601FA016FF0082B983 /* XHWLPatroLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C1B25F1FA016FF0082B983 /* XHWLPatroLabelView.swift */; };
+		19C799711FA9505F00A78A90 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C7996E1FA9505A00A78A90 /* SMCalloutView.m */; };
+		19C799721FA9506300A78A90 /* SMClassicCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C799701FA9505A00A78A90 /* SMClassicCalloutView.m */; };
 		19CDF0F51F886A3E001F17A1 /* XHWLImageScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CDF0F41F886A3E001F17A1 /* XHWLImageScale.swift */; };
 		19CDF18A1F8AFEDD001F17A1 /* XHWLBluetoothModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CDF1891F8AFEDB001F17A1 /* XHWLBluetoothModel.swift */; };
 		19D8FDBB1F6A664400AC7C22 /* XHWLAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D8FDBA1F6A664400AC7C22 /* XHWLAccountModel.swift */; };
@@ -586,8 +600,6 @@
 		193F10B61F7B97A200C2F948 /* 别人进行云对讲0058.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0058.png"; sourceTree = "<group>"; };
 		193F10B71F7B97A200C2F948 /* 别人进行云对讲0059.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0059.png"; sourceTree = "<group>"; };
 		193F10B81F7B97A200C2F948 /* 别人进行云对讲0060.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0060.png"; sourceTree = "<group>"; };
-		193F10BA1F7B97A200C2F948 /* xhwl_login_logo_down.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xhwl_login_logo_down.gif; sourceTree = "<group>"; };
-		193F10BB1F7B97A200C2F948 /* xhwl_login_logo_up.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xhwl_login_logo_up.gif; sourceTree = "<group>"; };
 		1941DCDA1F58341B009DE0F0 /* XHWLHouseManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XHWLHouseManager.entitlements; sourceTree = "<group>"; };
 		194D7FAB1F80B48200B27BD0 /* XHWLMessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMessageVC.swift; sourceTree = "<group>"; };
 		194D7FAD1F80B55700B27BD0 /* XHWLMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMessageView.swift; sourceTree = "<group>"; };
@@ -737,6 +749,16 @@
 		19ADF39D1F64DD8400A9E0FB /* XHWLRegisterationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLRegisterationModel.swift; sourceTree = "<group>"; };
 		19ADF3AB1F64FF7300A9E0FB /* XHWLTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLTagView.swift; sourceTree = "<group>"; };
 		19B142E91F677D780087AC5E /* XHWLNavHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLNavHeadView.swift; sourceTree = "<group>"; };
+		19B8F5A41FB42E8C002D7B9E /* XHWLRosterManageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLRosterManageVC.swift; sourceTree = "<group>"; };
+		19B8F5A71FB52DA7002D7B9E /* XHWLRosterManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLRosterManageView.swift; sourceTree = "<group>"; };
+		19B8F5A91FB531F1002D7B9E /* XHWLRosterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLRosterModel.swift; sourceTree = "<group>"; };
+		19B8F5AE1FB54B8C002D7B9E /* LBXPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBXPermissions.swift; sourceTree = "<group>"; };
+		19B8F5AF1FB54B8C002D7B9E /* LBXScanLineAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBXScanLineAnimation.swift; sourceTree = "<group>"; };
+		19B8F5B01FB54B8C002D7B9E /* LBXScanNetAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBXScanNetAnimation.swift; sourceTree = "<group>"; };
+		19B8F5B11FB54B8C002D7B9E /* LBXScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBXScanView.swift; sourceTree = "<group>"; };
+		19B8F5B21FB54B8C002D7B9E /* LBXScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBXScanViewController.swift; sourceTree = "<group>"; };
+		19B8F5B31FB54B8C002D7B9E /* LBXScanViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBXScanViewStyle.swift; sourceTree = "<group>"; };
+		19B8F5B41FB54B8C002D7B9E /* LBXScanWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBXScanWrapper.swift; sourceTree = "<group>"; };
 		19B9C18F1FA1D25600B0A0FB /* XHWLOverlayAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLOverlayAnnotationView.swift; sourceTree = "<group>"; };
 		19B9C1941FA2CDDC00B0A0FB /* NSDate+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
 		19B9C1951FA2CDDC00B0A0FB /* NSDate+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
@@ -758,27 +780,6 @@
 		19BB53341F56BF5A006C38EA /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		19BB53371F56BF99006C38EA /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
 		19BB53381F56BF99006C38EA /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
-		19BB533B1F56BFA3006C38EA /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtension.h; sourceTree = "<group>"; };
-		19BB533C1F56BFA3006C38EA /* MJExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConst.h; sourceTree = "<group>"; };
-		19BB533D1F56BFA3006C38EA /* MJExtensionConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConst.m; sourceTree = "<group>"; };
-		19BB533E1F56BFA3006C38EA /* MJFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJFoundation.h; sourceTree = "<group>"; };
-		19BB533F1F56BFA3006C38EA /* MJFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJFoundation.m; sourceTree = "<group>"; };
-		19BB53401F56BFA3006C38EA /* MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJProperty.h; sourceTree = "<group>"; };
-		19BB53411F56BFA3006C38EA /* MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJProperty.m; sourceTree = "<group>"; };
-		19BB53421F56BFA3006C38EA /* MJPropertyKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyKey.h; sourceTree = "<group>"; };
-		19BB53431F56BFA3006C38EA /* MJPropertyKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyKey.m; sourceTree = "<group>"; };
-		19BB53441F56BFA3006C38EA /* MJPropertyType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyType.h; sourceTree = "<group>"; };
-		19BB53451F56BFA3006C38EA /* MJPropertyType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyType.m; sourceTree = "<group>"; };
-		19BB53461F56BFA3006C38EA /* NSObject+MJClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJClass.h"; sourceTree = "<group>"; };
-		19BB53471F56BFA3006C38EA /* NSObject+MJClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJClass.m"; sourceTree = "<group>"; };
-		19BB53481F56BFA3006C38EA /* NSObject+MJCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJCoding.h"; sourceTree = "<group>"; };
-		19BB53491F56BFA3006C38EA /* NSObject+MJCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJCoding.m"; sourceTree = "<group>"; };
-		19BB534A1F56BFA3006C38EA /* NSObject+MJKeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJKeyValue.h"; sourceTree = "<group>"; };
-		19BB534B1F56BFA3006C38EA /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
-		19BB534C1F56BFA3006C38EA /* NSObject+MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJProperty.h"; sourceTree = "<group>"; };
-		19BB534D1F56BFA3006C38EA /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
-		19BB534E1F56BFA3006C38EA /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
-		19BB534F1F56BFA3006C38EA /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
 		19BB535A1F56C00F006C38EA /* XHWLConfigure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLConfigure.swift; sourceTree = "<group>"; };
 		19BB53A61F56C9E3006C38EA /* XHWLHouseManager-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XHWLHouseManager-Bridging-Header.h"; sourceTree = "<group>"; };
 		19BB53A71F56DA43006C38EA /* XHWLLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLoginVC.swift; sourceTree = "<group>"; };
@@ -787,8 +788,26 @@
 		19BBF3D91F73D95F005AC7F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		19BBF3DA1F73D966005AC7F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		19BBF3E11F74A620005AC7F2 /* String+Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
+		19BEB1871FA55EEB0098CE9F /* XHWLMcuPictureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMcuPictureModel.swift; sourceTree = "<group>"; };
 		19C0BCEE1F56AA8B00871BDD /* XHWLNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLNavigationController.swift; sourceTree = "<group>"; };
+		19C0E8471FB5825000FB3774 /* XHWLRosterAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLRosterAddView.swift; sourceTree = "<group>"; };
+		19C0E84A1FBC2C8000FB3774 /* XHWLRosterManageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLRosterManageCell.swift; sourceTree = "<group>"; };
+		19C0E8501FBD231F00FB3774 /* XHWLChannelManageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLChannelManageVC.swift; sourceTree = "<group>"; };
+		19C0E8521FBD656500FB3774 /* XHWLChannelListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLChannelListView.swift; sourceTree = "<group>"; };
+		19C0E8541FBD6AED00FB3774 /* XHWLChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLChannelModel.swift; sourceTree = "<group>"; };
+		19C0E8561FBD72F500FB3774 /* XHWLSelectGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLSelectGroupVC.swift; sourceTree = "<group>"; };
+		19C0E8581FBD731400FB3774 /* XHWLSelectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLSelectGroupView.swift; sourceTree = "<group>"; };
+		19C0E8941FBE78ED00FB3774 /* XHWLChannelInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLChannelInfoVC.swift; sourceTree = "<group>"; };
+		19C0E8971FBE880800FB3774 /* LxGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LxGridView.swift; sourceTree = "<group>"; };
+		19C0E8981FBE880800FB3774 /* LxGridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LxGridViewCell.swift; sourceTree = "<group>"; };
+		19C0E8991FBE880800FB3774 /* LxGridViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LxGridViewFlowLayout.swift; sourceTree = "<group>"; };
+		19C0E89A1FBE883800FB3774 /* XHWLGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLGridView.swift; sourceTree = "<group>"; };
+		19C0E89F1FBEF3C800FB3774 /* XHWLWorkerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLWorkerModel.swift; sourceTree = "<group>"; };
 		19C1B25F1FA016FF0082B983 /* XHWLPatroLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLPatroLabelView.swift; sourceTree = "<group>"; };
+		19C7996D1FA9505A00A78A90 /* SMCalloutView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMCalloutView.h; sourceTree = "<group>"; };
+		19C7996E1FA9505A00A78A90 /* SMCalloutView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMCalloutView.m; sourceTree = "<group>"; };
+		19C7996F1FA9505A00A78A90 /* SMClassicCalloutView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMClassicCalloutView.h; sourceTree = "<group>"; };
+		19C799701FA9505A00A78A90 /* SMClassicCalloutView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMClassicCalloutView.m; sourceTree = "<group>"; };
 		19CDF0F41F886A3E001F17A1 /* XHWLImageScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLImageScale.swift; sourceTree = "<group>"; };
 		19CDF1891F8AFEDB001F17A1 /* XHWLBluetoothModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLBluetoothModel.swift; sourceTree = "<group>"; };
 		19D8FDBA1F6A664400AC7C22 /* XHWLAccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLAccountModel.swift; sourceTree = "<group>"; };
@@ -982,6 +1001,7 @@
 		193F0E631F7B512B00C2F948 /* SecurityEmployee */ = {
 			isa = PBXGroup;
 			children = (
+				19B8F59F1FB42DE6002D7B9E /* RosterManage */,
 				196761231F9AF4E1007C840A /* CloudTalking */,
 				193F0E641F7B512B00C2F948 /* VisitorRegister */,
 			);
@@ -1527,10 +1547,8 @@
 		193F107A1F7B97A200C2F948 /* resourceFile */ = {
 			isa = PBXGroup;
 			children = (
-				19E16CCF1F7CE2BB00E7F930 /* open_door.gif */,
 				193F107B1F7B97A200C2F948 /* GIF_image */,
-				193F10BA1F7B97A200C2F948 /* xhwl_login_logo_down.gif */,
-				193F10BB1F7B97A200C2F948 /* xhwl_login_logo_up.gif */,
+				19E16CCF1F7CE2BB00E7F930 /* open_door.gif */,
 			);
 			path = resourceFile;
 			sourceTree = "<group>";
@@ -1732,6 +1750,7 @@
 			isa = PBXGroup;
 			children = (
 				1967610D1F99D218007C840A /* XHWLMcuModel.swift */,
+				19BEB1871FA55EEB0098CE9F /* XHWLMcuPictureModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2079,6 +2098,56 @@
 			path = Bluetooth;
 			sourceTree = "<group>";
 		};
+		19B8F59F1FB42DE6002D7B9E /* RosterManage */ = {
+			isa = PBXGroup;
+			children = (
+				19B8F5A31FB42E4F002D7B9E /* View */,
+				19B8F5A21FB42E44002D7B9E /* Model */,
+				19B8F5A01FB42E24002D7B9E /* Controller */,
+			);
+			path = RosterManage;
+			sourceTree = "<group>";
+		};
+		19B8F5A01FB42E24002D7B9E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				19B8F5A41FB42E8C002D7B9E /* XHWLRosterManageVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		19B8F5A21FB42E44002D7B9E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				19B8F5A91FB531F1002D7B9E /* XHWLRosterModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		19B8F5A31FB42E4F002D7B9E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				19B8F5A71FB52DA7002D7B9E /* XHWLRosterManageView.swift */,
+				19C0E8471FB5825000FB3774 /* XHWLRosterAddView.swift */,
+				19C0E84A1FBC2C8000FB3774 /* XHWLRosterManageCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		19B8F5AD1FB54B8C002D7B9E /* swiftScan */ = {
+			isa = PBXGroup;
+			children = (
+				19B8F5AE1FB54B8C002D7B9E /* LBXPermissions.swift */,
+				19B8F5AF1FB54B8C002D7B9E /* LBXScanLineAnimation.swift */,
+				19B8F5B01FB54B8C002D7B9E /* LBXScanNetAnimation.swift */,
+				19B8F5B11FB54B8C002D7B9E /* LBXScanView.swift */,
+				19B8F5B21FB54B8C002D7B9E /* LBXScanViewController.swift */,
+				19B8F5B31FB54B8C002D7B9E /* LBXScanViewStyle.swift */,
+				19B8F5B41FB54B8C002D7B9E /* LBXScanWrapper.swift */,
+			);
+			path = swiftScan;
+			sourceTree = "<group>";
+		};
 		19B9C1931FA2CDDC00B0A0FB /* WSDaePickerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2096,7 +2165,6 @@
 		19BB53231F56BEBB006C38EA /* Mcu_sdk */ = {
 			isa = PBXGroup;
 			children = (
-				19BB533A1F56BFA3006C38EA /* MJExtension */,
 				19BB53361F56BF99006C38EA /* XmlReader */,
 				19BB53241F56BEBB006C38EA /* Mcu_sdk.framework */,
 			);
@@ -2112,37 +2180,11 @@
 			path = XmlReader;
 			sourceTree = "<group>";
 		};
-		19BB533A1F56BFA3006C38EA /* MJExtension */ = {
-			isa = PBXGroup;
-			children = (
-				19BB533B1F56BFA3006C38EA /* MJExtension.h */,
-				19BB533C1F56BFA3006C38EA /* MJExtensionConst.h */,
-				19BB533D1F56BFA3006C38EA /* MJExtensionConst.m */,
-				19BB533E1F56BFA3006C38EA /* MJFoundation.h */,
-				19BB533F1F56BFA3006C38EA /* MJFoundation.m */,
-				19BB53401F56BFA3006C38EA /* MJProperty.h */,
-				19BB53411F56BFA3006C38EA /* MJProperty.m */,
-				19BB53421F56BFA3006C38EA /* MJPropertyKey.h */,
-				19BB53431F56BFA3006C38EA /* MJPropertyKey.m */,
-				19BB53441F56BFA3006C38EA /* MJPropertyType.h */,
-				19BB53451F56BFA3006C38EA /* MJPropertyType.m */,
-				19BB53461F56BFA3006C38EA /* NSObject+MJClass.h */,
-				19BB53471F56BFA3006C38EA /* NSObject+MJClass.m */,
-				19BB53481F56BFA3006C38EA /* NSObject+MJCoding.h */,
-				19BB53491F56BFA3006C38EA /* NSObject+MJCoding.m */,
-				19BB534A1F56BFA3006C38EA /* NSObject+MJKeyValue.h */,
-				19BB534B1F56BFA3006C38EA /* NSObject+MJKeyValue.m */,
-				19BB534C1F56BFA3006C38EA /* NSObject+MJProperty.h */,
-				19BB534D1F56BFA3006C38EA /* NSObject+MJProperty.m */,
-				19BB534E1F56BFA3006C38EA /* NSString+MJExtension.h */,
-				19BB534F1F56BFA3006C38EA /* NSString+MJExtension.m */,
-			);
-			path = MJExtension;
-			sourceTree = "<group>";
-		};
 		19C0BCE31F56AA8B00871BDD /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				19B8F5AD1FB54B8C002D7B9E /* swiftScan */,
+				19C7996C1FA9505A00A78A90 /* CallPaoPao */,
 				19B9C1931FA2CDDC00B0A0FB /* WSDaePickerView */,
 				192B644C1FA093BA0094421B /* THDatePickerView.h */,
 				192B644B1FA093BA0094421B /* THDatePickerView.m */,
@@ -2205,6 +2247,7 @@
 		19C0BCEF1F56AA8B00871BDD /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				19C0E84C1FBD22CC00FB3774 /* ChannelManage */,
 				194D7FA71F80B45000B27BD0 /* Message */,
 				193F0E571F7B50E600C2F948 /* IssueReport */,
 				19F04DCD1F75051C00E0BD75 /* RemoteOpenDoor */,
@@ -2228,6 +2271,67 @@
 				1955C9B41F652A41008C31C8 /* XHWLCodeTF.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		19C0E84C1FBD22CC00FB3774 /* ChannelManage */ = {
+			isa = PBXGroup;
+			children = (
+				19C0E84F1FBD22F500FB3774 /* Model */,
+				19C0E84E1FBD22EF00FB3774 /* View */,
+				19C0E84D1FBD22E900FB3774 /* Controller */,
+			);
+			path = ChannelManage;
+			sourceTree = "<group>";
+		};
+		19C0E84D1FBD22E900FB3774 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				19C0E8501FBD231F00FB3774 /* XHWLChannelManageVC.swift */,
+				19C0E8561FBD72F500FB3774 /* XHWLSelectGroupVC.swift */,
+				19C0E8941FBE78ED00FB3774 /* XHWLChannelInfoVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		19C0E84E1FBD22EF00FB3774 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				19C0E8961FBE880800FB3774 /* LxGridView */,
+				19C0E8521FBD656500FB3774 /* XHWLChannelListView.swift */,
+				19C0E8581FBD731400FB3774 /* XHWLSelectGroupView.swift */,
+				19C0E89A1FBE883800FB3774 /* XHWLGridView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		19C0E84F1FBD22F500FB3774 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				19C0E8541FBD6AED00FB3774 /* XHWLChannelModel.swift */,
+				19C0E89F1FBEF3C800FB3774 /* XHWLWorkerModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		19C0E8961FBE880800FB3774 /* LxGridView */ = {
+			isa = PBXGroup;
+			children = (
+				19C0E8971FBE880800FB3774 /* LxGridView.swift */,
+				19C0E8981FBE880800FB3774 /* LxGridViewCell.swift */,
+				19C0E8991FBE880800FB3774 /* LxGridViewFlowLayout.swift */,
+			);
+			path = LxGridView;
+			sourceTree = "<group>";
+		};
+		19C7996C1FA9505A00A78A90 /* CallPaoPao */ = {
+			isa = PBXGroup;
+			children = (
+				19C7996D1FA9505A00A78A90 /* SMCalloutView.h */,
+				19C7996E1FA9505A00A78A90 /* SMCalloutView.m */,
+				19C7996F1FA9505A00A78A90 /* SMClassicCalloutView.h */,
+				19C799701FA9505A00A78A90 /* SMClassicCalloutView.m */,
+			);
+			path = CallPaoPao;
 			sourceTree = "<group>";
 		};
 		19CDF1881F8AFEBE001F17A1 /* Model */ = {
@@ -2553,7 +2657,6 @@
 				193F10D91F7B97A200C2F948 /* 别人进行云对讲0029.png in Resources */,
 				193F10E71F7B97A200C2F948 /* 别人进行云对讲0043.png in Resources */,
 				193F10D11F7B97A200C2F948 /* 别人进行云对讲0021.png in Resources */,
-				193F10FB1F7B97A200C2F948 /* xhwl_login_logo_up.gif in Resources */,
 				193F10D01F7B97A200C2F948 /* 别人进行云对讲0020.png in Resources */,
 				193F10E91F7B97A200C2F948 /* 别人进行云对讲0045.png in Resources */,
 				193F10ED1F7B97A200C2F948 /* 别人进行云对讲0049.png in Resources */,
@@ -2575,7 +2678,6 @@
 				193F10C81F7B97A200C2F948 /* 别人进行云对讲0012.png in Resources */,
 				193F10C01F7B97A200C2F948 /* 别人进行云对讲0004.png in Resources */,
 				193F10E01F7B97A200C2F948 /* 别人进行云对讲0036.png in Resources */,
-				193F10FA1F7B97A200C2F948 /* xhwl_login_logo_down.gif in Resources */,
 				84A50A611F5668DA00BCDA47 /* Main.storyboard in Resources */,
 				193F10CB1F7B97A200C2F948 /* 别人进行云对讲0015.png in Resources */,
 				193F10D71F7B97A200C2F948 /* 别人进行云对讲0027.png in Resources */,
@@ -2661,10 +2763,11 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/MZTimerLabel/MZTimerLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TransitionAnimation/TransitionAnimation.framework",
 				"${BUILT_PRODUCTS_DIR}/TransitionTreasury/TransitionTreasury.framework",
-				"${BUILT_PRODUCTS_DIR}/swiftScan/swiftScan.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -2672,10 +2775,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MZTimerLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TransitionAnimation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TransitionTreasury.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/swiftScan.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2697,6 +2801,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19C0E89D1FBE889C00FB3774 /* LxGridViewCell.swift in Sources */,
 				19C1B2601FA016FF0082B983 /* XHWLPatroLabelView.swift in Sources */,
 				193F0F2F1F7B543700C2F948 /* XHWLMeAnnotationView.swift in Sources */,
 				196F72701FA2D1DE00B0AA4D /* NSDate+Extension.m in Sources */,
@@ -2708,23 +2813,32 @@
 				193F0F2C1F7B53E400C2F948 /* XHWLSafeGuardView.swift in Sources */,
 				192BC2221F9F5D8A00CDF492 /* XHWLPatrolStateView.swift in Sources */,
 				193F0F2D1F7B53E400C2F948 /* XHWLSafeProtectionView.swift in Sources */,
+				19C0E8951FBE78ED00FB3774 /* XHWLChannelInfoVC.swift in Sources */,
 				193F0F2A1F7B53DD00C2F948 /* XHWLSafeProtectionModel.swift in Sources */,
 				193F0F281F7B53D600C2F948 /* XHWLSafeGuardVC.swift in Sources */,
 				193F0F291F7B53D600C2F948 /* XHWLSafeProtectionVC.swift in Sources */,
 				192AEF611F8C6356004A7BF8 /* XHWLOtherAnnotationView.swift in Sources */,
+				19C799721FA9506300A78A90 /* SMClassicCalloutView.m in Sources */,
 				196F72721FA2D1E400B0AA4D /* WSDatePickerView.m in Sources */,
+				19B8F5B51FB54C08002D7B9E /* LBXPermissions.swift in Sources */,
 				193F0F241F7B53CF00C2F948 /* XHWLActualTimeCell.swift in Sources */,
 				193F0F251F7B53CF00C2F948 /* XHWLProgressDetailCell.swift in Sources */,
 				196761151F99D272007C840A /* XHWLMcuCell.swift in Sources */,
 				193F0F261F7B53CF00C2F948 /* XHWLProgressDetailView.swift in Sources */,
 				19057C551FA0A2DE0061E26B /* XHWLGroupBoxListView.swift in Sources */,
 				193F0F271F7B53CF00C2F948 /* XHWLProgressView.swift in Sources */,
+				19B8F5A51FB42E8C002D7B9E /* XHWLRosterManageVC.swift in Sources */,
 				193F0F231F7B53C800C2F948 /* XHWLProgressDetailVC.swift in Sources */,
+				19C0E8421FB54CE100FB3774 /* LBXScanNetAnimation.swift in Sources */,
 				193F0F221F7B53C200C2F948 /* XHWLMapKitModel.swift in Sources */,
+				19BEB1881FA55EEB0098CE9F /* XHWLMcuPictureModel.swift in Sources */,
 				193F0F211F7B53BC00C2F948 /* XHWLMapKitVC.swift in Sources */,
+				19C0E8511FBD231F00FB3774 /* XHWLChannelManageVC.swift in Sources */,
 				193F0F1E1F7B53B500C2F948 /* XHWLDataCell.swift in Sources */,
 				193F0F1F1F7B53B500C2F948 /* XHWLDataView.swift in Sources */,
 				192BC21C1F9F184300CDF492 /* XHWLPatrolHeadView.swift in Sources */,
+				19B8F5B61FB54C0B002D7B9E /* LBXScanLineAnimation.swift in Sources */,
+				19C0E8431FB54CE600FB3774 /* LBXScanView.swift in Sources */,
 				193F0F201F7B53B500C2F948 /* XHWLSubDataView.swift in Sources */,
 				193F0F1D1F7B53AE00C2F948 /* XHWLDataModel.swift in Sources */,
 				19A9C1761F7DEEEE00C928AA /* BluetoothScanVC.swift in Sources */,
@@ -2739,11 +2853,13 @@
 				193F0F1B1F7B53A100C2F948 /* XHWLSafeGuardDetailView.swift in Sources */,
 				1967611C1F99D388007C840A /* XHWLPlayerView.swift in Sources */,
 				193F0F141F7B539900C2F948 /* XHWLAbnormalPassVC.swift in Sources */,
+				19B8F5AA1FB531F1002D7B9E /* XHWLRosterModel.swift in Sources */,
 				193F0F151F7B539900C2F948 /* XHWLSafeGuardDetailVC.swift in Sources */,
 				196761281F9AF7EB007C840A /* XHWLCallTakingVC.swift in Sources */,
 				193F0F0A1F7B539100C2F948 /* XHWLButton.swift in Sources */,
 				193F0F0B1F7B539100C2F948 /* XHWLCheckListTF.swift in Sources */,
 				193F0F0C1F7B539100C2F948 /* XHWLCheckListView.swift in Sources */,
+				19C0E89B1FBE883800FB3774 /* XHWLGridView.swift in Sources */,
 				193F0F0D1F7B539100C2F948 /* XHWLCheckTF.swift in Sources */,
 				1967611A1F99D283007C840A /* XHWLMcuModel.swift in Sources */,
 				193F0F0E1F7B539100C2F948 /* XHWLMoreListView.swift in Sources */,
@@ -2755,6 +2871,7 @@
 				196AB4C21F945ED5004E6C7A /* BYPushAnimation_04.swift in Sources */,
 				196AB4B81F945E84004E6C7A /* UIViewController+Extension.swift in Sources */,
 				193F0F091F7B538900C2F948 /* XHWLUnitModel.swift in Sources */,
+				19C0E89C1FBE889900FB3774 /* LxGridView.swift in Sources */,
 				193F0F081F7B538300C2F948 /* XHWLCheckVC.swift in Sources */,
 				19857F361F83322400850A8A /* XHWLMenuLineView.swift in Sources */,
 				193F0F061F7B537C00C2F948 /* XHWLRegistrationDetailView.swift in Sources */,
@@ -2770,6 +2887,7 @@
 				193F0EFF1F7B535800C2F948 /* XHWLHistoryDetailVC.swift in Sources */,
 				193F0F001F7B535800C2F948 /* XHWLWarningVC.swift in Sources */,
 				193F0EFE1F7B535100C2F948 /* XHWLEnergyManagementVC.swift in Sources */,
+				19C0E8551FBD6AED00FB3774 /* XHWLChannelModel.swift in Sources */,
 				193F0EFD1F7B534700C2F948 /* XHWLDeviceStatisticsVC.swift in Sources */,
 				193F0EFA1F7B534000C2F948 /* XHWLChargeButton.swift in Sources */,
 				193F0EFB1F7B534000C2F948 /* XHWLChargeProviderCell.swift in Sources */,
@@ -2792,6 +2910,7 @@
 				193F0EEF1F7B530D00C2F948 /* XHWLScanModel.swift in Sources */,
 				193F0EEA1F7B530400C2F948 /* XHWLIssueReportListVC.swift in Sources */,
 				193F0EEB1F7B530400C2F948 /* XHWLIssueReportVC.swift in Sources */,
+				19C0E8441FB54CE800FB3774 /* LBXScanViewController.swift in Sources */,
 				19B9C1901FA1D25600B0A0FB /* XHWLOverlayAnnotationView.swift in Sources */,
 				193F0EEC1F7B530400C2F948 /* XHWLScanResultVC.swift in Sources */,
 				193F0EE91F7B52F600C2F948 /* XHWLScanVC.swift in Sources */,
@@ -2822,8 +2941,10 @@
 				192B644D1FA093BA0094421B /* THDatePickerView.m in Sources */,
 				19A14D6F1F5E381100D96A2E /* NSArray+MASAdditions.m in Sources */,
 				196AB4BB1F945EA3004E6C7A /* BHPopAnimation.swift in Sources */,
+				19C0E8461FB54CEE00FB3774 /* LBXScanWrapper.swift in Sources */,
 				19A572681F6CE5F0007B0D3F /* XHWLWorkView.swift in Sources */,
 				19F04DD41F7509B400E0BD75 /* BluetoothTableViewCell.swift in Sources */,
+				19C0E8451FB54CEB00FB3774 /* LBXScanViewStyle.swift in Sources */,
 				19A7A7131F58067E0044DC1A /* AlertMessage.swift in Sources */,
 				19764F5A1F9DDD0A005FD87D /* XHWLPictureListView.swift in Sources */,
 				19E122011F9DF3220015AC70 /* XHWLMapKitTopView.swift in Sources */,
@@ -2834,21 +2955,19 @@
 				198B17C71F7A3F8100F1067C /* XHWLLabel.swift in Sources */,
 				19A14D7E1F5E703D00D96A2E /* XHWLSearchBar.swift in Sources */,
 				1960DBD11FA18FB10081E084 /* XHWLCallSubView.swift in Sources */,
-				19BB53501F56BFA3006C38EA /* MJExtensionConst.m in Sources */,
 				197D64B31F62805500977074 /* XHWLMenuLabelView.swift in Sources */,
 				19EBB2391FA33AF300997CD9 /* XHWLPatrolDetailModel.swift in Sources */,
 				19BB53A81F56DA43006C38EA /* XHWLLoginVC.swift in Sources */,
+				19C0E8591FBD731400FB3774 /* XHWLSelectGroupView.swift in Sources */,
 				19FACBCB1F68CA0C00680E63 /* XHWLRoleModel.swift in Sources */,
 				19A14DB01F5F991600D96A2E /* UIViewController+RTRootNavigationController.m in Sources */,
-				19BB53521F56BFA3006C38EA /* MJProperty.m in Sources */,
 				19A14D8D1F5EA46F00D96A2E /* GIFAnimatedImageView.swift in Sources */,
 				19ADF3AC1F64FF7300A9E0FB /* XHWLTagView.swift in Sources */,
 				196761381F9B2A22007C840A /* VideoViewLayouter.swift in Sources */,
-				19BB53561F56BFA3006C38EA /* NSObject+MJCoding.m in Sources */,
+				19C799711FA9505F00A78A90 /* SMCalloutView.m in Sources */,
 				199999631F78D56D00F6A135 /* UIDevice+Extension.swift in Sources */,
 				19A14D901F5EA46F00D96A2E /* GifTextHeaderFooter.swift in Sources */,
 				19F04DD71F7509B800E0BD75 /* LocalBlueToothTableViewCell.swift in Sources */,
-				19BB53511F56BFA3006C38EA /* MJFoundation.m in Sources */,
 				196761451F9B4017007C840A /* VideoSession.swift in Sources */,
 				19A14D6E1F5E381100D96A2E /* MASViewConstraint.m in Sources */,
 				19BB53AA1F56DDC7006C38EA /* XHWLLoginView.swift in Sources */,
@@ -2864,6 +2983,7 @@
 				196AB4C41F945EDE004E6C7A /* BYPushAnimation_06.swift in Sources */,
 				19A5725D1F6CD49C007B0D3F /* XHWLBaseVC.swift in Sources */,
 				197D64B61F62807D00977074 /* XHWLMenuModel.swift in Sources */,
+				19C0E8A01FBEF3C800FB3774 /* XHWLWorkerModel.swift in Sources */,
 				19F04DD51F7509B400E0BD75 /* BluetoothVC.swift in Sources */,
 				19BBF3E21F74A620005AC7F2 /* String+Validation.swift in Sources */,
 				19A14D791F5E3BF300D96A2E /* XHWLTabbarVC.swift in Sources */,
@@ -2871,9 +2991,9 @@
 				19764F581F9DDC76005FD87D /* XHWLMcuPictureListVC.swift in Sources */,
 				1960DBCD1FA171FB0081E084 /* XHWLShowImageVC.swift in Sources */,
 				194D7FAE1F80B55700B27BD0 /* XHWLMessageView.swift in Sources */,
+				19C0E89E1FBE889E00FB3774 /* LxGridViewFlowLayout.swift in Sources */,
 				19A14D801F5E853C00D96A2E /* XHWLSearchVC.swift in Sources */,
 				1961CD9D1F596328006856D0 /* RealPlayViewController.m in Sources */,
-				19BB53531F56BFA3006C38EA /* MJPropertyKey.m in Sources */,
 				19A7A70D1F57EB460044DC1A /* YLGIFImage.swift in Sources */,
 				19A14D6B1F5E381100D96A2E /* MASConstraintMaker.m in Sources */,
 				1912240B1F5D47F500D201F3 /* JSONAndDictionary.swift in Sources */,
@@ -2882,7 +3002,6 @@
 				1961CDA91F596328006856D0 /* ToolBarButton.m in Sources */,
 				19A14DAF1F5F991600D96A2E /* RTRootNavigationController.m in Sources */,
 				1961CDA71F596328006856D0 /* TalkChannelView.m in Sources */,
-				19BB53571F56BFA3006C38EA /* NSObject+MJKeyValue.m in Sources */,
 				1931C0B01F725EDB004D0A41 /* Date+Extension.swift in Sources */,
 				19D8FDBB1F6A664400AC7C22 /* XHWLAccountModel.swift in Sources */,
 				1961CCD21F58E336006856D0 /* DateStringExtension.swift in Sources */,
@@ -2895,9 +3014,9 @@
 				19BB535B1F56C00F006C38EA /* XHWLConfigure.swift in Sources */,
 				1955C9B51F652A41008C31C8 /* XHWLCodeTF.swift in Sources */,
 				19A572651F6CE5CC007B0D3F /* XHWLHomeVC.swift in Sources */,
+				19C0E8531FBD656500FB3774 /* XHWLChannelListView.swift in Sources */,
 				196761191F99D27E007C840A /* XHWLMcuShowVC.swift in Sources */,
 				19A14D961F5EA6B200D96A2E /* HLBarIndicatorView.swift in Sources */,
-				19BB53541F56BFA3006C38EA /* MJPropertyType.m in Sources */,
 				196AB4BA1F945E9D004E6C7A /* BYPushAnimation_07.swift in Sources */,
 				196AB4BD1F945EB1004E6C7A /* BYPopAnimation_02.swift in Sources */,
 				19A14D8E1F5EA46F00D96A2E /* GifHeaderFooter.swift in Sources */,
@@ -2905,9 +3024,10 @@
 				19B142EA1F677D780087AC5E /* XHWLNavHeadView.swift in Sources */,
 				19A7A7111F57FB350044DC1A /* XHWLHttpTool.swift in Sources */,
 				19D8FDBD1F6A670900AC7C22 /* XHWLProjectModel.swift in Sources */,
-				19BB53581F56BFA3006C38EA /* NSObject+MJProperty.m in Sources */,
 				19CDF0F51F886A3E001F17A1 /* XHWLImageScale.swift in Sources */,
+				19B8F5A81FB52DA7002D7B9E /* XHWLRosterManageView.swift in Sources */,
 				197D64B81F628B9400977074 /* XHWLTipView.swift in Sources */,
+				19C0E8481FB5825000FB3774 /* XHWLRosterAddView.swift in Sources */,
 				19A14D8F1F5EA46F00D96A2E /* GifImagesHeaderFooter.swift in Sources */,
 				1912240D1F5D774700D201F3 /* XHWLHttpKey.swift in Sources */,
 				1961CCD61F58E448006856D0 /* TimerARC.swift in Sources */,
@@ -2922,7 +3042,7 @@
 				1961CDAB1F596328006856D0 /* ToolBarScrollView.m in Sources */,
 				196AB4BC1F945EA3004E6C7A /* BHPushAnimation.swift in Sources */,
 				19BB53391F56BF99006C38EA /* XMLReader.m in Sources */,
-				19BB53551F56BFA3006C38EA /* NSObject+MJClass.m in Sources */,
+				19C0E8571FBD72F500FB3774 /* XHWLSelectGroupVC.swift in Sources */,
 				84A50A5C1F5668DA00BCDA47 /* AppDelegate.swift in Sources */,
 				19F04DCF1F75051C00E0BD75 /* RemoteOpenDoorVC.swift in Sources */,
 				192DA5321F57A62A005950EC /* UIColor+Category.swift in Sources */,
@@ -2934,7 +3054,6 @@
 				19A5725F1F6CDF80007B0D3F /* XHWLWorkCell.swift in Sources */,
 				197D64B01F62804C00977074 /* XHWLWorkVC.swift in Sources */,
 				19A822911F728E1C00B8E570 /* SwiftNotice.swift in Sources */,
-				19BB53591F56BFA3006C38EA /* NSString+MJExtension.m in Sources */,
 				19A14D701F5E381100D96A2E /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				1961CCCE1F58E301006856D0 /* HintTool.swift in Sources */,
 				1955C9B31F6528C1008C31C8 /* XHWLForgetPwdView.swift in Sources */,
@@ -2944,6 +3063,7 @@
 				198B17D91F7A849100F1067C /* CLNewFeatureView.swift in Sources */,
 				192DA5431F57B73E005950EC /* XHWLSetPwdView.swift in Sources */,
 				197D64BC1F62A10900977074 /* XHWLTopView.swift in Sources */,
+				19C0E84B1FBC2C8000FB3774 /* XHWLRosterManageCell.swift in Sources */,
 				19A5726A1F6CE659007B0D3F /* XHWLHomeView.swift in Sources */,
 				19A14D8C1F5EA46F00D96A2E /* CoreTextHeaderFooter.swift in Sources */,
 				19A14D931F5EA46F00D96A2E /* UIScrollView+SYRefresh.swift in Sources */,
@@ -3197,6 +3317,7 @@
 					"$(PROJECT_DIR)/Libs",
 				);
 				GCC_INPUT_FILETYPE = automatic;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = XHWLHouseManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -3219,6 +3340,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XHWLHouseManager/XHWLHouseManager-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
@@ -3245,6 +3367,7 @@
 					"$(PROJECT_DIR)/Libs",
 				);
 				GCC_INPUT_FILETYPE = automatic;
+				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = XHWLHouseManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

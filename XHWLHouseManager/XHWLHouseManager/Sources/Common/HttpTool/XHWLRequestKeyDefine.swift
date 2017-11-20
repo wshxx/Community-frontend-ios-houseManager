@@ -43,13 +43,19 @@ enum XHWLRequestKeyID : NSInteger {
     case XHWL_DELETECARDLOG // 删除蓝牙绑卡记录
     case XHWL_SAVECARDLOG   // 保存蓝牙绑卡记录
     case XHWL_REGISTERJPUSH // 访客登记提交推送
-    case XHWL_SEARCHPIN // 巡更—在线定位—轨迹回放
-    case XHWL_PATROLDETAIL // 巡更—在线定位—点击位置查看详情
-    case XHWL_VIDEOUPLOAD // 上传云瞳抓拍图片
-    case XHWL_VIDEOIMGLIST // 获取云瞳抓拍图片
+    case XHWL_SEARCHPIN     // 巡更—在线定位—轨迹回放
+    case XHWL_PATROLDETAIL  // 巡更—在线定位—点击位置查看详情
+    case XHWL_VIDEOUPLOAD   // 上传云瞳抓拍图片
+    case XHWL_VIDEOIMGLIST  // 获取云瞳抓拍图片
     case XHWL_DELETEVIDEOIMG //删除抓拍图片
+    case XHWL_ROSTERLIST    // 获取名单列表
+    case XHWL_ADDROSTER     // 名单---添加新名单（黑名单、灰名单）
+    case XHWL_ROSTERINFO    // 根据证件号获取名单信息
+    case XHWL_CHANNELLIST   // 获取所有频道列表
+    case XHWL_ADDCHANNEL    // 新增频道/频道成员
+    case XHWL_DELETECHANNEL // 删除频道/频道成员
+    case XHWL_WORKERLIST    // 获取所有物业工作人员信息
 }
-
 
 class XHWLRequestKeyDefine: NSObject {
     
@@ -105,6 +111,13 @@ class XHWLRequestKeyDefine: NSObject {
             XHWLRequestKeyID.XHWL_VIDEOUPLOAD:"wyBusiness/iot/video/upload",        // 上传云瞳抓拍图片
             XHWLRequestKeyID.XHWL_VIDEOIMGLIST:"wyBusiness/iot/video/getList", // 获取云瞳抓拍图片
             XHWLRequestKeyID.XHWL_DELETEVIDEOIMG:"wyBusiness/iot/video/delete", //删除抓拍图片
+            XHWLRequestKeyID.XHWL_ROSTERLIST:"wyBusiness/wyRoster/getByType", // 获取名单列表
+            XHWLRequestKeyID.XHWL_ADDROSTER:"wyBusiness/wyRoster/new", // 名单---添加新名单（黑名单、灰名单）
+            XHWLRequestKeyID.XHWL_ROSTERINFO:"wyBusiness/wyRoster/getRosterByCetificateNo", // 根据证件号获取名单信息
+            XHWLRequestKeyID.XHWL_CHANNELLIST:"wyBusiness/channel/list", // 获取所有频道列表
+            XHWLRequestKeyID.XHWL_ADDCHANNEL:"wyBusiness/channel/add", // 新增频道/频道成员
+            XHWLRequestKeyID.XHWL_DELETECHANNEL:"wyBusiness/channel/removeMember", // 删除频道/频道成员
+            XHWLRequestKeyID.XHWL_WORKERLIST:"wyBusiness/channel/getMembers", // 获取所有物业工作人员信息
         ]
     }
 }

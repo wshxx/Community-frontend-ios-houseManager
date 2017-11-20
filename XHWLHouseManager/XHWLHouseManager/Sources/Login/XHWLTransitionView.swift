@@ -222,6 +222,12 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
                 UserDefaults.standard.set(modelData, forKey: "projectList")
                 UserDefaults.standard.synchronize()
                 
+                JPUSHService.setAlias(userModel.telephone,
+                                      completion: { (iResCode, iAlias, seq) in
+                                        if seq == 0 {
+                                            // "打标签成功".ext_debugPrintAndHint()
+                                        }
+                }, seq: 0)
                 // 打标签 安管主任：AGM； 工程：GC
                 if userModel.wyAccount.wyRole.name == "工程" {
                     JPUSHService.addTags(["GC"],
@@ -247,13 +253,6 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
                     
                     self.loginButtonClicked()
                 } else {
-                    
-                    JPUSHService.setAlias(userModel.telephone,
-                                          completion: { (iResCode, iAlias, seq) in
-                                            if seq == 0 {
-                                                // "打标签成功".ext_debugPrintAndHint()
-                                            }
-                    }, seq: 0)
                     
                     JPUSHService.setBadge(0) // JPush服务器
                     UIApplication.shared.applicationIconBadgeNumber = 0

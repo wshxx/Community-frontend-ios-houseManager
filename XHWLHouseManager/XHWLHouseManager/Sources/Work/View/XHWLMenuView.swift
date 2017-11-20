@@ -40,19 +40,22 @@ class XHWLMenuView: UIView , XHWLMenuLabelViewDelegate, XHWLNetworkDelegate {
         
         var projectStr:String! = ""
         if UserDefaults.standard.object(forKey: "projectList") != nil {
-            let projectData:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
-            let projectList:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: projectData.mj_JSONObject())
-            
-            for i in 0..<projectList.count {
-                let projectModel:XHWLProjectModel = projectList[i] as! XHWLProjectModel
-                if !projectStr.isEmpty {
-                    
-                    projectStr = projectStr + ","+projectModel.name
-                } else {
-                    
-                    projectStr = projectModel.name
+            if  UserDefaults.standard.object(forKey: "projectList") is NSData {
+                let projectData:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
+                let projectList:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: projectData.mj_JSONObject())
+                
+                for i in 0..<projectList.count {
+                    let projectModel:XHWLProjectModel = projectList[i] as! XHWLProjectModel
+                    if !projectStr.isEmpty {
+                        
+                        projectStr = projectStr + ","+projectModel.name
+                    } else {
+                        
+                        projectStr = projectModel.name
+                    }
                 }
             }
+            
 //            if projectList.count > 0 {
 //                let projectSubData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
 //                let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectSubData.mj_JSONObject())

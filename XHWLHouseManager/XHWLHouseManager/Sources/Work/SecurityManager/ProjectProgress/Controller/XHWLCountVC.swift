@@ -8,10 +8,10 @@
 
 import UIKit
 
-class XHWLCountVC: UIViewController , XHWLNetworkDelegate {
+class XHWLCountVC: XHWLBaseVC , XHWLNetworkDelegate {
     
-    var bgImg:UIImageView!
-    var topMenu:XHWLTopView!
+//    var bgImg:UIImageView!
+//    var topMenu:XHWLTopView!
     var warningView:XHWLCountView!
     var dataAry:NSMutableArray! = NSMutableArray()
     
@@ -22,17 +22,7 @@ class XHWLCountVC: UIViewController , XHWLNetworkDelegate {
         self.view.backgroundColor = UIColor.white
         setupView()
         setupNav()
-//        onLoadData()
     }
-    
-//    var dataAry:NSArray = NSArray() {
-//        willSet {
-//            //    dataAry = XHWLRealProgressModel.mj_objectArray(withKeyValuesArray:response["result"]!["progressList"] as! NSArray)
-//            warningView.dataAry = NSMutableArray()
-//            warningView.dataAry.addObjects(from: newValue as! [Any])
-//            warningView.tableView.reloadData()
-//        }
-//    }
     
     func onLoadData() {
 
@@ -60,21 +50,21 @@ class XHWLCountVC: UIViewController , XHWLNetworkDelegate {
     }
     
     func setupNav() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
         self.title = "巡更进度"
     }
     
-    func onBack(){
-        self.navigationController?.popViewController(animated: true)
-    }
+//    func onBack(){
+//        self.navigationController?.popViewController(animated: true)
+//    }
     
     func setupView() {
         
-        bgImg = UIImageView()
-        bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"home_bg")
-        self.view.addSubview(bgImg)
+//        bgImg = UIImageView()
+//        bgImg.frame = self.view.bounds
+//        bgImg.image = UIImage(named:"home_bg")
+//        self.view.addSubview(bgImg)
         
         warningView = XHWLCountView(frame:CGRect.zero)
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
@@ -83,6 +73,8 @@ class XHWLCountVC: UIViewController , XHWLNetworkDelegate {
             let vc:XHWLProgressDetailVC = XHWLProgressDetailVC()
             let model:XHWLRealProgressModel = self?.dataAry[index] as! XHWLRealProgressModel
             vc.userId = model.userId
+            vc.name = model.nickname
+            vc.progress = model.progress
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         self.view.addSubview(warningView)

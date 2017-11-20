@@ -23,6 +23,7 @@ class XHWLMeAnnotationView: BMKAnnotationView {
         self.backgroundColor = UIColor.clear
         self.centerOffset = CGPoint(x:0, y:0)
         self.isDraggable = false
+        self.canShowCallout = false
         
         annotationImageView = UIImageView(frame: bounds)
         annotationImageView.contentMode = UIViewContentMode.center

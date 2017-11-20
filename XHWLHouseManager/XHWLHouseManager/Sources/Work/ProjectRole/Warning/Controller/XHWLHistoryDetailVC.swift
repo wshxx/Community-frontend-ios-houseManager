@@ -8,9 +8,9 @@
 
 import UIKit
 
-class XHWLHistoryDetailVC: UIViewController , XHWLScanTestVCDelegate{
+class XHWLHistoryDetailVC: XHWLBaseVC , XHWLScanTestVCDelegate{
     
-    var bgImg:UIImageView!
+//    var bgImg:UIImageView!
     var dataAry:NSMutableArray!
     var isHistory:Bool! // 是历史记录
     var warningModel:XHWLWarningModel!
@@ -37,7 +37,7 @@ class XHWLHistoryDetailVC: UIViewController , XHWLScanTestVCDelegate{
         
         setupView()
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         if isHistory {
             self.title = "历史告警"
         } else {
@@ -45,16 +45,16 @@ class XHWLHistoryDetailVC: UIViewController , XHWLScanTestVCDelegate{
         }
     }
     
-    func onBack(){
-        self.navigationController?.popViewController(animated: true)
-    }
+//    func onBack(){
+//        self.navigationController?.popViewController(animated: true)
+//    }
     
     func setupView() {
         
-        bgImg = UIImageView()
-        bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"home_bg")
-        self.view.addSubview(bgImg)
+//        bgImg = UIImageView()
+//        bgImg.frame = self.view.bounds
+//        bgImg.image = UIImage(named:"home_bg")
+//        self.view.addSubview(bgImg)
         
         let warningView:XHWLHistoryWarningView = XHWLHistoryWarningView()
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)

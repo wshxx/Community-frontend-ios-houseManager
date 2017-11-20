@@ -8,9 +8,9 @@
 
 import UIKit
 
-class XHWLRegistrationDetailVC: UIViewController  , XHWLScanTestVCDelegate{
+class XHWLRegistrationDetailVC: XHWLBaseVC  , XHWLScanTestVCDelegate{
     
-    var bgImg:UIImageView!
+//    var bgImg:UIImageView!
     var dataAry:NSMutableArray!
     var visitorLogModel:XHWLVisitLogModel! 
     
@@ -28,9 +28,13 @@ class XHWLRegistrationDetailVC: UIViewController  , XHWLScanTestVCDelegate{
                             ["name":"证件：", "content":visitorLogModel.sysVisitor.certificateType+visitorLogModel.sysVisitor.cetificateNo, "isHiddenEdit":true],
                             ["name":"手机：", "content":visitorLogModel.sysVisitor.telephone, "isHiddenEdit": true],
                             ["name":"时效：", "content":visitorLogModel.sysVisitor.timeNo+visitorLogModel.sysVisitor.timeUnit, "isHiddenEdit": true]]
+        var registerTime:String = ""
+        if !visitorLogModel.sysVisitor.registTime.isEmpty { // accessTime
+            registerTime = Date.getStringDate(Int(visitorLogModel.sysVisitor.registTime)!)
+        }
         let ary2:NSArray = [
                             ["name":"事由：", "content":visitorLogModel.sysVisitor.accessReason, "isHiddenEdit": true],
-                            ["name":"登记时间：", "content":Date.getStringDate(Int(visitorLogModel.sysVisitor.accessTime)!), "isHiddenEdit": true]]
+                            ["name":"登记时间：", "content":registerTime, "isHiddenEdit": true]]
       
         print("\(visitorLogModel.yzName)")
         if !visitorLogModel.yzName.isEmpty {
@@ -48,37 +52,32 @@ class XHWLRegistrationDetailVC: UIViewController  , XHWLScanTestVCDelegate{
         
         setupView()
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
         self.title = "登记详情"
     }
     
-    func onBack(){
-        self.navigationController?.popViewController(animated: true)
-    }
+//    func onBack(){
+//        self.navigationController?.popViewController(animated: true)
+//    }
     
     func setupView() {
         
-        bgImg = UIImageView()
-        bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"home_bg")
-        self.view.addSubview(bgImg)
+//        bgImg = UIImageView()
+//        bgImg.frame = self.view.bounds
+//        bgImg.image = UIImage(named:"home_bg")
+//        self.view.addSubview(bgImg)
         
         let warningView:XHWLRegistrationDetailView = XHWLRegistrationDetailView()
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.createArray(array: dataAry)
-        warningView.successView()
-        
-//        if !visitorLogModel.yzName.isEmpty {
-//            
-//            warningView.successView()
-//        } else {
-//            
-//            warningView.failView()
-//        }
+        if visitorLogModel.sysVisitor.isYZAgree == "n" {
+            warningView.failView()
+        } else if visitorLogModel.sysVisitor.isYZAgree == "y" {
+            warningView.successView()
+        }
         self.view.addSubview(warningView)
-        
     }
     
 

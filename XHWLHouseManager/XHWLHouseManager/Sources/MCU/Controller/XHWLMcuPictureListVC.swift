@@ -26,6 +26,8 @@ class XHWLMcuPictureListVC: XHWLBaseVC , XHWLShowImageVCDelegate , XHWLNetworkDe
         
         return jumpBtn
     }()
+    var deleteImageAry:NSMutableArray! = NSMutableArray()
+    var isSingleDelete:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,24 @@ class XHWLMcuPictureListVC: XHWLBaseVC , XHWLShowImageVCDelegate , XHWLNetworkDe
         
         setupView()
         setupLoadData()
+    }
+    
+    func onDeleteData() {
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        var imageId:String = ""
+        for i in 0..<deleteImageAry.count {
+            let model:XHWLMcuPictureModel = deleteImageAry[i] as! XHWLMcuPictureModel
+            imageId = imageId + "," + model.id
+        }
+        if !imageId.isEmpty {
+            imageId = imageId.substring(from: String.Index(1))
+        }
+        let param:NSDictionary = ["token":userModel.wyAccount.token,
+                                  "imageId":imageId]
+        XHWLNetwork.shared.postDeleteVideoImgClick(param, self)
     }
     
     func setupLoadData() {
@@ -51,57 +71,33 @@ class XHWLMcuPictureListVC: XHWLBaseVC , XHWLShowImageVCDelegate , XHWLNetworkDe
             XHWLNetwork.shared.getVideoImgListClick(param, self)
         }
     }
-    
-//    rows =         (
-//    {
-//    id = 2;
-//    imageUrl = "http://202.105.104.105:8006/appImagesFloder/image_1509106853.png";
-//    sysProject =                 {
-//    ccProjectCode = "ZH-0755-0101";
-//    code = 201;
-//    divisionName = "\U5e7f\U4e1c\U7701";
-//    entranceCode = SZ0101;
-//    id = "5ba97a83-8e1f-11e7-a2f9-4ccc6aeb6282";
-//    latitude = "102.1233";
-//    longitude = 101;
-//    name = "\U6df1\U5733\U4e2d\U6d77\U534e\U5ead";
-//    parkingCode = "";
-//    patrolCode = "";
-//    };
-//    wyAccount =                 {
-//    id = "04e771c5-62aa-4aef-98f5-4df92a411956";
-//    isFirstLogin = n;
-//    loginTime = 1509084368000;
-//    name = 13543753374;
-//    password = 670b14728ad9902aecba32e22fa4f6bd;
-//    talkbackUUID = "";
-//    token = "f53718b2-bc88-4082-a749-b7da562cda75";
-//    weChat = "";
-//    workCode = xhwl3375;
-//    wyRole =                     {
-//    code = AGM001;
-//    id = "59b0ef1a-92e6-11e7-9069-fc4596942686";
-//    name = "\U5b89\U7ba1\U4e3b\U4efb";
-//    };
-//    wyRoleName = "\U5b89\U7ba1\U4e3b\U4efb";
-//    };
-//    }
-//    );
-    
+
     // MARK: - XHWLNetworkDelegate
     
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
         
         if requestKey == XHWLRequestKeyID.XHWL_VIDEOIMGLIST.rawValue {
-            //            if response["result"] is NSNull {
-            //                return
-            //            }
-            //            let dict:NSDictionary = response["result"] as! NSDictionary
-            //            //            let userProgressArray:NSArray = XHWLPatrolDetailModel.mj_objectArray(withKeyValuesArray:dict["userProgress"] as! NSArray)
-            //            //            self.dataAry = NSMutableArray()
-            //            realModel = XHWLPatrolDetailModel.mj_object(withKeyValues: dict["userProgress"] )
-            //            //            self.dataAry.addObjects(from: userProgressArray as! [Any])
-            //            self.tableView.reloadData()
+                        if response["result"] is NSNull {
+                            return
+                        }
+            let dict:NSDictionary = response["result"] as! NSDictionary
+            let array:NSArray = XHWLMcuPictureModel.mj_objectArray(withKeyValuesArray: dict["rows"])
+            warningView.collectAry = NSMutableArray()
+            warningView.collectAry.addObjects(from: array as! [Any])
+            warningView.collectionView.reloadData()
+        }
+        else if requestKey == XHWLRequestKeyID.XHWL_DELETEVIDEOIMG.rawValue {
+            
+            "删除图片成功".ext_debugPrintAndHint()
+            let model:XHWLMcuPictureModel = deleteImageAry[0] as! XHWLMcuPictureModel
+//            warningView.collectAry.remove(model)
+            warningView.collectAry.removeObjects(in: deleteImageAry as! [Any])
+            warningView.collectionView.reloadData()
+            if isSingleDelete {
+                
+            } else {
+                onCancel()
+            }
         }
     }
     
@@ -112,20 +108,21 @@ class XHWLMcuPictureListVC: XHWLBaseVC , XHWLShowImageVCDelegate , XHWLNetworkDe
     func setupView() {
         
         warningView = XHWLPictureListView(frame:CGRect(x:Screen_width*3/32.0, y:Screen_height/6.0, width:Screen_width*13/16.0, height:Screen_height*2/3.0))
-        warningView.jumpBlock = { _ in
+        warningView.jumpBlock = { model in
             let vc:XHWLShowImageVC = XHWLShowImageVC()
-            vc.showImage = UIImage(named:"2")!
+            vc.pictureModel = model
             vc.delegate = self
             self.navigationController?.pushViewController(vc, animated: true)
         }
         self.view.addSubview(warningView)
-        
         self.view.addSubview(self.deleteBtn)
     }
     
-    func onDeleteImage(_ image:UIImage) {
-//        warningView.dataAry.remove()
-        warningView.collectionView.reloadData()
+    func onDeleteImage(_ model:XHWLMcuPictureModel) {
+        isSingleDelete = true
+        deleteImageAry = NSMutableArray()
+        deleteImageAry.add(model)
+        onDeleteData()
     }
     
     func onEdit() {
@@ -144,7 +141,14 @@ class XHWLMcuPictureListVC: XHWLBaseVC , XHWLShowImageVCDelegate , XHWLNetworkDe
     
     func onDelete() {
         
-        onCancel()
+        if warningView.deleteAry.count > 0 {
+            isSingleDelete = false
+            deleteImageAry = NSMutableArray()
+            deleteImageAry.addObjects(from: warningView.deleteAry as! [Any])
+            onDeleteData()
+        } else {
+            "请先选择要删除的图片".ext_debugPrintAndHint()
+        }
     }
 
     override func didReceiveMemoryWarning() {

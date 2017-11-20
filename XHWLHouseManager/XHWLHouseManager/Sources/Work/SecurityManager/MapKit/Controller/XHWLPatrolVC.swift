@@ -56,10 +56,12 @@ class XHWLPatrolVC: XHWLBaseVC , XHWLMapKitVCDelegate {
         }
     }
 
-    func mapkitWithShowDetail(_ mapkit:XHWLMapKitVC, _ userId:String) {
+    func mapkitWithShowDetail(_ mapkit:XHWLMapKitVC,  _ model:XHWLMapKitModel) {
         let vc:XHWLProgressDetailVC = XHWLProgressDetailVC()
-        vc.userId = userId
-        print("\(userId)")
+        vc.userId = model.userId
+        vc.name = model.nickname
+        vc.progress = model.speed
+        print("\(model.userId)")
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

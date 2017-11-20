@@ -8,10 +8,10 @@
 
 import UIKit
 
-class XHWLAbnormalPassVC: UIViewController , XHWLNetworkDelegate {
+class XHWLAbnormalPassVC: XHWLBaseVC , XHWLNetworkDelegate {
 
-    var bgImg:UIImageView!
-    var topMenu:XHWLTopView!
+//    var bgImg:UIImageView!
+//    var topMenu:XHWLTopView!
 //    var warningView:XHWLSafeProtectionView!
     var warningView:XHWLAbnormalPassView!
     var dealArray:NSArray!
@@ -27,14 +27,14 @@ class XHWLAbnormalPassVC: UIViewController , XHWLNetworkDelegate {
     }
     
     func setupNav() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
         self.title = "异常放行记录"
     }
     
-    func onBack(){
-        self.navigationController?.popViewController(animated: true)
-    }
+//    func onBack(){
+//        self.navigationController?.popViewController(animated: true)
+//    }
     
     func onLoadData() {
         
@@ -69,10 +69,10 @@ class XHWLAbnormalPassVC: UIViewController , XHWLNetworkDelegate {
     
     func setupView() {
         
-        bgImg = UIImageView()
-        bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"home_bg")
-        self.view.addSubview(bgImg)
+//        bgImg = UIImageView()
+//        bgImg.frame = self.view.bounds
+//        bgImg.image = UIImage(named:"home_bg")
+//        self.view.addSubview(bgImg)
         
         warningView = XHWLAbnormalPassView()
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)

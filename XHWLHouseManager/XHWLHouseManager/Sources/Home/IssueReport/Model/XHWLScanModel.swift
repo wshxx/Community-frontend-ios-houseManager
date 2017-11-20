@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MJExtension
+//import MJExtension
 
 class XHWLScanModel:NSObject {
     var plant:XHWLScanDataModel = XHWLScanDataModel()

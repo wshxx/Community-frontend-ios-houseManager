@@ -14,37 +14,34 @@ class XHWLPictureListView: UIView ,UICollectionViewDelegate,UICollectionViewData
     var bgImage:UIImageView!
     let CELL_ID:String! = "cell_id"
     let HEAD_ID:String! = "head_id"
-    var jumpBlock:(UIImage)->() = { param in }
-    var mArrOfSelectedData:NSMutableArray = NSMutableArray()
-    var mArrOfSelectedItem:NSMutableArray = NSMutableArray()
+    var jumpBlock:(XHWLMcuPictureModel)->() = { param in }
+//    var mArrOfSelectedData:NSMutableArray = NSMutableArray()
+//    var mArrOfSelectedItem:NSMutableArray = NSMutableArray()
+    
+    
+    var collectAry:NSMutableArray = NSMutableArray()
+    var deleteAry:NSMutableArray = NSMutableArray()
     var isEdit:Bool = false {
         willSet {
             if newValue == true {
-                collectionView.allowsMultipleSelection = true
-                mArrOfSelectedData = NSMutableArray()
-                mArrOfSelectedItem = NSMutableArray()
-                let array:[MainPageSectionZeroCell] = collectionView.visibleCells as! [MainPageSectionZeroCell]
-                for var cell:MainPageSectionZeroCell in array {
-                    
-                    cell.maskV.isHidden = false
-                    cell.selectIV.isHidden = true
+                deleteAry = NSMutableArray()
+
+                for i in 0..<collectAry.count {
+                    let model:XHWLMcuPictureModel = collectAry[i] as! XHWLMcuPictureModel
+                    model.isEdit = newValue
+                    collectAry.replaceObject(at: i, with: model)
                 }
                 
                 collectionView.reloadData()
             } else {
-                mArrOfSelectedData = NSMutableArray()
-                mArrOfSelectedItem = NSMutableArray()
-                collectionView.allowsMultipleSelection = false
-                let array:[MainPageSectionZeroCell] = collectionView.visibleCells as! [MainPageSectionZeroCell]
-                for var cell:MainPageSectionZeroCell in array {
-                    
-                    cell.maskV.isHidden = true
-                    cell.selectIV.isHidden = true
-                    
-                    let indexPath:IndexPath = collectionView.indexPath(for: cell)!
-                    collectionView.deselectItem(at: indexPath, animated: false)
+                deleteAry = NSMutableArray()
+
+                for i in 0..<collectAry.count {
+                    let model:XHWLMcuPictureModel = collectAry[i] as! XHWLMcuPictureModel
+                    model.isEdit = newValue
+                    collectAry.replaceObject(at: i, with: model)
                 }
-                
+               
                 collectionView.reloadData()
             }
         }
@@ -85,12 +82,12 @@ class XHWLPictureListView: UIView ,UICollectionViewDelegate,UICollectionViewData
     
     //分区数
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 3
+        return 1
     }
     
     //每个分区含有的 item 个数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return collectAry.count
     }
     
     //返回 cell
@@ -98,6 +95,8 @@ class XHWLPictureListView: UIView ,UICollectionViewDelegate,UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as! MainPageSectionZeroCell
+        let model:XHWLMcuPictureModel = collectAry[indexPath.row] as! XHWLMcuPictureModel
+        cell.cellModel = model
         
         return cell
     }
@@ -126,38 +125,24 @@ class XHWLPictureListView: UIView ,UICollectionViewDelegate,UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("index is \(indexPath.row)")
         if (isEdit) {
+            let model:XHWLMcuPictureModel = collectAry[indexPath.row] as! XHWLMcuPictureModel
             
-            let cell:MainPageSectionZeroCell = collectionView.cellForItem(at: indexPath) as! MainPageSectionZeroCell
-            mArrOfSelectedItem.add(indexPath)
-            
-            let str:String = "str\(indexPath.row)"
-            mArrOfSelectedData.add(str)
-            
-            cell.selectIV.isHidden = false
+            if deleteAry.contains(model) {
+                model.isSelected = false
+                deleteAry.remove(model)
+                collectAry.replaceObject(at: indexPath.row, with: model)
+            } else {
+                model.isSelected = true
+                deleteAry.add(model)
+                collectAry.replaceObject(at: indexPath.row, with: model)
+            }
+            collectionView.reloadData()
         } else {
-            let img:UIImage = UIImage(named:"Patrol_selected")!
-            self.jumpBlock(img)
+            let model:XHWLMcuPictureModel = collectAry[indexPath.row] as! XHWLMcuPictureModel
+            self.jumpBlock(model)
         }
     }
 
-//    #pragma mark 反选
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-    
-        if (isEdit) {
-            
-            let cell:MainPageSectionZeroCell = collectionView.cellForItem(at: indexPath) as! MainPageSectionZeroCell
-            if mArrOfSelectedItem.contains(indexPath) {
-                
-                mArrOfSelectedItem.remove(indexPath)
-                
-                let str:String = "str\(indexPath.row)"
-                mArrOfSelectedData.remove(str)
-                
-                cell.selectIV.isHidden = true
-            }
-        }
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("\(touches)")
     }
@@ -168,6 +153,26 @@ class MainPageSectionZeroCell: UICollectionViewCell {
     var selectIV:UIImageView!
     var imageBtn:UIImageView!
     var maskV:UIView!
+    var cellModel:XHWLMcuPictureModel! {
+        willSet {
+            if newValue != nil {
+                
+                let url = URL(string: newValue.imageUrl)
+                imageBtn.kf.setImage(with: url, placeholder: UIImage(named:"default_icon"), options: nil, progressBlock: nil, completionHandler: nil)
+                if newValue.isEdit {
+                    self.maskV.isHidden = false
+                    if newValue.isSelected {
+                        self.selectIV.isHidden = false
+                    } else {
+                        self.selectIV.isHidden = true
+                    }
+                } else {
+                    self.maskV.isHidden = true
+                    self.selectIV.isHidden = true
+                }
+            }
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame);
@@ -187,13 +192,6 @@ class MainPageSectionZeroCell: UICollectionViewCell {
         selectIV.image = UIImage(named:"CloudEyes_select")
         selectIV.isHidden = true
         self.contentView.addSubview(selectIV)
-        
-//        let tap:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapClick))
-//        self.contentView.addGestureRecognizer(tap)
-    }
-    
-    func tapClick() {
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

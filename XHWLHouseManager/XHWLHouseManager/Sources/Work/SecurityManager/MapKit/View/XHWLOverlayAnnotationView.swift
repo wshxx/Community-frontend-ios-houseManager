@@ -20,6 +20,8 @@ class XHWLOverlayAnnotationView: BMKAnnotationView {
         self.centerOffset = CGPoint(x:0, y:0)
         self.isDraggable = false
         
+        self.canShowCallout = false
+        
         annotationImageView = UIImageView(frame: bounds)
         annotationImageView.contentMode = UIViewContentMode.center
         annotationImageView.image = UIImage(named: "Patrol_blue_pin")!

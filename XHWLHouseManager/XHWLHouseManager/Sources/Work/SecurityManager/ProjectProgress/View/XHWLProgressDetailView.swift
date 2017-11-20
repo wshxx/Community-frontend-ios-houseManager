@@ -10,34 +10,26 @@ import UIKit
 
 class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSource , XHWLNetworkDelegate {
 
-    
-
     var bgImage:UIImageView!
     var tableView:UITableView!
     var dataAry:NSMutableArray! = NSMutableArray()
     var progressView:XHWLProgressView!
     var dismissBlock:(NSInteger)->(Void) = { param in }
     var realModel:XHWLPatrolDetailModel!
-//    var realModel:XHWLRealProgressModel! {
-//        willSet {
-//            if (newValue != nil) {
-//
-//////                let ary1 = newValue.checkedList as NSArray
-////                let ary2 = newValue.planChecksList as NSArray
-////                let array = NSMutableArray()
-//////                array.addObjects(from: ary1 as! [Any])
-////                array.addObjects(from: ary2 as! [Any])
-////
-////                dataAry = XHWLListModel.mj_objectArray(withKeyValuesArray: array)
-////                progressView.progressModel = newValue
-////
-////                self.tableView.reloadData()
-//            }
-//        }
-//    }
+
     var userId:String! = "" {
         willSet {
             onLoad(newValue)
+        }
+    }
+    var name:String! = "" {
+        willSet {
+            progressView.show(name: newValue, progress: progress)
+        }
+    }
+    var progress:String! = "" {
+        willSet {
+            progressView.show(name: name, progress: newValue)
         }
     }
     
@@ -67,17 +59,12 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
                 return
             }
             let dict:NSDictionary = response["result"] as! NSDictionary
-//            let userProgressArray:NSArray = XHWLPatrolDetailModel.mj_objectArray(withKeyValuesArray:dict["userProgress"] as! NSArray)
-//            self.dataAry = NSMutableArray()
             realModel = XHWLPatrolDetailModel.mj_object(withKeyValues: dict["userProgress"] )
-//            self.dataAry.addObjects(from: userProgressArray as! [Any])
             self.tableView.reloadData()
+
+            progressView.show(name: name, progress: realModel.progress)
         }
     }
-
-
-    
-    
     
     func requestFail(_ requestKey: NSInteger, _ error: NSError) {
         
@@ -112,49 +99,56 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
         }
         
         let lineList:NSArray = realModel.lineList
-//        return dataAry.count
-        return lineList.count // self.realModel.totalChecksDetail.count
+        let totalChecksDetail:NSArray = realModel.totalChecksDetail
+        if totalChecksDetail.count > 0 {
+             return lineList.count + 1
+        } else {
+             return lineList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
         let lineList:NSArray = realModel.lineList
-        let lineModel:XHWLPatrolLineModel = XHWLPatrolLineModel.mj_object(withKeyValues: lineList[section])
-        if lineModel.isFlod == true {
-            return lineModel.currentTimeChecksDetail.count+1
+        if section < lineList.count {
+            let lineModel:XHWLPatrolLineModel = XHWLPatrolLineModel.mj_object(withKeyValues: lineList[section])
+            if lineModel.isFlod == true {
+                return lineModel.currentTimePlanChecksList.count+1
+            }
+        } else {
+            let totalChecksDetail:NSArray = realModel.totalChecksDetail
+            return totalChecksDetail.count
         }
         
         return 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         let lineList:NSArray = realModel.lineList
-        let lineModel:XHWLPatrolLineModel = XHWLPatrolLineModel.mj_object(withKeyValues: lineList[indexPath.section])
-        let detailAry:NSArray = lineModel.currentTimeChecksDetail
-        let cellModel:XHWLPatrolTotalCheckModel = XHWLPatrolTotalCheckModel.mj_object(withKeyValues: detailAry[indexPath.row])
-//        let realModel:XHWLPatrolDetailModel = (dataAry[section] as? XHWLPatrolDetailModel)!
-        if indexPath.row == detailAry.count {
-            let cell = XHWLMapKitSubViewCell.cellWithTableView(tableView: tableView)
-            //        cell.textLabel?.text = dataAry[indexPath.row] as? String
-            //        print("\(dataAry[indexPath.row])")
-            //        let realModel:XHWLListModel = (dataAry[indexPath.row] as? XHWLListModel)!
-            //        cell.isTop = indexPath.row == 0
-            //        cell.isBottom = indexPath.row == dataAry.count - 1
-            //        cell.setRealModel(realModel)
-            cell.lineModel = lineModel
+        print("\(indexPath.section) = \(lineList.count)")
+        if lineList.count > Int(indexPath.section) {
+            let lineModel:XHWLPatrolLineModel = XHWLPatrolLineModel.mj_object(withKeyValues: lineList[indexPath.section])
+            let detailAry:NSArray = lineModel.currentTimePlanChecksList
 
-            return cell
+            if indexPath.row >= detailAry.count {
+                let cell = XHWLMapKitSubViewCell.cellWithTableView(tableView: tableView)
+                cell.lineModel = lineModel
+                
+                return cell
+            } else {
+                let modelAry:NSArray = XHWLPatrolTotalCheckModel.mj_objectArray(withKeyValuesArray: detailAry)
+                let cellModel:XHWLPatrolTotalCheckModel = modelAry[indexPath.row] as! XHWLPatrolTotalCheckModel
+                let cell = XHWLProgressDetailCell.cellWithTableView(tableView: tableView)
+                cell.cellModel = cellModel
+                
+                return cell
+            }
         } else {
+            let totalChecksDetail:NSArray = realModel.totalChecksDetail
+            let lineAry:NSArray = XHWLPatrolTotalCheckModel.mj_objectArray(withKeyValuesArray: totalChecksDetail)
+            let lineModel:XHWLPatrolTotalCheckModel = lineAry[indexPath.row] as! XHWLPatrolTotalCheckModel
             let cell = XHWLProgressDetailCell.cellWithTableView(tableView: tableView)
-            //        cell.textLabel?.text = dataAry[indexPath.row] as? String
-//            print("\(dataAry[indexPath.row])")
-//            let realModel:XHWLListModel = (dataAry[indexPath.row] as? XHWLListModel)!
-//            cell.isTop = indexPath.row == 0
-//            cell.isBottom = indexPath.row == dataAry.count - 1
-//            cell.setRealModel(realModel)
-//            let cellModel = lineModel.currentTimeChecksDetail[indexPath.row] as! XHWLPatrolTotalCheckModel
-            cell.cellModel = cellModel
+            cell.lineModel = lineModel
             
             return cell
         }
@@ -165,70 +159,108 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let head:XHWLPatrolHeadView = XHWLPatrolHeadView.init(reuseIdentifier:"XHWLPatrolHeadView")
         
         let lineList:NSMutableArray = realModel.lineList
-        let lineModel:XHWLPatrolLineModel = XHWLPatrolLineModel.mj_object(withKeyValues: lineList[section])
-        head.headViewBlock = {[weak lineModel] cellModel in
-            print("\(cellModel.isFlod)")
+        if section < lineList.count {
+            let head:XHWLPatrolHeadView = XHWLPatrolHeadView.init(reuseIdentifier:"XHWLPatrolHeadView")
+            let lineModel:XHWLPatrolLineModel = XHWLPatrolLineModel.mj_object(withKeyValues: lineList[section])
+            head.headViewBlock = {[weak lineModel] cellModel in
+                print("\(cellModel.isFlod)")
+                
+                lineModel?.isFlod = cellModel.isFlod
+                let dict:NSDictionary = (lineModel?.mj_keyValues())!
+                self.realModel.lineList.replaceObject(at: section, with: dict)
+                self.tableView.reloadData()
+            }
+            head.cellModel = lineModel
             
-            lineModel?.isFlod = cellModel.isFlod
-            let dict:NSDictionary = (lineModel?.mj_keyValues())!
-            self.realModel.lineList.replaceObject(at: section, with: dict)
+            return head
+        } else {
+            
+            return nil
         }
-//        head.delegate = self
-//        head.cellModel = realModel
-        head.cellModel = lineModel //realModel
-//        self.realModel.totalChecksDetail
-
-        return head
     }
     
-    func headViewClicked(_ cellModel: XHWLPatrolDetailModel, _ headView: XHWLPatrolHeadView) {
-//        headView.isUserInteractionEnabled = false
-        
-//        var indexPaths = [IndexPath]()
-        print("\(cellModel.isFlod)")
-        
-        self.realModel.isFlod = cellModel.isFlod
-//        cellModel.isFlod = !cellModel.isFlod
-        
-        
-        self.tableView.reloadData()
-        
-//        let indexSection = IndexPath.init(row: 0, section: 0)
-//        self.tableView.scrollToRow(at: indexSection as IndexPath, at: UITableViewScrollPosition.middle, animated:true)
-//        for i in 0..<chapterModel.questions.count {
-//            let indexPath = IndexPath.init(row: i , section: chapterModel.chapterId - 1)
-//            indexPaths.append(indexPath as IndexPath)
-//        }
-        
-//        let time = DispatchTime.now() + TableViewConfig.dispatchAfterTime
-//        DispatchQueue.main.asyncAfter(deadline: time) {
-//            if ChapterFoldingSectionState.ChapterSectionStateFlod == chapterModel.foldingState {
-//                self.tableView.deleteRows(at: indexPaths as [IndexPath], with: UITableViewRowAnimation.top)
-//
-//            } else {
-//                self.tableView.insertRows(at: indexPaths as [IndexPath], with: UITableViewRowAnimation.top)
-//                let indexSection = IndexPath.init(row: 0, section: chapterModel.chapterId - 1)
-//
-//                self.tableView.scrollToRow(at: indexSection as IndexPath, at: UITableViewScrollPosition.middle, animated:true)
-//
-//            }
-//            headView.isUserInteractionEnabled = true
-//
-//        }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
     }
-    
+ 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        let lineList:NSMutableArray = realModel.lineList
+        if section < lineList.count {
+            return 60
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 4 {
-            return 50*5
+        let lineList:NSMutableArray = realModel.lineList
+        if indexPath.section < lineList.count {
+            let lineModel:XHWLPatrolLineModel = XHWLPatrolLineModel.mj_object(withKeyValues: lineList[indexPath.section])
+            if indexPath.row == lineModel.currentTimePlanChecksList.count {
+                
+                var weekStr:String = ""
+                if lineModel.mon == "1" {
+                    weekStr = weekStr + "、星期一"
+                }
+                if lineModel.tue == "1" {
+                    weekStr = weekStr + "、星期二"
+                }
+                if lineModel.wed == "1" {
+                    
+                    weekStr = weekStr + "、星期三"
+                }
+                if lineModel.thu == "1" {
+                    weekStr = weekStr + "、星期四"
+                }
+                if lineModel.fri == "1" {
+                    weekStr = weekStr + "、星期五"
+                }
+                if lineModel.sat == "1" {
+                    weekStr = weekStr + "、星期六"
+                }
+                if lineModel.sun == "1" {
+                    weekStr = weekStr + "、星期日"
+                }
+                if !weekStr.isEmpty {
+                    weekStr = weekStr.substring(from: String.Index(1))
+                }
+                
+                var addressStr:String = ""
+                let detailAry:NSArray = XHWLPatrolTotalCheckModel.mj_objectArray(withKeyValuesArray: lineModel.currentTimeChecksDetail)
+                
+                for i in 0..<detailAry.count {
+                    let model:XHWLPatrolTotalCheckModel = detailAry[i] as! XHWLPatrolTotalCheckModel
+                    addressStr = addressStr + model.nodeName
+                }
+                let array :NSArray = [addressStr, lineModel.startDate + "～" + lineModel.endDate, weekStr]
+                
+                var maxHeight:CGFloat = 0
+                for i in 0..<array.count {
+                    let menuModel :String = array[i] as! String
+                    
+                    maxHeight = maxHeight + heightWithSize(menuModel) + CGFloat(array.count)*5
+                }
+                
+                var num = 1
+                if lineModel.planTime.count > 0 {
+                    num = lineModel.planTime.count
+                }
+                maxHeight = maxHeight + 5 + CGFloat(num) * font_14.lineHeight
+                
+                return maxHeight
+            }
         }
         return 50
+    }
+    
+    
+    func heightWithSize(_ menuModel :String) -> CGFloat {
+        
+        let sizeR:CGSize = menuModel.boundingRect(with: CGSize(width:CGFloat(Int(self.bounds.size.width-80-10)), height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+        
+        return sizeR.height + 5
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

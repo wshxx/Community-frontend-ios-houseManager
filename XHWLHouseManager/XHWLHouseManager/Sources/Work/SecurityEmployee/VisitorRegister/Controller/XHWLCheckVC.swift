@@ -13,6 +13,7 @@ class XHWLCheckVC: XHWLBaseVC , XHWLNetworkDelegate {
     var warningView:XHWLCheckListView!
     var submitBtn:UIButton!
     var nextParams:NSMutableDictionary! = NSMutableDictionary()
+    var isAgree:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,8 +59,13 @@ class XHWLCheckVC: XHWLBaseVC , XHWLNetworkDelegate {
     }
     
     func submitClick() {
-        
+    
         self.warningView.endEditing(true)
+        
+        if warningView.isBackList {
+            "该访客被列为黑名单".ext_debugPrintAndHint()
+            return 
+        }
         
         if warningView.name.isEmpty {
             "您的姓名为空".ext_debugPrintAndHint()
@@ -102,6 +108,11 @@ class XHWLCheckVC: XHWLBaseVC , XHWLNetworkDelegate {
             return
         }
         
+        if warningView.numStr.isEmpty {
+            "请选择进出次数".ext_debugPrintAndHint()
+            return
+        }
+        
         if !warningView.carNo.isEmpty && !Validation.carNo(warningView.carNo).isRight {
             "您输入的车牌不合法".ext_debugPrintAndHint()
             return
@@ -111,9 +122,10 @@ class XHWLCheckVC: XHWLBaseVC , XHWLNetworkDelegate {
             "您的事由为空".ext_debugPrintAndHint()
             return
         }
-        
-        var isYZAgree:String = "y"
-        
+        if warningView.inOutStr.isEmpty {
+            "请选择进出方式".ext_debugPrintAndHint()
+            return
+        }
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let dict:NSDictionary = data.mj_JSONObject() as! NSDictionary
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: dict)
@@ -144,14 +156,14 @@ class XHWLCheckVC: XHWLBaseVC , XHWLNetworkDelegate {
                 "accessReason": warningView.accessReason, //    string    是    来访事由
                 "roomNo":self.warningView.subView.isHidden ? "":warningView.subView.roomNo, //+warningView.subView.roomNo, //    string    否    房间号（根据获取的业主所拥有的单元选择，房间号手动输入）
                 "yzId":self.warningView.subView.isHidden ? "":warningView.subView.yzId, //    string    否    业主id
-                "isYZAgree":isYZAgree,
-                "effectiveTimes":"1",    //    是    有效次数
-                "accessWay":"1"
+                "isYZAgree":"y",
+                "effectiveTimes":self.warningView.numStr,    //    是    有效次数
+                "accessWay":self.warningView.inOutStr
             ])
             registerJpush()
         } else {
             
-            submit(isYZAgree)
+            submit()
         }
     }
     
@@ -166,7 +178,7 @@ class XHWLCheckVC: XHWLBaseVC , XHWLNetworkDelegate {
         XHWLNetwork.shared.postRegisterJpushClick(params as NSDictionary, self)
     }
     
-    func submit(_ isYZAgree:String) {
+    func submit() {
         
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let dict:NSDictionary = data.mj_JSONObject() as! NSDictionary
@@ -185,9 +197,9 @@ class XHWLCheckVC: XHWLBaseVC , XHWLNetworkDelegate {
             "accessReason": warningView.accessReason, //    string    是    来访事由
             "roomNo":self.warningView.subView.isHidden ? "":warningView.subView.roomNo, //+warningView.subView.roomNo, //    string    否    房间号（根据获取的业主所拥有的单元选择，房间号手动输入）
             "yzId":self.warningView.subView.isHidden ? "":warningView.subView.yzId, //    string    否    业主id
-            "isYZAgree":isYZAgree,
-            "effectiveTimes":"1",    //    是    有效次数
-            "accessWay":"1"
+            "isYZAgree":"",
+            "effectiveTimes":self.warningView.numStr,    //    是    有效次数
+            "accessWay":self.warningView.inOutStr
         ]
         
 //        nextParams = params
@@ -205,20 +217,21 @@ class XHWLCheckVC: XHWLBaseVC , XHWLNetworkDelegate {
             
             vc.roomName = userModel.telephone// warningView.subView.yzTele
             vc.yzName = warningView.subView.yzName
-            vc.backBlock = { isAgree in
-                
-                self.nextParams.addEntries(from: ["isYZAgree":isAgree])
-                XHWLNetwork.shared.postVisitRegisterClick(self.nextParams as NSDictionary, self)
+            vc.backBlock = { [weak self] isAgree in
+                self?.isAgree = isAgree
+                self?.nextParams.addEntries(from: ["isYZAgree":isAgree])
+                XHWLNetwork.shared.postVisitRegisterClick(self?.nextParams as! NSDictionary, self!)
             }
             vc.nextParams = self.nextParams
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
-            if !warningView.subView.isHidden {
-                
-            } else {
-                "提交成功".ext_debugPrintAndHint()
-                self.navigationController?.popViewController(animated: true)
-            }
+//            if !warningView.subView.isHidden {
+                let vc:XHWLRegistrationVC = XHWLRegistrationVC()
+                self.navigationController?.pushViewController(vc, animated: true)
+//            } else {
+//                "提交成功".ext_debugPrintAndHint()
+//                self.navigationController?.popViewController(animated: true)
+//            }
         }
     }
     

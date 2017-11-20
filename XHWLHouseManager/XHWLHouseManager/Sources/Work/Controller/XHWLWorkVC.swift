@@ -44,38 +44,40 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
     func createNavHeadView() -> UIButton {
         
         if UserDefaults.standard.object(forKey: "projectList") != nil {
-            
-            let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
-            let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
-            var name:String!
-            if array.count > 0{
-                
-                if UserDefaults.standard.object(forKey: "project") != nil {
-                    let projectSubData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
-                    let model:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectSubData.mj_JSONObject())
+            if UserDefaults.standard.object(forKey: "projectList") is NSData {
+                let data:NSData = UserDefaults.standard.object(forKey: "projectList") as! NSData
+                let array:NSArray = XHWLProjectModel.mj_objectArray(withKeyValuesArray: data.mj_JSONObject())
+                var name:String!
+                if array.count > 0{
                     
-                    name = model.name
-                } else {
-                    let model:XHWLProjectModel = array[0] as! XHWLProjectModel
-                    name = model.name
+                    if UserDefaults.standard.object(forKey: "project") != nil {
+                        let projectSubData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+                        let model:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectSubData.mj_JSONObject())
+                        
+                        name = model.name
+                    } else {
+                        let model:XHWLProjectModel = array[0] as! XHWLProjectModel
+                        name = model.name
+                        
+                        let projectData:NSData = model.mj_JSONData()! as NSData
+                        UserDefaults.standard.set(projectData, forKey: "project") // 项目
+                        UserDefaults.standard.synchronize()
+                    }
                     
-                    let projectData:NSData = model.mj_JSONData()! as NSData
-                    UserDefaults.standard.set(projectData, forKey: "project") // 项目
-                    UserDefaults.standard.synchronize()
+                    
+                    let btn:UIButton = UIButton()
+                    btn.frame = CGRect(x:0, y:0, width:120, height:200)
+                    btn.setTitle(name, for: UIControlState.normal)
+                    btn.setTitleColor(UIColor.white, for: UIControlState.normal)
+                    btn.setImage(UIImage(named:"home_switch"), for: UIControlState.normal)
+                    btn.titleLabel?.font = font_14
+                    btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -14, bottom: 0, right: 0)
+                    btn.addTarget(self, action: #selector(onCreateNavHeadView), for: UIControlEvents.touchUpInside)
+                    
+                    return btn
                 }
- 
-                
-                let btn:UIButton = UIButton()
-                btn.frame = CGRect(x:0, y:0, width:120, height:200)
-                btn.setTitle(name, for: UIControlState.normal)
-                btn.setTitleColor(UIColor.white, for: UIControlState.normal)
-                btn.setImage(UIImage(named:"home_switch"), for: UIControlState.normal)
-                btn.titleLabel?.font = font_14
-                btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -14, bottom: 0, right: 0)
-                btn.addTarget(self, action: #selector(onCreateNavHeadView), for: UIControlEvents.touchUpInside)
-                
-                return btn
             }
+            
             
             return UIButton()
         }
@@ -127,15 +129,15 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         
         let array:NSMutableArray! = NSMutableArray()
         if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
-            array.addObjects(from: ["异常放行", "安防事件", "访客记录", "巡更安全", "安环数据", "云瞳监控"])
+            array.addObjects(from: ["异常抬杆", "安防事件", "访客记录", "巡更安全", "安环数据", "云瞳监控", "频道列表"])
         } else if userModel.wyAccount.wyRole.name.compare("门岗").rawValue == 0 {
-            array.addObjects(from: ["访客登记"])
+            array.addObjects(from: ["访客登记", "名单管理"]) //
         } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
             loadDeviceInfo()
             array.addObjects(from: ["设备报警", "设备监控", "能耗统计", "设备统计", "报警统计"])
         } else { // 项目经理
             loadDeviceInfo()
-            array.addObjects(from:["安防事件", "设备报警", "异常抬杆", "巡更进度", "访客记录", "设备监控", "安防品质监控", "工程品质监控"])
+            array.addObjects(from:["安防事件", "设备报警", "异常抬杆", "巡更安全", "访客记录", "设备监控", "安防品质监控", "工程品质监控"])
         }
        
         homeView = XHWLWorkView(frame: CGRect.zero, array: array)
@@ -179,8 +181,8 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
             let vc:XHWLAbnormalPassVC = XHWLAbnormalPassVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
-        case 3: // "巡更进度",
-            let vc:XHWLCountVC = XHWLCountVC()
+        case 3: // "巡更安全",
+            let vc:XHWLPatrolVC = XHWLPatrolVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
         case 4: // "访客记录",
@@ -222,9 +224,8 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
             vc.title = "访客记录"
             self.navigationController?.pushViewController(vc, animated: true)
             break
-        case 3:// "巡更定位", 巡更安全
+        case 3:// 巡更安全
             let vc:XHWLPatrolVC = XHWLPatrolVC()
-//            let vc:XHWLMapKitVC = XHWLMapKitVC()
             self.navigationController?.pushViewController(vc, animated: true)
             break
         case 4: //  "数据",
@@ -232,10 +233,13 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
             self.navigationController?.pushViewController(vc, animated: true)
             break
         case 5: // 云瞳监控
-            // 视频
             let vc = XHWLMcuListVC()
             self.navigationController?.pushViewController(vc, animated: true)
+        case 6:
+            let vc:XHWLChannelManageVC = XHWLChannelManageVC()
+            navigationController?.pushViewController(vc, animated: true)
             
+            break
         default: break
             
         }
@@ -303,6 +307,15 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
             navigationController?.pushViewController(vc, animated: true)
             
             break
+//            名单管理
+        case 1: // "名单管理"
+            let vc:XHWLRosterManageVC = XHWLRosterManageVC()
+            //            navigationController?.delegate = self as? UINavigationControllerDelegate // push/ pop
+            //            self.navigationController?.tr_pushViewController(vc, method: .page)
+            navigationController?.pushViewController(vc, animated: true)
+            
+            break
+
         default:
             break
         }

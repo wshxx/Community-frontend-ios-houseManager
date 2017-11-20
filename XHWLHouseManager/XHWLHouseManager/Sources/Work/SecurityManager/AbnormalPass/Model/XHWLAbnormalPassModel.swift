@@ -22,6 +22,7 @@ class XHWLAbnormalPassModel: NSObject {
     var operatorName:String = ""
     var roadName:String = ""
     var handleTime:String = ""
+    var handleName:String = ""
     var id :String = ""
     var outExceptionId:String = ""
     var status:String = "" // n拒绝 y同意

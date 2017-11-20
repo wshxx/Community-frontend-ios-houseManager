@@ -79,29 +79,47 @@ class XHWLMcuListVC: XHWLBaseVC, UITableViewDelegate, UITableViewDataSource, UIA
     }
     
     func setupData() {
-        let array:NSArray = [["nodeType":2, "nodeID":"118", "nodeName":"深圳中海华庭"],
-                             ]
-        let modelAry:NSArray = XHWLMcuModel.mj_objectArray(withKeyValuesArray: array)
         
         if UserDefaults.standard.object(forKey: "project") != nil {
             let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
             let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectData.mj_JSONObject())
-            
-            for i in 0..<modelAry.count {
-                let model:XHWLMcuModel = modelAry[i] as! XHWLMcuModel
-                if projectModel.name == model.nodeName {
-                    projectMcuModel = model
-                    return
-                }
+
+            print("\(projectModel.nodeType)")
+            if projectModel.nodeType.isEmpty {
+                return
             }
+            projectMcuModel = XHWLMcuModel()
+            projectMcuModel.nodeName = projectModel.name
+            projectMcuModel.nodeID = projectModel.nodeID
+            projectMcuModel.nodeType = Int(projectModel.nodeType)!
+            print("\(projectMcuModel.nodeType) = \(projectMcuModel.nodeID)")
         }
+        
+//        let array:NSArray = [["nodeType":2, "nodeID":"118", "nodeName":"深圳中海华庭"],
+//                             ]
+//        let modelAry:NSArray = XHWLMcuModel.mj_objectArray(withKeyValuesArray: array)
+//
+//
+//        if UserDefaults.standard.object(forKey: "project") != nil {
+//            let projectData:NSData = UserDefaults.standard.object(forKey: "project") as! NSData// 项目
+//            let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectData.mj_JSONObject())
+//
+//            for i in 0..<modelAry.count {
+//                let model:XHWLMcuModel = modelAry[i] as! XHWLMcuModel
+//                if projectModel.name == model.nodeName {
+//
+//                    projectMcuModel = model
+//                    return
+//                }
+//            }
+//        }
     }
     
     func setupList() {
         
         let isLogin:Bool = UserDefaults.standard.bool(forKey: "isLogin")
         if isLogin == true {
-            if projectMcuModel != nil {
+            if projectMcuModel != nil && !projectMcuModel.nodeID.isEmpty {
                 self.requestResource(projectMcuModel.nodeID, projectMcuModel.nodeType)
             } else {
                 "当前项目无资源".ext_debugPrintAndHint()
@@ -230,6 +248,8 @@ class XHWLMcuListVC: XHWLBaseVC, UITableViewDelegate, UITableViewDataSource, UIA
     
     func requestResource(_ nodeID:String, _ nodeType:Int) {
         
+        print("\(nodeID), \(nodeType)")
+        
         MCUVmsNetSDK.shareInstance().requestResource(withSysType: 1,
                                                      nodeType: nodeType,
                                                      currentID: nodeID ,
@@ -237,6 +257,7 @@ class XHWLMcuListVC: XHWLBaseVC, UITableViewDelegate, UITableViewDataSource, UIA
                                                      curPage: 1,
                                                      success: { (object) in
                                                         
+                                                        print("\(object)")
                                                         let obj:NSDictionary = object as! NSDictionary
                                                         let status:String = obj["status"] as! String
                                                         
@@ -270,7 +291,7 @@ class XHWLMcuListVC: XHWLBaseVC, UITableViewDelegate, UITableViewDataSource, UIA
                                                             }
                                                         }
         }) { (error) in
-            //            NSLog(@"requestResource failed");
+            print("requestResource failed");
         }
     }
     

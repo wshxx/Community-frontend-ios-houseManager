@@ -15,7 +15,7 @@ enum XHWLCheckListViewEnum : Int{
     case radio
 }
 
-class XHWLCheckListView: UIView {
+class XHWLCheckListView: UIView, XHWLNetworkDelegate {
 
     var bgImage:UIImageView!
     var bgScrollView:UIScrollView!
@@ -34,7 +34,9 @@ class XHWLCheckListView: UIView {
     var timeNo:String! = ""
     var carNo:String! = ""
     var accessReason:String! = ""
-
+    var numStr:String! = ""
+    var inOutStr:String! = "二维码"
+    var isBackList:Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,8 +47,11 @@ class XHWLCheckListView: UIView {
                               ["name":"", "content":"身份证", "isHiddenEdit":true, "type": 1],
                               ["name":"手机", "content":"", "isHiddenEdit": true, "type": 0],
                               ["name":"时效", "content":"分钟", "isHiddenEdit": true, "type": 2],
+                              ["name":"次数", "content":"", "isHiddenEdit": true, "type": 4],
+                              
                               ["name":"车牌", "content":"2017-11-11 09:12:30 \n 2017-11-11", "isHiddenEdit": false, "type": 0],
                               ["name":"事由", "content":"", "isHiddenEdit": true, "type": 0],
+                              ["name":"进出方式", "content":"二维码\nIC卡", "isHiddenEdit":true, "type": 3],
                               ["name":"业主认证", "content":"是\n否", "isHiddenEdit":true, "type": 3]]
         
 
@@ -84,15 +89,15 @@ class XHWLCheckListView: UIView {
             if menuModel.type == 0 {
                 let cardView:XHWLCheckTF = XHWLCheckTF()
                 cardView.showText(menuModel.name, "", menuModel.isHiddenEdit)
-                cardView.textEndBlock = {param in
+                cardView.textEndBlock = {[weak self] param in
                     if i == 0 {
-                        self.name = param
+                        self?.name = param
                     } else if i == 3 {
-                        self.telephone = param
+                        self?.telephone = param
                     } else if i == 5 {
-                        self.carNo = param
-                    } else if i == 6 {
-                        self.accessReason = param
+                        self?.carNo = param
+                    } else if i == 7 {
+                        self?.accessReason = param
                     }
                 }
                 bgScrollView.addSubview(cardView)
@@ -118,8 +123,17 @@ class XHWLCheckListView: UIView {
                     pickerView.frame = UIScreen.main.bounds
                     window.addSubview(pickerView)
                 }
-                vertical.textEndBlock = {param in
-                    self.certificateNo = param
+                vertical.textEndBlock = {[weak self] param in
+                    self?.certificateNo = param
+                    
+                    let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+                    let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+                    let params:NSDictionary = [
+                        "token":userModel.wyAccount.token, //   是    用户登录token
+                        "cetificateNo": param          //
+                    ]
+                    
+                    XHWLNetwork.shared.postRosterInfoClick(params, self!)
                 }
                 bgScrollView.addSubview(vertical)
                 labelViewArray.add(vertical)
@@ -152,15 +166,21 @@ class XHWLCheckListView: UIView {
             }
             else if menuModel.type == 3 {
                 let radioView:XHWLRadioView = XHWLRadioView()
-                radioView.showText(leftText: menuModel.name, rightText: "是", btnTitle: "否")
-                radioView.btnBlock = { index in
-                    self.endEditing(true)
-                    if index == 0 {
-                        self.subView.isHidden = false
+                let contentAry:NSArray = menuModel.content.components(separatedBy: "\n") as NSArray
+                radioView.showText(leftText: menuModel.name, rightText:(contentAry[0] as! String), btnTitle: (contentAry[1] as! String))
+                radioView.btnBlock = {[weak self] index in
+                    self?.endEditing(true)
+                    
+                    if menuModel.name == "业主认证" {
+                        if index == 0 {
+                            self?.subView.isHidden = false
+                        } else {
+                            self?.subView.isHidden = true
+                        }
+                        self?.setNeedsLayout()
                     } else {
-                        self.subView.isHidden = true
+                        self?.inOutStr = (contentAry[index] as! String)
                     }
-                    self.setNeedsLayout()
                 }
                 bgScrollView.addSubview(radioView)
                 labelViewArray.add(radioView)
@@ -171,14 +191,24 @@ class XHWLCheckListView: UIView {
                 cardView.btnBlock = { [weak cardView] in
                     self.endEditing(true)
                     
-                    let array:NSArray = ["亲属", "友人", "家教", "家政", "快递", "外卖", "维修人员", "其他"]
+                    var array:NSArray!
+                    if menuModel.name == "类型" {
+                        array = ["亲属", "友人", "家教", "家政", "快递", "外卖", "维修人员", "其他"]
+                    } else {
+                        array = ["1", "2", "3", "4", "5"]
+                    }
+                    
                     let pickerView:XHWLPickerView = XHWLPickerView(frame:CGRect.zero, array:array)
                     
                     let window: UIWindow = (UIApplication.shared.keyWindow)!
                     pickerView.dismissBlock = { [weak pickerView] (index)->() in
                         print("\(index)")
                         if index != -1 {
-                            self.type = array[index] as! String
+                            if menuModel.name == "类型" {
+                                self.type = array[index] as! String
+                            } else {
+                                self.numStr = array[index] as! String
+                            }
                             cardView?.showBtnTitle(array[index] as! String)
                         }
                         pickerView?.removeFromSuperview()
@@ -189,11 +219,47 @@ class XHWLCheckListView: UIView {
                 bgScrollView.addSubview(cardView)
                 labelViewArray.add(cardView)
             }
-            
         }
         
         subView = XHWLMoreListView()
         bgScrollView.addSubview(subView)
+    }
+    
+    // MARK: - XHWLNetworkDelegate
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        if requestKey == XHWLRequestKeyID.XHWL_ROSTERINFO.rawValue {
+            
+            if response.count > 0 {
+                let type:String = response["result"]!["type"] as! String
+                if type == "黑名单" {
+                    isBackList = true
+                    "该访客被列为黑名单".ext_debugPrintAndHint()
+                } else {
+                    isBackList = false
+                    
+                    //                    "telephone": "18320489492",
+                    //                    "certificateType": "身份证",
+                    //                    "name": "Kellan",
+
+//                    "id": "8ab3a5bb5f7bce03015f7bce27780000",
+//                    "type": "黑名单",
+//                    "name": "Kellan",
+//                    "telephone": "18320489492",
+//                    "certificateType": "身份证",
+//                    "cetificateNo": "441323199405070311",
+//                    "remark": "打架闹事",
+//                    "createTime": 1509610628000
+
+                }
+                //            self.typeName = response["certificateType"]
+                //            self.tele = response["type"]
+            }
+        }
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
     }
     
     override func layoutSubviews() {

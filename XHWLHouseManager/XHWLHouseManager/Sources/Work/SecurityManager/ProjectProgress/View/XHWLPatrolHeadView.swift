@@ -25,38 +25,22 @@ class XHWLPatrolHeadView: UITableViewHeaderFooterView {
                 projectL.text = "巡检计划名称："+newValue.lineName
                 progressView.show(name: "进度：", progress: newValue.progress)
                 
-                //保持箭头方向
-                if newValue.isFlod == false {
-                    //            self.indicateIcon.transform = CGAffineTransform.identity;
+                if newValue.isFlod == true {
+                    self.progressView.lineIV.isHidden = true
+                    
                 } else {
-                    //            self.indicateIcon.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI));
+                    self.progressView.lineIV.isHidden = false
+                    self.progressView.lineIV.image = UIImage(named: "Patrol_line")!
                 }
             }
         }
     }
-//    var cellModel: XHWLRealProgressModel! {
-//        willSet {
-//            if newValue != nil {
-//
-////                progressView.progressModel = newValue
-//
-//                //保持箭头方向
-//                if newValue.isFlod == false {
-//                    //            self.indicateIcon.transform = CGAffineTransform.identity;
-//                } else {
-//                    //            self.indicateIcon.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI));
-//                }
-//            }
-//        }
-//    }
-//    weak var delegate:XHWLPatrolHeadViewDelegate?
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
         self.backgroundColor = UIColor.clear
         contentView.backgroundColor = UIColor.clear
-//        self.backgroundColor = UIColor.clear
         
         self.buildHeadView()
     }
@@ -72,10 +56,7 @@ class XHWLPatrolHeadView: UITableViewHeaderFooterView {
         
         self.progressView = XHWLProgressView()
         self.contentView.addSubview(self.progressView)
-
-        self.accessIV = UIImageView()
-        self.accessIV.image = UIImage(named: "warning_accessView")
-        self.contentView.addSubview(self.accessIV)
+        self.progressView.lineIV.image = UIImage(named: "Patrol_line")!
         
         self.selfAddTapGesture()
     }
@@ -92,17 +73,19 @@ class XHWLPatrolHeadView: UITableViewHeaderFooterView {
             
             if self.cellModel.isFlod == false {
                 self.cellModel.isFlod = true
+                
+                self.progressView.lineIV.isHidden = true
 //                self.indicateIcon.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI));
                 
             } else {
                 self.cellModel.isFlod = false
 //                self.indicateIcon.transform = CGAffineTransform(rotationAngle: CGFloat(0));
-                
+                self.progressView.lineIV.isHidden = false
+                self.progressView.lineIV.image = UIImage(named: "Patrol_line")!
             }
         }
         
         self.headViewBlock(self.cellModel)
-//        self.delegate?.headViewClicked(self.cellModel, self)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -112,13 +95,9 @@ class XHWLPatrolHeadView: UITableViewHeaderFooterView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        projectL.frame = CGRect(x:10, y:0, width:self.bounds.size.width-20, height:30)
-        progressView.frame = CGRect(x:0, y:projectL.frame.maxY, width:self.bounds.size.width, height:30)
-        accessIV.frame = CGRect(x:10, y:self.bounds.size.height-1, width:self.bounds.size.width-20, height:1)
-        
-//        progressView.frame = self.contentView.bounds
-//        accessIV.bounds = CGRect(x:0, y:0, width:7, height:12)
-//        accessIV.center = CGPoint(x:self.frame.size.width-17, y:self.frame.size.height/2.0)
+        projectL.frame = CGRect(x:10, y:0, width:self.bounds.size.width-20, height:20)
+        progressView.frame = CGRect(x:0, y:projectL.frame.maxY, width:self.bounds.size.width, height:44)
+//        accessIV.frame = CGRect(x:10, y:self.bounds.size.height-1, width:self.bounds.size.width-20, height:1)
     }
     
     deinit {

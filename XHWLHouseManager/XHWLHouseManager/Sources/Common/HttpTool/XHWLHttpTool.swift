@@ -105,7 +105,10 @@ class XHWLHttpTool: NSObject {
                     
                     print("success:\(value)")
                      
-                    if self.requestKey != .XHWL_LOGOUT && self.requestKey != .XHWL_GETVERCODE && self.requestKey != .XHWL_SCANCODE {
+                    if self.requestKey != .XHWL_LOGOUT
+                        && self.requestKey != .XHWL_GETVERCODE
+                        && self.requestKey != .XHWL_SCANCODE
+                        && self.requestKey != .XHWL_SEARCHPIN{
                         if (value as! [String : AnyObject])["result"] is String {
                             if !((value as! [String : AnyObject])["message"] is NSNull) {
                                 let message:String = (value as! [String : AnyObject])["message"] as! String
@@ -186,7 +189,9 @@ class XHWLHttpTool: NSObject {
                         self.requestKey != .XHWL_HANDLEEXCEPTIONPASS &&
                         self.requestKey != .XHWL_SAVECARDLOG &&
                         self.requestKey != .XHWL_DELETECARDLOG &&
-                        self.requestKey != .XHWL_REGISTERJPUSH
+                        self.requestKey != .XHWL_REGISTERJPUSH &&
+                        self.requestKey != .XHWL_DELETEVIDEOIMG &&
+                        self.requestKey != .XHWL_ADDCHANNEL
                     {
                         if (value as! [String : AnyObject])["result"] is String {
                             if !((value as! [String : AnyObject])["message"] is NSNull) {
@@ -299,7 +304,7 @@ class XHWLHttpTool: NSObject {
     
     func onShowAlert() {
         
-        let vc:UIViewController = AppDelegate.shared().getCurrentVC() as! UIViewController
+        let vc:UIViewController = AppDelegate.shared().getCurrentVC() 
 
         AlertMessage.showOneAlertMessage(vc: vc, alertMessage: "登录失效，请重新登录！") {
             AppDelegate.shared().onLogout()

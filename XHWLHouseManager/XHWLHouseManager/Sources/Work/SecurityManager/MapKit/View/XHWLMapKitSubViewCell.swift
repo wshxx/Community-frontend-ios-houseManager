@@ -28,34 +28,48 @@ class XHWLMapKitSubViewCell: UITableViewCell {
     }
     var lineModel:XHWLPatrolLineModel! {
         willSet {
-            if lineModel != nil {
+            if newValue != nil {
   
                 var weekStr:String = ""
-                if Bool(newValue.mon) == true {
+                if newValue.mon == "1" {
                     weekStr = weekStr + "、星期一"
                 }
-                if Bool(newValue.tue) == true {
+                if newValue.tue == "1" {
                     weekStr = weekStr + "、星期二"
                 }
-                if Bool(newValue.wed) == true {
+                if newValue.wed == "1" {
                     
                     weekStr = weekStr + "、星期三"
                 }
-                if Bool(newValue.thu) == true {
+                if newValue.thu == "1" {
                     weekStr = weekStr + "、星期四"
                 }
-                if Bool(newValue.fri) == true {
+                if newValue.fri == "1" {
                     weekStr = weekStr + "、星期五"
                 }
-                if Bool(newValue.sat) == true {
+                if newValue.sat == "1" {
                     weekStr = weekStr + "、星期六"
                 }
-                if Bool(newValue.sun) == true {
+                if newValue.sun == "1" {
                     weekStr = weekStr + "、星期日"
                 }
-                weekStr = weekStr.substring(from: String.Index(1))
+                if !weekStr.isEmpty {
+                    weekStr = weekStr.substring(from: String.Index(1))
+                }
                 
-                let array :NSArray = [["name":"巡检点：", "content":"1.10号楼一单元 2.10号楼一单元天台 3.9号楼一单元大堂"],
+                var addressStr:String = ""
+                let detailAry:NSArray = XHWLPatrolTotalCheckModel.mj_objectArray(withKeyValuesArray: newValue.currentTimeChecksDetail)
+                
+                for i in 0..<detailAry.count {
+                    let model:XHWLPatrolTotalCheckModel = detailAry[i] as! XHWLPatrolTotalCheckModel
+                    addressStr = addressStr + "、" + model.nodeName
+                }
+                
+                if !addressStr.isEmpty {
+                    addressStr = addressStr.substring(from: String.Index(1))
+                }
+                
+                let array :NSArray = [["name":"巡检点：", "content":addressStr],
                                       ["name":"巡检日期：", "content":newValue.startDate + "～" + newValue.endDate],
                                       ["name":"周期：", "content":weekStr],]
                 
@@ -135,7 +149,12 @@ class XHWLMapKitSubViewCell: UITableViewCell {
             maxHeight = Int(labelView.frame.maxY)
         }
         
-        stateView.frame = CGRect(x:0, y:maxHeight+5, width:Int(self.bounds.size.width), height:80)
+        var num = 1
+        if lineModel.planTime.count > 0 {
+            num = lineModel.planTime.count
+        }
+                
+        stateView.frame = CGRect(x:0, y:maxHeight+5, width:Int(self.bounds.size.width), height:num * 25)
     }
     
     override func awakeFromNib() {

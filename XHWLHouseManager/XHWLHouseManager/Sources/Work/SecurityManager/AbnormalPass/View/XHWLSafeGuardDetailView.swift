@@ -25,12 +25,17 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
     var backReloadBlock:()->() = {param in }
     var exceptionId:String! // 异常放行ID
     var isAgree:Bool! = false
+    fileprivate var head1:XHWLHeadView!
+    fileprivate var head2:XHWLHeadView!
+    fileprivate var labelViewArray2:NSMutableArray!
+    fileprivate var dataAry2:NSArray! = NSArray()
     
-    init(frame: CGRect, _ isAgree:Bool, _ dataAry:NSArray) {
+    init(frame: CGRect, _ isAgree:Bool, _ dataAry:NSArray, _ dataAry2:NSArray) {
         super.init(frame: frame)
         
         self.isAgree = isAgree // isAgree
         self.dataAry = dataAry
+        self.dataAry2 = dataAry2
         
         setupView()
     }
@@ -48,6 +53,13 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
         bgScrollView = UIScrollView()
         bgScrollView.showsVerticalScrollIndicator = false
         self.addSubview(bgScrollView)
+        
+        if isAgree == true {
+            head1 = XHWLHeadView()
+            head1.showText("事件详情：")
+            head1.showTextColor = color_01f0ff
+            bgScrollView.addSubview(head1)
+        }
         
         labelViewArray = NSMutableArray()
         for i in 0...dataAry.count-1  {
@@ -75,6 +87,34 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
                 labelViewArray.add(picture)
             }
         }
+        
+        if isAgree == true {
+            head2 = XHWLHeadView()
+            head2.showText("处置详情：")
+            head2.showTextColor = color_01f0ff
+            bgScrollView.addSubview(head2)
+            
+            labelViewArray2 = NSMutableArray()
+            for i in 0...dataAry2.count-1  {
+                let menuModel :XHWLMenuModel = dataAry2[i] as! XHWLMenuModel
+                
+//                if menuModel.type == 0 {
+//                    let labelView: XHWLLabelView = XHWLLabelView()
+//                    labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
+//                    labelView.textAlign = NSTextAlignment.left
+//                    bgScrollView.addSubview(labelView)
+//                    labelViewArray.add(labelView)
+//                }
+//                else if menuModel.type == 1 {
+                    let labelView: XHWLLineView = XHWLLineView()
+                    labelView.showText(leftText: menuModel.name, rightText:menuModel.content)
+                    bgScrollView.addSubview(labelView)
+                    labelViewArray2.add(labelView)
+                    
+//                }
+            }
+        }
+        
     
         if isAgree == false {
             agreeBtn = UIButton()
@@ -136,6 +176,10 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
         bgScrollView.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:self.bounds.size.height)
         var maxH:CGFloat = 20
         
+        if isAgree {
+            head1.frame = CGRect(x:0, y:0, width:self.bounds.size.width, height:30)
+            maxH = head1.frame.maxY
+        }
         if labelViewArray.count > 0 {
             for i in 0...labelViewArray.count-1 {
                 
@@ -162,6 +206,28 @@ class XHWLSafeGuardDetailView: UIView , XHWLNetworkDelegate{
                     let labelView :XHWLPickPhotoView = labelViewArray[i] as! XHWLPickPhotoView
                     labelView.frame = CGRect(x:30/2.0, y:10 + maxH, width:self.frame.size.width-30, height:80)
                     maxH = labelView.frame.maxY
+                }
+            }
+        }
+        if isAgree {
+            head2.frame = CGRect(x:0, y:maxH+10, width:self.bounds.size.width, height:30)
+            maxH = head2.frame.maxY
+            
+            if labelViewArray2.count > 0 {
+                for i in 0...labelViewArray2.count-1 {
+                    
+                    let menuModel :XHWLMenuModel = dataAry2[i] as! XHWLMenuModel
+                    
+                    
+                    let size:CGSize = menuModel.content.boundingRect(with: CGSize(width:self.frame.size.width-30-100, height:CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font_14], context: nil).size
+                    let height:CGFloat = size.height < font_14.lineHeight ? font_14.lineHeight:size.height
+                    let labelView:XHWLLineView = labelViewArray2[i] as! XHWLLineView
+                    
+                    //                    labelView.bounds = CGRect(x:0, y:0, width:Int(self.frame.size.width-30), height:Int(height))
+                    //                    labelView.center = CGPoint(x:self.frame.size.width/2.0, y:(height)/2.0 + 5 + maxH)
+                    labelView.frame = CGRect(x:5, y:Int(10 + maxH), width:Int(self.frame.size.width-30), height:Int(height))
+                    maxH = labelView.frame.maxY
+                    
                 }
             }
         }

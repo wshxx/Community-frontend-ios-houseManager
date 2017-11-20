@@ -60,9 +60,9 @@ class XHWLTimeLeftView: UIView { // HooDatePickerDelegate
     func showDatePickerView() {
         //_________________________年-月-日-时-分（滚动到指定的日期）_________________________
         let minDateFormater:DateFormatter = DateFormatter()
-        minDateFormater.dateFormat = "yyyy-MM-dd HH:mm"
+        minDateFormater.dateFormat = "yyyy-MM-dd" //  HH:mm"  DateStyleShowYearMonthDayHourMinute
         
-        let datepicker:WSDatePickerView = WSDatePickerView.init(dateStyle:DateStyleShowYearMonthDayHourMinute, scrollTo: Date()) { (selectDate) in
+        let datepicker:WSDatePickerView = WSDatePickerView.init(dateStyle:DateStyleShowYearMonthDay, scrollTo: Date()) { (selectDate) in
             
             let date:String = minDateFormater.string(from: selectDate!)
             print("选择的日期：\(date)")

@@ -10,14 +10,10 @@ import UIKit
 
 extension Date {
 
-    static func getCurrentStamp() -> Int {
+    // MARK: - 获取当前时间戳
+    static func stringToStamp(_ timeStr:String) -> Int {
         //获取当前时间
-        let now = Date()
-        
-        // 创建一个日期格式器
-//        let dformatter = DateFormatter()
-//        dformatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
-//        print("当前日期时间：\(dformatter.string(from: now))")
+        let now:Date = stringToDate(timeStr)
         
         //当前时间的时间戳
         let timeInterval:TimeInterval = now.timeIntervalSince1970
@@ -27,6 +23,36 @@ extension Date {
         return timeStamp
     }
     
+    // MARK: - 获取当前时间戳
+    static func getCurrentStamp() -> Int {
+        //获取当前时间
+        let now = Date()
+        
+        //当前时间的时间戳
+        let timeInterval:TimeInterval = now.timeIntervalSince1970
+        let timeStamp = Int(timeInterval)
+        print("当前时间的时间戳：\(timeStamp)")
+        
+        return timeStamp
+    }
+    
+    // MARK: - 时间字符串转Date
+    static func stringToDate(_ dateStr:String) -> Date {
+        
+        let toDate:Date = stringToDate(dateStr, "yyyy-MM-dd HH:mm:ss")
+        
+        return toDate
+    }
+    
+    static func stringToDate(_ dateStr:String, _ dateFormat:String) -> Date {
+        let dformatter = DateFormatter()
+        dformatter.dateFormat = dateFormat
+        let toDate:Date = dformatter.date(from: dateStr)!
+        
+        return toDate
+    }
+    
+    // MARK: - 当前时间字符串
     static func getCurrentDate()->String {
         let dateStr = getCurrentDate("yyyy-MM-dd HH:mm:ss")
         
@@ -42,7 +68,15 @@ extension Date {
         return dateStr
     }
     
-    // 时间戳转时间
+    // MARK: - 时间戳转时间字符串
+    static func getDateWith(_ timeStamp:Int) -> String {
+        return self.getDateWith(timeStamp, "yyyy/MM/dd")
+    }
+    
+    static func getStringDate(_ timeStamp:Int) -> String {
+        return self.getDateWith(timeStamp, "yyyy-MM-dd HH:mm:ss")
+    }
+    
     static func getDateWith(_ timeStamp:Int, _ formatString:String) -> String {
         //转换为时间
         let timeInterval:TimeInterval = TimeInterval(timeStamp/1000)
@@ -54,44 +88,5 @@ extension Date {
         print("对应的日期时间：\(dformatter.string(from: date))")
         
         return dformatter.string(from: date)
-    }
-    
-    // 时间戳转时间
-    static func getDateWith(_ timeStamp:Int) -> String {
-//        //时间戳
-//        let timeStamp = 1463637809
-//        print("时间戳：\(timeStamp)")
-//        
-//        //转换为时间
-//        let timeInterval:TimeInterval = TimeInterval(timeStamp/1000)
-//        let date = Date(timeIntervalSince1970: timeInterval)
-//        
-//        //格式话输出
-//        let dformatter = DateFormatter()
-//        dformatter.dateFormat = "yyyy/MM/dd"
-//        print("对应的日期时间：\(dformatter.string(from: date))")
-//        
-//        return dformatter.string(from: date)
-        return self.getDateWith(timeStamp, "yyyy/MM/dd")
-    }
-    
-    // 时间戳转时间
-    static func getStringDate(_ timeStamp:Int) -> String {
-        //        //时间戳
-        //        let timeStamp = 1463637809
-//        print("时间戳：\(timeStamp)")
-//        
-//        //转换为时间
-//        let timeInterval:TimeInterval = TimeInterval(timeStamp/1000)
-//        let date = Date(timeIntervalSince1970: timeInterval)
-//        
-//        //格式话输出
-//        let dformatter = DateFormatter()
-//        dformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//        print("对应的日期时间：\(dformatter.string(from: date))")
-//        
-//        return dformatter.string(from: date)
-        
-        return self.getDateWith(timeStamp, "yyyy-MM-dd HH:mm:ss")
     }
 }

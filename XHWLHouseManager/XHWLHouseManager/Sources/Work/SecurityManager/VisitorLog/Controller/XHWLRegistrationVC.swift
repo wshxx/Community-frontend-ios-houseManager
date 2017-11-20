@@ -8,10 +8,10 @@
 
 import UIKit
 
-class XHWLRegistrationVC: UIViewController , XHWLScanTestVCDelegate, XHWLNetworkDelegate{
+class XHWLRegistrationVC: XHWLBaseVC , XHWLScanTestVCDelegate, XHWLNetworkDelegate{
 
-    var bgImg:UIImageView!
-    var topMenu:XHWLTopView!
+//    var bgImg:UIImageView!
+//    var topMenu:XHWLTopView!
     var warningView:XHWLRegistrationView!
     var dataSource:NSMutableArray!
     
@@ -21,18 +21,18 @@ class XHWLRegistrationVC: UIViewController , XHWLScanTestVCDelegate, XHWLNetwork
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.white
         setupView()
-        setupNav()
+//        setupNav()
         onLoadVisitList()
     }
     
-    func setupNav() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
-        
-    }
+//    func setupNav() {
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
+//
+//    }
 
-    func onBack(){
-        self.navigationController?.popViewController(animated: true)
-    }
+//    func onBack(){
+//        self.navigationController?.popViewController(animated: true)
+//    }
     
     func onLoadVisitList() {
         
@@ -68,10 +68,10 @@ class XHWLRegistrationVC: UIViewController , XHWLScanTestVCDelegate, XHWLNetwork
     
     func setupView() {
         
-        bgImg = UIImageView()
-        bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"home_bg")
-        self.view.addSubview(bgImg)
+//        bgImg = UIImageView()
+//        bgImg.frame = self.view.bounds
+//        bgImg.image = UIImage(named:"home_bg")
+//        self.view.addSubview(bgImg)
         
         warningView = XHWLRegistrationView()
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)

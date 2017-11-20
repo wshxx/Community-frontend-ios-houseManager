@@ -66,7 +66,7 @@ class XHWLGroupBoxListView: UIView {
         self.boxTitle = UILabel(frame: frame)
         self.boxTitle.text = title
         self.boxTitle.font = UIFont.systemFont(ofSize: TGDropBoxTitleHoldFontSize)
-        self.boxTitle.textAlignment = .left
+        self.boxTitle.textAlignment = .center
         self.boxTitle.textColor = TGDropBoxDefaultColor
         self.boxButton.addSubview(self.boxTitle)
         
@@ -149,6 +149,11 @@ class XHWLGroupBoxListView: UIView {
     }
     
     fileprivate func showBoxList() {
+        
+        if self.items.count == 0{
+            "没有可选的数据".ext_debugPrintAndHint()
+            return
+        }
         
         self.boxWrapperView.isHidden = false
         if self.isHightWhenShowList == true {

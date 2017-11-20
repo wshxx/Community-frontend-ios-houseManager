@@ -70,6 +70,7 @@ class XHWLPersonView: UIView {
 //        timeBtn?.frame = CGRect(x:lineL.frame.maxX+5, y:0, width:self.bounds.size.width-lineL.frame.maxX-img.size.width-15, height:self.bounds.size.height)
 //        self.addSubview(timeBtn)
         
+//        let vc:UIViewController = self.currentViewController()
         let vc:UIViewController = AppDelegate.shared().getCurrentVC()
         //        let window:UIWindow = UIApplication.shared.keyWindow!
         vc.view.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)

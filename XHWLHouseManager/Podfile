@@ -6,14 +6,18 @@ target "XHWLHouseManager" do
 pod 'Alamofire', '~>4.5.0'
 pod 'Kingfisher', '~>3.11.0'
 pod 'IQKeyboardManagerSwift', '~>4.0.13'
-pod 'swiftScan', '~>1.1.1'
 pod 'SnapKit', '~>3.2.0'
 pod 'BaiduMapKit', '~>3.4.0'
 pod 'MJExtension', '~>3.0.13'
 pod 'JPush', '~>3.0.6'
 pod 'tingyunApp','~>2.5.9'
 pod 'TransitionAnimation', '~>4.0.0'
+pod 'MZTimerLabel', '~>0.5.4'
+#pod 'ESPullToRefresh', '~>2.7'
+pod 'MJRefresh', '~>3.1.15'
 
+#pod "swiftScan", "~>1.1.1"
+#pod 'SwiftyJSON', '~>3.1.4'
 
 #pod 'AgoraAudio_iOS', '~>1.12.0'    #声网
 #pod 'AgoraRtcEngine_iOS'#, '~>1.12.0'

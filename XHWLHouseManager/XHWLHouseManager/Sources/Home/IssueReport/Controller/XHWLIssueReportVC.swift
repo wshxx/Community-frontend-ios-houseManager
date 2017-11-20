@@ -9,9 +9,9 @@
 import UIKit
 
 //@nonobjc(HZActionSheetDelegate)
-class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImagePickerControllerDelegate, XHWLNetworkDelegate, UIActionSheetDelegate, HZActionSheetDelegate { // UINavigationControllerDelegate,
+class XHWLIssueReportVC: XHWLBaseVC,  XHWLIssueReportViewDelegate, UIImagePickerControllerDelegate, XHWLNetworkDelegate, UIActionSheetDelegate, HZActionSheetDelegate { // UINavigationControllerDelegate,
     
-    var bgImg:UIImageView!
+//    var bgImg:UIImageView!
     var isAddPicture:Bool!
     var warningView:XHWLIssueReportView!
     var actionArr:NSArray!
@@ -28,7 +28,7 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
         setupView()
         
         self.title = "报事"
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
 //        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
 //        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
@@ -55,22 +55,22 @@ class XHWLIssueReportVC: UIViewController,  XHWLIssueReportViewDelegate, UIImage
         XHWLTipView.shared.remove()
     }
     
-    func onBack(){
-//        self.navigationController?.popViewController(animated: true)
-        
-//        if self.view.isUserInteractionEnabled == true {
-        
-            let vc:UIViewController = (self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)!-3])!
-            self.navigationController?.popToViewController(vc, animated: true)
-//        }
-    }
+//    func onBack(){
+////        self.navigationController?.popViewController(animated: true)
+//
+////        if self.view.isUserInteractionEnabled == true {
+//
+//            let vc:UIViewController = (self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)!-3])!
+//            self.navigationController?.popToViewController(vc, animated: true)
+////        }
+//    }
     
     func setupView() {
         
-        bgImg = UIImageView()
-        bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"home_bg")
-        self.view.addSubview(bgImg)
+//        bgImg = UIImageView()
+//        bgImg.frame = self.view.bounds
+//        bgImg.image = UIImage(named:"home_bg")
+//        self.view.addSubview(bgImg)
         
         warningView = XHWLIssueReportView()
         warningView.scanModel = scanModel

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import swiftScan
+//import swiftScan
 
 @objc protocol XHWLScanVCDelegate:NSObjectProtocol {
     

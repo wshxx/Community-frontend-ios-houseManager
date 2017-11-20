@@ -8,11 +8,41 @@
 
 import UIKit
 
+enum XHWLPatrolLineEnum {
+    case unStart
+    case pastUnFinished
+    case unFinished
+    case finished
+}
+
 class XHWLPatrolLineView: UIView {
 
     var timeL:UILabel!
     var stateL:UILabel!
     var stateIV:UIImageView!
+    var patrolEnum:XHWLPatrolLineEnum = .unStart {
+        willSet {
+            if newValue == .unStart {
+                stateL.isHidden = true
+                stateIV.isHidden = true
+            }
+            else if newValue == .unFinished || newValue == .pastUnFinished {
+                stateL.isHidden = false
+                stateIV.isHidden = true
+            }
+            else if newValue == .finished {
+                stateL.isHidden = true
+                stateIV.isHidden = false
+            }
+        }
+    }
+
+    func setUnPatrolNum(_ time:String, _ num:String, _ progress:String) {
+        timeL.text = time
+        if !num.isEmpty {
+            stateL.text = num + "个未检点" + " " + progress
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,7 +61,7 @@ class XHWLPatrolLineView: UIView {
 
         stateL = UILabel()
         stateL.font = font_14
-        stateL.text = "1个未检点、1个异常点"
+        stateL.text = ""
         stateL.textColor = UIColor.red
         self.addSubview(stateL)
         
@@ -51,11 +81,6 @@ class XHWLPatrolLineView: UIView {
         stateL.frame = CGRect(x: timeL.frame.maxX, y: 0, width: self.bounds.size.width-timeL.frame.maxX, height:font_14.lineHeight)
         stateIV.bounds = CGRect(x:0, y: 0, width: 14, height:14)
         stateIV.center = CGPoint(x: timeL.frame.maxX+5+7, y: font_14.lineHeight/2.0)
-    }
-    
-    func showText(leftText:String, rightText:String) {
-        timeL.text = leftText
-        stateL.text = rightText
     }
     
     required init?(coder aDecoder: NSCoder) {

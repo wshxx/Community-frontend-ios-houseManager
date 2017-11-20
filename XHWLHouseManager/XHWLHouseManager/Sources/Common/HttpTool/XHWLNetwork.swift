@@ -475,6 +475,59 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
         superWithLoadData(parameters, .XHWL_DELETEVIDEOIMG, .post)
     }
     
+    // 获取名单列表
+    func postRosterListClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_ROSTERLIST, .post)
+    }
+    
+    // 名单---添加新名单（黑名单、灰名单）
+    func postAddRosterClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_ADDROSTER, .post)
+    }
+    
+    // 根据证件号获取名单信息
+    func postRosterInfoClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_ROSTERINFO, .post)
+    }
+    
+    // 获取所有频道列表
+    func getChannelListClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_CHANNELLIST, .get)
+    }
+    
+    // 新增频道/频道成员
+    func postAddChannelClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_ADDCHANNEL, .post)
+    }
+    
+    // 删除频道/频道成员
+    func postDeleteChannelClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_DELETECHANNEL, .post)
+    }
+    
+    // 获取所有物业工作人员信息
+    func getWorkerListClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_WORKERLIST, .get)
+    }
+    
+    
+    
+    
+    
     
     
     
@@ -493,7 +546,7 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
     }
     
     func onShowAlert() {
-        let vc:UIViewController = AppDelegate.shared().getCurrentVC() as! UIViewController
+        let vc:UIViewController = AppDelegate.shared().getCurrentVC()
         
         AlertMessage.showOneAlertMessage(vc: vc, alertMessage: "登录失效，请重新登录！") {
             AppDelegate.shared().onLogout()

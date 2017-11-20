@@ -82,8 +82,7 @@ class XHWLCallTakingVC: XHWLBaseVC {
 //        callView.delegate = self
 //        self.view.addSubview(callView)
         
-        self.callView.roomName = yzName
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(operatorTalking), name: NSNotification.Name(rawValue: "Talking"), object: nil)
     }
     
@@ -105,6 +104,9 @@ class XHWLCallTakingVC: XHWLBaseVC {
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.isHidden = true
+        
+        self.callView.roomName = yzName
+        self.callView.receiveType = .calling
     }
     
     func updateInterface(withAnimation animation: Bool) {

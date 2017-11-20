@@ -25,6 +25,7 @@ class XHWLPatrolDetailModel: NSObject {
 
 class XHWLPatrolLineModel: NSObject {
     var count:String = ""
+    var currentTimePlanChecksList:NSArray = NSArray()
     var currentTimeChecksDetail:NSArray = NSArray()
     var endDate:String = ""
     var fri:String = ""
@@ -43,6 +44,7 @@ class XHWLPatrolLineModel: NSObject {
     
     func mj_objectClassInArray() -> [AnyHashable : Any]! {
         return ["currentTimeChecksDetail":XHWLPatrolTotalCheckModel.self,
+                "currentTimePlanChecksList":XHWLPatrolTotalCheckModel.self,
                 "planTime":XHWLPatrolPlanTimeModel.self
         ]
     }

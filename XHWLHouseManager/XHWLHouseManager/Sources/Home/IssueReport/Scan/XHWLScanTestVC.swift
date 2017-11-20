@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import swiftScan
+//import swiftScan
 
 @objc protocol XHWLScanTestVCDelegate:NSObjectProtocol {
     @objc optional func returnResultString(strResult:String, block:((_ isSuccess:Bool)->Void));

@@ -20,6 +20,16 @@ class XHWLMcuCell: UITableViewCell {
             }
         }
     }
+    var workerModel:XHWLWorkerModel! {
+        willSet {
+            self.textLabel?.text = newValue.name
+            if newValue.isSelected {
+                self.accessoryType = UITableViewCellAccessoryType.checkmark
+            } else {
+                self.accessoryType = UITableViewCellAccessoryType.none
+            }
+        }
+    }
     
     static func cellWithTableView(_ tableView:UITableView) -> XHWLMcuCell {
         let ID: String = "XHWLMcuCell"

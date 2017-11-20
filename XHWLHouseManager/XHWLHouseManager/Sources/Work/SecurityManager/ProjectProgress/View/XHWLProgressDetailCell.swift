@@ -14,12 +14,12 @@ class XHWLProgressDetailCell: UITableViewCell {
     var timeL:UILabel!
     var iconIV:UIImageView!
     var topLineIV:UIImageView!
-//    var bottomLineIV:UIImageView!
     var bgImage:UIImageView!
     var waringModel:XHWLWarningModel!
     var cellModel:XHWLPatrolTotalCheckModel! {
         willSet {
             if newValue != nil {
+                bgImage.image = UIImage(named:"Patrol_sub_bg")
                 titleL.text = newValue.nodeName
                 timeL.text = "\(newValue.arriveTime)"
                 
@@ -33,19 +33,23 @@ class XHWLProgressDetailCell: UITableViewCell {
             }
         }
     }
-    
-//    func setRealModel(_ realModel:XHWLListModel) {
-//        titleL.text = realModel.nodeName
-//        timeL.text = "\(realModel.arriveTime)"
-//
-//        if realModel.arriveType == "-1" {
-//
-//            iconIV.image = UIImage(named: "dot_gray")
-//        } else if realModel.arriveType == "0" {
-//
-//            iconIV.image = UIImage(named: "dot_green")
-//        }
-//    }
+    var lineModel:XHWLPatrolTotalCheckModel! {
+        willSet {
+            if newValue != nil {
+                bgImage.image = UIImage(named:"")
+                titleL.text = newValue.nodeName
+                timeL.text = "\(newValue.arriveTime)"
+                
+                if newValue.arriveType == "0" {
+                    
+                    iconIV.image = UIImage(named: "dot_green")
+                } else if newValue.arriveType == "-1" {
+                    
+                    iconIV.image = UIImage(named: "dot_gray")
+                }
+            }
+        }
+    }
     
     class func cellWithTableView(tableView:UITableView) -> XHWLProgressDetailCell {
         

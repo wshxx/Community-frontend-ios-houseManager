@@ -12,7 +12,9 @@ class XHWLProgressDetailVC: XHWLBaseVC {
 
     var warningView:XHWLProgressDetailView!
     var realModel:XHWLRealProgressModel!
-    var userId:String! = "" 
+    var userId:String! = ""
+    var name:String! = ""
+    var progress:String! = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +33,9 @@ class XHWLProgressDetailVC: XHWLBaseVC {
 
         print("\(userId)")
         warningView = XHWLProgressDetailView(frame:CGRect.zero)
-//        warningView.realModel = realModel
         warningView.userId = userId
+        warningView.name = name
+        warningView.progress = progress
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
         warningView.dismissBlock = { index in

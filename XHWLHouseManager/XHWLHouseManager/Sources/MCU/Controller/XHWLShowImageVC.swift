@@ -9,7 +9,7 @@
 import UIKit
 
 protocol XHWLShowImageVCDelegate:NSObjectProtocol {
-    func onDeleteImage(_ image:UIImage)
+    func onDeleteImage(_ model:XHWLMcuPictureModel)
 }
 
 class XHWLShowImageVC: XHWLBaseVC {
@@ -26,7 +26,8 @@ class XHWLShowImageVC: XHWLBaseVC {
         
         return jumpBtn
     }()
-    var showImage:UIImage!
+//    var showImage:UIImage!
+    var pictureModel:XHWLMcuPictureModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,11 @@ class XHWLShowImageVC: XHWLBaseVC {
     func setupView() {
         
         warningView = XHWLShowImageView(frame:CGRect(x:Screen_width*3/32.0, y:Screen_height/6.0, width:Screen_width*13/16.0, height:Screen_height*2/3.0))
-        warningView.showIV.image = showImage
+        
+        let url = URL(string: pictureModel.imageUrl)
+        warningView.showIV.kf.setImage(with: url, placeholder: UIImage(named:"default_icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        
+//        warningView.showIV.image = showImage
         self.view.addSubview(warningView)
         
         self.view.addSubview(self.downloadBtn)
@@ -48,11 +53,20 @@ class XHWLShowImageVC: XHWLBaseVC {
     
     func onDownload() {
     
-        UIImageWriteToSavedPhotosAlbum(showImage!, nil, nil, nil)
+        let url = URL(string: pictureModel.imageUrl)
+        
+        //  方式二:try?方式(常用方式) 系统帮助我们处理异常,如果该方法出现了异常,则该方法返回nil.如果没有异常,则返回对应的对象
+        guard let data = try? Data.init(contentsOf: url!, options: Data.ReadingOptions.alwaysMapped) else {
+            return
+        }
+        
+        "保存图片成功".ext_debugPrintAndHint()
+        let showImage:UIImage = UIImage.init(data: data)!
+        UIImageWriteToSavedPhotosAlbum(showImage, nil, nil, nil)
     }
     
     func onDelete() {
-        self.delegate?.onDeleteImage(showImage)
+        self.delegate?.onDeleteImage(pictureModel)
         self.onBack()
     }
     

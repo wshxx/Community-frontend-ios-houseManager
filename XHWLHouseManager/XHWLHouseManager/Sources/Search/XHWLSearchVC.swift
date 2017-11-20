@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XHWLSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, XHWLSearchBarDelegate {
+class XHWLSearchVC: XHWLBaseVC, UITableViewDelegate, UITableViewDataSource, XHWLSearchBarDelegate {
 
     var searchBar:XHWLSearchBar!
     var tableView: UITableView!

@@ -26,13 +26,16 @@ class XHWLMapKitModel: NSObject {
 //    var speed:String = ""
     
     var accuracy:String = ""
+    var count:String = ""
     var createTime:String = ""
     var ele:String = ""
     var latitude:String = ""
     var longitude:String = ""
     var nickname:String = ""
+    var progress:String = ""
     var speed:String = ""
     var userId:String = ""
+    var isSelected:Bool = false
 }
 
 

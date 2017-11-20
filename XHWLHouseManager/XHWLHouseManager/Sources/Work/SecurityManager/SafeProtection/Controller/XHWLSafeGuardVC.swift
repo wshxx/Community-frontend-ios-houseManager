@@ -8,9 +8,9 @@
 
 import UIKit
 
-class XHWLSafeGuardVC: UIViewController  , XHWLScanTestVCDelegate, XHWLSafeGuardViewDelegate , UIImagePickerControllerDelegate, HZActionSheetDelegate, XHWLNetworkDelegate { // UINavigationControllerDelegate
+class XHWLSafeGuardVC: XHWLBaseVC , XHWLScanTestVCDelegate, XHWLSafeGuardViewDelegate , UIImagePickerControllerDelegate, HZActionSheetDelegate, XHWLNetworkDelegate { // UINavigationControllerDelegate
     
-    var bgImg:UIImageView!
+//    var bgImg:UIImageView!
     var warningView:XHWLSafeGuardView!
     var isAddPicture:Bool!
     var isFinished:Bool!
@@ -28,21 +28,21 @@ class XHWLSafeGuardVC: UIViewController  , XHWLScanTestVCDelegate, XHWLSafeGuard
         self.view.backgroundColor = UIColor.white
         setupView()
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         self.title = "安防事件详情"
     }
     
-    func onBack(){
-        self.navigationController?.popViewController(animated: true)
-    }
+//    func onBack(){
+//        self.navigationController?.popViewController(animated: true)
+//    }
     
     
     func setupView() {
         
-        bgImg = UIImageView()
-        bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"home_bg")
-        self.view.addSubview(bgImg)
+//        bgImg = UIImageView()
+//        bgImg.frame = self.view.bounds
+//        bgImg.image = UIImage(named:"home_bg")
+//        self.view.addSubview(bgImg)
         
         warningView = XHWLSafeGuardView(frame:CGRect.zero, isFinished, model)
         warningView.delegate = self

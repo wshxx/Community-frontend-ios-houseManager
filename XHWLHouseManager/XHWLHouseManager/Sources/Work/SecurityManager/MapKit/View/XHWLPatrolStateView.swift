@@ -36,15 +36,49 @@ class XHWLPatrolStateView: UIView {
     var planAry:NSArray! {
         willSet {
             if planAry != nil {
+
+                let ary:NSArray = XHWLPatrolPlanTimeModel.mj_objectArray(withKeyValuesArray: newValue)
                 
-//                for i in 0..< newValue.count {
-//                    let model:XHWLPatrolPlanTimeModel = newValue[i] as! XHWLPatrolPlanTimeModel
-////                     model.startTime+"-"+model.endTime
-////                    var count:String = ""
-////                    var progress:String = ""
-//                }
-            
-//                lineView
+                for i in 0..<ary.count {
+                    let model:XHWLPatrolPlanTimeModel = ary[i] as! XHWLPatrolPlanTimeModel
+                    if !model.progress.isEmpty {
+                        let ary:NSArray = model.progress.components(separatedBy: "/") as NSArray
+                        let oneStr:String = ary[0] as! String
+                        let twoStr:String = ary[1] as! String
+                        let time:String = (model.startTime as! String) + "~" + (model.endTime as! String)
+                        
+                        if oneStr == twoStr {
+                            if oneStr == "0" {
+                                lineView.patrolEnum = .unStart
+                                lineView.setUnPatrolNum(time, "", "")
+                            } else {
+                                lineView.patrolEnum = .finished
+                                lineView.setUnPatrolNum(time, "", "")
+                            }
+                        } else {
+                            
+                            let startStr = Date.getCurrentDate("yyyy-MM-dd") + " " + model.startTime + ":00"
+                            let endStr = Date.getCurrentDate("yyyy-MM-dd") + " " + model.startTime + ":00"
+                            let startStamp:Int = Date.stringToStamp(startStr)
+                            let endStamp:Int = Date.stringToStamp(endStr)
+                            let curentStamp:Int = Date.getCurrentStamp()
+                            
+                            if startStamp <= curentStamp && endStamp >= curentStamp {
+                                
+                                let num:String = String(Int(twoStr)! - Int(oneStr)!)
+                                let progress:String = String(Int(Int(oneStr)! * 100 / Int(twoStr)!)) + "%"
+                                lineView.patrolEnum = .unFinished
+                                lineView.setUnPatrolNum(time, num, progress)
+                            } else {
+                                
+                                let num:String = String(Int(twoStr)! - Int(oneStr)!)
+                                lineView.patrolEnum = .pastUnFinished
+                                lineView.setUnPatrolNum(time, num, "")
+                            }
+                            
+                        }
+                    }
+                }
             }
         }
     }

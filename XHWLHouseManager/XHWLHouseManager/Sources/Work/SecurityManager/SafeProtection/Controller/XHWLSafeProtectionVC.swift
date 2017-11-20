@@ -8,9 +8,9 @@
 
 import UIKit
 
-class XHWLSafeProtectionVC: UIViewController, XHWLNetworkDelegate {
+class XHWLSafeProtectionVC: XHWLBaseVC, XHWLNetworkDelegate {
     
-    var bgImg:UIImageView!
+//    var bgImg:UIImageView!
     var warningView:XHWLSafeProtectionView!
     
     override func viewDidLoad() {
@@ -25,14 +25,14 @@ class XHWLSafeProtectionVC: UIViewController, XHWLNetworkDelegate {
 
     
     func setupNav() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         
         self.title = "安防事件"
     }
     
-    func onBack(){
-        self.navigationController?.popViewController(animated: true)
-    }
+//    func onBack(){
+//        self.navigationController?.popViewController(animated: true)
+//    }
     
     func onLoadData() {
         
@@ -65,10 +65,10 @@ class XHWLSafeProtectionVC: UIViewController, XHWLNetworkDelegate {
     
     func setupView() {
         
-        bgImg = UIImageView()
-        bgImg.frame = self.view.bounds
-        bgImg.image = UIImage(named:"home_bg")
-        self.view.addSubview(bgImg)
+//        bgImg = UIImageView()
+//        bgImg.frame = self.view.bounds
+//        bgImg.image = UIImage(named:"home_bg")
+//        self.view.addSubview(bgImg)
         
         warningView = XHWLSafeProtectionView()
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width-20, height:Screen_height-160)

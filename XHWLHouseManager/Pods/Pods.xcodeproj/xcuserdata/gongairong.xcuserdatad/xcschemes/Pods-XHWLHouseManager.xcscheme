@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "89C561D938425BFFD4AEFAD9F13D1FF0"
+               BlueprintIdentifier = "DFCE64DBF707FD2281161FFAF6AAB99A"
                BuildableName = "Pods_XHWLHouseManager.framework"
                BlueprintName = "Pods-XHWLHouseManager"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -47,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "89C561D938425BFFD4AEFAD9F13D1FF0"
+            BlueprintIdentifier = "DFCE64DBF707FD2281161FFAF6AAB99A"
             BuildableName = "Pods_XHWLHouseManager.framework"
             BlueprintName = "Pods-XHWLHouseManager"
             ReferencedContainer = "container:Pods.xcodeproj">
