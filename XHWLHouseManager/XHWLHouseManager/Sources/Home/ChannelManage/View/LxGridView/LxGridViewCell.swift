@@ -34,18 +34,12 @@ class LxGridViewCell: UICollectionViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-        
-        setup()
-        setupEvents()
     }
     
     func setup() {
-        self.backgroundColor = UIColor.red
         
         iconImageView = UIImageView()
-        iconImageView?.contentMode = .scaleAspectFit
-        iconImageView?.layer.cornerRadius = ICON_CORNER_RADIUS
-        iconImageView?.layer.masksToBounds = true
+        iconImageView?.image = UIImage(named:"power_bg")
         contentView.addSubview(iconImageView!)
 
         _deleteButton = UIButton(type: .custom)
@@ -54,10 +48,11 @@ class LxGridViewCell: UICollectionViewCell {
         _deleteButton?.isHidden = true
         
         _titleLabel = UILabel()
-        _titleLabel?.text = "title"
+        _titleLabel?.text = ""
         _titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        _titleLabel?.textColor = UIColor.black
+        _titleLabel?.textColor = UIColor.white
         _titleLabel?.textAlignment = .center
+        _titleLabel?.numberOfLines = 0
         contentView.addSubview(_titleLabel!)
         
         iconImageView?.translatesAutoresizingMaskIntoConstraints = false
@@ -82,16 +77,22 @@ class LxGridViewCell: UICollectionViewCell {
         contentView.addConstraints([deleteButtonTopConstraint, deleteButtonLeftConstraint, deleteButtonWidthConstraint, deleteButtonHeightConstraint])
         
         let centerXConstraint = NSLayoutConstraint(item: _titleLabel!, attribute: .centerX, relatedBy: .equal, toItem: iconImageView, attribute: .centerX, multiplier: 1, constant: 0)
-        let titleLabelTopConstraint = NSLayoutConstraint(item: _titleLabel!, attribute: .top, relatedBy: .equal, toItem: iconImageView, attribute: .bottom, multiplier: 1, constant: 5)
+        let titleLabelTopConstraint = NSLayoutConstraint(item: _titleLabel!, attribute: .centerY, relatedBy: .equal, toItem: iconImageView, attribute: .centerY, multiplier: 1, constant: 0)
         let titleLabelWidthConstraint = NSLayoutConstraint(item: _titleLabel!, attribute: .width, relatedBy: .equal, toItem: iconImageView, attribute: .width, multiplier: 1, constant: 0)
         let titleLabelHeightConstraint = NSLayoutConstraint(item: _titleLabel!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 15)
         contentView.addConstraints([centerXConstraint, titleLabelTopConstraint, titleLabelWidthConstraint, titleLabelHeightConstraint])
+        
+//        let centerXConstraint = NSLayoutConstraint(item: _titleLabel!, attribute: .centerX, relatedBy: .equal, toItem: iconImageView, attribute: .centerX, multiplier: 1, constant: 0)
+//        let titleLabelTopConstraint = NSLayoutConstraint(item: _titleLabel!, attribute: .top, relatedBy: .equal, toItem: iconImageView, attribute: .bottom, multiplier: 1, constant: 5)
+//        let titleLabelWidthConstraint = NSLayoutConstraint(item: _titleLabel!, attribute: .width, relatedBy: .equal, toItem: iconImageView, attribute: .width, multiplier: 1, constant: 0)
+//        let titleLabelHeightConstraint = NSLayoutConstraint(item: _titleLabel!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 15)
+//        contentView.addConstraints([centerXConstraint, titleLabelTopConstraint, titleLabelWidthConstraint, titleLabelHeightConstraint])
     }
     
     func setupEvents() {
     
         _deleteButton?.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
-        iconImageView?.isUserInteractionEnabled = true
+//        iconImageView?.isUserInteractionEnabled = true
     }
     
     func deleteButtonClicked(btn: UIButton) {

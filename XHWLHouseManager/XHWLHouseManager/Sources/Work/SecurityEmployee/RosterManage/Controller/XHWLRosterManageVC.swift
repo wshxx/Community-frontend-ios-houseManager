@@ -8,13 +8,10 @@
 
 import UIKit
 
-class XHWLRosterManageVC: XHWLBaseVC, XHWLRosterAddViewDelegate {
+class XHWLRosterManageVC: XHWLBaseVC {
     
     var warningView:XHWLRosterManageView!
     var rosterAddView:XHWLRosterAddView!
-//    var selectIndex:NSInteger = 0
-//    var dataAry:NSMutableArray! = NSMutableArray()
-//    var dataSource:NSMutableArray! = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +73,15 @@ class XHWLRosterManageVC: XHWLBaseVC, XHWLRosterAddViewDelegate {
         rosterAddView.removeFromSuperview()
     }
     
-    // MARK - XHWLRosterAddViewDelegate
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+}
+
+// MARK - XHWLRosterAddViewDelegate
+extension XHWLRosterManageVC: XHWLRosterAddViewDelegate {
+
     func cancelWith(rosterAddView:XHWLRosterAddView) {
         rosterAddView.isHidden = true
     }
@@ -84,21 +89,6 @@ class XHWLRosterManageVC: XHWLBaseVC, XHWLRosterAddViewDelegate {
     func addWith(rosterAddView:XHWLRosterAddView) {
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+

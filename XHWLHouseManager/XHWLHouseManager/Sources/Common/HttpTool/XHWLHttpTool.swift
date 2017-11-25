@@ -181,54 +181,56 @@ class XHWLHttpTool: NSObject {
                 case .success(let value):
                     print("success:\(value)")
                     
-                    if self.requestKey != .XHWL_RESETPWD &&
-                        self.requestKey != .XHWL_VERCODENEXT &&
-                        self.requestKey != .XHWL_FORGETPWD &&
-                        self.requestKey != .XHWL_VISITREGISTER &&
-                        self.requestKey != .XHWL_MODIFYUSER &&
-                        self.requestKey != .XHWL_HANDLEEXCEPTIONPASS &&
-                        self.requestKey != .XHWL_SAVECARDLOG &&
-                        self.requestKey != .XHWL_DELETECARDLOG &&
-                        self.requestKey != .XHWL_REGISTERJPUSH &&
-                        self.requestKey != .XHWL_DELETEVIDEOIMG &&
-                        self.requestKey != .XHWL_ADDCHANNEL
-                    {
-                        if (value as! [String : AnyObject])["result"] is String {
-                            if !((value as! [String : AnyObject])["message"] is NSNull) {
-                                let message:String = (value as! [String : AnyObject])["message"] as! String
-                                message.ext_debugPrintAndHint()
-                            } else {
+                    if (value as! [String : AnyObject])["errorCode"] as! NSInteger != 200 {
+                        if self.requestKey != .XHWL_RESETPWD &&
+                            self.requestKey != .XHWL_VERCODENEXT &&
+                            self.requestKey != .XHWL_FORGETPWD &&
+                            self.requestKey != .XHWL_VISITREGISTER &&
+                            self.requestKey != .XHWL_MODIFYUSER &&
+                            self.requestKey != .XHWL_HANDLEEXCEPTIONPASS &&
+                            self.requestKey != .XHWL_SAVECARDLOG &&
+                            self.requestKey != .XHWL_DELETECARDLOG &&
+                            self.requestKey != .XHWL_REGISTERJPUSH &&
+                            self.requestKey != .XHWL_DELETEVIDEOIMG &&
+                            self.requestKey != .XHWL_ADDCHANNEL
+                        {
+                            if (value as! [String : AnyObject])["result"] is String {
+                                if !((value as! [String : AnyObject])["message"] is NSNull) {
+                                    let message:String = (value as! [String : AnyObject])["message"] as! String
+                                    message.ext_debugPrintAndHint()
+                                } else {
+                                    
+                                    "数据为空".ext_debugPrintAndHint()
+                                }
                                 
-                                "数据为空".ext_debugPrintAndHint()
-                            }
-                            
-                            if (value as! [String : AnyObject])["errorCode"] as! NSInteger == code_401 ||
-                                (value as! [String : AnyObject])["errorCode"] as! NSInteger == code_400 { // 用户token过期  用户没有登录
-                                self.onShowAlert()
-                            }
-                            
-                            return
-                        }
-                        
-                        if (value as! [String : AnyObject])["result"] is NSNull {//is NSNull
-                            
-                            if !((value as! [String : AnyObject])["message"] is NSNull) {
-                                let message:String = (value as! [String : AnyObject])["message"] as! String
-                                message.ext_debugPrintAndHint()
-                            } else {
+                                if (value as! [String : AnyObject])["errorCode"] as! NSInteger == code_401 ||
+                                    (value as! [String : AnyObject])["errorCode"] as! NSInteger == code_400 { // 用户token过期  用户没有登录
+                                    self.onShowAlert()
+                                }
                                 
-                                "数据为空".ext_debugPrintAndHint()
+                                return
                             }
                             
-                            if (value as! [String : AnyObject])["errorCode"] as! NSInteger == code_401 ||
-                                (value as! [String : AnyObject])["errorCode"] as! NSInteger == code_400 { // 用户token过期  用户没有登录
-                                self.onShowAlert()
+                            if (value as! [String : AnyObject])["result"] is NSNull {//is NSNull
+                                
+                                if !((value as! [String : AnyObject])["message"] is NSNull) {
+                                    let message:String = (value as! [String : AnyObject])["message"] as! String
+                                    message.ext_debugPrintAndHint()
+                                } else {
+                                    
+                                    "数据为空".ext_debugPrintAndHint()
+                                }
+                                
+                                if (value as! [String : AnyObject])["errorCode"] as! NSInteger == code_401 ||
+                                    (value as! [String : AnyObject])["errorCode"] as! NSInteger == code_400 { // 用户token过期  用户没有登录
+                                    self.onShowAlert()
+                                }
+                                
+                                return
                             }
-                            
-                            return
                         }
                     }
-                    
+                   
                     self.delegate?.requestSuccess(self.requestKey!.rawValue, result:value as! [String : AnyObject])
                     
                 case .failure(let error):

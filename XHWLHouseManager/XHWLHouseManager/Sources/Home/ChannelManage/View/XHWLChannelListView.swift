@@ -63,6 +63,8 @@ class XHWLChannelListView: UIView , UITableViewDelegate, UITableViewDataSource, 
         //        cell.setRegisterModel(model)
         let model:XHWLChannelModel = dataAry[indexPath.row] as! XHWLChannelModel
 //        cell.abnormalModel = model
+        cell.textLabel?.font = font_14
+        cell.textLabel?.textColor = UIColor.white
         cell.textLabel?.text = "\(model.name)(\(model.wyAccount.count)人）"
         
         return cell;
@@ -120,7 +122,7 @@ class XHWLChannelListView: UIView , UITableViewDelegate, UITableViewDataSource, 
         let params:NSDictionary = ["token":userModel?.wyAccount.token, //    用户登录token
                                     "channelId":channelModel.id, // 是    频道id
                                     "wyAccountIds":"", // 删除频道（否）/删除频道成员（是）    频道人员的id
-                                    "isRemoveChannel":"" // 是    是否删除频道
+                                    "isRemoveChannel":"y" // 是    是否删除频道
                                     ]
         
         XHWLNetwork.shared.postDeleteChannelClick(params, self)
@@ -132,7 +134,8 @@ class XHWLChannelListView: UIView , UITableViewDelegate, UITableViewDataSource, 
         
         if requestKey == XHWLRequestKeyID.XHWL_DELETECHANNEL.rawValue {
             
-
+            self.dataAry.removeObject(at: deleteIndexPath.row)
+            self.tableView.deleteRows(at: [deleteIndexPath as IndexPath], with: .none)
         }
     }
     

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import ELPickerView
 
-class XHWLSafeProtectionView: UIView , UITableViewDelegate, UITableViewDataSource {
+class XHWLSafeProtectionView: UIView {
     
     var bgImage:UIImageView!
     var tipImg:UIImageView!
@@ -19,6 +20,18 @@ class XHWLSafeProtectionView: UIView , UITableViewDelegate, UITableViewDataSourc
     var clickCell:(NSInteger, NSInteger, XHWLSafeProtectionModel)->(Void) = {param in }
     var selectIndex:NSInteger! = 0
     var topMenu:XHWLTopView!
+    lazy var customPickerView: ELCustomPickerView<String> = {
+       let pickerV = ELCustomPickerView<String>(pickerType: .singleComponent, items: [])
+        
+        pickerV.rightButton.setTitle("确定", for: .normal)
+        pickerV.leftButton.setTitle("取消", for: .normal)
+        pickerV.title.text = "分配给"
+        pickerV.foregroundView.picker.backgroundColor = UIColor.white
+        pickerV.rightButton.setTitleColor(UIColor.black, for: .normal)
+        pickerV.leftButton.setTitleColor(UIColor.black, for: .normal)
+        
+        return pickerV
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,6 +74,41 @@ class XHWLSafeProtectionView: UIView , UITableViewDelegate, UITableViewDataSourc
         tableView.frame = CGRect(x:14, y:topMenu.frame.maxY, width:self.bounds.size.width-28, height:self.frame.size.height-topMenu.frame.maxY-14)
     }
     
+   
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension XHWLSafeProtectionView: XHWLRegistrationCellDelegate {
+    // 底部弹出界面
+    func registrationWithHandle(_ cell:XHWLRegistrationCell) {
+
+        customPickerView.items = ["黄浩婷", "张浩然", "徐柳飞", "阳城"]
+        customPickerView.show(viewController: nil, animated: true)
+        
+        // 确定
+        customPickerView.rightButtoTapHandler = { [weak self] (view, chosenIndex, chosenItem) in
+            let hide = true
+            let animated = true
+            let str = "Did Tap Left Button. <Index: \(chosenIndex)> <chosenItem: \(chosenItem)> <Hide: \(hide)> <Animated: \(animated)>"
+            //            self?.logLabel.text = str
+            print(str)
+            return (hide, animated)
+        }
+        // 取消
+        customPickerView.leftButtoTapHandler = { [weak self] (view, chosenIndex, chosenItem) in
+            let hide = true
+            let animated = true
+            let str = "Did Tap Left Button. <Index: \(chosenIndex)> <chosenItem: \(chosenItem)> <Hide: \(hide)> <Animated: \(animated)>"
+//            self?.logLabel.text = str
+            print(str)
+            return (hide, animated)
+        }
+    }
+}
+
+extension XHWLSafeProtectionView: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -81,6 +129,7 @@ class XHWLSafeProtectionView: UIView , UITableViewDelegate, UITableViewDataSourc
         } else {
             model = dataSource[indexPath.row] as! XHWLSafeProtectionModel //XHWLRegisterationModel
         }
+        cell.delegate = self
         cell.setModel(model)
         
         return cell;
@@ -101,7 +150,5 @@ class XHWLSafeProtectionView: UIView , UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 55
     }
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
+

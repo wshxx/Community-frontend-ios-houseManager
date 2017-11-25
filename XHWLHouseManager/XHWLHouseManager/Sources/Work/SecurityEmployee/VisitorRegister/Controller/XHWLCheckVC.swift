@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XHWLCheckVC: XHWLBaseVC , XHWLNetworkDelegate {
+class XHWLCheckVC: XHWLBaseVC {
     
     var warningView:XHWLCheckListView!
     var submitBtn:UIButton!
@@ -206,6 +206,15 @@ class XHWLCheckVC: XHWLBaseVC , XHWLNetworkDelegate {
         XHWLNetwork.shared.postVisitRegisterClick(params as NSDictionary, self)
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+}
+
+
+extension XHWLCheckVC: XHWLNetworkDelegate {
+
     func requestSuccess(_ requestKey: NSInteger, _ response: [String : AnyObject]) {
         
         if requestKey == XHWLRequestKeyID.XHWL_REGISTERJPUSH.rawValue {
@@ -225,22 +234,22 @@ class XHWLCheckVC: XHWLBaseVC , XHWLNetworkDelegate {
             vc.nextParams = self.nextParams
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
-//            if !warningView.subView.isHidden {
-                let vc:XHWLRegistrationVC = XHWLRegistrationVC()
-                self.navigationController?.pushViewController(vc, animated: true)
-//            } else {
-//                "提交成功".ext_debugPrintAndHint()
-//                self.navigationController?.popViewController(animated: true)
-//            }
+            //            if !warningView.subView.isHidden {
+            let vc:XHWLRegistrationVC = XHWLRegistrationVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+            //            } else {
+            //                "提交成功".ext_debugPrintAndHint()
+            //                self.navigationController?.popViewController(animated: true)
+            //            }
         }
     }
     
     func requestFail(_ requestKey: NSInteger, _ error: NSError) {
         
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }
+
+
+
+
+

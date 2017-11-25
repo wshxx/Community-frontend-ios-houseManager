@@ -7,10 +7,10 @@
 //
 
 import UIKit
+import ELPickerView
 
-class XHWLSafeGuardVC: XHWLBaseVC , XHWLScanTestVCDelegate, XHWLSafeGuardViewDelegate , UIImagePickerControllerDelegate, HZActionSheetDelegate, XHWLNetworkDelegate { // UINavigationControllerDelegate
+class XHWLSafeGuardVC: XHWLBaseVC {
     
-//    var bgImg:UIImageView!
     var warningView:XHWLSafeGuardView!
     var isAddPicture:Bool!
     var isFinished:Bool!
@@ -20,6 +20,18 @@ class XHWLSafeGuardVC: XHWLBaseVC , XHWLScanTestVCDelegate, XHWLSafeGuardViewDel
     var actionArr:NSArray!
     var selectIndex:NSInteger! = 0
     var imageArray:NSMutableArray! = NSMutableArray()
+    lazy var customPickerView: ELCustomPickerView<String> = {
+        let pickerV = ELCustomPickerView<String>(pickerType: .singleComponent, items: [])
+        
+        pickerV.rightButton.setTitle("确定", for: .normal)
+        pickerV.leftButton.setTitle("取消", for: .normal)
+        pickerV.title.text = "分配给"
+        pickerV.foregroundView.picker.backgroundColor = UIColor.white
+        pickerV.rightButton.setTitleColor(UIColor.black, for: .normal)
+        pickerV.leftButton.setTitleColor(UIColor.black, for: .normal)
+        
+        return pickerV
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,29 +40,51 @@ class XHWLSafeGuardVC: XHWLBaseVC , XHWLScanTestVCDelegate, XHWLSafeGuardViewDel
         self.view.backgroundColor = UIColor.white
         setupView()
         
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         self.title = "安防事件详情"
+        let baoBar = UIBarButtonItem.init(image: UIImage(named:"CloudEyes_picture"), style: .plain, target: self, action: #selector(onBaoClick))
+        let devideBar = UIBarButtonItem.init(image: UIImage(named:"IssueReport_manager"), style: .plain, target: self, action: #selector(onDevideClick))
+        self.navigationItem.rightBarButtonItems = [devideBar, baoBar]
     }
     
-//    func onBack(){
-//        self.navigationController?.popViewController(animated: true)
-//    }
+    // 报
+    func onBaoClick() {
+        
+    }
     
-    
+    // 分配
+    func onDevideClick() {
+        customPickerView.items = ["黄浩婷", "张浩然", "徐柳飞", "阳城"]
+        customPickerView.show(viewController: nil, animated: true)
+        
+        // 确定
+        customPickerView.rightButtoTapHandler = { [weak self] (view, chosenIndex, chosenItem) in
+            let hide = true
+            let animated = true
+            let str = "Did Tap Left Button. <Index: \(chosenIndex)> <chosenItem: \(chosenItem)> <Hide: \(hide)> <Animated: \(animated)>"
+            //            self?.logLabel.text = str
+            print(str)
+            return (hide, animated)
+        }
+        // 取消
+        customPickerView.leftButtoTapHandler = { [weak self] (view, chosenIndex, chosenItem) in
+            let hide = true
+            let animated = true
+            let str = "Did Tap Left Button. <Index: \(chosenIndex)> <chosenItem: \(chosenItem)> <Hide: \(hide)> <Animated: \(animated)>"
+            //            self?.logLabel.text = str
+            print(str)
+            return (hide, animated)
+        }
+    }
+ 
     func setupView() {
-        
-//        bgImg = UIImageView()
-//        bgImg.frame = self.view.bounds
-//        bgImg.image = UIImage(named:"home_bg")
-//        self.view.addSubview(bgImg)
-        
+
         warningView = XHWLSafeGuardView(frame:CGRect.zero, isFinished, model)
-        warningView.delegate = self
+//        warningView.delegate = self
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
-        warningView.submitBlock = { [weak self] text in
-            self?.submitClick(text)
-        }
+//        warningView.submitBlock = { [weak self] text in
+//            self?.submitClick(text)
+//        }
         self.view.addSubview(warningView)
     }
     
@@ -83,25 +117,17 @@ class XHWLSafeGuardVC: XHWLBaseVC , XHWLScanTestVCDelegate, XHWLSafeGuardViewDel
         XHWLNetwork.shared.updateSafeGuardSubmitClick(param as NSDictionary, imageDataAry as! [Data], imageNameAry as! [String], self)
     }
     
-    // MARK: - XHWLNetworkDelegate
-    
-    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
-        
-        if requestKey == XHWLRequestKeyID.XHWL_SAFEGUARDSUBMIT.rawValue {
-            
-            self.backReloadBlock()
-            self.navigationController?.popViewController(animated: true)
-        }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
+
+}
+
+// MARK: - XHWLSafeGuardViewDelegate
+extension XHWLSafeGuardVC: XHWLSafeGuardViewDelegate {
     
-    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
-        
-    }
-    
-    func onSafeGuard(_ isAdd:Bool, _ index:NSInteger, _ isPictureAdd:Bool)
-    {
-//        isAddPicture = isAdd
-//        openAlbum()
+    func onSafeGuard(_ isAdd:Bool, _ index:NSInteger, _ isPictureAdd:Bool) {
         
         isAddPicture = isAdd
         selectIndex = index
@@ -119,8 +145,50 @@ class XHWLSafeGuardVC: XHWLBaseVC , XHWLScanTestVCDelegate, XHWLSafeGuardViewDel
             sheet.show(in: self.view)
         }
     }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+//extension XHWLSafeGuardVC: UIImagePickerControllerDelegate {
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+//        //查看info对象
+//        print(info)
+//        //获取选择的原图
+//        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+//        //            imageView.image = image
+//        if isAddPicture {
+//            warningView.pickPhoto.onCreateImgView(image)
+//            imageArray.add(image)
+//        } else {
+//            warningView.pickPhoto.onChangePicture(image)
+//            imageArray[selectIndex] = image
+//        }
+//
+//        //图片控制器退出
+//        picker.dismiss(animated: true, completion: nil)
+//    }
+//}
+
+// MARK: - XHWLNetworkDelegate
+
+extension XHWLSafeGuardVC: XHWLNetworkDelegate {
+
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        if requestKey == XHWLRequestKeyID.XHWL_SAFEGUARDSUBMIT.rawValue {
+            
+            self.backReloadBlock()
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
     
-    // pragma mark  ActionSheetDelegate
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
+    }
+}
+
+// MARK: - HZActionSheetDelegate
+extension XHWLSafeGuardVC: HZActionSheetDelegate {
+
     func sheet(_ actionSheet: HZActionSheet!, click buttonIndex: Int) {
         if ((actionArr != nil) && buttonIndex >= actionArr.count) {
             
@@ -132,182 +200,57 @@ class XHWLSafeGuardVC: XHWLBaseVC , XHWLScanTestVCDelegate, XHWLSafeGuardViewDel
         
         if (buttonIndex == 0) {// @"退回"
             
-            openAlbum()
+//            openAlbum()
         } else if (buttonIndex == 1){ // "删除
             
-            openCarme()
+//            openCamera()
         }
     }
+    
+    
     
     // 打开相机
-    func openCarme() {
-        //判断设置是否支持图片库
-        if UIImagePickerController.isSourceTypeAvailable(.camera){
-            //初始化图片控制器
-            let picker = UIImagePickerController()
-            //设置代理
-            picker.delegate = self
-            //指定图片控制器类型
-            picker.sourceType = UIImagePickerControllerSourceType.camera
-            //设置是否允许编辑
-            //            picker.allowsEditing = editSwitch.on
-            //弹出控制器，显示界面
-            self.present(picker, animated: true, completion: nil)
-        }else{
-            print("读取相册错误")
-        }
-    }
-    
-    //    func initImagePickerController()
-    //    {
-    //        self.imagePickerController = UIImagePickerController()
-    //        self.imagePickerController.delegate = self
-    //        // 设置是否可以管理已经存在的图片或者视频
-    //        self.imagePickerController.allowsEditing = true
-    //    }
-    //
-    //    func getImageFromPhotoLib(type:UIImagePickerControllerSourceType)
-    //    {
-    //        self.imagePickerController.sourceType = type
-    //        //判断是否支持相册
-    //        ifUIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-    //            self.present(self.imagePickerController, animated: true, completion:nil)
+    //    func openCamera() {
+    //        //判断设置是否支持图片库
+    //        if UIImagePickerController.isSourceTypeAvailable(.camera){
+    //            //初始化图片控制器
+    //            let picker = UIImagePickerController()
+    //            //设置代理
+    //            picker.delegate = self
+    //            //指定图片控制器类型
+    //            picker.sourceType = UIImagePickerControllerSourceType.camera
+    //            //设置是否允许编辑
+    //            //            picker.allowsEditing = editSwitch.on
+    //            //弹出控制器，显示界面
+    //            self.present(picker, animated: true, completion: nil)
+    //        }else{
+    //            print("读取相册错误")
     //        }
-    //    }
-    //    [self getInstanceMethodList];
-    //}
-    //
-    ////获取一个类的实例方法列表
-    //- (void)getInstanceMethodList {
-    //    unsigned int count;
-    //    Method *methods = class_copyMethodList(NSClassFromString(@"HZActionSheet"), &count);
-    //    for (int i =0; i < count; i++) {
-    //        SEL name = method_getName(methods[i]);
-    //
-    //        NSLog(@"***实例方法名:%@",NSStringFromSelector(name));
-    //        if ([NSStringFromSelector(name) isEqualToString:@"hideActionSheet"]) {
-    //            [_sheet performSelector:name];
-    //            break;
-    //        }
-    //    }
-    //    free(methods);
     //    }
     
     //打开相册
-    func openAlbum(){
-        //判断设置是否支持图片库
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-            //初始化图片控制器
-            let picker = UIImagePickerController()
-            //设置代理
-            picker.delegate = self
-            //指定图片控制器类型
-            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-            //设置是否允许编辑
-            //            picker.allowsEditing = editSwitch.on
-            //弹出控制器，显示界面
-            self.present(picker, animated: true, completion: nil)
-        }else{
-            print("读取相册错误")
-        }
-    }
-    
-    func openCamera(){
-        if UIImagePickerController.isSourceTypeAvailable(.camera){
-            
-            //创建图片控制器
-            let picker = UIImagePickerController()
-            //设置代理
-            picker.delegate = self
-            //设置来源
-            picker.sourceType = UIImagePickerControllerSourceType.camera
-            //允许编辑
-            picker.allowsEditing = true
-            //打开相机
-            self.present(picker, animated: true, completion: nil)
-        }else{
-            print("找不到相机")
-        }
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
-    {
-        //查看info对象
-        print(info)
-        //获取选择的原图
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        //            imageView.image = image
-        if isAddPicture {
-            warningView.pickPhoto.onCreateImgView(image)
-            imageArray.add(image)
-        } else {
-            warningView.pickPhoto.onChangePicture(image)
-            imageArray[selectIndex] = image
-        }
-        //        let type:String = (info[UIImagePickerControllerMediaType]as!String)
-        //        let imgData = UIImageJPEGRepresentation(self.headImg.image!,0.5)
-        
-        
-        //图片控制器退出
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
-    //打开相册
-//    func openAlbum(){
-//        //判断设置是否支持图片库
-//        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-//            //初始化图片控制器
-//            let picker = UIImagePickerController()
-//            //设置代理
-//            picker.delegate = self
-//            //指定图片控制器类型
-//            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-//            //设置是否允许编辑
-//            //            picker.allowsEditing = editSwitch.on
-//            //弹出控制器，显示界面
-//            self.present(picker, animated: true, completion: nil)
-//        }else{
-//            print("读取相册错误")
-//        }
-//    }
-    
-//    func openCamera(){
-//        if UIImagePickerController.isSourceTypeAvailable(.camera){
-//            
-//            //创建图片控制器
-//            let picker = UIImagePickerController()
-//            //设置代理
-//            picker.delegate = self
-//            //设置来源
-//            picker.sourceType = UIImagePickerControllerSourceType.camera
-//            //允许编辑
-//            picker.allowsEditing = true
-//            //打开相机
-//            self.present(picker, animated: true, completion: nil)
-//        }else{
-//            debugPrint("找不到相机")
-//        }
-//    }
-//    
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
-//    {
-//        //查看info对象
-//        print(info)
-//        //获取选择的原图
-//        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-//        //            imageView.image = image
-//        if isAddPicture {
-//            warningView.pickPhoto.onCreateImgView(image)
-//        } else {
-//            warningView.pickPhoto.onChangePicture(image)
-//        }
-//        //图片控制器退出
-//        picker.dismiss(animated: true, completion: nil)
-//    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    //    func openAlbum(){
+    //        //判断设置是否支持图片库
+    //        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+    //            //初始化图片控制器
+    //            let picker = UIImagePickerController()
+    //            //设置代理
+    //            picker.delegate = self
+    //            //指定图片控制器类型
+    //            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+    //            //设置是否允许编辑
+    //            //            picker.allowsEditing = editSwitch.on
+    //            //弹出控制器，显示界面
+    //            self.present(picker, animated: true, completion: nil)
+    //        }else{
+    //            print("读取相册错误")
+    //        }
+    //    }
 }
+
+
+
+
+
+
+

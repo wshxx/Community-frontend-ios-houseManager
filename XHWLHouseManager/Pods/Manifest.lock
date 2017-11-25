@@ -1,6 +1,8 @@
 PODS:
+  - AgoraRtcEngine_iOS (1.14.0)
   - Alamofire (4.5.1)
   - BaiduMapKit (3.4.2)
+  - ELPickerView (3.0.0)
   - IQKeyboardManagerSwift (4.0.13)
   - JCore (1.1.6)
   - JPush (3.0.7):
@@ -16,21 +18,25 @@ PODS:
   - TransitionTreasury (4.1.0)
 
 DEPENDENCIES:
+  - AgoraRtcEngine_iOS (~> 1.14.0)
   - Alamofire (~> 4.5.0)
   - BaiduMapKit (~> 3.4.0)
+  - ELPickerView
   - IQKeyboardManagerSwift (~> 4.0.13)
   - JPush (~> 3.0.6)
   - Kingfisher (~> 3.11.0)
   - MJExtension (~> 3.0.13)
-  - MJRefresh
+  - MJRefresh (~> 3.1.15)
   - MZTimerLabel (~> 0.5.4)
   - SnapKit (~> 3.2.0)
   - tingyunApp (~> 2.5.9)
   - TransitionAnimation (~> 4.0.0)
 
 SPEC CHECKSUMS:
+  AgoraRtcEngine_iOS: 942902e45104aa75579cd6d2b700357e5106a3cf
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   BaiduMapKit: f61b19ecf07a3f2deede72b221b366bf698739ed
+  ELPickerView: e46a864b1dcb34e93b4d882713a54d14e6527909
   IQKeyboardManagerSwift: fb399c4cddcd8d9bbcd2d0c7c81ed290b61c088e
   JCore: 18fc8725124f26e55625eaf224659b3a999dcf63
   JPush: 111b79b8a0169ab8fd4c486dac3ed166ed69293e
@@ -43,6 +49,6 @@ SPEC CHECKSUMS:
   TransitionAnimation: c397b9ca41ab593b35b1e8f8673df17bae0db20a
   TransitionTreasury: c3b541a2073ee3060519835afa10791bd4ba55f9
 
-PODFILE CHECKSUM: 83aac826a4fcc98832b02471f07a04c08fff22bc
+PODFILE CHECKSUM: bd83fab1b8799dddee370f91a2f362ef753f1a1e
 
 COCOAPODS: 1.3.1

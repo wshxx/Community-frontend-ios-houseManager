@@ -230,7 +230,7 @@ class XHWLCheckListView: UIView, XHWLNetworkDelegate {
         
         if requestKey == XHWLRequestKeyID.XHWL_ROSTERINFO.rawValue {
             
-            if response.count > 0 {
+            if !(response["result"] is NSNull) {
                 let type:String = response["result"]!["type"] as! String
                 if type == "黑名单" {
                     isBackList = true

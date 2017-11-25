@@ -11,12 +11,11 @@ import UIKit
 //import swiftScan
 import CoreBluetooth
 
-class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHWLNetworkDelegate, CBCentralManagerDelegate {
+class XHWLHomeVC: XHWLBaseVC {
     
     var btn:UIButton!
-    
-//    var menuView : XHWLMenuView!
     var homeView:XHWLHomeView!
+    var central: CBCentralManager!
     var block:(Bool)->() = {param in  }
     
     override func viewDidLoad() {
@@ -47,7 +46,6 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
     
     func createNavHeadView() -> UIButton {
     
-        
         if UserDefaults.standard.object(forKey: "projectList") != nil {
             
             if UserDefaults.standard.object(forKey: "projectList") is NSData {
@@ -86,43 +84,6 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
             return UIButton()
         }
         return UIButton()
-    }
-    
-    //MARK: -2.检查设备自身（中心设备）支持的蓝牙状态
-    // CBCentralManagerDelegate的代理方法
-    
-    /// 本地设备状态
-    ///
-    /// - Parameter central: 中心者对象
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        switch central.state {
-        case .unknown:
-            print("CBCentralManager state:", "unknown")
-            break
-        case .resetting:
-            print("CBCentralManager state:", "resetting")
-            break
-        case .unsupported:
-            print("CBCentralManager state:", "unsupported")
-            break
-        case .unauthorized:
-            print("CBCentralManager state:", "unauthorized")
-            break
-        case .poweredOff:
-            print("CBCentralManager state:", "power off")
-        
-            "请打开蓝牙！".ext_debugPrintAndHint()
-            break
-        case .poweredOn:
-            //暂时跳到云对讲
-            let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "bluetoothVC")
-            self.navigationController?.pushViewController(vc, animated: true)
-//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "bluetoothVC")
-//            self.present(vc!, animated: true)
-            break
-        }
-        
     }
     
     func onCreateNavHeadView() {
@@ -178,6 +139,56 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+}
+
+// MARK: - CBCentralManagerDelegate
+
+extension XHWLHomeVC:CBCentralManagerDelegate {
+    //MARK: -2.检查设备自身（中心设备）支持的蓝牙状态
+    // CBCentralManagerDelegate的代理方法
+    
+    /// 本地设备状态
+    ///
+    /// - Parameter central: 中心者对象
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        switch central.state {
+        case .unknown:
+            print("CBCentralManager state:", "unknown")
+            break
+        case .resetting:
+            print("CBCentralManager state:", "resetting")
+            break
+        case .unsupported:
+            print("CBCentralManager state:", "unsupported")
+            break
+        case .unauthorized:
+            print("CBCentralManager state:", "unauthorized")
+            break
+        case .poweredOff:
+            print("CBCentralManager state:", "power off")
+            
+            "请打开蓝牙！".ext_debugPrintAndHint()
+            break
+        case .poweredOn:
+            //暂时跳到云对讲
+            let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "bluetoothVC")
+            self.navigationController?.pushViewController(vc, animated: true)
+            //            let vc = self.storyboard?.instantiateViewController(withIdentifier: "bluetoothVC")
+            //            self.present(vc!, animated: true)
+            break
+        }
+    }
+}
+
+// MARK: - XHWLScanTestVCDelegate
+
+extension XHWLHomeVC:XHWLScanTestVCDelegate {
+    
     /**
      *  扫描代理的回调函数
      *
@@ -194,7 +205,7 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
      "type":"plant",
      "code":"xxxxx"
      }
-
+     
      *  @param strResult 返回的字符串
      */
     
@@ -230,9 +241,69 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
         }
         
     }
+}
+
+// MARK: - XHWLHomeViewDelegate
+
+extension XHWLHomeVC: XHWLHomeViewDelegate {
     
+    // 蓝牙开门
+    func onHomeViewWithOpenBluetooth(_ homeView:XHWLHomeView) {
+        self.noticeSuccess("开门成功！")
+    }
     
-    // MARK: - XHWLNetworkDelegate
+    // 远程开门
+    func onHomeViewWithOpenNetwork(_ homeView:XHWLHomeView) {
+        
+        let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ChooseDistrictVC")
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    // 蓝牙绑卡
+    func onHomeViewWithBindCard(_ homeView:XHWLHomeView) {
+        //初始化本地中心设备对象
+        central = CBCentralManager.init(delegate: self, queue: nil)
+    }
+    
+    func onHomeViewWithMessage(_ homeView:XHWLHomeView) {
+        let vc:XHWLMessageVC = XHWLMessageVC()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func onHomeViewWithChannel(_ homeView:XHWLHomeView) {
+        let vc:XHWLChannelManageVC = XHWLChannelManageVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func onHomeViewWithVoice(_ homeView:XHWLHomeView, _ isSelected:Bool) {
+        
+        if isSelected {
+            // 请求后台，同时进入频道
+            let channelData:NSData = UserDefaults.standard.object(forKey: "channelList") as! NSData
+            let channelList:NSArray = XHWLChannelModel.mj_objectArray(withKeyValuesArray: channelData.mj_JSONObject())
+            
+            print("\(channelList)")
+            if channelList.count == 0  {
+                return
+            }
+            let model:XHWLChannelModel = channelList[0] as! XHWLChannelModel
+            
+            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+            
+            let params:NSDictionary = ["token":userModel.wyAccount.token,
+                                       "channelId":model.id]
+            print("\(params)")
+            XHWLNetwork.shared.postTalkPushClick(params, self)
+        } else {
+            XHWLTalkManager.sharedInstance.leaveChannel()
+        }
+    }
+}
+
+// MARK: - XHWLNetworkDelegate
+extension XHWLHomeVC: XHWLNetworkDelegate {
     
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
         
@@ -263,43 +334,23 @@ class XHWLHomeVC: XHWLBaseVC, XHWLScanTestVCDelegate , XHWLHomeViewDelegate, XHW
                 message.ext_debugPrintAndHint()
                 block(false)
             }
+        } else if requestKey == XHWLRequestKeyID.XHWL_TALKPUSH.rawValue {
+            print("发送推送")
+            let channelData:NSData = UserDefaults.standard.object(forKey: "channelList") as! NSData
+            let channelList:NSArray = XHWLChannelModel.mj_objectArray(withKeyValuesArray: channelData.mj_JSONObject())
+            
+            print("\(channelList)")
+            if channelList.count == 0  {
+                return
+            }
+            let model:XHWLChannelModel = channelList[0] as! XHWLChannelModel
+            XHWLTalkManager.sharedInstance.onJoinRoom(model.id)
         }
     }
     
     func requestFail(_ requestKey:NSInteger, _ error:NSError) {
         
     }
-    
-    // MARK: - XHWLHomeViewDelegate
-    // 蓝牙开门
-    func onHomeViewWithOpenBluetooth(_ homeView:XHWLHomeView)
-    {
-        self.noticeSuccess("开门成功！")
-    }
-    
-    // 远程开门
-    func onHomeViewWithOpenNetwork(_ homeView:XHWLHomeView) {
-        
-        let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ChooseDistrictVC")
-        self.present(vc, animated: true, completion: nil)
-    }
-    
-    var central: CBCentralManager!
-    // 蓝牙绑卡
-    func onHomeViewWithBindCard(_ homeView:XHWLHomeView) {
-        //初始化本地中心设备对象
-        central = CBCentralManager.init(delegate: self, queue: nil)
-    }
-    
-    func onHomeViewWithMessage(_ homeView:XHWLHomeView) {
-        let vc:XHWLMessageVC = XHWLMessageVC()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }
+
+

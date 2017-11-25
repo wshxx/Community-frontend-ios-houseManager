@@ -82,10 +82,10 @@ class LxGridViewFlowLayout: UICollectionViewFlowLayout, UIGestureRecognizerDeleg
     
         collectionView?.isUserInteractionEnabled = true
         
-        _longPressGestureRecognizer.addTarget(self, action: #selector(longPressGestureRecognizerTriggerd))
-        _longPressGestureRecognizer.cancelsTouchesInView = false
-        _longPressGestureRecognizer.minimumPressDuration = PRESS_TO_MOVE_MIN_DURATION
-        _longPressGestureRecognizer.delegate = self
+//        _longPressGestureRecognizer.addTarget(self, action: #selector(longPressGestureRecognizerTriggerd))
+//        _longPressGestureRecognizer.cancelsTouchesInView = false
+//        _longPressGestureRecognizer.minimumPressDuration = PRESS_TO_MOVE_MIN_DURATION
+//        _longPressGestureRecognizer.delegate = self
         
         if let cV = collectionView {
         
@@ -222,6 +222,9 @@ class LxGridViewFlowLayout: UICollectionViewFlowLayout, UIGestureRecognizerDeleg
             
             let sourceCollectionViewCell = collectionView?.cellForItem(at: _movingItemIndexPath! as IndexPath)
             
+            if sourceCollectionViewCell is LxOtherGridViewCell || sourceCollectionViewCell == nil {
+                return
+            }
             assert(sourceCollectionViewCell is LxGridViewCell || sourceCollectionViewCell == nil, "LxGridViewFlowLayout: Must use LxGridViewCell as your collectionViewCell class!")
                 
             let sourceGridViewCell = sourceCollectionViewCell as! LxGridViewCell
@@ -342,7 +345,9 @@ class LxGridViewFlowLayout: UICollectionViewFlowLayout, UIGestureRecognizerDeleg
                 self.collectionView?.insertItems(at: [destinationIndexPath!])
             }, completion: { [unowned self] (finished) -> Void in
 
-                self.dataSource?.collectionView!(self.collectionView as! LxGridView, itemAtIndexPath: sourceIndexPath!, didMoveToIndexPath:  destinationIndexPath!)
+                if (self.dataSource != nil) && (self.dataSource?.responds(to: #selector(LxGridViewDataSource.collectionView(_:itemAtIndexPath:didMoveToIndexPath:))))! {
+                    self.dataSource?.collectionView!(self.collectionView as! LxGridView, itemAtIndexPath: sourceIndexPath!, didMoveToIndexPath:  destinationIndexPath!)
+                }
             })
             
         default:
@@ -374,14 +379,14 @@ class LxGridViewFlowLayout: UICollectionViewFlowLayout, UIGestureRecognizerDeleg
     
     func displayLinkTriggered(displayLink: CADisplayLink) {
     
-        if _remainSecondsToBeginEditing <= 0 {
-        
-            editing = true
-            _displayLink?.invalidate()
-            _displayLink = nil
-        }
-        
-        _remainSecondsToBeginEditing = _remainSecondsToBeginEditing - 0.1
+//        if _remainSecondsToBeginEditing <= 0 {
+//
+//            editing = true
+//            _displayLink?.invalidate()
+//            _displayLink = nil
+//        }
+//
+//        _remainSecondsToBeginEditing = _remainSecondsToBeginEditing - 0.1
     }
     
 //  MARK:- KVO and notification

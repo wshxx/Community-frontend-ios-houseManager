@@ -8,9 +8,8 @@
 
 import UIKit
 
-class XHWLSafeProtectionVC: XHWLBaseVC, XHWLNetworkDelegate {
+class XHWLSafeProtectionVC: XHWLBaseVC {
     
-//    var bgImg:UIImageView!
     var warningView:XHWLSafeProtectionView!
     
     override func viewDidLoad() {
@@ -18,22 +17,11 @@ class XHWLSafeProtectionVC: XHWLBaseVC, XHWLNetworkDelegate {
         
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.clear
+        self.title = "安防事件"
         setupView()
-        setupNav()
         onLoadData()
     }
 
-    
-    func setupNav() {
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
-        
-        self.title = "安防事件"
-    }
-    
-//    func onBack(){
-//        self.navigationController?.popViewController(animated: true)
-//    }
-    
     func onLoadData() {
         
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
@@ -42,34 +30,8 @@ class XHWLSafeProtectionVC: XHWLBaseVC, XHWLNetworkDelegate {
         XHWLNetwork.shared.getReportListClick([userModel.wyAccount.token] as NSArray, self)
     }
     
-    // MARK: - XHWLNetworkDelegate
-    
-    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
-       
-        if requestKey == XHWLRequestKeyID.XHWL_REPORTLIST.rawValue {
-
-            let dealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray:response["result"]!["deal"] as! NSArray )
-            let noDealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray: response["result"]!["notDeal"] as! NSArray)
-            
-            self.warningView.dataAry = NSMutableArray()
-            self.warningView.dataSource = NSMutableArray()
-            self.warningView.dataAry.addObjects(from: noDealArray as! [Any])
-            self.warningView.dataSource.addObjects(from: dealArray as! [Any])
-            self.warningView.tableView.reloadData()
-        }
-    }
-    
-    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
-        
-    }
-    
     func setupView() {
-        
-//        bgImg = UIImageView()
-//        bgImg.frame = self.view.bounds
-//        bgImg.image = UIImage(named:"home_bg")
-//        self.view.addSubview(bgImg)
-        
+
         warningView = XHWLSafeProtectionView()
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width-20, height:Screen_height-160)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
@@ -98,3 +60,29 @@ class XHWLSafeProtectionVC: XHWLBaseVC, XHWLNetworkDelegate {
     }
     
 }
+
+// MARK: - XHWLNetworkDelegate
+
+extension XHWLSafeProtectionVC: XHWLNetworkDelegate {
+
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        if requestKey == XHWLRequestKeyID.XHWL_REPORTLIST.rawValue {
+            
+            let dealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray:response["result"]!["deal"] as! NSArray )
+            let noDealArray:NSArray = XHWLSafeProtectionModel.mj_objectArray(withKeyValuesArray: response["result"]!["notDeal"] as! NSArray)
+            
+            self.warningView.dataAry = NSMutableArray()
+            self.warningView.dataSource = NSMutableArray()
+            self.warningView.dataAry.addObjects(from: noDealArray as! [Any])
+            self.warningView.dataSource.addObjects(from: dealArray as! [Any])
+            self.warningView.tableView.reloadData()
+        }
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
+    }
+}
+
+

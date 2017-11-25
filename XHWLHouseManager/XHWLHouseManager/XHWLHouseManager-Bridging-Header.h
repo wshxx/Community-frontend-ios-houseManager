@@ -62,7 +62,6 @@
 #import "WSDatePickerView.h"
 #import "THDatePickerView.h"
 #import "MZTimerLabel.h"
-#import "SMClassicCalloutView.h"
 #import "MJRefresh.h"
 
 #endif /* XHWLHouseManager_Bridging_Header_h */

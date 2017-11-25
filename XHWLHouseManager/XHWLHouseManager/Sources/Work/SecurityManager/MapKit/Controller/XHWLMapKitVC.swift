@@ -9,17 +9,13 @@
 import UIKit
 import MapKit
 
-class XHWLMapView:BMKMapView {
-    var calloutView:SMCalloutView!
-}
-
 protocol XHWLMapKitVCDelegate:NSObjectProtocol {
     func mapkitWithShowDetail(_ mapkit:XHWLMapKitVC, _ model:XHWLMapKitModel)
 }
 
-class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, XHWLNetworkDelegate, XHWLMapKitTopViewDelegate, SMCalloutViewDelegate  { //
+class XHWLMapKitVC: XHWLBaseVC  { //
 
-    var _mapView: XHWLMapView!
+    var _mapView: BMKMapView!
     var enableCustomMap = true
     var delegate:XHWLMapKitVCDelegate?
     var subBgIV:UIImageView!
@@ -28,48 +24,119 @@ class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, 
     var coordinate:CLLocationCoordinate2D! // 我的当前位置
     var annotationArray:NSMutableArray! = NSMutableArray()
     var selectAllBtn:UIButton!
+    var dealArray:NSArray = NSArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        bgImg = UIImageView()
-//        bgImg.frame = self.view.bounds
-//        bgImg.image = UIImage(named:"home_bg")
-//        self.view.addSubview(bgImg)
+        self.title = "巡更定位"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"Patrol_switch"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onSwitchClick))
         
 //        let topHeight = (self.navigationController?.navigationBar.frame.height)! + UIApplication.shared.statusBarFrame.height
         subBgIV = UIImageView(frame: CGRect(x:10, y:64+20, width:Screen_width-20, height:Screen_height-64-20-20))
         subBgIV.image = UIImage(named:"subview_bg")
         self.view.addSubview(subBgIV)
-        
-        self.title = "巡更定位"
-//        self.navigationItem.leftBarButtonItem = UI BarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"Patrol_switch"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onSwitchClick))
-        
+
         setupMapKit()
         setupLocation()
         onLoadData()
         setupUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        BMKMapView.enableCustomMapStyle(enableCustomMap)
+        _mapView?.viewWillAppear()
+        _mapView?.delegate = self
+        locationService.delegate = self
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        locationService.delegate = self
+        BMKMapView.enableCustomMapStyle(false)//消失时，关闭个性化地图
+        _mapView?.viewWillDisappear()
+        _mapView?.delegate = nil
+    }
+
+    // MARK: - 初始化地图和定位
+    func setupMapKit() {
+        
+//        let topHeight = (self.navigationController?.navigationBar.frame.height)! + UIApplication.shared.statusBarFrame.height
+//        _mapView = BMKMapView(frame: CGRect(x: 0, y: topHeight, width: self.view.frame.width, height: self.view.frame.height - topHeight))
+       
+        _mapView = BMKMapView(frame: CGRect(x:10+2, y:64+20+2, width:Screen_width-20-4, height:Screen_height-64-20-20-4))
+        _mapView?.logoPosition = BMKLogoPositionLeftBottom  /// logo位置，默认BMKLogoPositionLeftBottom
+        _mapView?.mapType = UInt(BMKMapTypeStandard)        /// 当前地图类型，可设定为标准地图、卫星地图
+        _mapView?.showMapScaleBar = true /// 设定是否显式比例尺
+        _mapView?.zoomLevel = 3         // 地图比例尺级别，在手机上当前可使用的级别为3-21级
+        _mapView?.minZoomLevel = 3      // 地图的自定义最小比例尺级别
+        _mapView?.maxZoomLevel = 20     /// 地图的自定义最大比例尺级别
+        _mapView?.rotation = 120        /// 地图旋转角度，在手机上当前可使用的范围为－180～180度
+   
+        self.view.addSubview(_mapView!)
+    }
+    
+    func setupLocation() {
+        locationService = BMKLocationService()
+        locationService.delegate = self
+ 
+        locationService.startUserLocationService() // 开始定位
+        _mapView.showsUserLocation = false//先关闭显示的定位图层
+        _mapView.userTrackingMode = BMKUserTrackingModeNone;//设置定位的状态
+        _mapView.showsUserLocation = true//显示定位图层
+    }
+    
+    func onLoadData() {
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        XHWLNetwork.shared.getMapkitClick([userModel.wyAccount.token] as NSArray, self)
+    }
+    
+    func setupUI() {
+        //        let topHeight = (self.navigationController?.navigationBar.frame.height)! + UIApplication.shared.statusBarFrame.height
+        topView = XHWLMapKitTopView(frame:CGRect(x:10, y:64+30, width:Screen_width-20, height:100))
+        topView.delegate = self
+        self.view.addSubview(topView)
+        
+        selectAllBtn = UIButton()
+        selectAllBtn.setTitleColor(UIColor.black, for: .normal)
+        selectAllBtn.setTitle("显示巡更进度", for: .normal)
+        selectAllBtn.setImage(UIImage(named:"Patrol_unSelected"), for: .normal)
+        selectAllBtn.setImage(UIImage(named:"Patrol_selected"), for: .selected)
+        selectAllBtn.titleLabel?.font = font_14
+        selectAllBtn.setBackgroundImage(UIImage(named:"Patrol_white_bg"), for: .normal)
+        selectAllBtn.setBackgroundImage(UIImage(named:"Patrol_white_bg"), for: .highlighted)
+        selectAllBtn.addTarget(self, action: #selector(selectAllAnnotations), for: .touchUpInside)
+        selectAllBtn?.frame = CGRect(x:Screen_width-120-20, y:Screen_height-80, width:120, height:30)
+        self.view.addSubview(selectAllBtn)
+    }
+    
     func onSwitchClick() {
         let vc:XHWLCountVC = XHWLCountVC()
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
+}
+
+// MARK: - XHWLMapKitTopViewDelegate
+extension XHWLMapKitVC: XHWLMapKitTopViewDelegate  { //
     
     func mapKitViewWithSearch(_ topView:XHWLMapKitTopView, _ array:NSArray) {
-//        selectAllBtn.isHidden = false
+        print("\(array)")
         onSearchData()
     }
+    
     func mapKitViewWithTrail(_ topView: XHWLMapKitTopView, _ array: NSArray) {
-        
+        print("\(array)")
         onSearchData()
         setupLine(dealArray)
     }
-
-    var dealArray:NSArray = NSArray()
     
+    // 打点
     func onSearchData()  {
         selectAllBtn.setTitle("巡更人员", for: .normal)
         selectAllBtn.setImage(nil, for: .normal)
@@ -77,7 +144,7 @@ class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, 
         
         _mapView.removeAnnotations(_mapView.annotations)
         _mapView.removeOverlays(_mapView.overlays)
-        //////
+        //////  假数据
         dealArray = NSArray()
         let noDelAry:NSMutableArray = NSMutableArray()
         for j in 0..<4 {
@@ -118,54 +185,40 @@ class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, 
         }
     }
     
-    func setupUI() {
-//        let topHeight = (self.navigationController?.navigationBar.frame.height)! + UIApplication.shared.statusBarFrame.height
-        topView = XHWLMapKitTopView(frame:CGRect(x:10, y:64+30, width:Screen_width-20, height:100))
-        topView.delegate = self
-        self.view.addSubview(topView)
+    // 画轨迹
+    func setupLine(_ dealAry:NSArray) {// BMKMapPoint
         
-        selectAllBtn = UIButton()
-        selectAllBtn.setTitleColor(UIColor.black, for: .normal)
-        selectAllBtn.setTitle("显示巡更进度", for: .normal)
-        selectAllBtn.setImage(UIImage(named:"Patrol_unSelected"), for: .normal)
-        selectAllBtn.setImage(UIImage(named:"Patrol_selected"), for: .selected)
-        selectAllBtn.titleLabel?.font = font_14
-        selectAllBtn.setBackgroundImage(UIImage(named:"Patrol_white_bg"), for: .normal)
-        selectAllBtn.setBackgroundImage(UIImage(named:"Patrol_white_bg"), for: .highlighted)
-        selectAllBtn.addTarget(self, action: #selector(selectAllAnnotations), for: .touchUpInside)
-        selectAllBtn?.frame = CGRect(x:Screen_width-120-20, y:Screen_height-80, width:120, height:30)
-        self.view.addSubview(selectAllBtn)
+        var tempPoints = Array(repeating: CLLocationCoordinate2DMake(0, 0), count: dealAry.count)
+        
+        for i in 0..<dealAry.count {
+            let pointAnno:XHWLMapKitModel = dealAry[i] as! XHWLMapKitModel
+            tempPoints[i].latitude = Double(pointAnno.latitude)!
+            tempPoints[i].longitude = Double(pointAnno.longitude)!
+        }
+        
+        //        let polyLine = BMKPolygon(coordinates:&tempPoints, count: UInt(annotationArray.count))! // 多边形
+        let polyLine = BMKPolyline(coordinates:&tempPoints, count: UInt(dealAry.count))
+        
+        // 添加路线 overlay
+        _mapView.add(polyLine)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    // 添加大头针
+    func stickOverlayAnnotation(_ coor:CLLocationCoordinate2D, _ model:XHWLMapKitModel) {
+        // 添加一个PointAnnotation
+        let annotation: XHWLCustomAnnotation = XHWLCustomAnnotation()
+        annotation.coordinate = coor
+        annotation.title = model.nickname
+        annotation.type = 3
+        _mapView?.addAnnotation(annotation)
         
-        BMKMapView.enableCustomMapStyle(enableCustomMap)
-        _mapView?.viewWillAppear()
-        _mapView?.delegate = self
-        locationService.delegate = self
-        
+        //        annotationArray = NSMutableArray()
+        //        annotationArray.add(annotation)
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        locationService.delegate = self
-        BMKMapView.enableCustomMapStyle(false)//消失时，关闭个性化地图
-        _mapView?.viewWillDisappear()
-        _mapView?.delegate = nil
-        
-    }
-    
-    func onLoadData() {
-        
-        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-        
-        XHWLNetwork.shared.getMapkitClick([userModel.wyAccount.token] as NSArray, self)
-    }
-    
-    // MARK: - XHWLNetworkDelegate
+}
+
+// MARK: - XHWLNetworkDelegate
+extension XHWLMapKitVC: XHWLNetworkDelegate { //
     
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
         
@@ -180,21 +233,21 @@ class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, 
             _mapView.removeAnnotations(_mapView.annotations)
             _mapView.removeOverlays(_mapView.overlays)
             
-//            let model1:XHWLMapKitModel = XHWLMapKitModel()
-//            model1.nickname = "历史"
-//            model1.progress = "2/5"
-//            model1.latitude = "22.539977"
-//            model1.longitude = "113.958474"
-//            let coor1:CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(model1.latitude)!, Double(model1.longitude)!)
-//            stickAnnotation(coor1, model1, 0)
-//
-//            let model2:XHWLMapKitModel = XHWLMapKitModel()
-//            model2.nickname = "展示"
-//            model2.progress = "2/3"
-//            model2.latitude = "22.539377"
-//            model2.longitude = "113.958474"
-//            let coor2:CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(model2.latitude)!, Double(model2.longitude)!)
-//            stickAnnotation(coor2, model2, 1)
+            //            let model1:XHWLMapKitModel = XHWLMapKitModel()
+            //            model1.nickname = "历史"
+            //            model1.progress = "2/5"
+            //            model1.latitude = "22.539977"
+            //            model1.longitude = "113.958474"
+            //            let coor1:CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(model1.latitude)!, Double(model1.longitude)!)
+            //            stickAnnotation(coor1, model1, 0)
+            //
+            //            let model2:XHWLMapKitModel = XHWLMapKitModel()
+            //            model2.nickname = "展示"
+            //            model2.progress = "2/3"
+            //            model2.latitude = "22.539377"
+            //            model2.longitude = "113.958474"
+            //            let coor2:CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(model2.latitude)!, Double(model2.longitude)!)
+            //            stickAnnotation(coor2, model2, 1)
             
             annotationArray = NSMutableArray()
             for i in 0..<dealArray.count {
@@ -207,18 +260,8 @@ class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, 
         }
     }
     
-    // 添加大头针
-    func stickOverlayAnnotation(_ coor:CLLocationCoordinate2D, _ model:XHWLMapKitModel) {
-        // 添加一个PointAnnotation
-        let annotation: XHWLCustomAnnotation = XHWLCustomAnnotation()
-        annotation.coordinate = coor
-        annotation.title = model.nickname
-        annotation.type = 3
-        _mapView?.addAnnotation(annotation)
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
         
-        
-        //        annotationArray = NSMutableArray()
-        //        annotationArray.add(annotation)
     }
     
     // 添加大头针
@@ -229,9 +272,13 @@ class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, 
         annotation.title = model.nickname
         if !model.progress.isEmpty {
             let ary:NSArray = model.progress.components(separatedBy: "/") as NSArray
-            let progross:String = String(Int(Int(ary[0] as! String)! * 100 / Int(ary[1] as! String)!))
-            
-            annotation.subtitle = progross+"%"
+            if (ary[1] as! String) != "0" {
+                let progross:String = String(Int(Int(ary[0] as! String)! * 100 / Int(ary[1] as! String)!))
+                
+                annotation.subtitle = progross+"%"
+            } else {
+                annotation.subtitle = "0%"
+            }
         } else {
             annotation.subtitle = "0%"
         }
@@ -242,126 +289,10 @@ class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, 
         
         annotationArray.add(annotation)
     }
-    
-    func setupLine(_ dealAry:NSArray) {// BMKMapPoint
-        
-        var tempPoints = Array(repeating: CLLocationCoordinate2DMake(0, 0), count: dealAry.count)
+}
 
-        for i in 0..<dealAry.count {
-            let pointAnno:XHWLMapKitModel = dealAry[i] as! XHWLMapKitModel
-            tempPoints[i].latitude = Double(pointAnno.latitude)!
-            tempPoints[i].longitude = Double(pointAnno.longitude)!
-        }
-        
-//        let polyLine = BMKPolygon(coordinates:&tempPoints, count: UInt(annotationArray.count))! // 多边形
-        let polyLine = BMKPolyline(coordinates:&tempPoints, count: UInt(dealAry.count))
-
-        // 添加路线 overlay
-        _mapView.add(polyLine)
-    }
-    
-    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
-        
-    }
-    
-    // MARK: - 初始化地图和定位
-    func setupMapKit() {
-        
-//        let topHeight = (self.navigationController?.navigationBar.frame.height)! + UIApplication.shared.statusBarFrame.height
-//        _mapView = BMKMapView(frame: CGRect(x: 0, y: topHeight, width: self.view.frame.width, height: self.view.frame.height - topHeight))
-       
-        _mapView = XHWLMapView(frame: CGRect(x:10+2, y:64+20+2, width:Screen_width-20-4, height:Screen_height-64-20-20-4))
-        _mapView?.logoPosition = BMKLogoPositionLeftBottom  /// logo位置，默认BMKLogoPositionLeftBottom
-        _mapView?.mapType = UInt(BMKMapTypeStandard)        /// 当前地图类型，可设定为标准地图、卫星地图
-        _mapView?.showMapScaleBar = true /// 设定是否显式比例尺
-        _mapView?.zoomLevel = 3         // 地图比例尺级别，在手机上当前可使用的级别为3-21级
-        _mapView?.minZoomLevel = 3      // 地图的自定义最小比例尺级别
-        _mapView?.maxZoomLevel = 20     /// 地图的自定义最大比例尺级别
-        _mapView?.rotation = 120        /// 地图旋转角度，在手机上当前可使用的范围为－180～180度
-   
-        self.view.addSubview(_mapView!)
-    }
-    
-    // MARK: -
-    
-    func setupLocation() {
-        locationService = BMKLocationService()
-        locationService.delegate = self
- 
-        locationService.startUserLocationService() // 开始定位
-        _mapView.showsUserLocation = false//先关闭显示的定位图层
-        _mapView.userTrackingMode = BMKUserTrackingModeNone;//设置定位的状态
-        _mapView.showsUserLocation = true//显示定位图层
-
-    }
-    
-//    func onBack(){
-//        self.navigationController?.popViewController(animated: true)
-//    }
-
-    // MARK: - 定位服务代理
-    
-    /**
-     *在将要启动定位时，会调用此函数
-     */
-    func willStartLocatingUser() {
-        print("willStartLocatingUser");
-    }
-    
-    
-    /**
-     *在停止定位后，会调用此函数
-     */
-    func didStopLocatingUser() {
-        print("didStopLocatingUser")
-    }
-    
-    /**
-     *用户方向更新后，会调用此函数
-     *@param userLocation 新的用户位置
-     */
-    func didUpdateUserHeading(_ userLocation: BMKUserLocation!) {
-        print("heading is \(userLocation.heading)")
-        _mapView.updateLocationData(userLocation)
-    }
-    
-    /**
-     *用户位置更新后，会调用此函数
-     *@param userLocation 新的用户位置
-     */
-    func didUpdate(_ userLocation: BMKUserLocation!) {
-        print("didUpdateUserLocation lat:\(userLocation.location.coordinate.latitude) lon:\(userLocation.location.coordinate.longitude)")
-        _mapView.updateLocationData(userLocation)
-     
-        coordinate = userLocation.location.coordinate
-        updateMapKit()
-        locationService.stopUserLocationService()
-    }
-    
-    // 更新地图显示
-    func updateMapKit() {
-        _mapView?.region = BMKCoordinateRegionMake(coordinate, BMKCoordinateSpanMake(0.1, 0.1))
-        // 当前地图的中心点，改变该值时，地图的比例尺级别不会发生变化
-        _mapView?.centerCoordinate = coordinate
-
-        let annotation: XHWLCustomAnnotation = XHWLCustomAnnotation()
-        annotation.coordinate = coordinate
-        annotation.type = 1
-        _mapView?.addAnnotation(annotation)
-        
-        /// 限制地图的显示范围（地图状态改变时，该范围不会在地图显示范围外。设置成功后，会调整地图显示该范围）
-        _mapView?.region = BMKCoordinateRegionMake(coordinate, BMKCoordinateSpanMake(0.001, 0.001))
-    }
-    
-    /**
-     *定位失败后，会调用此函数
-     *@param error 错误号
-     */
-    func didFailToLocateUserWithError(_ error: Error!) {
-        print("didFailToLocateUserWithError")
-    }
-    
-    // MARK: - BMKGeoCodeSearchDelegate
+// MARK: - BMKGeoCodeSearchDelegate
+extension XHWLMapKitVC {
     
     /**
      *返回地址信息搜索结果
@@ -412,8 +343,76 @@ class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, 
             self.present(alertView, animated: true, completion: nil)
         }
     }
+}
+
+// MARK: - BMKLocationServiceDelegate
+extension XHWLMapKitVC: BMKLocationServiceDelegate { //
+    // MARK: - 定位服务代理
     
-    // MARK: - BMKMapViewDelegate
+    /**
+     *在将要启动定位时，会调用此函数
+     */
+    func willStartLocatingUser() {
+        print("willStartLocatingUser");
+    }
+    
+    
+    /**
+     *在停止定位后，会调用此函数
+     */
+    func didStopLocatingUser() {
+        print("didStopLocatingUser")
+    }
+    
+    /**
+     *用户方向更新后，会调用此函数
+     *@param userLocation 新的用户位置
+     */
+    func didUpdateUserHeading(_ userLocation: BMKUserLocation!) {
+        print("heading is \(userLocation.heading)")
+        _mapView.updateLocationData(userLocation)
+    }
+    
+    /**
+     *用户位置更新后，会调用此函数
+     *@param userLocation 新的用户位置
+     */
+    func didUpdate(_ userLocation: BMKUserLocation!) {
+        print("didUpdateUserLocation lat:\(userLocation.location.coordinate.latitude) lon:\(userLocation.location.coordinate.longitude)")
+        _mapView.updateLocationData(userLocation)
+        
+        coordinate = userLocation.location.coordinate
+        updateMapKit()
+        locationService.stopUserLocationService()
+    }
+    
+    // 更新地图显示
+    func updateMapKit() {
+        _mapView?.region = BMKCoordinateRegionMake(coordinate, BMKCoordinateSpanMake(0.1, 0.1))
+        // 当前地图的中心点，改变该值时，地图的比例尺级别不会发生变化
+        _mapView?.centerCoordinate = coordinate
+        
+        let annotation: XHWLCustomAnnotation = XHWLCustomAnnotation()
+        annotation.coordinate = coordinate
+        annotation.type = 1
+        _mapView?.addAnnotation(annotation)
+        
+        /// 限制地图的显示范围（地图状态改变时，该范围不会在地图显示范围外。设置成功后，会调整地图显示该范围）
+        _mapView?.region = BMKCoordinateRegionMake(coordinate, BMKCoordinateSpanMake(0.001, 0.001))
+    }
+    
+    /**
+     *定位失败后，会调用此函数
+     *@param error 错误号
+     */
+    func didFailToLocateUserWithError(_ error: Error!) {
+        print("didFailToLocateUserWithError")
+    }
+}
+
+// MARK: - BMKMapViewDelegate
+extension XHWLMapKitVC: BMKMapViewDelegate { //
+
     
     /**
      *地图初始化完毕时会调用此接口
@@ -445,7 +444,7 @@ class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, 
         }
         return nil
     }
-
+    
     /**
      *根据anntation生成对应的View
      *@param mapView 地图View
@@ -467,7 +466,7 @@ class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, 
                 let annotationView = XHWLOtherAnnotationView(annotation: annotation, reuseIdentifier: AnnotationViewID)
                 annotationView.pointModel = anno.model
                 annotationView.tag = anno.tagg + 1000
-
+                
                 return annotationView
             }
             else if anno.type == 3 {
@@ -504,7 +503,7 @@ class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, 
                 }
                 _mapView.addAnnotations(annotationArray as! [Any]!)
             }
-           
+            
         } else if selectAllBtn.currentTitle == "巡更人员" {
             selectAllBtn.setTitle("显示巡更进度", for: .normal)
             selectAllBtn.setImage(UIImage(named:"Patrol_unSelected"), for: .normal)
@@ -533,124 +532,6 @@ class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, 
     func carClicked() {
         
     }
-    func selectAnnotation(_ annotation:XHWLCustomAnnotation, _ pinView:XHWLOtherAnnotationView) {
-        let title:String = annotation.title
-        
-        if annotation.isDisplay == false {
-            annotation.isDisplay = !annotation.isDisplay
-        } else {
-            annotation.isDisplay = false
-            return
-        }
-        if !(annotation.calloutView != nil) {
-            annotation.calloutView = SMCalloutView.platform() // [SMCalloutView platformCalloutView];
-        }
-        
-        
-//        let calloutView:UIView = UIView()
-//        calloutView.backgroundColor = UIColor.blue
-//
-//        let constrainedRect:CGRect = self.view.layer.convert(self.view.layer.bounds, to: calloutView.layer)
-//        constrainedRect = UIEdgeInsetsInsetRect(constrainedRect, self.constrainedInsets);
-//        self.frameSize = [self sizeThatFits:CGSizeMake(constrainedRect.size.width, self.calloutHeight)];
-        
-//
-//        let point:CGPoint = pinView.convert(pinView, to: <#T##UICoordinateSpace#>)
-//        calloutView.frame = CGRect(x:0, y:0, width:44, height:44+30)
-//        _mapView.addSubview(calloutView)
-        
-        let calloutView:SMCalloutView = annotation.calloutView
-        calloutView.delegate = self
-        calloutView.title = title
-
-        var frame:CGRect = calloutView.frame
-        calloutView.frame = CGRect(x:0, y:0, width:165.33334350585938, height:57)
-        // create a little accessory view to mimic the little car that Maps.app shows
-        let carView:UIImageView = UIImageView.init(image: UIImage(named:"1")) // [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Driving"]];
-
-        if calloutView.backgroundView is SMCalloutMaskedBackgroundView  {
-
-            // wrap it in a blue background on iOS 7+
-            let blueView:UIButton = UIButton.init(frame: CGRect(x:0, y:0, width:44, height:44+30))
-            blueView.tag = annotation.tagg + 2000
-
-            blueView.backgroundColor = UIColor.green
-            blueView.addTarget(self, action: #selector(carClicked), for:.touchUpInside)
-
-
-            carView.frame = CGRect(x:11, y:14, width:(carView.image?.size.width)!, height:(carView.image?.size.height)!)
-            blueView.addSubview(carView)
-
-            calloutView.leftAccessoryView = blueView
-            calloutView.leftAccessoryView?.backgroundColor = UIColor.red
-
-            // create a little disclosure indicator since our callout is tappable
-            let disclosure:UIButton = UIButton.init(type: .detailDisclosure)
-            //            [disclosure addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disclosureTapped)]];
-            blueView.addTarget(self, action: #selector(carClicked), for:.touchUpInside)
-            _mapView.calloutView = calloutView
-            calloutView.rightAccessoryView = disclosure
-
-        }
-        else {
-            // "inset" the car graphic to match the callout's title on iOS 6-
-            carView.layer.shadowOffset = CGSize(width:0, height:-1)
-            carView.layer.shadowColor = UIColor.white.cgColor
-            carView.layer.shadowOpacity = 1
-            carView.layer.shadowRadius = 0
-            carView.clipsToBounds = false
-            calloutView.leftAccessoryView = carView
-        }
-
-        // if we're on iOS 7+, the callout can be clicked - add a disclosure image to indicate this to the user!
-        if calloutView.backgroundView is SMCalloutMaskedBackgroundView  {
-            calloutView.rightAccessoryView = UIImageView.init(image: UIImage(named:"2"))
-            calloutView.rightAccessoryView?.alpha = 0.9
-        }
-
-
-
-        // Apply the MKAnnotationView's desired calloutOffset (from the top-middle of the view)
-        calloutView.calloutOffset = pinView.calloutOffset
-
-        // Apply any scroll view edge insets
-
-        // This does all the magic.
-
-
-        //    calloutView.frame = self.pinView.frame;
-
-        //    [self.pinView addSubview:calloutView];
-        //    [self.view layoutIfNeeded];
-        //    [calloutView presentCalloutFromRect:self.pinView.frame inView:self.mapView constrainedToView:self.mapView animated:YES];
-
-        // 这里的代码会在主线程执行
-        calloutView.dismissCallout(animated: true)
-        calloutView.removeFromSuperview()
-        calloutView.presentCallout(from: pinView.bounds, in: pinView, constrainedTo: self.view, animated: true)
-
-
-
-//        [calloutView dismissCalloutAnimated:YES];
-//        [calloutView removeFromSuperview];
-//        [calloutView presentCalloutFromRect:pinView.bounds inView:pinView constrainedToView:self.view animated:YES];
-
-
-        frame = calloutView.frame
-        frame = calloutView.frame
-        
-        
-        // Here's an alternate method that adds the callout *inside* the pin view. This may seem strange, but it's how MKMapView
-        // does it. It brings the selected pin to the front, then pops up the callout inside the pin's view. This way, the callout
-        // is "anchored" to the pin itself. Visually, there's no difference; the callout still looks like it's floating outside the pin.
-        // The only catch is that you will need to override -hitTest in your view to deliver touches to the callout, since the callout
-        // will technically be outside the bounds of the pin which is its parent.
-        
-        //[self.calloutView presentCalloutFromRect:self.pinView.bounds inView:self.pinView constrainedToView:self.view animated:YES];
-        
-        
-    }
-
     /**
      *当选中一个annotation views时，调用此接口
      *@param mapView 地图View
@@ -662,11 +543,11 @@ class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, 
         if view.annotation is XHWLCustomAnnotation {
             let anno:XHWLCustomAnnotation = view.annotation as! XHWLCustomAnnotation
             if anno.type == 2 {
-//                view.setSelected(true, animated: true)
-//                _mapView.mapForceRefresh()
+                //                view.setSelected(true, animated: true)
+                //                _mapView.mapForceRefresh()
                 
-//                let pinview:XHWLOtherAnnotationView = self.view.viewWithTag(anno.tagg + 1000) as! XHWLOtherAnnotationView
-//                self.selectAnnotation(anno, pinview)
+                //                let pinview:XHWLOtherAnnotationView = self.view.viewWithTag(anno.tagg + 1000) as! XHWLOtherAnnotationView
+                //                self.selectAnnotation(anno, pinview)
                 
                 let model:XHWLMapKitModel = anno.model
                 self.delegate?.mapkitWithShowDetail(self, model)
@@ -679,17 +560,17 @@ class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, 
      *@param mapView 地图View
      *@param views 取消选中的annotation views
      */
-//    func mapView(_ mapView: BMKMapView!, didDeselect view: BMKAnnotationView!) {
-//
-//        NSLog("取消选中标注")
-//        if view.annotation is XHWLCustomAnnotation {
-//            let anno:XHWLCustomAnnotation = view.annotation as! XHWLCustomAnnotation
-//            if anno.type == 2 {
-//                view.setSelected(false, animated: true)
-//                _mapView.mapForceRefresh()
-//            }
-//        }
-//    }
+    //    func mapView(_ mapView: BMKMapView!, didDeselect view: BMKAnnotationView!) {
+    //
+    //        NSLog("取消选中标注")
+    //        if view.annotation is XHWLCustomAnnotation {
+    //            let anno:XHWLCustomAnnotation = view.annotation as! XHWLCustomAnnotation
+    //            if anno.type == 2 {
+    //                view.setSelected(false, animated: true)
+    //                _mapView.mapForceRefresh()
+    //            }
+    //        }
+    //    }
     
     /**
      *拖动annotation view时，若view的状态发生变化，会调用此函数。ios3.2以后支持
@@ -716,13 +597,12 @@ class XHWLMapKitVC: XHWLBaseVC, BMKMapViewDelegate, BMKLocationServiceDelegate, 
                 self.delegate?.mapkitWithShowDetail(self, model)
             }
         }
-//        MyBMKPointAnnotation *tt = (MyBMKPointAnnotation *)view.annotation;
-//        if (tt.shopID) {
-//            BusinessIfonUVC *BusinessIfonVC = [[BusinessIfonUVC alloc]init];
-//            BusinessIfonVC.shopId = tt.shopID;
-//            [self.navigationController pushViewController:BusinessIfonVC animated:YES];
-//        }
+        //        MyBMKPointAnnotation *tt = (MyBMKPointAnnotation *)view.annotation;
+        //        if (tt.shopID) {
+        //            BusinessIfonUVC *BusinessIfonVC = [[BusinessIfonUVC alloc]init];
+        //            BusinessIfonVC.shopId = tt.shopID;
+        //            [self.navigationController pushViewController:BusinessIfonVC animated:YES];
+        //        }
     }
 }
-
 

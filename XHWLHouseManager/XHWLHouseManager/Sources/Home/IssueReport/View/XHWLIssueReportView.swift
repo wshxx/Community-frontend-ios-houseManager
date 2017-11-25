@@ -21,6 +21,8 @@ class XHWLIssueReportView: UIView {
     var radioView: XHWLRadioView!
     var typeView: XHWLSelTypeView!
     var dotView: XHWLLabelView!
+    var managerBtn:UIButton!
+    var selfBtn:UIButton!
     var scanModel:XHWLScanModel! {
         willSet {
             if (newValue != nil) {
@@ -118,14 +120,27 @@ class XHWLIssueReportView: UIView {
         }
         bgSc.addSubview(pickPhoto)
         
-        cancelBtn = UIButton()
-        cancelBtn.setTitle("取消", for: UIControlState.normal)
-        cancelBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
-        cancelBtn.titleLabel?.font = font_14
-        cancelBtn.tag = comTag
-        cancelBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
-        cancelBtn.addTarget(self, action: #selector(submitClick), for: UIControlEvents.touchUpInside)
-        self.addSubview(cancelBtn)
+        managerBtn = UIButton()
+        managerBtn.isHidden = true
+        managerBtn.setImage(UIImage(named:"IssueReport_manager"), for: UIControlState.normal)
+        managerBtn.addTarget(self, action: #selector(managerClick), for: UIControlEvents.touchUpInside)
+        self.addSubview(managerBtn)
+        
+        selfBtn = UIButton()
+        selfBtn.isHidden = true
+        selfBtn.setImage(UIImage(named:"IssueReport_self"), for: UIControlState.normal)
+        selfBtn.addTarget(self, action: #selector(selfClick), for: UIControlEvents.touchUpInside)
+        self.addSubview(selfBtn)
+        
+        
+//        cancelBtn = UIButton()
+//        cancelBtn.setTitle("取消", for: UIControlState.normal)
+//        cancelBtn.setTitleColor(color_09fbfe, for: UIControlState.normal)
+//        cancelBtn.titleLabel?.font = font_14
+//        cancelBtn.tag = comTag
+//        cancelBtn.setBackgroundImage(UIImage(named:"btn_background"), for: UIControlState.normal)
+//        cancelBtn.addTarget(self, action: #selector(submitClick), for: UIControlEvents.touchUpInside)
+//        self.addSubview(cancelBtn)
         
         submitBtn = UIButton()
         submitBtn.setTitle("提交", for: UIControlState.normal)
@@ -136,11 +151,23 @@ class XHWLIssueReportView: UIView {
         submitBtn.addTarget(self, action: #selector(submitClick), for: UIControlEvents.touchUpInside)
         self.addSubview(submitBtn)
     }
+    
+    func selfClick() {
+        self.btnBlock(self.type!, dotView.contentTF.text! ?? "", remark.textView.text! ?? "", radioIndex!)
+    }
+    
+    func managerClick() {
+//        self.btnBlock(self.type!, dotView.contentTF.text! ?? "", remark.textView.text! ?? "", radioIndex!)
+    }
 
     func submitClick(btn:UIButton) {
         
-        if btn.tag - comTag == 0 {
-            self.dismissBlock()
+        if btn.currentTitle == "取消" {
+//            self.dismissBlock()
+            
+            managerBtn.isHidden = true
+            selfBtn.isHidden = true
+            submitBtn.setTitle("提交", for: UIControlState.normal)
         } else {
 //            if type.isEmpty {
 //                "异常类型为空".ext_debugPrintAndHint()
@@ -150,7 +177,12 @@ class XHWLIssueReportView: UIView {
 //                "异常类型为空".ext_debugPrintAndHint()
 //                return
 //            }
-            self.btnBlock(self.type!, dotView.contentTF.text! ?? "", remark.textView.text! ?? "", radioIndex!)
+            
+            managerBtn.isHidden = false
+            selfBtn.isHidden = false
+            submitBtn.setTitle("提交", for: UIControlState.normal)
+            
+            
         }
         
     }
@@ -169,10 +201,15 @@ class XHWLIssueReportView: UIView {
         pickPhoto.frame = CGRect(x:0, y:radioView.frame.maxY+10, width:self.bounds.size.width-20, height:80)
         bgSc.contentSize = CGSize(width:self.bounds.size.width, height:self.bounds.size.height)
         
-        cancelBtn.bounds = CGRect(x:0, y:0, width:71, height:30)
-        cancelBtn.center = CGPoint(x:self.bounds.size.width/2.0-20-71/2.0, y:self.bounds.size.height-30)
+        managerBtn.frame = CGRect(x:0, y:0, width:50, height:60)
+        managerBtn.center = CGPoint(x:self.bounds.size.width/4.0, y:self.bounds.size.height-80)
+        selfBtn.frame = CGRect(x:0, y:0, width:50, height:60)
+        selfBtn.center = CGPoint(x:self.bounds.size.width*3/4.0, y:self.bounds.size.height-80)
+        
+//        cancelBtn.bounds = CGRect(x:0, y:0, width:71, height:30)
+//        cancelBtn.center = CGPoint(x:self.bounds.size.width/2.0-20-71/2.0, y:self.bounds.size.height-30)
         submitBtn.bounds = CGRect(x:0, y:0, width:71, height:30)
-        submitBtn.center = CGPoint(x:self.bounds.size.width/2.0+20+71/2.0, y:self.bounds.size.height-30)
+        submitBtn.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height-30)
     }
 
 }

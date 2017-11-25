@@ -8,9 +8,8 @@
 
 import UIKit
 
-class XHWLRegistrationDetailVC: XHWLBaseVC  , XHWLScanTestVCDelegate{
+class XHWLRegistrationDetailVC: XHWLBaseVC {
     
-//    var bgImg:UIImageView!
     var dataAry:NSMutableArray!
     var visitorLogModel:XHWLVisitLogModel! 
     
@@ -19,6 +18,7 @@ class XHWLRegistrationDetailVC: XHWLBaseVC  , XHWLScanTestVCDelegate{
         
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.white
+        self.title = "登记详情"
         
         dataAry = NSMutableArray()
         let array :NSMutableArray = NSMutableArray()
@@ -51,23 +51,11 @@ class XHWLRegistrationDetailVC: XHWLBaseVC  , XHWLScanTestVCDelegate{
         dataAry = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
         
         setupView()
-        
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
-        
-        self.title = "登记详情"
     }
-    
-//    func onBack(){
-//        self.navigationController?.popViewController(animated: true)
-//    }
+
     
     func setupView() {
-        
-//        bgImg = UIImageView()
-//        bgImg.frame = self.view.bounds
-//        bgImg.image = UIImage(named:"home_bg")
-//        self.view.addSubview(bgImg)
-        
+
         let warningView:XHWLRegistrationDetailView = XHWLRegistrationDetailView()
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
         warningView.center = CGPoint(x:self.view.frame.size.width/2.0, y:self.view.frame.size.height/2.0)
@@ -79,16 +67,8 @@ class XHWLRegistrationDetailVC: XHWLBaseVC  , XHWLScanTestVCDelegate{
         }
         self.view.addSubview(warningView)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+
+
+

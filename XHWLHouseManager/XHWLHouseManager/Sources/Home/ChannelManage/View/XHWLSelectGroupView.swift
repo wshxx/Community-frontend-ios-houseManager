@@ -58,7 +58,7 @@ class XHWLSelectGroupView: UIView , UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell: XHWLMcuCell = XHWLMcuCell.cellWithTableView(tableView)
+        let cell: XHWLSelectGroupCell = XHWLSelectGroupCell.cellWithTableView(tableView)
         //        let model:XHWLRegisterationModel = dataAry[indexPath.row] as! XHWLRegisterationModel
         //        cell.setRegisterModel(model)
         let model:XHWLWorkerModel = dataAry[indexPath.row] as! XHWLWorkerModel

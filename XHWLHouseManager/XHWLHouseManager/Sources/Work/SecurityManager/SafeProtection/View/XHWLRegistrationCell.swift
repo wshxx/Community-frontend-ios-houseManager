@@ -8,8 +8,12 @@
 
 import UIKit
 
+protocol XHWLRegistrationCellDelegate:NSObjectProtocol {
+    func registrationWithHandle(_ cell:XHWLRegistrationCell)
+}
 class XHWLRegistrationCell: UITableViewCell {
 
+    var delegate:XHWLRegistrationCellDelegate?
     var titleL:UILabel!
     var stateL:UILabel!
     var timeL:UILabel!
@@ -17,6 +21,8 @@ class XHWLRegistrationCell: UITableViewCell {
     var accessIV:UIImageView!
     var lineIV:UIImageView!
     var stateIV:UIImageView!
+    var handleBtn:UIButton!
+    
     var waringModel:XHWLWarningModel!
     var visitorLogModel:XHWLVisitLogModel! {
         willSet {
@@ -82,8 +88,13 @@ class XHWLRegistrationCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func setupView() {
+        handleBtn = UIButton()
+        handleBtn.isHidden = true
+        handleBtn.setImage(UIImage(named:"CloudEyes_picture"), for: .normal)
+        handleBtn.addTarget(self, action: #selector(onHandleClick), for: .touchUpInside)
+        self.contentView.addSubview(handleBtn)
         
         stateIV = UIImageView()
         stateIV.isHidden = true
@@ -119,9 +130,14 @@ class XHWLRegistrationCell: UITableViewCell {
         self.contentView.addSubview(lineIV)
     }
 
+    func onHandleClick() {
+        self.delegate?.registrationWithHandle(self)
+    }
+    
     func setModel(_ registrationModel:XHWLSafeProtectionModel) {
         titleL.text = registrationModel.appComplaint.remarks
         contentL.text = "来源:\(registrationModel.appComplaint.wyAccount.wyRole.name)"
+        handleBtn.isHidden = false
         
         if registrationModel.appComplaint.manageTime.isEmpty {
             timeL.text = Date.getDateWith(Int(registrationModel.appComplaint.createTime)!, "yyyy-MM-dd")
@@ -147,11 +163,13 @@ class XHWLRegistrationCell: UITableViewCell {
         if stateL.isHidden {
              titleL.frame = CGRect(x:stateW, y:0, width:self.frame.size.width-20-13-stateW, height:30)
             stateL.frame = CGRect(x:0, y:0, width:0, height:30)
+            handleBtn.frame = CGRect(x:0, y:0, width:0, height:30)
         } else {
              titleL.frame = CGRect(x:stateW, y:0, width:self.frame.size.width-20-13-100-stateW, height:30)
             stateL.frame = CGRect(x:self.frame.size.width-100, y:0, width:80, height:30)
         }
         
+        handleBtn.frame = CGRect(x:self.frame.size.width-100, y:0, width:50, height:30)
         timeL.frame = CGRect(x:10, y:30, width:(self.bounds.size.width-40)/2.0+20, height:25)
         contentL.frame = CGRect(x:timeL.frame.maxX, y:30, width:(self.bounds.size.width-40)/2.0-10, height:25)
         accessIV.bounds = CGRect(x:0, y:0, width:7, height:12)

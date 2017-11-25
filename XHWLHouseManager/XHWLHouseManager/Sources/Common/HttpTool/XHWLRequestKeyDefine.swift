@@ -55,6 +55,8 @@ enum XHWLRequestKeyID : NSInteger {
     case XHWL_ADDCHANNEL    // 新增频道/频道成员
     case XHWL_DELETECHANNEL // 删除频道/频道成员
     case XHWL_WORKERLIST    // 获取所有物业工作人员信息
+    case XHWL_RENAMECHANNEL // 频道重命名
+    case XHWL_TALKPUSH      // 对讲时向频道成员发起推送
 }
 
 class XHWLRequestKeyDefine: NSObject {
@@ -105,19 +107,21 @@ class XHWLRequestKeyDefine: NSObject {
             XHWLRequestKeyID.XHWL_DELETECARDLOG:"wyBusiness/delBluetoothCard",      // 删除蓝牙绑卡记录
             XHWLRequestKeyID.XHWL_SAVECARDLOG:"wyBusiness/bluetoothCard/bind",      // 保存蓝牙绑卡记录
             XHWLRequestKeyID.XHWL_MESSAGECOUNT:"wyBase/tips/count",                 // 消息总数
-            XHWLRequestKeyID.XHWL_REGISTERJPUSH:"wyBusiness/visitor/regist/jgPush",  // 访客登记提交推送
-            XHWLRequestKeyID.XHWL_SEARCHPIN:"wyBusiness/patrol/trails/playback", // 巡更—在线定位—轨迹回放
-            XHWLRequestKeyID.XHWL_PATROLDETAIL:"wyBusiness/patrol/position/progress", // 巡更—在线定位—点击位置查看详情
-            XHWLRequestKeyID.XHWL_VIDEOUPLOAD:"wyBusiness/iot/video/upload",        // 上传云瞳抓拍图片
-            XHWLRequestKeyID.XHWL_VIDEOIMGLIST:"wyBusiness/iot/video/getList", // 获取云瞳抓拍图片
-            XHWLRequestKeyID.XHWL_DELETEVIDEOIMG:"wyBusiness/iot/video/delete", //删除抓拍图片
-            XHWLRequestKeyID.XHWL_ROSTERLIST:"wyBusiness/wyRoster/getByType", // 获取名单列表
-            XHWLRequestKeyID.XHWL_ADDROSTER:"wyBusiness/wyRoster/new", // 名单---添加新名单（黑名单、灰名单）
+            XHWLRequestKeyID.XHWL_REGISTERJPUSH:"wyBusiness/visitor/regist/jgPush",     // 访客登记提交推送
+            XHWLRequestKeyID.XHWL_SEARCHPIN:"wyBusiness/patrol/trails/playback",        // 巡更—在线定位—轨迹回放
+            XHWLRequestKeyID.XHWL_PATROLDETAIL:"wyBusiness/patrol/position/progress",   // 巡更—在线定位—点击位置查看详情
+            XHWLRequestKeyID.XHWL_VIDEOUPLOAD:"wyBusiness/iot/video/upload",            // 上传云瞳抓拍图片
+            XHWLRequestKeyID.XHWL_VIDEOIMGLIST:"wyBusiness/iot/video/getList",          // 获取云瞳抓拍图片
+            XHWLRequestKeyID.XHWL_DELETEVIDEOIMG:"wyBusiness/iot/video/delete",         // 删除抓拍图片
+            XHWLRequestKeyID.XHWL_ROSTERLIST:"wyBusiness/wyRoster/getByType",           // 获取名单列表
+            XHWLRequestKeyID.XHWL_ADDROSTER:"wyBusiness/wyRoster/new",                  // 名单---添加新名单（黑名单、灰名单）
             XHWLRequestKeyID.XHWL_ROSTERINFO:"wyBusiness/wyRoster/getRosterByCetificateNo", // 根据证件号获取名单信息
-            XHWLRequestKeyID.XHWL_CHANNELLIST:"wyBusiness/channel/list", // 获取所有频道列表
-            XHWLRequestKeyID.XHWL_ADDCHANNEL:"wyBusiness/channel/add", // 新增频道/频道成员
-            XHWLRequestKeyID.XHWL_DELETECHANNEL:"wyBusiness/channel/removeMember", // 删除频道/频道成员
-            XHWLRequestKeyID.XHWL_WORKERLIST:"wyBusiness/channel/getMembers", // 获取所有物业工作人员信息
+            XHWLRequestKeyID.XHWL_CHANNELLIST:"wyBusiness/channel/list",                // 获取所有频道列表
+            XHWLRequestKeyID.XHWL_ADDCHANNEL:"wyBusiness/channel/add",                  // 新增频道/频道成员
+            XHWLRequestKeyID.XHWL_DELETECHANNEL:"wyBusiness/channel/removeMember",      // 删除频道/频道成员
+            XHWLRequestKeyID.XHWL_WORKERLIST:"wyBusiness/channel/getMembers",           // 获取所有物业工作人员信息
+            XHWLRequestKeyID.XHWL_RENAMECHANNEL:"wyBusiness/channel/rename",            // 频道重命名
+            XHWLRequestKeyID.XHWL_TALKPUSH:"wyBusiness/talkBackPushToChannelPerson",    // 对讲时向频道成员发起推送
         ]
     }
 }

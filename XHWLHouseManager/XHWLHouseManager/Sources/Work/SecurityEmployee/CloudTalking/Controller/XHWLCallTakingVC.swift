@@ -35,7 +35,6 @@ class XHWLCallTakingVC: XHWLBaseVC {
                                  ["name":"事由：", "content": newValue.object(forKey: "accessReason")],
                                  ["name":"业主：", "content": yzName],
                                  ["name":"房间：", "content": newValue.object(forKey: "roomNo")]]
-
             
             let dataAry:NSArray = XHWLMenuModel.mj_objectArray(withKeyValuesArray: array)
             callView.dataAry = dataAry

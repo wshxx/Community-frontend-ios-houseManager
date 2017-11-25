@@ -10,8 +10,6 @@ import UIKit
 
 @objc protocol XHWLPlayerViewDelegate:NSObjectProtocol {
     @objc optional func playViewWithSwitchAV(_ playView:XHWLPlayerView)
-//    @objc optional func playViewWithSwitchAV(_ playView:XHWLPlayerView)
-//    @objc optional func playViewWithDelete(_ playView:XHWLPlayerView)
 }
 
 class XHWLPlayerView: UIView, XHWLMcuViewDelegate {
@@ -24,32 +22,13 @@ class XHWLPlayerView: UIView, XHWLMcuViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setupView()
+        bgImage = UIImageView()
+        bgImage.image = UIImage(named:"subview_bg")
+        self.addSubview(bgImage)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setupView() {
-        
-        bgImage = UIImageView()
-        bgImage.image = UIImage(named:"subview_bg")
-        self.addSubview(bgImage)
-        
-//        playAry = NSMutableArray()
-//        for i in 0..<2 {
-//            let orginX:CGFloat = 5
-//            let orginY:CGFloat = CGFloat(i*200+30)
-//            let width:CGFloat = self.bounds.size.width-10
-//            let height:CGFloat = 150.0
-//
-//            let first = XHWLMcuView(frame:CGRect(x:orginX, y:orginY, width:width, height:height))
-//            first.delegate = self
-//            first.tag = comTag+i
-//            self.addSubview(first)
-//            playAry.add(first)
-//        }
     }
     
     var selectAry:NSArray! {
@@ -67,12 +46,12 @@ class XHWLPlayerView: UIView, XHWLMcuViewDelegate {
                         let orginX:CGFloat = 5
                         let orginY:CGFloat = 80
                         let width:CGFloat = self.bounds.size.width-10
-                        let height:CGFloat = 30.0
+                        let height:CGFloat = 250.0
                         
                         let first = XHWLMcuView(frame:CGRect(x:orginX, y:orginY, width:width, height:height))
                         first.delegate = self
                         first.tag = comTag
-                        first.center = self.center
+//                        first.center = self.center
                         
                         let node:XHWLMcuModel = newValue[0] as! XHWLMcuModel
                         first.realPlay(cameraSyscode: node.sysCode)
@@ -82,9 +61,10 @@ class XHWLPlayerView: UIView, XHWLMcuViewDelegate {
                     } else {
                         for i in 0..<newValue.count {
                             let orginX:CGFloat = 5
-                            let orginY:CGFloat = CGFloat(i*200+30)
-                            let width:CGFloat = self.bounds.size.width-10
                             let height:CGFloat = 150.0
+                            let topY:CGFloat = (self.bounds.size.height-(CGFloat(newValue.count) * height+CGFloat(newValue.count-1)*20.0))/2.0
+                            let orginY:CGFloat = CGFloat(CGFloat(i)*(height)+topY)
+                            let width:CGFloat = self.bounds.size.width-10
                             
                             let first = XHWLMcuView(frame:CGRect(x:orginX, y:orginY, width:width, height:height))
                             first.delegate = self

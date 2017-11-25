@@ -524,9 +524,19 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
         superWithLoadData(parameters, .XHWL_WORKERLIST, .get)
     }
     
+    // 频道重命名
+    func postRenameChannelClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_RENAMECHANNEL, .post)
+    }
     
-    
-    
+    // 对讲时向频道成员发起推送
+    func postTalkPushClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_TALKPUSH, .post)
+    }
     
     
     

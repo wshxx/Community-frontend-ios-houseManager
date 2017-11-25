@@ -18,6 +18,8 @@ import UIKit
     @objc optional func onHomeViewWithOpenNetwork(_ homeView:XHWLHomeView)
     @objc optional func onHomeViewWithBindCard(_ homeView:XHWLHomeView)
     @objc optional func onHomeViewWithMessage(_ homeView:XHWLHomeView)
+    @objc optional func onHomeViewWithChannel(_ homeView:XHWLHomeView)
+    @objc optional func onHomeViewWithVoice(_ homeView:XHWLHomeView, _ isSelected:Bool)
 }
 
 class XHWLHomeView: UIView , XHWLNetworkDelegate {
@@ -26,9 +28,11 @@ class XHWLHomeView: UIView , XHWLNetworkDelegate {
     var spaceBigCircle:UIImageView!
     var spaceSmallCircle:UIImageView!
     var openBtn:UIButton!
+    var voiceBtn:UIButton!
     var netOpenBtn:UIButton!
     var bindCardBtn:UIButton!
 //    var messageBtn:UIButton!
+    var channelBtn:UIButton!
     var delegate:XHWLHomeViewDelegate?
     
     weak var bluePoint: UIImageView!
@@ -42,42 +46,91 @@ class XHWLHomeView: UIView , XHWLNetworkDelegate {
     
     func setupView() {
         let bigImg = UIImage(named:"home_circle_outer")!
+        var bigWidth:CGFloat = bigImg.size.width
         spaceBigCircle = UIImageView()
-        spaceBigCircle.bounds = CGRect(x:0, y:0, width:bigImg.size.width, height:bigImg.size.height)
-        spaceBigCircle.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0)
         spaceBigCircle.image = bigImg
         self.addSubview(spaceBigCircle)
         
-        let smallImg = UIImage(named:"home_circle_inner")!
+        let smallImg = UIImage(named:"home_voiceBg")!
         spaceSmallCircle = UIImageView()
         spaceSmallCircle.bounds = CGRect(x:0, y:0, width:smallImg.size.width, height:smallImg.size.height)
         spaceSmallCircle.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0)
         spaceSmallCircle.image = smallImg
         self.addSubview(spaceSmallCircle)
         
-        let openImg:UIImage = UIImage(named: "home_finger_print")!
+        let voiceImg:UIImage = UIImage(named: "home_voice")!
+        voiceBtn = UIButton()
+        voiceBtn.setImage(voiceImg, for: UIControlState.normal)
+        voiceBtn.setImage(UIImage(named:"home_back"), for: .selected)
+        voiceBtn.addTarget(self, action: #selector(onVoiceClick), for: UIControlEvents.touchUpInside)
+        self.addSubview(voiceBtn)
+        
+        let openImg:UIImage = UIImage(named: "home_openDoor")!
         openBtn = UIButton()
-        openBtn.frame = CGRect(x:0, y:0, width:openImg.size.width, height:openImg.size.height)
-        openBtn.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0+5)
         openBtn.setImage(openImg, for: UIControlState.normal)
         openBtn.addTarget(self, action: #selector(onBluetoothOpenDoorClick), for: UIControlEvents.touchUpInside)
         self.addSubview(openBtn)
         
         let netOpenImg:UIImage = UIImage(named: "home_network")!
         netOpenBtn = UIButton()
-        netOpenBtn.frame = CGRect(x:0, y:0, width:netOpenImg.size.width, height:netOpenImg.size.height)
-        netOpenBtn.center = CGPoint(x:self.bounds.size.width/2.0+115, y:self.bounds.size.height/2.0+80)
         netOpenBtn.setImage(netOpenImg, for: UIControlState.normal)
         netOpenBtn.addTarget(self, action: #selector(onNetDoorBtnClicked), for: UIControlEvents.touchUpInside)
         self.addSubview(netOpenBtn)
         
         let cardImg:UIImage = UIImage(named: "home_bluetooth_bind")!
         bindCardBtn = UIButton()
-        bindCardBtn.frame = CGRect(x:0, y:0, width:cardImg.size.width, height:cardImg.size.height)
-        bindCardBtn.center = CGPoint(x:self.bounds.size.width/2.0-115, y:self.bounds.size.height/2.0-80)
         bindCardBtn.setImage(cardImg, for: UIControlState.normal)
         bindCardBtn.addTarget(self, action: #selector(onBindCardBtnClicked), for: UIControlEvents.touchUpInside)
         self.addSubview(bindCardBtn)
+        
+        let channelImg:UIImage = UIImage(named: "home_channel")!
+        channelBtn = UIButton()
+        channelBtn.setImage(channelImg, for: UIControlState.normal)
+        channelBtn.addTarget(self, action: #selector(onChannelClicked), for: UIControlEvents.touchUpInside)
+        self.addSubview(channelBtn)
+        
+        if self.bounds.size.width < bigWidth + cardImg.size.width {
+            bigWidth = self.bounds.size.width - cardImg.size.width + 30
+            
+            spaceBigCircle.bounds = CGRect(x:0, y:0, width:bigWidth, height:bigWidth)
+            spaceBigCircle.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0)
+            
+            voiceBtn.frame = CGRect(x:0, y:0, width:voiceImg.size.width, height:voiceImg.size.height)
+            voiceBtn.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0+5)
+            
+            openBtn.frame = CGRect(x:0, y:0, width:openImg.size.width, height:openImg.size.height)
+            openBtn.center = CGPoint(x:self.bounds.size.width/2.0, y:(self.bounds.size.height-bigWidth)/2.0)
+            
+            bindCardBtn.frame = CGRect(x:0, y:0, width:cardImg.size.width, height:cardImg.size.height)
+            bindCardBtn.center = CGPoint(x:(self.bounds.size.width-bigWidth)/2.0, y:self.bounds.size.height/2.0)
+            
+            netOpenBtn.frame = CGRect(x:0, y:0, width:netOpenImg.size.width, height:netOpenImg.size.height)
+            netOpenBtn.center = CGPoint(x:(self.bounds.size.width+bigWidth)/2.0, y:self.bounds.size.height/2.0)
+            
+            channelBtn.frame = CGRect(x:0, y:0, width:netOpenImg.size.width, height:netOpenImg.size.height)
+            channelBtn.center = CGPoint(x:self.bounds.size.width/2.0, y:(self.bounds.size.height+bigWidth)/2.0)
+        } else {
+            
+            spaceBigCircle.bounds = CGRect(x:0, y:0, width:bigImg.size.width, height:bigImg.size.height)
+            spaceBigCircle.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0)
+            
+            voiceBtn.frame = CGRect(x:0, y:0, width:voiceImg.size.width, height:voiceImg.size.height)
+            voiceBtn.center = CGPoint(x:self.bounds.size.width/2.0, y:self.bounds.size.height/2.0+5)
+            
+            openBtn.frame = CGRect(x:0, y:0, width:openImg.size.width, height:openImg.size.height)
+            openBtn.center = CGPoint(x:self.bounds.size.width/2.0, y:(self.bounds.size.height-bigWidth)/2.0)
+            
+            bindCardBtn.frame = CGRect(x:0, y:0, width:cardImg.size.width, height:cardImg.size.height)
+            bindCardBtn.center = CGPoint(x:(self.bounds.size.width-bigWidth)/2.0, y:self.bounds.size.height/2.0)
+            
+            netOpenBtn.frame = CGRect(x:0, y:0, width:netOpenImg.size.width, height:netOpenImg.size.height)
+            netOpenBtn.center = CGPoint(x:(self.bounds.size.width+bigWidth)/2.0, y:self.bounds.size.height/2.0)
+            
+            channelBtn.frame = CGRect(x:0, y:0, width:netOpenImg.size.width, height:netOpenImg.size.height)
+            channelBtn.center = CGPoint(x:self.bounds.size.width/2.0, y:(self.bounds.size.height+bigWidth)/2.0)
+            
+        }
+        
         
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
@@ -110,6 +163,15 @@ class XHWLHomeView: UIView , XHWLNetworkDelegate {
         return spaceBg
     }()
     
+    func onChannelClicked() {
+        self.delegate?.onHomeViewWithChannel!(self)
+    }
+    
+    // 语音
+    func onVoiceClick(_ btn:UIButton) {
+        btn.isSelected = !btn.isSelected
+        self.delegate?.onHomeViewWithVoice!(self, btn.isSelected)
+    }
 
     // 蓝牙一键开门
     func onBluetoothOpenDoorClick() {

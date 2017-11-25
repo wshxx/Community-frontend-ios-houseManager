@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'D95E8D196B4580D7CF922B13ACE1E34D'
+               BlueprintIdentifier = '449082589E135AD75E1BDED8A3B210EF'
                BlueprintName = 'TransitionAnimation'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'TransitionAnimation.framework'>

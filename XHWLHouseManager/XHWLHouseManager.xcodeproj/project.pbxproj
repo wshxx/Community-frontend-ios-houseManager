@@ -182,6 +182,13 @@
 		193F10F61F7B97A200C2F948 /* 别人进行云对讲0058.png in Resources */ = {isa = PBXBuildFile; fileRef = 193F10B61F7B97A200C2F948 /* 别人进行云对讲0058.png */; };
 		193F10F71F7B97A200C2F948 /* 别人进行云对讲0059.png in Resources */ = {isa = PBXBuildFile; fileRef = 193F10B71F7B97A200C2F948 /* 别人进行云对讲0059.png */; };
 		193F10F81F7B97A200C2F948 /* 别人进行云对讲0060.png in Resources */ = {isa = PBXBuildFile; fileRef = 193F10B81F7B97A200C2F948 /* 别人进行云对讲0060.png */; };
+		1944055D1FC6C3180049849B /* AgoraRtcCryptoLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1944055C1FC6C3180049849B /* AgoraRtcCryptoLoader.framework */; };
+		194405611FC6CBF20049849B /* VideoSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194405601FC6CBF10049849B /* VideoSession.swift */; };
+		194405631FC7FCAF0049849B /* XHWLTalkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194405621FC7FCAF0049849B /* XHWLTalkManager.swift */; };
+		194405651FC921710049849B /* XHWLPickPictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194405641FC921710049849B /* XHWLPickPictureCell.swift */; };
+		194405671FC94C080049849B /* XHWLLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194405661FC94C080049849B /* XHWLLabelCell.swift */; };
+		194405691FC94F250049849B /* XHWLLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194405681FC94F250049849B /* XHWLLineCell.swift */; };
+		1944056B1FC96C580049849B /* XHWLRemarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1944056A1FC96C580049849B /* XHWLRemarkCell.swift */; };
 		1949937C1F8CCB4A009EBC09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A50A621F5668DA00BCDA47 /* Assets.xcassets */; };
 		194D7FAC1F80B48400B27BD0 /* XHWLMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194D7FAB1F80B48200B27BD0 /* XHWLMessageVC.swift */; };
 		194D7FAE1F80B55700B27BD0 /* XHWLMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194D7FAD1F80B55700B27BD0 /* XHWLMessageView.swift */; };
@@ -217,7 +224,6 @@
 		196761151F99D272007C840A /* XHWLMcuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196761111F99D227007C840A /* XHWLMcuCell.swift */; };
 		196761161F99D276007C840A /* XHWLMcuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196761131F99D227007C840A /* XHWLMcuView.swift */; };
 		196761171F99D279007C840A /* XHWLMcuListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196761101F99D221007C840A /* XHWLMcuListVC.swift */; };
-		196761181F99D27C007C840A /* XHWLMcuResourceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1967610F1F99D221007C840A /* XHWLMcuResourceVC.swift */; };
 		196761191F99D27E007C840A /* XHWLMcuShowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1967610E1F99D221007C840A /* XHWLMcuShowVC.swift */; };
 		1967611A1F99D283007C840A /* XHWLMcuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1967610D1F99D218007C840A /* XHWLMcuModel.swift */; };
 		1967611C1F99D388007C840A /* XHWLPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1967611B1F99D388007C840A /* XHWLPlayerView.swift */; };
@@ -225,7 +231,6 @@
 		1967612A1F9AF94C007C840A /* XHWLCallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196761291F9AF94C007C840A /* XHWLCallView.swift */; };
 		196761381F9B2A22007C840A /* VideoViewLayouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196761371F9B2A22007C840A /* VideoViewLayouter.swift */; };
 		1967613C1F9B332A007C840A /* XHWLCallBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1967613B1F9B332A007C840A /* XHWLCallBottomView.swift */; };
-		196761451F9B4017007C840A /* VideoSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196761441F9B400E007C840A /* VideoSession.swift */; };
 		196A7E8D1F81E1C800E3352B /* XHWLDoorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196A7E8C1F81E1C800E3352B /* XHWLDoorModel.swift */; };
 		196AB4B81F945E84004E6C7A /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196AB4B71F945785004E6C7A /* UIViewController+Extension.swift */; };
 		196AB4B91F945E99004E6C7A /* BYPushAnimation_08.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196AB4B61F945785004E6C7A /* BYPushAnimation_08.swift */; };
@@ -242,8 +247,6 @@
 		196F72711FA2D1E100B0AA4D /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B9C1971FA2CDDC00B0A0FB /* UIView+Extension.m */; };
 		196F72721FA2D1E400B0AA4D /* WSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B9C1991FA2CDDC00B0A0FB /* WSDatePickerView.m */; };
 		196F72731FA2D28F00B0AA4D /* WSDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B9C19A1FA2CDDC00B0A0FB /* WSDatePickerView.xib */; };
-		19764F4C1F9DD8AB005FD87D /* AgoraRtcEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19764F491F9DD8AA005FD87D /* AgoraRtcEngineKit.framework */; };
-		19764F4E1F9DD8AB005FD87D /* AgoraRtcCryptoLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19764F4B1F9DD8AB005FD87D /* AgoraRtcCryptoLoader.framework */; };
 		19764F501F9DD8C8005FD87D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19764F4F1F9DD8C7005FD87D /* CoreTelephony.framework */; };
 		19764F521F9DD8D8005FD87D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19764F511F9DD8D8005FD87D /* CoreMotion.framework */; };
 		19764F541F9DD8F6005FD87D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19764F531F9DD8F6005FD87D /* AVFoundation.framework */; };
@@ -260,6 +263,10 @@
 		198B17C71F7A3F8100F1067C /* XHWLLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198B17C61F7A3F8100F1067C /* XHWLLabel.swift */; };
 		198B17CB1F7A4A1C00F1067C /* LYMUILabel+TextAlignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 198B17CA1F7A4A1C00F1067C /* LYMUILabel+TextAlignment.m */; };
 		198B17D91F7A849100F1067C /* CLNewFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198B17D81F7A849100F1067C /* CLNewFeatureView.swift */; };
+		199816B51FC2CF8300E0B9A1 /* LxOtherGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199816B41FC2CF8300E0B9A1 /* LxOtherGridViewCell.swift */; };
+		199816B71FC2D18B00E0B9A1 /* XHWLLineTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199816B61FC2D18B00E0B9A1 /* XHWLLineTF.swift */; };
+		199816B91FC3B01D00E0B9A1 /* XHWLChannelInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199816B81FC3B01D00E0B9A1 /* XHWLChannelInfoView.swift */; };
+		199816BB1FC400FC00E0B9A1 /* XHWLSelectGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199816BA1FC400FC00E0B9A1 /* XHWLSelectGroupCell.swift */; };
 		199999631F78D56D00F6A135 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199999621F78D56D00F6A135 /* UIDevice+Extension.swift */; };
 		19A14D691F5E381100D96A2E /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14D531F5E381100D96A2E /* MASCompositeConstraint.m */; };
 		19A14D6A1F5E381100D96A2E /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A14D561F5E381100D96A2E /* MASConstraint.m */; };
@@ -336,8 +343,6 @@
 		19C0E89E1FBE889E00FB3774 /* LxGridViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0E8991FBE880800FB3774 /* LxGridViewFlowLayout.swift */; };
 		19C0E8A01FBEF3C800FB3774 /* XHWLWorkerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0E89F1FBEF3C800FB3774 /* XHWLWorkerModel.swift */; };
 		19C1B2601FA016FF0082B983 /* XHWLPatroLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C1B25F1FA016FF0082B983 /* XHWLPatroLabelView.swift */; };
-		19C799711FA9505F00A78A90 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C7996E1FA9505A00A78A90 /* SMCalloutView.m */; };
-		19C799721FA9506300A78A90 /* SMClassicCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C799701FA9505A00A78A90 /* SMClassicCalloutView.m */; };
 		19CDF0F51F886A3E001F17A1 /* XHWLImageScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CDF0F41F886A3E001F17A1 /* XHWLImageScale.swift */; };
 		19CDF18A1F8AFEDD001F17A1 /* XHWLBluetoothModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CDF1891F8AFEDB001F17A1 /* XHWLBluetoothModel.swift */; };
 		19D8FDBB1F6A664400AC7C22 /* XHWLAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D8FDBA1F6A664400AC7C22 /* XHWLAccountModel.swift */; };
@@ -601,6 +606,13 @@
 		193F10B71F7B97A200C2F948 /* 别人进行云对讲0059.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0059.png"; sourceTree = "<group>"; };
 		193F10B81F7B97A200C2F948 /* 别人进行云对讲0060.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "别人进行云对讲0060.png"; sourceTree = "<group>"; };
 		1941DCDA1F58341B009DE0F0 /* XHWLHouseManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XHWLHouseManager.entitlements; sourceTree = "<group>"; };
+		1944055C1FC6C3180049849B /* AgoraRtcCryptoLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AgoraRtcCryptoLoader.framework; path = Libs/AgoraRtcCryptoLoader.framework; sourceTree = "<group>"; };
+		194405601FC6CBF10049849B /* VideoSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSession.swift; sourceTree = "<group>"; };
+		194405621FC7FCAF0049849B /* XHWLTalkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLTalkManager.swift; sourceTree = "<group>"; };
+		194405641FC921710049849B /* XHWLPickPictureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLPickPictureCell.swift; sourceTree = "<group>"; };
+		194405661FC94C080049849B /* XHWLLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLLabelCell.swift; sourceTree = "<group>"; };
+		194405681FC94F250049849B /* XHWLLineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLLineCell.swift; sourceTree = "<group>"; };
+		1944056A1FC96C580049849B /* XHWLRemarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLRemarkCell.swift; sourceTree = "<group>"; };
 		194D7FAB1F80B48200B27BD0 /* XHWLMessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMessageVC.swift; sourceTree = "<group>"; };
 		194D7FAD1F80B55700B27BD0 /* XHWLMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMessageView.swift; sourceTree = "<group>"; };
 		194D7FAF1F80B66A00B27BD0 /* XHWLMessageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMessageDetailVC.swift; sourceTree = "<group>"; };
@@ -649,7 +661,6 @@
 		1961CDBB1F5963EA006856D0 /* XHWLLocationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLocationVC.swift; sourceTree = "<group>"; };
 		1967610D1F99D218007C840A /* XHWLMcuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMcuModel.swift; sourceTree = "<group>"; };
 		1967610E1F99D221007C840A /* XHWLMcuShowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMcuShowVC.swift; sourceTree = "<group>"; };
-		1967610F1F99D221007C840A /* XHWLMcuResourceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMcuResourceVC.swift; sourceTree = "<group>"; };
 		196761101F99D221007C840A /* XHWLMcuListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMcuListVC.swift; sourceTree = "<group>"; };
 		196761111F99D227007C840A /* XHWLMcuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMcuCell.swift; sourceTree = "<group>"; };
 		196761121F99D227007C840A /* XHWLMcuBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMcuBottomView.swift; sourceTree = "<group>"; };
@@ -659,7 +670,6 @@
 		196761291F9AF94C007C840A /* XHWLCallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLCallView.swift; sourceTree = "<group>"; };
 		196761371F9B2A22007C840A /* VideoViewLayouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewLayouter.swift; sourceTree = "<group>"; };
 		1967613B1F9B332A007C840A /* XHWLCallBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLCallBottomView.swift; sourceTree = "<group>"; };
-		196761441F9B400E007C840A /* VideoSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoSession.swift; path = "../../../../../../../../../兴海物业/Agora_Native_SDK_for_iOS_FULL/samples/OpenLive_iOS/OpenLive/VideoSession.swift"; sourceTree = "<group>"; };
 		196A7E8C1F81E1C800E3352B /* XHWLDoorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLDoorModel.swift; sourceTree = "<group>"; };
 		196AB4A41F945785004E6C7A /* BHPopAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHPopAnimation.swift; sourceTree = "<group>"; };
 		196AB4A51F945785004E6C7A /* BHPushAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHPushAnimation.swift; sourceTree = "<group>"; };
@@ -672,8 +682,6 @@
 		196AB4B41F945785004E6C7A /* BYPushAnimation_07.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BYPushAnimation_07.swift; sourceTree = "<group>"; };
 		196AB4B61F945785004E6C7A /* BYPushAnimation_08.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BYPushAnimation_08.swift; sourceTree = "<group>"; };
 		196AB4B71F945785004E6C7A /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
-		19764F491F9DD8AA005FD87D /* AgoraRtcEngineKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AgoraRtcEngineKit.framework; path = Libs/AgoraRtcEngineKit.framework; sourceTree = "<group>"; };
-		19764F4B1F9DD8AB005FD87D /* AgoraRtcCryptoLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AgoraRtcCryptoLoader.framework; path = Libs/AgoraRtcCryptoLoader.framework; sourceTree = "<group>"; };
 		19764F4F1F9DD8C7005FD87D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		19764F511F9DD8D8005FD87D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		19764F531F9DD8F6005FD87D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -691,6 +699,10 @@
 		198B17C91F7A4A1C00F1067C /* LYMUILabel+TextAlignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LYMUILabel+TextAlignment.h"; sourceTree = "<group>"; };
 		198B17CA1F7A4A1C00F1067C /* LYMUILabel+TextAlignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LYMUILabel+TextAlignment.m"; sourceTree = "<group>"; };
 		198B17D81F7A849100F1067C /* CLNewFeatureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLNewFeatureView.swift; sourceTree = "<group>"; };
+		199816B41FC2CF8300E0B9A1 /* LxOtherGridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LxOtherGridViewCell.swift; sourceTree = "<group>"; };
+		199816B61FC2D18B00E0B9A1 /* XHWLLineTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLLineTF.swift; sourceTree = "<group>"; };
+		199816B81FC3B01D00E0B9A1 /* XHWLChannelInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLChannelInfoView.swift; sourceTree = "<group>"; };
+		199816BA1FC400FC00E0B9A1 /* XHWLSelectGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLSelectGroupCell.swift; sourceTree = "<group>"; };
 		199999621F78D56D00F6A135 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		19A14D521F5E381100D96A2E /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		19A14D531F5E381100D96A2E /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
@@ -804,10 +816,6 @@
 		19C0E89A1FBE883800FB3774 /* XHWLGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLGridView.swift; sourceTree = "<group>"; };
 		19C0E89F1FBEF3C800FB3774 /* XHWLWorkerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLWorkerModel.swift; sourceTree = "<group>"; };
 		19C1B25F1FA016FF0082B983 /* XHWLPatroLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLPatroLabelView.swift; sourceTree = "<group>"; };
-		19C7996D1FA9505A00A78A90 /* SMCalloutView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMCalloutView.h; sourceTree = "<group>"; };
-		19C7996E1FA9505A00A78A90 /* SMCalloutView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMCalloutView.m; sourceTree = "<group>"; };
-		19C7996F1FA9505A00A78A90 /* SMClassicCalloutView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMClassicCalloutView.h; sourceTree = "<group>"; };
-		19C799701FA9505A00A78A90 /* SMClassicCalloutView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMClassicCalloutView.m; sourceTree = "<group>"; };
 		19CDF0F41F886A3E001F17A1 /* XHWLImageScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLImageScale.swift; sourceTree = "<group>"; };
 		19CDF1891F8AFEDB001F17A1 /* XHWLBluetoothModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLBluetoothModel.swift; sourceTree = "<group>"; };
 		19D8FDBA1F6A664400AC7C22 /* XHWLAccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLAccountModel.swift; sourceTree = "<group>"; };
@@ -861,6 +869,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1944055D1FC6C3180049849B /* AgoraRtcCryptoLoader.framework in Frameworks */,
 				19764F561F9DD921005FD87D /* libresolv.tbd in Frameworks */,
 				19764F541F9DD8F6005FD87D /* AVFoundation.framework in Frameworks */,
 				192DA5361F57AC14005950EC /* AudioToolbox.framework in Frameworks */,
@@ -868,8 +877,6 @@
 				19764F521F9DD8D8005FD87D /* CoreMotion.framework in Frameworks */,
 				192DA5391F57AC32005950EC /* CoreMedia.framework in Frameworks */,
 				19764F501F9DD8C8005FD87D /* CoreTelephony.framework in Frameworks */,
-				19764F4C1F9DD8AB005FD87D /* AgoraRtcEngineKit.framework in Frameworks */,
-				19764F4E1F9DD8AB005FD87D /* AgoraRtcCryptoLoader.framework in Frameworks */,
 				193F0DA51F7B370F00C2F948 /* CommonCrypto.framework in Frameworks */,
 				19A7A7051F57E4540044DC1A /* Mcu_sdk.framework in Frameworks */,
 				193F0E051F7B461B00C2F948 /* CardReaderSDK.framework in Frameworks */,
@@ -1494,6 +1501,10 @@
 				193F0ED31F7B512B00C2F948 /* XHWLRegistrationCell.swift */,
 				193F0ED41F7B512B00C2F948 /* XHWLSafeGuardView.swift */,
 				193F0ED51F7B512B00C2F948 /* XHWLSafeProtectionView.swift */,
+				194405641FC921710049849B /* XHWLPickPictureCell.swift */,
+				194405661FC94C080049849B /* XHWLLabelCell.swift */,
+				194405681FC94F250049849B /* XHWLLineCell.swift */,
+				1944056A1FC96C580049849B /* XHWLRemarkCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1759,7 +1770,6 @@
 			isa = PBXGroup;
 			children = (
 				196761101F99D221007C840A /* XHWLMcuListVC.swift */,
-				1967610F1F99D221007C840A /* XHWLMcuResourceVC.swift */,
 				1967610E1F99D221007C840A /* XHWLMcuShowVC.swift */,
 				19764F571F9DDC76005FD87D /* XHWLMcuPictureListVC.swift */,
 				1960DBCC1FA171FB0081E084 /* XHWLShowImageVC.swift */,
@@ -1801,7 +1811,7 @@
 		196761251F9AF4E1007C840A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				196761441F9B400E007C840A /* VideoSession.swift */,
+				194405601FC6CBF10049849B /* VideoSession.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2184,7 +2194,6 @@
 			isa = PBXGroup;
 			children = (
 				19B8F5AD1FB54B8C002D7B9E /* swiftScan */,
-				19C7996C1FA9505A00A78A90 /* CallPaoPao */,
 				19B9C1931FA2CDDC00B0A0FB /* WSDaePickerView */,
 				192B644C1FA093BA0094421B /* THDatePickerView.h */,
 				192B644B1FA093BA0094421B /* THDatePickerView.m */,
@@ -2300,6 +2309,9 @@
 				19C0E8521FBD656500FB3774 /* XHWLChannelListView.swift */,
 				19C0E8581FBD731400FB3774 /* XHWLSelectGroupView.swift */,
 				19C0E89A1FBE883800FB3774 /* XHWLGridView.swift */,
+				199816B61FC2D18B00E0B9A1 /* XHWLLineTF.swift */,
+				199816B81FC3B01D00E0B9A1 /* XHWLChannelInfoView.swift */,
+				199816BA1FC400FC00E0B9A1 /* XHWLSelectGroupCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2309,6 +2321,7 @@
 			children = (
 				19C0E8541FBD6AED00FB3774 /* XHWLChannelModel.swift */,
 				19C0E89F1FBEF3C800FB3774 /* XHWLWorkerModel.swift */,
+				194405621FC7FCAF0049849B /* XHWLTalkManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2319,19 +2332,9 @@
 				19C0E8971FBE880800FB3774 /* LxGridView.swift */,
 				19C0E8981FBE880800FB3774 /* LxGridViewCell.swift */,
 				19C0E8991FBE880800FB3774 /* LxGridViewFlowLayout.swift */,
+				199816B41FC2CF8300E0B9A1 /* LxOtherGridViewCell.swift */,
 			);
 			path = LxGridView;
-			sourceTree = "<group>";
-		};
-		19C7996C1FA9505A00A78A90 /* CallPaoPao */ = {
-			isa = PBXGroup;
-			children = (
-				19C7996D1FA9505A00A78A90 /* SMCalloutView.h */,
-				19C7996E1FA9505A00A78A90 /* SMCalloutView.m */,
-				19C7996F1FA9505A00A78A90 /* SMClassicCalloutView.h */,
-				19C799701FA9505A00A78A90 /* SMClassicCalloutView.m */,
-			);
-			path = CallPaoPao;
 			sourceTree = "<group>";
 		};
 		19CDF1881F8AFEBE001F17A1 /* Model */ = {
@@ -2435,12 +2438,11 @@
 		8D4A7720846EA956431B05A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1944055C1FC6C3180049849B /* AgoraRtcCryptoLoader.framework */,
 				19764F551F9DD921005FD87D /* libresolv.tbd */,
 				19764F531F9DD8F6005FD87D /* AVFoundation.framework */,
 				19764F511F9DD8D8005FD87D /* CoreMotion.framework */,
 				19764F4F1F9DD8C7005FD87D /* CoreTelephony.framework */,
-				19764F4B1F9DD8AB005FD87D /* AgoraRtcCryptoLoader.framework */,
-				19764F491F9DD8AA005FD87D /* AgoraRtcEngineKit.framework */,
 				193F0DA91F7B387A00C2F948 /* CardReaderSDK.framework */,
 				192DA53D1F57AC5C005950EC /* libc++.1.tbd */,
 				192DA53B1F57AC4C005950EC /* libz.1.1.3.tbd */,
@@ -2560,7 +2562,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.HealthKit = {
 								enabled = 0;
@@ -2760,6 +2762,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-XHWLHouseManager/Pods-XHWLHouseManager-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/ELPickerView/ELPickerView.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
@@ -2772,6 +2775,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ELPickerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
@@ -2804,6 +2808,7 @@
 				19C0E89D1FBE889C00FB3774 /* LxGridViewCell.swift in Sources */,
 				19C1B2601FA016FF0082B983 /* XHWLPatroLabelView.swift in Sources */,
 				193F0F2F1F7B543700C2F948 /* XHWLMeAnnotationView.swift in Sources */,
+				199816B91FC3B01D00E0B9A1 /* XHWLChannelInfoView.swift in Sources */,
 				196F72701FA2D1DE00B0AA4D /* NSDate+Extension.m in Sources */,
 				193F0F2E1F7B53EA00C2F948 /* XHWLVisitLogModel.swift in Sources */,
 				193F0F2B1F7B53E400C2F948 /* XHWLRegistrationCell.swift in Sources */,
@@ -2818,7 +2823,6 @@
 				193F0F281F7B53D600C2F948 /* XHWLSafeGuardVC.swift in Sources */,
 				193F0F291F7B53D600C2F948 /* XHWLSafeProtectionVC.swift in Sources */,
 				192AEF611F8C6356004A7BF8 /* XHWLOtherAnnotationView.swift in Sources */,
-				19C799721FA9506300A78A90 /* SMClassicCalloutView.m in Sources */,
 				196F72721FA2D1E400B0AA4D /* WSDatePickerView.m in Sources */,
 				19B8F5B51FB54C08002D7B9E /* LBXPermissions.swift in Sources */,
 				193F0F241F7B53CF00C2F948 /* XHWLActualTimeCell.swift in Sources */,
@@ -2847,8 +2851,10 @@
 				193F0F171F7B53A100C2F948 /* XHWLHeadView.swift in Sources */,
 				194D7FB01F80B66A00B27BD0 /* XHWLMessageDetailVC.swift in Sources */,
 				193F0F181F7B53A100C2F948 /* XHWLImageBtn.swift in Sources */,
+				199816B71FC2D18B00E0B9A1 /* XHWLLineTF.swift in Sources */,
 				193F0F191F7B53A100C2F948 /* XHWLPickPhotoView.swift in Sources */,
 				193F0F1A1F7B53A100C2F948 /* XHWLRemarkView.swift in Sources */,
+				194405671FC94C080049849B /* XHWLLabelCell.swift in Sources */,
 				19A9C1791F7E433300C928AA /* XHWLLeadingView.swift in Sources */,
 				193F0F1B1F7B53A100C2F948 /* XHWLSafeGuardDetailView.swift in Sources */,
 				1967611C1F99D388007C840A /* XHWLPlayerView.swift in Sources */,
@@ -2880,6 +2886,7 @@
 				196761171F99D279007C840A /* XHWLMcuListVC.swift in Sources */,
 				193F0F051F7B536600C2F948 /* XHWLWarningModel.swift in Sources */,
 				193F0F011F7B535F00C2F948 /* XHWLHistoryWarningView.swift in Sources */,
+				199816B51FC2CF8300E0B9A1 /* LxOtherGridViewCell.swift in Sources */,
 				193F0F021F7B535F00C2F948 /* XHWLLineView.swift in Sources */,
 				193F0F031F7B535F00C2F948 /* XHWLWarningCell.swift in Sources */,
 				1960DBCF1FA173900081E084 /* XHWLShowImageView.swift in Sources */,
@@ -2908,6 +2915,7 @@
 				193F0EEE1F7B530D00C2F948 /* XHWLIssueReportModel.swift in Sources */,
 				192AEF631F8C6CCA004A7BF8 /* XHWLCustomAnnotation.swift in Sources */,
 				193F0EEF1F7B530D00C2F948 /* XHWLScanModel.swift in Sources */,
+				1944056B1FC96C580049849B /* XHWLRemarkCell.swift in Sources */,
 				193F0EEA1F7B530400C2F948 /* XHWLIssueReportListVC.swift in Sources */,
 				193F0EEB1F7B530400C2F948 /* XHWLIssueReportVC.swift in Sources */,
 				19C0E8441FB54CE800FB3774 /* LBXScanViewController.swift in Sources */,
@@ -2946,6 +2954,7 @@
 				19F04DD41F7509B400E0BD75 /* BluetoothTableViewCell.swift in Sources */,
 				19C0E8451FB54CEB00FB3774 /* LBXScanViewStyle.swift in Sources */,
 				19A7A7131F58067E0044DC1A /* AlertMessage.swift in Sources */,
+				199816BB1FC400FC00E0B9A1 /* XHWLSelectGroupCell.swift in Sources */,
 				19764F5A1F9DDD0A005FD87D /* XHWLPictureListView.swift in Sources */,
 				19E122011F9DF3220015AC70 /* XHWLMapKitTopView.swift in Sources */,
 				19A14D6D1F5E381100D96A2E /* MASViewAttribute.m in Sources */,
@@ -2961,19 +2970,17 @@
 				19C0E8591FBD731400FB3774 /* XHWLSelectGroupView.swift in Sources */,
 				19FACBCB1F68CA0C00680E63 /* XHWLRoleModel.swift in Sources */,
 				19A14DB01F5F991600D96A2E /* UIViewController+RTRootNavigationController.m in Sources */,
+				194405691FC94F250049849B /* XHWLLineCell.swift in Sources */,
 				19A14D8D1F5EA46F00D96A2E /* GIFAnimatedImageView.swift in Sources */,
 				19ADF3AC1F64FF7300A9E0FB /* XHWLTagView.swift in Sources */,
 				196761381F9B2A22007C840A /* VideoViewLayouter.swift in Sources */,
-				19C799711FA9505F00A78A90 /* SMCalloutView.m in Sources */,
 				199999631F78D56D00F6A135 /* UIDevice+Extension.swift in Sources */,
 				19A14D901F5EA46F00D96A2E /* GifTextHeaderFooter.swift in Sources */,
 				19F04DD71F7509B800E0BD75 /* LocalBlueToothTableViewCell.swift in Sources */,
-				196761451F9B4017007C840A /* VideoSession.swift in Sources */,
 				19A14D6E1F5E381100D96A2E /* MASViewConstraint.m in Sources */,
 				19BB53AA1F56DDC7006C38EA /* XHWLLoginView.swift in Sources */,
 				19ADF39E1F64DD8400A9E0FB /* XHWLRegisterationModel.swift in Sources */,
 				19E122031F9DF5220015AC70 /* XHWLTimeLeftView.swift in Sources */,
-				196761181F99D27C007C840A /* XHWLMcuResourceVC.swift in Sources */,
 				198B17CB1F7A4A1C00F1067C /* LYMUILabel+TextAlignment.m in Sources */,
 				19A14D921F5EA46F00D96A2E /* TextHeaderFooter.swift in Sources */,
 				19E122091F9EE4B10015AC70 /* XHWLPatrolVC.swift in Sources */,
@@ -3038,6 +3045,7 @@
 				840835911F6E01DF00DC644A /* XHWLNetwork.swift in Sources */,
 				1961CDA31F596328006856D0 /* PtzPresetPositionDialView.m in Sources */,
 				19CDF18A1F8AFEDD001F17A1 /* XHWLBluetoothModel.swift in Sources */,
+				194405631FC7FCAF0049849B /* XHWLTalkManager.swift in Sources */,
 				192BC2241F9F5DCD00CDF492 /* XHWLPatrolLineView.swift in Sources */,
 				1961CDAB1F596328006856D0 /* ToolBarScrollView.m in Sources */,
 				196AB4BC1F945EA3004E6C7A /* BHPushAnimation.swift in Sources */,
@@ -3046,6 +3054,7 @@
 				84A50A5C1F5668DA00BCDA47 /* AppDelegate.swift in Sources */,
 				19F04DCF1F75051C00E0BD75 /* RemoteOpenDoorVC.swift in Sources */,
 				192DA5321F57A62A005950EC /* UIColor+Category.swift in Sources */,
+				194405611FC6CBF20049849B /* VideoSession.swift in Sources */,
 				1961CDA81F596328006856D0 /* Singleton.m in Sources */,
 				1961CDA61F596328006856D0 /* QualityPanelView.m in Sources */,
 				1961CDA41F596328006856D0 /* PtzPresetPositionMultiDialView.m in Sources */,
@@ -3057,6 +3066,7 @@
 				19A14D701F5E381100D96A2E /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				1961CCCE1F58E301006856D0 /* HintTool.swift in Sources */,
 				1955C9B31F6528C1008C31C8 /* XHWLForgetPwdView.swift in Sources */,
+				194405651FC921710049849B /* XHWLPickPictureCell.swift in Sources */,
 				19E122051F9DF52F0015AC70 /* XHWLTimeRightView.swift in Sources */,
 				19FACBC61F68C43E00680E63 /* Validation.swift in Sources */,
 				197D64B41F62805500977074 /* XHWLMenuView.swift in Sources */,
@@ -3304,6 +3314,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_ENTITLEMENTS = XHWLHouseManager/XHWLHouseManager.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -3354,6 +3365,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_ENTITLEMENTS = XHWLHouseManager/XHWLHouseManager.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

@@ -11,7 +11,7 @@ import UIKit
 class XHWLChannelModel: NSObject {
     var id:String = ""
     var name:String = ""
-    var wyAccount:NSArray = NSArray()
+    var wyAccount:NSMutableArray = NSMutableArray()
     
     func mj_objectClassInArray() -> [AnyHashable : Any]! {
         return ["wyAccount":XHWLChannelRoleModel.self]
@@ -31,4 +31,5 @@ class XHWLChannelRoleModel: NSObject {
     var id:String = ""
     var workCode:String = ""
     var wyUserName:String = ""
+//    var editing:Bool = false
 }

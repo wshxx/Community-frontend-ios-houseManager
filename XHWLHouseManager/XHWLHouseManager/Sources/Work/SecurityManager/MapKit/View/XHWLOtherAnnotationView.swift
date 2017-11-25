@@ -23,9 +23,13 @@ class XHWLOtherAnnotationView:BMKAnnotationView  { // BMKAnnotationView MKPinAnn
             nameL.text = newValue.nickname
             if !newValue.progress.isEmpty {
                 let ary:NSArray = newValue.progress.components(separatedBy: "/") as NSArray
-                let progross:String = String(Int(Int(ary[0] as! String)! * 100 / Int(ary[1] as! String)!))
-                
-                progressL.text = progross+"%"
+                if (ary[1] as! String) == "0" {
+                    progressL.text = "0%"
+                } else {
+                    let progross:String = String(Int(Int(ary[0] as! String)! * 100 / Int(ary[1] as! String)!))
+                    
+                    progressL.text = progross+"%"
+                }
             } else {
                 progressL.text = "0%"
             }

@@ -206,14 +206,17 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
                  let wyUser:NSDictionary = response["result"]!["wyUser"] as! NSDictionary
                 
                 let projectList:NSArray = response["result"]!["projectList"] as! NSArray
+                let channelList:NSArray = response["result"]!["channelList"] as! NSArray
                 
                 print("\(wyUser)")
                 let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: wyUser)
                 let data:NSData = userModel.mj_JSONData()! as NSData
                 UserDefaults.standard.set(data, forKey: "user")
                 
+                let channelData:NSData = channelList.mj_JSONData()! as NSData
+                UserDefaults.standard.set(channelData, forKey: "channelList")
+                
                 if (projectList.count > 0) {
-                    
                     let projectData:NSData = (projectList[0] as! NSDictionary).mj_JSONData()! as NSData
                     UserDefaults.standard.set(projectData, forKey: "project")
                 }
@@ -225,7 +228,7 @@ class XHWLTransitionView: UIView, XHWLNetworkDelegate {
                 JPUSHService.setAlias(userModel.telephone,
                                       completion: { (iResCode, iAlias, seq) in
                                         if seq == 0 {
-                                            // "打标签成功".ext_debugPrintAndHint()
+                                             "\(userModel.telephone)打别名成功".ext_debugPrintAndHint()
                                         }
                 }, seq: 0)
                 // 打标签 安管主任：AGM； 工程：GC

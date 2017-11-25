@@ -10,7 +10,7 @@ import UIKit
 import TransitionAnimation
 import TransitionTreasury
 
-class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
+class XHWLWorkVC: UIViewController {
 
 //    var menuView : XHWLMenuView!
     var bgImg:UIImageView!
@@ -28,11 +28,9 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         setupView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(onUpdateMessageCount), name:NSNotification.Name(rawValue: "safeProtectNC"), object: nil)
-
     }
     
 //    updateBadge
-
     func setupNav() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"home_menu"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onOpenMenu))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"home_scan"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onScan))
@@ -129,7 +127,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         
         let array:NSMutableArray! = NSMutableArray()
         if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
-            array.addObjects(from: ["异常抬杆", "安防事件", "访客记录", "巡更安全", "安环数据", "云瞳监控", "频道列表"])
+            array.addObjects(from: ["异常抬杆", "安防事件", "访客记录", "巡更安全", "安环数据", "云瞳监控"])
         } else if userModel.wyAccount.wyRole.name.compare("门岗").rawValue == 0 {
             array.addObjects(from: ["访客登记", "名单管理"]) //
         } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
@@ -235,11 +233,6 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         case 5: // 云瞳监控
             let vc = XHWLMcuListVC()
             self.navigationController?.pushViewController(vc, animated: true)
-        case 6:
-            let vc:XHWLChannelManageVC = XHWLChannelManageVC()
-            navigationController?.pushViewController(vc, animated: true)
-            
-            break
         default: break
             
         }
@@ -334,51 +327,7 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    /**
-     *  扫描代理的回调函数
-     *
-     设备二维码模板：
-     {
-     "utid":"XHWL",
-     "type":"equipment",
-     "code":"eq01"
-     }
-     园林绿植二维码模板：
-     {
-     "utid":"XHWL",
-     "type":"plant",
-     "code":"lb01"
-     }
-     *  @param strResult 返回的字符串
-     */
-    func returnResultString(strResult:String, block:@escaping ((_ isSuccess:Bool)->Void))
-    {
-        print("\(strResult)")
-        self.block = block
-        let dict:NSDictionary = strResult.dictionaryWithJSON()
-        if dict.count > 0 {
-            let utid:String = dict["utid"] as! String
-            
-            if utid.compare("XHWL").rawValue == 0 {
-                //            block(true)
-                
-                let type:String = dict["type"] as! String
-                let code:String = dict["code"] as! String
-                
-                let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-                let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-                
-                let params:NSArray = [type, code, userModel.wyAccount.token]
-                
-                XHWLNetwork.shared.getScanCodeClick(params, self)
-                
-            } else {
-                block(false)
-            }
-        } else {
-            block(false)
-        }
-    }
+  
 
     //    返回项目下所有设备信息
     func loadDeviceInfo() {
@@ -403,89 +352,6 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
         } else {
             "您当前无项目".ext_debugPrintAndHint()
         }
-    }
-    
-    // MARK: - XHWLNetworkDelegate
-    
-    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
-        
-        if requestKey == XHWLRequestKeyID.XHWL_DEVICEINFO.rawValue {
-            let list:NSArray = response["result"]!["rows"] as! NSArray
-            
-            let modelData:NSData = list.mj_JSONData()! as NSData
-            UserDefaults.standard.set(modelData, forKey: "deviceList") // XHWLDeviceModel
-            UserDefaults.standard.synchronize()
-        }
-        else if requestKey == XHWLRequestKeyID.XHWL_MESSAGECOUNT.rawValue {
-            
-            let dict:NSDictionary = response["result"]!["count"] as! NSDictionary
-            
-            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-            
-            if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
-                let securityNotDealNo:NSNumber = dict["securityNotDealNo"] as! NSNumber //未处理安防事件总数
-//                let projectCycleAlarmAccount:NSNumber = dict["projectCycleAlarmAccount"] as! NSNumber //设备告警总数
-                let outExceptionAccount:NSNumber = dict["outExceptionAccount"] as! NSNumber //停车场异常抬杆总数
-                
-                var security:Int = Int(securityNotDealNo)
-                if Int(securityNotDealNo) > 8 {
-                    security = 8
-                }
-                updateBadge(security, 0, Int(outExceptionAccount))
-                
-                let num:Int = Int(outExceptionAccount).advanced(by: security)
-                JPUSHService.setBadge(num) // JPush服务器
-                UIApplication.shared.applicationIconBadgeNumber = num
-            } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
-                
-                let projectCycleAlarmAccount:NSNumber = dict["projectCycleAlarmAccount"] as! NSNumber //设备告警总数
-                
-                updateBadge(0, Int(projectCycleAlarmAccount), 0)
-                JPUSHService.setBadge(Int(projectCycleAlarmAccount)) // JPush服务器
-                UIApplication.shared.applicationIconBadgeNumber = Int(projectCycleAlarmAccount)
-            }
-            else if userModel.wyAccount.wyRole.name.compare("项目经理").rawValue == 0 { // 项目经理
-                let securityNotDealNo:NSNumber = dict["securityNotDealNo"] as! NSNumber //未处理安防事件总数
-                let projectCycleAlarmAccount:NSNumber = dict["projectCycleAlarmAccount"] as! NSNumber //设备告警总数
-                let outExceptionAccount:NSNumber = dict["outExceptionAccount"] as! NSNumber //停车场异常抬杆总数
-                var security:Int = Int(securityNotDealNo)
-                if Int(securityNotDealNo) > 8 {
-                    security = 8
-                }
-                updateBadge(security, Int(projectCycleAlarmAccount), Int(outExceptionAccount))
-                
-                let num:Int = Int(outExceptionAccount).advanced(by:Int(projectCycleAlarmAccount).advanced(by: security))
-                JPUSHService.setBadge(num) // JPush服务器
-                UIApplication.shared.applicationIconBadgeNumber = num
-            }
-        }
-        else if requestKey == XHWLRequestKeyID.XHWL_SCANCODE.rawValue {
-            print("\(response)")
-            let errorCode:NSInteger = response["errorCode"] as! NSInteger
-            if errorCode == 200 {
-                block(true)
-                "扫描成功".ext_debugPrintAndHint()
-                let result:NSDictionary = response["result"] as! NSDictionary
-                
-                let scanModel:XHWLScanModel = XHWLScanModel.mj_object(withKeyValues: result)
-                
-                print("\(scanModel.type)")
-                
-                let vc:XHWLScanResultVC = XHWLScanResultVC()
-                vc.scanModel = scanModel
-                self.navigationController?.pushViewController(vc, animated: true)
-            } else {
-                
-                let message:String = response["message"] as! String
-                message.ext_debugPrintAndHint()
-                block(false)
-            }
-        }
-    }
-    
-    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
-        
     }
     
     func updateBadge(_ securityNotDealNo:NSInteger, _ projectCycleAlarmAccount:NSInteger, _ outExceptionAccount:NSInteger) {
@@ -548,15 +414,139 @@ class XHWLWorkVC: UIViewController, XHWLScanTestVCDelegate, XHWLNetworkDelegate{
     //        self.navigationController?.pushViewController(vc, animated: true)
     //
     //    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+extension XHWLWorkVC: XHWLNetworkDelegate{
+    // MARK: - XHWLNetworkDelegate
+    
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        if requestKey == XHWLRequestKeyID.XHWL_DEVICEINFO.rawValue {
+            let list:NSArray = response["result"]!["rows"] as! NSArray
+            
+            let modelData:NSData = list.mj_JSONData()! as NSData
+            UserDefaults.standard.set(modelData, forKey: "deviceList") // XHWLDeviceModel
+            UserDefaults.standard.synchronize()
+        }
+        else if requestKey == XHWLRequestKeyID.XHWL_MESSAGECOUNT.rawValue {
+            
+            let dict:NSDictionary = response["result"]!["count"] as! NSDictionary
+            
+            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+            
+            if userModel.wyAccount.wyRole.name.compare("安管主任").rawValue == 0 {
+                let securityNotDealNo:NSNumber = dict["securityNotDealNo"] as! NSNumber //未处理安防事件总数
+                //                let projectCycleAlarmAccount:NSNumber = dict["projectCycleAlarmAccount"] as! NSNumber //设备告警总数
+                let outExceptionAccount:NSNumber = dict["outExceptionAccount"] as! NSNumber //停车场异常抬杆总数
+                
+                var security:Int = Int(securityNotDealNo)
+                if Int(securityNotDealNo) > 8 {
+                    security = 8
+                }
+                updateBadge(security, 0, Int(outExceptionAccount))
+                
+                let num:Int = Int(outExceptionAccount).advanced(by: security)
+                JPUSHService.setBadge(num) // JPush服务器
+                UIApplication.shared.applicationIconBadgeNumber = num
+            } else if userModel.wyAccount.wyRole.name.compare("工程").rawValue == 0 {
+                
+                let projectCycleAlarmAccount:NSNumber = dict["projectCycleAlarmAccount"] as! NSNumber //设备告警总数
+                
+                updateBadge(0, Int(projectCycleAlarmAccount), 0)
+                JPUSHService.setBadge(Int(projectCycleAlarmAccount)) // JPush服务器
+                UIApplication.shared.applicationIconBadgeNumber = Int(projectCycleAlarmAccount)
+            }
+            else if userModel.wyAccount.wyRole.name.compare("项目经理").rawValue == 0 { // 项目经理
+                let securityNotDealNo:NSNumber = dict["securityNotDealNo"] as! NSNumber //未处理安防事件总数
+                let projectCycleAlarmAccount:NSNumber = dict["projectCycleAlarmAccount"] as! NSNumber //设备告警总数
+                let outExceptionAccount:NSNumber = dict["outExceptionAccount"] as! NSNumber //停车场异常抬杆总数
+                var security:Int = Int(securityNotDealNo)
+                if Int(securityNotDealNo) > 8 {
+                    security = 8
+                }
+                updateBadge(security, Int(projectCycleAlarmAccount), Int(outExceptionAccount))
+                
+                let num:Int = Int(outExceptionAccount).advanced(by:Int(projectCycleAlarmAccount).advanced(by: security))
+                JPUSHService.setBadge(num) // JPush服务器
+                UIApplication.shared.applicationIconBadgeNumber = num
+            }
+        }
+        else if requestKey == XHWLRequestKeyID.XHWL_SCANCODE.rawValue {
+            print("\(response)")
+            let errorCode:NSInteger = response["errorCode"] as! NSInteger
+            if errorCode == 200 {
+                block(true)
+                "扫描成功".ext_debugPrintAndHint()
+                let result:NSDictionary = response["result"] as! NSDictionary
+                
+                let scanModel:XHWLScanModel = XHWLScanModel.mj_object(withKeyValues: result)
+                
+                print("\(scanModel.type)")
+                
+                let vc:XHWLScanResultVC = XHWLScanResultVC()
+                vc.scanModel = scanModel
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                
+                let message:String = response["message"] as! String
+                message.ext_debugPrintAndHint()
+                block(false)
+            }
+        }
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
+    }
+}
+
+extension XHWLWorkVC: XHWLScanTestVCDelegate {
+    /**
+     *  扫描代理的回调函数
+     *
+     设备二维码模板：
+     {
+     "utid":"XHWL",
+     "type":"equipment",
+     "code":"eq01"
+     }
+     园林绿植二维码模板：
+     {
+     "utid":"XHWL",
+     "type":"plant",
+     "code":"lb01"
+     }
+     *  @param strResult 返回的字符串
+     */
+    func returnResultString(strResult:String, block:@escaping ((_ isSuccess:Bool)->Void))
+    {
+        print("\(strResult)")
+        self.block = block
+        let dict:NSDictionary = strResult.dictionaryWithJSON()
+        if dict.count > 0 {
+            let utid:String = dict["utid"] as! String
+            
+            if utid.compare("XHWL").rawValue == 0 {
+                //            block(true)
+                
+                let type:String = dict["type"] as! String
+                let code:String = dict["code"] as! String
+                
+                let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+                let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+                
+                let params:NSArray = [type, code, userModel.wyAccount.token]
+                
+                XHWLNetwork.shared.getScanCodeClick(params, self)
+                
+            } else {
+                block(false)
+            }
+        } else {
+            block(false)
+        }
+    }
+}
+
+

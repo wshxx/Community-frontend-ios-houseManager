@@ -8,10 +8,8 @@
 
 import UIKit
 
-class XHWLCountVC: XHWLBaseVC , XHWLNetworkDelegate {
+class XHWLCountVC: XHWLBaseVC {
     
-//    var bgImg:UIImageView!
-//    var topMenu:XHWLTopView!
     var warningView:XHWLCountView!
     var dataAry:NSMutableArray! = NSMutableArray()
     
@@ -20,8 +18,8 @@ class XHWLCountVC: XHWLBaseVC , XHWLNetworkDelegate {
         
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.white
+        self.title = "巡更进度"
         setupView()
-        setupNav()
     }
     
     func onLoadData() {
@@ -31,40 +29,8 @@ class XHWLCountVC: XHWLBaseVC , XHWLNetworkDelegate {
 
         XHWLNetwork.shared.getRealProgressClick([userModel.wyAccount.token] as NSArray, self)
     }
-
-    // MARK: - XHWLNetworkDelegate
-
-    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
-
-        if requestKey == XHWLRequestKeyID.XHWL_REALPROGRESS.rawValue {
-
-            dataAry = XHWLRealProgressModel.mj_objectArray(withKeyValuesArray:response["result"]!["progressList"] as! NSArray)
-            warningView.dataAry = NSMutableArray()
-            warningView.dataAry.addObjects(from: dataAry as! [Any])
-            warningView.tableView.reloadData()
-        }
-    }
-
-    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
-
-    }
-    
-    func setupNav() {
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
-        
-        self.title = "巡更进度"
-    }
-    
-//    func onBack(){
-//        self.navigationController?.popViewController(animated: true)
-//    }
     
     func setupView() {
-        
-//        bgImg = UIImageView()
-//        bgImg.frame = self.view.bounds
-//        bgImg.image = UIImage(named:"home_bg")
-//        self.view.addSubview(bgImg)
         
         warningView = XHWLCountView(frame:CGRect.zero)
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
@@ -84,16 +50,26 @@ class XHWLCountVC: XHWLBaseVC , XHWLNetworkDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+// MARK: - XHWLNetworkDelegate
+
+extension XHWLCountVC: XHWLNetworkDelegate {
+
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        if requestKey == XHWLRequestKeyID.XHWL_REALPROGRESS.rawValue {
+            
+            dataAry = XHWLRealProgressModel.mj_objectArray(withKeyValuesArray:response["result"]!["progressList"] as! NSArray)
+            warningView.dataAry = NSMutableArray()
+            warningView.dataAry.addObjects(from: dataAry as! [Any])
+            warningView.tableView.reloadData()
+        }
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
+    }
+}
+
+

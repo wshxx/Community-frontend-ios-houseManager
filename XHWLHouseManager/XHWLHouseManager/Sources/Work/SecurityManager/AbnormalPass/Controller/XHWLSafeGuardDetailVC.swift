@@ -8,9 +8,8 @@
 
 import UIKit
 
-class XHWLSafeGuardDetailVC: XHWLBaseVC, XHWLScanTestVCDelegate{
+class XHWLSafeGuardDetailVC: XHWLBaseVC {
     
-//    var bgImg:UIImageView!
     var backReloadBlock:()->() = {param in }
     var abnormalModel:XHWLAbnormalPassModel!
     var dataAry:NSMutableArray! = NSMutableArray()
@@ -21,9 +20,6 @@ class XHWLSafeGuardDetailVC: XHWLBaseVC, XHWLScanTestVCDelegate{
         
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.white
-
-        
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:"scan_back"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(onBack))
         self.title = "详情"
         
         print("\(abnormalModel.operatorName)")
@@ -54,16 +50,7 @@ class XHWLSafeGuardDetailVC: XHWLBaseVC, XHWLScanTestVCDelegate{
         setupView()
     }
     
-//    func onBack(){
-//        self.navigationController?.popViewController(animated: true)
-//    }
-    
     func setupView() {
-        
-//        bgImg = UIImageView()
-//        bgImg.frame = self.view.bounds
-//        bgImg.image = UIImage(named:"home_bg")
-//        self.view.addSubview(bgImg)
         
         let warningView:XHWLSafeGuardDetailView = XHWLSafeGuardDetailView(frame: CGRect.zero, !abnormalModel.status.isEmpty, dataAry, dataAry2)
         warningView.bounds = CGRect(x:0, y:0, width:Screen_width*13/16.0, height:Screen_height*2/3.0)
@@ -75,12 +62,10 @@ class XHWLSafeGuardDetailVC: XHWLBaseVC, XHWLScanTestVCDelegate{
 
         }
         self.view.addSubview(warningView)
-        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 }
