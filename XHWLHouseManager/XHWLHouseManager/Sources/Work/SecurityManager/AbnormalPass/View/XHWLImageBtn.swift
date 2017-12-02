@@ -10,47 +10,88 @@ import UIKit
 
 class XHWLImageBtn: UIView {
 
-    var imageIV:UIButton!
+    var imageIV:UIImageView!
     var deleIV:UIButton!
-    var deleteBlock:()->(Void) = { param in }
-    var selectImgBlock:()->(Void) = { param in }
-    
-    override init(frame: CGRect) {
+    var videoView:MicroVideoPlayView!
+    var deleteImageBlock:()->(Void) = { param in }
+    var isVideo:Bool! = false
+    var isShow:Bool = false
+
+    init(frame: CGRect, _ isVideo:Bool, _ isShow:Bool) {
         super.init(frame: frame)
         
-        setupView()
+        setupView(isVideo, isShow)
     }
     
-    func setupView() {
+    func setupView(_ isVideo:Bool, _ isShow:Bool) {
         
-        imageIV = UIButton()
-        imageIV.addTarget(self, action: #selector(onSelectIamge), for: UIControlEvents.touchUpInside)
-        self.addSubview(imageIV)
-        
-        deleIV = UIButton()
-        deleIV.setImage(UIImage(named:"login_textfield_clear"), for: UIControlState.normal)
-        deleIV.addTarget(self, action: #selector(onDelete), for: UIControlEvents.touchUpInside)
-        self.addSubview(deleIV)
+        self.isVideo = isVideo
+        self.isShow = isShow
+        if isVideo {
+            videoView = MicroVideoPlayView.init(frame: CGRect(x:0, y:10, width:50, height:50))
+            self.addSubview(videoView)
+        } else {
+            imageIV = UIImageView()
+            imageIV.isUserInteractionEnabled = true
+            self.addSubview(imageIV)
+            
+            let tap:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(onScaleImage))
+            imageIV.addGestureRecognizer(tap)
+        }
+
+        if !isShow {
+            deleIV = UIButton()
+            deleIV.setImage(UIImage(named:"login_textfield_clear"), for: UIControlState.normal)
+            deleIV.addTarget(self, action: #selector(onDeleteImage), for: UIControlEvents.touchUpInside)
+            self.addSubview(deleIV)
+        }
     }
     
-    func onDelete() {
-        self.deleteBlock()
+    func onDeleteImage() {
+        self.deleteImageBlock()
     }
-    func onSelectIamge() {
-        self.selectImgBlock()
+    
+    func onScaleImage(_ tap:UITapGestureRecognizer) {
+        let views:UIImageView = tap.view as! UIImageView
+        
+        XHWLImageScale.scanBigImage(with: views, alpha: 1.0)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        imageIV.frame = CGRect(x:0, y:10, width:self.bounds.size.width-10, height:self.bounds.size.height-10)
-        
-        deleIV.frame = CGRect(x:0, y:0, width:10, height:10)
-        deleIV.center = CGPoint(x:self.bounds.size.width-10, y:10)
+        if !isShow {
+            if isVideo {
+                videoView.frame = CGRect(x:0, y:10, width:self.bounds.size.width-10, height:self.bounds.size.height-10)
+            } else {
+                imageIV.frame = CGRect(x:0, y:10, width:self.bounds.size.width-10, height:self.bounds.size.height-10)
+            }
+            
+            deleIV.frame = CGRect(x:0, y:0, width:10, height:10)
+            deleIV.center = CGPoint(x:self.bounds.size.width-10, y:10)
+        } else {
+            if isVideo {
+                videoView.frame = CGRect(x:0, y:5, width:self.bounds.size.width-10, height:self.bounds.size.height-10)
+            } else {
+                imageIV.frame = CGRect(x:0, y:5, width:self.bounds.size.width-10, height:self.bounds.size.height-10)
+            }
+        }
     }
     
-    func setImage(_ image:UIImage) {
-        imageIV.setImage(image, for: UIControlState.normal)
+    func setContentUrl(_ url:String) {
+        
+        if isVideo {
+            videoView.setContentUrl(url)
+        } else {
+            //            http://odum9helk.qnssl.com/resource/gogopher.jpg?imageView2/1/w/200/h/200
+            let url = URL.init(string: "\(url)?imageView2/1/w/200/h/200")!
+            guard let data = try? Data.init(contentsOf: url, options: Data.ReadingOptions.alwaysMapped) else {
+                return
+            }
+            
+            let image:UIImage = UIImage.init(data: data)!
+            imageIV.image = image
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

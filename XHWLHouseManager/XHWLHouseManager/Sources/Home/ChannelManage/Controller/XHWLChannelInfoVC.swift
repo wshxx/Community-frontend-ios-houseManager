@@ -75,7 +75,7 @@ class XHWLChannelInfoVC: XHWLBaseVC {
         let data = UserDefaults.standard.object(forKey: "user") as? NSData
         let userModel = XHWLUserModel.mj_object(withKeyValues: data?.mj_JSONObject())
 
-        let params:NSDictionary = ["token":userModel?.wyAccount.token, //    用户登录token
+        let params:NSDictionary = ["token":userModel?.wyAccount.token ?? "", //    用户登录token
             "channelId":channelModel.id, // 是    频道id
             "wyAccountIds":"", // 删除频道（否）/删除频道成员（是）    频道人员的id
             "isRemoveChannel":"y" // 是    是否删除频道
@@ -96,8 +96,7 @@ extension XHWLChannelInfoVC: XHWLNetworkDelegate {
     func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
         
         if requestKey == XHWLRequestKeyID.XHWL_DELETECHANNEL.rawValue {
-            
-            
+            self.navigationController?.popViewController(animated: true)
         }
     }
     

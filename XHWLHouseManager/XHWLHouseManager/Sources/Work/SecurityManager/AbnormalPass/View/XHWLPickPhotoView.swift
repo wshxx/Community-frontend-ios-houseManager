@@ -12,11 +12,12 @@ class XHWLPickPhotoView: UIView {
 
     var titleL:UILabel!
     var addBtn:UIButton!
-    var addPictureBlock:(Bool, NSInteger, Bool)->(Void) = {param in } // 是否添加，对应哪张图切换， 对应哪张是否是添加
+    var addPictureBlock:(NSInteger, NSInteger)->(Void) = {param in } // 是否添加，对应哪张图切换， 对应哪张是否是添加
     var imgIVArray:NSMutableArray!
     var selectImg:XHWLImageBtn!
     var isShow:Bool!
     var isBundle:Bool! = false
+    var isVideo:Bool = false
     
     init(frame: CGRect, _ isShow:Bool) {
         super.init(frame: frame)
@@ -63,8 +64,9 @@ class XHWLPickPhotoView: UIView {
         if isShow {
             if imgIVArray.count > 0 {
                 for i in 0...imgIVArray.count-1 {
-                    let imgV:UIImageView = imgIVArray[i] as! UIImageView
-//                    imgV.frame = CGRect(x:orginX+10, y:titleL.frame.maxY+5, width:self.bounds.size.height-20, height:self.bounds.size.height-titleL.frame.maxY)
+                    let imgV:UIView = imgIVArray[i] as! UIView
+//                    let imgV:MicroVideoPlayView = imgIVArray[i] as! MicroVideoPlayView
+//                    let imgV:UIImageView = imgIVArray[i] as! UIImageView
                     imgV.frame = CGRect(x:orginX+10, y:titleL.frame.maxY+5, width:60, height:60)
                     orginX = imgV.frame.maxX
                 }
@@ -72,14 +74,17 @@ class XHWLPickPhotoView: UIView {
         } else {
             if imgIVArray.count > 0 {
                 for i in 0...imgIVArray.count-1 {
-                    let imgV:XHWLImageBtn = imgIVArray[i] as! XHWLImageBtn
+                    let imgV:UIView = imgIVArray[i] as! UIView
+//                    let imgV:MicroVideoPlayView = imgIVArray[i] as! MicroVideoPlayView
+//                    let imgV:XHWLImageBtn = imgIVArray[i] as! XHWLImageBtn
                     //                let imgV:UIImageView = imgIVArray[i] as! UIImageView
                     imgV.frame = CGRect(x:orginX+10, y:titleL.frame.maxY+5, width:60, height:60)
 //                    imgV.frame = CGRect(x:orginX+10, y:titleL.frame.maxY+5, width:self.bounds.size.height-20, height:self.bounds.size.height-titleL.frame.maxY)
                     orginX = imgV.frame.maxX
                 }
             }
-            if imgIVArray.count >= 3 {
+            
+            if isVideo && imgIVArray.count >= 1 || !isVideo && imgIVArray.count >= 3  {
                 addBtn.isHidden = true
             } else {
                 addBtn.isHidden = false
@@ -90,27 +95,68 @@ class XHWLPickPhotoView: UIView {
         
     }
     
-    func onCreateImgView(_ image:UIImage) {
+    // 上传图片或视频
+    func onCreateImgView(_ url:String, _ isVideo:Bool) {
         print("\(imgIVArray.count), \(imgIVArray)")
-        if imgIVArray.count < 3 {
-            let imgV:XHWLImageBtn = XHWLImageBtn()
-            imgV.setImage(image)
+       
+        self.isVideo = isVideo
+        if !isVideo && imgIVArray.count < 3 || isVideo && imgIVArray.count < 1 { // 显示图片
+            let imgV:XHWLImageBtn = XHWLImageBtn.init(frame: CGRect.zero, isVideo, false)
+            imgV.setContentUrl(url)
             imgV.tag = comTag+imgIVArray.count
-            imgV.deleteBlock = { [weak imgV] _ in
-                //                self.addPictureBlock()
-                self.addPictureBlock(false, (imgV?.tag)!-comTag, false)
+            // 删除图片
+            imgV.deleteImageBlock = { [weak imgV] _ in
+                self.addPictureBlock((imgV?.tag)!-comTag, self.imgIVArray.count) // 是否添加
                 self.imgIVArray.remove(imgV)
                 imgV?.removeFromSuperview()
-            }
-            imgV.selectImgBlock = { _ in
-                self.selectImg = imgV
-                self.addPictureBlock(false, imgV.tag-comTag, true)
             }
             self.addSubview(imgV)
             imgIVArray.add(imgV)
         }
     }
     
+    // 显示链接图片或视频
+    func showImgOrVideoArray(_ array:NSArray) {
+        
+        imgIVArray = NSMutableArray()
+        var num:NSInteger = array.count
+        if array.count > 3 {
+            num = 3
+        }
+        for i in 0..<num {
+            let url:String = array[i] as! String
+            let array:NSArray = url.components(separatedBy: ".") as NSArray
+            var isVideo = true
+            if (array.lastObject as! String) == "png" {
+                isVideo = false
+            }
+            let imgV:XHWLImageBtn = XHWLImageBtn.init(frame: CGRect.zero, isVideo, true)
+            imgV.setContentUrl(url)
+            imgV.tag = comTag+imgIVArray.count
+            self.addSubview(imgV)
+            imgIVArray.add(imgV)
+            
+            
+//            imgV.isUserInteractionEnabled = true
+//            let tap:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(onScaleImg(_:)))
+//            imgV.addGestureRecognizer(tap)
+            
+//            if isBundle == false {
+//                let urlStr = "\(XHWLHttpURL)/\(array[i] as! String)"
+//                let url = URL(string: urlStr)
+//                //                imgV.kf.setImage(with: url)
+//                imgV.kf.setImage(with: url, placeholder: UIImage(named:"default_icon"), options: nil, progressBlock: nil, completionHandler: nil)
+//                self.addSubview(imgV)
+//                imgIVArray.add(imgV)
+//            } else {
+//                imgV.image = UIImage(named:"IMG_\(i)")
+//                self.addSubview(imgV)
+//                imgIVArray.add(imgV)
+//            }
+        }
+    }
+    
+     // 显示ben di图片或视频
     func onShowImgArray(_ array:NSArray) {
         
         imgIVArray = NSMutableArray()
@@ -125,7 +171,7 @@ class XHWLPickPhotoView: UIView {
             imgV.addGestureRecognizer(tap)
             
             if isBundle == false {
-                let urlStr = "\(XHWLImgURL)/\(array[i] as! String)"
+                let urlStr = "\(XHWLHttpURL)/\(array[i] as! String)"
                 let url = URL(string: urlStr)
 //                imgV.kf.setImage(with: url)
                 imgV.kf.setImage(with: url, placeholder: UIImage(named:"default_icon"), options: nil, progressBlock: nil, completionHandler: nil)
@@ -141,25 +187,16 @@ class XHWLPickPhotoView: UIView {
     
     // 放大图片
     func onScaleImg(_ tap:UITapGestureRecognizer) {
-        
-        print("\(tap.view)")
         let views:UIImageView = tap.view as! UIImageView
         
         XHWLImageScale.scanBigImage(with: views, alpha: 1.0)
     }
     
-    func onChangePicture(_ image:UIImage) {
-        self.selectImg.setImage(image)
-    }
-    
+    // 添加图片
     func onAddClick() {
         
-        self.addPictureBlock(true, -1, true)
+        self.addPictureBlock(-1, imgIVArray.count)
     }
-    
-//    func createBtn() {
-//        var btn:
-//    }
     
     func showText(_ leftText:String) {
         titleL.text = leftText

@@ -34,6 +34,7 @@ class XHWLLabelCell: UITableViewCell {
         
         self.backgroundColor = UIColor.clear
         self.contentView.backgroundColor = UIColor.clear
+        self.selectionStyle = .none
         
         setupView()
     }

@@ -260,6 +260,45 @@
 		197D64B81F628B9400977074 /* XHWLTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D64B71F628B9400977074 /* XHWLTipView.swift */; };
 		197D64BC1F62A10900977074 /* XHWLTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D64BB1F62A10900977074 /* XHWLTopView.swift */; };
 		19857F361F83322400850A8A /* XHWLMenuLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19857F351F83322400850A8A /* XHWLMenuLineView.swift */; };
+		19883ED81FCD5D850027EEA2 /* MicroVideoPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19883EB31FCD5D850027EEA2 /* MicroVideoPlayView.m */; };
+		19883ED91FCD5D850027EEA2 /* MicroVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19883EB51FCD5D850027EEA2 /* MicroVideoView.m */; };
+		19883EDA1FCD5D850027EEA2 /* 前后摄像头.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EB71FCD5D850027EEA2 /* 前后摄像头.png */; };
+		19883EDB1FCD5D850027EEA2 /* 前后摄像头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EB81FCD5D850027EEA2 /* 前后摄像头@2x.png */; };
+		19883EDC1FCD5D850027EEA2 /* 前后摄像头@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EB91FCD5D850027EEA2 /* 前后摄像头@3x.png */; };
+		19883EDD1FCD5D850027EEA2 /* 发送.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EBA1FCD5D850027EEA2 /* 发送.png */; };
+		19883EDE1FCD5D850027EEA2 /* 发送@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EBB1FCD5D850027EEA2 /* 发送@2x.png */; };
+		19883EDF1FCD5D850027EEA2 /* 发送@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EBC1FCD5D850027EEA2 /* 发送@3x.png */; };
+		19883EE01FCD5D850027EEA2 /* 取消.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EBD1FCD5D850027EEA2 /* 取消.png */; };
+		19883EE11FCD5D850027EEA2 /* 取消@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EBE1FCD5D850027EEA2 /* 取消@2x.png */; };
+		19883EE21FCD5D850027EEA2 /* 取消@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EBF1FCD5D850027EEA2 /* 取消@3x.png */; };
+		19883EE31FCD5D850027EEA2 /* 圆.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EC01FCD5D850027EEA2 /* 圆.png */; };
+		19883EE41FCD5D850027EEA2 /* 圆@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EC11FCD5D850027EEA2 /* 圆@2x.png */; };
+		19883EE51FCD5D850027EEA2 /* 圆@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EC21FCD5D850027EEA2 /* 圆@3x.png */; };
+		19883EE61FCD5D850027EEA2 /* 外圆环.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EC31FCD5D850027EEA2 /* 外圆环.png */; };
+		19883EE71FCD5D850027EEA2 /* 外圆环@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EC41FCD5D850027EEA2 /* 外圆环@2x.png */; };
+		19883EE81FCD5D850027EEA2 /* 外圆环@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EC51FCD5D850027EEA2 /* 外圆环@3x.png */; };
+		19883EE91FCD5D850027EEA2 /* 摄像中.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EC61FCD5D850027EEA2 /* 摄像中.png */; };
+		19883EEA1FCD5D850027EEA2 /* 摄像中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EC71FCD5D850027EEA2 /* 摄像中@2x.png */; };
+		19883EEB1FCD5D850027EEA2 /* 摄像中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EC81FCD5D850027EEA2 /* 摄像中@3x.png */; };
+		19883EEC1FCD5D850027EEA2 /* 摄像头.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EC91FCD5D850027EEA2 /* 摄像头.png */; };
+		19883EED1FCD5D850027EEA2 /* 摄像头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883ECA1FCD5D850027EEA2 /* 摄像头@2x.png */; };
+		19883EEE1FCD5D850027EEA2 /* 摄像头@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883ECB1FCD5D850027EEA2 /* 摄像头@3x.png */; };
+		19883EEF1FCD5D850027EEA2 /* 视频录影头.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883ECC1FCD5D850027EEA2 /* 视频录影头.png */; };
+		19883EF01FCD5D850027EEA2 /* 视频录影头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883ECD1FCD5D850027EEA2 /* 视频录影头@2x.png */; };
+		19883EF11FCD5D850027EEA2 /* 视频录影头@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883ECE1FCD5D850027EEA2 /* 视频录影头@3x.png */; };
+		19883EF21FCD5D850027EEA2 /* 返回键.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883ECF1FCD5D850027EEA2 /* 返回键.png */; };
+		19883EF31FCD5D850027EEA2 /* 返回键@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883ED01FCD5D850027EEA2 /* 返回键@2x.png */; };
+		19883EF41FCD5D850027EEA2 /* 返回键@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883ED11FCD5D850027EEA2 /* 返回键@3x.png */; };
+		19883EF51FCD5D850027EEA2 /* record_focusbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883ED21FCD5D850027EEA2 /* record_focusbutton@2x.png */; };
+		19883EF61FCD5D850027EEA2 /* record_hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883ED31FCD5D850027EEA2 /* record_hover@2x.png */; };
+		19883EF71FCD5D850027EEA2 /* record_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883ED41FCD5D850027EEA2 /* record_normal@2x.png */; };
+		19883EF81FCD5D850027EEA2 /* record_video_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883ED51FCD5D850027EEA2 /* record_video_bg@2x.png */; };
+		19883EF91FCD5D850027EEA2 /* ZFProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19883ED71FCD5D850027EEA2 /* ZFProgressView.m */; };
+		19883EFE1FCE3E1D0027EEA2 /* XHWLMicroVideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 19883EFD1FCE3E1D0027EEA2 /* XHWLMicroVideoVC.m */; };
+		19883F021FCEAB8A0027EEA2 /* default_video@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883EFF1FCEAB890027EEA2 /* default_video@2x.png */; };
+		19883F031FCEAB8A0027EEA2 /* record_errorbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883F001FCEAB890027EEA2 /* record_errorbutton@2x.png */; };
+		19883F0A1FD0DF580027EEA2 /* record_playbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883F081FD0DF580027EEA2 /* record_playbutton@2x.png */; };
+		19883F0B1FD0DF580027EEA2 /* record_playbutton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19883F091FD0DF580027EEA2 /* record_playbutton@3x.png */; };
 		198B17C71F7A3F8100F1067C /* XHWLLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198B17C61F7A3F8100F1067C /* XHWLLabel.swift */; };
 		198B17CB1F7A4A1C00F1067C /* LYMUILabel+TextAlignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 198B17CA1F7A4A1C00F1067C /* LYMUILabel+TextAlignment.m */; };
 		198B17D91F7A849100F1067C /* CLNewFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198B17D81F7A849100F1067C /* CLNewFeatureView.swift */; };
@@ -695,6 +734,49 @@
 		197D64B71F628B9400977074 /* XHWLTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLTipView.swift; sourceTree = "<group>"; };
 		197D64BB1F62A10900977074 /* XHWLTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLTopView.swift; sourceTree = "<group>"; };
 		19857F351F83322400850A8A /* XHWLMenuLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWLMenuLineView.swift; sourceTree = "<group>"; };
+		19883EB21FCD5D850027EEA2 /* MicroVideoPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicroVideoPlayView.h; sourceTree = "<group>"; };
+		19883EB31FCD5D850027EEA2 /* MicroVideoPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicroVideoPlayView.m; sourceTree = "<group>"; };
+		19883EB41FCD5D850027EEA2 /* MicroVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicroVideoView.h; sourceTree = "<group>"; };
+		19883EB51FCD5D850027EEA2 /* MicroVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicroVideoView.m; sourceTree = "<group>"; };
+		19883EB71FCD5D850027EEA2 /* 前后摄像头.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "前后摄像头.png"; sourceTree = "<group>"; };
+		19883EB81FCD5D850027EEA2 /* 前后摄像头@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "前后摄像头@2x.png"; sourceTree = "<group>"; };
+		19883EB91FCD5D850027EEA2 /* 前后摄像头@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "前后摄像头@3x.png"; sourceTree = "<group>"; };
+		19883EBA1FCD5D850027EEA2 /* 发送.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发送.png"; sourceTree = "<group>"; };
+		19883EBB1FCD5D850027EEA2 /* 发送@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发送@2x.png"; sourceTree = "<group>"; };
+		19883EBC1FCD5D850027EEA2 /* 发送@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发送@3x.png"; sourceTree = "<group>"; };
+		19883EBD1FCD5D850027EEA2 /* 取消.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "取消.png"; sourceTree = "<group>"; };
+		19883EBE1FCD5D850027EEA2 /* 取消@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "取消@2x.png"; sourceTree = "<group>"; };
+		19883EBF1FCD5D850027EEA2 /* 取消@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "取消@3x.png"; sourceTree = "<group>"; };
+		19883EC01FCD5D850027EEA2 /* 圆.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆.png"; sourceTree = "<group>"; };
+		19883EC11FCD5D850027EEA2 /* 圆@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆@2x.png"; sourceTree = "<group>"; };
+		19883EC21FCD5D850027EEA2 /* 圆@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆@3x.png"; sourceTree = "<group>"; };
+		19883EC31FCD5D850027EEA2 /* 外圆环.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "外圆环.png"; sourceTree = "<group>"; };
+		19883EC41FCD5D850027EEA2 /* 外圆环@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "外圆环@2x.png"; sourceTree = "<group>"; };
+		19883EC51FCD5D850027EEA2 /* 外圆环@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "外圆环@3x.png"; sourceTree = "<group>"; };
+		19883EC61FCD5D850027EEA2 /* 摄像中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "摄像中.png"; sourceTree = "<group>"; };
+		19883EC71FCD5D850027EEA2 /* 摄像中@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "摄像中@2x.png"; sourceTree = "<group>"; };
+		19883EC81FCD5D850027EEA2 /* 摄像中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "摄像中@3x.png"; sourceTree = "<group>"; };
+		19883EC91FCD5D850027EEA2 /* 摄像头.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "摄像头.png"; sourceTree = "<group>"; };
+		19883ECA1FCD5D850027EEA2 /* 摄像头@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "摄像头@2x.png"; sourceTree = "<group>"; };
+		19883ECB1FCD5D850027EEA2 /* 摄像头@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "摄像头@3x.png"; sourceTree = "<group>"; };
+		19883ECC1FCD5D850027EEA2 /* 视频录影头.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "视频录影头.png"; sourceTree = "<group>"; };
+		19883ECD1FCD5D850027EEA2 /* 视频录影头@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "视频录影头@2x.png"; sourceTree = "<group>"; };
+		19883ECE1FCD5D850027EEA2 /* 视频录影头@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "视频录影头@3x.png"; sourceTree = "<group>"; };
+		19883ECF1FCD5D850027EEA2 /* 返回键.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回键.png"; sourceTree = "<group>"; };
+		19883ED01FCD5D850027EEA2 /* 返回键@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回键@2x.png"; sourceTree = "<group>"; };
+		19883ED11FCD5D850027EEA2 /* 返回键@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回键@3x.png"; sourceTree = "<group>"; };
+		19883ED21FCD5D850027EEA2 /* record_focusbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record_focusbutton@2x.png"; sourceTree = "<group>"; };
+		19883ED31FCD5D850027EEA2 /* record_hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record_hover@2x.png"; sourceTree = "<group>"; };
+		19883ED41FCD5D850027EEA2 /* record_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record_normal@2x.png"; sourceTree = "<group>"; };
+		19883ED51FCD5D850027EEA2 /* record_video_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record_video_bg@2x.png"; sourceTree = "<group>"; };
+		19883ED61FCD5D850027EEA2 /* ZFProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFProgressView.h; sourceTree = "<group>"; };
+		19883ED71FCD5D850027EEA2 /* ZFProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFProgressView.m; sourceTree = "<group>"; };
+		19883EFC1FCE3E1D0027EEA2 /* XHWLMicroVideoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHWLMicroVideoVC.h; sourceTree = "<group>"; };
+		19883EFD1FCE3E1D0027EEA2 /* XHWLMicroVideoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHWLMicroVideoVC.m; sourceTree = "<group>"; };
+		19883EFF1FCEAB890027EEA2 /* default_video@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default_video@2x.png"; sourceTree = "<group>"; };
+		19883F001FCEAB890027EEA2 /* record_errorbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record_errorbutton@2x.png"; sourceTree = "<group>"; };
+		19883F081FD0DF580027EEA2 /* record_playbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record_playbutton@2x.png"; sourceTree = "<group>"; };
+		19883F091FD0DF580027EEA2 /* record_playbutton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record_playbutton@3x.png"; sourceTree = "<group>"; };
 		198B17C61F7A3F8100F1067C /* XHWLLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHWLLabel.swift; sourceTree = "<group>"; };
 		198B17C91F7A4A1C00F1067C /* LYMUILabel+TextAlignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LYMUILabel+TextAlignment.h"; sourceTree = "<group>"; };
 		198B17CA1F7A4A1C00F1067C /* LYMUILabel+TextAlignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LYMUILabel+TextAlignment.m"; sourceTree = "<group>"; };
@@ -1944,6 +2026,64 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		19883EB11FCD5D850027EEA2 /* PlayView */ = {
+			isa = PBXGroup;
+			children = (
+				19883EB21FCD5D850027EEA2 /* MicroVideoPlayView.h */,
+				19883EB31FCD5D850027EEA2 /* MicroVideoPlayView.m */,
+				19883EB41FCD5D850027EEA2 /* MicroVideoView.h */,
+				19883EB51FCD5D850027EEA2 /* MicroVideoView.m */,
+				19883EB61FCD5D850027EEA2 /* PNG */,
+				19883ED21FCD5D850027EEA2 /* record_focusbutton@2x.png */,
+				19883ED31FCD5D850027EEA2 /* record_hover@2x.png */,
+				19883ED41FCD5D850027EEA2 /* record_normal@2x.png */,
+				19883ED51FCD5D850027EEA2 /* record_video_bg@2x.png */,
+				19883ED61FCD5D850027EEA2 /* ZFProgressView.h */,
+				19883ED71FCD5D850027EEA2 /* ZFProgressView.m */,
+				19883EFC1FCE3E1D0027EEA2 /* XHWLMicroVideoVC.h */,
+				19883EFD1FCE3E1D0027EEA2 /* XHWLMicroVideoVC.m */,
+			);
+			path = PlayView;
+			sourceTree = "<group>";
+		};
+		19883EB61FCD5D850027EEA2 /* PNG */ = {
+			isa = PBXGroup;
+			children = (
+				19883F081FD0DF580027EEA2 /* record_playbutton@2x.png */,
+				19883F091FD0DF580027EEA2 /* record_playbutton@3x.png */,
+				19883EFF1FCEAB890027EEA2 /* default_video@2x.png */,
+				19883F001FCEAB890027EEA2 /* record_errorbutton@2x.png */,
+				19883EB71FCD5D850027EEA2 /* 前后摄像头.png */,
+				19883EB81FCD5D850027EEA2 /* 前后摄像头@2x.png */,
+				19883EB91FCD5D850027EEA2 /* 前后摄像头@3x.png */,
+				19883EBA1FCD5D850027EEA2 /* 发送.png */,
+				19883EBB1FCD5D850027EEA2 /* 发送@2x.png */,
+				19883EBC1FCD5D850027EEA2 /* 发送@3x.png */,
+				19883EBD1FCD5D850027EEA2 /* 取消.png */,
+				19883EBE1FCD5D850027EEA2 /* 取消@2x.png */,
+				19883EBF1FCD5D850027EEA2 /* 取消@3x.png */,
+				19883EC01FCD5D850027EEA2 /* 圆.png */,
+				19883EC11FCD5D850027EEA2 /* 圆@2x.png */,
+				19883EC21FCD5D850027EEA2 /* 圆@3x.png */,
+				19883EC31FCD5D850027EEA2 /* 外圆环.png */,
+				19883EC41FCD5D850027EEA2 /* 外圆环@2x.png */,
+				19883EC51FCD5D850027EEA2 /* 外圆环@3x.png */,
+				19883EC61FCD5D850027EEA2 /* 摄像中.png */,
+				19883EC71FCD5D850027EEA2 /* 摄像中@2x.png */,
+				19883EC81FCD5D850027EEA2 /* 摄像中@3x.png */,
+				19883EC91FCD5D850027EEA2 /* 摄像头.png */,
+				19883ECA1FCD5D850027EEA2 /* 摄像头@2x.png */,
+				19883ECB1FCD5D850027EEA2 /* 摄像头@3x.png */,
+				19883ECC1FCD5D850027EEA2 /* 视频录影头.png */,
+				19883ECD1FCD5D850027EEA2 /* 视频录影头@2x.png */,
+				19883ECE1FCD5D850027EEA2 /* 视频录影头@3x.png */,
+				19883ECF1FCD5D850027EEA2 /* 返回键.png */,
+				19883ED01FCD5D850027EEA2 /* 返回键@2x.png */,
+				19883ED11FCD5D850027EEA2 /* 返回键@3x.png */,
+			);
+			path = PNG;
+			sourceTree = "<group>";
+		};
 		198B17C81F7A4A1C00F1067C /* UILabel+TextAlignmentExpand */ = {
 			isa = PBXGroup;
 			children = (
@@ -2193,6 +2333,7 @@
 		19C0BCE31F56AA8B00871BDD /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				19883EB11FCD5D850027EEA2 /* PlayView */,
 				19B8F5AD1FB54B8C002D7B9E /* swiftScan */,
 				19B9C1931FA2CDDC00B0A0FB /* WSDaePickerView */,
 				192B644C1FA093BA0094421B /* THDatePickerView.h */,
@@ -2623,40 +2764,67 @@
 				193F10BE1F7B97A200C2F948 /* 别人进行云对讲0002.png in Resources */,
 				193F10DA1F7B97A200C2F948 /* 别人进行云对讲0030.png in Resources */,
 				193F10F61F7B97A200C2F948 /* 别人进行云对讲0058.png in Resources */,
+				19883EEA1FCD5D850027EEA2 /* 摄像中@2x.png in Resources */,
 				193F10E51F7B97A200C2F948 /* 别人进行云对讲0041.png in Resources */,
 				193F10DC1F7B97A200C2F948 /* 别人进行云对讲0032.png in Resources */,
 				193F10F21F7B97A200C2F948 /* 别人进行云对讲0054.png in Resources */,
 				84A50A661F5668DA00BCDA47 /* LaunchScreen.storyboard in Resources */,
+				19883EF81FCD5D850027EEA2 /* record_video_bg@2x.png in Resources */,
 				193F10EC1F7B97A200C2F948 /* 别人进行云对讲0048.png in Resources */,
 				193F10BD1F7B97A200C2F948 /* 别人进行云对讲0001.png in Resources */,
 				193F10DF1F7B97A200C2F948 /* 别人进行云对讲0035.png in Resources */,
 				193F10F01F7B97A200C2F948 /* 别人进行云对讲0052.png in Resources */,
 				193F10E11F7B97A200C2F948 /* 别人进行云对讲0037.png in Resources */,
 				193F10CA1F7B97A200C2F948 /* 别人进行云对讲0014.png in Resources */,
+				19883EF31FCD5D850027EEA2 /* 返回键@2x.png in Resources */,
 				193F10C11F7B97A200C2F948 /* 别人进行云对讲0005.png in Resources */,
+				19883EDD1FCD5D850027EEA2 /* 发送.png in Resources */,
+				19883F0A1FD0DF580027EEA2 /* record_playbutton@2x.png in Resources */,
 				193F10C31F7B97A200C2F948 /* 别人进行云对讲0007.png in Resources */,
 				193F10F81F7B97A200C2F948 /* 别人进行云对讲0060.png in Resources */,
 				193F10D21F7B97A200C2F948 /* 别人进行云对讲0022.png in Resources */,
 				193F10C61F7B97A200C2F948 /* 别人进行云对讲0010.png in Resources */,
 				193F10CF1F7B97A200C2F948 /* 别人进行云对讲0019.png in Resources */,
+				19883EE61FCD5D850027EEA2 /* 外圆环.png in Resources */,
 				193F10DD1F7B97A200C2F948 /* 别人进行云对讲0033.png in Resources */,
+				19883EE51FCD5D850027EEA2 /* 圆@3x.png in Resources */,
 				193F10F11F7B97A200C2F948 /* 别人进行云对讲0053.png in Resources */,
+				19883EF21FCD5D850027EEA2 /* 返回键.png in Resources */,
+				19883EDE1FCD5D850027EEA2 /* 发送@2x.png in Resources */,
 				84A50A631F5668DA00BCDA47 /* Assets.xcassets in Resources */,
 				19E16CD01F7CE53E00E7F930 /* open_door.gif in Resources */,
 				193F10F41F7B97A200C2F948 /* 别人进行云对讲0056.png in Resources */,
 				193F10C51F7B97A200C2F948 /* 别人进行云对讲0009.png in Resources */,
 				193F10E81F7B97A200C2F948 /* 别人进行云对讲0044.png in Resources */,
+				19883EDC1FCD5D850027EEA2 /* 前后摄像头@3x.png in Resources */,
 				193F10CC1F7B97A200C2F948 /* 别人进行云对讲0016.png in Resources */,
+				19883EDA1FCD5D850027EEA2 /* 前后摄像头.png in Resources */,
+				19883EF41FCD5D850027EEA2 /* 返回键@3x.png in Resources */,
+				19883EE71FCD5D850027EEA2 /* 外圆环@2x.png in Resources */,
+				19883EE21FCD5D850027EEA2 /* 取消@3x.png in Resources */,
+				19883EE41FCD5D850027EEA2 /* 圆@2x.png in Resources */,
 				193F10EE1F7B97A200C2F948 /* 别人进行云对讲0050.png in Resources */,
+				19883EF11FCD5D850027EEA2 /* 视频录影头@3x.png in Resources */,
+				19883EE81FCD5D850027EEA2 /* 外圆环@3x.png in Resources */,
 				193F10D61F7B97A200C2F948 /* 别人进行云对讲0026.png in Resources */,
+				19883EE91FCD5D850027EEA2 /* 摄像中.png in Resources */,
+				19883EED1FCD5D850027EEA2 /* 摄像头@2x.png in Resources */,
+				19883F021FCEAB8A0027EEA2 /* default_video@2x.png in Resources */,
 				193F10D51F7B97A200C2F948 /* 别人进行云对讲0025.png in Resources */,
 				193F10E31F7B97A200C2F948 /* 别人进行云对讲0039.png in Resources */,
+				19883EEB1FCD5D850027EEA2 /* 摄像中@3x.png in Resources */,
+				19883EE11FCD5D850027EEA2 /* 取消@2x.png in Resources */,
 				193F10F71F7B97A200C2F948 /* 别人进行云对讲0059.png in Resources */,
 				193F10C41F7B97A200C2F948 /* 别人进行云对讲0008.png in Resources */,
+				19883EDB1FCD5D850027EEA2 /* 前后摄像头@2x.png in Resources */,
+				19883EF51FCD5D850027EEA2 /* record_focusbutton@2x.png in Resources */,
 				196F72731FA2D28F00B0AA4D /* WSDatePickerView.xib in Resources */,
+				19883F031FCEAB8A0027EEA2 /* record_errorbutton@2x.png in Resources */,
 				193F10EF1F7B97A200C2F948 /* 别人进行云对讲0051.png in Resources */,
+				19883EDF1FCD5D850027EEA2 /* 发送@3x.png in Resources */,
 				193F10E21F7B97A200C2F948 /* 别人进行云对讲0038.png in Resources */,
 				193F10D91F7B97A200C2F948 /* 别人进行云对讲0029.png in Resources */,
+				19883F0B1FD0DF580027EEA2 /* record_playbutton@3x.png in Resources */,
 				193F10E71F7B97A200C2F948 /* 别人进行云对讲0043.png in Resources */,
 				193F10D11F7B97A200C2F948 /* 别人进行云对讲0021.png in Resources */,
 				193F10D01F7B97A200C2F948 /* 别人进行云对讲0020.png in Resources */,
@@ -2670,19 +2838,27 @@
 				193F10BF1F7B97A200C2F948 /* 别人进行云对讲0003.png in Resources */,
 				193F10D81F7B97A200C2F948 /* 别人进行云对讲0028.png in Resources */,
 				193F10E61F7B97A200C2F948 /* 别人进行云对讲0042.png in Resources */,
+				19883EEC1FCD5D850027EEA2 /* 摄像头.png in Resources */,
 				193F10C91F7B97A200C2F948 /* 别人进行云对讲0013.png in Resources */,
+				19883EF61FCD5D850027EEA2 /* record_hover@2x.png in Resources */,
 				193F10CE1F7B97A200C2F948 /* 别人进行云对讲0018.png in Resources */,
+				19883EEE1FCD5D850027EEA2 /* 摄像头@3x.png in Resources */,
 				193F10D41F7B97A200C2F948 /* 别人进行云对讲0024.png in Resources */,
 				193F10C21F7B97A200C2F948 /* 别人进行云对讲0006.png in Resources */,
 				193F10F51F7B97A200C2F948 /* 别人进行云对讲0057.png in Resources */,
 				193F10D31F7B97A200C2F948 /* 别人进行云对讲0023.png in Resources */,
 				193F10BC1F7B97A200C2F948 /* 别人进行云对讲0000.png in Resources */,
+				19883EE31FCD5D850027EEA2 /* 圆.png in Resources */,
 				193F10C81F7B97A200C2F948 /* 别人进行云对讲0012.png in Resources */,
+				19883EF01FCD5D850027EEA2 /* 视频录影头@2x.png in Resources */,
 				193F10C01F7B97A200C2F948 /* 别人进行云对讲0004.png in Resources */,
 				193F10E01F7B97A200C2F948 /* 别人进行云对讲0036.png in Resources */,
+				19883EF71FCD5D850027EEA2 /* record_normal@2x.png in Resources */,
 				84A50A611F5668DA00BCDA47 /* Main.storyboard in Resources */,
 				193F10CB1F7B97A200C2F948 /* 别人进行云对讲0015.png in Resources */,
 				193F10D71F7B97A200C2F948 /* 别人进行云对讲0027.png in Resources */,
+				19883EE01FCD5D850027EEA2 /* 取消.png in Resources */,
+				19883EEF1FCD5D850027EEA2 /* 视频录影头.png in Resources */,
 				193F10EA1F7B97A200C2F948 /* 别人进行云对讲0046.png in Resources */,
 				193F10DE1F7B97A200C2F948 /* 别人进行云对讲0034.png in Resources */,
 			);
@@ -2912,6 +3088,7 @@
 				193F0EF11F7B531400C2F948 /* XHWLScanResultView.swift in Sources */,
 				193F0EED1F7B530D00C2F948 /* XHWLIssueAccountModel.swift in Sources */,
 				196AB4B91F945E99004E6C7A /* BYPushAnimation_08.swift in Sources */,
+				19883ED91FCD5D850027EEA2 /* MicroVideoView.m in Sources */,
 				193F0EEE1F7B530D00C2F948 /* XHWLIssueReportModel.swift in Sources */,
 				192AEF631F8C6CCA004A7BF8 /* XHWLCustomAnnotation.swift in Sources */,
 				193F0EEF1F7B530D00C2F948 /* XHWLScanModel.swift in Sources */,
@@ -3030,6 +3207,7 @@
 				1931C0AA1F722C87004D0A41 /* HZActionSheet.m in Sources */,
 				19B142EA1F677D780087AC5E /* XHWLNavHeadView.swift in Sources */,
 				19A7A7111F57FB350044DC1A /* XHWLHttpTool.swift in Sources */,
+				19883ED81FCD5D850027EEA2 /* MicroVideoPlayView.m in Sources */,
 				19D8FDBD1F6A670900AC7C22 /* XHWLProjectModel.swift in Sources */,
 				19CDF0F51F886A3E001F17A1 /* XHWLImageScale.swift in Sources */,
 				19B8F5A81FB52DA7002D7B9E /* XHWLRosterManageView.swift in Sources */,
@@ -3045,6 +3223,7 @@
 				840835911F6E01DF00DC644A /* XHWLNetwork.swift in Sources */,
 				1961CDA31F596328006856D0 /* PtzPresetPositionDialView.m in Sources */,
 				19CDF18A1F8AFEDD001F17A1 /* XHWLBluetoothModel.swift in Sources */,
+				19883EF91FCD5D850027EEA2 /* ZFProgressView.m in Sources */,
 				194405631FC7FCAF0049849B /* XHWLTalkManager.swift in Sources */,
 				192BC2241F9F5DCD00CDF492 /* XHWLPatrolLineView.swift in Sources */,
 				1961CDAB1F596328006856D0 /* ToolBarScrollView.m in Sources */,
@@ -3066,6 +3245,7 @@
 				19A14D701F5E381100D96A2E /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				1961CCCE1F58E301006856D0 /* HintTool.swift in Sources */,
 				1955C9B31F6528C1008C31C8 /* XHWLForgetPwdView.swift in Sources */,
+				19883EFE1FCE3E1D0027EEA2 /* XHWLMicroVideoVC.m in Sources */,
 				194405651FC921710049849B /* XHWLPickPictureCell.swift in Sources */,
 				19E122051F9DF52F0015AC70 /* XHWLTimeRightView.swift in Sources */,
 				19FACBC61F68C43E00680E63 /* Validation.swift in Sources */,

@@ -28,6 +28,7 @@ class XHWLLineCell: UITableViewCell {
         
         self.backgroundColor = UIColor.clear
         self.contentView.backgroundColor = UIColor.clear
+         self.selectionStyle = .none
         
         setupView()
     }
@@ -35,6 +36,7 @@ class XHWLLineCell: UITableViewCell {
     func setupView() {
         
         lineL = UILabel()
+        lineL.backgroundColor = UIColor.white
         contentView.addSubview(lineL)
     }
     

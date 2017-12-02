@@ -17,11 +17,39 @@ class XHWLHomeVC: XHWLBaseVC {
     var homeView:XHWLHomeView!
     var central: CBCentralManager!
     var block:(Bool)->() = {param in  }
+    var type = "in"
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupView()
+    
+        
+        let currentVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+        
+        if UserDefaults.standard.object(forKey: "versionCode") == nil {
+            setupLaungh()
+        }
+        else {
+            let saveVersion:String = UserDefaults.standard.object(forKey: "versionCode") as! String
+            print("\(saveVersion)")
+            if saveVersion != currentVersion {
+                setupLaungh()
+            }
+        }
+    }
+    
+    func setupLaungh() {
+        var imageNameArr = Array<Any>()
+        for i in 1..<3 {
+            imageNameArr.append("\(i)")
+        }
+        
+        self.view!.addSubview(CLNewFeatureView(imageNameArr: imageNameArr))
+        
+        let currentVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+        UserDefaults.standard.set(currentVersion, forKey:"versionCode")
+        UserDefaults.standard.synchronize()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -278,27 +306,31 @@ extension XHWLHomeVC: XHWLHomeViewDelegate {
     
     func onHomeViewWithVoice(_ homeView:XHWLHomeView, _ isSelected:Bool) {
         
-        if isSelected {
-            // 请求后台，同时进入频道
-            let channelData:NSData = UserDefaults.standard.object(forKey: "channelList") as! NSData
-            let channelList:NSArray = XHWLChannelModel.mj_objectArray(withKeyValuesArray: channelData.mj_JSONObject())
-            
-            print("\(channelList)")
-            if channelList.count == 0  {
-                return
-            }
-            let model:XHWLChannelModel = channelList[0] as! XHWLChannelModel
-            
-            let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
-            let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
-            
-            let params:NSDictionary = ["token":userModel.wyAccount.token,
-                                       "channelId":model.id]
-            print("\(params)")
-            XHWLNetwork.shared.postTalkPushClick(params, self)
-        } else {
-            XHWLTalkManager.sharedInstance.leaveChannel()
+        // 请求后台，同时进入频道
+        let channelData:NSData = UserDefaults.standard.object(forKey: "channelList") as! NSData
+        let channelList:NSArray = XHWLChannelModel.mj_objectArray(withKeyValuesArray: channelData.mj_JSONObject())
+        
+        print("\(channelList)")
+        if channelList.count == 0  {
+            return
         }
+        let model:XHWLChannelModel = channelList[0] as! XHWLChannelModel
+        
+        if isSelected {
+            type = "in"
+        } else {
+            type = "out"
+        }
+        
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        let params:NSDictionary = ["token":userModel.wyAccount.token,
+                                   "channelId":model.id,
+                                   "type":type] // 加入(in)/退出(out)房间
+        print("\(params)")
+        XHWLNetwork.shared.postTalkPushClick(params, self)
+        
     }
 }
 
@@ -336,15 +368,20 @@ extension XHWLHomeVC: XHWLNetworkDelegate {
             }
         } else if requestKey == XHWLRequestKeyID.XHWL_TALKPUSH.rawValue {
             print("发送推送")
-            let channelData:NSData = UserDefaults.standard.object(forKey: "channelList") as! NSData
-            let channelList:NSArray = XHWLChannelModel.mj_objectArray(withKeyValuesArray: channelData.mj_JSONObject())
             
-            print("\(channelList)")
-            if channelList.count == 0  {
-                return
+            if type == "out" {
+                XHWLTalkManager.sharedInstance.leaveChannel()
+            } else {
+                let channelData:NSData = UserDefaults.standard.object(forKey: "channelList") as! NSData
+                let channelList:NSArray = XHWLChannelModel.mj_objectArray(withKeyValuesArray: channelData.mj_JSONObject())
+                
+                print("\(channelList)")
+                if channelList.count == 0  {
+                    return
+                }
+                let model:XHWLChannelModel = channelList[0] as! XHWLChannelModel
+                XHWLTalkManager.sharedInstance.onJoinRoom(model.id)
             }
-            let model:XHWLChannelModel = channelList[0] as! XHWLChannelModel
-            XHWLTalkManager.sharedInstance.onJoinRoom(model.id)
         }
     }
     

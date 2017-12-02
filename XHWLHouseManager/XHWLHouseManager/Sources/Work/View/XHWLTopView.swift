@@ -27,9 +27,6 @@ class XHWLTopView: UIView {
         bgImage = UIImageView()
         bgImage.image = UIImage(named:"warning_subview_top_bg")
         self.addSubview(bgImage)
-        
-        
-
     }
     
     func createModelArray(_ array:NSArray) {
@@ -48,6 +45,7 @@ class XHWLTopView: UIView {
             btn.setTitle(model.deviceTitle, for: UIControlState.normal)
             btn.tag = i+btnTag
             btn.contentHorizontalAlignment = .center
+            btn.titleLabel?.font = font_15
             btn.setTitleColor(UIColor.white, for: UIControlState.normal)
             btn.addTarget(self, action: #selector(btnClick), for: UIControlEvents.touchUpInside)
             sc.addSubview(btn)

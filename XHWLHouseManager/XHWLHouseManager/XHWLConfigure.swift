@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-#if DEBUG // 判断是否在测试环境下
+//#if DEBUG // 判断是否在测试环境下
 let apsForProduction:Bool = false  // 0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
-#else // REALEASE
-let apsForProduction:Bool = true  // 0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
-#endif
+//#else // REALEASE
+//let apsForProduction:Bool = true  // 0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
+//#endif
 
 // mark -- 登录及地址界面
 let MSP_ADDRESS : String  =  "202.105.104.109"

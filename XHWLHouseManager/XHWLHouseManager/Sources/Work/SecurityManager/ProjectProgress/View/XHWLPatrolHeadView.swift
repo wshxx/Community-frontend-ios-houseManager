@@ -95,7 +95,7 @@ class XHWLPatrolHeadView: UITableViewHeaderFooterView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        projectL.frame = CGRect(x:10, y:0, width:self.bounds.size.width-20, height:20)
+        projectL.frame = CGRect(x:10, y:5, width:self.bounds.size.width-20, height:20)
         progressView.frame = CGRect(x:0, y:projectL.frame.maxY, width:self.bounds.size.width, height:44)
 //        accessIV.frame = CGRect(x:10, y:self.bounds.size.height-1, width:self.bounds.size.width-20, height:1)
     }

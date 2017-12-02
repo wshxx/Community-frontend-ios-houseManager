@@ -21,9 +21,9 @@ DEPENDENCIES:
   - AgoraRtcEngine_iOS (~> 1.14.0)
   - Alamofire (~> 4.5.0)
   - BaiduMapKit (~> 3.4.0)
-  - ELPickerView
+  - ELPickerView (~> 3.0.0)
   - IQKeyboardManagerSwift (~> 4.0.13)
-  - JPush (~> 3.0.6)
+  - JPush (~> 3.0.7)
   - Kingfisher (~> 3.11.0)
   - MJExtension (~> 3.0.13)
   - MJRefresh (~> 3.1.15)
@@ -49,6 +49,6 @@ SPEC CHECKSUMS:
   TransitionAnimation: c397b9ca41ab593b35b1e8f8673df17bae0db20a
   TransitionTreasury: c3b541a2073ee3060519835afa10791bd4ba55f9
 
-PODFILE CHECKSUM: bd83fab1b8799dddee370f91a2f362ef753f1a1e
+PODFILE CHECKSUM: 6213e3c30c7e2f066dddcab27dd05255de83326d
 
 COCOAPODS: 1.3.1

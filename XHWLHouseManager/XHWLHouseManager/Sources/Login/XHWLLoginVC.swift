@@ -40,6 +40,7 @@ class XHWLLoginVC: XHWLBaseVC , XHWLTransitionViewDelegate {
         }
         
         self.view!.addSubview(CLNewFeatureView(imageNameArr: imageNameArr))
+        
         let currentVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
         UserDefaults.standard.set(currentVersion, forKey:"versionCode")
         UserDefaults.standard.synchronize()

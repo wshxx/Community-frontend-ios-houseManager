@@ -31,5 +31,6 @@ class XHWLChannelRoleModel: NSObject {
     var id:String = ""
     var workCode:String = ""
     var wyUserName:String = ""
+    var name:String = ""
 //    var editing:Bool = false
 }

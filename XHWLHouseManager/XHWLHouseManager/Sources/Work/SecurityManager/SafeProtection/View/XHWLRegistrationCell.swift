@@ -9,7 +9,7 @@
 import UIKit
 
 protocol XHWLRegistrationCellDelegate:NSObjectProtocol {
-    func registrationWithHandle(_ cell:XHWLRegistrationCell)
+    func registrationWithHandle(_ cell:XHWLRegistrationCell, _ warningModel:XHWLSafeProtectionModel)
 }
 class XHWLRegistrationCell: UITableViewCell {
 
@@ -92,7 +92,7 @@ class XHWLRegistrationCell: UITableViewCell {
     func setupView() {
         handleBtn = UIButton()
         handleBtn.isHidden = true
-        handleBtn.setImage(UIImage(named:"CloudEyes_picture"), for: .normal)
+        handleBtn.setImage(UIImage(named:"Issue_alloc"), for: .normal)
         handleBtn.addTarget(self, action: #selector(onHandleClick), for: .touchUpInside)
         self.contentView.addSubview(handleBtn)
         
@@ -131,18 +131,22 @@ class XHWLRegistrationCell: UITableViewCell {
     }
 
     func onHandleClick() {
-        self.delegate?.registrationWithHandle(self)
+        self.delegate?.registrationWithHandle(self, warningModel)
     }
     
-    func setModel(_ registrationModel:XHWLSafeProtectionModel) {
-        titleL.text = registrationModel.appComplaint.remarks
-        contentL.text = "来源:\(registrationModel.appComplaint.wyAccount.wyRole.name)"
-        handleBtn.isHidden = false
-        
-        if registrationModel.appComplaint.manageTime.isEmpty {
-            timeL.text = Date.getDateWith(Int(registrationModel.appComplaint.createTime)!, "yyyy-MM-dd")
-        } else {
-            timeL.text = Date.getDateWith(Int(registrationModel.appComplaint.manageTime)!, "yyyy-MM-dd")
+    var warningModel:XHWLSafeProtectionModel! {
+        willSet {
+            if newValue != nil {
+                titleL.text = newValue.remarks
+                contentL.text = "来源:\(newValue.getOriginString())"
+                handleBtn.isHidden = false
+                
+                //        if registrationModel.createTime.isEmpty {
+                timeL.text = Date.getDateWith(Int(newValue.createTime)!, "yyyy-MM-dd")
+                //        } else {
+                //            timeL.text = Date.getDateWith(Int(registrationModel.manageTime)!, "yyyy-MM-dd")
+                //        }
+            }
         }
     }
     

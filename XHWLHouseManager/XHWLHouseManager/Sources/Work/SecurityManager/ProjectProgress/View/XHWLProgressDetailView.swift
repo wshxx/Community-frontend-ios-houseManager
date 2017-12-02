@@ -86,6 +86,7 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.grouped)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.sectionFooterHeight = 0.01
         tableView.backgroundColor = UIColor.clear
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -181,8 +182,14 @@ class XHWLProgressDetailView: UIView , UITableViewDelegate, UITableViewDataSourc
         }
     }
     
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+        return 0.01
+    }
+    
+    //将分组尾设置为一个空的View
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
  
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

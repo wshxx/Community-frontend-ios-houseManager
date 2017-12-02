@@ -76,26 +76,26 @@ extension XHWLTalkManager: AgoraRtcEngineDelegate {
     }
     
     func rtcEngine(_ engine: AgoraRtcEngineKit!, didOccurError errorCode: AgoraRtcErrorCode) {
-        "发生错误: \(errorCode.rawValue)".ext_debugPrintAndHint()
+        print("发生错误: \(errorCode.rawValue)")
     }
     
     func rtcEngine(_ engine: AgoraRtcEngineKit!, didJoinChannel channel: String!, withUid uid: UInt, elapsed: Int) {
-        "加入频道: \(channel!), with uid: \(uid), elapsed: \(elapsed)".ext_debugPrintAndHint()
+        print("加入频道: \(channel!), with uid: \(uid), elapsed: \(elapsed)")
     }
     
     func rtcEngine(_ engine: AgoraRtcEngineKit!, didJoinedOfUid uid: UInt, elapsed: Int) {
-        "用户加入: \(uid)".ext_debugPrintAndHint()
+        print("用户加入: \(uid)")
     }
     
     func rtcEngine(_ engine: AgoraRtcEngineKit!, didOfflineOfUid uid: UInt, reason: AgoraRtcUserOfflineReason) {
-        "用户离线: \(uid), reason: \(reason.rawValue)".ext_debugPrintAndHint()
+        print("用户离线: \(uid), reason: \(reason.rawValue)")
     }
     
     func rtcEngine(_ engine: AgoraRtcEngineKit!, audioQualityOfUid uid: UInt, quality: AgoraRtcQuality, delay: UInt, lost: UInt) {
-        "Audio Quality of uid: \(uid), quality: \(quality.rawValue), delay: \(delay), lost: \(lost)".ext_debugPrintAndHint()
+        print("Audio Quality of uid: \(uid), quality: \(quality.rawValue), delay: \(delay), lost: \(lost)")
     }
     
     func rtcEngine(_ engine: AgoraRtcEngineKit!, didApiCallExecute api: String!, error: Int) {
-        "Did api call execute: \(api!), error: \(error)".ext_debugPrintAndHint()
+        print("Did api call execute: \(api!), error: \(error)")
     }
 }

@@ -16,6 +16,7 @@ class XHWLProjectModel: NSObject {
     var latitude:String = ""
     var longitude:String = ""
     var divisionName:String = ""
+    var projectCode:String = ""
     
     var ccProjectCode:String = ""
     var entranceCode:String = ""

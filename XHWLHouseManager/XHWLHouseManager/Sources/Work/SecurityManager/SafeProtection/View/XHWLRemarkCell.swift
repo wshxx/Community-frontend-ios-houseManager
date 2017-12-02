@@ -34,6 +34,7 @@ class XHWLRemarkCell: UITableViewCell {
         
         self.backgroundColor = UIColor.clear
         self.contentView.backgroundColor = UIColor.clear
+        self.selectionStyle = .none
         
         setupView()
     }
@@ -51,7 +52,7 @@ class XHWLRemarkCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        remark.frame = self.bounds
+        remark.frame = CGRect(x:10, y:0, width:self.bounds.size.width-10, height:self.bounds.size.height)        
     }
     
     required init?(coder aDecoder: NSCoder) {

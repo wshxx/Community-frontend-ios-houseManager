@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol XHWLIssueReportViewDelegate:NSObjectProtocol {
-    @objc optional func onSafeGuard(_ isAdd:Bool, _ index:NSInteger, _ isPictureAdd:Bool)
+    @objc optional func onSafeGuard( _ index:NSInteger, _ count:NSInteger)
 }
 
 class XHWLIssueReportView: UIView {
@@ -23,6 +23,7 @@ class XHWLIssueReportView: UIView {
     var dotView: XHWLLabelView!
     var managerBtn:UIButton!
     var selfBtn:UIButton!
+    var imageArray:NSMutableArray = NSMutableArray()
     var scanModel:XHWLScanModel! {
         willSet {
             if (newValue != nil) {
@@ -41,10 +42,10 @@ class XHWLIssueReportView: UIView {
     var cancelBtn:UIButton!
     var submitBtn:UIButton!
     weak var delegate:XHWLIssueReportViewDelegate?
-    var btnBlock:(String, String, String, String)->(Void) = { param in }
+    var btnBlock:(NSInteger, String, String, Bool, Bool)->(Void) = { param in }
     var dismissBlock:()->() = {_ in }
-    var radioIndex:String? = "否"
-    var type:String! = "工程"
+    var urgency:Bool = false
+    var type:NSInteger! = 1
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,17 +69,17 @@ class XHWLIssueReportView: UIView {
         self.addSubview(bgSc)
         
         typeView = XHWLSelTypeView()
-        typeView.showText("异常类型", "工程", false)
+        typeView.showText("异常类型", "安防", false)
         typeView.btnBlock = { [weak typeView] in
             self.endEditing(true)
-            let array:NSArray = ["工程", "环境", "客服", "安防"]
+            let array:NSArray = ["安防", "工程", "环境", "客服"]
             let pickerView:XHWLPickerView = XHWLPickerView(frame:CGRect.zero, array:array)
             
             let window: UIWindow = (UIApplication.shared.keyWindow)!
             pickerView.dismissBlock = { [weak pickerView] (index)->() in
                 print("\(index)")
                 if index != -1 {
-                    self.type = array[index] as! String
+                    self.type = index+1 // array[index] as! String
                     typeView?.showBtnTitle(array[index] as! String)
                 }
                 pickerView?.removeFromSuperview()
@@ -104,9 +105,9 @@ class XHWLIssueReportView: UIView {
         radioView.btnBlock = { [weak self] index in
             
             if index == 0 {
-                self?.radioIndex = "是"
+                self?.urgency = true
             } else {
-                self?.radioIndex = "否"
+                self?.urgency = false
             }
             
         }
@@ -115,8 +116,8 @@ class XHWLIssueReportView: UIView {
         pickPhoto = XHWLPickPhotoView(frame: CGRect.zero, false)
         pickPhoto.showText("上传照片：")
 //        pickPhoto.isShow = false
-        pickPhoto.addPictureBlock = { isAdd, index, isPictureAdd in
-            self.delegate?.onSafeGuard!(isAdd, index, isPictureAdd)
+        pickPhoto.addPictureBlock = { index, count in
+            self.delegate?.onSafeGuard!( index, count)
         }
         bgSc.addSubview(pickPhoto)
         
@@ -153,38 +154,35 @@ class XHWLIssueReportView: UIView {
     }
     
     func selfClick() {
-        self.btnBlock(self.type!, dotView.contentTF.text! ?? "", remark.textView.text! ?? "", radioIndex!)
+        self.btnBlock(self.type, dotView.contentTF.text! , remark.textView.text! , urgency, false)
     }
     
     func managerClick() {
-//        self.btnBlock(self.type!, dotView.contentTF.text! ?? "", remark.textView.text! ?? "", radioIndex!)
+        self.btnBlock(self.type, dotView.contentTF.text! , remark.textView.text! , urgency, true)
+        
     }
 
     func submitClick(btn:UIButton) {
         
         if btn.currentTitle == "取消" {
 //            self.dismissBlock()
+            bgSc.isUserInteractionEnabled = true
             
             managerBtn.isHidden = true
             selfBtn.isHidden = true
             submitBtn.setTitle("提交", for: UIControlState.normal)
         } else {
-//            if type.isEmpty {
-//                "异常类型为空".ext_debugPrintAndHint()
-//                return
-//            }
-//            if remark.textView.text.isEmpty {
-//                "异常类型为空".ext_debugPrintAndHint()
-//                return
-//            }
+            bgSc.isUserInteractionEnabled = false
+            
+            if imageArray.count == 0 {
+                "请先上传图片或视频".ext_debugPrintAndHint()
+                return
+            }
             
             managerBtn.isHidden = false
             selfBtn.isHidden = false
-            submitBtn.setTitle("提交", for: UIControlState.normal)
-            
-            
+            submitBtn.setTitle("取消", for: UIControlState.normal)
         }
-        
     }
     
     override func layoutSubviews() {

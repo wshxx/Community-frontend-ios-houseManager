@@ -8,38 +8,50 @@
 
 import UIKit
 
+protocol XHWLPickPictureCellDelegage:NSObjectProtocol {
+    func pickPictureCellWithAddImageOrVideo(_ index:NSInteger, _ count:NSInteger, _ cell:XHWLPickPictureCell)
+}
+
 class XHWLPickPictureCell: UITableViewCell {
 
+    weak var delegate:XHWLPickPictureCellDelegage?
     var pickPhoto:XHWLPickPhotoView!
     var isFinished:Bool!
     var menuModel:XHWLMenuModel! {
         willSet {
-//            pickPhoto.showText(leftText: newValue.name, rightText:newValue.content)
-            //            labelView.textAlign = NSTextAlignment.center
+            
+            pickPhoto.showText(newValue.name)
+            if isFinished {
+                if !newValue.content.isEmpty {
+                    let array:NSArray = newValue.content.components(separatedBy: ",") as NSArray
+                    pickPhoto.showImgOrVideoArray(array)
+                }
+            }
         }
     }
     
-    class func cellWithTableView(tableView:UITableView, _ isFinished:String) -> XHWLPickPictureCell {
+    class func cellWithTableView(tableView:UITableView, _ content:String) -> XHWLPickPictureCell {
         
         let ID: String = "XHWLPickPictureCell"
         var cell = tableView.dequeueReusableCell(withIdentifier: ID)
         if (cell == nil) {
-            cell =  XHWLPickPictureCell.init(style: UITableViewCellStyle.default, reuseIdentifier: ID, isFinished)
+            cell =  XHWLPickPictureCell.init(style: UITableViewCellStyle.default, reuseIdentifier: ID, content)
         }
         
         return cell as! XHWLPickPictureCell
     }
     
-    init(style: UITableViewCellStyle, reuseIdentifier: String?, _ isFinished:String) {
+    init(style: UITableViewCellStyle, reuseIdentifier: String?, _ content:String) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        if isFinished == "1" {
+        if !content.isEmpty {
             self.isFinished = true
         } else {
             self.isFinished = false
         }
         self.backgroundColor = UIColor.clear
         self.contentView.backgroundColor = UIColor.clear
+         self.selectionStyle = .none
         
         setupView()
     }
@@ -48,15 +60,9 @@ class XHWLPickPictureCell: UITableViewCell {
         
         pickPhoto = XHWLPickPhotoView(frame: CGRect.zero, isFinished)
         pickPhoto.showText("现场照片：")
-        if isFinished {
-//            if !model.appComplaint.manageImgUrl.isEmpty {
-//                let array:NSArray = model.appComplaint.manageImgUrl.components(separatedBy: ",") as NSArray
-//                pickPhoto.onShowImgArray(array)
-//            }
-        }
-        //        pickPhoto.isShow = isFinished // 显示
-        pickPhoto.addPictureBlock = { isAdd, index, isPictureAdd in
-//            self.delegate?.onSafeGuard!(isAdd, index, isPictureAdd)
+//        pickPhoto.isShow = isFinished // 显示
+        pickPhoto.addPictureBlock = { index, count in
+            self.delegate?.pickPictureCellWithAddImageOrVideo(index, count, self)
         }
         contentView.addSubview(pickPhoto)
     }

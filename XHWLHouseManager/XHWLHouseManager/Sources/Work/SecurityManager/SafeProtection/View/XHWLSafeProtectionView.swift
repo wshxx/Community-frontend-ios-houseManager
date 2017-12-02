@@ -20,6 +20,10 @@ class XHWLSafeProtectionView: UIView {
     var clickCell:(NSInteger, NSInteger, XHWLSafeProtectionModel)->(Void) = {param in }
     var selectIndex:NSInteger! = 0
     var topMenu:XHWLTopView!
+    var handlerCode:String = ""
+    var operatorCode:String = ""
+    var remarks:String = ""
+    var warningModel:XHWLSafeProtectionModel!
     lazy var customPickerView: ELCustomPickerView<String> = {
        let pickerV = ELCustomPickerView<String>(pickerType: .singleComponent, items: [])
         
@@ -32,11 +36,22 @@ class XHWLSafeProtectionView: UIView {
         
         return pickerV
     }()
+//    var dataAry:NSArray = NSArray()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupView()
+    }
+    
+    // 请求接口
+    func updateTop(_ index:NSInteger) {
+        
+//        if array.count > index {
+//            let model:XHWLDeviceTitleModel = array[index] as! XHWLDeviceTitleModel
+//            print("\(model.deviceAry)")
+//            dataAry = model.deviceAry
+//        }
     }
     
     func setupView() {
@@ -45,11 +60,21 @@ class XHWLSafeProtectionView: UIView {
         bgImage.image = UIImage(named:"menu_bg")
         self.addSubview(bgImage)
         
-        let array:NSArray = ["待处理", "已处理"]
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
+        
+        var array:NSArray  = NSArray()
+        if userModel.wyAccount.wyRole.name == "安管主任" {
+            array = ["待分配", "待处理", "待销项", "已销项"]
+        }
+        else {
+            array = ["重大事件", "待分配", "待处理", "待销项", "已销项"]
+        }
         topMenu = XHWLTopView.init(frame: CGRect.zero)
         topMenu.createArray(array: array)
         topMenu.btnBlock = {[weak self] index in
             self?.selectIndex = index
+            self?.updateTop(index)
             self?.tableView.reloadData()
         }
         self.addSubview(topMenu)
@@ -82,29 +107,94 @@ class XHWLSafeProtectionView: UIView {
 
 extension XHWLSafeProtectionView: XHWLRegistrationCellDelegate {
     // 底部弹出界面
-    func registrationWithHandle(_ cell:XHWLRegistrationCell) {
+    func registrationWithHandle(_ cell:XHWLRegistrationCell, _ warningModel:XHWLSafeProtectionModel) {
 
-        customPickerView.items = ["黄浩婷", "张浩然", "徐柳飞", "阳城"]
-        customPickerView.show(viewController: nil, animated: true)
+        self.warningModel = warningModel
+        let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+        let dict:NSDictionary = data.mj_JSONObject() as! NSDictionary
+        let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: dict)
         
-        // 确定
-        customPickerView.rightButtoTapHandler = { [weak self] (view, chosenIndex, chosenItem) in
-            let hide = true
-            let animated = true
-            let str = "Did Tap Left Button. <Index: \(chosenIndex)> <chosenItem: \(chosenItem)> <Hide: \(hide)> <Animated: \(animated)>"
-            //            self?.logLabel.text = str
-            print(str)
-            return (hide, animated)
+        guard let projectData:NSData = UserDefaults.standard.object(forKey: "project") as? NSData else {
+            
+            "当前无项目".ext_debugPrintAndHint()
+            return
         }
-        // 取消
-        customPickerView.leftButtoTapHandler = { [weak self] (view, chosenIndex, chosenItem) in
-            let hide = true
-            let animated = true
-            let str = "Did Tap Left Button. <Index: \(chosenIndex)> <chosenItem: \(chosenItem)> <Hide: \(hide)> <Animated: \(animated)>"
-//            self?.logLabel.text = str
-            print(str)
-            return (hide, animated)
+        let projectModel:XHWLProjectModel = XHWLProjectModel.mj_object(withKeyValues: projectData.mj_JSONObject())
+        
+        let params:NSDictionary = [
+            "token":userModel.wyAccount.token, //    string    否    用户登录token； web端不用传，app传；
+            "projectCode":projectModel.projectCode, //
+        ]
+        XHWLNetwork.shared.postAccountInfoClick(params, self)
+    }
+}
+
+// MARK: - XHWLNetworkDelegate
+extension XHWLSafeProtectionView: XHWLNetworkDelegate {
+    
+    func requestSuccess(_ requestKey:NSInteger, _ response:[String : AnyObject]) {
+        
+        if requestKey == XHWLRequestKeyID.XHWL_ACCOUNTINFO.rawValue {
+            print("\(response)")
+            
+            let dealArray:NSArray = XHWLChannelRoleModel.mj_objectArray(withKeyValuesArray:response["result"] as! NSArray )
+            
+            let array:NSMutableArray = NSMutableArray()
+            for i in 0..<dealArray.count {
+                let model = dealArray[i] as! XHWLChannelRoleModel
+                array.add(model.name)
+            }
+          
+            customPickerView.items = array as! [String] // ["黄浩婷", "张浩然", "徐柳飞", "阳城"]
+            customPickerView.show(viewController: nil, animated: true)
+            
+            // 确定
+            customPickerView.rightButtoTapHandler = { [weak self] (view, chosenIndex, chosenItem) in
+                let hide = true
+                let animated = true
+                
+                let model:XHWLChannelRoleModel = dealArray[chosenIndex] as! XHWLChannelRoleModel
+                let str = "Did Tap Left Button. <Index: \(chosenIndex)> <chosenItem: \(chosenItem)> <Hide: \(hide)> <Animated: \(animated)>"
+                //            self?.logLabel.text = str
+                print(str + "asdbf \(model.name)")
+                
+                let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
+                let dict:NSDictionary = data.mj_JSONObject() as! NSDictionary
+                let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: dict)
+                
+                let handlerCode:String = ""
+                let operatorCode:String = model.id
+                
+                let params:NSDictionary = [
+                    "token":userModel.wyAccount.token, //    string    否    用户登录token； web端不用传，app传；
+                    "handlerCode":handlerCode, //    int    是    处理人工号
+                    "operatorCode":operatorCode, //     boolean    是    分配人工号
+                    "warningId":self?.warningModel.id, //     int    是    报事id
+                    "remarks":self?.remarks //     String    否    备注
+                ]
+                XHWLNetwork.shared.postWarningListClick(params, self!)
+                
+                return (hide, animated)
+            }
+            // 取消
+            customPickerView.leftButtoTapHandler = { [weak self] (view, chosenIndex, chosenItem) in
+                let hide = true
+                let animated = true
+                let str = "Did Tap Left Button. <Index: \(chosenIndex)> <chosenItem: \(chosenItem)> <Hide: \(hide)> <Animated: \(animated)>"
+                //            self?.logLabel.text = str
+                print(str)
+                return (hide, animated)
+            }
+        } else if requestKey == XHWLRequestKeyID.XHWL_SAFEGUARDSUBMIT.rawValue {
+            
+            print("\(response)")
+            
+           
         }
+    }
+    
+    func requestFail(_ requestKey:NSInteger, _ error:NSError) {
+        
     }
 }
 
@@ -114,23 +204,17 @@ extension XHWLSafeProtectionView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if selectIndex == 0 {
-            return dataAry.count
-        }
-        return dataSource.count
+        
+        return dataAry.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: XHWLRegistrationCell = XHWLRegistrationCell.cellWithTableView(tableView: tableView)
-        var model:XHWLSafeProtectionModel! //XHWLRegisterationModel!
-        if selectIndex == 0 {
-            model = dataAry[indexPath.row] as! XHWLSafeProtectionModel //XHWLRegisterationModel
-        } else {
-            model = dataSource[indexPath.row] as! XHWLSafeProtectionModel //XHWLRegisterationModel
-        }
+       
         cell.delegate = self
-        cell.setModel(model)
+        let model:XHWLSafeProtectionModel = dataAry[indexPath.row] as! XHWLSafeProtectionModel
+        cell.warningModel = model
         
         return cell;
     }
@@ -138,12 +222,7 @@ extension XHWLSafeProtectionView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        var model:XHWLSafeProtectionModel! //XHWLRegisterationModel!
-        if selectIndex == 0 {
-            model = dataAry[indexPath.row] as! XHWLSafeProtectionModel //XHWLRegisterationModel
-        } else {
-            model = dataSource[indexPath.row] as! XHWLSafeProtectionModel //XHWLRegisterationModel
-        }
+        let model:XHWLSafeProtectionModel = dataAry[indexPath.row] as! XHWLSafeProtectionModel
         self.clickCell(selectIndex, indexPath.row, model)
     }
     

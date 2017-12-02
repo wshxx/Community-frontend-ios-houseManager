@@ -63,5 +63,8 @@
 #import "THDatePickerView.h"
 #import "MZTimerLabel.h"
 #import "MJRefresh.h"
+#import "MicroVideoPlayView.h"
+//#import "MicroVideoView.h"
+#import "XHWLMicroVideoVC.h"
 
 #endif /* XHWLHouseManager_Bridging_Header_h */

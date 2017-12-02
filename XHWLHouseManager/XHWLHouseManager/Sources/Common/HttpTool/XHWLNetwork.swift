@@ -176,6 +176,22 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
         })
     }
     
+    func superWithUploadImage(_ data:[Data], _ requestKey:XHWLRequestKeyID,  _ isVideo:Bool) {
+        
+        changeStatus({ (isReach) in
+            if isReach == false {
+                "网络不可用".ext_debugPrintAndHint()
+            } else {
+                XHMLProgressHUD.shared.show()
+                
+                let request = XHWLHttpTool()
+                request.initWithKey(requestKey, self)
+                request.validTime = 1200
+                request.uploadHttpTool(data, isVideo)
+            }
+        })
+    }
+    
     func superWithUploadImage(_ parameters:NSDictionary, _ requestKey:XHWLRequestKeyID, _ data:[Data], _ name:[String]) {
         
         changeStatus({ (isReach) in
@@ -270,20 +286,6 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
         
         self.delegate = delegate;
         superWithLoadData(parameters, .XHWL_SCANCODE, .get)
-    }
-    
-    // 上传图片
-    func uploadImageClick(_ parameters:NSDictionary, _ data:[Data], _ name:[String], _ delegate:XHWLNetworkDelegate) {
-        
-        self.delegate = delegate;
-        superWithUploadImage(parameters, .XHWL_REPORTLIST, data, name)
-    }
-    
-    // 报事列表
-    func getReportListClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
-        
-        self.delegate = delegate;
-        superWithLoadData(parameters, .XHWL_REPORTLIST, .get)
     }
     
     // 修改姓名 手机号
@@ -497,10 +499,10 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
     }
     
     // 获取所有频道列表
-    func getChannelListClick(_ parameters:NSArray, _ delegate:XHWLNetworkDelegate) {
+    func postChannelListClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
         
         self.delegate = delegate;
-        superWithLoadData(parameters, .XHWL_CHANNELLIST, .get)
+        superWithLoadData(parameters, .XHWL_CHANNELLIST, .post)
     }
     
     // 新增频道/频道成员
@@ -538,6 +540,68 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
         superWithLoadData(parameters, .XHWL_TALKPUSH, .post)
     }
     
+    // 文件上传
+//    func postFileUploadClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+//
+//        self.delegate = delegate;
+//        superWithLoadData(parameters, .XHWL_FILEUPLOAD, .post)
+//    }
+    func uploadFileUploadClick(_ isVideo:Bool, _ data:[Data], _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithUploadImage(data, .XHWL_FILEUPLOAD, isVideo)
+    }
+    
+    // 版本控制---获取最新版本信息
+    func postNewVersionClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_NEWVERSION, .post)
+    }
+    
+    // 报事
+    func postAddWarningClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_ADDWARNING, .post)
+    }
+    
+    // 上传图片
+    func uploadImageClick(_ parameters:NSDictionary, _ data:[Data], _ name:[String], _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithUploadImage(parameters, .XHWL_REPORTLIST, data, name)
+    }
+    
+    // 获取报事列表
+    func postWarningListClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_WARNINGLIST, .post)
+    }
+    
+    // 获取报事详情
+    func postWarningDetailClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_WARNINGDETAIL, .post)
+    }
+    
+    // 分配人员（重新分配一样）
+    func postWarningPeopleClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_WARNINGPEOPLE, .post)
+    }
+    
+    // 获取所有物业工作人员信息
+    func postAccountInfoClick(_ parameters:NSDictionary, _ delegate:XHWLNetworkDelegate) {
+        
+        self.delegate = delegate;
+        superWithLoadData(parameters, .XHWL_ACCOUNTINFO, .post)
+    }
+    
+    
     
     
     
@@ -560,6 +624,9 @@ class XHWLNetwork: NSObject, XHWLHttpToolDelegate {
         
         AlertMessage.showOneAlertMessage(vc: vc, alertMessage: "登录失效，请重新登录！") {
             AppDelegate.shared().onLogout()
+
+            let vc : XHWLLoginVC = XHWLLoginVC()
+            AppDelegate.shared().window?.rootViewController = vc //UINavigationController(rootViewController: vc)
         }
     }
     

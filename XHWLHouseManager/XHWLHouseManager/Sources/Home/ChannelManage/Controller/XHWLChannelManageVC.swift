@@ -42,7 +42,7 @@ class XHWLChannelManageVC: XHWLBaseVC {
         let data:NSData = UserDefaults.standard.object(forKey: "user") as! NSData
         let userModel:XHWLUserModel = XHWLUserModel.mj_object(withKeyValues: data.mj_JSONObject())
         
-        XHWLNetwork.shared.getChannelListClick([userModel.wyAccount.token] as NSArray, self)
+        XHWLNetwork.shared.postChannelListClick(["token":userModel.wyAccount.token, "channelId":""], self)
     }
     
     func setupView() {
